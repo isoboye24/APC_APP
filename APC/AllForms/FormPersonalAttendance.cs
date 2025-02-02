@@ -270,6 +270,19 @@ namespace APC
         private void txtExpectedMonthlyDue_Click(object sender, EventArgs e)
         {
 
-        }        
+        }
+
+        private void iconMaximize_Click(object sender, EventArgs e)
+        {
+
+            if (WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+            }
+        }
     }
 }
