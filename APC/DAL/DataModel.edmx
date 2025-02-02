@@ -1,0 +1,1018 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="APCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ATTENDANCE_STATUS">
+          <Key>
+            <PropertyRef Name="attendanceStatusID" />
+          </Key>
+          <Property Name="attendanceStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="attendanceStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="CHILD">
+          <Key>
+            <PropertyRef Name="childID" />
+          </Key>
+          <Property Name="childID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthday" Type="date" />
+          <Property Name="imagePath" Type="varchar(max)" />
+          <Property Name="genderID" Type="int" Nullable="false" />
+          <Property Name="nationalityID" Type="int" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="motherID" Type="int" />
+          <Property Name="fatherID" Type="int" />
+        </EntityType>
+        <EntityType Name="COMMENT">
+          <Key>
+            <PropertyRef Name="commentID" />
+          </Key>
+          <Property Name="commentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="comment" Type="text" Nullable="false" />
+          <Property Name="memberID" Type="int" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONSTITUTION">
+          <Key>
+            <PropertyRef Name="constitutionID" />
+          </Key>
+          <Property Name="constitutionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="constitution" Type="text" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="fine" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="section" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="countryID" />
+          </Key>
+          <Property Name="countryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="countryName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="DOCUMENT">
+          <Key>
+            <PropertyRef Name="documentID" />
+          </Key>
+          <Property Name="documentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="documentPath" Type="varchar(max)" Nullable="false" />
+          <Property Name="documentType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="documentName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DUAL_NATIONALITY">
+          <Key>
+            <PropertyRef Name="dualNationalityID" />
+          </Key>
+          <Property Name="dualNationalityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dualNationality" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="EMPLOYMENT_STATUS">
+          <Key>
+            <PropertyRef Name="employmentStatusID" />
+          </Key>
+          <Property Name="employmentStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employmentStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="EVENT_IMAGE">
+          <Key>
+            <PropertyRef Name="eventImageID" />
+          </Key>
+          <Property Name="eventImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="eventID" Type="int" Nullable="false" />
+          <Property Name="summary" Type="text" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="imagePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="imageCaption" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EVENTS">
+          <Key>
+            <PropertyRef Name="eventID" />
+          </Key>
+          <Property Name="eventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="summary" Type="text" />
+          <Property Name="coverImagePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="eventDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXPENDITURE">
+          <Key>
+            <PropertyRef Name="expenditureID" />
+          </Key>
+          <Property Name="expenditureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="amountSpent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="summary" Type="text" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="expenditureDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FINANCIAL_REPORT">
+          <Key>
+            <PropertyRef Name="financialReportID" />
+          </Key>
+          <Property Name="financialReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="totalAmountRaised" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="totalAmountSpent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="summary" Type="text" />
+        </EntityType>
+        <EntityType Name="FINED_MEMBER">
+          <Key>
+            <PropertyRef Name="finedMemberID" />
+          </Key>
+          <Property Name="finedMemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="amountPaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="summary" Type="text" />
+          <Property Name="constitutionID" Type="int" Nullable="false" />
+          <Property Name="memberID" Type="int" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="isdeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="GENDER">
+          <Key>
+            <PropertyRef Name="genderID" />
+          </Key>
+          <Property Name="genderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genderName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GENERAL_ATTENDANCE">
+          <Key>
+            <PropertyRef Name="generalAttendanceID" />
+          </Key>
+          <Property Name="generalAttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="totalMembersPresent" Type="int" />
+          <Property Name="totalMembersAbsent" Type="int" />
+          <Property Name="totalDuesPaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="totalDuesExpected" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="totalDuesBalance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="summary" Type="text" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="attendanceDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MARITAL_STATUS">
+          <Key>
+            <PropertyRef Name="maritalStatusID" />
+          </Key>
+          <Property Name="maritalStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="maritalStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="memberID" />
+          </Key>
+          <Property Name="memberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="imagePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="houseAddress" Type="varchar(max)" Nullable="false" />
+          <Property Name="emailAddress" Type="varchar" MaxLength="50" />
+          <Property Name="membershipDate" Type="date" />
+          <Property Name="countryID" Type="int" Nullable="false" />
+          <Property Name="nationalityID" Type="int" Nullable="false" />
+          <Property Name="professionID" Type="int" Nullable="false" />
+          <Property Name="positionID" Type="int" Nullable="false" />
+          <Property Name="genderID" Type="int" Nullable="false" />
+          <Property Name="employmentStatusID" Type="int" Nullable="false" />
+          <Property Name="maritalStatusID" Type="int" Nullable="false" />
+          <Property Name="permissionID" Type="int" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phoneNumber2" Type="varchar" MaxLength="50" />
+          <Property Name="phoneNumber3" Type="varchar" MaxLength="50" />
+          <Property Name="membershipStatusID" Type="int" Nullable="false" />
+          <Property Name="deadDate" Type="date" Nullable="false" />
+          <Property Name="nextOfKin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LGAOfCountryOrigin" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="relationshipToKinID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MEMBERSHIP_STATUS">
+          <Key>
+            <PropertyRef Name="membershipStatusID" />
+          </Key>
+          <Property Name="membershipStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="membershipStatus" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MONTH">
+          <Key>
+            <PropertyRef Name="monthID" />
+          </Key>
+          <Property Name="monthID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="monthName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NATIONALITY">
+          <Key>
+            <PropertyRef Name="nationalityID" />
+          </Key>
+          <Property Name="nationalityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nationality" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="NEXT_OF_KIN_RELATIONSHIP">
+          <Key>
+            <PropertyRef Name="RelationshipToKinID" />
+          </Key>
+          <Property Name="RelationshipToKinID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RelationshipToKin" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="permissionID" />
+          </Key>
+          <Property Name="permissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="permission" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="PERSONAL_ATTENDANCE">
+          <Key>
+            <PropertyRef Name="attendanceID" />
+          </Key>
+          <Property Name="attendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="attendanceStatusID" Type="int" Nullable="false" />
+          <Property Name="memberID" Type="int" Nullable="false" />
+          <Property Name="monthlyDues" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="day" Type="int" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="expectedMonthlyDue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="balance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="generalAttendanceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POSITION">
+          <Key>
+            <PropertyRef Name="positionID" />
+          </Key>
+          <Property Name="positionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="positionName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="PROFESSION">
+          <Key>
+            <PropertyRef Name="professionID" />
+          </Key>
+          <Property Name="professionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="profession" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
+        <EntityContainer Name="APCModelStoreContainer">
+          <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHILD" EntityType="Self.CHILD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMMENT" EntityType="Self.COMMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONSTITUTION" EntityType="Self.CONSTITUTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUMENT" EntityType="Self.DOCUMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DUAL_NATIONALITY" EntityType="Self.DUAL_NATIONALITY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLOYMENT_STATUS" EntityType="Self.EMPLOYMENT_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENT_IMAGE" EntityType="Self.EVENT_IMAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENTS" EntityType="Self.EVENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXPENDITURE" EntityType="Self.EXPENDITURE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FINANCIAL_REPORT" EntityType="Self.FINANCIAL_REPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FINED_MEMBER" EntityType="Self.FINED_MEMBER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GENDER" EntityType="Self.GENDER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GENERAL_ATTENDANCE" EntityType="Self.GENERAL_ATTENDANCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MARITAL_STATUS" EntityType="Self.MARITAL_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEMBERSHIP_STATUS" EntityType="Self.MEMBERSHIP_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MONTH" EntityType="Self.MONTH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NATIONALITY" EntityType="Self.NATIONALITY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NEXT_OF_KIN_RELATIONSHIP" EntityType="Self.NEXT_OF_KIN_RELATIONSHIP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSONAL_ATTENDANCE" EntityType="Self.PERSONAL_ATTENDANCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POSITION" EntityType="Self.POSITION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="APCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ATTENDANCE_STATUS">
+          <Key>
+            <PropertyRef Name="attendanceStatusID" />
+          </Key>
+          <Property Name="attendanceStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="attendanceStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="CHILD">
+          <Key>
+            <PropertyRef Name="childID" />
+          </Key>
+          <Property Name="childID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="imagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="genderID" Type="Int32" Nullable="false" />
+          <Property Name="nationalityID" Type="Int32" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="motherID" Type="Int32" />
+          <Property Name="fatherID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="COMMENT">
+          <Key>
+            <PropertyRef Name="commentID" />
+          </Key>
+          <Property Name="commentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="memberID" Type="Int32" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONSTITUTION">
+          <Key>
+            <PropertyRef Name="constitutionID" />
+          </Key>
+          <Property Name="constitutionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="constitution1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="fine" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="section" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="countryID" />
+          </Key>
+          <Property Name="countryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="countryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DOCUMENT">
+          <Key>
+            <PropertyRef Name="documentID" />
+          </Key>
+          <Property Name="documentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="documentPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="documentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="documentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DUAL_NATIONALITY">
+          <Key>
+            <PropertyRef Name="dualNationalityID" />
+          </Key>
+          <Property Name="dualNationalityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dualNationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="EMPLOYMENT_STATUS">
+          <Key>
+            <PropertyRef Name="employmentStatusID" />
+          </Key>
+          <Property Name="employmentStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employmentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="EVENT_IMAGE">
+          <Key>
+            <PropertyRef Name="eventImageID" />
+          </Key>
+          <Property Name="eventImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eventID" Type="Int32" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="imagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="imageCaption" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EVENT">
+          <Key>
+            <PropertyRef Name="eventID" />
+          </Key>
+          <Property Name="eventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="coverImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="eventDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="EXPENDITURE">
+          <Key>
+            <PropertyRef Name="expenditureID" />
+          </Key>
+          <Property Name="expenditureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="amountSpent" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="expenditureDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="FINANCIAL_REPORT">
+          <Key>
+            <PropertyRef Name="financialReportID" />
+          </Key>
+          <Property Name="financialReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="totalAmountRaised" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="totalAmountSpent" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FINED_MEMBER">
+          <Key>
+            <PropertyRef Name="finedMemberID" />
+          </Key>
+          <Property Name="finedMemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="amountPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="constitutionID" Type="Int32" Nullable="false" />
+          <Property Name="memberID" Type="Int32" Nullable="false" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="isdeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="GENDER">
+          <Key>
+            <PropertyRef Name="genderID" />
+          </Key>
+          <Property Name="genderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GENERAL_ATTENDANCE">
+          <Key>
+            <PropertyRef Name="generalAttendanceID" />
+          </Key>
+          <Property Name="generalAttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="totalMembersPresent" Type="Int32" />
+          <Property Name="totalMembersAbsent" Type="Int32" />
+          <Property Name="totalDuesPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="totalDuesExpected" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="totalDuesBalance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="attendanceDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="MARITAL_STATUS">
+          <Key>
+            <PropertyRef Name="maritalStatusID" />
+          </Key>
+          <Property Name="maritalStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="memberID" />
+          </Key>
+          <Property Name="memberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="imagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="houseAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="membershipDate" Type="DateTime" Precision="0" />
+          <Property Name="countryID" Type="Int32" Nullable="false" />
+          <Property Name="nationalityID" Type="Int32" Nullable="false" />
+          <Property Name="professionID" Type="Int32" Nullable="false" />
+          <Property Name="positionID" Type="Int32" Nullable="false" />
+          <Property Name="genderID" Type="Int32" Nullable="false" />
+          <Property Name="employmentStatusID" Type="Int32" Nullable="false" />
+          <Property Name="maritalStatusID" Type="Int32" Nullable="false" />
+          <Property Name="permissionID" Type="Int32" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="phoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phoneNumber2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="membershipStatusID" Type="Int32" Nullable="false" />
+          <Property Name="deadDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="nextOfKin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LGAOfCountryOrigin" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="relationshipToKinID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MEMBERSHIP_STATUS">
+          <Key>
+            <PropertyRef Name="membershipStatusID" />
+          </Key>
+          <Property Name="membershipStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="membershipStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MONTH">
+          <Key>
+            <PropertyRef Name="monthID" />
+          </Key>
+          <Property Name="monthID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="monthName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NATIONALITY">
+          <Key>
+            <PropertyRef Name="nationalityID" />
+          </Key>
+          <Property Name="nationalityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nationality1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="NEXT_OF_KIN_RELATIONSHIP">
+          <Key>
+            <PropertyRef Name="RelationshipToKinID" />
+          </Key>
+          <Property Name="RelationshipToKinID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RelationshipToKin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="permissionID" />
+          </Key>
+          <Property Name="permissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="permission1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="PERSONAL_ATTENDANCE">
+          <Key>
+            <PropertyRef Name="attendanceID" />
+          </Key>
+          <Property Name="attendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="attendanceStatusID" Type="Int32" Nullable="false" />
+          <Property Name="memberID" Type="Int32" Nullable="false" />
+          <Property Name="monthlyDues" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="day" Type="Int32" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="expectedMonthlyDue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="balance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="generalAttendanceID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POSITION">
+          <Key>
+            <PropertyRef Name="positionID" />
+          </Key>
+          <Property Name="positionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="positionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="PROFESSION">
+          <Key>
+            <PropertyRef Name="professionID" />
+          </Key>
+          <Property Name="professionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="profession1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="APCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" />
+          <EntitySet Name="Children" EntityType="Self.CHILD" />
+          <EntitySet Name="COMMENTs" EntityType="Self.COMMENT" />
+          <EntitySet Name="CONSTITUTIONs" EntityType="Self.CONSTITUTION" />
+          <EntitySet Name="COUNTRies" EntityType="Self.COUNTRY" />
+          <EntitySet Name="DOCUMENTs" EntityType="Self.DOCUMENT" />
+          <EntitySet Name="DUAL_NATIONALITY" EntityType="Self.DUAL_NATIONALITY" />
+          <EntitySet Name="EMPLOYMENT_STATUS" EntityType="Self.EMPLOYMENT_STATUS" />
+          <EntitySet Name="EVENT_IMAGE" EntityType="Self.EVENT_IMAGE" />
+          <EntitySet Name="EVENTS" EntityType="Self.EVENT" />
+          <EntitySet Name="EXPENDITUREs" EntityType="Self.EXPENDITURE" />
+          <EntitySet Name="FINANCIAL_REPORT" EntityType="Self.FINANCIAL_REPORT" />
+          <EntitySet Name="FINED_MEMBER" EntityType="Self.FINED_MEMBER" />
+          <EntitySet Name="GENDERs" EntityType="Self.GENDER" />
+          <EntitySet Name="GENERAL_ATTENDANCE" EntityType="Self.GENERAL_ATTENDANCE" />
+          <EntitySet Name="MARITAL_STATUS" EntityType="Self.MARITAL_STATUS" />
+          <EntitySet Name="MEMBERs" EntityType="Self.MEMBER" />
+          <EntitySet Name="MEMBERSHIP_STATUS" EntityType="Self.MEMBERSHIP_STATUS" />
+          <EntitySet Name="MONTHs" EntityType="Self.MONTH" />
+          <EntitySet Name="NATIONALITies" EntityType="Self.NATIONALITY" />
+          <EntitySet Name="NEXT_OF_KIN_RELATIONSHIP" EntityType="Self.NEXT_OF_KIN_RELATIONSHIP" />
+          <EntitySet Name="PERMISSIONs" EntityType="Self.PERMISSION" />
+          <EntitySet Name="PERSONAL_ATTENDANCE" EntityType="Self.PERSONAL_ATTENDANCE" />
+          <EntitySet Name="POSITIONs" EntityType="Self.POSITION" />
+          <EntitySet Name="PROFESSIONs" EntityType="Self.PROFESSION" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="APCModelStoreContainer" CdmEntityContainer="APCEntities">
+          <EntitySetMapping Name="ATTENDANCE_STATUS">
+            <EntityTypeMapping TypeName="APCModel.ATTENDANCE_STATUS">
+              <MappingFragment StoreEntitySet="ATTENDANCE_STATUS">
+                <ScalarProperty Name="attendanceStatusID" ColumnName="attendanceStatusID" />
+                <ScalarProperty Name="attendanceStatus" ColumnName="attendanceStatus" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Children">
+            <EntityTypeMapping TypeName="APCModel.CHILD">
+              <MappingFragment StoreEntitySet="CHILD">
+                <ScalarProperty Name="childID" ColumnName="childID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+                <ScalarProperty Name="genderID" ColumnName="genderID" />
+                <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="motherID" ColumnName="motherID" />
+                <ScalarProperty Name="fatherID" ColumnName="fatherID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMMENTs">
+            <EntityTypeMapping TypeName="APCModel.COMMENT">
+              <MappingFragment StoreEntitySet="COMMENT">
+                <ScalarProperty Name="commentID" ColumnName="commentID" />
+                <ScalarProperty Name="comment1" ColumnName="comment" />
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONSTITUTIONs">
+            <EntityTypeMapping TypeName="APCModel.CONSTITUTION">
+              <MappingFragment StoreEntitySet="CONSTITUTION">
+                <ScalarProperty Name="constitutionID" ColumnName="constitutionID" />
+                <ScalarProperty Name="constitution1" ColumnName="constitution" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="fine" ColumnName="fine" />
+                <ScalarProperty Name="section" ColumnName="section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COUNTRies">
+            <EntityTypeMapping TypeName="APCModel.COUNTRY">
+              <MappingFragment StoreEntitySet="COUNTRY">
+                <ScalarProperty Name="countryID" ColumnName="countryID" />
+                <ScalarProperty Name="countryName" ColumnName="countryName" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUMENTs">
+            <EntityTypeMapping TypeName="APCModel.DOCUMENT">
+              <MappingFragment StoreEntitySet="DOCUMENT">
+                <ScalarProperty Name="documentID" ColumnName="documentID" />
+                <ScalarProperty Name="documentPath" ColumnName="documentPath" />
+                <ScalarProperty Name="documentType" ColumnName="documentType" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="documentName" ColumnName="documentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DUAL_NATIONALITY">
+            <EntityTypeMapping TypeName="APCModel.DUAL_NATIONALITY">
+              <MappingFragment StoreEntitySet="DUAL_NATIONALITY">
+                <ScalarProperty Name="dualNationalityID" ColumnName="dualNationalityID" />
+                <ScalarProperty Name="dualNationality" ColumnName="dualNationality" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYMENT_STATUS">
+            <EntityTypeMapping TypeName="APCModel.EMPLOYMENT_STATUS">
+              <MappingFragment StoreEntitySet="EMPLOYMENT_STATUS">
+                <ScalarProperty Name="employmentStatusID" ColumnName="employmentStatusID" />
+                <ScalarProperty Name="employmentStatus" ColumnName="employmentStatus" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENT_IMAGE">
+            <EntityTypeMapping TypeName="APCModel.EVENT_IMAGE">
+              <MappingFragment StoreEntitySet="EVENT_IMAGE">
+                <ScalarProperty Name="eventImageID" ColumnName="eventImageID" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+                <ScalarProperty Name="imageCaption" ColumnName="imageCaption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENTS">
+            <EntityTypeMapping TypeName="APCModel.EVENT">
+              <MappingFragment StoreEntitySet="EVENTS">
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="coverImagePath" ColumnName="coverImagePath" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="eventDate" ColumnName="eventDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXPENDITUREs">
+            <EntityTypeMapping TypeName="APCModel.EXPENDITURE">
+              <MappingFragment StoreEntitySet="EXPENDITURE">
+                <ScalarProperty Name="expenditureID" ColumnName="expenditureID" />
+                <ScalarProperty Name="amountSpent" ColumnName="amountSpent" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="expenditureDate" ColumnName="expenditureDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FINANCIAL_REPORT">
+            <EntityTypeMapping TypeName="APCModel.FINANCIAL_REPORT">
+              <MappingFragment StoreEntitySet="FINANCIAL_REPORT">
+                <ScalarProperty Name="financialReportID" ColumnName="financialReportID" />
+                <ScalarProperty Name="totalAmountRaised" ColumnName="totalAmountRaised" />
+                <ScalarProperty Name="totalAmountSpent" ColumnName="totalAmountSpent" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FINED_MEMBER">
+            <EntityTypeMapping TypeName="APCModel.FINED_MEMBER">
+              <MappingFragment StoreEntitySet="FINED_MEMBER">
+                <ScalarProperty Name="finedMemberID" ColumnName="finedMemberID" />
+                <ScalarProperty Name="amountPaid" ColumnName="amountPaid" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="constitutionID" ColumnName="constitutionID" />
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENDERs">
+            <EntityTypeMapping TypeName="APCModel.GENDER">
+              <MappingFragment StoreEntitySet="GENDER">
+                <ScalarProperty Name="genderID" ColumnName="genderID" />
+                <ScalarProperty Name="genderName" ColumnName="genderName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENERAL_ATTENDANCE">
+            <EntityTypeMapping TypeName="APCModel.GENERAL_ATTENDANCE">
+              <MappingFragment StoreEntitySet="GENERAL_ATTENDANCE">
+                <ScalarProperty Name="generalAttendanceID" ColumnName="generalAttendanceID" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="totalMembersPresent" ColumnName="totalMembersPresent" />
+                <ScalarProperty Name="totalMembersAbsent" ColumnName="totalMembersAbsent" />
+                <ScalarProperty Name="totalDuesPaid" ColumnName="totalDuesPaid" />
+                <ScalarProperty Name="totalDuesExpected" ColumnName="totalDuesExpected" />
+                <ScalarProperty Name="totalDuesBalance" ColumnName="totalDuesBalance" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="attendanceDate" ColumnName="attendanceDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARITAL_STATUS">
+            <EntityTypeMapping TypeName="APCModel.MARITAL_STATUS">
+              <MappingFragment StoreEntitySet="MARITAL_STATUS">
+                <ScalarProperty Name="maritalStatusID" ColumnName="maritalStatusID" />
+                <ScalarProperty Name="maritalStatus" ColumnName="maritalStatus" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEMBERs">
+            <EntityTypeMapping TypeName="APCModel.MEMBER">
+              <MappingFragment StoreEntitySet="MEMBER">
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+                <ScalarProperty Name="houseAddress" ColumnName="houseAddress" />
+                <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+                <ScalarProperty Name="membershipDate" ColumnName="membershipDate" />
+                <ScalarProperty Name="countryID" ColumnName="countryID" />
+                <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
+                <ScalarProperty Name="professionID" ColumnName="professionID" />
+                <ScalarProperty Name="positionID" ColumnName="positionID" />
+                <ScalarProperty Name="genderID" ColumnName="genderID" />
+                <ScalarProperty Name="employmentStatusID" ColumnName="employmentStatusID" />
+                <ScalarProperty Name="maritalStatusID" ColumnName="maritalStatusID" />
+                <ScalarProperty Name="permissionID" ColumnName="permissionID" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="phoneNumber2" ColumnName="phoneNumber2" />
+                <ScalarProperty Name="phoneNumber3" ColumnName="phoneNumber3" />
+                <ScalarProperty Name="membershipStatusID" ColumnName="membershipStatusID" />
+                <ScalarProperty Name="deadDate" ColumnName="deadDate" />
+                <ScalarProperty Name="nextOfKin" ColumnName="nextOfKin" />
+                <ScalarProperty Name="LGAOfCountryOrigin" ColumnName="LGAOfCountryOrigin" />
+                <ScalarProperty Name="relationshipToKinID" ColumnName="relationshipToKinID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEMBERSHIP_STATUS">
+            <EntityTypeMapping TypeName="APCModel.MEMBERSHIP_STATUS">
+              <MappingFragment StoreEntitySet="MEMBERSHIP_STATUS">
+                <ScalarProperty Name="membershipStatusID" ColumnName="membershipStatusID" />
+                <ScalarProperty Name="membershipStatus" ColumnName="membershipStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MONTHs">
+            <EntityTypeMapping TypeName="APCModel.MONTH">
+              <MappingFragment StoreEntitySet="MONTH">
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="monthName" ColumnName="monthName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NATIONALITies">
+            <EntityTypeMapping TypeName="APCModel.NATIONALITY">
+              <MappingFragment StoreEntitySet="NATIONALITY">
+                <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
+                <ScalarProperty Name="nationality1" ColumnName="nationality" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEXT_OF_KIN_RELATIONSHIP">
+            <EntityTypeMapping TypeName="APCModel.NEXT_OF_KIN_RELATIONSHIP">
+              <MappingFragment StoreEntitySet="NEXT_OF_KIN_RELATIONSHIP">
+                <ScalarProperty Name="RelationshipToKinID" ColumnName="RelationshipToKinID" />
+                <ScalarProperty Name="RelationshipToKin" ColumnName="RelationshipToKin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISSIONs">
+            <EntityTypeMapping TypeName="APCModel.PERMISSION">
+              <MappingFragment StoreEntitySet="PERMISSION">
+                <ScalarProperty Name="permissionID" ColumnName="permissionID" />
+                <ScalarProperty Name="permission1" ColumnName="permission" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONAL_ATTENDANCE">
+            <EntityTypeMapping TypeName="APCModel.PERSONAL_ATTENDANCE">
+              <MappingFragment StoreEntitySet="PERSONAL_ATTENDANCE">
+                <ScalarProperty Name="attendanceID" ColumnName="attendanceID" />
+                <ScalarProperty Name="attendanceStatusID" ColumnName="attendanceStatusID" />
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="monthlyDues" ColumnName="monthlyDues" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="expectedMonthlyDue" ColumnName="expectedMonthlyDue" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="generalAttendanceID" ColumnName="generalAttendanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POSITIONs">
+            <EntityTypeMapping TypeName="APCModel.POSITION">
+              <MappingFragment StoreEntitySet="POSITION">
+                <ScalarProperty Name="positionID" ColumnName="positionID" />
+                <ScalarProperty Name="positionName" ColumnName="positionName" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROFESSIONs">
+            <EntityTypeMapping TypeName="APCModel.PROFESSION">
+              <MappingFragment StoreEntitySet="PROFESSION">
+                <ScalarProperty Name="professionID" ColumnName="professionID" />
+                <ScalarProperty Name="profession1" ColumnName="profession" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

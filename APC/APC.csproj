@@ -1,0 +1,880 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4C6ED3F2-49DE-4079-A815-82C2CD86E552}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>APC</RootNamespace>
+    <AssemblyName>APC</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\user\source\repos\APC\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>APC</ProductName>
+    <PublisherName>Dan-Obu Isoboye Vincent</PublisherName>
+    <SuiteName>APC</SuiteName>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logoAPC.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3D271E70A6AE18177BF15808BE3BD47494B3AA7B</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>APC_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=7.0.4.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.7.0.4\lib\net462\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=6.1.1.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Interfaces.6.1.1\lib\net462\EPPlus.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.System.Drawing, Version=6.1.1.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.System.Drawing.6.1.1\lib\net462\EPPlus.System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=6.3.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.6.3.0\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Document.NET, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.2.5.0\lib\net40\Xceed.Document.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Words.NET, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.2.5.0\lib\net40\Xceed.Words.NET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllForms\FormConstitution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormConstitution.Designer.cs">
+      <DependentUpon>FormConstitution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormDocument.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormDocument.Designer.cs">
+      <DependentUpon>FormDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormFinedMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormFinedMember.Designer.cs">
+      <DependentUpon>FormFinedMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormMeetingBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormMeetingBoard.Designer.cs">
+      <DependentUpon>FormMeetingBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormMembersBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormMembersBoard.Designer.cs">
+      <DependentUpon>FormMembersBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormReportsBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormReportsBoard.Designer.cs">
+      <DependentUpon>FormReportsBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormSingleCommentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormSingleCommentList.Designer.cs">
+      <DependentUpon>FormSingleCommentList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewConstitution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewConstitution.Designer.cs">
+      <DependentUpon>FormViewConstitution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewDocument.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewDocument.Designer.cs">
+      <DependentUpon>FormViewDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewFinedMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewFinedMember.Designer.cs">
+      <DependentUpon>FormViewFinedMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewMeetingsSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewMeetingsSummary.Designer.cs">
+      <DependentUpon>FormViewMeetingsSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewPersonalAttendances.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewPersonalAttendances.Designer.cs">
+      <DependentUpon>FormViewPersonalAttendances.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BLL\ConstitutionBLL.cs" />
+    <Compile Include="BLL\DocumentBLL.cs" />
+    <Compile Include="BLL\FinedMemberBLL.cs" />
+    <Compile Include="BLL\GeneralAttendanceBLL.cs" />
+    <Compile Include="BLL\GraphBLL.cs" />
+    <Compile Include="BLL\MembershipStatusBLL.cs" />
+    <Compile Include="BLL\RelationshipsToKinBLL.cs" />
+    <Compile Include="CircularPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DAL\ATTENDANCE_STATUS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CHILD.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\COMMENT.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CONSTITUTION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\COUNTRY.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DAO\ConstitutionDAO.cs" />
+    <Compile Include="DAL\DAO\DocumentDAO.cs" />
+    <Compile Include="DAL\DAO\FinedMemberDAO.cs" />
+    <Compile Include="DAL\DAO\GraphDAO.cs" />
+    <Compile Include="DAL\DAO\MembershipStatusDAO.cs" />
+    <Compile Include="DAL\DAO\RelationshipToNextOfKinDAO.cs" />
+    <Compile Include="DAL\DataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUMENT.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DTO\AbsenteesDetailDTO.cs" />
+    <Compile Include="DAL\DTO\AbsenteesDTO.cs" />
+    <Compile Include="DAL\DTO\ConstitutionDetailDTO.cs" />
+    <Compile Include="DAL\DTO\ConstitutionDTO.cs" />
+    <Compile Include="DAL\DTO\ConstitutionSectionDetailDTO.cs" />
+    <Compile Include="DAL\DTO\ConstitutionSectionDTO.cs" />
+    <Compile Include="DAL\DTO\DeletedDataDTO.cs" />
+    <Compile Include="DAL\DTO\DocumentDetailDTO.cs" />
+    <Compile Include="AllForms\FormDocumentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormDocumentList.Designer.cs">
+      <DependentUpon>FormDocumentList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormPersonalAttendance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormPersonalAttendance.Designer.cs">
+      <DependentUpon>FormPersonalAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormChildren.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormChildren.Designer.cs">
+      <DependentUpon>FormChildren.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormChildrenOfSingleParent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormChildrenOfSingleParent.Designer.cs">
+      <DependentUpon>FormChildrenOfSingleParent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormComments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormComments.Designer.cs">
+      <DependentUpon>FormComments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormCountry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormCountry.Designer.cs">
+      <DependentUpon>FormCountry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormEvenImages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormEvenImages.Designer.cs">
+      <DependentUpon>FormEvenImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormExpenditure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormExpenditure.Designer.cs">
+      <DependentUpon>FormExpenditure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormGeneralAttendance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormGeneralAttendance.Designer.cs">
+      <DependentUpon>FormGeneralAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormNationality.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormNationality.Designer.cs">
+      <DependentUpon>FormNationality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormNotifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormNotifications.Designer.cs">
+      <DependentUpon>FormNotifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormEventSingleImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormEventSingleImage.Designer.cs">
+      <DependentUpon>FormEventSingleImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewFinancialReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewFinancialReport.Designer.cs">
+      <DependentUpon>FormViewFinancialReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewGeneralAttendance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewGeneralAttendance.Designer.cs">
+      <DependentUpon>FormViewGeneralAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewChild.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewChild.Designer.cs">
+      <DependentUpon>FormViewChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewChildrenList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewChildrenList.Designer.cs">
+      <DependentUpon>FormViewChildrenList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewComment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewComment.Designer.cs">
+      <DependentUpon>FormViewComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewDeadMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewDeadMember.Designer.cs">
+      <DependentUpon>FormViewDeadMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewExpenditure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewExpenditure.Designer.cs">
+      <DependentUpon>FormViewExpenditure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewMember.Designer.cs">
+      <DependentUpon>FormViewMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BLL\EventImageBLL.cs" />
+    <Compile Include="BLL\EventsBLL.cs" />
+    <Compile Include="BLL\FinancialReportBLL.cs" />
+    <Compile Include="BLL\PersonalAttendanceBLL.cs" />
+    <Compile Include="BLL\AttendanceStatusBLL.cs" />
+    <Compile Include="BLL\ChildBLL.cs" />
+    <Compile Include="BLL\CommentBLL.cs" />
+    <Compile Include="BLL\CountryBLL.cs" />
+    <Compile Include="BLL\DualNationalityBLL.cs" />
+    <Compile Include="BLL\EmploymentStatusBLL.cs" />
+    <Compile Include="BLL\ExpenditureBLL.cs" />
+    <Compile Include="BLL\FatherBLL.cs" />
+    <Compile Include="BLL\GenderBLL.cs" />
+    <Compile Include="BLL\IBLL.cs" />
+    <Compile Include="BLL\MaritalStatusBLL.cs" />
+    <Compile Include="BLL\MemberBLL.cs" />
+    <Compile Include="BLL\MonthBLL.cs" />
+    <Compile Include="BLL\MotherBLL.cs" />
+    <Compile Include="BLL\NationalityBLL.cs" />
+    <Compile Include="BLL\PermissionBLL.cs" />
+    <Compile Include="BLL\PositionBLL.cs" />
+    <Compile Include="BLL\ProfessionBLL.cs" />
+    <Compile Include="DAL\DAO\APCContexts.cs" />
+    <Compile Include="DAL\DAO\EventImageDAO.cs" />
+    <Compile Include="DAL\DAO\EventsDAO.cs" />
+    <Compile Include="DAL\DAO\FinancialReportDAO.cs" />
+    <Compile Include="DAL\DAO\GeneralAttendanceDAO.cs" />
+    <Compile Include="DAL\DAO\PersonalAttendanceDAO.cs" />
+    <Compile Include="DAL\DAO\AttendanceStatusDAO.cs" />
+    <Compile Include="DAL\DAO\ChildDAO.cs" />
+    <Compile Include="DAL\DAO\CommentDAO.cs" />
+    <Compile Include="DAL\DAO\CountryDAO.cs" />
+    <Compile Include="DAL\DAO\DualNationalityDAO.cs" />
+    <Compile Include="DAL\DAO\EmploymentStatusDAO.cs" />
+    <Compile Include="DAL\DAO\ExpenditureDAO.cs" />
+    <Compile Include="DAL\DAO\FatherDAO.cs" />
+    <Compile Include="DAL\DAO\GenderDAO.cs" />
+    <Compile Include="DAL\DAO\IDAO.cs" />
+    <Compile Include="DAL\DAO\MaritalStatusDAO.cs" />
+    <Compile Include="DAL\DAO\MemberDAO.cs" />
+    <Compile Include="DAL\DAO\MonthDAO.cs" />
+    <Compile Include="DAL\DAO\MotherDAO.cs" />
+    <Compile Include="DAL\DAO\NationalityDAO.cs" />
+    <Compile Include="DAL\DAO\PermissionDAO.cs" />
+    <Compile Include="DAL\DAO\PositionDAO.cs" />
+    <Compile Include="DAL\DAO\ProfessionDAO.cs" />
+    <Compile Include="DAL\DTO\DocumentDTO.cs" />
+    <Compile Include="DAL\DTO\EventImageDetailDTO.cs" />
+    <Compile Include="DAL\DTO\EventImageDTO.cs" />
+    <Compile Include="DAL\DTO\EventsDetailDTO.cs" />
+    <Compile Include="DAL\DTO\EventsDTO.cs" />
+    <Compile Include="DAL\DTO\FinancialReportDetailDTO.cs" />
+    <Compile Include="DAL\DTO\FinancialReportDTO.cs" />
+    <Compile Include="DAL\DTO\FinedMemberDetailDTO.cs" />
+    <Compile Include="DAL\DTO\FinedMemberDTO.cs" />
+    <Compile Include="DAL\DTO\GraphAmountDetailDTO.cs" />
+    <Compile Include="DAL\DTO\GraphDTO.cs" />
+    <Compile Include="DAL\DTO\MembershipStatusDetailDTO.cs" />
+    <Compile Include="DAL\DTO\MembershipStatusDTO.cs" />
+    <Compile Include="DAL\DTO\PersonalAttendanceDetailDTO.cs" />
+    <Compile Include="DAL\DTO\PersonalAttendanceDTO.cs" />
+    <Compile Include="DAL\DTO\GeneralAttendanceDetailDTO.cs" />
+    <Compile Include="DAL\DTO\GeneralAttendanceDTO.cs" />
+    <Compile Include="DAL\DTO\AttendanceStatusDetailDTO.cs" />
+    <Compile Include="DAL\DTO\AttendanceStatusDTO.cs" />
+    <Compile Include="DAL\DTO\ChildDetailDTO.cs" />
+    <Compile Include="DAL\DTO\ChildDTO.cs" />
+    <Compile Include="DAL\DTO\CommentDetailDTO.cs" />
+    <Compile Include="DAL\DTO\CommentDTO.cs" />
+    <Compile Include="DAL\DTO\CountryDetailDTO.cs" />
+    <Compile Include="DAL\DTO\CountryDTO.cs" />
+    <Compile Include="DAL\DTO\DualNationalityDetailDTO.cs" />
+    <Compile Include="DAL\DTO\DualNationalityDTO.cs" />
+    <Compile Include="DAL\DTO\EmploymentStatusDetailDTO.cs" />
+    <Compile Include="DAL\DTO\EmploymentStatusDTO.cs" />
+    <Compile Include="DAL\DTO\ExpenditureDetailDTO.cs" />
+    <Compile Include="DAL\DTO\ExpenditureDTO.cs" />
+    <Compile Include="DAL\DTO\FatherDTO.cs" />
+    <Compile Include="DAL\DTO\FathersDetailDTO.cs" />
+    <Compile Include="DAL\DTO\GenderDetailDTO.cs" />
+    <Compile Include="DAL\DTO\GenderDTO.cs" />
+    <Compile Include="DAL\DTO\MaritalStatusDetailDTO.cs" />
+    <Compile Include="DAL\DTO\MaritalStatusDTO.cs" />
+    <Compile Include="DAL\DTO\MemberDetailDTO.cs" />
+    <Compile Include="DAL\DTO\MemberDTO.cs" />
+    <Compile Include="DAL\DTO\MonthAndYearListDetailDTO.cs" />
+    <Compile Include="DAL\DTO\MonthAndYearListDTO.cs" />
+    <Compile Include="DAL\DTO\MonthDetailDTO.cs" />
+    <Compile Include="DAL\DTO\MonthDTO.cs" />
+    <Compile Include="DAL\DTO\MotherDTO.cs" />
+    <Compile Include="DAL\DTO\MothersDetailDTO.cs" />
+    <Compile Include="DAL\DTO\NationalityDetailDTO.cs" />
+    <Compile Include="DAL\DTO\NationalityDTO.cs" />
+    <Compile Include="DAL\DTO\PermissionDetailDTO.cs" />
+    <Compile Include="DAL\DTO\PermissionDTO.cs" />
+    <Compile Include="DAL\DTO\PositionDetailDTO.cs" />
+    <Compile Include="DAL\DTO\PositionDTO.cs" />
+    <Compile Include="DAL\DTO\ProfessionDetailDTO.cs" />
+    <Compile Include="DAL\DTO\ProfessionDTO.cs" />
+    <Compile Include="DAL\DTO\RelationshipToNextOfKinDetailDTO.cs" />
+    <Compile Include="DAL\DTO\RelationshipToNextOfKinDTO.cs" />
+    <Compile Include="DAL\DUAL_NATIONALITY.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EMPLOYMENT_STATUS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EVENT.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EVENT_IMAGE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\EXPENDITURE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\FINANCIAL_REPORT.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\FINED_MEMBER.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GENDER.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\GENERAL_ATTENDANCE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MARITAL_STATUS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MEMBER.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MEMBERSHIP_STATUS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MONTH.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NATIONALITY.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NEXT_OF_KIN_RELATIONSHIP.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PERMISSION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PERSONAL_ATTENDANCE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\POSITION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PROFESSION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FormProperties.cs" />
+    <Compile Include="LoginInfo.cs" />
+    <Compile Include="ReadFiles.cs" />
+    <Compile Include="FillComboBox.cs" />
+    <Compile Include="FormDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDashboard.Designer.cs">
+      <DependentUpon>FormDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormEmploymentStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormEmploymentStatus.Designer.cs">
+      <DependentUpon>FormEmploymentStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormEvent.Designer.cs">
+      <DependentUpon>FormEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormEventsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormEventsList.Designer.cs">
+      <DependentUpon>FormEventsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormFinancialReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormFinancialReport.Designer.cs">
+      <DependentUpon>FormFinancialReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormMaritalStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormMaritalStatus.Designer.cs">
+      <DependentUpon>FormMaritalStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormMembers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormMembers.Designer.cs">
+      <DependentUpon>FormMembers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormPosition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormPosition.Designer.cs">
+      <DependentUpon>FormPosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormProfession.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormProfession.Designer.cs">
+      <DependentUpon>FormProfession.cs</DependentUpon>
+    </Compile>
+    <Compile Include="General.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AllForms\FormConstitution.resx">
+      <DependentUpon>FormConstitution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormDocument.resx">
+      <DependentUpon>FormDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormDocumentList.resx">
+      <DependentUpon>FormDocumentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormFinedMember.resx">
+      <DependentUpon>FormFinedMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormGeneralAttendance.resx">
+      <DependentUpon>FormGeneralAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormMeetingBoard.resx">
+      <DependentUpon>FormMeetingBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormMembersBoard.resx">
+      <DependentUpon>FormMembersBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormPersonalAttendance.resx">
+      <DependentUpon>FormPersonalAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormChildren.resx">
+      <DependentUpon>FormChildren.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormChildrenOfSingleParent.resx">
+      <DependentUpon>FormChildrenOfSingleParent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormComments.resx">
+      <DependentUpon>FormComments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormCountry.resx">
+      <DependentUpon>FormCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormEmploymentStatus.resx">
+      <DependentUpon>FormEmploymentStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormEvenImages.resx">
+      <DependentUpon>FormEvenImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormEvent.resx">
+      <DependentUpon>FormEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormEventsList.resx">
+      <DependentUpon>FormEventsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormExpenditure.resx">
+      <DependentUpon>FormExpenditure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormMaritalStatus.resx">
+      <DependentUpon>FormMaritalStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormNationality.resx">
+      <DependentUpon>FormNationality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormNotifications.resx">
+      <DependentUpon>FormNotifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormProfession.resx">
+      <DependentUpon>FormProfession.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormEventSingleImage.resx">
+      <DependentUpon>FormEventSingleImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormReportsBoard.resx">
+      <DependentUpon>FormReportsBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormSettings.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormSingleCommentList.resx">
+      <DependentUpon>FormSingleCommentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewConstitution.resx">
+      <DependentUpon>FormViewConstitution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewDocument.resx">
+      <DependentUpon>FormViewDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewFinancialReport.resx">
+      <DependentUpon>FormViewFinancialReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewFinedMember.resx">
+      <DependentUpon>FormViewFinedMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewGeneralAttendance.resx">
+      <DependentUpon>FormViewGeneralAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewChild.resx">
+      <DependentUpon>FormViewChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewChildrenList.resx">
+      <DependentUpon>FormViewChildrenList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewComment.resx">
+      <DependentUpon>FormViewComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewDeadMember.resx">
+      <DependentUpon>FormViewDeadMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewExpenditure.resx">
+      <DependentUpon>FormViewExpenditure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewMeetingsSummary.resx">
+      <DependentUpon>FormViewMeetingsSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewMember.resx">
+      <DependentUpon>FormViewMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewPersonalAttendances.resx">
+      <DependentUpon>FormViewPersonalAttendances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDashboard.resx">
+      <DependentUpon>FormDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormFinancialReport.resx">
+      <DependentUpon>FormFinancialReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormMembers.resx">
+      <DependentUpon>FormMembers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormPosition.resx">
+      <DependentUpon>FormPosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="AllForms\packages.config" />
+    <None Include="APC_1_TemporaryKey.pfx" />
+    <EntityDeploy Include="DAL\DataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="APC_2_TemporaryKey.pfx" />
+    <None Include="DAL\DataModel.edmx.diagram">
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-minimize-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-rounded-rectangle-stroked-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-multiply-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kids %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\worker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\worker %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hierarchy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\employment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\locksmith.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coronavirus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toilet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red-carpet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\attendance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\career.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\couple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\P90360274-oliver-zipse-member-of-the-board-of-management-of-bmw-ag-production-as-of-16-august-2019-chairman-of-600px.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileImage.png" />
+    <None Include="Resources\docIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DAL\DataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\DataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="logoAPC.ico" />
+    <Content Include="Wallpaperfx-3d-Bluefx-Desktop-Documents.256.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
