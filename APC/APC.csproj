@@ -59,10 +59,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3D271E70A6AE18177BF15808BE3BD47494B3AA7B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>833C16490D1F0D818FACC8F9460D6FF742B9A6E1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>APC_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>APC_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -748,11 +748,11 @@
     </Compile>
     <None Include="AllForms\packages.config" />
     <None Include="APC_1_TemporaryKey.pfx" />
+    <None Include="APC_2_TemporaryKey.pfx" />
     <EntityDeploy Include="DAL\DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="APC_2_TemporaryKey.pfx" />
     <None Include="DAL\DataModel.edmx.diagram">
       <DependentUpon>DataModel.edmx</DependentUpon>
     </None>

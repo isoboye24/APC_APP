@@ -13,10 +13,10 @@ namespace APC.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class APCEntities : DbContext
+    public partial class APCEntities1 : DbContext
     {
-        public APCEntities()
-            : base("name=APCEntities")
+        public APCEntities1()
+            : base("name=APCEntities1")
         {
         }
     

@@ -20,5 +20,6 @@ namespace APC.DAL.DTO
         public decimal TotalDuesBalance { get; set; }
         public string Summary { get; set; }
         public DateTime AttendanceDate { get; set; }
+        public string FinancialStatus { get; set; }
     }
 }

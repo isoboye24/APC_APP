@@ -129,10 +129,11 @@ namespace APC.AllForms
             dataGridView1.Columns[5].HeaderText = "Members Present";
             dataGridView1.Columns[6].HeaderText = "Members Absent";
             dataGridView1.Columns[7].HeaderText = "Dues Paid";
-            dataGridView1.Columns[8].HeaderText = "Dues Expected";
-            dataGridView1.Columns[9].HeaderText = "Balance";
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].Visible = false;
             dataGridView1.Columns[10].Visible = false;
             dataGridView1.Columns[11].Visible = false;
+            dataGridView1.Columns[12].Visible = false;
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -163,12 +164,13 @@ namespace APC.AllForms
             constitutionDTO = constitutionBLL.Select();
             dataGridViewConstitution.DataSource = constitutionDTO.Constitutions;
             dataGridViewConstitution.Columns[0].Visible = false;
-            dataGridViewConstitution.Columns[1].HeaderText = "Constitution";
-            dataGridViewConstitution.Columns[2].HeaderText = "Section";
-            dataGridViewConstitution.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewConstitution.Columns[3].Visible = false;
-            dataGridViewConstitution.Columns[4].HeaderText = "Fine";
-            dataGridViewConstitution.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewConstitution.Columns[1].Visible = false;
+            dataGridViewConstitution.Columns[2].HeaderText = "Constitution Summary";
+            dataGridViewConstitution.Columns[3].HeaderText = "Section";
+            dataGridViewConstitution.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewConstitution.Columns[4].Visible = false;
+            dataGridViewConstitution.Columns[5].HeaderText = "Fine";
+            dataGridViewConstitution.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             foreach (DataGridViewColumn column in dataGridViewConstitution.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -179,18 +181,18 @@ namespace APC.AllForms
             dataGridViewFinedMembers.Columns[0].Visible = false;
             dataGridViewFinedMembers.Columns[1].HeaderText = "Name";
             dataGridViewFinedMembers.Columns[2].HeaderText = "Surname";
-            dataGridViewFinedMembers.Columns[3].HeaderText = "Violated";
-            dataGridViewFinedMembers.Columns[4].Visible = false;
-            dataGridViewFinedMembers.Columns[5].HeaderText = "Fine";
-            dataGridViewFinedMembers.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[6].Visible = false;
-            dataGridViewFinedMembers.Columns[7].HeaderText = "Paid";
-            dataGridViewFinedMembers.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[8].Visible = false;
+            dataGridViewFinedMembers.Columns[3].Visible = false;
+            dataGridViewFinedMembers.Columns[4].HeaderText = "Violated";
+            dataGridViewFinedMembers.Columns[5].Visible = false;
+            dataGridViewFinedMembers.Columns[6].HeaderText = "Fine";
+            dataGridViewFinedMembers.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewFinedMembers.Columns[7].Visible = false;
+            dataGridViewFinedMembers.Columns[8].HeaderText = "Paid";
+            dataGridViewFinedMembers.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewFinedMembers.Columns[9].Visible = false;
-            dataGridViewFinedMembers.Columns[10].HeaderText = "Status";
-            dataGridViewFinedMembers.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[11].Visible = false;
+            dataGridViewFinedMembers.Columns[10].Visible = false;
+            dataGridViewFinedMembers.Columns[11].HeaderText = "Status";
+            dataGridViewFinedMembers.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewFinedMembers.Columns[12].Visible = false;
             dataGridViewFinedMembers.Columns[13].Visible = false;
             dataGridViewFinedMembers.Columns[14].Visible = false;
@@ -198,14 +200,15 @@ namespace APC.AllForms
             dataGridViewFinedMembers.Columns[16].Visible = false;
             dataGridViewFinedMembers.Columns[17].Visible = false;
             dataGridViewFinedMembers.Columns[18].Visible = false;
-            dataGridViewFinedMembers.Columns[19].HeaderText = "Day";
-            dataGridViewFinedMembers.Columns[19].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[20].Visible = false;
-            dataGridViewFinedMembers.Columns[21].HeaderText = "Month";
-            dataGridViewFinedMembers.Columns[21].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[22].HeaderText = "Year";
+            dataGridViewFinedMembers.Columns[19].Visible = false;
+            dataGridViewFinedMembers.Columns[20].HeaderText = "Day";
+            dataGridViewFinedMembers.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewFinedMembers.Columns[21].Visible = false;
+            dataGridViewFinedMembers.Columns[22].HeaderText = "Month";
             dataGridViewFinedMembers.Columns[22].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[23].Visible = false;
+            dataGridViewFinedMembers.Columns[23].HeaderText = "Year";
+            dataGridViewFinedMembers.Columns[23].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewFinedMembers.Columns[24].Visible = false;
             foreach (DataGridViewColumn column in dataGridViewFinedMembers.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -431,6 +434,7 @@ namespace APC.AllForms
             detail.TotalDuesBalance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
             detail.Summary = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
             detail.AttendanceDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
+            detail.FinancialStatus = dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -580,26 +584,27 @@ namespace APC.AllForms
             finedMemberDetail.Name = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[1].Value.ToString();
             finedMemberDetail.Surname = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[2].Value.ToString();
             finedMemberDetail.ConstitutionSection = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[3].Value.ToString();
-            finedMemberDetail.ExpectedAmount = Convert.ToDecimal(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[4].Value);
-            finedMemberDetail.ExpectedAmountWithCurrency = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[5].Value.ToString();
-            finedMemberDetail.AmountPaid = Convert.ToDecimal(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[6].Value);
-            finedMemberDetail.AmountPaidWithCurrency = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[7].Value.ToString();
-            finedMemberDetail.Balance = Convert.ToDecimal(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[8].Value);
-            finedMemberDetail.BalanceWithCurrency = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[9].Value.ToString();
-            finedMemberDetail.FineStatus = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[10].Value.ToString();
-            finedMemberDetail.Gender = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[11].Value.ToString();
-            finedMemberDetail.Summary = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[12].Value.ToString();
-            finedMemberDetail.ConstitutionID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[13].Value);
-            finedMemberDetail.Constitution = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[14].Value.ToString();
-            finedMemberDetail.MemberID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[15].Value);
-            finedMemberDetail.PositionID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[16].Value);
-            finedMemberDetail.Position = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[17].Value.ToString();
-            finedMemberDetail.GenderID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[18].Value);
-            finedMemberDetail.Day = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[19].Value);
-            finedMemberDetail.MonthID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[20].Value);
-            finedMemberDetail.MonthName = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[21].Value.ToString();
-            finedMemberDetail.Year = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[22].Value);
-            finedMemberDetail.ImagePath = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[23].Value.ToString();
+            finedMemberDetail.ConstitutionShortDescription = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[4].Value.ToString();
+            finedMemberDetail.ExpectedAmount = Convert.ToDecimal(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[5].Value);
+            finedMemberDetail.ExpectedAmountWithCurrency = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[6].Value.ToString();
+            finedMemberDetail.AmountPaid = Convert.ToDecimal(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[7].Value);
+            finedMemberDetail.AmountPaidWithCurrency = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[8].Value.ToString();
+            finedMemberDetail.Balance = Convert.ToDecimal(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[9].Value);
+            finedMemberDetail.BalanceWithCurrency = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[10].Value.ToString();
+            finedMemberDetail.FineStatus = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[11].Value.ToString();
+            finedMemberDetail.Gender = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[12].Value.ToString();
+            finedMemberDetail.Summary = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[13].Value.ToString();
+            finedMemberDetail.ConstitutionID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[14].Value);
+            finedMemberDetail.Constitution = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[15].Value.ToString();
+            finedMemberDetail.MemberID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[16].Value);
+            finedMemberDetail.PositionID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[17].Value);
+            finedMemberDetail.Position = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[18].Value.ToString();
+            finedMemberDetail.GenderID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[19].Value);
+            finedMemberDetail.Day = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[20].Value);
+            finedMemberDetail.MonthID = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[21].Value);
+            finedMemberDetail.MonthName = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[22].Value.ToString();
+            finedMemberDetail.Year = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[23].Value);
+            finedMemberDetail.ImagePath = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[24].Value.ToString();
         }
         private void btnAddFinedMember_Click(object sender, EventArgs e)
         {
@@ -682,9 +687,10 @@ namespace APC.AllForms
             constitutionDetail = new ConstitutionDetailDTO();
             constitutionDetail.ConstitutionID = Convert.ToInt32(dataGridViewConstitution.Rows[e.RowIndex].Cells[0].Value);
             constitutionDetail.ConstitutionText = dataGridViewConstitution.Rows[e.RowIndex].Cells[1].Value.ToString();
-            constitutionDetail.Section = dataGridViewConstitution.Rows[e.RowIndex].Cells[2].Value.ToString();
-            constitutionDetail.Fine = Convert.ToDecimal(dataGridViewConstitution.Rows[e.RowIndex].Cells[3].Value);
-            constitutionDetail.FineWithCurrency = dataGridViewConstitution.Rows[e.RowIndex].Cells[4].Value.ToString();
+            constitutionDetail.ShortDescription = dataGridViewConstitution.Rows[e.RowIndex].Cells[2].Value.ToString();
+            constitutionDetail.Section = dataGridViewConstitution.Rows[e.RowIndex].Cells[3].Value.ToString();
+            constitutionDetail.Fine = Convert.ToDecimal(dataGridViewConstitution.Rows[e.RowIndex].Cells[4].Value);
+            constitutionDetail.FineWithCurrency = dataGridViewConstitution.Rows[e.RowIndex].Cells[5].Value.ToString();
         }
 
         private void btnViewConstitution_Click(object sender, EventArgs e)

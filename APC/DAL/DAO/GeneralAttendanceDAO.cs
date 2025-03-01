@@ -115,6 +115,18 @@ namespace APC.DAL.DAO
                         dto.TotalDuesPaid = totalDuesCollection.Sum();                
                         dto.TotalDuesExpected = totalExpectedDues.Sum();
                         dto.TotalDuesBalance = dto.TotalDuesExpected - dto.TotalDuesPaid;
+                        if (dto.TotalDuesBalance > 0)
+                        {
+                            dto.FinancialStatus = "Extra";
+                        }
+                        else if (dto.TotalDuesBalance == 0)
+                        {
+                            dto.FinancialStatus = "Completed";
+                        }
+                        else
+                        {
+                            dto.FinancialStatus = "Deficit";
+                        }
                         dto.Month = General.ConventIntToMonth(monthItem);
                         dto.TotalMembersPresent = db.PERSONAL_ATTENDANCE.Count(x => x.isDeleted == false && x.year == yearItem && x.monthID == monthItem && x.attendanceStatusID == 2);
                         dto.TotalMembersAbsent = db.PERSONAL_ATTENDANCE.Count(x => x.isDeleted == false && x.year == yearItem && x.monthID == monthItem && x.attendanceStatusID == 3);

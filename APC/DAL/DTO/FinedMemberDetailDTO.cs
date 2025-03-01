@@ -12,6 +12,7 @@ namespace APC.DAL.DTO
         public string Name { get; set; }
         public string Surname { get; set; }
         public string ConstitutionSection { get; set; }
+        public string ConstitutionShortDescription { get; set; }
         public decimal ExpectedAmount { get; set; }
         public string ExpectedAmountWithCurrency { get; set; }
         public decimal AmountPaid { get; set; }

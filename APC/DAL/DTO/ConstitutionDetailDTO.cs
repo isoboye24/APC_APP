@@ -10,6 +10,7 @@ namespace APC.DAL.DTO
     {
         public int ConstitutionID { get; set; }
         public string ConstitutionText { get; set; }
+        public string ShortDescription { get; set; }
         public string Section { get; set; }
         public decimal Fine { get; set; }
         public string FineWithCurrency { get; set; }

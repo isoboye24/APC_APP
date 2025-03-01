@@ -142,6 +142,7 @@ namespace APC.DAL.DAO
                                 summary = fm.summary,
                                 section = c.section,
                                 constitution = c.constitution1,
+                                shortDescription = c.ShortDescription,
                                 memberID = m.memberID,
                                 name = m.name,
                                 surname = m.surname,
@@ -167,15 +168,20 @@ namespace APC.DAL.DAO
                     dto.Balance = dto.ExpectedAmount - dto.AmountPaid;
                     dto.BalanceWithCurrency = "€ " + dto.Balance;
                     dto.Summary = item.summary;
-                    if (dto.Balance < 1)
+                    if (dto.Balance == 0)
                     {
                         dto.FineStatus = "Completed";
+                    }
+                    else if (dto.Balance > 0)
+                    {
+                        dto.FineStatus = "Extra";
                     }
                     else
                     {
                         dto.FineStatus = "NOT completed";
                     }
                     dto.ConstitutionSection = item.section;
+                    dto.ConstitutionShortDescription = item.shortDescription;
                     dto.Constitution = item.constitution;
                     dto.MemberID = item.memberID;
                     dto.Name = item.name;
@@ -220,6 +226,7 @@ namespace APC.DAL.DAO
                                 summary = fm.summary,
                                 section = c.section,
                                 constitution = c.constitution1,
+                                shortDescription = c.ShortDescription,
                                 memberID = m.memberID,
                                 name = m.name,
                                 surname = m.surname,
@@ -245,9 +252,13 @@ namespace APC.DAL.DAO
                     dto.Balance = dto.ExpectedAmount - dto.AmountPaid;
                     dto.BalanceWithCurrency = "€ " + dto.Balance;
                     dto.Summary = item.summary;
-                    if (dto.Balance < 1)
+                    if (dto.Balance == 0)
                     {
                         dto.FineStatus = "Completed";
+                    }
+                    else if (dto.Balance > 0)
+                    {
+                        dto.FineStatus = "Extra";
                     }
                     else
                     {

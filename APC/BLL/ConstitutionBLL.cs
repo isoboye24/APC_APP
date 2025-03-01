@@ -37,6 +37,7 @@ namespace APC.BLL
             constit.constitution1 = entity.ConstitutionText;
             constit.fine = entity.Fine;
             constit.section = entity.Section;
+            constit.ShortDescription = entity.ShortDescription;
             return dao.Insert(constit);
         }
 
@@ -59,6 +60,7 @@ namespace APC.BLL
             constit.constitution1 = entity.ConstitutionText;
             constit.fine = entity.Fine;
             constit.section = entity.Section;
+            constit.ShortDescription = entity.ShortDescription;
             return dao.Update(constit);
         }
     }

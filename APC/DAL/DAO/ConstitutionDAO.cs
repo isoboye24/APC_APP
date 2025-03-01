@@ -65,8 +65,16 @@ namespace APC.DAL.DAO
                 {
                     ConstitutionDetailDTO dto = new ConstitutionDetailDTO();
                     dto.ConstitutionID = item.constitutionID;
-                    dto.Section = item.section;
                     dto.ConstitutionText = item.constitution1;
+                    if (item.ShortDescription.Length == 0 || item.ShortDescription == null)
+                    {
+                        dto.ShortDescription = "No Description";
+                    }
+                    else
+                    {
+                        dto.ShortDescription = item.ShortDescription;
+                    }
+                    dto.Section = item.section;
                     dto.Fine = item.fine;
                     dto.FineWithCurrency = "€ " + item.fine;
                     constitutions.Add(dto);
@@ -90,6 +98,7 @@ namespace APC.DAL.DAO
                     ConstitutionDetailDTO dto = new ConstitutionDetailDTO();
                     dto.ConstitutionID = item.constitutionID;
                     dto.Section = item.section;
+                    dto.ShortDescription = item.ShortDescription;
                     dto.ConstitutionText = item.constitution1;
                     dto.Fine = item.fine;
                     dto.FineWithCurrency = "€ " + item.fine;
@@ -146,6 +155,7 @@ namespace APC.DAL.DAO
                 constit.constitution1 = entity.constitution1;
                 constit.fine = entity.fine;
                 constit.section = entity.section;
+                constit.ShortDescription = entity.ShortDescription;
                 db.SaveChanges();
                 return true;
             }

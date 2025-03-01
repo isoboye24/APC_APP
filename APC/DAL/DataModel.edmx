@@ -53,6 +53,7 @@
           <Property Name="deletedDate" Type="date" />
           <Property Name="fine" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="section" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ShortDescription" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="COUNTRY">
           <Key>
@@ -384,6 +385,7 @@
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
           <Property Name="fine" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="section" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="COUNTRY">
           <Key>
@@ -635,7 +637,7 @@
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityContainer Name="APCEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="APCEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" />
           <EntitySet Name="Children" EntityType="Self.CHILD" />
           <EntitySet Name="COMMENTs" EntityType="Self.COMMENT" />
@@ -667,7 +669,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="APCModelStoreContainer" CdmEntityContainer="APCEntities">
+        <EntityContainerMapping StorageEntityContainer="APCModelStoreContainer" CdmEntityContainer="APCEntities1">
           <EntitySetMapping Name="ATTENDANCE_STATUS">
             <EntityTypeMapping TypeName="APCModel.ATTENDANCE_STATUS">
               <MappingFragment StoreEntitySet="ATTENDANCE_STATUS">
@@ -718,6 +720,7 @@
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
                 <ScalarProperty Name="fine" ColumnName="fine" />
                 <ScalarProperty Name="section" ColumnName="section" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

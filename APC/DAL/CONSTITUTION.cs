@@ -20,5 +20,6 @@ namespace APC.DAL
         public Nullable<System.DateTime> deletedDate { get; set; }
         public decimal fine { get; set; }
         public string section { get; set; }
+        public string ShortDescription { get; set; }
     }
 }

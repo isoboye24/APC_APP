@@ -39,11 +39,13 @@ namespace APC.AllForms
             label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
 
             txtConstitution.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtAmount.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtSection.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            txtShortDescription.Font = new Font("Segoe UI", 14, FontStyle.Regular);
 
             btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -75,6 +77,10 @@ namespace APC.AllForms
             {
                 MessageBox.Show("Constitution is empty.");
             }
+            else if (txtShortDescription.Text.Trim() == "")
+            {
+                MessageBox.Show("Short description is empty.");
+            }
             else
             {
                 if (!isUpdate)
@@ -83,6 +89,7 @@ namespace APC.AllForms
                     constitution.ConstitutionText = txtConstitution.Text.Trim();
                     constitution.Fine = Convert.ToInt32(txtAmount.Text.Trim());
                     constitution.Section = txtSection.Text.Trim();
+                    constitution.ShortDescription = txtShortDescription.Text.Trim();
                     if (bll.Insert(constitution))
                     {
                         MessageBox.Show("Constitution is added.");
@@ -95,7 +102,8 @@ namespace APC.AllForms
                 {
                     if (detail.ConstitutionText == txtConstitution.Text.Trim() 
                         && detail.Section == txtSection.Text.Trim()
-                        && detail.Fine == Convert.ToDecimal(txtAmount.Text.Trim()))
+                        && detail.Fine == Convert.ToDecimal(txtAmount.Text.Trim()) 
+                        && detail.ShortDescription == txtShortDescription.Text.Trim())
                     {
                         MessageBox.Show("There is no change!");
                     }
@@ -104,6 +112,7 @@ namespace APC.AllForms
                         detail.ConstitutionText = txtConstitution.Text.Trim();
                         detail.Fine = Convert.ToDecimal(txtAmount.Text.Trim());
                         detail.Section = txtSection.Text.Trim();
+                        detail.ShortDescription = txtShortDescription.Text.Trim();
                         if (bll.Update(detail))
                         {
                             MessageBox.Show("Constitution is updated!");

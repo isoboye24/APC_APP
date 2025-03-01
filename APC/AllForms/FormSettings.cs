@@ -1100,11 +1100,12 @@ namespace APC.AllForms
                 dataGridView1.DataSource = memberDeletedDataDTO.Constitutions;
                 dataGridView1.Columns[0].Visible = false;
                 dataGridView1.Columns[1].HeaderText = "Constitution";
-                dataGridView1.Columns[2].HeaderText = "Section";
-                dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].HeaderText = "Fine";
-                dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns[2].HeaderText = "Short Description";
+                dataGridView1.Columns[3].HeaderText = "Section";
+                dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns[4].Visible = false;
+                dataGridView1.Columns[5].HeaderText = "Fine";
+                dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -1116,18 +1117,18 @@ namespace APC.AllForms
                 dataGridView1.Columns[0].Visible = false;
                 dataGridView1.Columns[1].HeaderText = "Name";
                 dataGridView1.Columns[2].HeaderText = "Surname";
-                dataGridView1.Columns[3].HeaderText = "Violated";
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].HeaderText = "Fine";
-                dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].HeaderText = "Paid";
-                dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[8].Visible = false;
+                dataGridView1.Columns[3].Visible = false;
+                dataGridView1.Columns[4].HeaderText = "Violated";
+                dataGridView1.Columns[5].Visible = false;
+                dataGridView1.Columns[6].HeaderText = "Fine";
+                dataGridView1.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns[7].Visible = false;
+                dataGridView1.Columns[8].HeaderText = "Paid";
+                dataGridView1.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].HeaderText = "Status";
-                dataGridView1.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[11].Visible = false;
+                dataGridView1.Columns[10].Visible = false;
+                dataGridView1.Columns[11].HeaderText = "Status";
+                dataGridView1.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView1.Columns[12].Visible = false;
                 dataGridView1.Columns[13].Visible = false;
                 dataGridView1.Columns[14].Visible = false;
@@ -1135,14 +1136,15 @@ namespace APC.AllForms
                 dataGridView1.Columns[16].Visible = false;
                 dataGridView1.Columns[17].Visible = false;
                 dataGridView1.Columns[18].Visible = false;
-                dataGridView1.Columns[19].HeaderText = "Day";
-                dataGridView1.Columns[19].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[20].Visible = false;
-                dataGridView1.Columns[21].HeaderText = "Month";
-                dataGridView1.Columns[21].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[22].HeaderText = "Year";
+                dataGridView1.Columns[19].Visible = false;
+                dataGridView1.Columns[20].HeaderText = "Day";
+                dataGridView1.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns[21].Visible = false;
+                dataGridView1.Columns[22].HeaderText = "Month";
                 dataGridView1.Columns[22].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[23].Visible = false;
+                dataGridView1.Columns[23].HeaderText = "Year";
+                dataGridView1.Columns[23].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns[24].Visible = false;
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -1364,9 +1366,10 @@ namespace APC.AllForms
                 constitutionDeletedDataDetail = new ConstitutionDetailDTO();
                 constitutionDeletedDataDetail.ConstitutionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
                 constitutionDeletedDataDetail.ConstitutionText = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                constitutionDeletedDataDetail.Section = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                constitutionDeletedDataDetail.Fine = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-                constitutionDeletedDataDetail.FineWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                constitutionDeletedDataDetail.ShortDescription = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                constitutionDeletedDataDetail.Section = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                constitutionDeletedDataDetail.Fine = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
+                constitutionDeletedDataDetail.FineWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
             }
             else if (cmbDeletedData.SelectedIndex == 16)
             {

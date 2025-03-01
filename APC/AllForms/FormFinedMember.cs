@@ -177,10 +177,11 @@ namespace APC.AllForms
             dataGridViewConstitutions.DataSource = dto.Constitutions;
             dataGridViewConstitutions.Columns[0].Visible = false;
             dataGridViewConstitutions.Columns[1].Visible = false;
-            dataGridViewConstitutions.Columns[2].HeaderText = "Section";
+            dataGridViewConstitutions.Columns[2].HeaderText = "Section Des.";
             dataGridViewConstitutions.Columns[3].Visible = false;
-            dataGridViewConstitutions.Columns[4].HeaderText = "Fine";
-            dataGridViewConstitutions.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewConstitutions.Columns[4].Visible = false;
+            dataGridViewConstitutions.Columns[5].HeaderText = "Fine";
+            dataGridViewConstitutions.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             foreach (DataGridViewColumn column in dataGridViewConstitutions.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -346,8 +347,9 @@ namespace APC.AllForms
             constitutionDetail.ConstitutionID = Convert.ToInt32(dataGridViewConstitutions.Rows[e.RowIndex].Cells[0].Value);
             constitutionDetail.ConstitutionText = dataGridViewConstitutions.Rows[e.RowIndex].Cells[1].Value.ToString();
             constitutionDetail.Section = dataGridViewConstitutions.Rows[e.RowIndex].Cells[2].Value.ToString();
-            constitutionDetail.Fine = Convert.ToDecimal(dataGridViewConstitutions.Rows[e.RowIndex].Cells[3].Value);
-            constitutionDetail.FineWithCurrency = dataGridViewConstitutions.Rows[e.RowIndex].Cells[4].Value.ToString();
+            constitutionDetail.ShortDescription = dataGridViewConstitutions.Rows[e.RowIndex].Cells[3].Value.ToString();
+            constitutionDetail.Fine = Convert.ToDecimal(dataGridViewConstitutions.Rows[e.RowIndex].Cells[4].Value);
+            constitutionDetail.FineWithCurrency = dataGridViewConstitutions.Rows[e.RowIndex].Cells[5].Value.ToString();
 
             labelFine.Text = constitutionDetail.FineWithCurrency;
             labelConstitutionSection.Text = constitutionDetail.Section;
