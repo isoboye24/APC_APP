@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace APC.DAL.DAO
 {
-    public class EventsDAO : APCContexts, IDAO<EventsDetailDTO, EVENT>
+    public class EventsDAO : APCContexts, IDAO<EventsDetailDTO, EVENTS>
     {
-        public bool Delete(EVENT entity)
+        public bool Delete(EVENTS entity)
         {
             throw new NotImplementedException();
         }
@@ -18,7 +18,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                EVENT events = db.EVENTS.First(x=>x.eventID==ID);
+                EVENTS events = db.EVENTS.First(x=>x.eventID==ID);
                 events.isDeleted = false;
                 events.deletedDate = null;
                 db.SaveChanges();
@@ -30,7 +30,7 @@ namespace APC.DAL.DAO
             }
         }
 
-        public bool Insert(EVENT entity)
+        public bool Insert(EVENTS entity)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace APC.DAL.DAO
             {
                 List<EventsDetailDTO> events = new List<EventsDetailDTO>();
                 var list = (from e in db.EVENTS.Where(x => x.isDeleted == false)
-                            join m in db.MONTHs on e.monthID equals m.monthID
+                            join m in db.MONTH on e.monthID equals m.monthID
                             select new
                             {
                                 eventID = e.eventID,
@@ -92,7 +92,7 @@ namespace APC.DAL.DAO
                 if (eventCount > 0)
                 {
                     var recentEvent = (from e in db.EVENTS.Where(x => x.isDeleted == false)
-                                       join m in db.MONTHs on e.monthID equals m.monthID
+                                       join m in db.MONTH on e.monthID equals m.monthID
                                        select new
                                        {
                                            eventID = e.eventID,
@@ -136,7 +136,7 @@ namespace APC.DAL.DAO
             {
                 List<EventsDetailDTO> events = new List<EventsDetailDTO>();
                 var list = (from e in db.EVENTS.Where(x => x.isDeleted == isDeleted)
-                            join m in db.MONTHs on e.monthID equals m.monthID
+                            join m in db.MONTH on e.monthID equals m.monthID
                             select new
                             {
                                 eventID = e.eventID,
@@ -171,11 +171,11 @@ namespace APC.DAL.DAO
             }
         }
 
-        public bool Update(EVENT entity)
+        public bool Update(EVENTS entity)
         {
             try
             {
-                EVENT events = db.EVENTS.First(x => x.eventID == entity.eventID);
+                EVENTS events = db.EVENTS.First(x => x.eventID == entity.eventID);
                 events.summary = entity.summary;
                 events.title = entity.title;
                 events.coverImagePath = entity.coverImagePath;

@@ -146,7 +146,7 @@ namespace APC
 
         private void txtMonthlyDues_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = General.isNumber(e, (TextBox)sender);
         }
 
         private void picClose_Click(object sender, EventArgs e)
@@ -264,7 +264,7 @@ namespace APC
 
         private void txtExpectedMonthlyDue_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = General.isNumber(e, (TextBox)sender);
         }
 
         private void txtExpectedMonthlyDue_Click(object sender, EventArgs e)

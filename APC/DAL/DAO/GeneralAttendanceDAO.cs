@@ -148,7 +148,7 @@ namespace APC.DAL.DAO
             {
                 List<GeneralAttendanceDetailDTO> generalAttendance = new List<GeneralAttendanceDetailDTO>();
                 var list = (from g in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == isDeleted)
-                            join m in db.MONTHs on g.monthID equals m.monthID
+                            join m in db.MONTH on g.monthID equals m.monthID
                             select new
                             {
                                 generalAttendanceID = g.generalAttendanceID,
@@ -195,7 +195,7 @@ namespace APC.DAL.DAO
             {
                 List<decimal> monthlyDues = new List<decimal>();
                 var list = (from g in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false)
-                            join m in db.MONTHs.Where(x=>x.monthID == month) on g.monthID equals m.monthID
+                            join m in db.MONTH.Where(x=>x.monthID == month) on g.monthID equals m.monthID
                             select new
                             {
                                 generalAttendanceID = g.generalAttendanceID,                               

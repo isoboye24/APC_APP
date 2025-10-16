@@ -60,7 +60,7 @@ namespace APC.DAL.DAO
                 var list = db.FINED_MEMBER.Where(x=>x.isdeleted == false);
                 foreach (var item in list)
                 {
-                    CONSTITUTION fine = db.CONSTITUTIONs.First(x => x.isDeleted == false && x.constitutionID == item.constitutionID);
+                    CONSTITUTION fine = db.CONSTITUTION.First(x => x.isDeleted == false && x.constitutionID == item.constitutionID);
                     totalFinesExpected.Add(fine.fine);
                 }
                 decimal totalAmount = totalFinesExpected.Sum();
@@ -127,12 +127,12 @@ namespace APC.DAL.DAO
             {
                 List<FinedMemberDetailDTO> finedMembers = new List<FinedMemberDetailDTO>();
                 var list = (from fm in db.FINED_MEMBER.Where(x => x.isdeleted == false)
-                            join m in db.MEMBERs.Where(x=>x.isDeleted == false) on fm.memberID equals m.memberID
+                            join m in db.MEMBER.Where(x=>x.isDeleted == false) on fm.memberID equals m.memberID
                             join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatusID == 1) on m.membershipStatusID equals ms.membershipStatusID
-                            join g in db.GENDERs on m.genderID equals g.genderID
-                            join p in db.POSITIONs on m.positionID equals p.positionID
-                            join mn in db.MONTHs on fm.monthID equals mn.monthID
-                            join c in db.CONSTITUTIONs on fm.constitutionID equals c.constitutionID
+                            join g in db.GENDER on m.genderID equals g.genderID
+                            join p in db.POSITION on m.positionID equals p.positionID
+                            join mn in db.MONTH on fm.monthID equals mn.monthID
+                            join c in db.CONSTITUTION on fm.constitutionID equals c.constitutionID
                             select new
                             {
                                 finedMemberID = fm.finedMemberID,
@@ -211,12 +211,12 @@ namespace APC.DAL.DAO
             {
                 List<FinedMemberDetailDTO> finedMembers = new List<FinedMemberDetailDTO>();
                 var list = (from fm in db.FINED_MEMBER.Where(x => x.isdeleted == isDeleted)
-                            join m in db.MEMBERs.Where(x=>x.isDeleted == false) on fm.memberID equals m.memberID
+                            join m in db.MEMBER.Where(x=>x.isDeleted == false) on fm.memberID equals m.memberID
                             join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatusID == 1) on m.membershipStatusID equals ms.membershipStatusID
-                            join g in db.GENDERs on m.genderID equals g.genderID
-                            join p in db.POSITIONs on m.positionID equals p.positionID
-                            join mn in db.MONTHs on fm.monthID equals mn.monthID
-                            join c in db.CONSTITUTIONs on fm.constitutionID equals c.constitutionID
+                            join g in db.GENDER on m.genderID equals g.genderID
+                            join p in db.POSITION on m.positionID equals p.positionID
+                            join mn in db.MONTH on fm.monthID equals mn.monthID
+                            join c in db.CONSTITUTION on fm.constitutionID equals c.constitutionID
                             select new
                             {
                                 finedMemberID = fm.finedMemberID,
@@ -294,12 +294,12 @@ namespace APC.DAL.DAO
             {
                 List<FinedMemberDetailDTO> finedMembers = new List<FinedMemberDetailDTO>();
                 var list = (from fm in db.FINED_MEMBER.Where(x => x.isdeleted == false && x.memberID == ID)
-                            join m in db.MEMBERs.Where(x=>x.isDeleted == false) on fm.memberID equals m.memberID
+                            join m in db.MEMBER.Where(x=>x.isDeleted == false) on fm.memberID equals m.memberID
                             join ms in db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
-                            join g in db.GENDERs on m.genderID equals g.genderID
-                            join p in db.POSITIONs on m.positionID equals p.positionID
-                            join mn in db.MONTHs on fm.monthID equals mn.monthID
-                            join c in db.CONSTITUTIONs on fm.constitutionID equals c.constitutionID
+                            join g in db.GENDER on m.genderID equals g.genderID
+                            join p in db.POSITION on m.positionID equals p.positionID
+                            join mn in db.MONTH on fm.monthID equals mn.monthID
+                            join c in db.CONSTITUTION on fm.constitutionID equals c.constitutionID
                             select new
                             {
                                 finedMemberID = fm.finedMemberID,
@@ -392,7 +392,7 @@ namespace APC.DAL.DAO
                 List<decimal> expectedFines = new List<decimal>();
                 decimal totalExpectedAmount = 0;
                 var list = (from fm in db.FINED_MEMBER.Where(x => x.isdeleted == false && x.memberID == ID)
-                            join c in db.CONSTITUTIONs.Where(x=>x.isDeleted == false) on fm.constitutionID equals c.constitutionID
+                            join c in db.CONSTITUTION.Where(x=>x.isDeleted == false) on fm.constitutionID equals c.constitutionID
                             select new { 
                                 finedMemberID = fm.finedMemberID,
                                 memberID = fm.memberID,

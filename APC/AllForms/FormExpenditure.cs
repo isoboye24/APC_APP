@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -41,64 +42,6 @@ namespace APC.AllForms
         ExpenditureBLL bll = new ExpenditureBLL();
         public ExpenditureDetailDTO detail = new ExpenditureDetailDTO();
         public bool isUpdate = false;
-        private void btnSave_Click(object sender, EventArgs e)
-        {            
-            if (txtAmountSpent.Text.Trim()=="")
-            {
-                MessageBox.Show("Add amount");
-            }
-            else if(txtSummary.Text.Trim() == "")
-            {
-                MessageBox.Show("Add summary");
-            }
-            else
-            {
-                if (!isUpdate)
-                {
-                    ExpenditureDetailDTO expenditure = new ExpenditureDetailDTO();
-                    expenditure.AmountSpent = Convert.ToDecimal(txtAmountSpent.Text);
-                    expenditure.Summary = txtSummary.Text;
-                    expenditure.Day = dateTimePickerExpDate.Value.Day;
-                    expenditure.MonthID = dateTimePickerExpDate.Value.Month;
-                    expenditure.Year = dateTimePickerExpDate.Value.Year.ToString();
-                    expenditure.ExpenditureDate = dateTimePickerExpDate.Value;
-                    if (bll.Insert(expenditure))
-                    {
-                        MessageBox.Show("Expenditure was added");
-                        txtAmountSpent.Clear();
-                        txtSummary.Clear();
-                        dateTimePickerExpDate.Value = DateTime.Today;
-                    }
-                }
-                else if(isUpdate)
-                {
-                    if (detail.AmountSpent == Convert.ToDecimal(txtAmountSpent.Text) && detail.Summary == txtSummary.Text
-                        && detail.ExpenditureDate == dateTimePickerExpDate.Value)
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        detail.AmountSpent = Convert.ToDecimal(txtAmountSpent.Text);
-                        detail.Summary = txtSummary.Text;
-                        detail.Day = dateTimePickerExpDate.Value.Day;
-                        detail.MonthID = dateTimePickerExpDate.Value.Month;
-                        detail.Year = dateTimePickerExpDate.Value.Year.ToString();
-                        detail.ExpenditureDate = dateTimePickerExpDate.Value;
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Expenditure was updated");
-                            this.Close();
-                        }
-                    }
-                }
-            }
-        }
-
-        private void txtAmountSpent_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = General.isNumber(e);
-        }
 
         private void FormExpenditure_Load(object sender, EventArgs e)
         {
@@ -125,6 +68,67 @@ namespace APC.AllForms
             {
                 labelTitle.Text = "Add Expenditure";
             }
-        }        
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {            
+            if (txtAmountSpent.Text.Trim()=="")
+            {
+                MessageBox.Show("Add amount");
+            }
+            else if(txtSummary.Text.Trim() == "")
+            {
+                MessageBox.Show("Add summary");
+            }
+            else
+            {
+                if (!isUpdate)
+                {
+                    ExpenditureDetailDTO expenditure = new ExpenditureDetailDTO();
+                    expenditure.AmountSpent = Convert.ToDecimal(txtAmountSpent.Text, CultureInfo.InvariantCulture);
+                    expenditure.Summary = txtSummary.Text;
+                    expenditure.Day = dateTimePickerExpDate.Value.Day;
+                    expenditure.MonthID = dateTimePickerExpDate.Value.Month;
+                    expenditure.Year = dateTimePickerExpDate.Value.Year.ToString();
+                    expenditure.ExpenditureDate = dateTimePickerExpDate.Value;
+                    if (bll.Insert(expenditure))
+                    {
+                        MessageBox.Show("Expenditure was added");
+                        txtAmountSpent.Clear();
+                        txtSummary.Clear();
+                        dateTimePickerExpDate.Value = DateTime.Today;
+                    }
+                }
+                else if(isUpdate)
+                {
+                    if (Convert.ToDecimal(txtAmountSpent.Text, CultureInfo.InvariantCulture) == detail.AmountSpent && txtSummary.Text == detail.Summary 
+                        && dateTimePickerExpDate.Value == detail.ExpenditureDate)
+                    {
+                        MessageBox.Show("There is no change");
+                    }
+                    else
+                    {
+                        detail.AmountSpent = Convert.ToDecimal(txtAmountSpent.Text, CultureInfo.InvariantCulture);
+                        detail.Summary = txtSummary.Text;
+                        detail.Day = dateTimePickerExpDate.Value.Day;
+                        detail.MonthID = dateTimePickerExpDate.Value.Month;
+                        detail.Year = dateTimePickerExpDate.Value.Year.ToString();
+                        detail.ExpenditureDate = dateTimePickerExpDate.Value;
+                        if (bll.Update(detail))
+                        {
+                            MessageBox.Show("Expenditure was updated");
+                            this.Close();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void txtAmountSpent_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = General.isNumber(e, (TextBox)sender);
+        }
+        
+
     }
 }

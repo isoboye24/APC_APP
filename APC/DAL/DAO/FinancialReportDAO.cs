@@ -83,7 +83,7 @@ namespace APC.DAL.DAO
                     {
                         totalDuesCollection.Add((decimal)due.monthlyDues);
                     }
-                    var yearlyExpenditures = db.EXPENDITUREs.Where(x => x.isDeleted == false && x.year == report.year).ToList();
+                    var yearlyExpenditures = db.EXPENDITURE.Where(x => x.isDeleted == false && x.year == report.year).ToList();
                     foreach (var expense in yearlyExpenditures)
                     {
                         totalExpenditures.Add(expense.amountSpent);
@@ -221,7 +221,7 @@ namespace APC.DAL.DAO
                 }
                 decimal totalAmountRaised = totalRaisedAmount.Sum();
                 List<decimal> totalSpentAmount = new List<decimal>();
-                var listSpent = db.EXPENDITUREs.Where(x => x.isDeleted == false && x.year == year);
+                var listSpent = db.EXPENDITURE.Where(x => x.isDeleted == false && x.year == year);
                 foreach (var item in listSpent)
                 {
                     totalSpentAmount.Add(item.amountSpent);
@@ -246,7 +246,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<decimal> totalSpentAmount = new List<decimal>();
-                var list = db.EXPENDITUREs.Where(x => x.isDeleted == false);
+                var list = db.EXPENDITURE.Where(x => x.isDeleted == false);
                 foreach (var item in list)
                 {                                       
                     totalSpentAmount.Add(item.amountSpent);

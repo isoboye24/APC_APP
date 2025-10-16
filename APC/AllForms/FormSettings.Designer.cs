@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.dashboardPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -152,6 +152,18 @@
             this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbDeletedData = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.personalDataPage = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel33 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel34 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelName = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.labelSurname = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.labelAccessLevel = new System.Windows.Forms.Label();
+            this.labelPosition = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.picProfilePic = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.dashboardPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -212,6 +224,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel31.SuspendLayout();
             this.tableLayoutPanel30.SuspendLayout();
+            this.personalDataPage.SuspendLayout();
+            this.tableLayoutPanel33.SuspendLayout();
+            this.tableLayoutPanel34.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -225,6 +241,7 @@
             this.tabControl1.Controls.Add(this.positionPage);
             this.tabControl1.Controls.Add(this.professionPage);
             this.tabControl1.Controls.Add(this.deletedDataPage);
+            this.tabControl1.Controls.Add(this.personalDataPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -742,8 +759,8 @@
             this.dataGridViewCountry.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewCountry.Name = "dataGridViewCountry";
             this.dataGridViewCountry.RowHeadersWidth = 51;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewCountry.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCountry.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewCountry.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewCountry.RowTemplate.Height = 40;
             this.dataGridViewCountry.Size = new System.Drawing.Size(1201, 427);
@@ -924,8 +941,8 @@
             this.dataGridViewEmpStatus.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEmpStatus.Name = "dataGridViewEmpStatus";
             this.dataGridViewEmpStatus.RowHeadersWidth = 51;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewEmpStatus.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewEmpStatus.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewEmpStatus.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewEmpStatus.RowTemplate.Height = 40;
             this.dataGridViewEmpStatus.Size = new System.Drawing.Size(1209, 432);
@@ -1105,8 +1122,8 @@
             this.dataGridViewMarStatus.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewMarStatus.Name = "dataGridViewMarStatus";
             this.dataGridViewMarStatus.RowHeadersWidth = 51;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewMarStatus.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewMarStatus.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewMarStatus.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewMarStatus.RowTemplate.Height = 40;
             this.dataGridViewMarStatus.Size = new System.Drawing.Size(1209, 432);
@@ -1374,8 +1391,8 @@
             this.dataGridViewNationality.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewNationality.Name = "dataGridViewNationality";
             this.dataGridViewNationality.RowHeadersWidth = 51;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewNationality.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewNationality.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewNationality.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewNationality.RowTemplate.Height = 40;
             this.dataGridViewNationality.Size = new System.Drawing.Size(1209, 432);
@@ -1466,8 +1483,8 @@
             this.dataGridViewPermissions.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewPermissions.Name = "dataGridViewPermissions";
             this.dataGridViewPermissions.RowHeadersWidth = 51;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewPermissions.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewPermissions.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewPermissions.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewPermissions.RowTemplate.Height = 40;
             this.dataGridViewPermissions.Size = new System.Drawing.Size(1234, 513);
@@ -1643,8 +1660,8 @@
             this.dataGridViewPositions.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewPositions.Name = "dataGridViewPositions";
             this.dataGridViewPositions.RowHeadersWidth = 51;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewPositions.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewPositions.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewPositions.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewPositions.RowTemplate.Height = 40;
             this.dataGridViewPositions.Size = new System.Drawing.Size(1209, 524);
@@ -1823,8 +1840,8 @@
             this.dataGridViewProfessions.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewProfessions.Name = "dataGridViewProfessions";
             this.dataGridViewProfessions.RowHeadersWidth = 51;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewProfessions.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewProfessions.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewProfessions.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewProfessions.RowTemplate.Height = 40;
             this.dataGridViewProfessions.Size = new System.Drawing.Size(1209, 432);
@@ -1969,7 +1986,7 @@
             this.deletedDataPage.Name = "deletedDataPage";
             this.deletedDataPage.Size = new System.Drawing.Size(1268, 688);
             this.deletedDataPage.TabIndex = 8;
-            this.deletedDataPage.Text = "Deleted Data";
+            this.deletedDataPage.Text = "Deleted Data   ";
             this.deletedDataPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel29
@@ -2004,8 +2021,8 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.RowTemplate.Height = 40;
             this.dataGridView1.Size = new System.Drawing.Size(1209, 432);
@@ -2091,6 +2108,186 @@
             this.label11.Size = new System.Drawing.Size(137, 25);
             this.label11.TabIndex = 1;
             this.label11.Text = "Deleted Data";
+            // 
+            // personalDataPage
+            // 
+            this.personalDataPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.personalDataPage.Controls.Add(this.tableLayoutPanel33);
+            this.personalDataPage.Location = new System.Drawing.Point(4, 46);
+            this.personalDataPage.Name = "personalDataPage";
+            this.personalDataPage.Size = new System.Drawing.Size(1268, 688);
+            this.personalDataPage.TabIndex = 9;
+            this.personalDataPage.Text = "Personal Info   ";
+            // 
+            // tableLayoutPanel33
+            // 
+            this.tableLayoutPanel33.ColumnCount = 2;
+            this.tableLayoutPanel33.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel33.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel33.Controls.Add(this.tableLayoutPanel34, 1, 0);
+            this.tableLayoutPanel33.Controls.Add(this.picProfilePic, 0, 0);
+            this.tableLayoutPanel33.Location = new System.Drawing.Point(172, 19);
+            this.tableLayoutPanel33.Name = "tableLayoutPanel33";
+            this.tableLayoutPanel33.RowCount = 1;
+            this.tableLayoutPanel33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel33.Size = new System.Drawing.Size(777, 292);
+            this.tableLayoutPanel33.TabIndex = 11;
+            // 
+            // tableLayoutPanel34
+            // 
+            this.tableLayoutPanel34.ColumnCount = 2;
+            this.tableLayoutPanel34.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel34.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tableLayoutPanel34.Controls.Add(this.labelName, 1, 0);
+            this.tableLayoutPanel34.Controls.Add(this.label13, 0, 0);
+            this.tableLayoutPanel34.Controls.Add(this.labelSurname, 1, 1);
+            this.tableLayoutPanel34.Controls.Add(this.label14, 0, 1);
+            this.tableLayoutPanel34.Controls.Add(this.labelAccessLevel, 1, 2);
+            this.tableLayoutPanel34.Controls.Add(this.labelPosition, 1, 3);
+            this.tableLayoutPanel34.Controls.Add(this.label15, 0, 3);
+            this.tableLayoutPanel34.Controls.Add(this.label17, 0, 2);
+            this.tableLayoutPanel34.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel34.Location = new System.Drawing.Point(313, 3);
+            this.tableLayoutPanel34.Name = "tableLayoutPanel34";
+            this.tableLayoutPanel34.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.tableLayoutPanel34.RowCount = 4;
+            this.tableLayoutPanel34.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel34.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel34.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel34.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel34.Size = new System.Drawing.Size(461, 286);
+            this.tableLayoutPanel34.TabIndex = 2;
+            // 
+            // labelName
+            // 
+            this.labelName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelName.AutoSize = true;
+            this.labelName.BackColor = System.Drawing.Color.Transparent;
+            this.labelName.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelName.ForeColor = System.Drawing.Color.DarkOrange;
+            this.labelName.Location = new System.Drawing.Point(164, 24);
+            this.labelName.Margin = new System.Windows.Forms.Padding(0);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(56, 23);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "Name";
+            this.labelName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Silver;
+            this.label13.Location = new System.Drawing.Point(5, 24);
+            this.label13.Margin = new System.Windows.Forms.Padding(0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 23);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Name:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labelSurname
+            // 
+            this.labelSurname.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelSurname.AutoSize = true;
+            this.labelSurname.BackColor = System.Drawing.Color.Transparent;
+            this.labelSurname.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSurname.ForeColor = System.Drawing.Color.DarkOrange;
+            this.labelSurname.Location = new System.Drawing.Point(164, 95);
+            this.labelSurname.Margin = new System.Windows.Forms.Padding(0);
+            this.labelSurname.Name = "labelSurname";
+            this.labelSurname.Size = new System.Drawing.Size(78, 23);
+            this.labelSurname.TabIndex = 0;
+            this.labelSurname.Text = "Surname";
+            this.labelSurname.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Silver;
+            this.label14.Location = new System.Drawing.Point(5, 95);
+            this.label14.Margin = new System.Windows.Forms.Padding(0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(82, 23);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Surname:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labelAccessLevel
+            // 
+            this.labelAccessLevel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelAccessLevel.AutoSize = true;
+            this.labelAccessLevel.BackColor = System.Drawing.Color.Transparent;
+            this.labelAccessLevel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAccessLevel.ForeColor = System.Drawing.Color.DarkOrange;
+            this.labelAccessLevel.Location = new System.Drawing.Point(164, 166);
+            this.labelAccessLevel.Margin = new System.Windows.Forms.Padding(0);
+            this.labelAccessLevel.Name = "labelAccessLevel";
+            this.labelAccessLevel.Size = new System.Drawing.Size(60, 23);
+            this.labelAccessLevel.TabIndex = 0;
+            this.labelAccessLevel.Text = "Admin";
+            this.labelAccessLevel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labelPosition
+            // 
+            this.labelPosition.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelPosition.AutoSize = true;
+            this.labelPosition.BackColor = System.Drawing.Color.Transparent;
+            this.labelPosition.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPosition.ForeColor = System.Drawing.Color.DarkOrange;
+            this.labelPosition.Location = new System.Drawing.Point(164, 238);
+            this.labelPosition.Margin = new System.Windows.Forms.Padding(0);
+            this.labelPosition.Name = "labelPosition";
+            this.labelPosition.Size = new System.Drawing.Size(70, 23);
+            this.labelPosition.TabIndex = 0;
+            this.labelPosition.Text = "Position";
+            this.labelPosition.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Silver;
+            this.label15.Location = new System.Drawing.Point(5, 238);
+            this.label15.Margin = new System.Windows.Forms.Padding(0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(74, 23);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Position:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.Transparent;
+            this.label17.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Silver;
+            this.label17.Location = new System.Drawing.Point(5, 166);
+            this.label17.Margin = new System.Windows.Forms.Padding(0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(64, 23);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Access:";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // picProfilePic
+            // 
+            this.picProfilePic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picProfilePic.Location = new System.Drawing.Point(3, 3);
+            this.picProfilePic.Name = "picProfilePic";
+            this.picProfilePic.Size = new System.Drawing.Size(304, 286);
+            this.picProfilePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picProfilePic.TabIndex = 1;
+            this.picProfilePic.TabStop = false;
+            this.picProfilePic.Paint += new System.Windows.Forms.PaintEventHandler(this.picProfilePic_Paint);
             // 
             // FormSettings
             // 
@@ -2187,6 +2384,11 @@
             this.tableLayoutPanel31.ResumeLayout(false);
             this.tableLayoutPanel30.ResumeLayout(false);
             this.tableLayoutPanel30.PerformLayout();
+            this.personalDataPage.ResumeLayout(false);
+            this.tableLayoutPanel33.ResumeLayout(false);
+            this.tableLayoutPanel34.ResumeLayout(false);
+            this.tableLayoutPanel34.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2309,5 +2511,17 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel18;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel27;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel30;
+        private System.Windows.Forms.TabPage personalDataPage;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel33;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel34;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label labelSurname;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label labelAccessLevel;
+        private System.Windows.Forms.Label labelPosition;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.PictureBox picProfilePic;
     }
 }

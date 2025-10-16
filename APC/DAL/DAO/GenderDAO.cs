@@ -14,7 +14,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<GenderDetailDTO> genders = new List<GenderDetailDTO>();
-                var list = db.GENDERs.OrderBy(x => x.genderName).ToList();
+                var list = db.GENDER.OrderBy(x => x.genderName).ToList();
                 foreach (var item in list)
                 {
                     GenderDetailDTO dto = new GenderDetailDTO();

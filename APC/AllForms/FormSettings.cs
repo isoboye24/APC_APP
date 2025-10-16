@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Drawing.Drawing2D;
+using FontAwesome.Sharp;
 
 namespace APC.AllForms
 {
@@ -25,6 +27,7 @@ namespace APC.AllForms
         EventsBLL eventBLL = new EventsBLL();
         private void FormSettings_Load(object sender, EventArgs e)
         {
+            //Button label
             #region
             label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -80,6 +83,15 @@ namespace APC.AllForms
             btnAddProfessions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnUpdateProfessions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnDeleteProfessions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+
+            labelName.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            labelSurname.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            labelAccessLevel.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            labelPosition.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            label13.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            label15.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            label14.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            label17.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             #endregion
 
             #region
@@ -189,6 +201,25 @@ namespace APC.AllForms
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             }
+
+            picProfilePic.SizeMode = PictureBoxSizeMode.StretchImage;
+            picProfilePic.BorderStyle = BorderStyle.None;
+            picProfilePic.Width = picProfilePic.Height = 40;
+            picProfilePic.Paint += new PaintEventHandler(picProfilePic_Paint);
+
+            picProfilePic.SizeMode = PictureBoxSizeMode.StretchImage;
+            picProfilePic.BorderStyle = BorderStyle.None;
+            picProfilePic.Width = picProfilePic.Height = 40;
+            picProfilePic.Paint += new PaintEventHandler(picProfilePic_Paint);
+
+            MemberDTO memberDTO = memberBLL.Select();
+            MemberDetailDTO detail = memberDTO.Members.First(x => x.MemberID == LoginInfo.MemberID);
+            string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+            picProfilePic.ImageLocation = imagePath;
+            labelName.Text = detail.Name;
+            labelSurname.Text = detail.Surname;
+            labelAccessLevel.Text = detail.PermissionName;
+            labelPosition.Text = detail.PositionName;
             #endregion
 
             // Deleted Data
@@ -278,6 +309,14 @@ namespace APC.AllForms
             }
 
             Counts();
+        }
+
+        private void picProfilePic_Paint(object sender, PaintEventArgs e)
+        {
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddEllipse(0, 0, picProfilePic.Width - 1, picProfilePic.Height - 1);
+            Region rg = new Region(gp);
+            picProfilePic.Region = rg;
         }
 
         CountryBLL countryBLL = new CountryBLL();
@@ -1734,5 +1773,7 @@ namespace APC.AllForms
                 MessageBox.Show("Unable to open the website: " + ex.Message);
             }
         }
+
+        
     }
 }

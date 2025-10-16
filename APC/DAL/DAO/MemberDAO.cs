@@ -16,7 +16,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                List<MEMBER> list = db.MEMBERs.Where(x => x.username == username && x.password == password && x.membershipStatusID == 1).ToList();
+                List<MEMBER> list = db.MEMBER.Where(x => x.username == username && x.password == password && x.membershipStatusID == 1).ToList();
                 return list;
             }
             catch (Exception ex)
@@ -28,7 +28,7 @@ namespace APC.DAL.DAO
         {            
             try
             {
-                MEMBER member = db.MEMBERs.First(x => x.memberID == entity.memberID);
+                MEMBER member = db.MEMBER.First(x => x.memberID == entity.memberID);
                 member.isDeleted = true;
                 member.deletedDate = DateTime.Today;
                 db.SaveChanges();
@@ -44,7 +44,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                MEMBER member = db.MEMBERs.First(x => x.memberID == entity.memberID);
+                MEMBER member = db.MEMBER.First(x => x.memberID == entity.memberID);
                 member.permissionID = 2;
                 db.SaveChanges();
                 return true;
@@ -58,7 +58,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                MEMBER member = db.MEMBERs.First(x=>x.memberID==ID);
+                MEMBER member = db.MEMBER.First(x=>x.memberID==ID);
                 member.isDeleted = false;
                 member.deletedDate = null;
                 db.SaveChanges();
@@ -74,7 +74,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                db.MEMBERs.Add(entity);
+                db.MEMBER.Add(entity);
                 db.SaveChanges();
                 return true;
             }
@@ -89,15 +89,15 @@ namespace APC.DAL.DAO
             try
             {
                 List<MemberDetailDTO> members = new List<MemberDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x=>x.isDeleted==false)
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                var list = (from m in db.MEMBER.Where(x=>x.isDeleted==false)
+                            join g in db.GENDER on m.genderID equals g.genderID
                             join e in db.EMPLOYMENT_STATUS.Where(x => x.isDeleted == false) on m.employmentStatusID equals e.employmentStatusID
-                            join p in db.PROFESSIONs.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
-                            join pos in db.POSITIONs.Where(x => x.isDeleted == false) on m.positionID equals pos.positionID
+                            join p in db.PROFESSION.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
+                            join pos in db.POSITION.Where(x => x.isDeleted == false) on m.positionID equals pos.positionID
                             join mar in db.MARITAL_STATUS.Where(x => x.isDeleted == false) on m.maritalStatusID equals mar.maritalStatusID
-                            join c in db.COUNTRies.Where(x => x.isDeleted == false) on m.countryID equals c.countryID
-                            join n in db.NATIONALITies.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
-                            join perm in db.PERMISSIONs.Where(x => x.isDeleted == false) on m.permissionID equals perm.permissionID
+                            join c in db.COUNTRY.Where(x => x.isDeleted == false) on m.countryID equals c.countryID
+                            join n in db.NATIONALITY.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
+                            join perm in db.PERMISSION.Where(x => x.isDeleted == false) on m.permissionID equals perm.permissionID
                             join kin in db.NEXT_OF_KIN_RELATIONSHIP on m.relationshipToKinID equals kin.RelationshipToKinID
                             join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
                             select new
@@ -192,15 +192,15 @@ namespace APC.DAL.DAO
             try
             {
                 List<MemberDetailDTO> members = new List<MemberDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x => x.isDeleted == false)
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                var list = (from m in db.MEMBER.Where(x => x.isDeleted == false)
+                            join g in db.GENDER on m.genderID equals g.genderID
                             join e in db.EMPLOYMENT_STATUS.Where(x => x.isDeleted == false) on m.employmentStatusID equals e.employmentStatusID
-                            join p in db.PROFESSIONs.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
-                            join pos in db.POSITIONs.Where(x => x.isDeleted == false) on m.positionID equals pos.positionID
+                            join p in db.PROFESSION.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
+                            join pos in db.POSITION.Where(x => x.isDeleted == false) on m.positionID equals pos.positionID
                             join mar in db.MARITAL_STATUS.Where(x => x.isDeleted == false) on m.maritalStatusID equals mar.maritalStatusID
-                            join c in db.COUNTRies.Where(x => x.isDeleted == false) on m.countryID equals c.countryID
-                            join n in db.NATIONALITies.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
-                            join perm in db.PERMISSIONs.Where(x => x.isDeleted == false) on m.permissionID equals perm.permissionID
+                            join c in db.COUNTRY.Where(x => x.isDeleted == false) on m.countryID equals c.countryID
+                            join n in db.NATIONALITY.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
+                            join perm in db.PERMISSION.Where(x => x.isDeleted == false) on m.permissionID equals perm.permissionID
                             join kin in db.NEXT_OF_KIN_RELATIONSHIP on m.relationshipToKinID equals kin.RelationshipToKinID
                             join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Former") on m.membershipStatusID equals ms.membershipStatusID
                             select new
@@ -295,15 +295,15 @@ namespace APC.DAL.DAO
             try
             {
                 List<MemberDetailDTO> members = new List<MemberDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x => x.isDeleted == false)
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                var list = (from m in db.MEMBER.Where(x => x.isDeleted == false)
+                            join g in db.GENDER on m.genderID equals g.genderID
                             join e in db.EMPLOYMENT_STATUS.Where(x => x.isDeleted == false) on m.employmentStatusID equals e.employmentStatusID
-                            join p in db.PROFESSIONs.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
-                            join pos in db.POSITIONs.Where(x => x.isDeleted == false) on m.positionID equals pos.positionID
+                            join p in db.PROFESSION.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
+                            join pos in db.POSITION.Where(x => x.isDeleted == false) on m.positionID equals pos.positionID
                             join mar in db.MARITAL_STATUS.Where(x => x.isDeleted == false) on m.maritalStatusID equals mar.maritalStatusID
-                            join c in db.COUNTRies.Where(x => x.isDeleted == false) on m.countryID equals c.countryID
-                            join n in db.NATIONALITies.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
-                            join perm in db.PERMISSIONs.Where(x => x.isDeleted == false) on m.permissionID equals perm.permissionID
+                            join c in db.COUNTRY.Where(x => x.isDeleted == false) on m.countryID equals c.countryID
+                            join n in db.NATIONALITY.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
+                            join perm in db.PERMISSION.Where(x => x.isDeleted == false) on m.permissionID equals perm.permissionID
                             join kin in db.NEXT_OF_KIN_RELATIONSHIP on m.relationshipToKinID equals kin.RelationshipToKinID
                             join ms in db.MEMBERSHIP_STATUS.Where(x=>x.membershipStatus=="Deceased") on m.membershipStatusID equals ms.membershipStatusID
                             select new
@@ -400,15 +400,15 @@ namespace APC.DAL.DAO
             try
             {
                 List<MemberDetailDTO> members = new List<MemberDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x => x.isDeleted == isDeleted && x.membershipStatusID == 1)
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                var list = (from m in db.MEMBER.Where(x => x.isDeleted == isDeleted && x.membershipStatusID == 1)
+                            join g in db.GENDER on m.genderID equals g.genderID
                             join e in db.EMPLOYMENT_STATUS on m.employmentStatusID equals e.employmentStatusID
-                            join p in db.PROFESSIONs on m.professionID equals p.professionID
-                            join pos in db.POSITIONs on m.positionID equals pos.positionID
+                            join p in db.PROFESSION on m.professionID equals p.professionID
+                            join pos in db.POSITION on m.positionID equals pos.positionID
                             join mar in db.MARITAL_STATUS on m.maritalStatusID equals mar.maritalStatusID
-                            join c in db.COUNTRies on m.countryID equals c.countryID
-                            join n in db.NATIONALITies on m.nationalityID equals n.nationalityID
-                            join perm in db.PERMISSIONs on m.permissionID equals perm.permissionID
+                            join c in db.COUNTRY on m.countryID equals c.countryID
+                            join n in db.NATIONALITY on m.nationalityID equals n.nationalityID
+                            join perm in db.PERMISSION on m.permissionID equals perm.permissionID
                             join kin in db.NEXT_OF_KIN_RELATIONSHIP on m.relationshipToKinID equals kin.RelationshipToKinID
                             join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
                             select new
@@ -514,7 +514,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x => x.isDeleted == false && x.membershipStatusID == 1);
+                int numberOfMembers = db.MEMBER.Count(x => x.isDeleted == false && x.membershipStatusID == 1);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -526,7 +526,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x=>x.isDeleted==false && x.genderID==1 && x.membershipStatusID == 1);
+                int numberOfMembers = db.MEMBER.Count(x=>x.isDeleted==false && x.genderID==1 && x.membershipStatusID == 1);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -538,7 +538,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x => x.isDeleted == false && x.genderID == 1 && x.membershipStatusID == 3);
+                int numberOfMembers = db.MEMBER.Count(x => x.isDeleted == false && x.genderID == 1 && x.membershipStatusID == 3);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -550,7 +550,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x => x.isDeleted == false && x.genderID == 1 && x.membershipStatusID == 2);
+                int numberOfMembers = db.MEMBER.Count(x => x.isDeleted == false && x.genderID == 1 && x.membershipStatusID == 2);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -563,7 +563,7 @@ namespace APC.DAL.DAO
             try
             {
                 string username;
-                var lastMemberUsername = db.MEMBERs.OrderByDescending(x=>x.memberID).FirstOrDefault();
+                var lastMemberUsername = db.MEMBER.OrderByDescending(x=>x.memberID).FirstOrDefault();
                 if (lastMemberUsername != null)
                 {
                     username = lastMemberUsername.username;
@@ -583,7 +583,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x => x.isDeleted == false && x.genderID == 2 && x.membershipStatusID == 1);
+                int numberOfMembers = db.MEMBER.Count(x => x.isDeleted == false && x.genderID == 2 && x.membershipStatusID == 1);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -595,7 +595,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x => x.isDeleted == false && x.genderID == 2 && x.membershipStatusID == 3);
+                int numberOfMembers = db.MEMBER.Count(x => x.isDeleted == false && x.genderID == 2 && x.membershipStatusID == 3);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -607,7 +607,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x => x.isDeleted == false && x.genderID == 2 && x.membershipStatusID == 2);
+                int numberOfMembers = db.MEMBER.Count(x => x.isDeleted == false && x.genderID == 2 && x.membershipStatusID == 2);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -619,7 +619,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x => x.isDeleted == false && x.genderID == 3 && x.membershipStatusID == 1);
+                int numberOfMembers = db.MEMBER.Count(x => x.isDeleted == false && x.genderID == 3 && x.membershipStatusID == 1);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -631,7 +631,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x => x.isDeleted == false && x.genderID == 3 && x.membershipStatusID == 3);
+                int numberOfMembers = db.MEMBER.Count(x => x.isDeleted == false && x.genderID == 3 && x.membershipStatusID == 3);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -643,7 +643,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfMembers = db.MEMBERs.Count(x => x.isDeleted == false && x.genderID == 3 && x.membershipStatusID == 2);
+                int numberOfMembers = db.MEMBER.Count(x => x.isDeleted == false && x.genderID == 3 && x.membershipStatusID == 2);
                 return numberOfMembers;
             }
             catch (Exception ex)
@@ -657,8 +657,8 @@ namespace APC.DAL.DAO
             {
                 List<string> nationalityList = new List<string>();
                 List<MemberDetailDTO> uniqueNationality = new List<MemberDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x => x.isDeleted == false && x.membershipStatusID == 1)
-                            join n in db.NATIONALITies.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
+                var list = (from m in db.MEMBER.Where(x => x.isDeleted == false && x.membershipStatusID == 1)
+                            join n in db.NATIONALITY.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
                             select new
                             {
                                 memberID = m.memberID,
@@ -687,8 +687,8 @@ namespace APC.DAL.DAO
             {
                 List<string> positionList = new List<string>();
                 List<MemberDetailDTO> uniquePosition = new List<MemberDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x => x.isDeleted == false && x.membershipStatusID == 1)
-                            join p in db.POSITIONs.Where(x => x.isDeleted == false) on m.positionID equals p.positionID
+                var list = (from m in db.MEMBER.Where(x => x.isDeleted == false && x.membershipStatusID == 1)
+                            join p in db.POSITION.Where(x => x.isDeleted == false) on m.positionID equals p.positionID
                             select new
                             {
                                 memberID = m.memberID,
@@ -717,8 +717,8 @@ namespace APC.DAL.DAO
             {
                 List<string> professionList = new List<string>();
                 List<MemberDetailDTO> uniqueProfession = new List<MemberDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x => x.isDeleted == false && x.membershipStatusID == 1)
-                            join p in db.PROFESSIONs.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
+                var list = (from m in db.MEMBER.Where(x => x.isDeleted == false && x.membershipStatusID == 1)
+                            join p in db.PROFESSION.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
                             select new
                             {
                                 memberID = m.memberID,
@@ -746,15 +746,15 @@ namespace APC.DAL.DAO
             try
             {
                 List<MemberDetailDTO> members = new List<MemberDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x => x.isDeleted == false && x.membershipStatusID == 1)
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                var list = (from m in db.MEMBER.Where(x => x.isDeleted == false && x.membershipStatusID == 1)
+                            join g in db.GENDER on m.genderID equals g.genderID
                             join e in db.EMPLOYMENT_STATUS on m.employmentStatusID equals e.employmentStatusID
-                            join p in db.PROFESSIONs on m.professionID equals p.professionID
-                            join pos in db.POSITIONs on m.positionID equals pos.positionID
+                            join p in db.PROFESSION on m.professionID equals p.professionID
+                            join pos in db.POSITION on m.positionID equals pos.positionID
                             join mar in db.MARITAL_STATUS on m.maritalStatusID equals mar.maritalStatusID
-                            join c in db.COUNTRies on m.countryID equals c.countryID
-                            join n in db.NATIONALITies on m.nationalityID equals n.nationalityID
-                            join perm in db.PERMISSIONs.Where(x=>x.permission1 != "Member") on m.permissionID equals perm.permissionID
+                            join c in db.COUNTRY on m.countryID equals c.countryID
+                            join n in db.NATIONALITY on m.nationalityID equals n.nationalityID
+                            join perm in db.PERMISSION.Where(x=>x.permission1 != "Member") on m.permissionID equals perm.permissionID
                             //join kin in db.NEXT_OF_KIN_RELATIONSHIP on m.relationshipToKinID equals kin.ID
                             join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
                             select new
@@ -849,15 +849,15 @@ namespace APC.DAL.DAO
             try
             {
                 List<MemberDetailDTO> members = new List<MemberDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x => x.isDeleted == false && x.memberID == ID)
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                var list = (from m in db.MEMBER.Where(x => x.isDeleted == false && x.memberID == ID)
+                            join g in db.GENDER on m.genderID equals g.genderID
                             join e in db.EMPLOYMENT_STATUS on m.employmentStatusID equals e.employmentStatusID
-                            join p in db.PROFESSIONs on m.professionID equals p.professionID
-                            join pos in db.POSITIONs on m.positionID equals pos.positionID
+                            join p in db.PROFESSION on m.professionID equals p.professionID
+                            join pos in db.POSITION on m.positionID equals pos.positionID
                             join mar in db.MARITAL_STATUS on m.maritalStatusID equals mar.maritalStatusID
-                            join c in db.COUNTRies on m.countryID equals c.countryID
-                            join n in db.NATIONALITies on m.nationalityID equals n.nationalityID
-                            join perm in db.PERMISSIONs on m.permissionID equals perm.permissionID
+                            join c in db.COUNTRY on m.countryID equals c.countryID
+                            join n in db.NATIONALITY on m.nationalityID equals n.nationalityID
+                            join perm in db.PERMISSION on m.permissionID equals perm.permissionID
                             //join kin in db.NEXT_OF_KIN_RELATIONSHIP on m.relationshipToKinID equals kin.ID
                             join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
                             select new
@@ -951,7 +951,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int permittedMembers = db.MEMBERs.Count(x => x.permissionID > 2 && x.membershipStatusID == 1);
+                int permittedMembers = db.MEMBER.Count(x => x.permissionID > 2 && x.membershipStatusID == 1);
                 return permittedMembers;
             }
             catch (Exception ex)
@@ -966,7 +966,7 @@ namespace APC.DAL.DAO
             List<int> absentMembers = new List<int>();
             List<string> absentCheckList = new List<string>();
             var Absentees = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false)
-                            join mem in db.MEMBERs.Where(x => x.isDeleted == false) on p.memberID equals mem.memberID
+                            join mem in db.MEMBER.Where(x => x.isDeleted == false) on p.memberID equals mem.memberID
                             join ats in db.ATTENDANCE_STATUS.Where(x => x.attendanceStatus == "Absent") on p.attendanceStatusID equals ats.attendanceStatusID
                             join gen in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ThenByDescending(x=>x.monthID).Take(3) on p.generalAttendanceID equals gen.generalAttendanceID
                             select new
@@ -983,9 +983,9 @@ namespace APC.DAL.DAO
             {
                 foreach (var memberID in membersAppearingThreeTimes)
                 {
-                    var list = (from m in db.MEMBERs.Where(x => x.isDeleted == false && x.memberID == memberID)
-                                join g in db.GENDERs on m.genderID equals g.genderID
-                                join pos in db.POSITIONs on m.positionID equals pos.positionID
+                    var list = (from m in db.MEMBER.Where(x => x.isDeleted == false && x.memberID == memberID)
+                                join g in db.GENDER on m.genderID equals g.genderID
+                                join pos in db.POSITION on m.positionID equals pos.positionID
                                 join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
                                 select new
                                 {
@@ -1129,7 +1129,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                var memberInfo = db.MEMBERs.FirstOrDefault(x => x.memberID == ID && x.isDeleted == false);
+                var memberInfo = db.MEMBER.FirstOrDefault(x => x.memberID == ID && x.isDeleted == false);
                 decimal totalAmountExpected;
                 List<int> meetingCount = new List<int>();
 
@@ -1139,7 +1139,7 @@ namespace APC.DAL.DAO
 
                     int meeting = (from p in db.PERSONAL_ATTENDANCE
                                    join g in db.GENERAL_ATTENDANCE on p.generalAttendanceID equals g.generalAttendanceID
-                                   join m in db.MEMBERs on p.memberID equals m.memberID
+                                   join m in db.MEMBER on p.memberID equals m.memberID
                                    where m.memberID == ID && g.isDeleted == false && g.attendanceDate > membershipDate
                                    select p).Count();
                     if (meeting != 0)
@@ -1161,7 +1161,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                MEMBER member = db.MEMBERs.First(x => x.memberID == entity.memberID);
+                MEMBER member = db.MEMBER.First(x => x.memberID == entity.memberID);
                 member.surname = entity.surname;
                 member.name = entity.name;
                 member.username = entity.username;

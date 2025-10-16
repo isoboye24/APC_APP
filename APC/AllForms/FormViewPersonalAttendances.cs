@@ -202,8 +202,8 @@ namespace APC.AllForms
                 string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
                 picProfile.ImageLocation = imagePath;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€" + amountExpected + ".00";
-                labelTotalName.Text = "Total Amt. Expected";
+                labelTotalAmount.Text = "€ 120.00";
+                labelTotalName.Text = "Total Amt. Expected per Year";
             }
             if (isPersonalBalance)
             {
@@ -234,8 +234,8 @@ namespace APC.AllForms
                 picProfile.ImageLocation = imagePath;
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€" + Balance;
-                labelTotalName.Text = "Total Amt. Balance";
+                labelTotalAmount.Text = "€" + (120 - amountContributed);
+                labelTotalName.Text = "Remaining Amt.";
             }
             if (isPersonalFines)
             {
@@ -281,7 +281,7 @@ namespace APC.AllForms
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
                 labelTotalAmount.Text = "€ " + fineBalance;
-                labelTotalName.Text = "Total Balance";
+                labelTotalName.Text = "Total Fines";
             }
         }
 

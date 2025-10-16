@@ -14,7 +14,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                DOCUMENT document = db.DOCUMENTs.First(x=>x.documentID==entity.documentID);
+                DOCUMENT document = db.DOCUMENT.First(x=>x.documentID==entity.documentID);
                 document.isDeleted = true;
                 document.deletedDate = DateTime.Today;
                 db.SaveChanges();
@@ -30,7 +30,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                DOCUMENT document = db.DOCUMENTs.First(x=>x.documentID==ID);
+                DOCUMENT document = db.DOCUMENT.First(x=>x.documentID==ID);
                 document.isDeleted = false;
                 document.deletedDate = null;
                 db.SaveChanges();
@@ -46,7 +46,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                db.DOCUMENTs.Add(entity);
+                db.DOCUMENT.Add(entity);
                 db.SaveChanges();
                 return true;
             }
@@ -61,8 +61,8 @@ namespace APC.DAL.DAO
             try
             {
                 List<DocumentDetailDTO> documents = new List<DocumentDetailDTO>();
-                var list = (from d in db.DOCUMENTs.Where(x => x.isDeleted == false)
-                            join m in db.MONTHs on d.monthID equals m.monthID
+                var list = (from d in db.DOCUMENT.Where(x => x.isDeleted == false)
+                            join m in db.MONTH on d.monthID equals m.monthID
                             select new
                             {
                                 documentID = d.documentID,
@@ -100,8 +100,8 @@ namespace APC.DAL.DAO
             try
             {
                 List<DocumentDetailDTO> documents = new List<DocumentDetailDTO>();
-                var list = (from d in db.DOCUMENTs.Where(x => x.isDeleted == isDeleted)
-                            join m in db.MONTHs on d.monthID equals m.monthID
+                var list = (from d in db.DOCUMENT.Where(x => x.isDeleted == isDeleted)
+                            join m in db.MONTH on d.monthID equals m.monthID
                             select new
                             {
                                 documentID = d.documentID,
@@ -138,7 +138,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int counter = db.DOCUMENTs.Count(x => x.isDeleted == false);                
+                int counter = db.DOCUMENT.Count(x => x.isDeleted == false);                
                 return counter;
             }
             catch (Exception ex)
@@ -150,7 +150,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                DOCUMENT document = db.DOCUMENTs.First(x=>x.documentID==entity.documentID);
+                DOCUMENT document = db.DOCUMENT.First(x=>x.documentID==entity.documentID);
                 document.documentName = entity.documentName;
                 document.documentPath = entity.documentPath;
                 document.documentType = entity.documentType;

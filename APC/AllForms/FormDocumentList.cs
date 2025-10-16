@@ -79,8 +79,8 @@ namespace APC.AllForms
         DocumentDTO dto = new DocumentDTO();
         private void FormDocumentList_Load(object sender, EventArgs e)
         {
+            label2.Tag = "resizable";
             label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label6.Font = new Font("Segoe UI", 11, FontStyle.Bold);

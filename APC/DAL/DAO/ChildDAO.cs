@@ -13,7 +13,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                CHILD child = db.Children.First(x => x.childID == entity.childID);
+                CHILD child = db.CHILD.First(x => x.childID == entity.childID);
                 child.isDeleted = true;
                 child.deletedDate = DateTime.Today;
                 db.SaveChanges();
@@ -29,7 +29,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                CHILD child = db.Children.First(x=>x.childID==ID);
+                CHILD child = db.CHILD.First(x=>x.childID==ID);
                 child.isDeleted = false;
                 child.deletedDate = null;
                 db.SaveChanges();
@@ -45,7 +45,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                db.Children.Add(entity);
+                db.CHILD.Add(entity);
                 db.SaveChanges();
                 return true;
             }
@@ -60,13 +60,13 @@ namespace APC.DAL.DAO
             try
             {
                 List<ChildDetailDTO> children = new List<ChildDetailDTO>();
-                var list = (from c in db.Children.Where(x => x.isDeleted == false)
-                            join g in db.GENDERs on c.genderID equals g.genderID
-                            join n in db.NATIONALITies on c.nationalityID equals n.nationalityID
-                            join mm in db.MEMBERs on c.motherID equals mm.memberID
-                            join mn in db.NATIONALITies on mm.nationalityID equals mn.nationalityID
-                            join mf in db.MEMBERs on c.fatherID equals mf.memberID
-                            join fn in db.NATIONALITies on mf.nationalityID equals fn.nationalityID
+                var list = (from c in db.CHILD.Where(x => x.isDeleted == false)
+                            join g in db.GENDER on c.genderID equals g.genderID
+                            join n in db.NATIONALITY on c.nationalityID equals n.nationalityID
+                            join mm in db.MEMBER on c.motherID equals mm.memberID
+                            join mn in db.NATIONALITY on mm.nationalityID equals mn.nationalityID
+                            join mf in db.MEMBER on c.fatherID equals mf.memberID
+                            join fn in db.NATIONALITY on mf.nationalityID equals fn.nationalityID
                             select new
                             {
                                 childID = c.childID,
@@ -129,13 +129,13 @@ namespace APC.DAL.DAO
             try
             {
                 List<ChildDetailDTO> children = new List<ChildDetailDTO>();
-                var list = (from c in db.Children.Where(x => x.isDeleted == isDeleted)
-                            join g in db.GENDERs on c.genderID equals g.genderID
-                            join n in db.NATIONALITies.Where(x => x.isDeleted == false) on c.nationalityID equals n.nationalityID
-                            join mm in db.MEMBERs on c.motherID equals mm.memberID
-                            join mn in db.NATIONALITies.Where(x => x.isDeleted == false) on mm.nationalityID equals mn.nationalityID
-                            join mf in db.MEMBERs on c.fatherID equals mf.memberID
-                            join fn in db.NATIONALITies.Where(x => x.isDeleted == false) on mf.nationalityID equals fn.nationalityID
+                var list = (from c in db.CHILD.Where(x => x.isDeleted == isDeleted)
+                            join g in db.GENDER on c.genderID equals g.genderID
+                            join n in db.NATIONALITY.Where(x => x.isDeleted == false) on c.nationalityID equals n.nationalityID
+                            join mm in db.MEMBER on c.motherID equals mm.memberID
+                            join mn in db.NATIONALITY.Where(x => x.isDeleted == false) on mm.nationalityID equals mn.nationalityID
+                            join mf in db.MEMBER on c.fatherID equals mf.memberID
+                            join fn in db.NATIONALITY.Where(x => x.isDeleted == false) on mf.nationalityID equals fn.nationalityID
                             select new
                             {
                                 childID = c.childID,
@@ -199,7 +199,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int totalChildren = db.Children.Count(x => x.isDeleted == false);
+                int totalChildren = db.CHILD.Count(x => x.isDeleted == false);
                 return totalChildren;
             }
             catch (Exception ex)
@@ -211,7 +211,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int totalChildren = db.Children.Count(x => x.isDeleted == false && x.motherID == ID || x.fatherID == ID);
+                int totalChildren = db.CHILD.Count(x => x.isDeleted == false && x.motherID == ID || x.fatherID == ID);
                 return totalChildren;
             }
             catch (Exception ex)
@@ -224,13 +224,13 @@ namespace APC.DAL.DAO
             try
             {
                 List<ChildDetailDTO> children = new List<ChildDetailDTO>();
-                var list = (from c in db.Children.Where(x => x.isDeleted == false && x.motherID ==ID || x.fatherID==ID)
-                            join g in db.GENDERs on c.genderID equals g.genderID
-                            join n in db.NATIONALITies on c.nationalityID equals n.nationalityID
-                            join mm in db.MEMBERs on c.motherID equals mm.memberID
-                            join mn in db.NATIONALITies on mm.nationalityID equals mn.nationalityID
-                            join mf in db.MEMBERs on c.fatherID equals mf.memberID
-                            join fn in db.NATIONALITies on mf.nationalityID equals fn.nationalityID
+                var list = (from c in db.CHILD.Where(x => x.isDeleted == false && x.motherID ==ID || x.fatherID==ID)
+                            join g in db.GENDER on c.genderID equals g.genderID
+                            join n in db.NATIONALITY on c.nationalityID equals n.nationalityID
+                            join mm in db.MEMBER on c.motherID equals mm.memberID
+                            join mn in db.NATIONALITY on mm.nationalityID equals mn.nationalityID
+                            join mf in db.MEMBER on c.fatherID equals mf.memberID
+                            join fn in db.NATIONALITY on mf.nationalityID equals fn.nationalityID
                             select new
                             {
                                 childID = c.childID,
@@ -293,7 +293,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int totalChildren = db.Children.Count(x => x.isDeleted == false && x.genderID==1);
+                int totalChildren = db.CHILD.Count(x => x.isDeleted == false && x.genderID==1);
                 return totalChildren;
             }
             catch (Exception ex)
@@ -305,7 +305,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int totalChildren = db.Children.Count(x => x.isDeleted == false && x.genderID == 2);
+                int totalChildren = db.CHILD.Count(x => x.isDeleted == false && x.genderID == 2);
                 return totalChildren;
             }
             catch (Exception ex)
@@ -318,7 +318,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                CHILD child = db.Children.First(x => x.childID == entity.childID);
+                CHILD child = db.CHILD.First(x => x.childID == entity.childID);
                 child.name = entity.name;
                 child.surname = entity.surname;
                 child.birthday = entity.birthday;

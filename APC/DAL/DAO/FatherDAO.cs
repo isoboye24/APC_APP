@@ -14,15 +14,15 @@ namespace APC.DAL.DAO
             try
             {
                 List<FathersDetailDTO> fathers = new List<FathersDetailDTO>();
-                var list = (from m in db.MEMBERs.Where(x => x.isDeleted == false)
-                            join g in db.GENDERs.Where(x => x.genderName == "Male") on m.genderID equals g.genderID
+                var list = (from m in db.MEMBER.Where(x => x.isDeleted == false)
+                            join g in db.GENDER.Where(x => x.genderName == "Male") on m.genderID equals g.genderID
                             join e in db.EMPLOYMENT_STATUS.Where(x => x.isDeleted == false) on m.employmentStatusID equals e.employmentStatusID
-                            join p in db.PROFESSIONs.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
-                            join pos in db.POSITIONs.Where(x => x.isDeleted == false) on m.positionID equals pos.positionID
+                            join p in db.PROFESSION.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
+                            join pos in db.POSITION.Where(x => x.isDeleted == false) on m.positionID equals pos.positionID
                             join mar in db.MARITAL_STATUS.Where(x => x.isDeleted == false) on m.maritalStatusID equals mar.maritalStatusID
-                            join c in db.COUNTRies.Where(x => x.isDeleted == false) on m.countryID equals c.countryID
-                            join n in db.NATIONALITies.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
-                            join perm in db.PERMISSIONs.Where(x => x.isDeleted == false) on m.permissionID equals perm.permissionID
+                            join c in db.COUNTRY.Where(x => x.isDeleted == false) on m.countryID equals c.countryID
+                            join n in db.NATIONALITY.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
+                            join perm in db.PERMISSION.Where(x => x.isDeleted == false) on m.permissionID equals perm.permissionID
                             join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
                             select new
                             {

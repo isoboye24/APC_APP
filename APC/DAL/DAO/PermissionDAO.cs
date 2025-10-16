@@ -15,7 +15,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<PermissionDetailDTO> permissions = new List<PermissionDetailDTO>();
-                var list = db.PERMISSIONs.Where(x => x.isDeleted == false).OrderBy(x => x.permission1).ToList(); ;
+                var list = db.PERMISSION.Where(x => x.isDeleted == false).OrderBy(x => x.permission1).ToList(); ;
                 foreach (var item in list)
                 {
                     PermissionDetailDTO dto = new PermissionDetailDTO();
@@ -36,7 +36,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<PermissionDetailDTO> permissions = new List<PermissionDetailDTO>();
-                var list = db.PERMISSIONs.Where(x => x.isDeleted == false && x.permission1 != "Member").OrderBy(x => x.permission1).ToList(); ;
+                var list = db.PERMISSION.Where(x => x.isDeleted == false && x.permission1 != "Member").OrderBy(x => x.permission1).ToList(); ;
                 foreach (var item in list)
                 {
                     PermissionDetailDTO dto = new PermissionDetailDTO();
@@ -55,7 +55,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int specialPermissionCount = db.PERMISSIONs.Count(x=>x.isDeleted ==false && x.permission1 != "Member");
+                int specialPermissionCount = db.PERMISSION.Count(x=>x.isDeleted ==false && x.permission1 != "Member");
                 return specialPermissionCount;
             }
             catch (Exception ex)

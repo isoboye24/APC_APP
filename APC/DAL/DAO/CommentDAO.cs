@@ -14,7 +14,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                COMMENT comment = db.COMMENTs.First(x => x.commentID == entity.commentID);
+                COMMENT comment = db.COMMENT.First(x => x.commentID == entity.commentID);
                 comment.isDeleted = true;
                 comment.deletedDate = DateTime.Today;
                 db.SaveChanges();
@@ -30,7 +30,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                COMMENT comment = db.COMMENTs.First(x=>x.commentID == ID);
+                COMMENT comment = db.COMMENT.First(x=>x.commentID == ID);
                 comment.isDeleted = false;
                 comment.deletedDate = null;
                 db.SaveChanges();
@@ -46,7 +46,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                db.COMMENTs.Add(entity);
+                db.COMMENT.Add(entity);
                 db.SaveChanges();
                 return true;
             }
@@ -61,10 +61,10 @@ namespace APC.DAL.DAO
             try
             {
                 List<CommentDetailDTO> comments = new List<CommentDetailDTO>();
-                var list = (from c in db.COMMENTs.Where(x => x.isDeleted == false)
-                            join mo in db.MONTHs on c.monthID equals mo.monthID
-                            join m in db.MEMBERs on c.memberID equals m.memberID
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                var list = (from c in db.COMMENT.Where(x => x.isDeleted == false)
+                            join mo in db.MONTH on c.monthID equals mo.monthID
+                            join m in db.MEMBER on c.memberID equals m.memberID
+                            join g in db.GENDER on m.genderID equals g.genderID
                             select new
                             {
                                 commentID = c.commentID,
@@ -110,10 +110,10 @@ namespace APC.DAL.DAO
             try
             {
                 List<CommentDetailDTO> comments = new List<CommentDetailDTO>();
-                var list = (from c in db.COMMENTs.Where(x => x.isDeleted == false && x.memberID == ID)
-                            join mo in db.MONTHs on c.monthID equals mo.monthID
-                            join m in db.MEMBERs on c.memberID equals m.memberID
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                var list = (from c in db.COMMENT.Where(x => x.isDeleted == false && x.memberID == ID)
+                            join mo in db.MONTH on c.monthID equals mo.monthID
+                            join m in db.MEMBER on c.memberID equals m.memberID
+                            join g in db.GENDER on m.genderID equals g.genderID
                             select new
                             {
                                 commentID = c.commentID,
@@ -159,10 +159,10 @@ namespace APC.DAL.DAO
             try
             {
                 List<CommentDetailDTO> comments = new List<CommentDetailDTO>();
-                var list = (from c in db.COMMENTs.Where(x => x.isDeleted == isDeleted)
-                            join mo in db.MONTHs on c.monthID equals mo.monthID
-                            join m in db.MEMBERs.Where(x => x.isDeleted == false) on c.memberID equals m.memberID
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                var list = (from c in db.COMMENT.Where(x => x.isDeleted == isDeleted)
+                            join mo in db.MONTH on c.monthID equals mo.monthID
+                            join m in db.MEMBER.Where(x => x.isDeleted == false) on c.memberID equals m.memberID
+                            join g in db.GENDER on m.genderID equals g.genderID
                             select new
                             {
                                 commentID = c.commentID,
@@ -209,7 +209,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int totalComments = db.COMMENTs.Count(x => x.isDeleted == false);
+                int totalComments = db.COMMENT.Count(x => x.isDeleted == false);
                 return totalComments;
             }
             catch (Exception ex)
@@ -221,7 +221,7 @@ namespace APC.DAL.DAO
         {            
             try
             {
-                int totalComments = db.COMMENTs.Count(x => x.isDeleted == false && x.monthID == DateTime.Today.Month);
+                int totalComments = db.COMMENT.Count(x => x.isDeleted == false && x.monthID == DateTime.Today.Month);
                 return totalComments;
             }
             catch (Exception ex)
@@ -233,7 +233,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                COMMENT comment = db.COMMENTs.First(x => x.commentID == entity.commentID);
+                COMMENT comment = db.COMMENT.First(x => x.commentID == entity.commentID);
                 comment.comment1 = entity.comment1;
                 comment.memberID = entity.memberID;
                 comment.day = entity.day;

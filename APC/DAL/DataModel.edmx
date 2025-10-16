@@ -96,6 +96,21 @@
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
         </EntityType>
+        <EntityType Name="EVENT_EXPENDITURE">
+          <Key>
+            <PropertyRef Name="eventExpenditureID" />
+          </Key>
+          <Property Name="eventExpenditureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="eventID" Type="int" Nullable="false" />
+          <Property Name="amountSpent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="expenditureDate" Type="date" Nullable="false" />
+          <Property Name="summary" Type="text" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="EVENT_IMAGE">
           <Key>
             <PropertyRef Name="eventImageID" />
@@ -107,6 +122,35 @@
           <Property Name="deletedDate" Type="date" />
           <Property Name="imagePath" Type="varchar(max)" Nullable="false" />
           <Property Name="imageCaption" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EVENT_RECEIPTS">
+          <Key>
+            <PropertyRef Name="eventReceiptID" />
+          </Key>
+          <Property Name="eventReceiptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="eventID" Type="int" Nullable="false" />
+          <Property Name="imagePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="summary" Type="text" />
+          <Property Name="caption" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENT_SALES">
+          <Key>
+            <PropertyRef Name="eventSalesID" />
+          </Key>
+          <Property Name="eventSalesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="eventID" Type="int" Nullable="false" />
+          <Property Name="amountSold" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="summary" Type="text" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EVENTS">
           <Key>
@@ -314,7 +358,10 @@
           <EntitySet Name="DOCUMENT" EntityType="Self.DOCUMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DUAL_NATIONALITY" EntityType="Self.DUAL_NATIONALITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPLOYMENT_STATUS" EntityType="Self.EMPLOYMENT_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENT_EXPENDITURE" EntityType="Self.EVENT_EXPENDITURE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EVENT_IMAGE" EntityType="Self.EVENT_IMAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENT_RECEIPTS" EntityType="Self.EVENT_RECEIPTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENT_SALES" EntityType="Self.EVENT_SALES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EVENTS" EntityType="Self.EVENTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EXPENDITURE" EntityType="Self.EXPENDITURE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FINANCIAL_REPORT" EntityType="Self.FINANCIAL_REPORT" Schema="dbo" store:Type="Tables" />
@@ -428,6 +475,21 @@
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="EVENT_EXPENDITURE">
+          <Key>
+            <PropertyRef Name="eventExpenditureID" />
+          </Key>
+          <Property Name="eventExpenditureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eventID" Type="Int32" Nullable="false" />
+          <Property Name="amountSpent" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="expenditureDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="EVENT_IMAGE">
           <Key>
             <PropertyRef Name="eventImageID" />
@@ -440,7 +502,36 @@
           <Property Name="imagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="imageCaption" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="EVENT">
+        <EntityType Name="EVENT_RECEIPTS">
+          <Key>
+            <PropertyRef Name="eventReceiptID" />
+          </Key>
+          <Property Name="eventReceiptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eventID" Type="Int32" Nullable="false" />
+          <Property Name="imagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="caption" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENT_SALES">
+          <Key>
+            <PropertyRef Name="eventSalesID" />
+          </Key>
+          <Property Name="eventSalesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eventID" Type="Int32" Nullable="false" />
+          <Property Name="amountSold" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENTS">
           <Key>
             <PropertyRef Name="eventID" />
           </Key>
@@ -637,39 +728,42 @@
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityContainer Name="APCEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="APCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" />
-          <EntitySet Name="Children" EntityType="Self.CHILD" />
-          <EntitySet Name="COMMENTs" EntityType="Self.COMMENT" />
-          <EntitySet Name="CONSTITUTIONs" EntityType="Self.CONSTITUTION" />
-          <EntitySet Name="COUNTRies" EntityType="Self.COUNTRY" />
-          <EntitySet Name="DOCUMENTs" EntityType="Self.DOCUMENT" />
+          <EntitySet Name="CHILD" EntityType="Self.CHILD" />
+          <EntitySet Name="COMMENT" EntityType="Self.COMMENT" />
+          <EntitySet Name="CONSTITUTION" EntityType="Self.CONSTITUTION" />
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" />
+          <EntitySet Name="DOCUMENT" EntityType="Self.DOCUMENT" />
           <EntitySet Name="DUAL_NATIONALITY" EntityType="Self.DUAL_NATIONALITY" />
           <EntitySet Name="EMPLOYMENT_STATUS" EntityType="Self.EMPLOYMENT_STATUS" />
+          <EntitySet Name="EVENT_EXPENDITURE" EntityType="Self.EVENT_EXPENDITURE" />
           <EntitySet Name="EVENT_IMAGE" EntityType="Self.EVENT_IMAGE" />
-          <EntitySet Name="EVENTS" EntityType="Self.EVENT" />
-          <EntitySet Name="EXPENDITUREs" EntityType="Self.EXPENDITURE" />
+          <EntitySet Name="EVENT_RECEIPTS" EntityType="Self.EVENT_RECEIPTS" />
+          <EntitySet Name="EVENT_SALES" EntityType="Self.EVENT_SALES" />
+          <EntitySet Name="EVENTS" EntityType="Self.EVENTS" />
+          <EntitySet Name="EXPENDITURE" EntityType="Self.EXPENDITURE" />
           <EntitySet Name="FINANCIAL_REPORT" EntityType="Self.FINANCIAL_REPORT" />
           <EntitySet Name="FINED_MEMBER" EntityType="Self.FINED_MEMBER" />
-          <EntitySet Name="GENDERs" EntityType="Self.GENDER" />
+          <EntitySet Name="GENDER" EntityType="Self.GENDER" />
           <EntitySet Name="GENERAL_ATTENDANCE" EntityType="Self.GENERAL_ATTENDANCE" />
           <EntitySet Name="MARITAL_STATUS" EntityType="Self.MARITAL_STATUS" />
-          <EntitySet Name="MEMBERs" EntityType="Self.MEMBER" />
+          <EntitySet Name="MEMBER" EntityType="Self.MEMBER" />
           <EntitySet Name="MEMBERSHIP_STATUS" EntityType="Self.MEMBERSHIP_STATUS" />
-          <EntitySet Name="MONTHs" EntityType="Self.MONTH" />
-          <EntitySet Name="NATIONALITies" EntityType="Self.NATIONALITY" />
+          <EntitySet Name="MONTH" EntityType="Self.MONTH" />
+          <EntitySet Name="NATIONALITY" EntityType="Self.NATIONALITY" />
           <EntitySet Name="NEXT_OF_KIN_RELATIONSHIP" EntityType="Self.NEXT_OF_KIN_RELATIONSHIP" />
-          <EntitySet Name="PERMISSIONs" EntityType="Self.PERMISSION" />
+          <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" />
           <EntitySet Name="PERSONAL_ATTENDANCE" EntityType="Self.PERSONAL_ATTENDANCE" />
-          <EntitySet Name="POSITIONs" EntityType="Self.POSITION" />
-          <EntitySet Name="PROFESSIONs" EntityType="Self.PROFESSION" />
+          <EntitySet Name="POSITION" EntityType="Self.POSITION" />
+          <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="APCModelStoreContainer" CdmEntityContainer="APCEntities1">
+        <EntityContainerMapping StorageEntityContainer="APCModelStoreContainer" CdmEntityContainer="APCEntities">
           <EntitySetMapping Name="ATTENDANCE_STATUS">
             <EntityTypeMapping TypeName="APCModel.ATTENDANCE_STATUS">
               <MappingFragment StoreEntitySet="ATTENDANCE_STATUS">
@@ -680,7 +774,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Children">
+          <EntitySetMapping Name="CHILD">
             <EntityTypeMapping TypeName="APCModel.CHILD">
               <MappingFragment StoreEntitySet="CHILD">
                 <ScalarProperty Name="childID" ColumnName="childID" />
@@ -697,7 +791,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="COMMENTs">
+          <EntitySetMapping Name="COMMENT">
             <EntityTypeMapping TypeName="APCModel.COMMENT">
               <MappingFragment StoreEntitySet="COMMENT">
                 <ScalarProperty Name="commentID" ColumnName="commentID" />
@@ -711,7 +805,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CONSTITUTIONs">
+          <EntitySetMapping Name="CONSTITUTION">
             <EntityTypeMapping TypeName="APCModel.CONSTITUTION">
               <MappingFragment StoreEntitySet="CONSTITUTION">
                 <ScalarProperty Name="constitutionID" ColumnName="constitutionID" />
@@ -724,7 +818,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="COUNTRies">
+          <EntitySetMapping Name="COUNTRY">
             <EntityTypeMapping TypeName="APCModel.COUNTRY">
               <MappingFragment StoreEntitySet="COUNTRY">
                 <ScalarProperty Name="countryID" ColumnName="countryID" />
@@ -734,7 +828,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DOCUMENTs">
+          <EntitySetMapping Name="DOCUMENT">
             <EntityTypeMapping TypeName="APCModel.DOCUMENT">
               <MappingFragment StoreEntitySet="DOCUMENT">
                 <ScalarProperty Name="documentID" ColumnName="documentID" />
@@ -769,6 +863,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EVENT_EXPENDITURE">
+            <EntityTypeMapping TypeName="APCModel.EVENT_EXPENDITURE">
+              <MappingFragment StoreEntitySet="EVENT_EXPENDITURE">
+                <ScalarProperty Name="eventExpenditureID" ColumnName="eventExpenditureID" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+                <ScalarProperty Name="amountSpent" ColumnName="amountSpent" />
+                <ScalarProperty Name="expenditureDate" ColumnName="expenditureDate" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="EVENT_IMAGE">
             <EntityTypeMapping TypeName="APCModel.EVENT_IMAGE">
               <MappingFragment StoreEntitySet="EVENT_IMAGE">
@@ -782,8 +892,39 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EVENT_RECEIPTS">
+            <EntityTypeMapping TypeName="APCModel.EVENT_RECEIPTS">
+              <MappingFragment StoreEntitySet="EVENT_RECEIPTS">
+                <ScalarProperty Name="eventReceiptID" ColumnName="eventReceiptID" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+                <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="caption" ColumnName="caption" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENT_SALES">
+            <EntityTypeMapping TypeName="APCModel.EVENT_SALES">
+              <MappingFragment StoreEntitySet="EVENT_SALES">
+                <ScalarProperty Name="eventSalesID" ColumnName="eventSalesID" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+                <ScalarProperty Name="amountSold" ColumnName="amountSold" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="EVENTS">
-            <EntityTypeMapping TypeName="APCModel.EVENT">
+            <EntityTypeMapping TypeName="APCModel.EVENTS">
               <MappingFragment StoreEntitySet="EVENTS">
                 <ScalarProperty Name="eventID" ColumnName="eventID" />
                 <ScalarProperty Name="title" ColumnName="title" />
@@ -798,7 +939,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EXPENDITUREs">
+          <EntitySetMapping Name="EXPENDITURE">
             <EntityTypeMapping TypeName="APCModel.EXPENDITURE">
               <MappingFragment StoreEntitySet="EXPENDITURE">
                 <ScalarProperty Name="expenditureID" ColumnName="expenditureID" />
@@ -842,7 +983,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GENDERs">
+          <EntitySetMapping Name="GENDER">
             <EntityTypeMapping TypeName="APCModel.GENDER">
               <MappingFragment StoreEntitySet="GENDER">
                 <ScalarProperty Name="genderID" ColumnName="genderID" />
@@ -879,7 +1020,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MEMBERs">
+          <EntitySetMapping Name="MEMBER">
             <EntityTypeMapping TypeName="APCModel.MEMBER">
               <MappingFragment StoreEntitySet="MEMBER">
                 <ScalarProperty Name="memberID" ColumnName="memberID" />
@@ -921,7 +1062,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MONTHs">
+          <EntitySetMapping Name="MONTH">
             <EntityTypeMapping TypeName="APCModel.MONTH">
               <MappingFragment StoreEntitySet="MONTH">
                 <ScalarProperty Name="monthID" ColumnName="monthID" />
@@ -929,7 +1070,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NATIONALITies">
+          <EntitySetMapping Name="NATIONALITY">
             <EntityTypeMapping TypeName="APCModel.NATIONALITY">
               <MappingFragment StoreEntitySet="NATIONALITY">
                 <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
@@ -947,7 +1088,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PERMISSIONs">
+          <EntitySetMapping Name="PERMISSION">
             <EntityTypeMapping TypeName="APCModel.PERMISSION">
               <MappingFragment StoreEntitySet="PERMISSION">
                 <ScalarProperty Name="permissionID" ColumnName="permissionID" />
@@ -975,7 +1116,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="POSITIONs">
+          <EntitySetMapping Name="POSITION">
             <EntityTypeMapping TypeName="APCModel.POSITION">
               <MappingFragment StoreEntitySet="POSITION">
                 <ScalarProperty Name="positionID" ColumnName="positionID" />
@@ -985,7 +1126,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PROFESSIONs">
+          <EntitySetMapping Name="PROFESSION">
             <EntityTypeMapping TypeName="APCModel.PROFESSION">
               <MappingFragment StoreEntitySet="PROFESSION">
                 <ScalarProperty Name="professionID" ColumnName="professionID" />
@@ -1009,10 +1150,10 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

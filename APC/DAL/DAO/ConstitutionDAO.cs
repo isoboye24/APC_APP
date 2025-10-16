@@ -13,7 +13,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                CONSTITUTION constit = db.CONSTITUTIONs.First(x => x.constitutionID == entity.constitutionID);
+                CONSTITUTION constit = db.CONSTITUTION.First(x => x.constitutionID == entity.constitutionID);
                 constit.isDeleted = true;
                 constit.deletedDate = DateTime.Today;
                 db.SaveChanges();
@@ -29,7 +29,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                CONSTITUTION constit = db.CONSTITUTIONs.First(x => x.constitutionID == ID);
+                CONSTITUTION constit = db.CONSTITUTION.First(x => x.constitutionID == ID);
                 constit.isDeleted = false;
                 constit.deletedDate = null;
                 db.SaveChanges();
@@ -45,7 +45,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                db.CONSTITUTIONs.Add(entity);
+                db.CONSTITUTION.Add(entity);
                 db.SaveChanges();
                 return true;
             }
@@ -60,7 +60,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<ConstitutionDetailDTO> constitutions = new List<ConstitutionDetailDTO>();
-                var list = db.CONSTITUTIONs.Where(x => x.isDeleted == false).ToList();
+                var list = db.CONSTITUTION.Where(x => x.isDeleted == false).ToList();
                 foreach (var item in list)
                 {
                     ConstitutionDetailDTO dto = new ConstitutionDetailDTO();
@@ -92,7 +92,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<ConstitutionDetailDTO> constitutions = new List<ConstitutionDetailDTO>();
-                var list = db.CONSTITUTIONs.Where(x => x.isDeleted == isDeleted).ToList();
+                var list = db.CONSTITUTION.Where(x => x.isDeleted == isDeleted).ToList();
                 foreach (var item in list)
                 {
                     ConstitutionDetailDTO dto = new ConstitutionDetailDTO();
@@ -116,7 +116,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                List<CONSTITUTION> list = db.CONSTITUTIONs.Where(x => x.constitutionID == ID).ToList();
+                List<CONSTITUTION> list = db.CONSTITUTION.Where(x => x.constitutionID == ID).ToList();
                 return list;
             }
             catch (Exception ex)
@@ -130,7 +130,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<ConstitutionSectionDetailDTO> constitutionSections = new List<ConstitutionSectionDetailDTO>();
-                var list = db.CONSTITUTIONs.Where(x => x.isDeleted == false).ToList();
+                var list = db.CONSTITUTION.Where(x => x.isDeleted == false).ToList();
                 foreach (var item in list)
                 {
                     ConstitutionSectionDetailDTO dto = new ConstitutionSectionDetailDTO();
@@ -151,7 +151,7 @@ namespace APC.DAL.DAO
             try
             {
                 CONSTITUTION constit = new CONSTITUTION();
-                constit = db.CONSTITUTIONs.First(x => x.constitutionID == entity.constitutionID);
+                constit = db.CONSTITUTION.First(x => x.constitutionID == entity.constitutionID);
                 constit.constitution1 = entity.constitution1;
                 constit.fine = entity.fine;
                 constit.section = entity.section;

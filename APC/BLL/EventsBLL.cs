@@ -24,7 +24,7 @@ namespace APC.BLL
 
         public bool Insert(EventsDetailDTO entity)
         {
-            EVENT events = new EVENT();
+            EVENTS events = new EVENTS();
             events.summary = entity.Summary;
             events.title = entity.EventTitle;
             events.coverImagePath = entity.CoverImagePath;
@@ -53,7 +53,7 @@ namespace APC.BLL
 
         public bool Update(EventsDetailDTO entity)
         {
-            EVENT events = new EVENT();
+            EVENTS events = new EVENTS();
             events.eventID = entity.EventID;
             events.summary = entity.Summary;
             events.title = entity.EventTitle;

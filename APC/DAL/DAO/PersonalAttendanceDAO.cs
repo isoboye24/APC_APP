@@ -81,9 +81,9 @@ namespace APC.DAL.DAO
             List<int> members = new List<int>();
             List<int> absentMembers = new List<int>();
             var list = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false)
-                            join mem in db.MEMBERs.Where(x => x.isDeleted == false && x.memberID ==ID) on p.memberID equals mem.memberID
-                            join m in db.MONTHs on p.monthID equals m.monthID
-                            join g in db.GENDERs on mem.genderID equals g.genderID
+                            join mem in db.MEMBER.Where(x => x.isDeleted == false && x.memberID ==ID) on p.memberID equals mem.memberID
+                            join m in db.MONTH on p.monthID equals m.monthID
+                            join g in db.GENDER on mem.genderID equals g.genderID
                             join ats in db.ATTENDANCE_STATUS.Where(x => x.attendanceStatus == "Present") on p.attendanceStatusID equals ats.attendanceStatusID
                             join gen in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ThenByDescending(x=>x.monthID) on p.generalAttendanceID equals gen.generalAttendanceID
                             select new
@@ -137,9 +137,9 @@ namespace APC.DAL.DAO
             List<int> members = new List<int>();
             List<int> absentMembers = new List<int>();
             var list = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false)
-                        join mem in db.MEMBERs.Where(x => x.isDeleted == false && x.memberID == ID) on p.memberID equals mem.memberID
-                        join m in db.MONTHs on p.monthID equals m.monthID
-                        join g in db.GENDERs on mem.genderID equals g.genderID
+                        join mem in db.MEMBER.Where(x => x.isDeleted == false && x.memberID == ID) on p.memberID equals mem.memberID
+                        join m in db.MONTH on p.monthID equals m.monthID
+                        join g in db.GENDER on mem.genderID equals g.genderID
                         join ats in db.ATTENDANCE_STATUS.Where(x => x.attendanceStatus == "Absent") on p.attendanceStatusID equals ats.attendanceStatusID
                         join gen in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID) on p.generalAttendanceID equals gen.generalAttendanceID
                         select new
@@ -193,9 +193,9 @@ namespace APC.DAL.DAO
             List<int> members = new List<int>();
             List<int> absentMembers = new List<int>();
             var list = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.monthlyDues > 0)
-                        join mem in db.MEMBERs.Where(x => x.isDeleted == false && x.memberID == ID) on p.memberID equals mem.memberID
-                        join m in db.MONTHs on p.monthID equals m.monthID
-                        join g in db.GENDERs on mem.genderID equals g.genderID
+                        join mem in db.MEMBER.Where(x => x.isDeleted == false && x.memberID == ID) on p.memberID equals mem.memberID
+                        join m in db.MONTH on p.monthID equals m.monthID
+                        join g in db.GENDER on mem.genderID equals g.genderID
                         join ats in db.ATTENDANCE_STATUS on p.attendanceStatusID equals ats.attendanceStatusID
                         join gen in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID) on p.generalAttendanceID equals gen.generalAttendanceID
                         select new
@@ -248,9 +248,9 @@ namespace APC.DAL.DAO
             List<int> members = new List<int>();
             List<int> absentMembers = new List<int>();
             var list = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false)
-                        join mem in db.MEMBERs.Where(x => x.isDeleted == false && x.memberID == ID) on p.memberID equals mem.memberID
-                        join m in db.MONTHs on p.monthID equals m.monthID
-                        join g in db.GENDERs on mem.genderID equals g.genderID
+                        join mem in db.MEMBER.Where(x => x.isDeleted == false && x.memberID == ID) on p.memberID equals mem.memberID
+                        join m in db.MONTH on p.monthID equals m.monthID
+                        join g in db.GENDER on mem.genderID equals g.genderID
                         join ats in db.ATTENDANCE_STATUS.Where(x=>x.attendanceStatus == "Present" || x.attendanceStatus == "Absent") on p.attendanceStatusID equals ats.attendanceStatusID
                         join gen in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID) on p.generalAttendanceID equals gen.generalAttendanceID
                         select new
@@ -303,9 +303,9 @@ namespace APC.DAL.DAO
             List<int> members = new List<int>();
             List<int> absentMembers = new List<int>();
             var list = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.monthlyDues < x.expectedMonthlyDue)
-                        join mem in db.MEMBERs.Where(x => x.isDeleted == false && x.memberID == ID) on p.memberID equals mem.memberID
-                        join m in db.MONTHs on p.monthID equals m.monthID
-                        join g in db.GENDERs on mem.genderID equals g.genderID
+                        join mem in db.MEMBER.Where(x => x.isDeleted == false && x.memberID == ID) on p.memberID equals mem.memberID
+                        join m in db.MONTH on p.monthID equals m.monthID
+                        join g in db.GENDER on mem.genderID equals g.genderID
                         join ats in db.ATTENDANCE_STATUS.Where(x => x.attendanceStatus == "Present" || x.attendanceStatus == "Absent") on p.attendanceStatusID equals ats.attendanceStatusID
                         join gen in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ThenByDescending(x=>x.monthID) on p.generalAttendanceID equals gen.generalAttendanceID
                         select new
@@ -360,9 +360,9 @@ namespace APC.DAL.DAO
 
                 var list = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == isDeleted)
                             join ats in db.ATTENDANCE_STATUS on p.attendanceStatusID equals ats.attendanceStatusID
-                            join m in db.MEMBERs.Where(x => x.isDeleted == false) on p.memberID equals m.memberID
-                            join mo in db.MONTHs on p.monthID equals mo.monthID
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                            join m in db.MEMBER.Where(x => x.isDeleted == false) on p.memberID equals m.memberID
+                            join mo in db.MONTH on p.monthID equals mo.monthID
+                            join g in db.GENDER on m.genderID equals g.genderID
                             select new
                             {
                                 attendanceID = p.attendanceID,
@@ -421,9 +421,9 @@ namespace APC.DAL.DAO
 
                 var list = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.generalAttendanceID == generalAttendanceID)
                             join ats in db.ATTENDANCE_STATUS on p.attendanceStatusID equals ats.attendanceStatusID
-                            join m in db.MEMBERs on p.memberID equals m.memberID
-                            join mo in db.MONTHs on p.monthID equals mo.monthID
-                            join g in db.GENDERs on m.genderID equals g.genderID
+                            join m in db.MEMBER on p.memberID equals m.memberID
+                            join mo in db.MONTH on p.monthID equals mo.monthID
+                            join g in db.GENDER on m.genderID equals g.genderID
                             select new
                             {
                                 attendanceID = p.attendanceID,

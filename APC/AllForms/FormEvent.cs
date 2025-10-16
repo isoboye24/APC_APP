@@ -81,41 +81,52 @@ namespace APC
                 }
                 else if (isUpdate)
                 {
-                    if (detail.EventDate == dateTimePickerEvent.Value && txtTitle.Text.Trim() == detail.EventTitle
-                        && detail.Summary == txtSummary.Text.Trim() && detail.CoverImagePath == txtImagePath.Text.Trim())
+                    // Check if all values are unchanged (including image)
+                    bool imageUnchanged = Path.GetFileName(txtImagePath.Text.Trim()) == detail.CoverImagePath;
+                    bool noChanges =
+                        detail.EventDate == dateTimePickerEvent.Value &&
+                        txtTitle.Text.Trim() == detail.EventTitle &&
+                        txtSummary.Text.Trim() == detail.Summary &&
+                        imageUnchanged;
+
+                    if (noChanges)
                     {
                         MessageBox.Show("There is no change");
+                        return;
                     }
-                    else
+
+                    string imagesDir = Path.Combine(Application.StartupPath, "images");
+                    string newFileName = fileName;
+
+                    if (!imageUnchanged)
                     {
-                        string imagePath = Application.StartupPath + "\\images\\" + detail.CoverImagePath;
-                        if (txtImagePath.Text != imagePath)
+                        string oldImagePath = Path.Combine(imagesDir, detail.CoverImagePath);
+                        if (File.Exists(oldImagePath))
                         {
-                            if (File.Exists(@"images\\" + detail.CoverImagePath))
-                            {
-                                File.Delete(@"images\\" + detail.CoverImagePath);
-                            }
-                            File.Copy(txtImagePath.Text, @"images\\" + fileName);
-                            detail.CoverImagePath = fileName;
+                            File.Delete(oldImagePath);
                         }
-                        else if (txtImagePath.Text == detail.CoverImagePath)
-                        {
-                            detail.CoverImagePath = txtImagePath.Text;
-                        }
-                        detail.Day = dateTimePickerEvent.Value.Day;
-                        detail.MonthID = dateTimePickerEvent.Value.Month;
-                        detail.Year = dateTimePickerEvent.Value.Year.ToString();
-                        detail.Summary = txtSummary.Text;
-                        detail.EventTitle = txtTitle.Text;
-                        detail.Summary = txtSummary.Text;
-                        detail.EventDate = dateTimePickerEvent.Value;
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Event was updated");
-                            this.Close();
-                        }
+
+                        // Copy new image
+                        string newImagePath = Path.Combine(imagesDir, newFileName);
+                        File.Copy(txtImagePath.Text, newImagePath, overwrite: true);
+
+                        detail.CoverImagePath = newFileName;
+                    }
+
+                    detail.EventDate = dateTimePickerEvent.Value;
+                    detail.Day = dateTimePickerEvent.Value.Day;
+                    detail.MonthID = dateTimePickerEvent.Value.Month;
+                    detail.Year = dateTimePickerEvent.Value.Year.ToString();
+                    detail.Summary = txtSummary.Text.Trim();
+                    detail.EventTitle = txtTitle.Text.Trim();
+
+                    if (bll.Update(detail))
+                    {
+                        MessageBox.Show("Event was updated successfully");
+                        this.Close();
                     }
                 }
+
             }
         }
         string fileName;

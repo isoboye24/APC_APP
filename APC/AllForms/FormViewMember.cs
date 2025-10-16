@@ -208,20 +208,21 @@ namespace APC.AllForms
                 btnViewAmountContributed.Text = "View Amount";
             }
             amountExpected = bll.GetAmountExpected(detail.MemberID);
-            labelAmountExpected.Text = "€" + amountExpected;
+            //labelAmountExpected.Text = "€" + amountExpected;
+            labelAmountExpected.Text = "€ 120";
             btnViewAmountExpected.Hide();
             if (amountExpected > 0)
             {
                 btnViewAmountExpected.Visible = true;
                 btnViewAmountExpected.Text = "View Amount";
             }
-            Balance = amountExpected - amountContributed;
-            labelPersonalBalance.Text = "€" + Balance;
+            Balance = 120 - amountContributed;
             btnViewPersonalBalance.Hide();
             if (Balance > 0)
             {
+                labelPersonalBalance.Text = "€" + Balance;
                 btnViewPersonalBalance.Visible = true;
-                btnViewPersonalBalance.Text = "View Amount";
+                btnViewPersonalBalance.Text = "View Amount";    
             }
 
             txtPhone2.Hide();
@@ -387,7 +388,7 @@ namespace APC.AllForms
 
         private void btnViewAmountExpected_Click_1(object sender, EventArgs e)
         {
-            if (amountExpected > 0)
+            if (Balance > 0)
             {
                 FormViewPersonalAttendances open = new FormViewPersonalAttendances();
                 open.detail = detail;

@@ -13,7 +13,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                PROFESSION profession = db.PROFESSIONs.First(x => x.professionID == entity.professionID);
+                PROFESSION profession = db.PROFESSION.First(x => x.professionID == entity.professionID);
                 profession.isDeleted = true;
                 profession.deletedDate = DateTime.Today;
                 db.SaveChanges();
@@ -27,7 +27,7 @@ namespace APC.DAL.DAO
 
         public bool GetBack(int ID)
         {
-            PROFESSION profession = db.PROFESSIONs.First(x=>x.professionID == ID);
+            PROFESSION profession = db.PROFESSION.First(x=>x.professionID == ID);
             profession.isDeleted = false;
             profession.deletedDate = null;
             db.SaveChanges();
@@ -38,7 +38,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                db.PROFESSIONs.Add(entity);
+                db.PROFESSION.Add(entity);
                 db.SaveChanges();
                 return true;
             }
@@ -53,7 +53,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<ProfessionDetailDTO> professions = new List<ProfessionDetailDTO>();
-                var list = db.PROFESSIONs.Where(x => x.isDeleted == false).OrderBy(x => x.profession1).ToList();
+                var list = db.PROFESSION.Where(x => x.isDeleted == false).OrderBy(x => x.profession1).ToList();
                 foreach (var item in list)
                 {
                     ProfessionDetailDTO dto = new ProfessionDetailDTO();
@@ -73,7 +73,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<ProfessionDetailDTO> professions = new List<ProfessionDetailDTO>();
-                var list = db.PROFESSIONs.Where(x => x.isDeleted == isDeleted).OrderBy(x => x.profession1).ToList();
+                var list = db.PROFESSION.Where(x => x.isDeleted == isDeleted).OrderBy(x => x.profession1).ToList();
                 foreach (var item in list)
                 {
                     ProfessionDetailDTO dto = new ProfessionDetailDTO();
@@ -93,7 +93,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int numberOfProfession = db.PROFESSIONs.Count(x => x.isDeleted == false);
+                int numberOfProfession = db.PROFESSION.Count(x => x.isDeleted == false);
                 return numberOfProfession;
             }
             catch (Exception ex)
@@ -106,7 +106,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                PROFESSION profession = db.PROFESSIONs.First(x => x.professionID == entity.professionID);
+                PROFESSION profession = db.PROFESSION.First(x => x.professionID == entity.professionID);
                 profession.profession1 = entity.profession1;
                 db.SaveChanges();
                 return true;

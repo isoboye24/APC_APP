@@ -61,16 +61,27 @@ namespace APC
             }
         }
 
-        public static bool isNumber(KeyPressEventArgs e)
+        public static bool isNumber(KeyPressEventArgs e, TextBox txt)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                return true;
-            }
-            else
+            // Allow control keys (Backspace, Delete, etc.)
+            if (char.IsControl(e.KeyChar))
             {
                 return false;
             }
+
+            // Allow digits
+            if (char.IsDigit(e.KeyChar))
+            {
+                return false;
+            }
+
+            // Allow one decimal point (.)
+            if (e.KeyChar == '.' && !txt.Text.Contains('.'))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public static void ValueCount(Label property, int value, int horizontalPoint, int verticalPoint)
@@ -162,7 +173,6 @@ namespace APC
                 property.Location = new Point(horizontalPoint - 140, verticalPoint);
             }
         }
-
         public static void ValueCountInDecimal(Label property, decimal value, int horizontalPoint, int verticalPoint)
         {
             if (value.ToString("0.00").Length < 5)
@@ -217,7 +227,6 @@ namespace APC
                 property.Location = new Point(horizontalPoint - 180, verticalPoint);
             }
         }
-
         public static void ComboBoxProps(ComboBox cmb, string name, string ID)
         {
             cmb.DisplayMember = name;

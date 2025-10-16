@@ -13,7 +13,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                NATIONALITY nationality = db.NATIONALITies.First(x=>x.nationalityID == entity.nationalityID);
+                NATIONALITY nationality = db.NATIONALITY.First(x=>x.nationalityID == entity.nationalityID);
                 nationality.isDeleted = true;
                 nationality.deletedDate = DateTime.Today;
                 db.SaveChanges();
@@ -29,7 +29,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                NATIONALITY nationality = db.NATIONALITies.First(x=>x.nationalityID==ID);
+                NATIONALITY nationality = db.NATIONALITY.First(x=>x.nationalityID==ID);
                 nationality.isDeleted = false;
                 nationality.deletedDate = null;
                 db.SaveChanges();
@@ -45,7 +45,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                db.NATIONALITies.Add(entity);                
+                db.NATIONALITY.Add(entity);                
                 db.SaveChanges();
                 return true;
             }
@@ -60,7 +60,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<NationalityDetailDTO> nationalities = new List<NationalityDetailDTO>();
-                var list = db.NATIONALITies.Where(x=>x.isDeleted==false).OrderBy(x=>x.nationality1).ToList();
+                var list = db.NATIONALITY.Where(x=>x.isDeleted==false).OrderBy(x=>x.nationality1).ToList();
                 foreach (var item in list)
                 {
                     NationalityDetailDTO dto = new NationalityDetailDTO();
@@ -80,7 +80,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<NationalityDetailDTO> nationalities = new List<NationalityDetailDTO>();
-                var list = db.NATIONALITies.Where(x => x.isDeleted == isDeleted).OrderBy(x => x.nationality1).ToList();
+                var list = db.NATIONALITY.Where(x => x.isDeleted == isDeleted).OrderBy(x => x.nationality1).ToList();
                 foreach (var item in list)
                 {
                     NationalityDetailDTO dto = new NationalityDetailDTO();
@@ -100,7 +100,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                NATIONALITY nationality = db.NATIONALITies.First(x => x.nationalityID == entity.nationalityID);
+                NATIONALITY nationality = db.NATIONALITY.First(x => x.nationalityID == entity.nationalityID);
                 nationality.nationality1 = entity.nationality1;
                 db.SaveChanges();
                 return true;

@@ -14,7 +14,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                COUNTRY country = db.COUNTRies.First(x => x.countryID == entity.countryID);
+                COUNTRY country = db.COUNTRY.First(x => x.countryID == entity.countryID);
                 country.isDeleted = true;
                 country.deletedDate = DateTime.Today;
                 db.SaveChanges();
@@ -30,7 +30,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                COUNTRY country = db.COUNTRies.First(x=>x.countryID==ID);
+                COUNTRY country = db.COUNTRY.First(x=>x.countryID==ID);
                 country.isDeleted = false;
                 country.deletedDate = null;
                 db.SaveChanges();
@@ -46,7 +46,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                db.COUNTRies.Add(entity);
+                db.COUNTRY.Add(entity);
                 db.SaveChanges();
                 return true;
             }
@@ -61,7 +61,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<CountryDetailDTO> countries = new List<CountryDetailDTO>();
-                var list = db.COUNTRies.Where(x=>x.isDeleted==false).OrderBy(x=>x.countryName).ToList();
+                var list = db.COUNTRY.Where(x=>x.isDeleted==false).OrderBy(x=>x.countryName).ToList();
                 foreach (var item in list)
                 {
                     CountryDetailDTO dto = new CountryDetailDTO();
@@ -81,7 +81,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<CountryDetailDTO> countries = new List<CountryDetailDTO>();
-                var list = db.COUNTRies.Where(x => x.isDeleted == isDeleted).OrderBy(x => x.countryName).ToList();
+                var list = db.COUNTRY.Where(x => x.isDeleted == isDeleted).OrderBy(x => x.countryName).ToList();
                 foreach (var item in list)
                 {
                     CountryDetailDTO dto = new CountryDetailDTO();
@@ -101,7 +101,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                COUNTRY position = db.COUNTRies.First(x => x.countryID == entity.countryID);
+                COUNTRY position = db.COUNTRY.First(x => x.countryID == entity.countryID);
                 position.countryName = entity.countryName;
                 db.SaveChanges();
                 return true;

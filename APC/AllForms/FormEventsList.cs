@@ -55,7 +55,7 @@ namespace APC
             }
             else
             {
-                FormEvenImages open = new FormEvenImages();
+                FormEventDetailsBoard open = new FormEventDetailsBoard();
                 open.isView = true;
                 open.detail = detail;
                 this.Hide();
@@ -68,7 +68,7 @@ namespace APC
         EventsDTO dto = new EventsDTO();
         private void FormEventsList_Load(object sender, EventArgs e)
         {
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            label1.Tag = "resizable";
             label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
 
             txtEventTitle.Font = new Font("Segoe UI", 14, FontStyle.Regular);
@@ -87,12 +87,12 @@ namespace APC
             dataGridView1.Columns[3].Visible = false;
             dataGridView1.Columns[4].HeaderText = "Year";
             dataGridView1.Columns[5].HeaderText = "Event Title";
-            dataGridView1.Columns[6].HeaderText = "Summary";
+            dataGridView1.Columns[6].Visible = false;
             dataGridView1.Columns[7].Visible = false;
             dataGridView1.Columns[8].Visible = false;
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             }
         }
         private void FillDataGrid()
@@ -118,7 +118,7 @@ namespace APC
 
         private void txtEventYear_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = General.isNumber(e, (TextBox)sender);
         }
         EventsDetailDTO detail = new EventsDetailDTO();
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -133,6 +133,7 @@ namespace APC
             detail.Summary = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
             detail.CoverImagePath = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
             detail.EventDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
+
             string imagePath = Application.StartupPath + "\\images\\" + detail.CoverImagePath;
             picViewEventCoverImage.ImageLocation = imagePath;
         }

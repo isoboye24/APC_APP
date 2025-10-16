@@ -14,7 +14,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<MonthDetailDTO> months = new List<MonthDetailDTO>();
-                var list = db.MONTHs.ToList();
+                var list = db.MONTH.ToList();
                 foreach (var item in list)
                 {
                     MonthDetailDTO dto = new MonthDetailDTO();

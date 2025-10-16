@@ -14,6 +14,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using APC.AllForms;
 using APC.BLL;
 using APC.DAL.DTO;
+using APC.Utility;
 using FontAwesome.Sharp;
 
 namespace APC
@@ -23,6 +24,9 @@ namespace APC
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
+
+        private float globalFontSize = 14.0f;
+        private float resizeFactor = 16.0f;
         public FormDashboard()
         {
             InitializeComponent();
@@ -140,47 +144,23 @@ namespace APC
         private void FormDashboard_Load(object sender, EventArgs e)
         {
             #region
-            labelName.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelSurname.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelAccessLevel.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelPosition.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             labelDuesMonthName.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             labelTotalDuesYear.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label13.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label16.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label11.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label14.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label12.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelCommentMonthName.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label7.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label8.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label9.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            
             labelAmountRaisedYearly.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             labelExpendituresYearly.Font = new Font("Segoe UI", 16, FontStyle.Bold);
 
             labelNoOfRegMem.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelNoOfChildren.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelMonthlyDues.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelYearlyDues.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelExpendituresInYear.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelTotalExpenditures.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelLastMeetingAttendance.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelLastEventDate.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelTotalPaidFines.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelTotalFineExpected.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelMonthlyComments.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelTotalComments.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             #endregion
 
-            picProfilePic.SizeMode = PictureBoxSizeMode.StretchImage;
-            picProfilePic.BorderStyle = BorderStyle.None;
-            picProfilePic.Width = picProfilePic.Height = 40;
-            picProfilePic.Paint += new PaintEventHandler(picProfilePic_Paint);
+            
 
             int minWidthPercentage = 70;
             int minHeightPercentage = 70;
@@ -188,18 +168,9 @@ namespace APC
             int minHeight = Screen.PrimaryScreen.Bounds.Height * minHeightPercentage / 100;
             this.MinimumSize = new Size(minWidth, minHeight);
 
-            MemberDTO memberDTO = memberBLL.Select();
-            MemberDetailDTO detail = memberDTO.Members.First(x => x.MemberID == LoginInfo.MemberID);
-            string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-            picProfilePic.ImageLocation = imagePath;
-            labelName.Text = detail.Name;
-            labelSurname.Text = detail.Surname;
-            labelAccessLevel.Text = detail.PermissionName;
-            labelPosition.Text = detail.PositionName;
-
             if (!isAdmin && !isEditor)
             {
-                tableLayoutPanelRealCards.Hide();
+                tableLayoutPanelCards.Hide();
                 btnAttendance.Hide();
                 btnFinancialReport.Hide();
                 btnEvents.Hide();
@@ -221,10 +192,7 @@ namespace APC
 
         private void picProfilePic_Paint(object sender, PaintEventArgs e)
         {
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddEllipse(0, 0, picProfilePic.Width - 1, picProfilePic.Height - 1);
-            Region rg = new Region(gp);
-            picProfilePic.Region = rg;
+            
         }
         
         private void RefreshAllCards()
@@ -241,27 +209,27 @@ namespace APC
                 "ORDER BY EXPENDITURE.year ASC";
 
             labelNoOfRegMem.Text = memberBLL.SelectAllMembersCount().ToString();
-            labelTotalComments.Text = commentBLL.SelectAllCommentsCount().ToString();
-            labelMonthlyComments.Text = commentBLL.SelectMonthlyCommentsCount().ToString();
-            labelNoOfChildren.Text = childBLL.SelectAllChildren().ToString();
             labelLastMeetingAttendance.Text = personalAttendanceBLL.SelectLastMeetingAttendance().ToString();
-            labelLastEventDate.Text = eventBLL.SelectRecentEvent();
+            //labelTotalComments.Text = commentBLL.SelectAllCommentsCount().ToString();
+            //labelMonthlyComments.Text = commentBLL.SelectMonthlyCommentsCount().ToString();
+            //labelNoOfChildren.Text = childBLL.SelectAllChildren().ToString();
+            //labelLastEventDate.Text = eventBLL.SelectRecentEvent();
 
             string monthToday = DateTime.Now.ToString("MMMM");
             string yearToday = DateTime.Now.Year.ToString();
-            if (Convert.ToInt32(labelMonthlyComments.Text) > 1)
-            {
-                labelCommentMonthName.Text = "Comments in " + monthToday + " " + yearToday;
-            }
-            else
-            {
-                labelCommentMonthName.Text = "Comment in " + monthToday + " " + yearToday;
-            }
+            //if (Convert.ToInt32(labelMonthlyComments.Text) > 1)
+            //{
+            //    labelCommentMonthName.Text = "Comments in " + monthToday + " " + yearToday;
+            //}
+            //else
+            //{
+            //    labelCommentMonthName.Text = "Comment in " + monthToday + " " + yearToday;
+            //}
             int todayMonth = DateTime.Now.Month;
             int todayYear = DateTime.Today.Year;
             labelDuesMonthName.Text = "Dues in "+ monthToday + " "+ yearToday;
-            labelTotalDuesYear.Text = "Total Dues + Fines in " + yearToday;
-            label13.Text = "Expenditures in " + yearToday;
+            labelExpensesInThisYear.Text = "Total Expenses in " + yearToday;
+            labelTotalDuesYear.Text = "Total Dues in " + yearToday;
 
             labelMonthlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountMonthly(todayMonth);
             labelYearlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountYearly(todayYear);
@@ -491,6 +459,22 @@ namespace APC
         private void panelLastEvent_Click_1(object sender, EventArgs e)
         {
             btnEvents.PerformClick();
+        }
+
+        private void iconZoomIn_Click(object sender, EventArgs e)
+        {
+            globalFontSize += 2f;
+            resizeFactor += 1.05f;
+
+            ControlResize.ResizeAllOpenForms(globalFontSize, resizeFactor);
+        }
+
+        private void iconZoomOut_Click(object sender, EventArgs e)
+        {
+            globalFontSize -= 2f;
+            resizeFactor -= 1 / 1.05f;
+
+            ControlResize.ResizeAllOpenForms(globalFontSize, resizeFactor);
         }
     }
 }

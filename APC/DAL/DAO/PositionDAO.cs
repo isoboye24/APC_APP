@@ -13,7 +13,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                POSITION position = db.POSITIONs.First(x => x.positionID == entity.positionID);
+                POSITION position = db.POSITION.First(x => x.positionID == entity.positionID);
                 position.isDeleted = true;
                 position.deletedDate = DateTime.Today;
                 db.SaveChanges();
@@ -27,7 +27,7 @@ namespace APC.DAL.DAO
 
         public bool GetBack(int ID)
         {
-            POSITION position = db.POSITIONs.First(x => x.positionID == ID);
+            POSITION position = db.POSITION.First(x => x.positionID == ID);
             position.isDeleted = false;
             position.deletedDate = null;
             db.SaveChanges();
@@ -38,7 +38,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                db.POSITIONs.Add(entity);
+                db.POSITION.Add(entity);
                 db.SaveChanges();
                 return true;
             }
@@ -53,7 +53,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<PositionDetailDTO> positions = new List<PositionDetailDTO>();
-                var list = db.POSITIONs.Where(x =>x.isDeleted==false).OrderBy(x => x.positionName).ToList();
+                var list = db.POSITION.Where(x =>x.isDeleted==false).OrderBy(x => x.positionName).ToList();
                 foreach (var item in list)
                 {
                     PositionDetailDTO dto = new PositionDetailDTO();
@@ -73,7 +73,7 @@ namespace APC.DAL.DAO
             try
             {
                 List<PositionDetailDTO> positions = new List<PositionDetailDTO>();
-                var list = db.POSITIONs.Where(x => x.isDeleted == isDeleted).OrderBy(x => x.positionName).ToList();
+                var list = db.POSITION.Where(x => x.isDeleted == isDeleted).OrderBy(x => x.positionName).ToList();
                 foreach (var item in list)
                 {
                     PositionDetailDTO dto = new PositionDetailDTO();
@@ -93,7 +93,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                int position = db.POSITIONs.Count(x => x.isDeleted == false);
+                int position = db.POSITION.Count(x => x.isDeleted == false);
                 return position;
             }
             catch (Exception ex)
@@ -106,7 +106,7 @@ namespace APC.DAL.DAO
         {
             try
             {
-                POSITION position = db.POSITIONs.First(x => x.positionID == entity.positionID);
+                POSITION position = db.POSITION.First(x => x.positionID == entity.positionID);
                 position.positionName = entity.positionName;
                 db.SaveChanges();
                 return true;

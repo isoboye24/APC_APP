@@ -338,7 +338,7 @@ namespace APC.AllForms
 
         private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = General.isNumber(e, (TextBox)sender);
         }
 
         private void dataGridViewConstitutions_RowEnter(object sender, DataGridViewCellEventArgs e)

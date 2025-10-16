@@ -281,17 +281,17 @@ namespace APC.AllForms
 
         private void txtYear_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = General.isNumber(e, (TextBox)sender);
         }
 
         private void txtNoOfAttend_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = General.isNumber(e, (TextBox)sender);
         }
 
         private void txtMonthlyDues_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = General.isNumber(e, (TextBox)sender);
         }
         private void FillDateGrid()
         {
@@ -783,7 +783,7 @@ namespace APC.AllForms
 
         private void txtYearFinedMember_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = General.isNumber(e, (TextBox)sender);
         }
 
         private void txtNameFinedMember_TextChanged(object sender, EventArgs e)
