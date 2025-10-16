@@ -23,5 +23,6 @@ namespace APC.DAL
         public int day { get; set; }
         public int monthID { get; set; }
         public int year { get; set; }
+        public System.DateTime salesDate { get; set; }
     }
 }

@@ -15,12 +15,14 @@ namespace APC.BLL
         MonthDAO monthDAO = new MonthDAO();
         public bool Delete(EventExpenditureDetailDTO entity)
         {
-            throw new NotImplementedException();
+            EVENT_EXPENDITURE expenditure = new EVENT_EXPENDITURE();
+            expenditure.eventExpenditureID = entity.EventExpenditureID;
+            return dao.Delete(expenditure);
         }
 
         public bool GetBack(EventExpenditureDetailDTO entity)
         {
-            throw new NotImplementedException();
+            return dao.GetBack(entity.EventExpenditureID);
         }
 
         public bool Insert(EventExpenditureDetailDTO entity)
@@ -48,6 +50,11 @@ namespace APC.BLL
             dto.EventExpenditures = dao.Select(eventID);
             dto.Months = monthDAO.Select();
             return dto;
+        }
+        
+        public decimal SelectTotalAmountEventExp(int eventID)
+        {
+            return dao.SelectTotalAmountEventExp(eventID);           
         }
 
         public bool Update(EventExpenditureDetailDTO entity)

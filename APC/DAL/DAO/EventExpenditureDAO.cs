@@ -12,12 +12,34 @@ namespace APC.DAL
     {
         public bool Delete(EVENT_EXPENDITURE entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                EVENT_EXPENDITURE expenditure = db.EVENT_EXPENDITURE.First(x => x.eventExpenditureID == entity.eventExpenditureID);
+                expenditure.isDeleted = true;
+                expenditure.deletedDate = DateTime.Today;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool GetBack(int ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                EVENT_EXPENDITURE expenditure = db.EVENT_EXPENDITURE.First(x => x.eventExpenditureID == ID);
+                expenditure.isDeleted = false;
+                expenditure.deletedDate = null;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool Insert(EVENT_EXPENDITURE entity)
@@ -38,6 +60,32 @@ namespace APC.DAL
         {
             throw new NotImplementedException();
         }
+        
+        public decimal SelectTotalAmountEventExp(int eventID)
+        {
+            try
+            {
+                List<decimal> totalEventExpenditure = new List<decimal>();
+                var list = db.EVENT_EXPENDITURE.Where(x => x.isDeleted == false && x.eventID == eventID);
+                foreach (var item in list)
+                {
+                    totalEventExpenditure.Add(item.amountSpent);
+                }
+                decimal total = totalEventExpenditure.Sum();
+                if (total > 0)
+                {
+                    return total;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public List<EventExpenditureDetailDTO> Select(int eventID)
         {
@@ -49,6 +97,7 @@ namespace APC.DAL
                             select new
                             {
                                 eventExpenditureID = e.eventExpenditureID,
+                                eventID = e.eventID,
                                 amountSpent = e.amountSpent,
                                 summary = e.summary,
                                 day = e.day,
@@ -61,6 +110,7 @@ namespace APC.DAL
                 {
                     EventExpenditureDetailDTO dto = new EventExpenditureDetailDTO();
                     dto.EventExpenditureID = item.eventExpenditureID;
+                    dto.EventID = item.eventID;
                     dto.Summary = item.summary;
                     dto.AmountSpent = item.amountSpent;
                     dto.Day = item.day;

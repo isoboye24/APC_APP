@@ -151,6 +151,12 @@
     <Compile Include="AllForms\FormEventExpenditure.Designer.cs">
       <DependentUpon>FormEventExpenditure.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormEventSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormEventSales.Designer.cs">
+      <DependentUpon>FormEventSales.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormFinedMember.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +205,18 @@
     <Compile Include="AllForms\FormViewDocument.Designer.cs">
       <DependentUpon>FormViewDocument.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormViewEventExpenditure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewEventExpenditure.Designer.cs">
+      <DependentUpon>FormViewEventExpenditure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormViewEventSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewEventSales.Designer.cs">
+      <DependentUpon>FormViewEventSales.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormViewFinedMember.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +238,7 @@
     <Compile Include="BLL\ConstitutionBLL.cs" />
     <Compile Include="BLL\DocumentBLL.cs" />
     <Compile Include="BLL\EventExpenditureBLL.cs" />
+    <Compile Include="BLL\EventSalesBLL.cs" />
     <Compile Include="BLL\FinedMemberBLL.cs" />
     <Compile Include="BLL\GeneralAttendanceBLL.cs" />
     <Compile Include="BLL\GraphBLL.cs" />
@@ -245,6 +264,7 @@
     </Compile>
     <Compile Include="DAL\DAO\ConstitutionDAO.cs" />
     <Compile Include="DAL\DAO\DocumentDAO.cs" />
+    <Compile Include="DAL\DAO\EventSalesDAO.cs" />
     <Compile Include="DAL\DAO\FinedMemberDAO.cs" />
     <Compile Include="DAL\DAO\GraphDAO.cs" />
     <Compile Include="DAL\DAO\MembershipStatusDAO.cs" />
@@ -452,8 +472,10 @@
     <Compile Include="DAL\DTO\EventExpenditureDTO.cs" />
     <Compile Include="DAL\DTO\EventImageDetailDTO.cs" />
     <Compile Include="DAL\DTO\EventImageDTO.cs" />
+    <Compile Include="DAL\DTO\EventSalesDetailDTO.cs" />
     <Compile Include="DAL\DTO\EventsDetailDTO.cs" />
     <Compile Include="DAL\DTO\EventsDTO.cs" />
+    <Compile Include="DAL\DTO\EventSalesDTO.cs" />
     <Compile Include="DAL\DTO\FinancialReportDetailDTO.cs" />
     <Compile Include="DAL\DTO\FinancialReportDTO.cs" />
     <Compile Include="DAL\DTO\FinedMemberDetailDTO.cs" />
@@ -504,13 +526,13 @@
     <Compile Include="DAL\DTO\ProfessionDTO.cs" />
     <Compile Include="DAL\DTO\RelationshipToNextOfKinDetailDTO.cs" />
     <Compile Include="DAL\DTO\RelationshipToNextOfKinDTO.cs" />
+    <Compile Include="DAL\DAO\EventExpenditureDAO.cs" />
     <Compile Include="DAL\DUAL_NATIONALITY.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\EMPLOYMENT_STATUS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EventExpenditureDAO.cs" />
     <Compile Include="DAL\EVENTS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -648,6 +670,9 @@
     <EmbeddedResource Include="AllForms\FormEventExpenditure.resx">
       <DependentUpon>FormEventExpenditure.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormEventSales.resx">
+      <DependentUpon>FormEventSales.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormFinedMember.resx">
       <DependentUpon>FormFinedMember.cs</DependentUpon>
     </EmbeddedResource>
@@ -722,6 +747,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormViewDocument.resx">
       <DependentUpon>FormViewDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewEventExpenditure.resx">
+      <DependentUpon>FormViewEventExpenditure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewEventSales.resx">
+      <DependentUpon>FormViewEventSales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormViewFinancialReport.resx">
       <DependentUpon>FormViewFinancialReport.cs</DependentUpon>
@@ -887,8 +918,8 @@
   <ItemGroup>
     <Content Include="DAL\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
       <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DAL\DataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

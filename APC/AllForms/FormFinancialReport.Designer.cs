@@ -103,7 +103,7 @@
             this.labelTitle.Location = new System.Drawing.Point(13, 9);
             this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(300, 32);
+            this.labelTitle.Size = new System.Drawing.Size(234, 25);
             this.labelTitle.TabIndex = 5;
             this.labelTitle.Text = "ADD FINANCIAL REPORT";
             // 
@@ -206,7 +206,7 @@
             this.txtYear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtYear.Location = new System.Drawing.Point(103, 3);
             this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(163, 34);
+            this.txtYear.Size = new System.Drawing.Size(163, 29);
             this.txtYear.TabIndex = 0;
             // 
             // label1
@@ -216,7 +216,7 @@
             this.label1.Location = new System.Drawing.Point(3, 5);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 28);
+            this.label1.Size = new System.Drawing.Size(43, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "Year";
             // 
@@ -239,10 +239,10 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 5);
+            this.label2.Location = new System.Drawing.Point(3, 9);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(942, 28);
+            this.label2.Size = new System.Drawing.Size(942, 21);
             this.label2.TabIndex = 1;
             this.label2.Text = "Summary:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -299,7 +299,7 @@
             // 
             // FormFinancialReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(980, 673);
             this.Controls.Add(this.tableLayoutPanel1);
