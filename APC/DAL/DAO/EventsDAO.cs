@@ -75,6 +75,27 @@ namespace APC.DAL.DAO
                     dto.MonthName = item.monthName;
                     dto.Year = item.year.ToString();
                     dto.EventDate = item.eventDate;
+
+                    var soldAmount = db.EVENT_SALES.Where(x => x.eventID == item.eventID && x.isDeleted == false).ToList();
+                    List<decimal> eventSales = new List<decimal>();
+                    foreach (var sold in soldAmount)
+                    {
+                        eventSales.Add(sold.amountSold);
+                    }
+                    decimal totalAmountSold = eventSales.Sum();
+                    dto.AmountSold = totalAmountSold;
+
+                    var spentAmount = db.EVENT_EXPENDITURE.Where(x => x.eventID == item.eventID && x.isDeleted == false).ToList();
+                    List<decimal> eventExpenditures = new List<decimal>();
+                    foreach (var spent in spentAmount)
+                    {
+                        eventExpenditures.Add(spent.amountSpent);
+                    }
+                    decimal totalAmountSpent = eventExpenditures.Sum();
+                    dto.AmountSpent = totalAmountSpent;
+
+                    dto.Balance = totalAmountSold - totalAmountSpent;
+
                     events.Add(dto);
                 }
                 return events;
@@ -130,6 +151,47 @@ namespace APC.DAL.DAO
                 throw ex;
             }
         }
+        
+        public decimal SelectOverallExpenditures()
+        {
+            try
+            {
+                var allEventExpenditures = db.EVENT_EXPENDITURE.Where(x => x.isDeleted == false).ToList();
+                List<decimal> totalEventExpenditures = new List<decimal>();
+                foreach (var spent in allEventExpenditures)
+                {
+                    totalEventExpenditures.Add(spent.amountSpent);
+                }
+                decimal totalAmountSpent = totalEventExpenditures.Sum();
+                
+                return totalAmountSpent;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public decimal SelectOverallSales()
+        {
+            try
+            {
+                var allEventSales = db.EVENT_SALES.Where(x => x.isDeleted == false).ToList();
+                List<decimal> totalEventSales = new List<decimal>();
+                foreach (var sale in allEventSales)
+                {
+                    totalEventSales.Add(sale.amountSold);
+                }
+                decimal totalAmountSold = totalEventSales.Sum();
+
+                return totalAmountSold;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<EventsDetailDTO> Select(bool isDeleted)
         {
             try

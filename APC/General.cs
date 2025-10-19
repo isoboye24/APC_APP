@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -327,6 +328,19 @@ namespace APC
                 return "Unknown month";
             }
         }
-        
+
+        public static bool IsDirectoryWritable(string dirPath)
+        {
+            try
+            {
+                string testFile = Path.Combine(dirPath, Path.GetRandomFileName());
+                using (FileStream fs = File.Create(testFile, 1, FileOptions.DeleteOnClose)) { }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

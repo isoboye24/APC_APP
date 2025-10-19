@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -41,16 +41,20 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnView = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
+            this.btnAddEventImages = new System.Windows.Forms.Button();
+            this.btnUpdateEventImages = new System.Windows.Forms.Button();
+            this.btnDeleteEventImages = new System.Windows.Forms.Button();
+            this.btnViewEventImages = new System.Windows.Forms.Button();
+            this.btnCloseEventImages = new System.Windows.Forms.Button();
+            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelTotalRowsEventImage = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtImageCaption = new System.Windows.Forms.TextBox();
+            this.txtEventImageCaption = new System.Windows.Forms.TextBox();
+            this.btnClearEventImage = new System.Windows.Forms.Button();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridEventImages = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.eventSalesPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -98,46 +102,48 @@
             this.label3 = new System.Windows.Forms.Label();
             this.receiptsPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtDocName = new System.Windows.Forms.TextBox();
-            this.txtDocType = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtYear = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.txtEventReceiptCaption = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.cmbMonth = new System.Windows.Forms.ComboBox();
+            this.cmbMonthEventReceipt = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddEventReceipt = new System.Windows.Forms.Button();
             this.btnUpdateEventReceipt = new System.Windows.Forms.Button();
             this.btnDeleteEventReceipt = new System.Windows.Forms.Button();
             this.btnViewEventReceipt = new System.Windows.Forms.Button();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
-            this.label16 = new System.Windows.Forms.Label();
+            this.labelTotalRowsEventReceipt = new System.Windows.Forms.Label();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelTotalAmountEventReceipt = new System.Windows.Forms.Label();
             this.btnCloseEventReceipt = new System.Windows.Forms.Button();
+            this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridViewEventReceipt = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
             this.summaryPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
             this.labelEventSummary = new System.Windows.Forms.Label();
-            this.picImage = new System.Windows.Forms.PictureBox();
+            this.picImage2 = new System.Windows.Forms.PictureBox();
+            this.picEventReceipt = new System.Windows.Forms.PictureBox();
             this.iconZoomIn = new FontAwesome.Sharp.IconPictureBox();
             this.iconZoomOut = new FontAwesome.Sharp.IconPictureBox();
             this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
             this.picClose = new System.Windows.Forms.PictureBox();
             this.picMinimize = new System.Windows.Forms.PictureBox();
+            this.picImage = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.eventImagesPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel26.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventImages)).BeginInit();
+            this.tableLayoutPanel15.SuspendLayout();
             this.eventSalesPage.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
@@ -156,19 +162,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventExpenditures)).BeginInit();
             this.receiptsPage.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
-            this.tableLayoutPanel15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel18.SuspendLayout();
             this.tableLayoutPanel16.SuspendLayout();
             this.tableLayoutPanel17.SuspendLayout();
+            this.tableLayoutPanel22.SuspendLayout();
+            this.tableLayoutPanel25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEventReceipt)).BeginInit();
+            this.tableLayoutPanel27.SuspendLayout();
             this.summaryPage.SuspendLayout();
             this.tableLayoutPanel19.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEventReceipt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -255,7 +265,7 @@
             this.eventImagesPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.eventImagesPage.Size = new System.Drawing.Size(1445, 660);
             this.eventImagesPage.TabIndex = 0;
-            this.eventImagesPage.Text = "Images    ";
+            this.eventImagesPage.Text = "Pictures    ";
             // 
             // tableLayoutPanel1
             // 
@@ -294,22 +304,23 @@
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 11;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.5F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.5F));
-            this.tableLayoutPanel5.Controls.Add(this.btnAdd, 1, 1);
-            this.tableLayoutPanel5.Controls.Add(this.btnUpdate, 3, 1);
-            this.tableLayoutPanel5.Controls.Add(this.btnDelete, 7, 1);
-            this.tableLayoutPanel5.Controls.Add(this.btnView, 5, 1);
-            this.tableLayoutPanel5.Controls.Add(this.btnClose, 9, 1);
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
+            this.tableLayoutPanel5.Controls.Add(this.btnAddEventImages, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.btnUpdateEventImages, 3, 1);
+            this.tableLayoutPanel5.Controls.Add(this.btnDeleteEventImages, 7, 1);
+            this.tableLayoutPanel5.Controls.Add(this.btnViewEventImages, 5, 1);
+            this.tableLayoutPanel5.Controls.Add(this.btnCloseEventImages, 9, 1);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel26, 0, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 512);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -321,95 +332,131 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(1427, 86);
             this.tableLayoutPanel5.TabIndex = 3;
             // 
-            // btnAdd
+            // btnAddEventImages
             // 
-            this.btnAdd.BackColor = System.Drawing.Color.Indigo;
-            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(195, 23);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(179, 39);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAddEventImages.BackColor = System.Drawing.Color.Indigo;
+            this.btnAddEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddEventImages.FlatAppearance.BorderSize = 0;
+            this.btnAddEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddEventImages.ForeColor = System.Drawing.Color.White;
+            this.btnAddEventImages.Location = new System.Drawing.Point(245, 23);
+            this.btnAddEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddEventImages.Name = "btnAddEventImages";
+            this.btnAddEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnAddEventImages.TabIndex = 0;
+            this.btnAddEventImages.Text = "Add";
+            this.btnAddEventImages.UseVisualStyleBackColor = false;
+            this.btnAddEventImages.Click += new System.EventHandler(this.btnAddEventImages_Click);
             // 
-            // btnUpdate
+            // btnUpdateEventImages
             // 
-            this.btnUpdate.BackColor = System.Drawing.Color.Olive;
-            this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnUpdate.FlatAppearance.BorderSize = 0;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(408, 23);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(179, 39);
-            this.btnUpdate.TabIndex = 1;
-            this.btnUpdate.Text = "Edit";
-            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdateEventImages.BackColor = System.Drawing.Color.Olive;
+            this.btnUpdateEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnUpdateEventImages.FlatAppearance.BorderSize = 0;
+            this.btnUpdateEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateEventImages.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateEventImages.Location = new System.Drawing.Point(437, 23);
+            this.btnUpdateEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnUpdateEventImages.Name = "btnUpdateEventImages";
+            this.btnUpdateEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnUpdateEventImages.TabIndex = 1;
+            this.btnUpdateEventImages.Text = "Edit";
+            this.btnUpdateEventImages.UseVisualStyleBackColor = false;
+            this.btnUpdateEventImages.Click += new System.EventHandler(this.btnUpdateEventImages_Click);
             // 
-            // btnDelete
+            // btnDeleteEventImages
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.Crimson;
-            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(834, 23);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(179, 39);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDeleteEventImages.BackColor = System.Drawing.Color.Crimson;
+            this.btnDeleteEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteEventImages.FlatAppearance.BorderSize = 0;
+            this.btnDeleteEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteEventImages.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteEventImages.Location = new System.Drawing.Point(821, 23);
+            this.btnDeleteEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDeleteEventImages.Name = "btnDeleteEventImages";
+            this.btnDeleteEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnDeleteEventImages.TabIndex = 2;
+            this.btnDeleteEventImages.Text = "Delete";
+            this.btnDeleteEventImages.UseVisualStyleBackColor = false;
+            this.btnDeleteEventImages.Click += new System.EventHandler(this.btnDeleteEventImages_Click);
             // 
-            // btnView
+            // btnViewEventImages
             // 
-            this.btnView.BackColor = System.Drawing.Color.DarkGreen;
-            this.btnView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnView.FlatAppearance.BorderSize = 0;
-            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnView.ForeColor = System.Drawing.Color.White;
-            this.btnView.Location = new System.Drawing.Point(621, 23);
-            this.btnView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(179, 39);
-            this.btnView.TabIndex = 3;
-            this.btnView.Text = "View";
-            this.btnView.UseVisualStyleBackColor = false;
+            this.btnViewEventImages.BackColor = System.Drawing.Color.DarkGreen;
+            this.btnViewEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnViewEventImages.FlatAppearance.BorderSize = 0;
+            this.btnViewEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewEventImages.ForeColor = System.Drawing.Color.White;
+            this.btnViewEventImages.Location = new System.Drawing.Point(629, 23);
+            this.btnViewEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnViewEventImages.Name = "btnViewEventImages";
+            this.btnViewEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnViewEventImages.TabIndex = 3;
+            this.btnViewEventImages.Text = "View";
+            this.btnViewEventImages.UseVisualStyleBackColor = false;
+            this.btnViewEventImages.Click += new System.EventHandler(this.btnViewEventImages_Click);
             // 
-            // btnClose
+            // btnCloseEventImages
             // 
-            this.btnClose.BackColor = System.Drawing.Color.IndianRed;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.ForeColor = System.Drawing.Color.Black;
-            this.btnClose.Location = new System.Drawing.Point(1047, 23);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(179, 39);
-            this.btnClose.TabIndex = 2;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnCloseEventImages.BackColor = System.Drawing.Color.IndianRed;
+            this.btnCloseEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCloseEventImages.FlatAppearance.BorderSize = 0;
+            this.btnCloseEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseEventImages.ForeColor = System.Drawing.Color.Black;
+            this.btnCloseEventImages.Location = new System.Drawing.Point(1013, 23);
+            this.btnCloseEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCloseEventImages.Name = "btnCloseEventImages";
+            this.btnCloseEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnCloseEventImages.TabIndex = 2;
+            this.btnCloseEventImages.Text = "Close";
+            this.btnCloseEventImages.UseVisualStyleBackColor = false;
+            this.btnCloseEventImages.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // tableLayoutPanel26
+            // 
+            this.tableLayoutPanel26.ColumnCount = 2;
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel26.Controls.Add(this.labelTotalRowsEventImage, 0, 0);
+            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 23);
+            this.tableLayoutPanel26.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
+            this.tableLayoutPanel26.RowCount = 1;
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(236, 39);
+            this.tableLayoutPanel26.TabIndex = 7;
+            // 
+            // labelTotalRowsEventImage
+            // 
+            this.labelTotalRowsEventImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalRowsEventImage.AutoSize = true;
+            this.labelTotalRowsEventImage.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalRowsEventImage.Location = new System.Drawing.Point(4, 5);
+            this.labelTotalRowsEventImage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTotalRowsEventImage.Name = "labelTotalRowsEventImage";
+            this.labelTotalRowsEventImage.Size = new System.Drawing.Size(204, 28);
+            this.labelTotalRowsEventImage.TabIndex = 4;
+            this.labelTotalRowsEventImage.Text = "0";
+            this.labelTotalRowsEventImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnCount = 5;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel6.Controls.Add(this.label4, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.txtImageCaption, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.txtEventImageCaption, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.btnClearEventImage, 3, 1);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 2);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -432,22 +479,40 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Picture Caption";
             // 
-            // txtImageCaption
+            // txtEventImageCaption
             // 
-            this.txtImageCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtImageCaption.Location = new System.Drawing.Point(217, 15);
-            this.txtImageCaption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtImageCaption.Name = "txtImageCaption";
-            this.txtImageCaption.Size = new System.Drawing.Size(992, 43);
-            this.txtImageCaption.TabIndex = 1;
+            this.txtEventImageCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEventImageCaption.Location = new System.Drawing.Point(217, 15);
+            this.txtEventImageCaption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtEventImageCaption.Name = "txtEventImageCaption";
+            this.txtEventImageCaption.Size = new System.Drawing.Size(921, 43);
+            this.txtEventImageCaption.TabIndex = 1;
+            this.txtEventImageCaption.TextChanged += new System.EventHandler(this.txtImageCaption_TextChanged);
+            // 
+            // btnClearEventImage
+            // 
+            this.btnClearEventImage.BackColor = System.Drawing.Color.Crimson;
+            this.btnClearEventImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearEventImage.FlatAppearance.BorderSize = 0;
+            this.btnClearEventImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearEventImage.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearEventImage.ForeColor = System.Drawing.Color.Black;
+            this.btnClearEventImage.Location = new System.Drawing.Point(1216, 15);
+            this.btnClearEventImage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClearEventImage.Name = "btnClearEventImage";
+            this.btnClearEventImage.Size = new System.Drawing.Size(134, 43);
+            this.btnClearEventImage.TabIndex = 2;
+            this.btnClearEventImage.Text = "Clear";
+            this.btnClearEventImage.UseVisualStyleBackColor = false;
+            this.btnClearEventImage.Click += new System.EventHandler(this.btnClearEventImage_Click);
             // 
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel7.Controls.Add(this.dataGridEventImages, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.picImage, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel15, 1, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 80);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -466,9 +531,25 @@
             this.dataGridEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridEventImages.Name = "dataGridEventImages";
             this.dataGridEventImages.RowHeadersWidth = 51;
-            this.dataGridEventImages.RowTemplate.Height = 30;
-            this.dataGridEventImages.Size = new System.Drawing.Size(564, 424);
+            this.dataGridEventImages.RowTemplate.Height = 40;
+            this.dataGridEventImages.Size = new System.Drawing.Size(850, 424);
             this.dataGridEventImages.TabIndex = 1;
+            this.dataGridEventImages.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridEventImages_RowEnter);
+            // 
+            // tableLayoutPanel15
+            // 
+            this.tableLayoutPanel15.ColumnCount = 3;
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel15.Controls.Add(this.picImage2, 1, 0);
+            this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(859, 3);
+            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
+            this.tableLayoutPanel15.RowCount = 1;
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(565, 422);
+            this.tableLayoutPanel15.TabIndex = 2;
             // 
             // label1
             // 
@@ -543,8 +624,8 @@
             this.dataGridEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridEventSales.Name = "dataGridEventSales";
             this.dataGridEventSales.RowHeadersWidth = 51;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridEventSales.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridEventSales.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridEventSales.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridEventSales.RowTemplate.Height = 40;
             this.dataGridEventSales.Size = new System.Drawing.Size(1365, 403);
@@ -1187,8 +1268,8 @@
             this.dataGridEventExpenditures.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridEventExpenditures.Name = "dataGridEventExpenditures";
             this.dataGridEventExpenditures.RowHeadersWidth = 51;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridEventExpenditures.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridEventExpenditures.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridEventExpenditures.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridEventExpenditures.RowTemplate.Height = 40;
             this.dataGridEventExpenditures.Size = new System.Drawing.Size(1371, 388);
@@ -1225,150 +1306,59 @@
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96F));
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel14.Controls.Add(this.tableLayoutPanel15, 1, 1);
-            this.tableLayoutPanel14.Controls.Add(this.dataGridView1, 1, 4);
-            this.tableLayoutPanel14.Controls.Add(this.tableLayoutPanel18, 1, 3);
-            this.tableLayoutPanel14.Controls.Add(this.tableLayoutPanel16, 1, 5);
+            this.tableLayoutPanel14.Controls.Add(this.tableLayoutPanel18, 1, 1);
+            this.tableLayoutPanel14.Controls.Add(this.tableLayoutPanel16, 1, 3);
+            this.tableLayoutPanel14.Controls.Add(this.tableLayoutPanel25, 1, 2);
             this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel14.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
-            this.tableLayoutPanel14.RowCount = 6;
+            this.tableLayoutPanel14.RowCount = 4;
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73F));
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel14.Size = new System.Drawing.Size(1445, 660);
             this.tableLayoutPanel14.TabIndex = 5;
             // 
-            // tableLayoutPanel15
-            // 
-            this.tableLayoutPanel15.ColumnCount = 5;
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 213F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 213F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel15.Controls.Add(this.label10, 0, 0);
-            this.tableLayoutPanel15.Controls.Add(this.txtDocName, 1, 0);
-            this.tableLayoutPanel15.Controls.Add(this.txtDocType, 4, 0);
-            this.tableLayoutPanel15.Controls.Add(this.label11, 3, 0);
-            this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel15.Location = new System.Drawing.Point(32, 14);
-            this.tableLayoutPanel15.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
-            this.tableLayoutPanel15.RowCount = 1;
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(1379, 41);
-            this.tableLayoutPanel15.TabIndex = 4;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(4, 6);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(172, 28);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Document Name";
-            // 
-            // txtDocName
-            // 
-            this.txtDocName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDocName.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDocName.Location = new System.Drawing.Point(217, 4);
-            this.txtDocName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDocName.Name = "txtDocName";
-            this.txtDocName.Size = new System.Drawing.Size(650, 32);
-            this.txtDocName.TabIndex = 2;
-            // 
-            // txtDocType
-            // 
-            this.txtDocType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDocType.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDocType.Location = new System.Drawing.Point(1101, 4);
-            this.txtDocType.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDocType.Name = "txtDocType";
-            this.txtDocType.Size = new System.Drawing.Size(274, 32);
-            this.txtDocType.TabIndex = 2;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(888, 6);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(161, 28);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Document Type";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(32, 131);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridView1.RowTemplate.Height = 30;
-            this.dataGridView1.Size = new System.Drawing.Size(1379, 415);
-            this.dataGridView1.TabIndex = 5;
-            // 
             // tableLayoutPanel18
             // 
-            this.tableLayoutPanel18.ColumnCount = 10;
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
+            this.tableLayoutPanel18.ColumnCount = 9;
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 4F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel18.Controls.Add(this.txtYear, 1, 0);
-            this.tableLayoutPanel18.Controls.Add(this.label13, 0, 0);
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel18.Controls.Add(this.txtEventReceiptCaption, 1, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnSearch, 6, 0);
             this.tableLayoutPanel18.Controls.Add(this.btnClear, 8, 0);
             this.tableLayoutPanel18.Controls.Add(this.label14, 3, 0);
-            this.tableLayoutPanel18.Controls.Add(this.cmbMonth, 4, 0);
+            this.tableLayoutPanel18.Controls.Add(this.cmbMonthEventReceipt, 4, 0);
+            this.tableLayoutPanel18.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel18.Location = new System.Drawing.Point(32, 69);
+            this.tableLayoutPanel18.Location = new System.Drawing.Point(32, 17);
             this.tableLayoutPanel18.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel18.Name = "tableLayoutPanel18";
             this.tableLayoutPanel18.RowCount = 1;
             this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel18.Size = new System.Drawing.Size(1379, 54);
+            this.tableLayoutPanel18.Size = new System.Drawing.Size(1379, 58);
             this.tableLayoutPanel18.TabIndex = 0;
             // 
-            // txtYear
+            // txtEventReceiptCaption
             // 
-            this.txtYear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtYear.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYear.Location = new System.Drawing.Point(111, 4);
-            this.txtYear.Margin = new System.Windows.Forms.Padding(4);
-            this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(217, 32);
-            this.txtYear.TabIndex = 2;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(4, 6);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(52, 28);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Year";
+            this.txtEventReceiptCaption.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEventReceiptCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEventReceiptCaption.Location = new System.Drawing.Point(169, 4);
+            this.txtEventReceiptCaption.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEventReceiptCaption.Name = "txtEventReceiptCaption";
+            this.txtEventReceiptCaption.Size = new System.Drawing.Size(364, 32);
+            this.txtEventReceiptCaption.TabIndex = 2;
+            this.txtEventReceiptCaption.TextChanged += new System.EventHandler(this.txtEventReceiptCaption_TextChanged);
             // 
             // btnSearch
             // 
@@ -1378,13 +1368,14 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.Black;
-            this.btnSearch.Location = new System.Drawing.Point(758, 4);
+            this.btnSearch.Location = new System.Drawing.Point(1028, 4);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(161, 46);
+            this.btnSearch.Size = new System.Drawing.Size(157, 50);
             this.btnSearch.TabIndex = 0;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnClear
             // 
@@ -1394,50 +1385,64 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.Black;
-            this.btnClear.Location = new System.Drawing.Point(931, 4);
+            this.btnClear.Location = new System.Drawing.Point(1213, 4);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(161, 46);
+            this.btnClear.Size = new System.Drawing.Size(162, 50);
             this.btnClear.TabIndex = 0;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // label14
             // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(363, 6);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
+            this.label14.Location = new System.Drawing.Point(568, 15);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(75, 28);
+            this.label14.Size = new System.Drawing.Size(157, 28);
             this.label14.TabIndex = 0;
             this.label14.Text = "Month";
             // 
-            // cmbMonth
+            // cmbMonthEventReceipt
             // 
-            this.cmbMonth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbMonth.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbMonth.FormattingEnabled = true;
-            this.cmbMonth.Location = new System.Drawing.Point(470, 4);
-            this.cmbMonth.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbMonth.Name = "cmbMonth";
-            this.cmbMonth.Size = new System.Drawing.Size(273, 36);
-            this.cmbMonth.TabIndex = 3;
+            this.cmbMonthEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbMonthEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbMonthEventReceipt.FormattingEnabled = true;
+            this.cmbMonthEventReceipt.Location = new System.Drawing.Point(733, 4);
+            this.cmbMonthEventReceipt.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbMonthEventReceipt.Name = "cmbMonthEventReceipt";
+            this.cmbMonthEventReceipt.Size = new System.Drawing.Size(267, 36);
+            this.cmbMonthEventReceipt.TabIndex = 3;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(4, 15);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(157, 28);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Caption";
             // 
             // tableLayoutPanel16
             // 
             this.tableLayoutPanel16.ColumnCount = 11;
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.5F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.5F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
             this.tableLayoutPanel16.Controls.Add(this.btnAddEventReceipt, 1, 1);
             this.tableLayoutPanel16.Controls.Add(this.btnUpdateEventReceipt, 3, 1);
             this.tableLayoutPanel16.Controls.Add(this.btnDeleteEventReceipt, 7, 1);
@@ -1446,14 +1451,14 @@
             this.tableLayoutPanel16.Controls.Add(this.tableLayoutPanel22, 10, 1);
             this.tableLayoutPanel16.Controls.Add(this.btnCloseEventReceipt, 9, 1);
             this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel16.Location = new System.Drawing.Point(32, 554);
+            this.tableLayoutPanel16.Location = new System.Drawing.Point(32, 564);
             this.tableLayoutPanel16.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel16.Name = "tableLayoutPanel16";
             this.tableLayoutPanel16.RowCount = 3;
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(1379, 102);
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(1379, 92);
             this.tableLayoutPanel16.TabIndex = 6;
             // 
             // btnAddEventReceipt
@@ -1464,13 +1469,14 @@
             this.btnAddEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddEventReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnAddEventReceipt.Location = new System.Drawing.Point(190, 29);
+            this.btnAddEventReceipt.Location = new System.Drawing.Point(238, 27);
             this.btnAddEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddEventReceipt.Name = "btnAddEventReceipt";
-            this.btnAddEventReceipt.Size = new System.Drawing.Size(171, 43);
+            this.btnAddEventReceipt.Size = new System.Drawing.Size(157, 38);
             this.btnAddEventReceipt.TabIndex = 0;
             this.btnAddEventReceipt.Text = "Add";
             this.btnAddEventReceipt.UseVisualStyleBackColor = false;
+            this.btnAddEventReceipt.Click += new System.EventHandler(this.btnAddEventReceipt_Click);
             // 
             // btnUpdateEventReceipt
             // 
@@ -1480,13 +1486,14 @@
             this.btnUpdateEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateEventReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateEventReceipt.Location = new System.Drawing.Point(396, 29);
+            this.btnUpdateEventReceipt.Location = new System.Drawing.Point(423, 27);
             this.btnUpdateEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateEventReceipt.Name = "btnUpdateEventReceipt";
-            this.btnUpdateEventReceipt.Size = new System.Drawing.Size(171, 43);
+            this.btnUpdateEventReceipt.Size = new System.Drawing.Size(157, 38);
             this.btnUpdateEventReceipt.TabIndex = 1;
             this.btnUpdateEventReceipt.Text = "Edit";
             this.btnUpdateEventReceipt.UseVisualStyleBackColor = false;
+            this.btnUpdateEventReceipt.Click += new System.EventHandler(this.btnUpdateEventReceipt_Click);
             // 
             // btnDeleteEventReceipt
             // 
@@ -1496,13 +1503,14 @@
             this.btnDeleteEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteEventReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteEventReceipt.Location = new System.Drawing.Point(808, 29);
+            this.btnDeleteEventReceipt.Location = new System.Drawing.Point(793, 27);
             this.btnDeleteEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteEventReceipt.Name = "btnDeleteEventReceipt";
-            this.btnDeleteEventReceipt.Size = new System.Drawing.Size(171, 43);
+            this.btnDeleteEventReceipt.Size = new System.Drawing.Size(157, 38);
             this.btnDeleteEventReceipt.TabIndex = 2;
             this.btnDeleteEventReceipt.Text = "Delete";
             this.btnDeleteEventReceipt.UseVisualStyleBackColor = false;
+            this.btnDeleteEventReceipt.Click += new System.EventHandler(this.btnDeleteEventReceipt_Click);
             // 
             // btnViewEventReceipt
             // 
@@ -1512,13 +1520,14 @@
             this.btnViewEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnViewEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewEventReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnViewEventReceipt.Location = new System.Drawing.Point(602, 29);
+            this.btnViewEventReceipt.Location = new System.Drawing.Point(608, 27);
             this.btnViewEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnViewEventReceipt.Name = "btnViewEventReceipt";
-            this.btnViewEventReceipt.Size = new System.Drawing.Size(171, 43);
+            this.btnViewEventReceipt.Size = new System.Drawing.Size(157, 38);
             this.btnViewEventReceipt.TabIndex = 3;
             this.btnViewEventReceipt.Text = "View";
             this.btnViewEventReceipt.UseVisualStyleBackColor = false;
+            this.btnViewEventReceipt.Click += new System.EventHandler(this.btnViewEventReceipt_Click);
             // 
             // tableLayoutPanel17
             // 
@@ -1526,43 +1535,57 @@
             this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel17.Controls.Add(this.label16, 0, 0);
+            this.tableLayoutPanel17.Controls.Add(this.labelTotalRowsEventReceipt, 0, 0);
             this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 27);
+            this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanel17.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel17.Name = "tableLayoutPanel17";
             this.tableLayoutPanel17.RowCount = 1;
             this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel17.Size = new System.Drawing.Size(180, 47);
+            this.tableLayoutPanel17.Size = new System.Drawing.Size(228, 42);
             this.tableLayoutPanel17.TabIndex = 6;
             // 
-            // label16
+            // labelTotalRowsEventReceipt
             // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(4, 9);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(154, 28);
-            this.label16.TabIndex = 4;
-            this.label16.Text = "0";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTotalRowsEventReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalRowsEventReceipt.AutoSize = true;
+            this.labelTotalRowsEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalRowsEventReceipt.Location = new System.Drawing.Point(4, 7);
+            this.labelTotalRowsEventReceipt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTotalRowsEventReceipt.Name = "labelTotalRowsEventReceipt";
+            this.labelTotalRowsEventReceipt.Size = new System.Drawing.Size(197, 28);
+            this.labelTotalRowsEventReceipt.TabIndex = 4;
+            this.labelTotalRowsEventReceipt.Text = "0";
+            this.labelTotalRowsEventReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel22
             // 
-            this.tableLayoutPanel22.ColumnCount = 3;
-            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel22.ColumnCount = 2;
+            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel22.Controls.Add(this.labelTotalAmountEventReceipt, 1, 0);
             this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel22.Location = new System.Drawing.Point(1192, 27);
+            this.tableLayoutPanel22.Location = new System.Drawing.Point(1142, 25);
             this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel22.Name = "tableLayoutPanel22";
             this.tableLayoutPanel22.RowCount = 1;
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel22.Size = new System.Drawing.Size(184, 47);
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(234, 42);
             this.tableLayoutPanel22.TabIndex = 5;
+            // 
+            // labelTotalAmountEventReceipt
+            // 
+            this.labelTotalAmountEventReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalAmountEventReceipt.AutoSize = true;
+            this.labelTotalAmountEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalAmountEventReceipt.Location = new System.Drawing.Point(27, 7);
+            this.labelTotalAmountEventReceipt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTotalAmountEventReceipt.Name = "labelTotalAmountEventReceipt";
+            this.labelTotalAmountEventReceipt.Size = new System.Drawing.Size(203, 28);
+            this.labelTotalAmountEventReceipt.TabIndex = 4;
+            this.labelTotalAmountEventReceipt.Text = "0";
+            this.labelTotalAmountEventReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCloseEventReceipt
             // 
@@ -1572,13 +1595,62 @@
             this.btnCloseEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCloseEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCloseEventReceipt.ForeColor = System.Drawing.Color.Black;
-            this.btnCloseEventReceipt.Location = new System.Drawing.Point(1014, 29);
+            this.btnCloseEventReceipt.Location = new System.Drawing.Point(978, 27);
             this.btnCloseEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnCloseEventReceipt.Name = "btnCloseEventReceipt";
-            this.btnCloseEventReceipt.Size = new System.Drawing.Size(171, 43);
+            this.btnCloseEventReceipt.Size = new System.Drawing.Size(157, 38);
             this.btnCloseEventReceipt.TabIndex = 7;
             this.btnCloseEventReceipt.Text = "Close";
             this.btnCloseEventReceipt.UseVisualStyleBackColor = false;
+            this.btnCloseEventReceipt.Click += new System.EventHandler(this.btnCloseEventReceipt_Click);
+            // 
+            // tableLayoutPanel25
+            // 
+            this.tableLayoutPanel25.ColumnCount = 2;
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel25.Controls.Add(this.dataGridViewEventReceipt, 0, 0);
+            this.tableLayoutPanel25.Controls.Add(this.tableLayoutPanel27, 1, 0);
+            this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel25.Location = new System.Drawing.Point(31, 82);
+            this.tableLayoutPanel25.Name = "tableLayoutPanel25";
+            this.tableLayoutPanel25.RowCount = 1;
+            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel25.Size = new System.Drawing.Size(1381, 475);
+            this.tableLayoutPanel25.TabIndex = 7;
+            // 
+            // dataGridViewEventReceipt
+            // 
+            this.dataGridViewEventReceipt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewEventReceipt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewEventReceipt.Location = new System.Drawing.Point(4, 4);
+            this.dataGridViewEventReceipt.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewEventReceipt.Name = "dataGridViewEventReceipt";
+            this.dataGridViewEventReceipt.RowHeadersWidth = 51;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewEventReceipt.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewEventReceipt.RowTemplate.Height = 30;
+            this.dataGridViewEventReceipt.Size = new System.Drawing.Size(958, 467);
+            this.dataGridViewEventReceipt.TabIndex = 5;
+            this.dataGridViewEventReceipt.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEventReceipt_RowEnter);
+            // 
+            // tableLayoutPanel27
+            // 
+            this.tableLayoutPanel27.ColumnCount = 3;
+            this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel27.Controls.Add(this.picEventReceipt, 1, 1);
+            this.tableLayoutPanel27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel27.Location = new System.Drawing.Point(969, 3);
+            this.tableLayoutPanel27.Name = "tableLayoutPanel27";
+            this.tableLayoutPanel27.RowCount = 3;
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96F));
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel27.Size = new System.Drawing.Size(409, 469);
+            this.tableLayoutPanel27.TabIndex = 6;
             // 
             // summaryPage
             // 
@@ -1619,16 +1691,27 @@
             this.labelEventSummary.TabIndex = 0;
             this.labelEventSummary.Text = "label15";
             // 
-            // picImage
+            // picImage2
             // 
-            this.picImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picImage.Location = new System.Drawing.Point(573, 2);
-            this.picImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.picImage.Name = "picImage";
-            this.picImage.Size = new System.Drawing.Size(851, 424);
-            this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picImage.TabIndex = 2;
-            this.picImage.TabStop = false;
+            this.picImage2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picImage2.Location = new System.Drawing.Point(60, 4);
+            this.picImage2.Margin = new System.Windows.Forms.Padding(4);
+            this.picImage2.Name = "picImage2";
+            this.picImage2.Size = new System.Drawing.Size(444, 414);
+            this.picImage2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picImage2.TabIndex = 1;
+            this.picImage2.TabStop = false;
+            // 
+            // picEventReceipt
+            // 
+            this.picEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picEventReceipt.Location = new System.Drawing.Point(23, 11);
+            this.picEventReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.picEventReceipt.Name = "picEventReceipt";
+            this.picEventReceipt.Size = new System.Drawing.Size(362, 446);
+            this.picEventReceipt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEventReceipt.TabIndex = 3;
+            this.picEventReceipt.TabStop = false;
             // 
             // iconZoomIn
             // 
@@ -1705,6 +1788,17 @@
             this.picMinimize.TabStop = false;
             this.picMinimize.Click += new System.EventHandler(this.picMinimize_Click);
             // 
+            // picImage
+            // 
+            this.picImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picImage.Location = new System.Drawing.Point(59, 2);
+            this.picImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.picImage.Name = "picImage";
+            this.picImage.Size = new System.Drawing.Size(446, 418);
+            this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picImage.TabIndex = 2;
+            this.picImage.TabStop = false;
+            // 
             // FormEventDetailsBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1731,10 +1825,13 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel26.ResumeLayout(false);
+            this.tableLayoutPanel26.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventImages)).EndInit();
+            this.tableLayoutPanel15.ResumeLayout(false);
             this.eventSalesPage.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -1761,23 +1858,27 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventExpenditures)).EndInit();
             this.receiptsPage.ResumeLayout(false);
             this.tableLayoutPanel14.ResumeLayout(false);
-            this.tableLayoutPanel15.ResumeLayout(false);
-            this.tableLayoutPanel15.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel18.ResumeLayout(false);
             this.tableLayoutPanel18.PerformLayout();
             this.tableLayoutPanel16.ResumeLayout(false);
             this.tableLayoutPanel17.ResumeLayout(false);
             this.tableLayoutPanel17.PerformLayout();
+            this.tableLayoutPanel22.ResumeLayout(false);
+            this.tableLayoutPanel22.PerformLayout();
+            this.tableLayoutPanel25.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEventReceipt)).EndInit();
+            this.tableLayoutPanel27.ResumeLayout(false);
             this.summaryPage.ResumeLayout(false);
             this.tableLayoutPanel19.ResumeLayout(false);
             this.tableLayoutPanel19.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEventReceipt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1801,14 +1902,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnView;
-        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnAddEventImages;
+        private System.Windows.Forms.Button btnUpdateEventImages;
+        private System.Windows.Forms.Button btnDeleteEventImages;
+        private System.Windows.Forms.Button btnViewEventImages;
+        private System.Windows.Forms.Button btnCloseEventImages;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtImageCaption;
+        private System.Windows.Forms.TextBox txtEventImageCaption;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.DataGridView dataGridEventImages;
         private System.Windows.Forms.PictureBox picImage;
@@ -1835,19 +1936,13 @@
         private System.Windows.Forms.TabPage receiptsPage;
         private System.Windows.Forms.TabPage summaryPage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtDocName;
-        private System.Windows.Forms.TextBox txtDocType;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel18;
-        private System.Windows.Forms.TextBox txtYear;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtEventReceiptCaption;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox cmbMonth;
+        private System.Windows.Forms.ComboBox cmbMonthEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
         private System.Windows.Forms.Label labelEventSummary;
         private FontAwesome.Sharp.IconPictureBox iconZoomIn;
@@ -1862,7 +1957,7 @@
         private System.Windows.Forms.Button btnDeleteEventReceipt;
         private System.Windows.Forms.Button btnViewEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label labelTotalRowsEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel22;
         private System.Windows.Forms.Button btnCloseEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
@@ -1882,5 +1977,15 @@
         private System.Windows.Forms.Button btnSearchEventSales;
         private System.Windows.Forms.ComboBox cmbMonthEventSales;
         private System.Windows.Forms.Button btnClearEventSales;
+        private System.Windows.Forms.Button btnClearEventImage;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
+        private System.Windows.Forms.Label labelTotalRowsEventImage;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel27;
+        private System.Windows.Forms.PictureBox picEventReceipt;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelTotalAmountEventReceipt;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
+        private System.Windows.Forms.PictureBox picImage2;
     }
 }

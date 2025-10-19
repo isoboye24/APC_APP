@@ -1,10 +1,12 @@
 ﻿using APC.BLL;
 using APC.DAL.DTO;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -39,11 +41,16 @@ namespace APC.AllForms
         {
             this.Close();
         }
+        public EventsDetailDTO eventDetail = new EventsDetailDTO();
         public int eventID;
         EventImageBLL bll = new EventImageBLL();
         public EventImageDetailDTO detail = new EventImageDetailDTO();
-        public bool isUdate = false;
+        public bool isUpdate = false;
         public bool isView = false;
+
+        private int buttonSize = 14;
+        private float panelSize;
+        int maxLength = 50;
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (eventID == 0)
@@ -60,7 +67,7 @@ namespace APC.AllForms
             }
             else
             {
-                if (!isUdate)
+                if (!isUpdate)
                 {
                     EventImageDetailDTO eventImage = new EventImageDetailDTO();
                     eventImage.EventID = eventID;
@@ -84,7 +91,7 @@ namespace APC.AllForms
                         picEventImage.Image = null;
                     }
                 }
-                else if (isUdate)
+                else if (isUpdate)
                 {
                     if (detail.ImageCaption == txtImageCaption.Text.Trim() && detail.Summary == txtImageSummary.Text.Trim() 
                         && detail.ImagePath == txtImagePath.Text)
@@ -137,7 +144,9 @@ namespace APC.AllForms
 
             txtImagePath.Hide();
             label3.Hide();
-            if (isUdate)
+
+            labelTitle.Text = labelTitle.Text = "Add " + eventDetail.EventTitle + " Picture.";
+            if (isUpdate)
             {
                 txtImagePath.Text = detail.ImagePath;
                 txtImageCaption.Text = detail.ImageCaption;
@@ -145,7 +154,8 @@ namespace APC.AllForms
                 eventID = detail.EventID;
                 string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
                 picEventImage.ImageLocation = imagePath;
-                labelTitle.Text = detail.EventTitle + " (" + detail.EventYear + ")";
+
+                labelTitle.Text = "Edit " + eventDetail.EventTitle + " Picture.";
             }
             else if (isView)
             {
@@ -166,13 +176,13 @@ namespace APC.AllForms
                 eventID = detail.EventID;
                 string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
                 picEventImage.ImageLocation = imagePath;
-                labelTitle.Text = detail.EventTitle + " (" + detail.EventYear + ")";
+                labelTitle.Text = detail.ImageCaption + " of " + eventDetail.EventTitle;
                 btnSave.Hide();
                 btnBrowse.Hide();
                 label1.Hide();
             }
         }
-        int maxLength = 50;
+        
         private void txtImageCaption_TextChanged(object sender, EventArgs e)
         {
 
@@ -183,10 +193,16 @@ namespace APC.AllForms
             if (WindowState == FormWindowState.Normal)
             {
                 WindowState = FormWindowState.Maximized;
+                buttonSize = 18;
+                panelSize = 3.05f;
+                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
             else
             {
                 WindowState = FormWindowState.Normal;
+                buttonSize = 14;
+                panelSize = 1.05f;
+                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
         }
 
@@ -199,8 +215,24 @@ namespace APC.AllForms
             else
             {
                 WindowState = FormWindowState.Normal;
+                buttonSize = 14;
+                panelSize = 1.05f;
+                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
+        }
 
+        private void iconZoomOut_Click(object sender, EventArgs e)
+        {
+            buttonSize -= 1;
+            panelSize -= 1.05f;
+            ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+        }
+
+        private void iconZoomIn_Click(object sender, EventArgs e)
+        {
+            buttonSize += 1;
+            panelSize += 1.05f;
+            ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
         }
     }
 }

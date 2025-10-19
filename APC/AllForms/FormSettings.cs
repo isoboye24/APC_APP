@@ -1056,12 +1056,9 @@ namespace APC.AllForms
                 dataGridView1.Columns[1].Visible = false;
                 dataGridView1.Columns[2].Visible = false;
                 dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].HeaderText = "No.";
-                dataGridView1.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[7].HeaderText = "Picture Caption";
-                dataGridView1.Columns[8].Visible = false;
+                dataGridView1.Columns[4].HeaderText = "No.";
+                dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns[5].HeaderText = "Picture Caption";
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -1079,6 +1076,9 @@ namespace APC.AllForms
                 dataGridView1.Columns[6].HeaderText = "Summary";
                 dataGridView1.Columns[7].Visible = false;
                 dataGridView1.Columns[8].Visible = false;
+                dataGridView1.Columns[9].HeaderText = "Sold (€)";
+                dataGridView1.Columns[10].HeaderText = "Spent (€)";
+                dataGridView1.Columns[11].HeaderText = "Balance";
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -1341,13 +1341,10 @@ namespace APC.AllForms
                 eventImageDeletedDataDetail = new EventImageDetailDTO();
                 eventImageDeletedDataDetail.EventImageID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
                 eventImageDeletedDataDetail.EventID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-                eventImageDeletedDataDetail.EventTitle = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                eventImageDeletedDataDetail.EventYear = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-                eventImageDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                eventImageDeletedDataDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                eventImageDeletedDataDetail.Counter = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
-                eventImageDeletedDataDetail.ImageCaption = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-                eventImageDeletedDataDetail.isEventDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
+                eventImageDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                eventImageDeletedDataDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                eventImageDeletedDataDetail.Counter = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
+                eventImageDeletedDataDetail.ImageCaption = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
             }
             else if (cmbDeletedData.SelectedIndex == 11)
             {
@@ -1361,6 +1358,9 @@ namespace APC.AllForms
                 eventDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
                 eventDeletedDataDetail.CoverImagePath = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
                 eventDeletedDataDetail.EventDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
+                eventDeletedDataDetail.AmountSold = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
+                eventDeletedDataDetail.AmountSpent = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[10].Value);
+                eventDeletedDataDetail.Balance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
             }
             else if (cmbDeletedData.SelectedIndex == 12)
             {
@@ -1645,11 +1645,7 @@ namespace APC.AllForms
                 }
                 else
                 {
-                    if (eventImageDeletedDataDetail.isEventDeleted)
-                    {
-                        MessageBox.Show("Event was deleted. Get back the event first.");
-                    }
-                    else if (eventImageDeletedDataBLL.GetBack(eventImageDeletedDataDetail))
+                    if (eventImageDeletedDataBLL.GetBack(eventImageDeletedDataDetail))
                     {
                         MessageBox.Show("Picture was retrieved");
                         memberDeletedDataDTO = memberDeletedDataBLL.Select(true);

@@ -44,6 +44,14 @@ namespace APC.AllForms
         EventSalesBLL eventSalesBLL = new EventSalesBLL();
         EventSalesDTO eventSalesDTO = new EventSalesDTO();
 
+        EventImageDetailDTO eventImageDetail = new EventImageDetailDTO();
+        EventImageBLL eventImageBLL = new EventImageBLL();
+        EventImageDTO eventImageDTO = new EventImageDTO();
+
+        EventReceiptsDetailDTO eventReceiptDetail = new EventReceiptsDetailDTO();
+        EventReceiptsBLL eventReceiptsBLL = new EventReceiptsBLL();
+        EventReceiptsDTO eventReceiptsDTO = new EventReceiptsDTO();
+
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
@@ -128,13 +136,13 @@ namespace APC.AllForms
             labelEventSummary.Tag = "resizable";
             label4.Tag = "resizable";
 
-            txtImageCaption.Tag = "resizable";
+            txtEventImageCaption.Tag = "resizable";
 
-            btnAdd.Tag = "resizable";
-            btnView.Tag = "resizable";
-            btnUpdate.Tag = "resizable";
-            btnDelete.Tag = "resizable";
-            btnClose.Tag = "resizable";
+            btnAddEventImages.Tag = "resizable";
+            btnViewEventImages.Tag = "resizable";
+            btnUpdateEventImages.Tag = "resizable";
+            btnDeleteEventImages.Tag = "resizable";
+            btnCloseEventImages.Tag = "resizable";
 
             #endregion
 
@@ -224,13 +232,61 @@ namespace APC.AllForms
 
             #endregion
 
-            
+            // Event Pictures
+            #region
+            eventImageDTO = eventImageBLL.Select(detail.EventID);
+
+            dataGridEventImages.DataSource = eventImageDTO.EventImages;
+            dataGridEventImages.Columns[0].Visible = false;
+            dataGridEventImages.Columns[1].Visible = false;
+            dataGridEventImages.Columns[2].Visible = false;
+            dataGridEventImages.Columns[3].Visible = false;
+            dataGridEventImages.Columns[4].HeaderText = "No.";
+            dataGridEventImages.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridEventImages.Columns[5].HeaderText = "Picture Caption";
+
+            foreach (DataGridViewColumn column in dataGridEventImages.Columns)
+            {
+                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            }
+            #endregion
+
+            // Event Receipts
+            #region
+            eventReceiptsDTO = eventReceiptsBLL.Select(detail.EventID);
+            cmbMonthEventReceipt.DataSource = eventReceiptsDTO.Months;
+            General.ComboBoxProps(cmbMonthEventReceipt, "MonthName", "MonthID");
+
+            dataGridViewEventReceipt.DataSource = eventReceiptsDTO.EventReceipts;
+            dataGridViewEventReceipt.Columns[0].Visible = false;
+            dataGridViewEventReceipt.Columns[1].Visible = false;
+            dataGridViewEventReceipt.Columns[2].Visible = false;
+            dataGridViewEventReceipt.Columns[3].Visible = false;
+            dataGridViewEventReceipt.Columns[4].HeaderText = "No.";
+            dataGridViewEventReceipt.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewEventReceipt.Columns[5].HeaderText = "Picture Caption";
+            dataGridViewEventReceipt.Columns[6].HeaderText = "Amt. on Receipt";
+            dataGridViewEventReceipt.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewEventReceipt.Columns[7].HeaderText = "Day";
+            dataGridViewEventReceipt.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewEventReceipt.Columns[8].Visible = false;
+            dataGridViewEventReceipt.Columns[9].HeaderText = "Month";
+            dataGridViewEventReceipt.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewEventReceipt.Columns[10].HeaderText = "Year";
+            dataGridViewEventReceipt.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewEventReceipt.Columns[11].Visible = false;
+
+            foreach (DataGridViewColumn column in dataGridViewEventReceipt.Columns)
+            {
+                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            }
+            #endregion
 
             Counts();
         }
 
         // ---------------------------------------------------------------
-        // ---------------- Event Expenditure ACTIONS ---------------
+        // ---------------- EVENT Expenditure ACTIONS ---------------
         // ---------------------------------------------------------------
         private void btnCloseEventExp_Click(object sender, EventArgs e)
         {
@@ -311,6 +367,17 @@ namespace APC.AllForms
             eventSalesDTO = eventSalesBLL.Select(detail.EventID);
             dataGridEventSales.DataSource = eventSalesDTO.EventSales;
 
+            txtEventImageCaption.Clear();
+            eventImageBLL = new EventImageBLL();
+            eventImageDTO = eventImageBLL.Select(detail.EventID);
+            dataGridEventImages.DataSource = eventImageDTO.EventImages;
+
+            txtEventReceiptCaption.Clear();
+            cmbMonthEventReceipt.SelectedIndex = -1;
+            eventReceiptsBLL = new EventReceiptsBLL();
+            eventReceiptsDTO = eventReceiptsBLL.Select(detail.EventID);
+            dataGridViewEventReceipt.DataSource = eventReceiptsDTO.EventReceipts;
+
             Counts();
         }
 
@@ -323,6 +390,12 @@ namespace APC.AllForms
             int pluralRowSales = dataGridEventSales.RowCount;
             labelTotalEventSales.Text = "Total : " + eventSalesBLL.SelectTotalAmountEventSold(detail.EventID) + " €";
             labelTotalRowsEventSales.Text = "Row" + (pluralRowSales > 1 ? "s " : " ") + pluralRowSales.ToString();
+
+            labelTotalRowsEventImage.Text = "Total : " + dataGridEventImages.RowCount.ToString();
+
+            int pluralRowReceipts = dataGridViewEventReceipt.RowCount;
+            labelTotalRowsEventReceipt.Text = "Row" + (pluralRowReceipts > 1 ? "s " : " ") + pluralRowReceipts.ToString();
+            labelTotalAmountEventReceipt.Text = "Total : " + eventReceiptsBLL.SelectTotalAmountOnEventReceipt(detail.EventID) + " €";
         }
 
         private void txtSummaryExpReport_TextChanged(object sender, EventArgs e)
@@ -373,7 +446,7 @@ namespace APC.AllForms
 
 
         // ---------------------------------------------------------------
-        // ---------------- Event SALES ACTIONS ---------------
+        // ---------------- EVENT SALES ACTIONS ---------------
         // ---------------------------------------------------------------
         private void btnCloseEventSales_Click(object sender, EventArgs e)
         {
@@ -447,7 +520,6 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-
         private void btnViewEventSales_Click(object sender, EventArgs e)
         {
             if (eventSalesDetail.EventSalesID == 0)
@@ -487,13 +559,260 @@ namespace APC.AllForms
         }
 
         // ---------------------------------------------------------------
+        // ---------------- EVENT PICTURES ACTIONS ---------------
+        // ---------------------------------------------------------------
+        private void btnAddEventImages_Click(object sender, EventArgs e)
+        {
+            FormEventSingleImage open = new FormEventSingleImage();
+            open.eventID = detail.EventID;
+            this.Hide();
+            open.ShowDialog();
+            this.Visible = true;
+            ClearFilters();
+        }
+
+        private void btnUpdateEventImages_Click(object sender, EventArgs e)
+        {
+            if (eventImageDetail.EventImageID == 0)
+            {
+                MessageBox.Show("Please choose an image from the table");
+            }
+            else
+            {
+                FormEventSingleImage open = new FormEventSingleImage();
+                open.detail = eventImageDetail;
+                open.eventDetail = detail;
+                open.isUpdate = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void btnViewEventImages_Click(object sender, EventArgs e)
+        {
+            if (eventImageDetail.EventImageID == 0)
+            {
+                MessageBox.Show("Please choose an image from the table");
+            }
+            else
+            {
+                FormEventSingleImage open = new FormEventSingleImage();
+                open.detail = eventImageDetail;
+                open.eventDetail = detail;
+                open.isView = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void btnDeleteEventImages_Click(object sender, EventArgs e)
+        {
+            if (LoginInfo.AccessLevel != 4)
+            {
+                this.Close();
+            }
+            else
+            {
+                if (eventImageDetail.EventImageID == 0)
+                {
+                    MessageBox.Show("Please choose an image from the table");
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        if (eventImageBLL.Delete(eventImageDetail))
+                        {
+                            MessageBox.Show("The picture was deleted");
+                            ClearFilters();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void txtImageCaption_TextChanged(object sender, EventArgs e)
+        {
+            List<EventImageDetailDTO> list = eventImageDTO.EventImages;
+            list = list.Where(x => x.ImageCaption.Contains(txtEventImageCaption.Text)).ToList();
+            dataGridEventImages.DataSource = list;
+        }
+
+        private void dataGridEventImages_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= dataGridEventImages.Rows.Count)
+                return;
+
+            var row = dataGridEventImages.Rows[e.RowIndex];
+            if (row == null || row.IsNewRow)
+                return;
+
+            eventImageDetail = new EventImageDetailDTO();
+            eventImageDetail.EventImageID = Convert.ToInt32(row.Cells[0].Value ?? 0);
+            eventImageDetail.EventID = Convert.ToInt32(row.Cells[1].Value ?? 0);
+            eventImageDetail.Summary = row.Cells[2].Value?.ToString() ?? string.Empty;
+            eventImageDetail.ImagePath = row.Cells[3].Value?.ToString() ?? string.Empty;
+            eventImageDetail.Counter = Convert.ToInt32(row.Cells[4].Value ?? 0);
+            eventImageDetail.ImageCaption = row.Cells[5].Value?.ToString() ?? string.Empty;
+
+            // ✅ Only set image if file path is valid
+            string imagePath = System.IO.Path.Combine(Application.StartupPath, "images", eventImageDetail.ImagePath);
+            if (System.IO.File.Exists(imagePath))
+                picImage2.ImageLocation = imagePath;
+            else
+                picImage2.Image = null;
+        }
+
+        private void btnClearEventImage_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        // ---------------------------------------------------------------
         // ---------------- Event RECEIPTS ACTIONS ---------------
         // ---------------------------------------------------------------
 
-        private void btnAddReceipt_Click(object sender, EventArgs e)
+        private void btnAddEventReceipt_Click(object sender, EventArgs e)
         {
-
+            FormEventReceipt open = new FormEventReceipt();
+            open.detail = detail;
+            this.Hide();
+            open.ShowDialog();
+            this.Visible = true;
+            ClearFilters();
         }
 
+        private void btnCloseEventReceipt_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnUpdateEventReceipt_Click(object sender, EventArgs e)
+        {
+            if (eventReceiptDetail.EventReceiptID == 0)
+            {
+                MessageBox.Show("Please choose an event receipt from the table");
+            }
+            else
+            {
+                FormEventReceipt open = new FormEventReceipt();
+                open.detailReceipt = eventReceiptDetail;
+                open.detail = detail;
+                open.isUpdate = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void dataGridViewEventReceipt_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= dataGridViewEventReceipt.Rows.Count)
+                return;
+
+            var row = dataGridViewEventReceipt.Rows[e.RowIndex];
+            if (row == null || row.IsNewRow)
+                return;
+
+            eventReceiptDetail = new EventReceiptsDetailDTO();
+            eventReceiptDetail.EventReceiptID = Convert.ToInt32(row.Cells[0].Value ?? 0);
+            eventReceiptDetail.EventID = Convert.ToInt32(row.Cells[1].Value ?? 0);
+            eventReceiptDetail.Summary = row.Cells[2].Value?.ToString() ?? string.Empty;
+            eventReceiptDetail.ImagePath = row.Cells[3].Value?.ToString() ?? string.Empty;
+            eventReceiptDetail.Counter = Convert.ToInt32(row.Cells[4].Value ?? 0);
+            eventReceiptDetail.ImageCaption = row.Cells[5].Value?.ToString() ?? string.Empty;
+            eventReceiptDetail.AmountSpent = Convert.ToDecimal(row.Cells[6].Value ?? 0);
+            eventReceiptDetail.Day = Convert.ToInt32(row.Cells[7].Value ?? 0);
+            eventReceiptDetail.MonthID = Convert.ToInt32(row.Cells[8].Value ?? 0);
+            eventReceiptDetail.MonthName = row.Cells[9].Value?.ToString() ?? string.Empty;
+            eventReceiptDetail.Year = Convert.ToInt32(row.Cells[10].Value ?? 0);
+            eventReceiptDetail.ReceiptDate = Convert.ToDateTime(row.Cells[11].Value ?? 0);
+
+            // ✅ Only set image if file path is valid
+            string imagePath = System.IO.Path.Combine(Application.StartupPath, "images", eventReceiptDetail.ImagePath);
+            if (System.IO.File.Exists(imagePath))
+                picEventReceipt.ImageLocation = imagePath;
+            else
+                picEventReceipt.Image = null;
+
+            
+        }
+
+        private void txtEventReceiptCaption_TextChanged(object sender, EventArgs e)
+        {
+            List<EventReceiptsDetailDTO> list = eventReceiptsDTO.EventReceipts;
+            list = list.Where(x => x.ImageCaption.Contains(txtEventReceiptCaption.Text)).ToList();
+            dataGridViewEventReceipt.DataSource = list;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            List<EventReceiptsDetailDTO> list = eventReceiptsDTO.EventReceipts;
+            if (cmbMonthEventReceipt.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthEventReceipt.SelectedValue)).ToList();
+            }
+            else
+            {
+                MessageBox.Show("Unknown search!");
+            }
+            dataGridViewEventReceipt.DataSource = list;
+        }
+
+        private void btnViewEventReceipt_Click(object sender, EventArgs e)
+        {
+            if (eventReceiptDetail.EventReceiptID == 0)
+            {
+                MessageBox.Show("Please choose an event receipt from the table");
+            }
+            else
+            {
+                FormViewEventReceipt open = new FormViewEventReceipt();
+                open.detailReceipt = eventReceiptDetail;
+                open.detail = detail;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void btnDeleteEventReceipt_Click(object sender, EventArgs e)
+        {
+            if (LoginInfo.AccessLevel != 4)
+            {
+                this.Close();
+            }
+            else
+            {
+                if (eventReceiptDetail.EventReceiptID == 0)
+                {
+                    MessageBox.Show("Please choose an event receipt from the table");
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        if (eventReceiptsBLL.Delete(eventReceiptDetail))
+                        {
+                            MessageBox.Show("The receipt was deleted");
+                            ClearFilters();
+                        }
+                    }
+                }
+            }
+        }
     }
 }

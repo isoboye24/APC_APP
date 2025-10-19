@@ -50,6 +50,15 @@ namespace APC.BLL
         {            
             return dao.SelectEventCount();
         }
+        public decimal SelectOverallExpenditures()
+        {            
+            return dao.SelectOverallExpenditures();
+        }
+
+        public decimal SelectOverallSales()
+        {            
+            return dao.SelectOverallSales();
+        }
 
         public bool Update(EventsDetailDTO entity)
         {

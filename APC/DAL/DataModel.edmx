@@ -137,6 +137,8 @@
           <Property Name="day" Type="int" Nullable="false" />
           <Property Name="monthID" Type="int" Nullable="false" />
           <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="receiptDate" Type="date" Nullable="false" />
+          <Property Name="amountSpent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="EVENT_SALES">
           <Key>
@@ -517,6 +519,8 @@
           <Property Name="day" Type="Int32" Nullable="false" />
           <Property Name="monthID" Type="Int32" Nullable="false" />
           <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="receiptDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="amountSpent" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="EVENT_SALES">
           <Key>
@@ -907,6 +911,8 @@
                 <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="monthID" ColumnName="monthID" />
                 <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="receiptDate" ColumnName="receiptDate" />
+                <ScalarProperty Name="amountSpent" ColumnName="amountSpent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

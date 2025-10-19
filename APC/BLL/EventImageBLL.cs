@@ -39,10 +39,10 @@ namespace APC.BLL
         {
             throw new NotImplementedException();
         }
-        public EventImageDTO SelectSpecificImage(int ID)
+        public EventImageDTO Select(int eventID)
         {
             EventImageDTO dto = new EventImageDTO();
-            dto.EventImages = dao.SelectSpecificImage(ID);
+            dto.EventImages = dao.Select(eventID);
             return dto;
         }
 

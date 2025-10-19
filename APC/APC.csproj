@@ -151,6 +151,12 @@
     <Compile Include="AllForms\FormEventExpenditure.Designer.cs">
       <DependentUpon>FormEventExpenditure.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormEventReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormEventReceipt.Designer.cs">
+      <DependentUpon>FormEventReceipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormEventSales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +217,12 @@
     <Compile Include="AllForms\FormViewEventExpenditure.Designer.cs">
       <DependentUpon>FormViewEventExpenditure.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormViewEventReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormViewEventReceipt.Designer.cs">
+      <DependentUpon>FormViewEventReceipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormViewEventSales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,6 +250,7 @@
     <Compile Include="BLL\ConstitutionBLL.cs" />
     <Compile Include="BLL\DocumentBLL.cs" />
     <Compile Include="BLL\EventExpenditureBLL.cs" />
+    <Compile Include="BLL\EventReceiptsBLL.cs" />
     <Compile Include="BLL\EventSalesBLL.cs" />
     <Compile Include="BLL\FinedMemberBLL.cs" />
     <Compile Include="BLL\GeneralAttendanceBLL.cs" />
@@ -264,6 +277,7 @@
     </Compile>
     <Compile Include="DAL\DAO\ConstitutionDAO.cs" />
     <Compile Include="DAL\DAO\DocumentDAO.cs" />
+    <Compile Include="DAL\DAO\EventReceiptsDAO.cs" />
     <Compile Include="DAL\DAO\EventSalesDAO.cs" />
     <Compile Include="DAL\DAO\FinedMemberDAO.cs" />
     <Compile Include="DAL\DAO\GraphDAO.cs" />
@@ -330,12 +344,6 @@
     </Compile>
     <Compile Include="AllForms\FormCountry.Designer.cs">
       <DependentUpon>FormCountry.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AllForms\FormEvenImages.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormEvenImages.Designer.cs">
-      <DependentUpon>FormEvenImages.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\FormExpenditure.cs">
       <SubType>Form</SubType>
@@ -472,6 +480,8 @@
     <Compile Include="DAL\DTO\EventExpenditureDTO.cs" />
     <Compile Include="DAL\DTO\EventImageDetailDTO.cs" />
     <Compile Include="DAL\DTO\EventImageDTO.cs" />
+    <Compile Include="DAL\DTO\EventReceiptsDetailDTO.cs" />
+    <Compile Include="DAL\DTO\EventReceiptsDTO.cs" />
     <Compile Include="DAL\DTO\EventSalesDetailDTO.cs" />
     <Compile Include="DAL\DTO\EventsDetailDTO.cs" />
     <Compile Include="DAL\DTO\EventsDTO.cs" />
@@ -670,6 +680,9 @@
     <EmbeddedResource Include="AllForms\FormEventExpenditure.resx">
       <DependentUpon>FormEventExpenditure.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormEventReceipt.resx">
+      <DependentUpon>FormEventReceipt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormEventSales.resx">
       <DependentUpon>FormEventSales.cs</DependentUpon>
     </EmbeddedResource>
@@ -702,9 +715,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormEmploymentStatus.resx">
       <DependentUpon>FormEmploymentStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormEvenImages.resx">
-      <DependentUpon>FormEvenImages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormEvent.resx">
       <DependentUpon>FormEvent.cs</DependentUpon>
@@ -750,6 +760,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormViewEventExpenditure.resx">
       <DependentUpon>FormViewEventExpenditure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormViewEventReceipt.resx">
+      <DependentUpon>FormViewEventReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormViewEventSales.resx">
       <DependentUpon>FormViewEventSales.cs</DependentUpon>

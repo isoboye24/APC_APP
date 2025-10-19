@@ -32,6 +32,8 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.iconZoomIn = new FontAwesome.Sharp.IconPictureBox();
+            this.iconZoomOut = new FontAwesome.Sharp.IconPictureBox();
             this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.picClose = new System.Windows.Forms.PictureBox();
@@ -56,6 +58,8 @@
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
@@ -104,6 +108,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkOrange;
+            this.panel1.Controls.Add(this.iconZoomIn);
+            this.panel1.Controls.Add(this.iconZoomOut);
             this.panel1.Controls.Add(this.iconMaximize);
             this.panel1.Controls.Add(this.labelTitle);
             this.panel1.Controls.Add(this.picClose);
@@ -115,6 +121,38 @@
             this.panel1.Size = new System.Drawing.Size(1399, 63);
             this.panel1.TabIndex = 12;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown_1);
+            // 
+            // iconZoomIn
+            // 
+            this.iconZoomIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconZoomIn.BackColor = System.Drawing.Color.Transparent;
+            this.iconZoomIn.ForeColor = System.Drawing.Color.Black;
+            this.iconZoomIn.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
+            this.iconZoomIn.IconColor = System.Drawing.Color.Black;
+            this.iconZoomIn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconZoomIn.Location = new System.Drawing.Point(927, 14);
+            this.iconZoomIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.iconZoomIn.Name = "iconZoomIn";
+            this.iconZoomIn.Size = new System.Drawing.Size(32, 32);
+            this.iconZoomIn.TabIndex = 19;
+            this.iconZoomIn.TabStop = false;
+            this.iconZoomIn.Click += new System.EventHandler(this.iconZoomIn_Click);
+            // 
+            // iconZoomOut
+            // 
+            this.iconZoomOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconZoomOut.BackColor = System.Drawing.Color.Transparent;
+            this.iconZoomOut.ForeColor = System.Drawing.Color.Black;
+            this.iconZoomOut.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassMinus;
+            this.iconZoomOut.IconColor = System.Drawing.Color.Black;
+            this.iconZoomOut.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconZoomOut.Location = new System.Drawing.Point(979, 14);
+            this.iconZoomOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.iconZoomOut.Name = "iconZoomOut";
+            this.iconZoomOut.Size = new System.Drawing.Size(32, 32);
+            this.iconZoomOut.TabIndex = 20;
+            this.iconZoomOut.TabStop = false;
+            this.iconZoomOut.Click += new System.EventHandler(this.iconZoomOut_Click);
             // 
             // iconMaximize
             // 
@@ -295,7 +333,7 @@
             // 
             // txtImagePath
             // 
-            this.txtImagePath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtImagePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtImagePath.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtImagePath.Location = new System.Drawing.Point(164, 4);
             this.txtImagePath.Margin = new System.Windows.Forms.Padding(4);
@@ -306,12 +344,13 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(4, 12);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
+            this.label3.Location = new System.Drawing.Point(4, 6);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 28);
+            this.label3.Size = new System.Drawing.Size(152, 28);
             this.label3.TabIndex = 0;
             this.label3.Text = "Image Path";
             // 
@@ -333,7 +372,7 @@
             // 
             // txtImageCaption
             // 
-            this.txtImageCaption.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtImageCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtImageCaption.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtImageCaption.Location = new System.Drawing.Point(204, 4);
             this.txtImageCaption.Margin = new System.Windows.Forms.Padding(4);
@@ -344,14 +383,16 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
+            this.label1.Location = new System.Drawing.Point(4, 6);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 28);
+            this.label1.Size = new System.Drawing.Size(192, 28);
             this.label1.TabIndex = 0;
             this.label1.Text = "Image Caption";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tableLayoutPanel9
             // 
@@ -372,6 +413,7 @@
             // btnBrowse
             // 
             this.btnBrowse.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -380,7 +422,7 @@
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(152, 46);
             this.btnBrowse.TabIndex = 4;
-            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.Text = "Upload";
             this.btnBrowse.UseVisualStyleBackColor = false;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
@@ -426,9 +468,9 @@
             // 
             // tableLayoutPanel8
             // 
-            this.tableLayoutPanel8.ColumnCount = 2;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tableLayoutPanel8.ColumnCount = 1;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel8.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(17, 4);
@@ -441,15 +483,16 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(4, 7);
+            this.label2.Location = new System.Drawing.Point(4, 3);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 28);
+            this.label2.Size = new System.Drawing.Size(501, 28);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Summary:";
+            this.label2.Text = "Description";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormEventSingleImage
             // 
@@ -468,6 +511,8 @@
             this.Load += new System.EventHandler(this.FormEventSingleImage_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
@@ -518,5 +563,7 @@
         private System.Windows.Forms.TextBox txtImageSummary;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.Label label2;
+        private FontAwesome.Sharp.IconPictureBox iconZoomIn;
+        private FontAwesome.Sharp.IconPictureBox iconZoomOut;
     }
 }

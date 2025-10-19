@@ -90,10 +90,21 @@ namespace APC
             dataGridView1.Columns[6].Visible = false;
             dataGridView1.Columns[7].Visible = false;
             dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].HeaderText = "Sold (€)";
+            dataGridView1.Columns[10].HeaderText = "Spent (€)";
+            dataGridView1.Columns[11].HeaderText = "Balance";
+
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             }
+
+            decimal overallSales = bll.SelectOverallSales();
+            decimal overallExpenditures = bll.SelectOverallExpenditures();
+
+            labelOverallSold.Text = overallSales > 0 ? overallSales.ToString() : 0.ToString();
+            labelOverallSpent.Text = overallExpenditures > 0 ? overallExpenditures.ToString() : 0.ToString();
+            labelOverallBalance.Text = (overallSales - overallExpenditures).ToString();
         }
         private void FillDataGrid()
         {
@@ -133,6 +144,9 @@ namespace APC
             detail.Summary = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
             detail.CoverImagePath = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
             detail.EventDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
+            detail.AmountSold = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
+            detail.AmountSpent = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[10].Value);
+            detail.Balance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
 
             string imagePath = Application.StartupPath + "\\images\\" + detail.CoverImagePath;
             picViewEventCoverImage.ImageLocation = imagePath;
