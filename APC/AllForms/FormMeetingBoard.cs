@@ -23,9 +23,14 @@ namespace APC.AllForms
         GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
         GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
         GeneralAttendanceDetailDTO detail = new GeneralAttendanceDetailDTO();
+
         CommentDTO commentDTO = new CommentDTO();
         CommentBLL commentBLL = new CommentBLL();
         CommentDetailDTO commentDetail = new CommentDetailDTO();
+
+        SpecialContributionDetailDTO specialContributionDetail = new SpecialContributionDetailDTO();
+        SpecialContributionsBLL specialContributionsBLL = new SpecialContributionsBLL();
+        SpecialContributionDTO specialContributionDTO = new SpecialContributionDTO();
         private void FormMeetingBoard_Load(object sender, EventArgs e)
         {
             #region
@@ -119,100 +124,152 @@ namespace APC.AllForms
             cmbFineStatus.Items.Add("Completed");
             cmbFineStatus.Items.Add("NOT completed");
 
+            
+
+
             #region
-            dataGridView1.DataSource = dto.GeneralAttendance;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].Visible = false;
-            dataGridView1.Columns[3].HeaderText = "Month";
-            dataGridView1.Columns[4].HeaderText = "Year";
-            dataGridView1.Columns[5].HeaderText = "Members Present";
-            dataGridView1.Columns[6].HeaderText = "Members Absent";
-            dataGridView1.Columns[7].HeaderText = "Dues Paid";
-            dataGridView1.Columns[8].Visible = false;
-            dataGridView1.Columns[9].Visible = false;
-            dataGridView1.Columns[10].Visible = false;
-            dataGridView1.Columns[11].Visible = false;
-            dataGridView1.Columns[12].Visible = false;
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-                        
-            dataGridViewComments.DataSource = commentDTO.Comments;
-            dataGridViewComments.Columns[0].Visible = false;
-            dataGridViewComments.Columns[1].HeaderText = "Comment";
-            dataGridViewComments.Columns[2].Visible = false;
-            dataGridViewComments.Columns[3].HeaderText = "Surname";
-            dataGridViewComments.Columns[4].HeaderText = "Name";
-            dataGridViewComments.Columns[5].Visible = false;
-            dataGridViewComments.Columns[6].Visible = false;
-            dataGridViewComments.Columns[7].HeaderText = "Gender";
-            dataGridViewComments.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewComments.Columns[8].Visible = false;
-            dataGridViewComments.Columns[9].Visible = false;
-            dataGridViewComments.Columns[10].HeaderText = "Month";
-            dataGridViewComments.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewComments.Columns[11].HeaderText = "Year";
-            dataGridViewComments.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewComments.Columns[12].Visible = false;
-            foreach (DataGridViewColumn columnComments in dataGridViewComments.Columns)
-            {
-                columnComments.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
+                #region
+                dataGridView1.DataSource = dto.GeneralAttendance;
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[1].Visible = false;
+                dataGridView1.Columns[2].Visible = false;
+                dataGridView1.Columns[3].HeaderText = "Month";
+                dataGridView1.Columns[4].HeaderText = "Year";
+                dataGridView1.Columns[5].HeaderText = "Members Present";
+                dataGridView1.Columns[6].HeaderText = "Members Absent";
+                dataGridView1.Columns[7].HeaderText = "Dues Paid";
+                dataGridView1.Columns[8].Visible = false;
+                dataGridView1.Columns[9].Visible = false;
+                dataGridView1.Columns[10].Visible = false;
+                dataGridView1.Columns[11].Visible = false;
+                dataGridView1.Columns[12].Visible = false;
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
+                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                }
 
-            constitutionDTO = constitutionBLL.Select();
-            dataGridViewConstitution.DataSource = constitutionDTO.Constitutions;
-            dataGridViewConstitution.Columns[0].Visible = false;
-            dataGridViewConstitution.Columns[1].Visible = false;
-            dataGridViewConstitution.Columns[2].HeaderText = "Constitution Summary";
-            dataGridViewConstitution.Columns[3].HeaderText = "Section";
-            dataGridViewConstitution.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewConstitution.Columns[4].Visible = false;
-            dataGridViewConstitution.Columns[5].HeaderText = "Fine";
-            dataGridViewConstitution.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            foreach (DataGridViewColumn column in dataGridViewConstitution.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
+            #endregion
 
-            finedMemberDTO = finedMemberBLL.Select();
-            dataGridViewFinedMembers.DataSource = finedMemberDTO.FineMembers;
-            dataGridViewFinedMembers.Columns[0].Visible = false;
-            dataGridViewFinedMembers.Columns[1].HeaderText = "Name";
-            dataGridViewFinedMembers.Columns[2].HeaderText = "Surname";
-            dataGridViewFinedMembers.Columns[3].Visible = false;
-            dataGridViewFinedMembers.Columns[4].HeaderText = "Violated";
-            dataGridViewFinedMembers.Columns[5].Visible = false;
-            dataGridViewFinedMembers.Columns[6].HeaderText = "Fine";
-            dataGridViewFinedMembers.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[7].Visible = false;
-            dataGridViewFinedMembers.Columns[8].HeaderText = "Paid";
-            dataGridViewFinedMembers.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[9].Visible = false;
-            dataGridViewFinedMembers.Columns[10].Visible = false;
-            dataGridViewFinedMembers.Columns[11].HeaderText = "Status";
-            dataGridViewFinedMembers.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[12].Visible = false;
-            dataGridViewFinedMembers.Columns[13].Visible = false;
-            dataGridViewFinedMembers.Columns[14].Visible = false;
-            dataGridViewFinedMembers.Columns[15].Visible = false;
-            dataGridViewFinedMembers.Columns[16].Visible = false;
-            dataGridViewFinedMembers.Columns[17].Visible = false;
-            dataGridViewFinedMembers.Columns[18].Visible = false;
-            dataGridViewFinedMembers.Columns[19].Visible = false;
-            dataGridViewFinedMembers.Columns[20].HeaderText = "Day";
-            dataGridViewFinedMembers.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[21].Visible = false;
-            dataGridViewFinedMembers.Columns[22].HeaderText = "Month";
-            dataGridViewFinedMembers.Columns[22].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[23].HeaderText = "Year";
-            dataGridViewFinedMembers.Columns[23].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewFinedMembers.Columns[24].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewFinedMembers.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
+                #region
+                dataGridViewComments.DataSource = commentDTO.Comments;
+                dataGridViewComments.Columns[0].Visible = false;
+                dataGridViewComments.Columns[1].HeaderText = "Comment";
+                dataGridViewComments.Columns[2].Visible = false;
+                dataGridViewComments.Columns[3].HeaderText = "Surname";
+                dataGridViewComments.Columns[4].HeaderText = "Name";
+                dataGridViewComments.Columns[5].Visible = false;
+                dataGridViewComments.Columns[6].Visible = false;
+                dataGridViewComments.Columns[7].HeaderText = "Gender";
+                dataGridViewComments.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewComments.Columns[8].Visible = false;
+                dataGridViewComments.Columns[9].Visible = false;
+                dataGridViewComments.Columns[10].HeaderText = "Month";
+                dataGridViewComments.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewComments.Columns[11].HeaderText = "Year";
+                dataGridViewComments.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewComments.Columns[12].Visible = false;
+                foreach (DataGridViewColumn columnComments in dataGridViewComments.Columns)
+                {
+                    columnComments.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                }
+            #endregion
+
+                #region
+                constitutionDTO = constitutionBLL.Select();
+                dataGridViewConstitution.DataSource = constitutionDTO.Constitutions;
+                dataGridViewConstitution.Columns[0].Visible = false;
+                dataGridViewConstitution.Columns[1].Visible = false;
+                dataGridViewConstitution.Columns[2].HeaderText = "Constitution Summary";
+                dataGridViewConstitution.Columns[3].HeaderText = "Section";
+                dataGridViewConstitution.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewConstitution.Columns[4].Visible = false;
+                dataGridViewConstitution.Columns[5].HeaderText = "Fine";
+                dataGridViewConstitution.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                foreach (DataGridViewColumn column in dataGridViewConstitution.Columns)
+                {
+                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                }
+            #endregion
+
+                #region
+                finedMemberDTO = finedMemberBLL.Select();
+                dataGridViewFinedMembers.DataSource = finedMemberDTO.FineMembers;
+                dataGridViewFinedMembers.Columns[0].Visible = false;
+                dataGridViewFinedMembers.Columns[1].HeaderText = "Name";
+                dataGridViewFinedMembers.Columns[2].HeaderText = "Surname";
+                dataGridViewFinedMembers.Columns[3].Visible = false;
+                dataGridViewFinedMembers.Columns[4].HeaderText = "Violated";
+                dataGridViewFinedMembers.Columns[5].Visible = false;
+                dataGridViewFinedMembers.Columns[6].HeaderText = "Fine";
+                dataGridViewFinedMembers.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewFinedMembers.Columns[7].Visible = false;
+                dataGridViewFinedMembers.Columns[8].HeaderText = "Paid";
+                dataGridViewFinedMembers.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewFinedMembers.Columns[9].Visible = false;
+                dataGridViewFinedMembers.Columns[10].Visible = false;
+                dataGridViewFinedMembers.Columns[11].HeaderText = "Status";
+                dataGridViewFinedMembers.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewFinedMembers.Columns[12].Visible = false;
+                dataGridViewFinedMembers.Columns[13].Visible = false;
+                dataGridViewFinedMembers.Columns[14].Visible = false;
+                dataGridViewFinedMembers.Columns[15].Visible = false;
+                dataGridViewFinedMembers.Columns[16].Visible = false;
+                dataGridViewFinedMembers.Columns[17].Visible = false;
+                dataGridViewFinedMembers.Columns[18].Visible = false;
+                dataGridViewFinedMembers.Columns[19].Visible = false;
+                dataGridViewFinedMembers.Columns[20].HeaderText = "Day";
+                dataGridViewFinedMembers.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewFinedMembers.Columns[21].Visible = false;
+                dataGridViewFinedMembers.Columns[22].HeaderText = "Month";
+                dataGridViewFinedMembers.Columns[22].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewFinedMembers.Columns[23].HeaderText = "Year";
+                dataGridViewFinedMembers.Columns[23].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewFinedMembers.Columns[24].Visible = false;
+                dataGridViewFinedMembers.Columns[25].Visible = false;
+                foreach (DataGridViewColumn column in dataGridViewFinedMembers.Columns)
+                {
+                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                }
+            #endregion
+
+                // SPECIAL CONTRIBUTIONS
+                #region
+                specialContributionDTO = specialContributionsBLL.Select();
+
+                dataGridViewSpecialContributions.DataSource = specialContributionDTO.SpecialContributions;
+                dataGridViewSpecialContributions.Columns[0].Visible = false;
+                dataGridViewSpecialContributions.Columns[1].HeaderText = "Title";
+                dataGridViewSpecialContributions.Columns[2].Visible = false;
+                dataGridViewSpecialContributions.Columns[3].Visible = false;
+                dataGridViewSpecialContributions.Columns[4].HeaderText = "Amt. Each";
+                dataGridViewSpecialContributions.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[5].Visible = false;
+                dataGridViewSpecialContributions.Columns[6].HeaderText = "Total Amt. Exp.";
+                dataGridViewSpecialContributions.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[7].Visible = false;
+                dataGridViewSpecialContributions.Columns[8].HeaderText = "Amt. Cont.";
+                dataGridViewSpecialContributions.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[9].HeaderText = "Status";
+                dataGridViewSpecialContributions.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[10].Visible = false;
+                dataGridViewSpecialContributions.Columns[11].HeaderText = "Supervisor";
+                dataGridViewSpecialContributions.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[12].HeaderText = "Members";
+                dataGridViewSpecialContributions.Columns[12].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[13].Visible = false;
+                dataGridViewSpecialContributions.Columns[14].HeaderText = "Start Date";
+                dataGridViewSpecialContributions.Columns[14].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[15].Visible = false;
+                dataGridViewSpecialContributions.Columns[16].HeaderText = "End Date";
+                dataGridViewSpecialContributions.Columns[16].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                
+                foreach (DataGridViewColumn column in dataGridViewSpecialContributions.Columns)
+                {
+                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                }
+                #endregion
+
+
             #endregion
 
             if (LoginInfo.AccessLevel != 4)
@@ -234,6 +291,10 @@ namespace APC.AllForms
             labelTotalFineMembers.Text = "Rows: " + dataGridViewFinedMembers.RowCount.ToString();
             labelTotalPaidFines.Text = "Total Paid: " + bll.TotalPaidFines();
         }
+
+        // -------------------------------------------------------------------------
+        // -------------------- GENERAL ATTENDANCE ----------------------
+        // -------------------------------------------------------------------------
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -457,6 +518,9 @@ namespace APC.AllForms
             }
         }
 
+        // -------------------------------------------------------------------------
+        // -------------------- ABSENTEES ----------------------
+        // -------------------------------------------------------------------------
         private void btnAbsentees_Click(object sender, EventArgs e)
         {
             FormNotifications open = new FormNotifications();
@@ -465,6 +529,9 @@ namespace APC.AllForms
             this.Visible = true;
         }
 
+        // -------------------------------------------------------------------------
+        // -------------------- COMMENTS ----------------------
+        // -------------------------------------------------------------------------
         private void btnAddComments_Click(object sender, EventArgs e)
         {
             FormComments open = new FormComments();
@@ -574,6 +641,10 @@ namespace APC.AllForms
             ClearFilters();
         }
 
+        // -------------------------------------------------------------------------
+        // -------------------- FINED MEMBERS ----------------------
+        // -------------------------------------------------------------------------
+
         FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
         FinedMemberDTO finedMemberDTO = new FinedMemberDTO();
         FinedMemberDetailDTO finedMemberDetail = new FinedMemberDetailDTO();
@@ -605,6 +676,7 @@ namespace APC.AllForms
             finedMemberDetail.MonthName = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[22].Value.ToString();
             finedMemberDetail.Year = Convert.ToInt32(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[23].Value);
             finedMemberDetail.ImagePath = dataGridViewFinedMembers.Rows[e.RowIndex].Cells[24].Value.ToString();
+            finedMemberDetail.FineDate = Convert.ToDateTime(dataGridViewFinedMembers.Rows[e.RowIndex].Cells[25].Value);
         }
         private void btnAddFinedMember_Click(object sender, EventArgs e)
         {
@@ -669,6 +741,10 @@ namespace APC.AllForms
                 }
             }
         }
+
+        // -------------------------------------------------------------------------
+        // -------------------- CONSTITUTION ----------------------
+        // -------------------------------------------------------------------------
 
         ConstitutionBLL constitutionBLL = new ConstitutionBLL();
         ConstitutionDTO constitutionDTO = new ConstitutionDTO();
@@ -831,6 +907,19 @@ namespace APC.AllForms
 
         private void btnClearFinedMember_Click(object sender, EventArgs e)
         {
+            ClearFilters();
+        }
+
+        // -------------------------------------------------------------------------
+        // -------------------- SPECIAL CONTRIBUTIONS ----------------------
+        // -------------------------------------------------------------------------
+
+        private void btnAddContribution_Click(object sender, EventArgs e)
+        {
+            FormSpecialContribution open = new FormSpecialContribution();
+            this.Hide();
+            open.ShowDialog();
+            this.Visible = true;
             ClearFilters();
         }
     }

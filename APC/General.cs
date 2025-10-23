@@ -342,5 +342,34 @@ namespace APC
                 return false;
             }
         }
+
+        public static decimal CalculateYearlyDue(DateTime registrationDate, int targetYear)
+        {
+            const decimal monthlyDue = 10m;
+            int registrationYear = registrationDate.Year;
+            int registrationMonth = registrationDate.Month;
+
+            int monthsToPay = 0;
+
+            if (registrationYear < targetYear)
+            {
+                // Registered before the target year → pays all 12 months
+                monthsToPay = 12;
+            }
+            else if (registrationYear == targetYear)
+            {
+                // Registered in target year → starts paying from next month
+                monthsToPay = 12 - registrationMonth;
+                if (monthsToPay < 0) monthsToPay = 0; // just in case
+            }
+            else
+            {
+                // Registered after target year → pays nothing yet
+                monthsToPay = 0;
+            }
+
+            return monthsToPay * monthlyDue;
+        }
+
     }
 }

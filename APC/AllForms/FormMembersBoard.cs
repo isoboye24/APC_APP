@@ -23,8 +23,17 @@ namespace APC.AllForms
         MemberBLL registeredMembersBLL = new MemberBLL();
         MemberDTO registeredMembersDTO = new MemberDTO();
         MemberDetailDTO registeredMembersDetail = new MemberDetailDTO();
+
+        MembersCommittmentBLL committmentBLL = new MembersCommittmentBLL();
+        MembersCommittmentDetailDTO committmentDetail = new MembersCommittmentDetailDTO();
+        MembersCommittmentDTO committmentDTO = new MembersCommittmentDTO();
         private void FormMembersBoard_Load(object sender, EventArgs e)
         {
+            if (LoginInfo.AccessLevel != 4)
+            {
+                btnDeleteRegisteredMembers.Hide();
+                btnDeleteChildren.Hide();
+            }
             #region
             label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -402,14 +411,44 @@ namespace APC.AllForms
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
                 }
-                #endregion
             #endregion
 
-            if (LoginInfo.AccessLevel != 4)
-            {
-                btnDeleteRegisteredMembers.Hide();
-                btnDeleteChildren.Hide();
-            }
+                // Members' Commitments
+                #region
+                committmentDTO = committmentBLL.Select(DateTime.Now.Year);
+                dataGridViewCommitments.DataSource = committmentDTO.Committments;
+                dataGridViewCommitments.Columns[0].Visible = false;
+                dataGridViewCommitments.Columns[1].HeaderText = "Rank Ratio";
+            dataGridViewCommitments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewCommitments.Columns[2].HeaderText = "Name";
+                dataGridViewCommitments.Columns[3].HeaderText = "Surname";
+                dataGridViewCommitments.Columns[4].Visible = false;
+                dataGridViewCommitments.Columns[5].HeaderText = "Exp (€)";
+                dataGridViewCommitments.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewCommitments.Columns[6].HeaderText = "Cont (€)";
+                dataGridViewCommitments.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewCommitments.Columns[7].HeaderText = "Bal";
+                dataGridViewCommitments.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewCommitments.Columns[8].HeaderText = "Fines (€)";
+                dataGridViewCommitments.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewCommitments.Columns[9].HeaderText = "P. Fines (€)";
+                dataGridViewCommitments.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewCommitments.Columns[10].HeaderText = "Pres.";
+                dataGridViewCommitments.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewCommitments.Columns[11].HeaderText = "Abs.";
+                dataGridViewCommitments.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewCommitments.Columns[12].Visible = false;
+
+            foreach (DataGridViewColumn column in dataGridViewCommitments.Columns)
+                {
+                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                }
+                dataGridViewCommitments.DefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+
+            #endregion
+
+            #endregion
+
             GetCounts();
         }
 
@@ -488,6 +527,8 @@ namespace APC.AllForms
             labelNoOfMenDeadMembers.Text = deadMembersBLL.SelectCountDeadMale().ToString();
             labelNoOfFemaleDeadMembers.Text = deadMembersBLL.SelectCountDeadFemale().ToString();
             labelNoOfDivisorDeadMembers.Text = deadMembersBLL.SelectCountDeadDivisor().ToString();
+
+            labelTotalRowsCommittment.Text = "Row : " + dataGridViewCommitments.RowCount.ToString();
         }
 
         private void btnUpdateRegisteredMembers_Click(object sender, EventArgs e)
@@ -633,6 +674,9 @@ namespace APC.AllForms
             registeredMembersDetail.NameOfNextOfKin = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
             registeredMembersDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[41].Value);
             registeredMembersDetail.RelationshipToKin = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[42].Value.ToString();
+
+            string imagePath = Application.StartupPath + "\\images\\" + registeredMembersDetail.ImagePath;
+            picRegisteredMember.ImageLocation = imagePath;
         }
 
         ChildBLL childrenBLL = new ChildBLL();
@@ -1105,6 +1149,43 @@ namespace APC.AllForms
                 open.ShowDialog();
                 this.Visible = true;               
                 ClearFilters();
+            }
+        }
+        
+        private void dataGridViewCommitments_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            committmentDetail = new MembersCommittmentDetailDTO();
+            committmentDetail.MemberID = Convert.ToInt32(dataGridViewCommitments.Rows[e.RowIndex].Cells[0].Value);
+            committmentDetail.Rank = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[1].Value);
+            committmentDetail.Name = dataGridViewCommitments.Rows[e.RowIndex].Cells[2].Value.ToString();
+            committmentDetail.Surname = dataGridViewCommitments.Rows[e.RowIndex].Cells[3].Value.ToString();
+            committmentDetail.ImagePath = dataGridViewCommitments.Rows[e.RowIndex].Cells[4].Value.ToString();
+            committmentDetail.ExpectedAmount = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[5].Value);
+            committmentDetail.Contributed = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[6].Value);
+            committmentDetail.Balance = dataGridViewCommitments.Rows[e.RowIndex].Cells[7].Value.ToString();
+            committmentDetail.Fines = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[8].Value);
+            committmentDetail.PaidFines = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[9].Value);
+            committmentDetail.NumberOfPresence = Convert.ToInt32(dataGridViewCommitments.Rows[e.RowIndex].Cells[10].Value);
+            committmentDetail.NumberOfAbsence = Convert.ToInt32(dataGridViewCommitments.Rows[e.RowIndex].Cells[11].Value);
+
+            string imagePath = Application.StartupPath + "\\images\\" + committmentDetail.ImagePath;
+            picCommittment.ImageLocation = imagePath;
+        }
+
+        private void dataGridViewCommitments_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            // Draw row numbers on the row header
+            using (Font font = new Font("Segoe UI", 14, FontStyle.Bold))
+            using (SolidBrush brush = new SolidBrush(dataGridViewCommitments.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                string rowNumber = (e.RowIndex + 1).ToString();
+                e.Graphics.DrawString(
+                    rowNumber,
+                    font,
+                    brush,
+                    e.RowBounds.Location.X + 15,
+                    e.RowBounds.Location.Y + 4
+                );
             }
         }
     }

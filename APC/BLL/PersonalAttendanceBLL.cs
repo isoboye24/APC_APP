@@ -78,6 +78,16 @@ namespace APC.BLL
             return dao.SelectLastMeetingAttendance();
         }
 
+        public decimal TotalDuesExpected(int meetingID)
+        {
+            return dao.AmountExpected(meetingID);
+        }
+
+        public decimal DuesContributed(int meetingID)
+        {
+            return dao.DuesContributed(meetingID);
+        }
+
         public bool IsUnique(int personID, int attendanceID)
         {
             List<PERSONAL_ATTENDANCE> list = dao.IsUnique(personID, attendanceID);

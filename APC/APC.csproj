@@ -199,6 +199,12 @@
     <Compile Include="AllForms\FormSingleCommentList.Designer.cs">
       <DependentUpon>FormSingleCommentList.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormSpecialContribution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormSpecialContribution.Designer.cs">
+      <DependentUpon>FormSpecialContribution.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormViewConstitution.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,8 +261,11 @@
     <Compile Include="BLL\FinedMemberBLL.cs" />
     <Compile Include="BLL\GeneralAttendanceBLL.cs" />
     <Compile Include="BLL\GraphBLL.cs" />
+    <Compile Include="BLL\MembersCommittmentBLL.cs" />
     <Compile Include="BLL\MembershipStatusBLL.cs" />
     <Compile Include="BLL\RelationshipsToKinBLL.cs" />
+    <Compile Include="BLL\SpecialContributionsBLL.cs" />
+    <Compile Include="BLL\SpecialContributorsBLL.cs" />
     <Compile Include="CircularPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -281,8 +290,11 @@
     <Compile Include="DAL\DAO\EventSalesDAO.cs" />
     <Compile Include="DAL\DAO\FinedMemberDAO.cs" />
     <Compile Include="DAL\DAO\GraphDAO.cs" />
+    <Compile Include="DAL\DAO\MembersCommittmentDAO.cs" />
     <Compile Include="DAL\DAO\MembershipStatusDAO.cs" />
     <Compile Include="DAL\DAO\RelationshipToNextOfKinDAO.cs" />
+    <Compile Include="DAL\DAO\SpecialContributionsDAO.cs" />
+    <Compile Include="DAL\DAO\SpecialContributorsDAO.cs" />
     <Compile Include="DAL\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -492,6 +504,8 @@
     <Compile Include="DAL\DTO\FinedMemberDTO.cs" />
     <Compile Include="DAL\DTO\GraphAmountDetailDTO.cs" />
     <Compile Include="DAL\DTO\GraphDTO.cs" />
+    <Compile Include="DAL\DTO\MembersCommittmentDetailDTO.cs" />
+    <Compile Include="DAL\DTO\MembersCommittmentDTO.cs" />
     <Compile Include="DAL\DTO\MembershipStatusDetailDTO.cs" />
     <Compile Include="DAL\DTO\MembershipStatusDTO.cs" />
     <Compile Include="DAL\DTO\PersonalAttendanceDetailDTO.cs" />
@@ -537,6 +551,10 @@
     <Compile Include="DAL\DTO\RelationshipToNextOfKinDetailDTO.cs" />
     <Compile Include="DAL\DTO\RelationshipToNextOfKinDTO.cs" />
     <Compile Include="DAL\DAO\EventExpenditureDAO.cs" />
+    <Compile Include="DAL\DTO\SpecialContributionDetailDTO.cs" />
+    <Compile Include="DAL\DTO\SpecialContributionDTO.cs" />
+    <Compile Include="DAL\DTO\SpecialContributorDetailDTO.cs" />
+    <Compile Include="DAL\DTO\SpecialContributorDTO.cs" />
     <Compile Include="DAL\DUAL_NATIONALITY.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -601,6 +619,12 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PROFESSION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SPECIAL_CONTRIBUTIONS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SPECIAL_CONTRIBUTORS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FormProperties.cs" />
@@ -751,6 +775,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormSingleCommentList.resx">
       <DependentUpon>FormSingleCommentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormSpecialContribution.resx">
+      <DependentUpon>FormSpecialContribution.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormViewConstitution.resx">
       <DependentUpon>FormViewConstitution.cs</DependentUpon>

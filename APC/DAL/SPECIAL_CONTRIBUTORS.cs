@@ -12,18 +12,15 @@ namespace APC.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class FINED_MEMBER
+    public partial class SPECIAL_CONTRIBUTORS
     {
-        public int finedMemberID { get; set; }
-        public Nullable<decimal> amountPaid { get; set; }
-        public string summary { get; set; }
-        public int constitutionID { get; set; }
+        public int specialContributorID { get; set; }
         public int memberID { get; set; }
-        public int monthID { get; set; }
-        public int day { get; set; }
-        public int year { get; set; }
-        public bool isdeleted { get; set; }
+        public decimal amountContributed { get; set; }
+        public System.DateTime contributedDate { get; set; }
+        public bool isDeleted { get; set; }
         public Nullable<System.DateTime> deletedDate { get; set; }
-        public System.DateTime fineDate { get; set; }
+        public string summary { get; set; }
+        public int specialContributionID { get; set; }
     }
 }

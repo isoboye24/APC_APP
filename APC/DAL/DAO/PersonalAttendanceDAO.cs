@@ -77,15 +77,17 @@ namespace APC.DAL.DAO
 
         public List<PersonalAttendanceDetailDTO> SelectPresentMember(int ID)
         {
-            List<PersonalAttendanceDetailDTO> attendances = new List<PersonalAttendanceDetailDTO>();
-            List<int> members = new List<int>();
-            List<int> absentMembers = new List<int>();
-            var list = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false)
-                            join mem in db.MEMBER.Where(x => x.isDeleted == false && x.memberID ==ID) on p.memberID equals mem.memberID
+            try
+            {
+                List<PersonalAttendanceDetailDTO> attendances = new List<PersonalAttendanceDetailDTO>();
+                List<int> members = new List<int>();
+                List<int> absentMembers = new List<int>();
+                var list = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false)
+                            join mem in db.MEMBER.Where(x => x.isDeleted == false && x.memberID == ID) on p.memberID equals mem.memberID
                             join m in db.MONTH on p.monthID equals m.monthID
                             join g in db.GENDER on mem.genderID equals g.genderID
                             join ats in db.ATTENDANCE_STATUS.Where(x => x.attendanceStatus == "Present") on p.attendanceStatusID equals ats.attendanceStatusID
-                            join gen in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ThenByDescending(x=>x.monthID) on p.generalAttendanceID equals gen.generalAttendanceID
+                            join gen in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID) on p.generalAttendanceID equals gen.generalAttendanceID
                             select new
                             {
                                 attendanceID = p.attendanceID,
@@ -128,7 +130,11 @@ namespace APC.DAL.DAO
                     dto.GeneralAttendanceID = item.meetingID;
                     attendances.Add(dto);
                 }
-            return attendances;
+                return attendances;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }            
         }
 
         public List<PersonalAttendanceDetailDTO> SelectAbsentMember(int ID)
@@ -242,6 +248,43 @@ namespace APC.DAL.DAO
             }
             return amountsContributed;
         }
+
+        public decimal AmountExpected(int meetingID)
+        {
+            try
+            {
+                decimal amountExpected  = db.PERSONAL_ATTENDANCE.Count(x =>x.generalAttendanceID == meetingID) * 10;
+                return amountExpected;
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+        public decimal DuesContributed(int meetingID)
+        {
+            try
+            {
+                List<decimal> duesContributed = new List<decimal>();
+                var totalDues  = db.PERSONAL_ATTENDANCE.Where(x =>x.generalAttendanceID == meetingID).ToList();
+
+                foreach (var item in totalDues)
+                {
+                    duesContributed.Add((decimal)item.monthlyDues);
+                }
+                decimal totalDuesContributed = duesContributed.Sum();
+
+                return totalDuesContributed;
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<PersonalAttendanceDetailDTO> AmountsExpected(int ID)
         {
             List<PersonalAttendanceDetailDTO> amountsExpected = new List<PersonalAttendanceDetailDTO>();

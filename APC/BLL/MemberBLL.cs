@@ -104,6 +104,13 @@ namespace APC.BLL
             dto.RelationshipsToNextOfKin = kinsDAO.Select();
             return dto;
         }
+
+        public MemberDTO Select(int memberID)
+        {
+            MemberDTO dto = new MemberDTO();
+            dto.Members = memberDAO.Select(memberID);
+            return dto;
+        }
         public MemberDTO SelectFormerMembers()
         {
             MemberDTO dto = new MemberDTO();

@@ -33,5 +33,6 @@ namespace APC.DAL.DTO
         public string MonthName { get; set; }
         public int Year { get; set; }
         public string ImagePath { get; set; }
+        public DateTime FineDate { get; set; }
     }
 }

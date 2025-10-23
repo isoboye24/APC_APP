@@ -56,6 +56,7 @@ namespace APC.AllForms
                 txtAmount.Text = detail.Fine.ToString();
                 txtSection.Text = detail.Section;
                 txtConstitution.Text = detail.ConstitutionText;
+                txtShortDescription.Text = detail.ShortDescription;
             }
             else if (!isUpdate)
             {

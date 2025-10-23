@@ -192,6 +192,7 @@ namespace APC.AllForms
             {
                 txtSummary.Text = detail.Summary;
                 txtAmount.Text = detail.AmountPaid.ToString();
+                dateTimePickerFineDate.Value = detail.FineDate;
                 labelFine.Text = detail.ExpectedAmountWithCurrency;
                 labelConstitutionSection.Text = detail.ConstitutionSection;
                 labelPosition.Text = detail.Position;
@@ -221,9 +222,10 @@ namespace APC.AllForms
                 }
                 finedMember.ConstitutionID = constitutionDetail.ConstitutionID;
                 finedMember.MemberID = memberDetail.MemberID;
-                finedMember.Day = DateTime.Today.Day;
-                finedMember.MonthID = DateTime.Today.Month;
-                finedMember.Year = DateTime.Today.Year;
+                finedMember.Day = dateTimePickerFineDate.Value.Day;
+                finedMember.MonthID = dateTimePickerFineDate.Value.Month;
+                finedMember.Year = dateTimePickerFineDate.Value.Year;
+                finedMember.FineDate = dateTimePickerFineDate.Value;
                 if (bll.Insert(finedMember))
                 {
                     MessageBox.Show("Member was fined successfully!");
@@ -239,6 +241,7 @@ namespace APC.AllForms
                     && txtSummary.Text.Trim() == detail.Summary
                     && detail.MemberID == memberDetail.MemberID
                     && detail.ConstitutionID == constitutionDetail.ConstitutionID
+                    && detail.FineDate == dateTimePickerFineDate.Value
                     )
                 {
                     MessageBox.Show("There is no change!");
@@ -270,9 +273,10 @@ namespace APC.AllForms
                     {
                         detail.MemberID = detail.MemberID;
                     }
-                    detail.Day = detail.Day;
-                    detail.MonthID = detail.MonthID;
-                    detail.Year = detail.Year;
+                    detail.FineDate = dateTimePickerFineDate.Value;
+                    detail.Day = dateTimePickerFineDate.Value.Day;
+                    detail.MonthID = dateTimePickerFineDate.Value.Month;
+                    detail.Year = dateTimePickerFineDate.Value.Year;
                     if (bll.Update(detail))
                     {
                         MessageBox.Show("Fined member was updated!");

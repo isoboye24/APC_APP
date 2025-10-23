@@ -61,6 +61,7 @@ namespace APC.BLL
             finedMember.day = entity.Day;
             finedMember.monthID = entity.MonthID;
             finedMember.year = entity.Year;
+            finedMember.fineDate = entity.FineDate;
             return dao.Insert(finedMember);
         }
 
@@ -86,6 +87,7 @@ namespace APC.BLL
             finedMember.day = entity.Day;
             finedMember.monthID = entity.MonthID;
             finedMember.year = entity.Year;
+            finedMember.fineDate = entity.FineDate;
             return dao.Update(finedMember);
         }
     }

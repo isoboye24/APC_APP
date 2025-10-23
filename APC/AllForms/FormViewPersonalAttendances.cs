@@ -251,11 +251,11 @@ namespace APC.AllForms
                 dataGridView1.Columns[7].HeaderText = "Paid";
                 dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].HeaderText = "Balance";
-                dataGridView1.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[10].HeaderText = "Status";
+                dataGridView1.Columns[9].Visible = false;
+                dataGridView1.Columns[10].HeaderText = "Balance";
                 dataGridView1.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[11].Visible = false;
+                dataGridView1.Columns[11].HeaderText = "Status";
+                dataGridView1.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView1.Columns[12].Visible = false;
                 dataGridView1.Columns[13].Visible = false;
                 dataGridView1.Columns[14].Visible = false;
@@ -263,14 +263,16 @@ namespace APC.AllForms
                 dataGridView1.Columns[16].Visible = false;
                 dataGridView1.Columns[17].Visible = false;
                 dataGridView1.Columns[18].Visible = false;
-                dataGridView1.Columns[19].HeaderText = "Day";
-                dataGridView1.Columns[19].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[20].Visible = false;
-                dataGridView1.Columns[21].HeaderText = "Month";
-                dataGridView1.Columns[21].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[22].HeaderText = "Year";
+                dataGridView1.Columns[19].Visible = false;
+                dataGridView1.Columns[20].HeaderText = "Day";
+                dataGridView1.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns[21].Visible = false;
+                dataGridView1.Columns[22].HeaderText = "Month";
                 dataGridView1.Columns[22].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[23].Visible = false;
+                dataGridView1.Columns[23].HeaderText = "Year";
+                dataGridView1.Columns[23].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns[24].Visible = false;
+                dataGridView1.Columns[25].Visible = false;
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);

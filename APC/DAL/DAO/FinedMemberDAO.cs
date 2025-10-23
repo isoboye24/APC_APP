@@ -155,6 +155,7 @@ namespace APC.DAL.DAO
                                 monthID = fm.monthID,
                                 month = mn.monthName,
                                 year = fm.year,
+                                finedDate = fm.fineDate,
                             }).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID).ThenByDescending(x => x.day).ThenBy(x => x.name).ToList();
                 foreach (var item in list)
                 {
@@ -168,6 +169,8 @@ namespace APC.DAL.DAO
                     dto.Balance = dto.ExpectedAmount - dto.AmountPaid;
                     dto.BalanceWithCurrency = "€ " + dto.Balance;
                     dto.Summary = item.summary;
+                    dto.FineDate = item.finedDate;
+
                     if (dto.Balance == 0)
                     {
                         dto.FineStatus = "Completed";
@@ -180,6 +183,7 @@ namespace APC.DAL.DAO
                     {
                         dto.FineStatus = "NOT completed";
                     }
+
                     dto.ConstitutionSection = item.section;
                     dto.ConstitutionShortDescription = item.shortDescription;
                     dto.Constitution = item.constitution;
@@ -239,6 +243,7 @@ namespace APC.DAL.DAO
                                 monthID = fm.monthID,
                                 month = mn.monthName,
                                 year = fm.year,
+                                finedDate = fm.fineDate,
                             }).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID).ThenByDescending(x => x.day).ThenBy(x => x.name).ToList();
                 foreach (var item in list)
                 {
@@ -252,6 +257,8 @@ namespace APC.DAL.DAO
                     dto.Balance = dto.ExpectedAmount - dto.AmountPaid;
                     dto.BalanceWithCurrency = "€ " + dto.Balance;
                     dto.Summary = item.summary;
+                    dto.FineDate = item.finedDate;
+                    
                     if (dto.Balance == 0)
                     {
                         dto.FineStatus = "Completed";
@@ -264,6 +271,7 @@ namespace APC.DAL.DAO
                     {
                         dto.FineStatus = "NOT completed";
                     }
+
                     dto.ConstitutionSection = item.section;
                     dto.Constitution = item.constitution;
                     dto.MemberID = item.memberID;
@@ -307,6 +315,7 @@ namespace APC.DAL.DAO
                                 constitutionID = fm.constitutionID,
                                 expectedAmount = c.fine,
                                 summary = fm.summary,
+                                finedDate = fm.fineDate,
                                 section = c.section,
                                 constitution = c.constitution1,
                                 memberID = m.memberID,
@@ -334,6 +343,7 @@ namespace APC.DAL.DAO
                     dto.Balance = dto.ExpectedAmount - dto.AmountPaid;
                     dto.BalanceWithCurrency = "€ " + dto.Balance;
                     dto.Summary = item.summary;
+                    dto.FineDate = item.finedDate;
                     if (dto.Balance < 1)
                     {
                         dto.FineStatus = "Completed";
@@ -342,6 +352,7 @@ namespace APC.DAL.DAO
                     {
                         dto.FineStatus = "NOT completed";
                     }
+
                     dto.ConstitutionSection = item.section;
                     dto.Constitution = item.constitution;
                     dto.MemberID = item.memberID;
@@ -424,6 +435,7 @@ namespace APC.DAL.DAO
                 finedMember.day = entity.day;
                 finedMember.monthID = entity.monthID;
                 finedMember.year = entity.year;
+                finedMember.fineDate = entity.fineDate;
                 db.SaveChanges();
                 return true;
             }

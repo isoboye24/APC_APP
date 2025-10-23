@@ -71,7 +71,7 @@ namespace APC.AllForms
             label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label10.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label11.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalDuesBalance.Font = new Font("Segoe UI", 24, FontStyle.Bold);
+            labelTotalBalanceNew.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelTotalDuesExpected.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelTotalDuesPaid.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             labelTotalMembersAbsent.Font = new Font("Segoe UI", 24, FontStyle.Bold);
@@ -132,9 +132,26 @@ namespace APC.AllForms
         {
             General.ValueCount(labelTotalMembersPresent, detail.TotalMembersPresent, 100, 57);
             General.ValueCount(labelTotalMembersAbsent, detail.TotalMembersAbsent, 100, 57);
-            General.ValueCountInDecimal(labelTotalDuesPaid, detail.TotalDuesPaid, 73, 57);
-            General.ValueCountInDecimal(labelTotalDuesExpected, detail.TotalDuesExpected, 73, 57);
-            General.ValueCountInDecimal(labelTotalDuesBalance, detail.TotalDuesBalance, 73, 26);
+
+            labelTotalDuesPaid.Text = bll.DuesContributed(detail.GeneralAttendanceID).ToString();
+            labelTotalDuesExpected.Text = bll.TotalDuesExpected(detail.GeneralAttendanceID).ToString();
+            decimal balance = bll.TotalDuesExpected(detail.GeneralAttendanceID) - bll.DuesContributed(detail.GeneralAttendanceID);
+
+            if (balance > 0)
+            {
+                labelBalanceStatus.Text = "Remaining";
+                labelTotalBalanceNew.Text = balance.ToString();
+            }
+            else if (balance < 0)
+            {
+                labelBalanceStatus.Text = "Extra";
+                labelTotalBalanceNew.Text = ((-1) * balance).ToString();
+            }
+            else
+            {
+                labelBalanceStatus.Text = "Exact";
+                labelTotalBalanceNew.Text = balance.ToString();
+            }
         }
 
         private void FillDataGrid()

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cf79c11a6c2a4ef3ac0767579728a0a0" Name="Diagram1">
+      <Diagram DiagramId="d708733d61774f46aac605795215ba88" Name="Diagram1">
         <EntityTypeShape EntityType="APCModel.ATTENDANCE_STATUS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="APCModel.CHILD" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="APCModel.COMMENT" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -33,6 +33,8 @@
         <EntityTypeShape EntityType="APCModel.PERSONAL_ATTENDANCE" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="APCModel.POSITION" Width="1.5" PointX="14.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="APCModel.PROFESSION" Width="1.5" PointX="14.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="APCModel.SPECIAL_CONTRIBUTIONS" Width="1.5" PointX="10.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="APCModel.SPECIAL_CONTRIBUTORS" Width="1.5" PointX="14.75" PointY="11.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

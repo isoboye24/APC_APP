@@ -53,5 +53,7 @@ namespace APC.DAL
         public virtual DbSet<PERSONAL_ATTENDANCE> PERSONAL_ATTENDANCE { get; set; }
         public virtual DbSet<POSITION> POSITION { get; set; }
         public virtual DbSet<PROFESSION> PROFESSION { get; set; }
+        public virtual DbSet<SPECIAL_CONTRIBUTIONS> SPECIAL_CONTRIBUTIONS { get; set; }
+        public virtual DbSet<SPECIAL_CONTRIBUTORS> SPECIAL_CONTRIBUTORS { get; set; }
     }
 }

@@ -210,6 +210,7 @@
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="isdeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
+          <Property Name="fineDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="GENDER">
           <Key>
@@ -352,6 +353,34 @@
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
         </EntityType>
+        <EntityType Name="SPECIAL_CONTRIBUTIONS">
+          <Key>
+            <PropertyRef Name="specialContributionID" />
+          </Key>
+          <Property Name="specialContributionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="summary" Type="text" />
+          <Property Name="amountToContribute" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="supervisorID" Type="int" Nullable="false" />
+          <Property Name="contributionStartDate" Type="date" Nullable="false" />
+          <Property Name="contributionEndDate" Type="date" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="amountExpected" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SPECIAL_CONTRIBUTORS">
+          <Key>
+            <PropertyRef Name="specialContributorID" />
+          </Key>
+          <Property Name="specialContributorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="memberID" Type="int" Nullable="false" />
+          <Property Name="amountContributed" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="contributedDate" Type="date" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="summary" Type="text" />
+          <Property Name="specialContributionID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="APCModelStoreContainer">
           <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CHILD" EntityType="Self.CHILD" Schema="dbo" store:Type="Tables" />
@@ -381,6 +410,8 @@
           <EntitySet Name="PERSONAL_ATTENDANCE" EntityType="Self.PERSONAL_ATTENDANCE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POSITION" EntityType="Self.POSITION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SPECIAL_CONTRIBUTIONS" EntityType="Self.SPECIAL_CONTRIBUTIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SPECIAL_CONTRIBUTORS" EntityType="Self.SPECIAL_CONTRIBUTORS" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -592,6 +623,7 @@
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="isdeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="fineDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="GENDER">
           <Key>
@@ -734,6 +766,34 @@
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="SPECIAL_CONTRIBUTIONS">
+          <Key>
+            <PropertyRef Name="specialContributionID" />
+          </Key>
+          <Property Name="specialContributionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="amountToContribute" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="supervisorID" Type="Int32" Nullable="false" />
+          <Property Name="contributionStartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="contributionEndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="amountExpected" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SPECIAL_CONTRIBUTORS">
+          <Key>
+            <PropertyRef Name="specialContributorID" />
+          </Key>
+          <Property Name="specialContributorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="memberID" Type="Int32" Nullable="false" />
+          <Property Name="amountContributed" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="contributedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="specialContributionID" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="APCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" />
           <EntitySet Name="CHILD" EntityType="Self.CHILD" />
@@ -763,6 +823,8 @@
           <EntitySet Name="PERSONAL_ATTENDANCE" EntityType="Self.PERSONAL_ATTENDANCE" />
           <EntitySet Name="POSITION" EntityType="Self.POSITION" />
           <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" />
+          <EntitySet Name="SPECIAL_CONTRIBUTIONS" EntityType="Self.SPECIAL_CONTRIBUTIONS" />
+          <EntitySet Name="SPECIAL_CONTRIBUTORS" EntityType="Self.SPECIAL_CONTRIBUTORS" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -989,6 +1051,7 @@
                 <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="fineDate" ColumnName="fineDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1142,6 +1205,36 @@
                 <ScalarProperty Name="profession1" ColumnName="profession" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPECIAL_CONTRIBUTIONS">
+            <EntityTypeMapping TypeName="APCModel.SPECIAL_CONTRIBUTIONS">
+              <MappingFragment StoreEntitySet="SPECIAL_CONTRIBUTIONS">
+                <ScalarProperty Name="specialContributionID" ColumnName="specialContributionID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="amountToContribute" ColumnName="amountToContribute" />
+                <ScalarProperty Name="supervisorID" ColumnName="supervisorID" />
+                <ScalarProperty Name="contributionStartDate" ColumnName="contributionStartDate" />
+                <ScalarProperty Name="contributionEndDate" ColumnName="contributionEndDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="amountExpected" ColumnName="amountExpected" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPECIAL_CONTRIBUTORS">
+            <EntityTypeMapping TypeName="APCModel.SPECIAL_CONTRIBUTORS">
+              <MappingFragment StoreEntitySet="SPECIAL_CONTRIBUTORS">
+                <ScalarProperty Name="specialContributorID" ColumnName="specialContributorID" />
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="amountContributed" ColumnName="amountContributed" />
+                <ScalarProperty Name="contributedDate" ColumnName="contributedDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="specialContributionID" ColumnName="specialContributionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

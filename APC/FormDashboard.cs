@@ -229,7 +229,7 @@ namespace APC
             int todayYear = DateTime.Today.Year;
             labelDuesMonthName.Text = "Dues in "+ monthToday + " "+ yearToday;
             labelExpensesInThisYear.Text = "Total Expenses in " + yearToday;
-            labelTotalDuesYear.Text = "Total Dues in " + yearToday;
+            labelTotalDuesYear.Text = "Total Dues + Fines in " + yearToday;
 
             labelMonthlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountMonthly(todayMonth);
             labelYearlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountYearly(todayYear);

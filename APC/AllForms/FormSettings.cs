@@ -1184,6 +1184,7 @@ namespace APC.AllForms
                 dataGridView1.Columns[23].HeaderText = "Year";
                 dataGridView1.Columns[23].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView1.Columns[24].Visible = false;
+                dataGridView1.Columns[25].Visible = false;
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -1417,26 +1418,28 @@ namespace APC.AllForms
                 finedMemberDeletedDataDetail.Name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                 finedMemberDeletedDataDetail.Surname = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                 finedMemberDeletedDataDetail.ConstitutionSection = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                finedMemberDeletedDataDetail.ExpectedAmount = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-                finedMemberDeletedDataDetail.ExpectedAmountWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                finedMemberDeletedDataDetail.AmountPaid = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
-                finedMemberDeletedDataDetail.AmountPaidWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-                finedMemberDeletedDataDetail.Balance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
-                finedMemberDeletedDataDetail.BalanceWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
-                finedMemberDeletedDataDetail.FineStatus = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
-                finedMemberDeletedDataDetail.Gender = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-                finedMemberDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString();
-                finedMemberDeletedDataDetail.ConstitutionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[13].Value);
-                finedMemberDeletedDataDetail.Constitution = dataGridView1.Rows[e.RowIndex].Cells[14].Value.ToString();
-                finedMemberDeletedDataDetail.MemberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[15].Value);
-                finedMemberDeletedDataDetail.PositionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[16].Value);
-                finedMemberDeletedDataDetail.Position = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
-                finedMemberDeletedDataDetail.GenderID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[18].Value);
-                finedMemberDeletedDataDetail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[19].Value);
-                finedMemberDeletedDataDetail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[20].Value);
-                finedMemberDeletedDataDetail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[21].Value.ToString();
-                finedMemberDeletedDataDetail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[22].Value);
-                finedMemberDeletedDataDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[23].Value.ToString();
+                finedMemberDeletedDataDetail.ConstitutionShortDescription = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                finedMemberDeletedDataDetail.ExpectedAmount = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
+                finedMemberDeletedDataDetail.ExpectedAmountWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+                finedMemberDeletedDataDetail.AmountPaid = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
+                finedMemberDeletedDataDetail.AmountPaidWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
+                finedMemberDeletedDataDetail.Balance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
+                finedMemberDeletedDataDetail.BalanceWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
+                finedMemberDeletedDataDetail.FineStatus = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
+                finedMemberDeletedDataDetail.Gender = dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString();
+                finedMemberDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[13].Value.ToString();
+                finedMemberDeletedDataDetail.ConstitutionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[14].Value);
+                finedMemberDeletedDataDetail.Constitution = dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString();
+                finedMemberDeletedDataDetail.MemberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[16].Value);
+                finedMemberDeletedDataDetail.PositionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[17].Value);
+                finedMemberDeletedDataDetail.Position = dataGridView1.Rows[e.RowIndex].Cells[18].Value.ToString();
+                finedMemberDeletedDataDetail.GenderID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[19].Value);
+                finedMemberDeletedDataDetail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[20].Value);
+                finedMemberDeletedDataDetail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[21].Value);
+                finedMemberDeletedDataDetail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[22].Value.ToString();
+                finedMemberDeletedDataDetail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[23].Value);
+                finedMemberDeletedDataDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[24].Value.ToString();
+                finedMemberDeletedDataDetail.FineDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[25].Value);
             }
         }
 
