@@ -1,25 +1,26 @@
-﻿using System;
+﻿using APC.AllForms;
+using APC.BLL;
+using APC.DAL.DTO;
+using APC.Utility;
+using FontAwesome.Sharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using APC.AllForms;
-using APC.BLL;
-using APC.DAL.DTO;
-using APC.Utility;
-using FontAwesome.Sharp;
 
 namespace APC
 {
-    public partial class FormDashboard : Form
+    public partial class FormDashboard : BaseForm
     {
         private IconButton currentBtn;
         private Panel leftBorderBtn;
@@ -141,6 +142,9 @@ namespace APC
         FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
         public bool isAdmin = false;
         public bool isEditor = false;
+
+        private int buttonSize = 14;
+        private float panelSize;
         private void FormDashboard_Load(object sender, EventArgs e)
         {
             #region
@@ -160,7 +164,7 @@ namespace APC
             labelTotalFineExpected.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             #endregion
 
-            
+            labelAmountRaisedYearly.Tag = "resizable";
 
             int minWidthPercentage = 70;
             int minHeightPercentage = 70;
@@ -187,14 +191,47 @@ namespace APC
             initialDetail.WindowState = this.WindowState;
 
             this.ControlBox = false;
-            RefreshAllCards();            
+            RefreshAllCards();
+            ResizeableControls();
         }       
 
         private void picProfilePic_Paint(object sender, PaintEventArgs e)
         {
             
         }
-        
+
+        private void ResizeableControls()
+        {
+            label18.Tag = "resizable";
+            label1.Tag = "resizable";
+            label19.Tag = "resizable";
+            label21.Tag = "resizable";
+            label23.Tag = "resizable";
+            label24.Tag = "resizable";
+            labelAmountRaisedYearly.Tag = "resizable";
+            labelDuesMonthName.Tag = "resizable";
+            labelExpendituresInYear.Tag = "resizable";
+            labelExpendituresYearly.Tag = "resizable";
+            labelExpensesInThisYear.Tag = "resizable";
+            labelLastMeetingAttendance.Tag = "resizable";
+            labelMonthlyDues.Tag = "resizable";
+            labelNoOfRegMem.Tag = "resizable";
+            labelTitleChildForm.Tag = "resizable";
+            labelTotalDuesYear.Tag = "resizable";
+            labelTotalExpenditures.Tag = "resizable";
+            labelTotalFineExpected.Tag = "resizable";
+            labelTotalPaidFines.Tag = "resizable";
+            labelYearlyDues.Tag = "resizable";
+
+
+            //btnAttendance.Tag = "resizable";
+            //btnDocuments.Tag = "resizable";
+            //btnEvents.Tag = "resizable";
+            //btnFinancialReport.Tag = "resizable";
+            //btnManage.Tag = "resizable";
+            //btnMembers.Tag = "resizable";
+        }
+
         private void RefreshAllCards()
         {
             string yearlyDues = "SELECT PERSONAL_ATTENDANCE.year, SUM(PERSONAL_ATTENDANCE.monthlyDues)\r\n" +
@@ -287,6 +324,11 @@ namespace APC
             if (WindowState == FormWindowState.Normal)
             {
                 WindowState = FormWindowState.Maximized;
+                ZoomManager.ZoomIn(this);
+
+                buttonSize = 18;
+                panelSize = 3.05f;
+                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
             else
             {
@@ -294,6 +336,11 @@ namespace APC
                 this.Location = initialDetail.Location;
                 this.Size = initialDetail.Size;
                 this.WindowState = initialDetail.WindowState;
+                ZoomManager.ZoomIn(this);
+
+                buttonSize = 14;
+                panelSize = 1.05f;
+                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
         }
 
@@ -301,11 +348,16 @@ namespace APC
         {
             if (WindowState == FormWindowState.Normal)
             {
-                WindowState = FormWindowState.Minimized;
+                WindowState = FormWindowState.Minimized;                
             }
             else
             {
                 WindowState = FormWindowState.Normal;
+                ZoomManager.ZoomOut(this);
+
+                buttonSize = 14;
+                panelSize = 1.05f;
+                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
         }
 
@@ -463,18 +515,12 @@ namespace APC
 
         private void iconZoomIn_Click(object sender, EventArgs e)
         {
-            globalFontSize += 2f;
-            resizeFactor += 1.05f;
-
-            ControlResize.ResizeAllOpenForms(globalFontSize, resizeFactor);
+            ZoomManager.ZoomIn(this);
         }
 
         private void iconZoomOut_Click(object sender, EventArgs e)
         {
-            globalFontSize -= 2f;
-            resizeFactor -= 1 / 1.05f;
-
-            ControlResize.ResizeAllOpenForms(globalFontSize, resizeFactor);
+            ZoomManager.ZoomOut(this);
         }
     }
 }

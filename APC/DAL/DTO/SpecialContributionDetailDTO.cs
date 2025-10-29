@@ -10,6 +10,7 @@ namespace APC.DAL.DTO
     public class SpecialContributionDetailDTO
     {
         public int SpecialContributionID { get; set; }
+        public int Counter { get; set; }
         public string ContributionTitle { get; set; }
         public string Summary { get; set; }
         public  decimal AmountToContribute { get; set; }
@@ -21,10 +22,12 @@ namespace APC.DAL.DTO
         public string Status { get; set; }
         public int SupervisorID { get; set; }
         public string SupervisorName { get; set; }
+        public string SupervisorSurname { get; set; }
         public int Members { get; set; }
         public  DateTime ContributionStartDate { get; set; }
         public string StartDate { get; set; }
         public  DateTime ContributionEndDate { get; set; }
         public string EndDate { get; set; }
+        public string ImagePath { get; set; }
     }
 }

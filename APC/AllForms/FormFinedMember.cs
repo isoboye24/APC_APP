@@ -31,6 +31,7 @@ namespace APC.AllForms
         FinedMemberBLL bll = new FinedMemberBLL();
         FinedMemberDTO dto = new FinedMemberDTO();
         public FinedMemberDetailDTO detail = new FinedMemberDetailDTO();
+
         public MemberDetailDTO memberDetail = new MemberDetailDTO();
         public ConstitutionDetailDTO constitutionDetail = new ConstitutionDetailDTO();
         public bool isUpdate = false;
@@ -335,6 +336,7 @@ namespace APC.AllForms
 
             string imagePath = Application.StartupPath + "\\images\\" + memberDetail.ImagePath;
             picProfilePic.ImageLocation = imagePath;
+
             labelName.Text = memberDetail.Name;
             labelSurname.Text = memberDetail.Surname;
             labelPosition.Text = memberDetail.PositionName;

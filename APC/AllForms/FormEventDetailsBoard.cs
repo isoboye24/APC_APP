@@ -15,7 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
 {
-    public partial class FormEventDetailsBoard : Form
+    public partial class FormEventDetailsBoard : BaseForm
     {
         public FormEventDetailsBoard()
         {
@@ -122,29 +122,86 @@ namespace APC.AllForms
             ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
         }
 
-        private void FormEventDetailsBoard_Load(object sender, EventArgs e)
+        private void ResizeableControls()
         {
-            if (LoginInfo.AccessLevel != 4)
-            {
-                btnDeleteExpReport.Hide();
-            }
-
-            // Resizeable
-            #region
             labelTitle.Tag = "resizable";
             label1.Tag = "resizable";
             labelEventSummary.Tag = "resizable";
             label4.Tag = "resizable";
+            labelTotalRowsEventImage.Tag = "resizable";
+            label14.Tag = "resizable";
+            label2.Tag = "resizable";
+            label3.Tag = "resizable";
+            label5.Tag = "resizable";
+            label6.Tag = "resizable";
+            label7.Tag = "resizable";
+            label8.Tag = "resizable";
+            label9.Tag = "resizable";
+            labelTotalAmountEventExp.Tag = "resizable";
+            labelTotalAmountEventReceipt.Tag = "resizable";
+            labelTotalEventSales.Tag = "resizable";
+            labelTotalRowsEventExp.Tag = "resizable";
+            labelTotalRowsEventImage.Tag = "resizable";
+            labelTotalRowsEventReceipt.Tag = "resizable";
+            labelTotalRowsEventSales.Tag = "resizable";
+            
 
             txtEventImageCaption.Tag = "resizable";
+            txtSummaryEventSales.Tag = "resizable";
+            txtEventReceiptCaption.Tag = "resizable";
+            txtSummaryExpReport.Tag = "resizable";
+
+
+            cmbMonthEventReceipt.Tag = "resizable";
+            cmbMonthEventSales.Tag = "resizable";
+            cmbMonthExpReport.Tag = "resizable";
+
 
             btnAddEventImages.Tag = "resizable";
             btnViewEventImages.Tag = "resizable";
             btnUpdateEventImages.Tag = "resizable";
             btnDeleteEventImages.Tag = "resizable";
             btnCloseEventImages.Tag = "resizable";
+            btnClearEventImage.Tag = "resizable";
+            btnAddEventReceipt.Tag = "resizable";
+            btnAddExpReport.Tag = "resizable";
+            btnClear.Tag = "resizable";
+            btnClearEventSales.Tag = "resizable";
+            btnAddEventSales.Tag = "resizable";
+            btnClearExpReport.Tag = "resizable";
+            btnCloseEventExp.Tag = "resizable";
+            btnCloseEventReceipt.Tag = "resizable";
+            btnCloseEventSales.Tag = "resizable";
+            btnDeleteEventReceipt.Tag = "resizable";
+            btnDeleteEventSales.Tag = "resizable";
+            btnDeleteExpReport.Tag = "resizable";
+            btnSearch.Tag = "resizable";
+            btnSearchEventSales.Tag = "resizable";
+            btnSearchExpReport.Tag = "resizable";
+            btnUpdateEventReceipt.Tag = "resizable";
+            btnUpdateEventSales.Tag = "resizable";
+            btnUpdateExpReport.Tag = "resizable";
+            btnViewEventReceipt.Tag = "resizable";
+            btnViewEventSales.Tag = "resizable";
+            btnViewExpReport.Tag = "resizable";
 
-            #endregion
+
+            //dataGridEventExpenditures.Tag = "resizable";
+            //dataGridEventImages.Tag = "resizable";
+            //dataGridEventSales.Tag = "resizable";
+            //dataGridViewEventReceipt.Tag = "resizable";
+
+
+            tableLayoutPanel1.Tag = "resizable";
+            //tabControl1.Tag = "resizable";
+        }
+
+        private void FormEventDetailsBoard_Load(object sender, EventArgs e)
+        {
+            if (LoginInfo.AccessLevel != 4)
+            {
+                btnDeleteExpReport.Hide();
+            }
 
             labelTitle.Text = detail.EventTitle;
             labelEventSummary.Text = detail.Summary;
@@ -283,6 +340,12 @@ namespace APC.AllForms
             #endregion
 
             Counts();
+
+            // Resizeable
+            #region
+            ResizeableControls();
+
+            #endregion
         }
 
         // ---------------------------------------------------------------

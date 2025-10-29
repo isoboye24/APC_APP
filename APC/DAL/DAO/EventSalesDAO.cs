@@ -101,6 +101,47 @@ namespace APC.DAL.DAO
             }
         }
 
+        public List<EventSalesDetailDTO> Select(bool isDeleted)
+        {
+            try
+            {
+                List<EventSalesDetailDTO> sales = new List<EventSalesDetailDTO>();
+                var list = (from e in db.EVENT_SALES.Where(x => x.isDeleted == isDeleted)
+                            join m in db.MONTH on e.monthID equals m.monthID
+                            select new
+                            {
+                                eventSalesID = e.eventSalesID,
+                                eventID = e.eventID,
+                                amountSold = e.amountSold,
+                                summary = e.summary,
+                                day = e.day,
+                                monthID = e.monthID,
+                                monthName = m.monthName,
+                                year = e.year,
+                                salesDate = e.salesDate,
+                            }).OrderByDescending(x => x.year).OrderByDescending(x => x.monthID).OrderByDescending(x => x.day).ToList();
+                foreach (var item in list)
+                {
+                    EventSalesDetailDTO dto = new EventSalesDetailDTO();
+                    dto.EventSalesID = item.eventSalesID;
+                    dto.EventID = item.eventID;
+                    dto.Summary = item.summary;
+                    dto.AmountSold = item.amountSold;
+                    dto.Day = item.day;
+                    dto.MonthID = item.monthID;
+                    dto.MonthName = item.monthName;
+                    dto.Year = item.year;
+                    dto.SalesDate = item.salesDate;
+                    sales.Add(dto);
+                }
+                return sales;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public decimal SelectTotalAmountEventSold(int eventID)
         {
             try

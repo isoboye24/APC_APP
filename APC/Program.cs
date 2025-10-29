@@ -1,9 +1,10 @@
-﻿using System;
+﻿using APC.AllForms;
+using APC.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using APC.AllForms;
 
 namespace APC
 {
@@ -17,6 +18,24 @@ namespace APC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            var initializedForms = new HashSet<Form>();
+
+            Application.Idle += (s, e) =>
+            {
+                foreach (Form form in Application.OpenForms)
+                {
+                    if (!initializedForms.Contains(form))
+                    {
+                        initializedForms.Add(form);
+                        form.Load += (sender, args) =>
+                        {
+                            AutoResizeInitializer.Initialize(form, ZoomManager.CurrentFontSize);
+                        };
+                    }
+                }
+            };
+
             Application.Run(new FormLogin());
         }
     }

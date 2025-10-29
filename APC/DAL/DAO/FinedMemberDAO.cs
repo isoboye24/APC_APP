@@ -143,7 +143,7 @@ namespace APC.DAL.DAO
                                 section = c.section,
                                 constitution = c.constitution1,
                                 shortDescription = c.ShortDescription,
-                                memberID = m.memberID,
+                                memberID = fm.memberID,
                                 name = m.name,
                                 surname = m.surname,
                                 positionID = m.positionID,

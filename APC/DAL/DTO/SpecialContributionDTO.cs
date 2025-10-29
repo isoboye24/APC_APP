@@ -10,5 +10,6 @@ namespace APC.DAL.DTO
     {
         public List<SpecialContributionDetailDTO> SpecialContributions {  get; set; }
         public List<MonthDetailDTO> Months {  get; set; }
+        public List<MemberDetailDTO> Members {  get; set; }
     }
 }

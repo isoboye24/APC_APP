@@ -124,12 +124,13 @@ namespace APC.AllForms
             cmbFineStatus.Items.Add("Completed");
             cmbFineStatus.Items.Add("NOT completed");
 
-            
-
+            specialContributionDTO = specialContributionsBLL.Select();
+            cmbMonthContribution.DataSource = specialContributionDTO.Months;
+            General.ComboBoxProps(cmbMonthContribution, "MonthName", "MonthID");
 
             #region
                 #region
-                dataGridView1.DataSource = dto.GeneralAttendance;
+            dataGridView1.DataSource = dto.GeneralAttendance;
                 dataGridView1.Columns[0].Visible = false;
                 dataGridView1.Columns[1].Visible = false;
                 dataGridView1.Columns[2].Visible = false;
@@ -234,34 +235,38 @@ namespace APC.AllForms
 
                 // SPECIAL CONTRIBUTIONS
                 #region
-                specialContributionDTO = specialContributionsBLL.Select();
 
                 dataGridViewSpecialContributions.DataSource = specialContributionDTO.SpecialContributions;
                 dataGridViewSpecialContributions.Columns[0].Visible = false;
-                dataGridViewSpecialContributions.Columns[1].HeaderText = "Title";
-                dataGridViewSpecialContributions.Columns[2].Visible = false;
+                dataGridViewSpecialContributions.Columns[1].HeaderText = "No.";
+                dataGridViewSpecialContributions.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[2].HeaderText = "Title";
                 dataGridViewSpecialContributions.Columns[3].Visible = false;
-                dataGridViewSpecialContributions.Columns[4].HeaderText = "Amt. Each";
-                dataGridViewSpecialContributions.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewSpecialContributions.Columns[5].Visible = false;
-                dataGridViewSpecialContributions.Columns[6].HeaderText = "Total Amt. Exp.";
-                dataGridViewSpecialContributions.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewSpecialContributions.Columns[7].Visible = false;
-                dataGridViewSpecialContributions.Columns[8].HeaderText = "Amt. Cont.";
-                dataGridViewSpecialContributions.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewSpecialContributions.Columns[9].HeaderText = "Status";
+                dataGridViewSpecialContributions.Columns[4].Visible = false;
+                dataGridViewSpecialContributions.Columns[5].HeaderText = "Amt. Each";
+                dataGridViewSpecialContributions.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[6].Visible = false;
+                dataGridViewSpecialContributions.Columns[7].HeaderText = "Total Amt. Exp.";
+                dataGridViewSpecialContributions.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[8].Visible = false;
+                dataGridViewSpecialContributions.Columns[9].HeaderText = "Amt. Cont.";
                 dataGridViewSpecialContributions.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewSpecialContributions.Columns[10].Visible = false;
-                dataGridViewSpecialContributions.Columns[11].HeaderText = "Supervisor";
-                dataGridViewSpecialContributions.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewSpecialContributions.Columns[12].HeaderText = "Members";
+                dataGridViewSpecialContributions.Columns[10].HeaderText = "Status";
+                dataGridViewSpecialContributions.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[11].Visible = false;
+                dataGridViewSpecialContributions.Columns[12].HeaderText = "S. Name";
                 dataGridViewSpecialContributions.Columns[12].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewSpecialContributions.Columns[13].Visible = false;
-                dataGridViewSpecialContributions.Columns[14].HeaderText = "Start Date";
+                dataGridViewSpecialContributions.Columns[13].HeaderText = "S. Surname";
+                dataGridViewSpecialContributions.Columns[13].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[14].HeaderText = "Members";
                 dataGridViewSpecialContributions.Columns[14].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridViewSpecialContributions.Columns[15].Visible = false;
-                dataGridViewSpecialContributions.Columns[16].HeaderText = "End Date";
+                dataGridViewSpecialContributions.Columns[16].HeaderText = "Start Date";
                 dataGridViewSpecialContributions.Columns[16].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[17].Visible = false;
+                dataGridViewSpecialContributions.Columns[18].HeaderText = "End Date";
+                dataGridViewSpecialContributions.Columns[18].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewSpecialContributions.Columns[19].Visible = false;
                 
                 foreach (DataGridViewColumn column in dataGridViewSpecialContributions.Columns)
                 {
@@ -280,8 +285,10 @@ namespace APC.AllForms
                 btnUpdateConstitution.Hide();
                 btnDeleteConstitution.Hide();
                 btnDeleteFinedMember.Hide();
+                btnDeleteContribution.Hide();
             }
             RefreshCounts();
+            ResizeableControls();
         }
         private void RefreshCounts()
         {
@@ -290,6 +297,102 @@ namespace APC.AllForms
             labelTotalConstitutions.Text = "Rows: " + dataGridViewConstitution.RowCount.ToString();
             labelTotalFineMembers.Text = "Rows: " + dataGridViewFinedMembers.RowCount.ToString();
             labelTotalPaidFines.Text = "Total Paid: " + bll.TotalPaidFines();
+            labelTotalRowsContributions.Text = "Rows: " + dataGridViewSpecialContributions.RowCount.ToString();
+            labelOverallTotalContributions.Text = "Total : " + specialContributionsBLL.OverallTotalContributions();
+        }
+
+        private void ResizeableControls()
+        {
+            #region
+            label18.Tag = "resizable";
+            label1.Tag = "resizable";
+            label19.Tag = "resizable";
+            label21.Tag = "resizable";
+            label23.Tag = "resizable";
+            label24.Tag = "resizable";
+            label10.Tag = "resizable";
+            label12.Tag = "resizable";
+            label13.Tag = "resizable";
+            label14.Tag = "resizable";
+            label15.Tag = "resizable";
+            label16.Tag = "resizable";
+            label18.Tag = "resizable";
+            label2.Tag = "resizable";
+            label20.Tag = "resizable";
+            label22.Tag = "resizable";
+            label23.Tag = "resizable";
+            label24.Tag = "resizable";
+            label25.Tag = "resizable";
+            label26.Tag = "resizable";
+            label3.Tag = "resizable";
+            label4.Tag = "resizable";
+            label5.Tag = "resizable";
+            label6.Tag = "resizable";
+            label7.Tag = "resizable";
+            label8.Tag = "resizable";
+            label9.Tag = "resizable";
+            labelOverallTotalContributions.Tag = "resizable";
+            labelTotalComments.Tag = "resizable";
+            labelTotalConstitutions.Tag = "resizable";
+            labelTotalFineMembers.Tag = "resizable";
+            labelTotalMeetings.Tag = "resizable";
+            labelTotalPaidFines.Tag = "resizable";
+            labelTotalRowsContributions.Tag = "resizable";
+            #endregion
+
+            #region
+            btnAbsentees.Tag = "resizable";
+            btnAdd.Tag = "resizable";
+            btnAddComments.Tag = "resizable";
+            btnAddConstitution.Tag = "resizable";
+            btnAddContribution.Tag = "resizable";
+            btnAddFinedMember.Tag = "resizable";
+            btnClear.Tag = "resizable";
+            btnClearComments.Tag = "resizable";
+            btnClearConstitution.Tag = "resizable";
+            btnClearContribution.Tag = "resizable";
+            btnClearFinedMember.Tag = "resizable";
+            btnDelete.Tag = "resizable";
+            btnDeleteComments.Tag = "resizable";
+            btnDeleteConstitution.Tag = "resizable";
+            btnDeleteContribution.Tag = "resizable";
+            btnDeleteFinedMember.Tag = "resizable";
+            btnSearch.Tag = "resizable";
+            btnSearchComments.Tag = "resizable";
+            btnSearchContribution.Tag = "resizable";
+            btnSearchFinedMember.Tag = "resizable";
+            btnUpdate.Tag = "resizable";
+            btnUpdateComments.Tag = "resizable";
+            btnUpdateConstitution.Tag = "resizable";
+            btnUpdateContribution.Tag = "resizable";
+            btnUpdateFinedMember.Tag = "resizable";
+            btnView.Tag = "resizable";
+            btnViewComments.Tag = "resizable";
+            btnViewConstitution.Tag = "resizable";
+            btnViewContribution.Tag = "resizable";
+            btnViewFinedMember.Tag = "resizable";
+
+            #endregion
+
+            #region
+            txtAmountSContributions.Tag = "resizable";
+            txtComment.Tag = "resizable";
+            txtConstitution.Tag = "resizable";
+            txtConstitutionSection.Tag = "resizable";
+            txtFine.Tag = "resizable";
+            txtMonthlyDues.Tag = "resizable";
+            txtNameComments.Tag = "resizable";
+            txtNameFinedMember.Tag = "resizable";
+            txtNoOfAttend.Tag = "resizable";
+            txtNoOfContributors.Tag = "resizable";
+            txtSection.Tag = "resizable";
+            txtSurnameComments.Tag = "resizable";
+            txtSurnameFinedMember.Tag = "resizable";
+            txtYear.Tag = "resizable";
+            txtYearComments.Tag = "resizable";
+            txtYearContribution.Tag = "resizable";
+            txtYearFinedMember.Tag = "resizable";
+            #endregion
         }
 
         // -------------------------------------------------------------------------
@@ -354,33 +457,7 @@ namespace APC.AllForms
         {
             e.Handled = General.isNumber(e, (TextBox)sender);
         }
-        private void FillDateGrid()
-        {
-            bll = new GeneralAttendanceBLL();
-            dto = bll.Select();
-            dataGridView1.DataSource = dto.GeneralAttendance;
-        }
         
-        private void FillDateGridComments()
-        {
-            commentBLL = new CommentBLL();
-            commentDTO = commentBLL.Select();
-            dataGridViewComments.DataSource = commentDTO.Comments;
-        }
-
-        private void FillDateGridConstitution()
-        {
-            constitutionBLL = new ConstitutionBLL();
-            constitutionDTO = constitutionBLL.Select();
-            dataGridViewConstitution.DataSource = constitutionDTO.Constitutions;
-        }
-
-        private void FillDateGridFinedMembers()
-        {
-            finedMemberBLL = new FinedMemberBLL();
-            finedMemberDTO = finedMemberBLL.Select();
-            dataGridViewFinedMembers.DataSource = finedMemberDTO.FineMembers;
-        }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -446,7 +523,9 @@ namespace APC.AllForms
             rbLessAttend.Checked = false;
             rbMoreAttend.Checked = false;
             cmbMonth.SelectedIndex = -1;
-            FillDateGrid();
+            bll = new GeneralAttendanceBLL();
+            dto = bll.Select();
+            dataGridView1.DataSource = dto.GeneralAttendance;
 
             txtNameComments.Clear();
             txtComment.Clear();
@@ -454,12 +533,16 @@ namespace APC.AllForms
             txtYearComments.Clear();
             cmbGenderComments.SelectedIndex = -1;
             cmbMonthComments.SelectedIndex = -1;
-            FillDateGridComments();
+            commentBLL = new CommentBLL();
+            commentDTO = commentBLL.Select();
+            dataGridViewComments.DataSource = commentDTO.Comments;
 
             txtConstitution.Clear();
             txtSection.Clear();
             txtFine.Clear();
-            FillDateGridConstitution();
+            constitutionBLL = new ConstitutionBLL();
+            constitutionDTO = constitutionBLL.Select();
+            dataGridViewConstitution.DataSource = constitutionDTO.Constitutions;
 
             txtNameFinedMember.Clear();
             txtSurnameFinedMember.Clear();
@@ -468,7 +551,16 @@ namespace APC.AllForms
             cmbFineStatus.SelectedIndex = -1;
             cmbMonthFinedMember.SelectedIndex = -1;
             cmbGenderFinedMember.SelectedIndex = -1;
-            FillDateGridFinedMembers();
+            finedMemberBLL = new FinedMemberBLL();
+            finedMemberDTO = finedMemberBLL.Select();
+            dataGridViewFinedMembers.DataSource = finedMemberDTO.FineMembers;
+
+            txtAmountSContributions.Clear();
+            txtNoOfContributors.Clear();
+            cmbMonthContribution.SelectedIndex = -1;
+            specialContributionsBLL = new SpecialContributionsBLL();
+            specialContributionDTO = specialContributionsBLL.Select();
+            dataGridViewSpecialContributions.DataSource = specialContributionDTO.SpecialContributions;
 
             RefreshCounts();
         }
@@ -742,6 +834,60 @@ namespace APC.AllForms
             }
         }
 
+        private void txtYearFinedMember_TextChanged(object sender, EventArgs e)
+        {
+            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
+            list = list.Where(x => x.Year.ToString().Contains(txtYearFinedMember.Text.Trim())).ToList();
+            dataGridViewFinedMembers.DataSource = list;
+        }
+
+        private void txtYearFinedMember_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = General.isNumber(e, (TextBox)sender);
+        }
+
+        private void txtNameFinedMember_TextChanged(object sender, EventArgs e)
+        {
+            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
+            list = list.Where(x => x.Name.Contains(txtNameFinedMember.Text.Trim())).ToList();
+            dataGridViewFinedMembers.DataSource = list;
+        }
+
+        private void txtSurnameFinedMember_TextChanged(object sender, EventArgs e)
+        {
+            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
+            list = list.Where(x => x.Surname.Contains(txtSurnameFinedMember.Text.Trim())).ToList();
+            dataGridViewFinedMembers.DataSource = list;
+        }
+
+        private void btnSearchFinedMember_Click(object sender, EventArgs e)
+        {
+            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
+            if (cmbGenderFinedMember.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.GenderID == Convert.ToInt32(cmbGenderFinedMember.SelectedValue)).ToList();
+            }
+            if (cmbMonthFinedMember.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthFinedMember.SelectedValue)).ToList();
+            }
+            if (cmbFineStatus.SelectedIndex == 0)
+            {
+                list = list.Where(x => x.FineStatus == "Completed").ToList();
+            }
+            if (cmbFineStatus.SelectedIndex == 1)
+            {
+                list = list.Where(x => x.FineStatus == "NOT completed").ToList();
+            }
+            dataGridViewFinedMembers.DataSource = list;
+        }
+
+        private void btnClearFinedMember_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+
         // -------------------------------------------------------------------------
         // -------------------- CONSTITUTION ----------------------
         // -------------------------------------------------------------------------
@@ -838,42 +984,9 @@ namespace APC.AllForms
             dataGridViewConstitution.DataSource = list;
         }
 
-        private void txtFine_TextChanged(object sender, EventArgs e)
-        {
-            List<ConstitutionDetailDTO> list = constitutionDTO.Constitutions;
-            list = list.Where(x => x.Fine.ToString().Contains(txtFine.Text.Trim())).ToList();
-            dataGridViewConstitution.DataSource = list;
-        }
-
         private void btnClearConstitution_Click(object sender, EventArgs e)
         {
             ClearFilters();
-        }
-
-        private void txtYearFinedMember_TextChanged(object sender, EventArgs e)
-        {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
-            list = list.Where(x => x.Year.ToString().Contains(txtYearFinedMember.Text.Trim())).ToList();
-            dataGridViewFinedMembers.DataSource = list;
-        }
-
-        private void txtYearFinedMember_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = General.isNumber(e, (TextBox)sender);
-        }
-
-        private void txtNameFinedMember_TextChanged(object sender, EventArgs e)
-        {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
-            list = list.Where(x => x.Name.Contains(txtNameFinedMember.Text.Trim())).ToList();
-            dataGridViewFinedMembers.DataSource = list;
-        }
-
-        private void txtSurnameFinedMember_TextChanged(object sender, EventArgs e)
-        {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
-            list = list.Where(x => x.Surname.Contains(txtSurnameFinedMember.Text.Trim())).ToList();
-            dataGridViewFinedMembers.DataSource = list;
         }
 
         private void txtConstitutionSection_TextChanged(object sender, EventArgs e)
@@ -883,32 +996,13 @@ namespace APC.AllForms
             dataGridViewFinedMembers.DataSource = list;
         }
 
-        private void btnSearchFinedMember_Click(object sender, EventArgs e)
+        private void txtFine_TextChanged(object sender, EventArgs e)
         {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
-            if (cmbGenderFinedMember.SelectedIndex !=-1)
-            {
-                list = list.Where(x => x.GenderID == Convert.ToInt32(cmbGenderFinedMember.SelectedValue)).ToList();
-            }
-            if (cmbMonthFinedMember.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthFinedMember.SelectedValue)).ToList();
-            }
-            if (cmbFineStatus.SelectedIndex == 0)
-            {                
-                list = list.Where(x => x.FineStatus == "Completed").ToList();
-            }
-            if (cmbFineStatus.SelectedIndex == 1)
-            {                
-                list = list.Where(x => x.FineStatus == "NOT completed").ToList();
-            }            
-            dataGridViewFinedMembers.DataSource = list;
+            List<ConstitutionDetailDTO> list = constitutionDTO.Constitutions;
+            list = list.Where(x => x.Fine.ToString().Contains(txtFine.Text.Trim())).ToList();
+            dataGridViewConstitution.DataSource = list;
         }
 
-        private void btnClearFinedMember_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
-        }
 
         // -------------------------------------------------------------------------
         // -------------------- SPECIAL CONTRIBUTIONS ----------------------
@@ -921,6 +1015,115 @@ namespace APC.AllForms
             open.ShowDialog();
             this.Visible = true;
             ClearFilters();
+        }
+
+        private void btnUpdateContribution_Click(object sender, EventArgs e)
+        {
+            if (specialContributionDetail.SpecialContributionID == 0)
+            {
+                MessageBox.Show("Please choose a special contribution from the table.");
+            }
+            else
+            {
+                FormSpecialContribution open = new FormSpecialContribution();
+                open.detail = specialContributionDetail;
+                open.isUpdate = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void dataGridViewSpecialContributions_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            specialContributionDetail = new SpecialContributionDetailDTO();
+            specialContributionDetail.SpecialContributionID = Convert.ToInt32(dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[0].Value);
+            specialContributionDetail.Counter = Convert.ToInt32(dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[1].Value);
+            specialContributionDetail.ContributionTitle = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[2].Value.ToString();
+            specialContributionDetail.Summary = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[3].Value.ToString();
+            specialContributionDetail.AmountToContribute = Convert.ToDecimal(dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[4].Value);
+            specialContributionDetail.AmountToContributeWithCurrency = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[5].Value.ToString();
+            specialContributionDetail.AmountExpected = Convert.ToDecimal(dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[6].Value);
+            specialContributionDetail.AmountExpectedWithCurrency = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[7].Value.ToString();
+            specialContributionDetail.AmountContributed = Convert.ToDecimal(dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[8].Value);
+            specialContributionDetail.AmountContributedWithCurrency = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[9].Value.ToString();
+            specialContributionDetail.Status = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[10].Value.ToString();
+            specialContributionDetail.SupervisorID = Convert.ToInt32(dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[11].Value);
+            specialContributionDetail.SupervisorName = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[12].Value.ToString();
+            specialContributionDetail.SupervisorSurname = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[13].Value.ToString();
+            specialContributionDetail.Members = Convert.ToInt32(dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[14].Value);
+            specialContributionDetail.ContributionStartDate = Convert.ToDateTime(dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[15].Value);
+            specialContributionDetail.StartDate = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[16].Value.ToString();
+            specialContributionDetail.ContributionEndDate = Convert.ToDateTime(dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[17].Value);
+            specialContributionDetail.EndDate = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[18].Value.ToString();
+            specialContributionDetail.ImagePath = dataGridViewSpecialContributions.Rows[e.RowIndex].Cells[19].Value.ToString();
+        }
+
+        private void btnClearContribution_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void txtAmountSContributions_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void txtNoOfContributors_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void txtAmountSContributions_TextChanged(object sender, EventArgs e)
+        {
+            List<SpecialContributionDetailDTO> list = specialContributionDTO.SpecialContributions;
+            list = list.Where(x => x.AmountToContribute == Convert.ToDecimal(txtAmountSContributions.Text.Trim())).ToList();
+            dataGridViewSpecialContributions.DataSource = list;
+        }
+
+        private void txtNoOfContributors_TextChanged(object sender, EventArgs e)
+        {
+            List<SpecialContributionDetailDTO> list = specialContributionDTO.SpecialContributions;
+            list = list.Where(x => x.Members == Convert.ToInt32(txtNoOfContributors.Text.Trim())).ToList();
+            dataGridViewSpecialContributions.DataSource = list;
+        }
+
+        private void btnViewContribution_Click(object sender, EventArgs e)
+        {
+            if (specialContributionDetail.SpecialContributionID == 0)
+            {
+                MessageBox.Show("Please choose a special contribution from the table.");
+            }
+            else
+            {
+                FormViewSpecialContribution open = new FormViewSpecialContribution();
+                open.detail = specialContributionDetail;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }            
+        }
+
+        private void btnDeleteContribution_Click(object sender, EventArgs e)
+        {
+            if (specialContributionDetail.SpecialContributionID == 0)
+            {
+                MessageBox.Show("Please choose a special contribution from the table.");
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    if (specialContributionsBLL.Delete(specialContributionDetail))
+                    {
+                        MessageBox.Show("Special Contribution was deleted successfully!");
+                        ClearFilters();
+                    }
+                }
+            }
         }
     }
 }

@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.iconZoomIn = new FontAwesome.Sharp.IconPictureBox();
+            this.iconZoomOut = new FontAwesome.Sharp.IconPictureBox();
+            this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
+            this.picClose = new System.Windows.Forms.PictureBox();
+            this.picMinimize = new System.Windows.Forms.PictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -55,6 +60,7 @@
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridEventImages = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
+            this.picImage2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.eventSalesPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -122,18 +128,17 @@
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewEventReceipt = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
+            this.picEventReceipt = new System.Windows.Forms.PictureBox();
             this.summaryPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
             this.labelEventSummary = new System.Windows.Forms.Label();
-            this.picImage2 = new System.Windows.Forms.PictureBox();
-            this.picEventReceipt = new System.Windows.Forms.PictureBox();
-            this.iconZoomIn = new FontAwesome.Sharp.IconPictureBox();
-            this.iconZoomOut = new FontAwesome.Sharp.IconPictureBox();
-            this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
-            this.picClose = new System.Windows.Forms.PictureBox();
-            this.picMinimize = new System.Windows.Forms.PictureBox();
             this.picImage = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.eventImagesPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -144,6 +149,7 @@
             this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventImages)).BeginInit();
             this.tableLayoutPanel15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage2)).BeginInit();
             this.eventSalesPage.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
@@ -169,15 +175,9 @@
             this.tableLayoutPanel25.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEventReceipt)).BeginInit();
             this.tableLayoutPanel27.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEventReceipt)).BeginInit();
             this.summaryPage.SuspendLayout();
             this.tableLayoutPanel19.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picImage2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picEventReceipt)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -197,6 +197,81 @@
             this.panel1.Size = new System.Drawing.Size(1453, 63);
             this.panel1.TabIndex = 31;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            // 
+            // iconZoomIn
+            // 
+            this.iconZoomIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconZoomIn.BackColor = System.Drawing.Color.Transparent;
+            this.iconZoomIn.ForeColor = System.Drawing.Color.Black;
+            this.iconZoomIn.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
+            this.iconZoomIn.IconColor = System.Drawing.Color.Black;
+            this.iconZoomIn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconZoomIn.Location = new System.Drawing.Point(1017, 16);
+            this.iconZoomIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.iconZoomIn.Name = "iconZoomIn";
+            this.iconZoomIn.Size = new System.Drawing.Size(32, 32);
+            this.iconZoomIn.TabIndex = 17;
+            this.iconZoomIn.TabStop = false;
+            this.iconZoomIn.Click += new System.EventHandler(this.iconZoomIn_Click);
+            // 
+            // iconZoomOut
+            // 
+            this.iconZoomOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconZoomOut.BackColor = System.Drawing.Color.Transparent;
+            this.iconZoomOut.ForeColor = System.Drawing.Color.Black;
+            this.iconZoomOut.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassMinus;
+            this.iconZoomOut.IconColor = System.Drawing.Color.Black;
+            this.iconZoomOut.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconZoomOut.Location = new System.Drawing.Point(1069, 16);
+            this.iconZoomOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.iconZoomOut.Name = "iconZoomOut";
+            this.iconZoomOut.Size = new System.Drawing.Size(32, 32);
+            this.iconZoomOut.TabIndex = 18;
+            this.iconZoomOut.TabStop = false;
+            this.iconZoomOut.Click += new System.EventHandler(this.iconZoomOut_Click);
+            // 
+            // iconMaximize
+            // 
+            this.iconMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconMaximize.BackColor = System.Drawing.Color.DarkOrange;
+            this.iconMaximize.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.iconMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
+            this.iconMaximize.IconColor = System.Drawing.SystemColors.ControlText;
+            this.iconMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconMaximize.IconSize = 36;
+            this.iconMaximize.Location = new System.Drawing.Point(1335, 12);
+            this.iconMaximize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.iconMaximize.Name = "iconMaximize";
+            this.iconMaximize.Size = new System.Drawing.Size(45, 36);
+            this.iconMaximize.TabIndex = 16;
+            this.iconMaximize.TabStop = false;
+            this.iconMaximize.Click += new System.EventHandler(this.iconMaximize_Click);
+            // 
+            // picClose
+            // 
+            this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picClose.Image = global::APC.Properties.Resources.icons8_multiply_32;
+            this.picClose.Location = new System.Drawing.Point(1385, 12);
+            this.picClose.Margin = new System.Windows.Forms.Padding(0, 16, 0, 0);
+            this.picClose.Name = "picClose";
+            this.picClose.Size = new System.Drawing.Size(45, 36);
+            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picClose.TabIndex = 15;
+            this.picClose.TabStop = false;
+            this.picClose.Click += new System.EventHandler(this.picClose_Click_1);
+            // 
+            // picMinimize
+            // 
+            this.picMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picMinimize.Image = global::APC.Properties.Resources.icons8_minimize_24;
+            this.picMinimize.Location = new System.Drawing.Point(1281, 12);
+            this.picMinimize.Margin = new System.Windows.Forms.Padding(0, 16, 0, 0);
+            this.picMinimize.Name = "picMinimize";
+            this.picMinimize.Size = new System.Drawing.Size(45, 36);
+            this.picMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picMinimize.TabIndex = 14;
+            this.picMinimize.TabStop = false;
+            this.picMinimize.Click += new System.EventHandler(this.picMinimize_Click);
             // 
             // labelTitle
             // 
@@ -551,6 +626,17 @@
             this.tableLayoutPanel15.Size = new System.Drawing.Size(565, 422);
             this.tableLayoutPanel15.TabIndex = 2;
             // 
+            // picImage2
+            // 
+            this.picImage2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picImage2.Location = new System.Drawing.Point(60, 4);
+            this.picImage2.Margin = new System.Windows.Forms.Padding(4);
+            this.picImage2.Name = "picImage2";
+            this.picImage2.Size = new System.Drawing.Size(444, 414);
+            this.picImage2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picImage2.TabIndex = 1;
+            this.picImage2.TabStop = false;
+            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -566,6 +652,7 @@
             // 
             // eventSalesPage
             // 
+            this.eventSalesPage.BackColor = System.Drawing.Color.Gainsboro;
             this.eventSalesPage.Controls.Add(this.tableLayoutPanel2);
             this.eventSalesPage.Location = new System.Drawing.Point(4, 46);
             this.eventSalesPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -574,7 +661,6 @@
             this.eventSalesPage.Size = new System.Drawing.Size(1445, 660);
             this.eventSalesPage.TabIndex = 1;
             this.eventSalesPage.Text = "Sales    ";
-            this.eventSalesPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
@@ -624,8 +710,8 @@
             this.dataGridEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridEventSales.Name = "dataGridEventSales";
             this.dataGridEventSales.RowHeadersWidth = 51;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridEventSales.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridEventSales.RowsDefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridEventSales.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridEventSales.RowTemplate.Height = 40;
             this.dataGridEventSales.Size = new System.Drawing.Size(1365, 403);
@@ -889,7 +975,7 @@
             // cmbMonthEventSales
             // 
             this.cmbMonthEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbMonthEventSales.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbMonthEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMonthEventSales.FormattingEnabled = true;
             this.cmbMonthEventSales.Location = new System.Drawing.Point(739, 4);
             this.cmbMonthEventSales.Margin = new System.Windows.Forms.Padding(4);
@@ -929,6 +1015,7 @@
             // 
             // eventExpendituresPage
             // 
+            this.eventExpendituresPage.BackColor = System.Drawing.Color.Gainsboro;
             this.eventExpendituresPage.Controls.Add(this.tableLayoutPanel3);
             this.eventExpendituresPage.Location = new System.Drawing.Point(4, 46);
             this.eventExpendituresPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -936,7 +1023,6 @@
             this.eventExpendituresPage.Size = new System.Drawing.Size(1445, 660);
             this.eventExpendituresPage.TabIndex = 2;
             this.eventExpendituresPage.Text = "Expenditures    ";
-            this.eventExpendituresPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
@@ -1234,7 +1320,7 @@
             // cmbMonthExpReport
             // 
             this.cmbMonthExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbMonthExpReport.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbMonthExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMonthExpReport.FormattingEnabled = true;
             this.cmbMonthExpReport.Location = new System.Drawing.Point(743, 4);
             this.cmbMonthExpReport.Margin = new System.Windows.Forms.Padding(4);
@@ -1268,8 +1354,8 @@
             this.dataGridEventExpenditures.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridEventExpenditures.Name = "dataGridEventExpenditures";
             this.dataGridEventExpenditures.RowHeadersWidth = 51;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridEventExpenditures.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridEventExpenditures.RowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridEventExpenditures.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridEventExpenditures.RowTemplate.Height = 40;
             this.dataGridEventExpenditures.Size = new System.Drawing.Size(1371, 388);
@@ -1291,6 +1377,7 @@
             // 
             // receiptsPage
             // 
+            this.receiptsPage.BackColor = System.Drawing.Color.Gainsboro;
             this.receiptsPage.Controls.Add(this.tableLayoutPanel14);
             this.receiptsPage.Location = new System.Drawing.Point(4, 46);
             this.receiptsPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1298,7 +1385,6 @@
             this.receiptsPage.Size = new System.Drawing.Size(1445, 660);
             this.receiptsPage.TabIndex = 3;
             this.receiptsPage.Text = "Receipts    ";
-            this.receiptsPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel14
             // 
@@ -1352,11 +1438,11 @@
             // txtEventReceiptCaption
             // 
             this.txtEventReceiptCaption.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtEventReceiptCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEventReceiptCaption.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEventReceiptCaption.Location = new System.Drawing.Point(169, 4);
             this.txtEventReceiptCaption.Margin = new System.Windows.Forms.Padding(4);
             this.txtEventReceiptCaption.Name = "txtEventReceiptCaption";
-            this.txtEventReceiptCaption.Size = new System.Drawing.Size(364, 32);
+            this.txtEventReceiptCaption.Size = new System.Drawing.Size(364, 34);
             this.txtEventReceiptCaption.TabIndex = 2;
             this.txtEventReceiptCaption.TextChanged += new System.EventHandler(this.txtEventReceiptCaption_TextChanged);
             // 
@@ -1628,8 +1714,8 @@
             this.dataGridViewEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEventReceipt.Name = "dataGridViewEventReceipt";
             this.dataGridViewEventReceipt.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewEventReceipt.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewEventReceipt.RowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewEventReceipt.RowTemplate.Height = 30;
             this.dataGridViewEventReceipt.Size = new System.Drawing.Size(958, 467);
             this.dataGridViewEventReceipt.TabIndex = 5;
@@ -1652,8 +1738,20 @@
             this.tableLayoutPanel27.Size = new System.Drawing.Size(409, 469);
             this.tableLayoutPanel27.TabIndex = 6;
             // 
+            // picEventReceipt
+            // 
+            this.picEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picEventReceipt.Location = new System.Drawing.Point(23, 11);
+            this.picEventReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.picEventReceipt.Name = "picEventReceipt";
+            this.picEventReceipt.Size = new System.Drawing.Size(362, 446);
+            this.picEventReceipt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEventReceipt.TabIndex = 3;
+            this.picEventReceipt.TabStop = false;
+            // 
             // summaryPage
             // 
+            this.summaryPage.BackColor = System.Drawing.Color.Gainsboro;
             this.summaryPage.Controls.Add(this.tableLayoutPanel19);
             this.summaryPage.Location = new System.Drawing.Point(4, 46);
             this.summaryPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1661,7 +1759,6 @@
             this.summaryPage.Size = new System.Drawing.Size(1445, 660);
             this.summaryPage.TabIndex = 4;
             this.summaryPage.Text = "Event Summary    ";
-            this.summaryPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel19
             // 
@@ -1690,103 +1787,6 @@
             this.labelEventSummary.Size = new System.Drawing.Size(1381, 633);
             this.labelEventSummary.TabIndex = 0;
             this.labelEventSummary.Text = "label15";
-            // 
-            // picImage2
-            // 
-            this.picImage2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picImage2.Location = new System.Drawing.Point(60, 4);
-            this.picImage2.Margin = new System.Windows.Forms.Padding(4);
-            this.picImage2.Name = "picImage2";
-            this.picImage2.Size = new System.Drawing.Size(444, 414);
-            this.picImage2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picImage2.TabIndex = 1;
-            this.picImage2.TabStop = false;
-            // 
-            // picEventReceipt
-            // 
-            this.picEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picEventReceipt.Location = new System.Drawing.Point(23, 11);
-            this.picEventReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.picEventReceipt.Name = "picEventReceipt";
-            this.picEventReceipt.Size = new System.Drawing.Size(362, 446);
-            this.picEventReceipt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picEventReceipt.TabIndex = 3;
-            this.picEventReceipt.TabStop = false;
-            // 
-            // iconZoomIn
-            // 
-            this.iconZoomIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconZoomIn.BackColor = System.Drawing.Color.Transparent;
-            this.iconZoomIn.ForeColor = System.Drawing.Color.Black;
-            this.iconZoomIn.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
-            this.iconZoomIn.IconColor = System.Drawing.Color.Black;
-            this.iconZoomIn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconZoomIn.Location = new System.Drawing.Point(1017, 16);
-            this.iconZoomIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.iconZoomIn.Name = "iconZoomIn";
-            this.iconZoomIn.Size = new System.Drawing.Size(32, 32);
-            this.iconZoomIn.TabIndex = 17;
-            this.iconZoomIn.TabStop = false;
-            this.iconZoomIn.Click += new System.EventHandler(this.iconZoomIn_Click);
-            // 
-            // iconZoomOut
-            // 
-            this.iconZoomOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconZoomOut.BackColor = System.Drawing.Color.Transparent;
-            this.iconZoomOut.ForeColor = System.Drawing.Color.Black;
-            this.iconZoomOut.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassMinus;
-            this.iconZoomOut.IconColor = System.Drawing.Color.Black;
-            this.iconZoomOut.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconZoomOut.Location = new System.Drawing.Point(1069, 16);
-            this.iconZoomOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.iconZoomOut.Name = "iconZoomOut";
-            this.iconZoomOut.Size = new System.Drawing.Size(32, 32);
-            this.iconZoomOut.TabIndex = 18;
-            this.iconZoomOut.TabStop = false;
-            this.iconZoomOut.Click += new System.EventHandler(this.iconZoomOut_Click);
-            // 
-            // iconMaximize
-            // 
-            this.iconMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconMaximize.BackColor = System.Drawing.Color.DarkOrange;
-            this.iconMaximize.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.iconMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
-            this.iconMaximize.IconColor = System.Drawing.SystemColors.ControlText;
-            this.iconMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconMaximize.IconSize = 36;
-            this.iconMaximize.Location = new System.Drawing.Point(1335, 12);
-            this.iconMaximize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.iconMaximize.Name = "iconMaximize";
-            this.iconMaximize.Size = new System.Drawing.Size(45, 36);
-            this.iconMaximize.TabIndex = 16;
-            this.iconMaximize.TabStop = false;
-            this.iconMaximize.Click += new System.EventHandler(this.iconMaximize_Click);
-            // 
-            // picClose
-            // 
-            this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picClose.Image = global::APC.Properties.Resources.icons8_multiply_32;
-            this.picClose.Location = new System.Drawing.Point(1385, 12);
-            this.picClose.Margin = new System.Windows.Forms.Padding(0, 16, 0, 0);
-            this.picClose.Name = "picClose";
-            this.picClose.Size = new System.Drawing.Size(45, 36);
-            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picClose.TabIndex = 15;
-            this.picClose.TabStop = false;
-            this.picClose.Click += new System.EventHandler(this.picClose_Click_1);
-            // 
-            // picMinimize
-            // 
-            this.picMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picMinimize.Image = global::APC.Properties.Resources.icons8_minimize_24;
-            this.picMinimize.Location = new System.Drawing.Point(1281, 12);
-            this.picMinimize.Margin = new System.Windows.Forms.Padding(0, 16, 0, 0);
-            this.picMinimize.Name = "picMinimize";
-            this.picMinimize.Size = new System.Drawing.Size(45, 36);
-            this.picMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picMinimize.TabIndex = 14;
-            this.picMinimize.TabStop = false;
-            this.picMinimize.Click += new System.EventHandler(this.picMinimize_Click);
             // 
             // picImage
             // 
@@ -1819,6 +1819,11 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormEventDetails_MouseDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.eventImagesPage.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1832,6 +1837,7 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventImages)).EndInit();
             this.tableLayoutPanel15.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picImage2)).EndInit();
             this.eventSalesPage.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -1868,16 +1874,10 @@
             this.tableLayoutPanel25.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEventReceipt)).EndInit();
             this.tableLayoutPanel27.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picEventReceipt)).EndInit();
             this.summaryPage.ResumeLayout(false);
             this.tableLayoutPanel19.ResumeLayout(false);
             this.tableLayoutPanel19.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picImage2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picEventReceipt)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
             this.ResumeLayout(false);
 

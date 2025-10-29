@@ -71,12 +71,12 @@
             this.btnUpdateContribution = new System.Windows.Forms.Button();
             this.btnDeleteContribution = new System.Windows.Forms.Button();
             this.labelTotalRowsContributions = new System.Windows.Forms.Label();
-            this.labelTotalContributions = new System.Windows.Forms.Label();
+            this.labelOverallTotalContributions = new System.Windows.Forms.Label();
             this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtAmountSContributions = new System.Windows.Forms.TextBox();
+            this.txtNoOfContributors = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.rbLessContAmount = new System.Windows.Forms.RadioButton();
             this.rbMoreContAmount = new System.Windows.Forms.RadioButton();
@@ -90,7 +90,7 @@
             this.btnClearContribution = new System.Windows.Forms.Button();
             this.btnSearchContribution = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtYearContribution = new System.Windows.Forms.TextBox();
+            this.txtYearContribution = new System.Windows.Forms.ComboBox();
             this.dataGridViewSpecialContributions = new System.Windows.Forms.DataGridView();
             this.commentPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -722,7 +722,7 @@
             this.tableLayoutPanel23.Controls.Add(this.btnUpdateContribution, 3, 1);
             this.tableLayoutPanel23.Controls.Add(this.btnDeleteContribution, 7, 1);
             this.tableLayoutPanel23.Controls.Add(this.labelTotalRowsContributions, 0, 1);
-            this.tableLayoutPanel23.Controls.Add(this.labelTotalContributions, 8, 1);
+            this.tableLayoutPanel23.Controls.Add(this.labelOverallTotalContributions, 8, 1);
             this.tableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel23.Location = new System.Drawing.Point(29, 587);
             this.tableLayoutPanel23.Margin = new System.Windows.Forms.Padding(4);
@@ -764,6 +764,7 @@
             this.btnViewContribution.TabIndex = 3;
             this.btnViewContribution.Text = "View";
             this.btnViewContribution.UseVisualStyleBackColor = false;
+            this.btnViewContribution.Click += new System.EventHandler(this.btnViewContribution_Click);
             // 
             // btnUpdateContribution
             // 
@@ -779,6 +780,7 @@
             this.btnUpdateContribution.TabIndex = 3;
             this.btnUpdateContribution.Text = "Edit";
             this.btnUpdateContribution.UseVisualStyleBackColor = false;
+            this.btnUpdateContribution.Click += new System.EventHandler(this.btnUpdateContribution_Click);
             // 
             // btnDeleteContribution
             // 
@@ -794,6 +796,7 @@
             this.btnDeleteContribution.TabIndex = 2;
             this.btnDeleteContribution.Text = "Delete";
             this.btnDeleteContribution.UseVisualStyleBackColor = false;
+            this.btnDeleteContribution.Click += new System.EventHandler(this.btnDeleteContribution_Click);
             // 
             // labelTotalRowsContributions
             // 
@@ -808,18 +811,18 @@
             this.labelTotalRowsContributions.Text = "Rows: 0";
             this.labelTotalRowsContributions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelTotalContributions
+            // labelOverallTotalContributions
             // 
-            this.labelTotalContributions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalContributions.AutoSize = true;
-            this.labelTotalContributions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalContributions.Location = new System.Drawing.Point(925, 40);
-            this.labelTotalContributions.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.labelTotalContributions.Name = "labelTotalContributions";
-            this.labelTotalContributions.Size = new System.Drawing.Size(280, 28);
-            this.labelTotalContributions.TabIndex = 4;
-            this.labelTotalContributions.Text = "Total : 0";
-            this.labelTotalContributions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelOverallTotalContributions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelOverallTotalContributions.AutoSize = true;
+            this.labelOverallTotalContributions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOverallTotalContributions.Location = new System.Drawing.Point(925, 40);
+            this.labelOverallTotalContributions.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
+            this.labelOverallTotalContributions.Name = "labelOverallTotalContributions";
+            this.labelOverallTotalContributions.Size = new System.Drawing.Size(280, 28);
+            this.labelOverallTotalContributions.TabIndex = 4;
+            this.labelOverallTotalContributions.Text = "Total : 0";
+            this.labelOverallTotalContributions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel24
             // 
@@ -832,8 +835,8 @@
             this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel24.Controls.Add(this.label13, 0, 0);
             this.tableLayoutPanel24.Controls.Add(this.label14, 0, 2);
-            this.tableLayoutPanel24.Controls.Add(this.textBox1, 1, 0);
-            this.tableLayoutPanel24.Controls.Add(this.textBox2, 1, 2);
+            this.tableLayoutPanel24.Controls.Add(this.txtAmountSContributions, 1, 0);
+            this.tableLayoutPanel24.Controls.Add(this.txtNoOfContributors, 1, 2);
             this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel25, 2, 0);
             this.tableLayoutPanel24.Controls.Add(this.label15, 3, 0);
             this.tableLayoutPanel24.Controls.Add(this.cmbMonthContribution, 4, 0);
@@ -875,25 +878,29 @@
             this.label14.TabIndex = 0;
             this.label14.Text = "No. of Contributors";
             // 
-            // textBox1
+            // txtAmountSContributions
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(269, 4);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(137, 34);
-            this.textBox1.TabIndex = 1;
+            this.txtAmountSContributions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtAmountSContributions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAmountSContributions.Location = new System.Drawing.Point(269, 4);
+            this.txtAmountSContributions.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAmountSContributions.Name = "txtAmountSContributions";
+            this.txtAmountSContributions.Size = new System.Drawing.Size(137, 34);
+            this.txtAmountSContributions.TabIndex = 1;
+            this.txtAmountSContributions.TextChanged += new System.EventHandler(this.txtAmountSContributions_TextChanged);
+            this.txtAmountSContributions.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmountSContributions_KeyPress);
             // 
-            // textBox2
+            // txtNoOfContributors
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(269, 51);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(137, 34);
-            this.textBox2.TabIndex = 1;
+            this.txtNoOfContributors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtNoOfContributors.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNoOfContributors.Location = new System.Drawing.Point(269, 51);
+            this.txtNoOfContributors.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNoOfContributors.Name = "txtNoOfContributors";
+            this.txtNoOfContributors.Size = new System.Drawing.Size(137, 34);
+            this.txtNoOfContributors.TabIndex = 1;
+            this.txtNoOfContributors.TextChanged += new System.EventHandler(this.txtNoOfContributors_TextChanged);
+            this.txtNoOfContributors.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNoOfContributors_KeyPress);
             // 
             // tableLayoutPanel25
             // 
@@ -1046,6 +1053,7 @@
             this.btnClearContribution.TabIndex = 0;
             this.btnClearContribution.Text = "Clear";
             this.btnClearContribution.UseVisualStyleBackColor = false;
+            this.btnClearContribution.Click += new System.EventHandler(this.btnClearContribution_Click);
             // 
             // btnSearchContribution
             // 
@@ -1078,11 +1086,12 @@
             // 
             this.txtYearContribution.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtYearContribution.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtYearContribution.FormattingEnabled = true;
             this.txtYearContribution.Location = new System.Drawing.Point(872, 51);
             this.txtYearContribution.Margin = new System.Windows.Forms.Padding(4);
             this.txtYearContribution.Name = "txtYearContribution";
-            this.txtYearContribution.Size = new System.Drawing.Size(185, 34);
-            this.txtYearContribution.TabIndex = 1;
+            this.txtYearContribution.Size = new System.Drawing.Size(185, 36);
+            this.txtYearContribution.TabIndex = 4;
             // 
             // dataGridViewSpecialContributions
             // 
@@ -1099,6 +1108,7 @@
             this.dataGridViewSpecialContributions.RowTemplate.Height = 40;
             this.dataGridViewSpecialContributions.Size = new System.Drawing.Size(1209, 459);
             this.dataGridViewSpecialContributions.TabIndex = 6;
+            this.dataGridViewSpecialContributions.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSpecialContributions_RowEnter);
             // 
             // commentPage
             // 
@@ -2457,8 +2467,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtAmountSContributions;
+        private System.Windows.Forms.TextBox txtNoOfContributors;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
         private System.Windows.Forms.RadioButton rbLessContAmount;
         private System.Windows.Forms.RadioButton rbMoreContAmount;
@@ -2472,8 +2482,8 @@
         private System.Windows.Forms.Button btnClearContribution;
         private System.Windows.Forms.Button btnSearchContribution;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtYearContribution;
         private System.Windows.Forms.DataGridView dataGridViewSpecialContributions;
-        private System.Windows.Forms.Label labelTotalContributions;
+        private System.Windows.Forms.Label labelOverallTotalContributions;
+        private System.Windows.Forms.ComboBox txtYearContribution;
     }
 }
