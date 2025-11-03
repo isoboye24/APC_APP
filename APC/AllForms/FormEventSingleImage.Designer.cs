@@ -32,12 +32,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.iconZoomIn = new FontAwesome.Sharp.IconPictureBox();
-            this.iconZoomOut = new FontAwesome.Sharp.IconPictureBox();
-            this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.picClose = new System.Windows.Forms.PictureBox();
-            this.picMinimize = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClose = new System.Windows.Forms.Button();
@@ -52,17 +47,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.btnBrowse = new System.Windows.Forms.Button();
-            this.picEventImage = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.txtImageSummary = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
+            this.picEventImage = new System.Windows.Forms.PictureBox();
+            this.iconZoomIn = new FontAwesome.Sharp.IconPictureBox();
+            this.iconZoomOut = new FontAwesome.Sharp.IconPictureBox();
+            this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
+            this.picClose = new System.Windows.Forms.PictureBox();
+            this.picMinimize = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -70,9 +65,14 @@
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -122,55 +122,6 @@
             this.panel1.TabIndex = 12;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown_1);
             // 
-            // iconZoomIn
-            // 
-            this.iconZoomIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconZoomIn.BackColor = System.Drawing.Color.Transparent;
-            this.iconZoomIn.ForeColor = System.Drawing.Color.Black;
-            this.iconZoomIn.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
-            this.iconZoomIn.IconColor = System.Drawing.Color.Black;
-            this.iconZoomIn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconZoomIn.Location = new System.Drawing.Point(927, 14);
-            this.iconZoomIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.iconZoomIn.Name = "iconZoomIn";
-            this.iconZoomIn.Size = new System.Drawing.Size(32, 32);
-            this.iconZoomIn.TabIndex = 19;
-            this.iconZoomIn.TabStop = false;
-            this.iconZoomIn.Click += new System.EventHandler(this.iconZoomIn_Click);
-            // 
-            // iconZoomOut
-            // 
-            this.iconZoomOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconZoomOut.BackColor = System.Drawing.Color.Transparent;
-            this.iconZoomOut.ForeColor = System.Drawing.Color.Black;
-            this.iconZoomOut.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassMinus;
-            this.iconZoomOut.IconColor = System.Drawing.Color.Black;
-            this.iconZoomOut.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconZoomOut.Location = new System.Drawing.Point(979, 14);
-            this.iconZoomOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.iconZoomOut.Name = "iconZoomOut";
-            this.iconZoomOut.Size = new System.Drawing.Size(32, 32);
-            this.iconZoomOut.TabIndex = 20;
-            this.iconZoomOut.TabStop = false;
-            this.iconZoomOut.Click += new System.EventHandler(this.iconZoomOut_Click);
-            // 
-            // iconMaximize
-            // 
-            this.iconMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconMaximize.BackColor = System.Drawing.Color.DarkOrange;
-            this.iconMaximize.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.iconMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
-            this.iconMaximize.IconColor = System.Drawing.SystemColors.ControlText;
-            this.iconMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconMaximize.IconSize = 39;
-            this.iconMaximize.Location = new System.Drawing.Point(1291, 14);
-            this.iconMaximize.Margin = new System.Windows.Forms.Padding(4);
-            this.iconMaximize.Name = "iconMaximize";
-            this.iconMaximize.Size = new System.Drawing.Size(43, 39);
-            this.iconMaximize.TabIndex = 13;
-            this.iconMaximize.TabStop = false;
-            this.iconMaximize.Click += new System.EventHandler(this.iconMaximize_Click);
-            // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
@@ -181,32 +132,6 @@
             this.labelTitle.Size = new System.Drawing.Size(187, 32);
             this.labelTitle.TabIndex = 5;
             this.labelTitle.Text = "CAPTION HERE";
-            // 
-            // picClose
-            // 
-            this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picClose.Image = global::APC.Properties.Resources.icons8_multiply_32;
-            this.picClose.Location = new System.Drawing.Point(1344, 14);
-            this.picClose.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
-            this.picClose.Name = "picClose";
-            this.picClose.Size = new System.Drawing.Size(43, 39);
-            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picClose.TabIndex = 6;
-            this.picClose.TabStop = false;
-            this.picClose.Click += new System.EventHandler(this.picClose_Click);
-            // 
-            // picMinimize
-            // 
-            this.picMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picMinimize.Image = global::APC.Properties.Resources.icons8_minimize_24;
-            this.picMinimize.Location = new System.Drawing.Point(1237, 14);
-            this.picMinimize.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
-            this.picMinimize.Name = "picMinimize";
-            this.picMinimize.Size = new System.Drawing.Size(43, 39);
-            this.picMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picMinimize.TabIndex = 5;
-            this.picMinimize.TabStop = false;
-            this.picMinimize.Click += new System.EventHandler(this.picMinimize_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -426,17 +351,6 @@
             this.btnBrowse.UseVisualStyleBackColor = false;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
-            // picEventImage
-            // 
-            this.picEventImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picEventImage.Location = new System.Drawing.Point(11, 53);
-            this.picEventImage.Margin = new System.Windows.Forms.Padding(4);
-            this.picEventImage.Name = "picEventImage";
-            this.picEventImage.Size = new System.Drawing.Size(803, 463);
-            this.picEventImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picEventImage.TabIndex = 0;
-            this.picEventImage.TabStop = false;
-            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 3;
@@ -494,6 +408,93 @@
             this.label2.Text = "Description";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // picEventImage
+            // 
+            this.picEventImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picEventImage.Location = new System.Drawing.Point(11, 53);
+            this.picEventImage.Margin = new System.Windows.Forms.Padding(4);
+            this.picEventImage.Name = "picEventImage";
+            this.picEventImage.Size = new System.Drawing.Size(803, 463);
+            this.picEventImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEventImage.TabIndex = 0;
+            this.picEventImage.TabStop = false;
+            // 
+            // iconZoomIn
+            // 
+            this.iconZoomIn.BackColor = System.Drawing.Color.Transparent;
+            this.iconZoomIn.ForeColor = System.Drawing.Color.Black;
+            this.iconZoomIn.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
+            this.iconZoomIn.IconColor = System.Drawing.Color.Black;
+            this.iconZoomIn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconZoomIn.IconSize = 39;
+            this.iconZoomIn.Location = new System.Drawing.Point(993, 14);
+            this.iconZoomIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.iconZoomIn.Name = "iconZoomIn";
+            this.iconZoomIn.Size = new System.Drawing.Size(45, 39);
+            this.iconZoomIn.TabIndex = 19;
+            this.iconZoomIn.TabStop = false;
+            this.iconZoomIn.Click += new System.EventHandler(this.iconZoomIn_Click);
+            // 
+            // iconZoomOut
+            // 
+            this.iconZoomOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconZoomOut.BackColor = System.Drawing.Color.Transparent;
+            this.iconZoomOut.ForeColor = System.Drawing.Color.Black;
+            this.iconZoomOut.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassMinus;
+            this.iconZoomOut.IconColor = System.Drawing.Color.Black;
+            this.iconZoomOut.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconZoomOut.IconSize = 39;
+            this.iconZoomOut.Location = new System.Drawing.Point(1075, 14);
+            this.iconZoomOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.iconZoomOut.Name = "iconZoomOut";
+            this.iconZoomOut.Size = new System.Drawing.Size(50, 39);
+            this.iconZoomOut.TabIndex = 20;
+            this.iconZoomOut.TabStop = false;
+            this.iconZoomOut.Click += new System.EventHandler(this.iconZoomOut_Click);
+            // 
+            // iconMaximize
+            // 
+            this.iconMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconMaximize.BackColor = System.Drawing.Color.DarkOrange;
+            this.iconMaximize.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.iconMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
+            this.iconMaximize.IconColor = System.Drawing.SystemColors.ControlText;
+            this.iconMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconMaximize.IconSize = 39;
+            this.iconMaximize.Location = new System.Drawing.Point(1291, 14);
+            this.iconMaximize.Margin = new System.Windows.Forms.Padding(4);
+            this.iconMaximize.Name = "iconMaximize";
+            this.iconMaximize.Size = new System.Drawing.Size(43, 39);
+            this.iconMaximize.TabIndex = 13;
+            this.iconMaximize.TabStop = false;
+            this.iconMaximize.Click += new System.EventHandler(this.iconMaximize_Click);
+            // 
+            // picClose
+            // 
+            this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picClose.Image = global::APC.Properties.Resources.icons8_multiply_32;
+            this.picClose.Location = new System.Drawing.Point(1344, 14);
+            this.picClose.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.picClose.Name = "picClose";
+            this.picClose.Size = new System.Drawing.Size(43, 39);
+            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picClose.TabIndex = 6;
+            this.picClose.TabStop = false;
+            this.picClose.Click += new System.EventHandler(this.picClose_Click);
+            // 
+            // picMinimize
+            // 
+            this.picMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picMinimize.Image = global::APC.Properties.Resources.icons8_minimize_24;
+            this.picMinimize.Location = new System.Drawing.Point(1237, 14);
+            this.picMinimize.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.picMinimize.Name = "picMinimize";
+            this.picMinimize.Size = new System.Drawing.Size(43, 39);
+            this.picMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picMinimize.TabIndex = 5;
+            this.picMinimize.TabStop = false;
+            this.picMinimize.Click += new System.EventHandler(this.picMinimize_Click);
+            // 
             // FormEventSingleImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -511,11 +512,6 @@
             this.Load += new System.EventHandler(this.FormEventSingleImage_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -525,11 +521,16 @@
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
             this.ResumeLayout(false);
 
         }

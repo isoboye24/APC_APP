@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconZoomIn = new FontAwesome.Sharp.IconPictureBox();
             this.iconZoomOut = new FontAwesome.Sharp.IconPictureBox();
@@ -60,6 +60,7 @@
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridEventImages = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
             this.picImage2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.eventSalesPage = new System.Windows.Forms.TabPage();
@@ -128,6 +129,7 @@
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewEventReceipt = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
             this.picEventReceipt = new System.Windows.Forms.PictureBox();
             this.summaryPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
@@ -149,6 +151,7 @@
             this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventImages)).BeginInit();
             this.tableLayoutPanel15.SuspendLayout();
+            this.tableLayoutPanel28.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImage2)).BeginInit();
             this.eventSalesPage.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -175,6 +178,7 @@
             this.tableLayoutPanel25.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEventReceipt)).BeginInit();
             this.tableLayoutPanel27.SuspendLayout();
+            this.tableLayoutPanel29.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEventReceipt)).BeginInit();
             this.summaryPage.SuspendLayout();
             this.tableLayoutPanel19.SuspendLayout();
@@ -617,7 +621,7 @@
             this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel15.Controls.Add(this.picImage2, 1, 0);
+            this.tableLayoutPanel15.Controls.Add(this.tableLayoutPanel28, 1, 0);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel15.Location = new System.Drawing.Point(859, 3);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
@@ -626,13 +630,27 @@
             this.tableLayoutPanel15.Size = new System.Drawing.Size(565, 422);
             this.tableLayoutPanel15.TabIndex = 2;
             // 
+            // tableLayoutPanel28
+            // 
+            this.tableLayoutPanel28.ColumnCount = 1;
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel28.Controls.Add(this.picImage2, 0, 0);
+            this.tableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel28.Location = new System.Drawing.Point(59, 3);
+            this.tableLayoutPanel28.Name = "tableLayoutPanel28";
+            this.tableLayoutPanel28.RowCount = 2;
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel28.Size = new System.Drawing.Size(446, 416);
+            this.tableLayoutPanel28.TabIndex = 2;
+            // 
             // picImage2
             // 
             this.picImage2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picImage2.Location = new System.Drawing.Point(60, 4);
+            this.picImage2.Location = new System.Drawing.Point(4, 4);
             this.picImage2.Margin = new System.Windows.Forms.Padding(4);
             this.picImage2.Name = "picImage2";
-            this.picImage2.Size = new System.Drawing.Size(444, 414);
+            this.picImage2.Size = new System.Drawing.Size(438, 283);
             this.picImage2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picImage2.TabIndex = 1;
             this.picImage2.TabStop = false;
@@ -710,8 +728,8 @@
             this.dataGridEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridEventSales.Name = "dataGridEventSales";
             this.dataGridEventSales.RowHeadersWidth = 51;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridEventSales.RowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridEventSales.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridEventSales.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridEventSales.RowTemplate.Height = 40;
             this.dataGridEventSales.Size = new System.Drawing.Size(1365, 403);
@@ -1354,8 +1372,8 @@
             this.dataGridEventExpenditures.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridEventExpenditures.Name = "dataGridEventExpenditures";
             this.dataGridEventExpenditures.RowHeadersWidth = 51;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridEventExpenditures.RowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridEventExpenditures.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridEventExpenditures.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridEventExpenditures.RowTemplate.Height = 40;
             this.dataGridEventExpenditures.Size = new System.Drawing.Size(1371, 388);
@@ -1714,8 +1732,8 @@
             this.dataGridViewEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEventReceipt.Name = "dataGridViewEventReceipt";
             this.dataGridViewEventReceipt.RowHeadersWidth = 51;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewEventReceipt.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewEventReceipt.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewEventReceipt.RowTemplate.Height = 30;
             this.dataGridViewEventReceipt.Size = new System.Drawing.Size(958, 467);
             this.dataGridViewEventReceipt.TabIndex = 5;
@@ -1727,7 +1745,7 @@
             this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel27.Controls.Add(this.picEventReceipt, 1, 1);
+            this.tableLayoutPanel27.Controls.Add(this.tableLayoutPanel29, 1, 1);
             this.tableLayoutPanel27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel27.Location = new System.Drawing.Point(969, 3);
             this.tableLayoutPanel27.Name = "tableLayoutPanel27";
@@ -1738,13 +1756,27 @@
             this.tableLayoutPanel27.Size = new System.Drawing.Size(409, 469);
             this.tableLayoutPanel27.TabIndex = 6;
             // 
+            // tableLayoutPanel29
+            // 
+            this.tableLayoutPanel29.ColumnCount = 1;
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel29.Controls.Add(this.picEventReceipt, 0, 0);
+            this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel29.Location = new System.Drawing.Point(23, 12);
+            this.tableLayoutPanel29.Name = "tableLayoutPanel29";
+            this.tableLayoutPanel29.RowCount = 2;
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel29.Size = new System.Drawing.Size(362, 444);
+            this.tableLayoutPanel29.TabIndex = 4;
+            // 
             // picEventReceipt
             // 
             this.picEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picEventReceipt.Location = new System.Drawing.Point(23, 11);
+            this.picEventReceipt.Location = new System.Drawing.Point(3, 2);
             this.picEventReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picEventReceipt.Name = "picEventReceipt";
-            this.picEventReceipt.Size = new System.Drawing.Size(362, 446);
+            this.picEventReceipt.Size = new System.Drawing.Size(356, 306);
             this.picEventReceipt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picEventReceipt.TabIndex = 3;
             this.picEventReceipt.TabStop = false;
@@ -1837,6 +1869,7 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventImages)).EndInit();
             this.tableLayoutPanel15.ResumeLayout(false);
+            this.tableLayoutPanel28.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picImage2)).EndInit();
             this.eventSalesPage.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1874,6 +1907,7 @@
             this.tableLayoutPanel25.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEventReceipt)).EndInit();
             this.tableLayoutPanel27.ResumeLayout(false);
+            this.tableLayoutPanel29.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picEventReceipt)).EndInit();
             this.summaryPage.ResumeLayout(false);
             this.tableLayoutPanel19.ResumeLayout(false);
@@ -1987,5 +2021,7 @@
         private System.Windows.Forms.Label labelTotalAmountEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
         private System.Windows.Forms.PictureBox picImage2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel28;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel29;
     }
 }

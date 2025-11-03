@@ -98,19 +98,11 @@ namespace APC.DAL.DAO
                     List<int> numberOfPresenceRatio = new List<int>();
                     List<decimal> bahaviorRatioList = new List<decimal>();
 
-                    var attendanceRatioList = db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.memberID == member.memberID && x.year == year && x.monthID <= endMonth).ToList();
-                    foreach (var attendanceRatio in attendanceRatioList)
+                    var duesRatioList = db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.memberID == member.memberID && x.year == year && x.monthID <= endMonth).ToList();
+                    foreach (var due in duesRatioList)
                     {
-                        amountContributedRatio.Add((decimal)attendanceRatio.monthlyDues);
-                        int attendanceStatus = attendanceRatio.attendanceStatusID;
-                        if (attendanceStatus == 2)
-                        {
-                            numberOfPresenceRatio.Add(1);
-                        }                        
+                        amountContributedRatio.Add((decimal)due.monthlyDues);
                     }
-                    decimal totalAttendSum = numberOfPresenceRatio.Sum();
-                    decimal AttendanceRatio = (totalAttendSum / 10) * 40;
-
                     decimal duesRatio = amountContributedRatio.Sum();
 
                     if (duesRatio > 120)
@@ -121,6 +113,18 @@ namespace APC.DAL.DAO
                     {
                         duesRatio = (duesRatio / 120) * 50;
                     }
+
+                    var attendanceRatioList = db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.memberID == member.memberID && x.year == year && x.monthID <= (endMonth + 1)).ToList();
+                    foreach (var attendanceRatio in attendanceRatioList)
+                    {                        
+                        int attendanceStatus = attendanceRatio.attendanceStatusID;
+                        if (attendanceStatus == 2)
+                        {
+                            numberOfPresenceRatio.Add(1);
+                        }
+                    }
+                    decimal totalAttendSum = numberOfPresenceRatio.Sum();
+                    decimal AttendanceRatio = (totalAttendSum / (endMonth + 1)) * 40;
 
                     int behaviorCount = db.FINED_MEMBER.Count(x => x.isdeleted == false && x.memberID == member.memberID && x.year == year && x.monthID <= (endMonth + 1));
                     var behaviorList = db.FINED_MEMBER.Where(x => x.isdeleted == false && x.memberID == member.memberID && x.year == year && x.monthID <= (endMonth + 1)).ToList();

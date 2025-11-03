@@ -171,17 +171,25 @@ namespace APC.DAL.DAO
                     dto.Summary = item.summary;
                     dto.FineDate = item.finedDate;
 
-                    if (dto.Balance == 0)
+                    if (dto.AmountPaid == 0)
+                    {
+                        dto.FineStatus = "NOT Paid";
+                    }
+                    else if (dto.AmountPaid > 0 && dto.AmountPaid < dto.ExpectedAmount)
+                    {
+                        dto.FineStatus = "NOT completed";
+                    }
+                    else if (dto.AmountPaid == dto.ExpectedAmount)
                     {
                         dto.FineStatus = "Completed";
                     }
-                    else if (dto.Balance > 0)
+                    else if (dto.AmountPaid > dto.ExpectedAmount)
                     {
                         dto.FineStatus = "Extra";
                     }
                     else
                     {
-                        dto.FineStatus = "NOT completed";
+                        dto.FineStatus = "deficit";
                     }
 
                     dto.ConstitutionSection = item.section;

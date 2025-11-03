@@ -117,8 +117,8 @@ namespace APC.AllForms
             dataGridView1.Columns[11].HeaderText = "Gender";
             dataGridView1.Columns[12].HeaderText = "Status";
             dataGridView1.Columns[13].HeaderText = "Dues Paid";
-            dataGridView1.Columns[14].HeaderText = "Expected Dues";
-            dataGridView1.Columns[15].HeaderText = "Balance";
+            dataGridView1.Columns[14].Visible = false;
+            dataGridView1.Columns[15].Visible = false;
             dataGridView1.Columns[16].Visible = false;
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {

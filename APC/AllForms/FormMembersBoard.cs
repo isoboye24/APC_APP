@@ -450,6 +450,7 @@ namespace APC.AllForms
             #endregion
 
             GetCounts();
+            
         }
 
         private void btnAddRegisteredMembers_Click(object sender, EventArgs e)
@@ -1186,6 +1187,37 @@ namespace APC.AllForms
                     e.RowBounds.Location.X + 15,
                     e.RowBounds.Location.Y + 4
                 );
+            }
+        }
+
+        
+        private void btnViewCommittment_Click(object sender, EventArgs e)
+        {
+            if (committmentDetail.MemberID == 0)
+            {
+                MessageBox.Show("Please choose a member from the table");
+            }
+            else
+            {
+                FormViewMember open = new FormViewMember();
+                MemberBLL bll = new MemberBLL();
+                MemberDTO DTO = new MemberDTO();
+                DTO = bll.Select();
+                MemberDetailDTO committmentMember = DTO.Members.FirstOrDefault(x => x.MemberID == committmentDetail.MemberID);
+                
+                if (committmentMember == null)
+                {
+                    MessageBox.Show("No member found!");
+                    return;
+                }
+
+                open.detail = committmentMember;
+                open.memberID = committmentMember.MemberID;
+                open.isCommittment = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
             }
         }
     }

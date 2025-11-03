@@ -1,16 +1,18 @@
-﻿using System;
+﻿using APC.AllForms;
+using APC.BLL;
+using APC.DAL.DTO;
+using APC.Utility;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using APC.AllForms;
-using APC.BLL;
-using APC.DAL.DTO;
 
 namespace APC.AllForms
 {
@@ -392,6 +394,39 @@ namespace APC.AllForms
             txtYearComments.Tag = "resizable";
             txtYearContribution.Tag = "resizable";
             txtYearFinedMember.Tag = "resizable";
+            #endregion
+
+            #region
+            cmbFineStatus.Tag = "resizable";
+            cmbGenderComments.Tag = "resizable";
+            cmbGenderFinedMember.Tag = "resizable";
+            cmbMonth.Tag = "resizable";
+            cmbMonthComments.Tag = "resizable";
+            cmbMonthContribution.Tag = "resizable";
+            cmbMonthFinedMember.Tag = "resizable";
+            #endregion
+
+            #region
+            rbEqualAttend.Tag = "resizable";
+            rbEqualContAmount.Tag = "resizable";
+            rbEqualContributors.Tag = "resizable";
+            rbEqualMonDues.Tag = "resizable";
+            rbLessAttend.Tag = "resizable";
+            rbLessContAmount.Tag = "resizable";
+            rbLessContributors.Tag = "resizable";
+            rbLessMonDues.Tag = "resizable";
+            rbMoreAttend.Tag = "resizable";
+            rbMoreContAmount.Tag = "resizable";
+            rbMoreContributors.Tag = "resizable";
+            rbMoreMonDues.Tag = "resizable";
+            #endregion
+
+            #region
+            dataGridView1.Tag = "resizable";
+            dataGridViewComments.Tag = "resizable";
+            dataGridViewConstitution.Tag = "resizable";
+            dataGridViewFinedMembers.Tag = "resizable";
+            dataGridViewSpecialContributions.Tag = "resizable";
             #endregion
         }
 

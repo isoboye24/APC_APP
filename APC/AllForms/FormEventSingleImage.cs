@@ -157,30 +157,7 @@ namespace APC.AllForms
 
                 labelTitle.Text = "Edit " + eventDetail.EventTitle + " Picture.";
             }
-            else if (isView)
-            {
-                txtImagePath.Text = detail.ImagePath;
-                txtImagePath.Hide();
-                label3.Hide();
-
-                txtImageCaption.Text = detail.ImageCaption;
-                txtImageCaption.ReadOnly = true;
-                txtImageCaption.BorderStyle = BorderStyle.None;
-                tableLayoutPanel5.RowStyles[1].SizeType = SizeType.Absolute;
-                tableLayoutPanel5.RowStyles[1].Height = 70;
-                
-
-                txtImageSummary.Text = detail.Summary;
-                txtImageSummary.ReadOnly = true;
-                txtImageSummary.BorderStyle = BorderStyle.None;
-                eventID = detail.EventID;
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-                picEventImage.ImageLocation = imagePath;
-                labelTitle.Text = detail.ImageCaption + " of " + eventDetail.EventTitle;
-                btnSave.Hide();
-                btnBrowse.Hide();
-                label1.Hide();
-            }
+            
         }
         
         private void txtImageCaption_TextChanged(object sender, EventArgs e)

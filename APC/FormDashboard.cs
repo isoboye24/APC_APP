@@ -143,7 +143,7 @@ namespace APC
         public bool isAdmin = false;
         public bool isEditor = false;
 
-        private int buttonSize = 14;
+        private float buttonSize = 14f;
         private float panelSize;
         private void FormDashboard_Load(object sender, EventArgs e)
         {
@@ -203,7 +203,7 @@ namespace APC
         private void ResizeableControls()
         {
             label18.Tag = "resizable";
-            label1.Tag = "resizable";
+            //label1.Tag = "resizable";
             label19.Tag = "resizable";
             label21.Tag = "resizable";
             label23.Tag = "resizable";
@@ -326,7 +326,7 @@ namespace APC
                 WindowState = FormWindowState.Maximized;
                 ZoomManager.ZoomIn(this);
 
-                buttonSize = 18;
+                buttonSize = 18f;
                 panelSize = 3.05f;
                 ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
@@ -338,7 +338,7 @@ namespace APC
                 this.WindowState = initialDetail.WindowState;
                 ZoomManager.ZoomIn(this);
 
-                buttonSize = 14;
+                buttonSize = 14f;
                 panelSize = 1.05f;
                 ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
@@ -355,7 +355,7 @@ namespace APC
                 WindowState = FormWindowState.Normal;
                 ZoomManager.ZoomOut(this);
 
-                buttonSize = 14;
+                buttonSize = 14f;
                 panelSize = 1.05f;
                 ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }

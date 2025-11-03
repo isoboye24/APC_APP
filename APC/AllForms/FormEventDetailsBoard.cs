@@ -34,6 +34,7 @@ namespace APC.AllForms
         public EventsDetailDTO detail = new EventsDetailDTO();
         public bool isView = false;
         private int buttonSize = 14;
+        private int tableHeaderSize = 16;
         private float panelSize;
 
         EventExpenditureDetailDTO eventExpDetail = new EventExpenditureDetailDTO();
@@ -81,14 +82,20 @@ namespace APC.AllForms
                 WindowState = FormWindowState.Maximized;
                 buttonSize = 18;
                 panelSize = 3.05f;
-                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+                AppZoomState.CurrentFontSize = buttonSize;
+                AppZoomState.CurrentScale = panelSize;
+
+                ControlResize.ResizeTaggedControls(dataGridEventImages, buttonSize, panelSize);
             }
             else
             {
                 WindowState = FormWindowState.Normal;
                 buttonSize = 14;
                 panelSize = 1.05f;
-                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+                AppZoomState.CurrentFontSize = buttonSize;
+                AppZoomState.CurrentScale = panelSize;
+
+                ControlResize.ResizeTaggedControls(dataGridEventImages, buttonSize, panelSize);
             }
 
         }
@@ -104,7 +111,10 @@ namespace APC.AllForms
                 WindowState = FormWindowState.Normal;
                 buttonSize = 14;
                 panelSize = 1.05f;
-                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+                AppZoomState.CurrentFontSize = buttonSize;
+                AppZoomState.CurrentScale = panelSize;
+
+                ControlResize.ResizeTaggedControls(dataGridEventImages, buttonSize, panelSize);
             }
         }
 
@@ -112,14 +122,20 @@ namespace APC.AllForms
         {
             buttonSize += 1;
             panelSize += 1.05f;
-            ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+            AppZoomState.CurrentFontSize = buttonSize;
+            AppZoomState.CurrentScale = panelSize;
+
+            ControlResize.ResizeTaggedControls(dataGridEventImages, buttonSize, panelSize);
         }
 
         private void iconZoomOut_Click(object sender, EventArgs e)
         {
-            buttonSize -= 1;
+            buttonSize -= 1; 
             panelSize -= 1.05f;
-            ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+            AppZoomState.CurrentFontSize = buttonSize;
+            AppZoomState.CurrentScale = panelSize;
+
+            ControlResize.ResizeTaggedControls(dataGridEventImages, buttonSize, panelSize);
         }
 
         private void ResizeableControls()
@@ -186,14 +202,13 @@ namespace APC.AllForms
             btnViewExpReport.Tag = "resizable";
 
 
-            //dataGridEventExpenditures.Tag = "resizable";
-            //dataGridEventImages.Tag = "resizable";
-            //dataGridEventSales.Tag = "resizable";
-            //dataGridViewEventReceipt.Tag = "resizable";
+            dataGridEventExpenditures.Tag = "resizable";
+            dataGridEventImages.Tag = "resizable";
+            dataGridEventSales.Tag = "resizable";
+            dataGridViewEventReceipt.Tag = "resizable";
 
 
             tableLayoutPanel1.Tag = "resizable";
-            //tabControl1.Tag = "resizable";
         }
 
         private void FormEventDetailsBoard_Load(object sender, EventArgs e)
@@ -227,7 +242,7 @@ namespace APC.AllForms
             dataGridEventExpenditures.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             foreach (DataGridViewColumn column in dataGridEventExpenditures.Columns)
             {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                column.HeaderCell.Style.Font = new Font("Segoe UI", tableHeaderSize, FontStyle.Bold);
             }
 
             // limit the amount of summary characters
@@ -269,7 +284,7 @@ namespace APC.AllForms
             dataGridEventSales.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             foreach (DataGridViewColumn column in dataGridEventSales.Columns)
             {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                column.HeaderCell.Style.Font = new Font("Segoe UI", tableHeaderSize, FontStyle.Bold);
             }
 
             if (dataGridEventSales.Columns.Count > 2)
@@ -304,7 +319,7 @@ namespace APC.AllForms
 
             foreach (DataGridViewColumn column in dataGridEventImages.Columns)
             {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                column.HeaderCell.Style.Font = new Font("Segoe UI", tableHeaderSize, FontStyle.Bold);
             }
             #endregion
 
@@ -335,7 +350,7 @@ namespace APC.AllForms
 
             foreach (DataGridViewColumn column in dataGridViewEventReceipt.Columns)
             {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                column.HeaderCell.Style.Font = new Font("Segoe UI", tableHeaderSize, FontStyle.Bold);
             }
             #endregion
 
@@ -661,10 +676,9 @@ namespace APC.AllForms
             }
             else
             {
-                FormEventSingleImage open = new FormEventSingleImage();
+                FormViewSingleImage open = new FormViewSingleImage();
                 open.detail = eventImageDetail;
                 open.eventDetail = detail;
-                open.isView = true;
                 this.Hide();
                 open.ShowDialog();
                 this.Visible = true;

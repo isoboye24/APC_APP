@@ -34,8 +34,11 @@ namespace APC.AllForms
         
         public bool isView = false;
         public bool isFormer = false;
-        public MemberDetailDTO detail = new MemberDetailDTO();
+        public bool isCommittment = false;
+        public MemberDetailDTO detail { get; set; }
+        public int memberID;
         MemberBLL bll = new MemberBLL();
+        MemberDTO DTO = new MemberDTO();
         int attendancePresentCount = 0;
         int attendanceAbsentCount = 0;
         decimal amountContributed = 0;
@@ -127,6 +130,60 @@ namespace APC.AllForms
             btnViewPersonalBalance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnViewPresentAttendance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             #endregion
+
+            if (isCommittment)
+            {
+                DTO = bll.Select();
+
+                detail = DTO.Members.FirstOrDefault(x => x.MemberID == memberID);
+
+                if (detail == null)
+                {
+                    MessageBox.Show("No detail data received!");
+                    return;
+                }
+                else
+                {
+                    labelMemberNameTitle.Text = detail.Surname + " " + detail.Name;
+                    string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+                    picProfilePic.ImageLocation = imagePath;
+
+                    txtName.Text = detail.Name;
+                    txtSurname.Text = detail.Surname;
+                    txtAddress.Text = detail.HouseAddress;
+                    txtPosition.Text = detail.PositionName;
+                    labelBirthday.Text = detail.Birthday.ToShortDateString();
+                    labelMemSince.Text = detail.MembershipDate.ToShortDateString();
+                    txtUsername.Text = detail.Username;
+                    txtPassword.Text = detail.Password;
+                    txtEmail.Text = detail.EmailAddress;
+                    txtPhone1.Text = detail.PhoneNumber;
+                    txtLGA.Text = detail.LGA;
+                    if (detail.PhoneNumber2 != "")
+                    {
+                        txtPhone2.Visible = true;
+                        labelPhone2.Visible = true;
+                    }
+                    if (detail.PhoneNumber3 != "")
+                    {
+                        txtPhone3.Visible = true;
+                        labelPhone3.Visible = true;
+                    }
+                    txtPhone2.Text = detail.PhoneNumber2;
+                    txtPhone3.Text = detail.PhoneNumber3;
+                    txtCountry.Text = detail.CountryName;
+                    txtProfession.Text = detail.ProfessionName;
+                    txtEmpStatus.Text = detail.EmploymentStatusName;
+                    txtGender.Text = detail.GenderName;
+                    txtNationality.Text = detail.NationalityName;
+                    txtMaritalStatus.Text = detail.MaritalStatusName;
+                    txtPermission.Text = detail.PermissionName;
+                    txtNextOfKin.Text = detail.NameOfNextOfKin;
+                    txtNextOfKinRelationship.Text = detail.RelationshipToKin;
+                }
+
+
+            }
 
             labelCommentText.Hide();
             labelNoOfComments.Hide();
@@ -268,6 +325,9 @@ namespace APC.AllForms
                 txtNextOfKin.Text = detail.NameOfNextOfKin;
                 txtNextOfKinRelationship.Text = detail.RelationshipToKin;
             }
+           
+
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)

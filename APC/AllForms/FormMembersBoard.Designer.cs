@@ -86,7 +86,6 @@
             this.label44 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel47 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel48 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
@@ -204,6 +203,11 @@
             this.btnSearchDeadMembers = new System.Windows.Forms.Button();
             this.btnClearDeadMembers = new System.Windows.Forms.Button();
             this.dataGridViewDeadMembers = new System.Windows.Forms.DataGridView();
+            this.label37 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.btnViewCommittment = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.activeMembersPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -870,10 +874,8 @@
             this.tableLayoutPanel41.RowCount = 4;
             this.tableLayoutPanel41.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
             this.tableLayoutPanel41.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel41.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66F));
-            this.tableLayoutPanel41.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel41.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel41.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel41.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tableLayoutPanel41.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8F));
             this.tableLayoutPanel41.Size = new System.Drawing.Size(1268, 688);
             this.tableLayoutPanel41.TabIndex = 5;
             // 
@@ -999,6 +1001,8 @@
             this.tableLayoutPanel46.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel46.Controls.Add(this.label44, 0, 0);
             this.tableLayoutPanel46.Controls.Add(this.comboBox1, 0, 1);
+            this.tableLayoutPanel46.Controls.Add(this.label37, 0, 2);
+            this.tableLayoutPanel46.Controls.Add(this.comboBox2, 0, 3);
             this.tableLayoutPanel46.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel46.Location = new System.Drawing.Point(248, 4);
             this.tableLayoutPanel46.Margin = new System.Windows.Forms.Padding(4);
@@ -1038,8 +1042,9 @@
             // 
             this.tableLayoutPanel47.ColumnCount = 1;
             this.tableLayoutPanel47.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel47.Controls.Add(this.textBox3, 0, 1);
             this.tableLayoutPanel47.Controls.Add(this.textBox4, 0, 3);
+            this.tableLayoutPanel47.Controls.Add(this.comboBox3, 0, 1);
+            this.tableLayoutPanel47.Controls.Add(this.label38, 0, 0);
             this.tableLayoutPanel47.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel47.Location = new System.Drawing.Point(492, 4);
             this.tableLayoutPanel47.Margin = new System.Windows.Forms.Padding(4);
@@ -1051,16 +1056,6 @@
             this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel47.Size = new System.Drawing.Size(224, 156);
             this.tableLayoutPanel47.TabIndex = 0;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(4, 41);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(216, 32);
-            this.textBox3.TabIndex = 2;
             // 
             // textBox4
             // 
@@ -1148,7 +1143,7 @@
             this.dataGridViewCommitments.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewCommitments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewCommitments.RowTemplate.Height = 40;
-            this.dataGridViewCommitments.Size = new System.Drawing.Size(1209, 446);
+            this.dataGridViewCommitments.Size = new System.Drawing.Size(1209, 439);
             this.dataGridViewCommitments.TabIndex = 5;
             this.dataGridViewCommitments.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCommitments_RowEnter);
             this.dataGridViewCommitments.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewCommitments_RowPostPaint);
@@ -1156,18 +1151,19 @@
             // tableLayoutPanel42
             // 
             this.tableLayoutPanel42.ColumnCount = 5;
+            this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24F));
             this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24F));
             this.tableLayoutPanel42.Controls.Add(this.labelTotalRowsCommittment, 0, 0);
+            this.tableLayoutPanel42.Controls.Add(this.btnViewCommittment, 2, 0);
             this.tableLayoutPanel42.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel42.Location = new System.Drawing.Point(28, 642);
+            this.tableLayoutPanel42.Location = new System.Drawing.Point(28, 635);
             this.tableLayoutPanel42.Name = "tableLayoutPanel42";
             this.tableLayoutPanel42.RowCount = 1;
             this.tableLayoutPanel42.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel42.Size = new System.Drawing.Size(1211, 43);
+            this.tableLayoutPanel42.Size = new System.Drawing.Size(1211, 50);
             this.tableLayoutPanel42.TabIndex = 6;
             // 
             // labelTotalRowsCommittment
@@ -1175,10 +1171,10 @@
             this.labelTotalRowsCommittment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTotalRowsCommittment.AutoSize = true;
             this.labelTotalRowsCommittment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRowsCommittment.Location = new System.Drawing.Point(4, 9);
+            this.labelTotalRowsCommittment.Location = new System.Drawing.Point(4, 13);
             this.labelTotalRowsCommittment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.labelTotalRowsCommittment.Name = "labelTotalRowsCommittment";
-            this.labelTotalRowsCommittment.Size = new System.Drawing.Size(234, 28);
+            this.labelTotalRowsCommittment.Size = new System.Drawing.Size(282, 28);
             this.labelTotalRowsCommittment.TabIndex = 1;
             this.labelTotalRowsCommittment.Text = "Row : 0";
             this.labelTotalRowsCommittment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2825,6 +2821,69 @@
             this.dataGridViewDeadMembers.TabIndex = 4;
             this.dataGridViewDeadMembers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDeadMembers_RowEnter);
             // 
+            // label37
+            // 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(4, 81);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(124, 27);
+            this.label37.TabIndex = 0;
+            this.label37.Text = "Dues Status";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(4, 112);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(216, 33);
+            this.comboBox2.TabIndex = 1;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(4, 41);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(216, 33);
+            this.comboBox3.TabIndex = 1;
+            // 
+            // label38
+            // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(4, 9);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(116, 28);
+            this.label38.TabIndex = 0;
+            this.label38.Text = "Fine Status";
+            // 
+            // btnViewCommittment
+            // 
+            this.btnViewCommittment.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnViewCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnViewCommittment.FlatAppearance.BorderSize = 0;
+            this.btnViewCommittment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewCommittment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewCommittment.ForeColor = System.Drawing.Color.White;
+            this.btnViewCommittment.Location = new System.Drawing.Point(536, 4);
+            this.btnViewCommittment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnViewCommittment.Name = "btnViewCommittment";
+            this.btnViewCommittment.Size = new System.Drawing.Size(137, 42);
+            this.btnViewCommittment.TabIndex = 2;
+            this.btnViewCommittment.Text = "View";
+            this.btnViewCommittment.UseVisualStyleBackColor = false;
+            this.btnViewCommittment.Click += new System.EventHandler(this.btnViewCommittment_Click);
+            // 
             // FormMembersBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -3085,7 +3144,6 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel47;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel48;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel49;
@@ -3098,5 +3156,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel50;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel42;
         private System.Windows.Forms.Label labelTotalRowsCommittment;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Button btnViewCommittment;
     }
 }

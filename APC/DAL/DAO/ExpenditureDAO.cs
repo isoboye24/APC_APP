@@ -109,7 +109,7 @@ namespace APC.DAL.DAO
                                 monthName = m.monthName,
                                 year = e.year,
                                 expenditureDate = e.expenditureDate,
-                            }).OrderByDescending(x => x.year).OrderByDescending(x =>x.monthID).ToList();
+                            }).OrderByDescending(x => x.year).ThenByDescending(x =>x.monthID).ThenByDescending(x =>x.day).ToList();
                 foreach (var item in list)
                 {
                     ExpenditureDetailDTO dto = new ExpenditureDetailDTO();

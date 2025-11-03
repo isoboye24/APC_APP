@@ -1146,13 +1146,13 @@
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 7;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 131F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel7.Controls.Add(this.btnClearComments, 6, 2);
             this.tableLayoutPanel7.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.label6, 0, 2);
@@ -1185,10 +1185,10 @@
             this.btnClearComments.FlatAppearance.BorderSize = 0;
             this.btnClearComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClearComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearComments.Location = new System.Drawing.Point(1071, 50);
+            this.btnClearComments.Location = new System.Drawing.Point(1060, 50);
             this.btnClearComments.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearComments.Name = "btnClearComments";
-            this.btnClearComments.Size = new System.Drawing.Size(126, 39);
+            this.btnClearComments.Size = new System.Drawing.Size(137, 39);
             this.btnClearComments.TabIndex = 0;
             this.btnClearComments.Text = "Clear";
             this.btnClearComments.UseVisualStyleBackColor = false;
@@ -1199,7 +1199,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(41, 12);
+            this.label5.Location = new System.Drawing.Point(69, 12);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(95, 28);
@@ -1211,7 +1211,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(33, 58);
+            this.label6.Location = new System.Drawing.Point(61, 58);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(103, 28);
@@ -1223,7 +1223,7 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(416, 58);
+            this.label7.Location = new System.Drawing.Point(432, 58);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 28);
@@ -1237,10 +1237,10 @@
             this.btnSearchComments.FlatAppearance.BorderSize = 0;
             this.btnSearchComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearchComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchComments.Location = new System.Drawing.Point(1071, 4);
+            this.btnSearchComments.Location = new System.Drawing.Point(1060, 4);
             this.btnSearchComments.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearchComments.Name = "btnSearchComments";
-            this.btnSearchComments.Size = new System.Drawing.Size(126, 37);
+            this.btnSearchComments.Size = new System.Drawing.Size(137, 37);
             this.btnSearchComments.TabIndex = 0;
             this.btnSearchComments.Text = "Search";
             this.btnSearchComments.UseVisualStyleBackColor = false;
@@ -1250,11 +1250,11 @@
             // 
             this.txtComment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComment.Location = new System.Drawing.Point(144, 50);
+            this.txtComment.Location = new System.Drawing.Point(172, 50);
             this.txtComment.Margin = new System.Windows.Forms.Padding(4);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(221, 39);
+            this.txtComment.Size = new System.Drawing.Size(172, 39);
             this.txtComment.TabIndex = 1;
             this.txtComment.TextChanged += new System.EventHandler(this.txtComment_TextChanged);
             // 
@@ -1263,10 +1263,10 @@
             this.cmbGenderComments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbGenderComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGenderComments.FormattingEnabled = true;
-            this.cmbGenderComments.Location = new System.Drawing.Point(504, 50);
+            this.cmbGenderComments.Location = new System.Drawing.Point(520, 50);
             this.cmbGenderComments.Margin = new System.Windows.Forms.Padding(4);
             this.cmbGenderComments.Name = "cmbGenderComments";
-            this.cmbGenderComments.Size = new System.Drawing.Size(221, 36);
+            this.cmbGenderComments.Size = new System.Drawing.Size(172, 36);
             this.cmbGenderComments.TabIndex = 4;
             // 
             // label8
@@ -1274,7 +1274,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(428, 12);
+            this.label8.Location = new System.Drawing.Point(444, 12);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 28);
@@ -1285,10 +1285,10 @@
             // 
             this.txtNameComments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNameComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNameComments.Location = new System.Drawing.Point(504, 4);
+            this.txtNameComments.Location = new System.Drawing.Point(520, 4);
             this.txtNameComments.Margin = new System.Windows.Forms.Padding(4);
             this.txtNameComments.Name = "txtNameComments";
-            this.txtNameComments.Size = new System.Drawing.Size(221, 34);
+            this.txtNameComments.Size = new System.Drawing.Size(172, 34);
             this.txtNameComments.TabIndex = 1;
             this.txtNameComments.TextChanged += new System.EventHandler(this.txtNameComments_TextChanged);
             // 
@@ -1296,10 +1296,10 @@
             // 
             this.txtSurnameComments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSurnameComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSurnameComments.Location = new System.Drawing.Point(144, 4);
+            this.txtSurnameComments.Location = new System.Drawing.Point(172, 4);
             this.txtSurnameComments.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurnameComments.Name = "txtSurnameComments";
-            this.txtSurnameComments.Size = new System.Drawing.Size(221, 34);
+            this.txtSurnameComments.Size = new System.Drawing.Size(172, 34);
             this.txtSurnameComments.TabIndex = 1;
             this.txtSurnameComments.TextChanged += new System.EventHandler(this.txtSurnameComments_TextChanged);
             // 
@@ -1308,7 +1308,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(759, 12);
+            this.label9.Location = new System.Drawing.Point(785, 12);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(75, 28);
@@ -1320,7 +1320,7 @@
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(782, 58);
+            this.label10.Location = new System.Drawing.Point(808, 58);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(52, 28);
@@ -1331,10 +1331,10 @@
             // 
             this.txtYearComments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtYearComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYearComments.Location = new System.Drawing.Point(842, 50);
+            this.txtYearComments.Location = new System.Drawing.Point(868, 50);
             this.txtYearComments.Margin = new System.Windows.Forms.Padding(4);
             this.txtYearComments.Name = "txtYearComments";
-            this.txtYearComments.Size = new System.Drawing.Size(221, 34);
+            this.txtYearComments.Size = new System.Drawing.Size(184, 34);
             this.txtYearComments.TabIndex = 1;
             this.txtYearComments.TextChanged += new System.EventHandler(this.txtYearComments_TextChanged);
             // 
@@ -1343,10 +1343,10 @@
             this.cmbMonthComments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbMonthComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMonthComments.FormattingEnabled = true;
-            this.cmbMonthComments.Location = new System.Drawing.Point(842, 4);
+            this.cmbMonthComments.Location = new System.Drawing.Point(868, 4);
             this.cmbMonthComments.Margin = new System.Windows.Forms.Padding(4);
             this.cmbMonthComments.Name = "cmbMonthComments";
-            this.cmbMonthComments.Size = new System.Drawing.Size(221, 36);
+            this.cmbMonthComments.Size = new System.Drawing.Size(184, 36);
             this.cmbMonthComments.TabIndex = 4;
             // 
             // tableLayoutPanel8

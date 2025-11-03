@@ -13,8 +13,9 @@ namespace APC.Utility
             {
                 if (c.Tag != null && c.Tag.ToString().Equals("resizable", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Resize text-based controls
-                    if (c is Label || c is Button || c is TextBox || c is ComboBox)
+                    // Resize text-based controls (added RadioButton + CheckBox)
+                    if (c is Label || c is Button || c is TextBox || c is ComboBox ||
+                        c is RadioButton || c is CheckBox)
                     {
                         ResizeFont(c, newFontSize);
                         ResizeSize(c, resizeFactor);
@@ -48,7 +49,7 @@ namespace APC.Utility
                         ResizeSize(c, resizeFactor);
                     }
 
-                    // Resize TableLayoutPanel — important part
+                    // Resize TableLayoutPanel
                     else if (c is TableLayoutPanel table)
                     {
                         ResizeTableLayoutPanel(table, resizeFactor);
@@ -80,8 +81,14 @@ namespace APC.Utility
         {
             try
             {
-                // Update fonts for all key sections
-                var newFont = new Font("Segoe UI", grid.Font.Size * resizeFactor, grid.Font.Style);
+                if (grid == null || grid.Columns.Count == 0)
+                    return; // Nothing to resize yet
+
+                // Create a new scaled font
+                float newFontSize = grid.Font.Size * resizeFactor;
+                var newFont = new Font(grid.Font.FontFamily, newFontSize, grid.Font.Style);
+
+                // Apply to all parts of the grid
                 grid.Font = newFont;
                 grid.DefaultCellStyle.Font = newFont;
                 grid.ColumnHeadersDefaultCellStyle.Font = newFont;
@@ -90,25 +97,29 @@ namespace APC.Utility
                 // Resize column widths
                 foreach (DataGridViewColumn col in grid.Columns)
                 {
-                    col.Width = (int)(col.Width * resizeFactor);
+                    col.Width = Math.Max(20, (int)(col.Width * resizeFactor)); // Minimum width
                 }
 
                 // Resize row heights
                 foreach (DataGridViewRow row in grid.Rows)
                 {
-                    row.Height = (int)(row.Height * resizeFactor);
+                    try
+                    {
+                        row.Height = Math.Max(18, (int)(row.Height * resizeFactor));
+                    }
+                    catch { /* some virtual rows may throw */ }
                 }
 
-                // Optionally auto-adjust layout to prevent text clipping
+                // Optional: auto resize to fit content
                 grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
                 grid.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
             }
-            catch
+            catch (Exception ex)
             {
-                // Ignore grids that are uninitialized
+                // Log or safely ignore — prevents crash during form load
+                Console.WriteLine("ResizeDataGridView failed: " + ex.Message);
             }
         }
-
 
         // Resize TableLayoutPanel Rows and Columns
         private static void ResizeTableLayoutPanel(TableLayoutPanel table, float resizeFactor)
@@ -133,6 +144,70 @@ namespace APC.Utility
         {
             foreach (Form form in Application.OpenForms)
                 ResizeTaggedControls(form, newFontSize, resizeFactor);
+        }
+
+        // 🟦 New: Smooth animation across all forms
+        public static void SmoothResizeAll(float targetFontSize, float targetScale, int durationMs = 250)
+        {
+            // Capture the current values at start
+            float startFontSize = CurrentFontSize;
+            float startScale = CurrentScale;
+
+            int steps = 10;
+            int interval = durationMs / steps;
+            int currentStep = 0;
+
+            Timer timer = new Timer { Interval = interval };
+            timer.Tick += (s, e) =>
+            {
+                currentStep++;
+                float progress = (float)currentStep / steps;
+                float eased = (float)Math.Sin(progress * Math.PI / 2); // smooth easing
+
+                // Interpolate between start and target
+                float fontSize = startFontSize + (targetFontSize - startFontSize) * eased;
+                float scale = startScale + (targetScale - startScale) * eased;
+
+                // Apply resize using absolute values, not cumulative scaling
+                foreach (Form form in Application.OpenForms)
+                    ResizeTaggedControls(form, fontSize, scale);
+
+                if (currentStep >= steps)
+                {
+                    timer.Stop();
+                    timer.Dispose();
+
+                    // Save new global zoom state
+                    CurrentFontSize = targetFontSize;
+                    CurrentScale = targetScale;
+
+                    // Refresh all DataGridViews once
+                    foreach (Form form in Application.OpenForms)
+                        RefreshDataGrids(form);
+                }
+            };
+
+            timer.Start();
+        }
+
+        public static float CurrentFontSize { get; private set; } = 14f;
+        public static float CurrentScale { get; private set; } = 1.0f;
+
+        private static void RefreshDataGrids(Control parent)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                if (c is DataGridView grid)
+                {
+                    grid.AutoResizeColumnHeadersHeight();
+                    grid.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+                    grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    grid.Refresh();
+                }
+
+                if (c.HasChildren)
+                    RefreshDataGrids(c);
+            }
         }
     }
 }

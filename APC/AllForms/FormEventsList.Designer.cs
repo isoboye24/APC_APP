@@ -480,8 +480,9 @@
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 1;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.RowCount = 2;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel10.Size = new System.Drawing.Size(349, 318);
             this.tableLayoutPanel10.TabIndex = 4;
             // 
@@ -491,7 +492,7 @@
             this.picViewEventCoverImage.Location = new System.Drawing.Point(21, 4);
             this.picViewEventCoverImage.Margin = new System.Windows.Forms.Padding(4);
             this.picViewEventCoverImage.Name = "picViewEventCoverImage";
-            this.picViewEventCoverImage.Size = new System.Drawing.Size(306, 310);
+            this.picViewEventCoverImage.Size = new System.Drawing.Size(306, 246);
             this.picViewEventCoverImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picViewEventCoverImage.TabIndex = 2;
             this.picViewEventCoverImage.TabStop = false;
