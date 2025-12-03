@@ -11,10 +11,12 @@ namespace APC.BLL
     public class MembersCommittmentBLL
     {
         MembersCommittmentDAO dao = new MembersCommittmentDAO();
+        PersonalAttendanceDAO personalAttDAO = new PersonalAttendanceDAO();
         public MembersCommittmentDTO Select(int year)
         {
             MembersCommittmentDTO dto = new MembersCommittmentDTO();
             dto.Committments = dao.Select(year);
+            dto.Years = personalAttDAO.SelectOnlyYears();
             return dto;
         }
     }

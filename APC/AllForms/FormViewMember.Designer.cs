@@ -322,7 +322,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 3, 0);
@@ -343,7 +343,7 @@
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.groupBox1, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(835, 4);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(834, 4);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
@@ -571,7 +571,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(809, 583);
+            this.tabControl1.Size = new System.Drawing.Size(808, 583);
             this.tabControl1.TabIndex = 1;
             // 
             // personalInfoPage
@@ -582,7 +582,7 @@
             this.personalInfoPage.Margin = new System.Windows.Forms.Padding(4);
             this.personalInfoPage.Name = "personalInfoPage";
             this.personalInfoPage.Padding = new System.Windows.Forms.Padding(4);
-            this.personalInfoPage.Size = new System.Drawing.Size(801, 539);
+            this.personalInfoPage.Size = new System.Drawing.Size(800, 539);
             this.personalInfoPage.TabIndex = 0;
             this.personalInfoPage.Text = "Personal Info   ";
             // 
@@ -599,7 +599,7 @@
             this.tableLayoutPanel20.Name = "tableLayoutPanel20";
             this.tableLayoutPanel20.RowCount = 1;
             this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel20.Size = new System.Drawing.Size(793, 531);
+            this.tableLayoutPanel20.Size = new System.Drawing.Size(792, 531);
             this.tableLayoutPanel20.TabIndex = 0;
             // 
             // tableLayoutPanel9
@@ -933,7 +933,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.100001F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(389, 523);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(388, 523);
             this.tableLayoutPanel6.TabIndex = 1;
             // 
             // tableLayoutPanel13
@@ -944,7 +944,7 @@
             this.tableLayoutPanel13.Controls.Add(this.btnViewChildren, 1, 0);
             this.tableLayoutPanel13.Controls.Add(this.labelNoOfChildren, 0, 0);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(179, 56);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(178, 56);
             this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 1;
@@ -993,7 +993,7 @@
             this.txtMaritalStatus.BackColor = System.Drawing.Color.Gainsboro;
             this.txtMaritalStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtMaritalStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaritalStatus.Location = new System.Drawing.Point(179, 4);
+            this.txtMaritalStatus.Location = new System.Drawing.Point(178, 4);
             this.txtMaritalStatus.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaritalStatus.Name = "txtMaritalStatus";
             this.txtMaritalStatus.ReadOnly = true;
@@ -1016,7 +1016,7 @@
             this.txtNationality.BackColor = System.Drawing.Color.Gainsboro;
             this.txtNationality.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNationality.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNationality.Location = new System.Drawing.Point(179, 108);
+            this.txtNationality.Location = new System.Drawing.Point(178, 108);
             this.txtNationality.Margin = new System.Windows.Forms.Padding(4);
             this.txtNationality.Name = "txtNationality";
             this.txtNationality.ReadOnly = true;
@@ -1050,7 +1050,7 @@
             this.txtNextOfKin.BackColor = System.Drawing.Color.Gainsboro;
             this.txtNextOfKin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNextOfKin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNextOfKin.Location = new System.Drawing.Point(179, 160);
+            this.txtNextOfKin.Location = new System.Drawing.Point(178, 160);
             this.txtNextOfKin.Margin = new System.Windows.Forms.Padding(4);
             this.txtNextOfKin.Name = "txtNextOfKin";
             this.txtNextOfKin.ReadOnly = true;
@@ -1073,7 +1073,7 @@
             this.txtNextOfKinRelationship.BackColor = System.Drawing.Color.Gainsboro;
             this.txtNextOfKinRelationship.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNextOfKinRelationship.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNextOfKinRelationship.Location = new System.Drawing.Point(179, 212);
+            this.txtNextOfKinRelationship.Location = new System.Drawing.Point(178, 212);
             this.txtNextOfKinRelationship.Margin = new System.Windows.Forms.Padding(4);
             this.txtNextOfKinRelationship.Name = "txtNextOfKinRelationship";
             this.txtNextOfKinRelationship.ReadOnly = true;
@@ -1096,7 +1096,7 @@
             this.txtPhone1.BackColor = System.Drawing.Color.Gainsboro;
             this.txtPhone1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPhone1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhone1.Location = new System.Drawing.Point(179, 264);
+            this.txtPhone1.Location = new System.Drawing.Point(178, 264);
             this.txtPhone1.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone1.Name = "txtPhone1";
             this.txtPhone1.ReadOnly = true;
@@ -1119,7 +1119,7 @@
             this.txtPhone2.BackColor = System.Drawing.Color.Gainsboro;
             this.txtPhone2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPhone2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhone2.Location = new System.Drawing.Point(179, 316);
+            this.txtPhone2.Location = new System.Drawing.Point(178, 316);
             this.txtPhone2.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone2.Name = "txtPhone2";
             this.txtPhone2.ReadOnly = true;
@@ -1142,7 +1142,7 @@
             this.txtPhone3.BackColor = System.Drawing.Color.Gainsboro;
             this.txtPhone3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPhone3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhone3.Location = new System.Drawing.Point(179, 368);
+            this.txtPhone3.Location = new System.Drawing.Point(178, 368);
             this.txtPhone3.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone3.Name = "txtPhone3";
             this.txtPhone3.ReadOnly = true;
@@ -1157,7 +1157,7 @@
             this.commitmentPage.Margin = new System.Windows.Forms.Padding(4);
             this.commitmentPage.Name = "commitmentPage";
             this.commitmentPage.Padding = new System.Windows.Forms.Padding(4);
-            this.commitmentPage.Size = new System.Drawing.Size(801, 539);
+            this.commitmentPage.Size = new System.Drawing.Size(800, 539);
             this.commitmentPage.TabIndex = 1;
             this.commitmentPage.Text = "Commitment   ";
             // 
@@ -1174,7 +1174,7 @@
             this.tableLayoutPanel21.Name = "tableLayoutPanel21";
             this.tableLayoutPanel21.RowCount = 1;
             this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel21.Size = new System.Drawing.Size(793, 531);
+            this.tableLayoutPanel21.Size = new System.Drawing.Size(792, 531);
             this.tableLayoutPanel21.TabIndex = 1;
             // 
             // tableLayoutPanel22
@@ -1634,7 +1634,7 @@
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.100001F));
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(310, 523);
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(309, 523);
             this.tableLayoutPanel23.TabIndex = 2;
             // 
             // tableLayoutPanel1

@@ -61,7 +61,7 @@ namespace APC.DAL.DAO
                     }
                     else if ((dto.ExpectedAmount - amountContributed.Sum()) == 0)
                     {
-                        dto.Balance = "0 €";
+                        dto.Balance = "Completed";
                     }
                     else
                     {
@@ -180,25 +180,6 @@ namespace APC.DAL.DAO
             }
         }
 
-        public List<int> SelectOnlyYears()
-        {
-            try
-            {
-                List<int> years = new List<int>();
-                List<int> AllYears = new List<int>();
-                var list = db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ToList();
-                foreach (var item in list)
-                {
-                    AllYears.Add(item.year);
-                }
-                years = AllYears.Distinct().ToList();
-                return years;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
     }
 }

@@ -136,6 +136,19 @@ namespace APC.BLL
             return dto;
         }
 
+        public MemberDTO SelectInactiveMembers()
+        {
+            MemberDTO dto = new MemberDTO();
+            dto.Members = memberDAO.SelectInactiveMembers();
+            dto.Professions = professionDAO.Select();
+            dto.Countries = countryDAO.Select();
+            dto.Nationalities = nationalityDAO.Select();
+            dto.Genders = genderDAO.Select();
+            dto.Positions = positionDAO.Select();
+            dto.MaritalStatuses = marStatusDAO.Select();
+            return dto;
+        }
+
         public List<MEMBER> CheckMember(string password, string username)
         {
             return memberDAO.CheckMember(password, username);

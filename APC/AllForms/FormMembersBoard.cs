@@ -20,6 +20,7 @@ namespace APC.AllForms
         {
             InitializeComponent();
         }
+
         MemberBLL registeredMembersBLL = new MemberBLL();
         MemberDTO registeredMembersDTO = new MemberDTO();
         MemberDetailDTO registeredMembersDetail = new MemberDetailDTO();
@@ -27,6 +28,7 @@ namespace APC.AllForms
         MembersCommittmentBLL committmentBLL = new MembersCommittmentBLL();
         MembersCommittmentDetailDTO committmentDetail = new MembersCommittmentDetailDTO();
         MembersCommittmentDTO committmentDTO = new MembersCommittmentDTO();
+
         private void FormMembersBoard_Load(object sender, EventArgs e)
         {
             if (LoginInfo.AccessLevel != 4)
@@ -133,6 +135,13 @@ namespace APC.AllForms
             btnViewDeadMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnSearchDeadMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnClearDeadMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+
+
+            txtNameCommittment.Tag = "resizeable";
+            txtSurnameCommittment.Tag = "resizeable";
+            cmbDuesStatusCommittment.Tag = "resizeable";
+            cmbFineStatusCommittment.Tag = "resizeable";
+            cmbYearCommittment.Tag = "resizeable";
             #endregion
 
             #region
@@ -171,11 +180,22 @@ namespace APC.AllForms
             General.ComboBoxProps(cmbPositionDeadMembers, "PositionName", "positionID");
             cmbNationalityDeadMembers.DataSource = deadMembersDTO.Nationalities;
             General.ComboBoxProps(cmbNationalityDeadMembers, "Nationality", "NationalityID");
+
+            inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
+            cmbGenderInactiveMembers.DataSource = inactiveMembersDTO.Genders;
+            General.ComboBoxProps(cmbGenderInactiveMembers, "GenderName", "genderID");
+            cmbProfessionInactiveMembers.DataSource = inactiveMembersDTO.Professions;
+            General.ComboBoxProps(cmbProfessionInactiveMembers, "Profession", "professionID");
+            cmbPositionInactiveMembers.DataSource = inactiveMembersDTO.Positions;
+            General.ComboBoxProps(cmbPositionInactiveMembers, "PositionName", "positionID");
+            cmbNationalityInactiveMembers.DataSource = inactiveMembersDTO.Nationalities;
+            General.ComboBoxProps(cmbNationalityInactiveMembers, "Nationality", "NationalityID");
+
             #endregion
-            
+
             #region
-                #region
-                dataGridViewRegisteredMembers.DataSource = registeredMembersDTO.Members;
+            #region
+            dataGridViewRegisteredMembers.DataSource = registeredMembersDTO.Members;
                 dataGridViewRegisteredMembers.Columns[0].Visible = false;
                 dataGridViewRegisteredMembers.Columns[1].Visible = false;
                 dataGridViewRegisteredMembers.Columns[2].Visible = false;
@@ -416,10 +436,22 @@ namespace APC.AllForms
                 // Members' Commitments
                 #region
                 committmentDTO = committmentBLL.Select(DateTime.Now.Year);
+
+                cmbYearCommittment.DataSource = committmentDTO.Years;
+                cmbYearCommittment.SelectedIndex = -1;
+
+                cmbDuesStatusCommittment.Items.Add("Incomplete");
+                cmbDuesStatusCommittment.Items.Add("Completed");
+                cmbDuesStatusCommittment.Items.Add("Extra");
+
+                cmbFineStatusCommittment.Items.Add("Incomplete");
+                cmbFineStatusCommittment.Items.Add("Completed");
+                cmbFineStatusCommittment.Items.Add("Extra");
+
                 dataGridViewCommitments.DataSource = committmentDTO.Committments;
                 dataGridViewCommitments.Columns[0].Visible = false;
                 dataGridViewCommitments.Columns[1].HeaderText = "Rank Ratio";
-            dataGridViewCommitments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewCommitments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridViewCommitments.Columns[2].HeaderText = "Name";
                 dataGridViewCommitments.Columns[3].HeaderText = "Surname";
                 dataGridViewCommitments.Columns[4].Visible = false;
@@ -427,7 +459,7 @@ namespace APC.AllForms
                 dataGridViewCommitments.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridViewCommitments.Columns[6].HeaderText = "Cont (€)";
                 dataGridViewCommitments.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewCommitments.Columns[7].HeaderText = "Bal";
+                dataGridViewCommitments.Columns[7].HeaderText = "Dues Bal.";
                 dataGridViewCommitments.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridViewCommitments.Columns[8].HeaderText = "Fines (€)";
                 dataGridViewCommitments.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -439,18 +471,70 @@ namespace APC.AllForms
                 dataGridViewCommitments.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridViewCommitments.Columns[12].Visible = false;
 
-            foreach (DataGridViewColumn column in dataGridViewCommitments.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                foreach (DataGridViewColumn column in dataGridViewCommitments.Columns)
+                    {
+                        column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                    }
                 dataGridViewCommitments.DefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Regular);
 
             #endregion
 
+                // Inactive Members
+                #region
+                dataGridViewInactiveMembers.DataSource = inactiveMembersDTO.Members;
+                dataGridViewInactiveMembers.Columns[0].Visible = false;
+                dataGridViewInactiveMembers.Columns[1].Visible = false;
+                dataGridViewInactiveMembers.Columns[2].Visible = false;
+                dataGridViewInactiveMembers.Columns[3].HeaderText = "Surname";
+                dataGridViewInactiveMembers.Columns[4].HeaderText = "Name";
+                dataGridViewInactiveMembers.Columns[5].Visible = false;
+                dataGridViewInactiveMembers.Columns[6].Visible = false;
+                dataGridViewInactiveMembers.Columns[7].Visible = false;
+                dataGridViewInactiveMembers.Columns[8].Visible = false;
+                dataGridViewInactiveMembers.Columns[9].Visible = false;
+                dataGridViewInactiveMembers.Columns[10].Visible = false;
+                dataGridViewInactiveMembers.Columns[11].Visible = false;
+                dataGridViewInactiveMembers.Columns[12].Visible = false;
+                dataGridViewInactiveMembers.Columns[13].HeaderText = "Nationality";
+                dataGridViewInactiveMembers.Columns[14].Visible = false;
+                dataGridViewInactiveMembers.Columns[15].HeaderText = "Profession";
+                dataGridViewInactiveMembers.Columns[16].Visible = false;
+                dataGridViewInactiveMembers.Columns[17].HeaderText = "Position";
+                dataGridViewInactiveMembers.Columns[18].Visible = false;
+                dataGridViewInactiveMembers.Columns[19].HeaderText = "Gender";
+                dataGridViewInactiveMembers.Columns[20].Visible = false;
+                dataGridViewInactiveMembers.Columns[21].Visible = false;
+                dataGridViewInactiveMembers.Columns[22].Visible = false;
+                dataGridViewInactiveMembers.Columns[23].Visible = false;
+                dataGridViewInactiveMembers.Columns[24].Visible = false;
+                dataGridViewInactiveMembers.Columns[25].Visible = false;
+                dataGridViewInactiveMembers.Columns[26].Visible = false;
+                dataGridViewInactiveMembers.Columns[27].Visible = false;
+                dataGridViewInactiveMembers.Columns[28].Visible = false;
+                dataGridViewInactiveMembers.Columns[29].Visible = false;
+                dataGridViewInactiveMembers.Columns[30].Visible = false;
+                dataGridViewInactiveMembers.Columns[31].Visible = false;
+                dataGridViewInactiveMembers.Columns[32].Visible = false;
+                dataGridViewInactiveMembers.Columns[33].Visible = false;
+                dataGridViewInactiveMembers.Columns[34].Visible = false;
+                dataGridViewInactiveMembers.Columns[35].Visible = false;
+                dataGridViewInactiveMembers.Columns[36].Visible = false;
+                dataGridViewInactiveMembers.Columns[37].Visible = false;
+                dataGridViewInactiveMembers.Columns[38].Visible = false;
+                dataGridViewInactiveMembers.Columns[39].Visible = false;
+                dataGridViewInactiveMembers.Columns[40].Visible = false;
+                dataGridViewInactiveMembers.Columns[41].Visible = false;
+                dataGridViewInactiveMembers.Columns[42].Visible = false;
+                foreach (DataGridViewColumn column in dataGridViewInactiveMembers.Columns)
+                {
+                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+                }
+                #endregion
+
+
             #endregion
 
             GetCounts();
-            
         }
 
         private void btnAddRegisteredMembers_Click(object sender, EventArgs e)
@@ -508,6 +592,25 @@ namespace APC.AllForms
             deadMembersBLL = new MemberBLL();
             deadMembersDTO = deadMembersBLL.SelectDeadMembers();
             dataGridViewDeadMembers.DataSource = deadMembersDTO.Members;
+
+            committmentBLL = new MembersCommittmentBLL();
+            committmentDTO = committmentBLL.Select(DateTime.Now.Year);
+            dataGridViewCommitments.DataSource = committmentDTO.Committments;
+            txtNameCommittment.Clear();
+            txtSurnameCommittment.Clear();            
+            cmbYearCommittment.SelectedIndex = -1;
+            cmbDuesStatusCommittment.SelectedIndex = -1;
+            cmbFineStatusCommittment.SelectedIndex = -1;
+
+            inactiveMembersBLL = new MemberBLL();
+            inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
+            dataGridViewInactiveMembers.DataSource = inactiveMembersDTO.Members;
+            txtNameInactiveMembers.Clear();
+            txtSurnameInactiveMembers.Clear();            
+            cmbGenderInactiveMembers.SelectedIndex = -1;
+            cmbPositionInactiveMembers.SelectedIndex = -1;
+            cmbProfessionInactiveMembers.SelectedIndex = -1;
+
             GetCounts();
         }
         private void GetCounts()
@@ -1190,7 +1293,6 @@ namespace APC.AllForms
             }
         }
 
-        
         private void btnViewCommittment_Click(object sender, EventArgs e)
         {
             if (committmentDetail.MemberID == 0)
@@ -1214,6 +1316,170 @@ namespace APC.AllForms
                 open.detail = committmentMember;
                 open.memberID = committmentMember.MemberID;
                 open.isCommittment = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void btnSearchCommittment_Click(object sender, EventArgs e)
+        {            
+            if (cmbYearCommittment.SelectedIndex != 1)
+            {
+                committmentBLL = new MembersCommittmentBLL();
+                committmentDTO = committmentBLL.Select(Convert.ToInt32(cmbYearCommittment.SelectedValue));
+                dataGridViewCommitments.DataSource = committmentDTO.Committments;
+
+                List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
+                if (cmbDuesStatusCommittment.SelectedIndex != -1)
+                {
+                    if (cmbDuesStatusCommittment.SelectedIndex == 0)
+                    {
+                        list = list.Where(x => x.Balance.Contains("€ Remaining")).ToList();
+                    }
+                    if (cmbDuesStatusCommittment.SelectedIndex == 1)
+                    {
+                        list = list.Where(x => x.Balance.Contains("Completed")).ToList();
+                    }
+                    if (cmbDuesStatusCommittment.SelectedIndex == 2)
+                    {
+                        list = list.Where(x => x.Balance.Contains("€ Extra")).ToList();
+                    }
+                }
+                if (cmbFineStatusCommittment.SelectedIndex != -1)
+                {
+                    if (cmbFineStatusCommittment.SelectedIndex == 0)
+                    {
+                        list = list.Where(x => x.PaidFines < x.Fines).ToList();
+                    }
+                    if (cmbFineStatusCommittment.SelectedIndex == 1)
+                    {
+                        list = list.Where(x => x.PaidFines == x.Fines).ToList();
+                    }
+                    if (cmbFineStatusCommittment.SelectedIndex == 2)
+                    {
+                        list = list.Where(x => x.PaidFines > x.Fines).ToList();
+                    }
+                }
+
+                dataGridViewCommitments.DataSource = list;
+                GetCounts();
+            }
+            else
+            {
+                MessageBox.Show("Please select year");
+            }
+
+        }
+
+        private void btnClearCommittment_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void txtNameCommittment_TextChanged(object sender, EventArgs e)
+        {
+            List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
+            list = list.Where(x => x.Name.Contains(txtNameCommittment.Text.Trim())).ToList();
+            dataGridViewCommitments.DataSource = list;
+            GetCounts();
+        }
+
+        private void txtSurnameCommittment_TextChanged(object sender, EventArgs e)
+        {
+            List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
+            list = list.Where(x => x.Surname.Contains(txtSurnameCommittment.Text.Trim())).ToList();
+            dataGridViewCommitments.DataSource = list;
+            GetCounts();
+        }
+
+        MemberDetailDTO inactiveMembersDetail = new MemberDetailDTO();
+        MemberBLL inactiveMembersBLL = new MemberBLL();
+        MemberDTO inactiveMembersDTO = new MemberDTO();
+
+        private void btnClearInactiveMembers_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void dataGridViewInactiveMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            inactiveMembersDetail = new MemberDetailDTO();
+            inactiveMembersDetail.MemberID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[0].Value);
+            inactiveMembersDetail.Username = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[1].Value.ToString();
+            inactiveMembersDetail.Password = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[2].Value.ToString();
+            inactiveMembersDetail.Surname = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[3].Value.ToString();
+            inactiveMembersDetail.Name = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[4].Value.ToString();
+            inactiveMembersDetail.Birthday = Convert.ToDateTime(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[5].Value);
+            inactiveMembersDetail.ImagePath = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[6].Value.ToString();
+            inactiveMembersDetail.EmailAddress = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[7].Value.ToString();
+            inactiveMembersDetail.HouseAddress = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[8].Value.ToString();
+            inactiveMembersDetail.MembershipDate = Convert.ToDateTime(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[9].Value);
+            inactiveMembersDetail.CountryID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[10].Value);
+            inactiveMembersDetail.CountryName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[11].Value.ToString();
+            inactiveMembersDetail.NationalityID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[12].Value);
+            inactiveMembersDetail.NationalityName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[13].Value.ToString();
+            inactiveMembersDetail.ProfessionID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[14].Value);
+            inactiveMembersDetail.ProfessionName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[15].Value.ToString();
+            inactiveMembersDetail.PositionID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[16].Value);
+            inactiveMembersDetail.PositionName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[17].Value.ToString();
+            inactiveMembersDetail.GenderID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[18].Value);
+            inactiveMembersDetail.GenderName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[19].Value.ToString();
+            inactiveMembersDetail.EmploymentStatusID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[20].Value);
+            inactiveMembersDetail.EmploymentStatusName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[21].Value.ToString();
+            inactiveMembersDetail.MaritalStatusID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[22].Value);
+            inactiveMembersDetail.MaritalStatusName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[23].Value.ToString();
+            inactiveMembersDetail.PermissionID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[24].Value);
+            inactiveMembersDetail.PermissionName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[25].Value.ToString();
+            inactiveMembersDetail.PhoneNumber = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[26].Value.ToString();
+            inactiveMembersDetail.PhoneNumber2 = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[27].Value.ToString();
+            inactiveMembersDetail.PhoneNumber3 = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[28].Value.ToString();
+            inactiveMembersDetail.isCountryDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[29].Value);
+            inactiveMembersDetail.isNationalityDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[30].Value);
+            inactiveMembersDetail.isProfessionDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[31].Value);
+            inactiveMembersDetail.isPositionDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[32].Value);
+            inactiveMembersDetail.isEmpStatusDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[33].Value);
+            inactiveMembersDetail.isMarStatusDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[34].Value);
+            inactiveMembersDetail.MembershipStatusID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[35].Value);
+            inactiveMembersDetail.MembershipStatus = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[36].Value.ToString();
+            inactiveMembersDetail.DeadDate = Convert.ToDateTime(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[37].Value);
+            inactiveMembersDetail.DeadAge = Convert.ToDouble(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[38].Value);
+            inactiveMembersDetail.LGA = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[39].Value.ToString();
+            inactiveMembersDetail.NameOfNextOfKin = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
+            inactiveMembersDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[41].Value);
+            inactiveMembersDetail.RelationshipToKin = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[42].Value.ToString();
+        }
+
+        private void btnViewInactiveMembers_Click(object sender, EventArgs e)
+        {
+            if (inactiveMembersDetail.MemberID == 0)
+            {
+                MessageBox.Show("Please choose a member from the table");
+            }
+            else
+            {
+                FormViewMember open = new FormViewMember();
+                open.detail = inactiveMembersDetail;
+                open.isView = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void btnUpdateInactiveMembers_Click(object sender, EventArgs e)
+        {
+            if (inactiveMembersDetail.MemberID == 0)
+            {
+                MessageBox.Show("Please choose a member from the table.");
+            }
+            else
+            {
+                FormMembers open = new FormMembers();
+                open.isUpdate = true;
+                open.detail = inactiveMembersDetail;
                 this.Hide();
                 open.ShowDialog();
                 this.Visible = true;
