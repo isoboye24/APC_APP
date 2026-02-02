@@ -62,7 +62,7 @@ namespace APC.DAL.DAO
                                 monthName = m.monthName,
                                 year = e.year,
                                 eventDate = e.eventDate,
-                            }).OrderByDescending(x => x.year).ToList();
+                            }).OrderByDescending(x => x.year).ThenByDescending(x=>x.monthID).ThenByDescending(x => x.day).ToList();
                 foreach (var item in list)
                 {
                     EventsDetailDTO dto = new EventsDetailDTO();
