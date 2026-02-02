@@ -105,6 +105,7 @@ namespace APC.AllForms
             dataGridViewFinReport.DataSource = finReportDTO.FinancialReports;
 
             txtYearExpReport.Clear();
+            txtSummaryExpReport.Clear();
             cmbMonthExpReport.SelectedIndex = -1;
             expReportBLL = new ExpenditureBLL();
             expReportDTO = expReportBLL.Select();
@@ -318,6 +319,13 @@ namespace APC.AllForms
                     }
                 }
             }
+        }
+
+        private void txtSummaryExpReport_TextChanged(object sender, EventArgs e)
+        {
+            List<ExpenditureDetailDTO> list = expReportDTO.Expenditures;
+            list = list.Where(x => x.Summary.Contains(txtSummaryExpReport.Text)).ToList();
+            dataGridViewExpReport.DataSource = list;
         }
     }
 }
