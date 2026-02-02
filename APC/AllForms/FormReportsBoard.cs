@@ -57,9 +57,9 @@ namespace APC.AllForms
             dataGridViewFinReport.DataSource = finReportDTO.FinancialReports;
             dataGridViewFinReport.Columns[0].Visible = false;
             dataGridViewFinReport.Columns[1].HeaderText = "Year";
-            dataGridViewFinReport.Columns[2].HeaderText = "Total Amount Raised";
-            dataGridViewFinReport.Columns[3].HeaderText = "Total Amount Spent";
-            dataGridViewFinReport.Columns[4].HeaderText = "Total Balance";
+            dataGridViewFinReport.Columns[2].HeaderText = "Amount Raised";
+            dataGridViewFinReport.Columns[3].HeaderText = "Amount Spent";
+            dataGridViewFinReport.Columns[4].HeaderText = "Balance";
             dataGridViewFinReport.Columns[5].Visible = false;
             foreach (DataGridViewColumn column in dataGridViewFinReport.Columns)
             {
