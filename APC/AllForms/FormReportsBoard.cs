@@ -41,7 +41,7 @@ namespace APC.AllForms
 
             label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalExpReport.Font = new Font("Segoe UI", 11, FontStyle.Regular);
+            labelTotalRowsExpReport.Font = new Font("Segoe UI", 11, FontStyle.Regular);
             cmbMonthExpReport.Font = new Font("Segoe UI", 16, FontStyle.Regular);
             txtYearExpReport.Font = new Font("Segoe UI", 16, FontStyle.Regular);
             btnAddExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -117,10 +117,13 @@ namespace APC.AllForms
         private void Counts()
         {
             labelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
-            labelTotalExpReport.Text = "Total: " + dataGridViewExpReport.RowCount.ToString();
+            labelTotalRowsExpReport.Text = "Row: " + dataGridViewExpReport.RowCount.ToString();
 
             labelTotalAmountRaised.Text = finReportBLL.SelectTotalRaisedAmount().ToString();
+
             labelTotalAmountSpent.Text = finReportBLL.SelectTotalSpentAmount().ToString();
+            labelTotalExpReport.Text = "Total: " + finReportBLL.SelectTotalSpentAmount().ToString();
+
             labelTotalBalance.Text = (finReportBLL.SelectTotalRaisedAmount() - finReportBLL.SelectTotalSpentAmount()).ToString();
         }
 
@@ -326,6 +329,8 @@ namespace APC.AllForms
             List<ExpenditureDetailDTO> list = expReportDTO.Expenditures;
             list = list.Where(x => x.Summary.Contains(txtSummaryExpReport.Text)).ToList();
             dataGridViewExpReport.DataSource = list;
+
+            Counts();
         }
     }
 }

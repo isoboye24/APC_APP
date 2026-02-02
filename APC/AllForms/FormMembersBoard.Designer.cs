@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.activeMembersPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -888,8 +888,8 @@
             this.dataGridViewRegisteredMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewRegisteredMembers.Name = "dataGridViewRegisteredMembers";
             this.dataGridViewRegisteredMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewRegisteredMembers.RowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewRegisteredMembers.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewRegisteredMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewRegisteredMembers.RowTemplate.Height = 40;
             this.dataGridViewRegisteredMembers.Size = new System.Drawing.Size(1201, 392);
@@ -1237,8 +1237,8 @@
             this.dataGridViewCommitments.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewCommitments.Name = "dataGridViewCommitments";
             this.dataGridViewCommitments.RowHeadersWidth = 51;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewCommitments.RowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCommitments.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewCommitments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewCommitments.RowTemplate.Height = 40;
             this.dataGridViewCommitments.Size = new System.Drawing.Size(1209, 439);
@@ -1791,8 +1791,8 @@
             this.dataGridViewChildren.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewChildren.Name = "dataGridViewChildren";
             this.dataGridViewChildren.RowHeadersWidth = 51;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewChildren.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewChildren.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewChildren.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewChildren.RowTemplate.Height = 40;
             this.dataGridViewChildren.Size = new System.Drawing.Size(1201, 359);
@@ -1840,8 +1840,8 @@
             this.dataGridViewContacts.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewContacts.Name = "dataGridViewContacts";
             this.dataGridViewContacts.RowHeadersWidth = 51;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewContacts.RowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewContacts.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewContacts.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewContacts.RowTemplate.Height = 40;
             this.dataGridViewContacts.Size = new System.Drawing.Size(1209, 485);
@@ -2436,8 +2436,8 @@
             this.dataGridViewInactiveMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewInactiveMembers.Name = "dataGridViewInactiveMembers";
             this.dataGridViewInactiveMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewInactiveMembers.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewInactiveMembers.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewInactiveMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewInactiveMembers.RowTemplate.Height = 40;
             this.dataGridViewInactiveMembers.Size = new System.Drawing.Size(1209, 397);
@@ -2924,8 +2924,8 @@
             this.dataGridViewFormerMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewFormerMembers.Name = "dataGridViewFormerMembers";
             this.dataGridViewFormerMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewFormerMembers.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewFormerMembers.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewFormerMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewFormerMembers.RowTemplate.Height = 40;
             this.dataGridViewFormerMembers.Size = new System.Drawing.Size(1209, 397);
@@ -3418,8 +3418,8 @@
             this.dataGridViewDeadMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewDeadMembers.Name = "dataGridViewDeadMembers";
             this.dataGridViewDeadMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewDeadMembers.RowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewDeadMembers.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewDeadMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewDeadMembers.RowTemplate.Height = 40;
             this.dataGridViewDeadMembers.Size = new System.Drawing.Size(1209, 397);

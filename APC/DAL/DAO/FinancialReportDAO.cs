@@ -66,9 +66,13 @@ namespace APC.DAL.DAO
                 List<int> monthIDs = new List<int>();
                 List<int> yearsCollection = new List<int>();
                 List<int> years = new List<int>();
+
                 List<decimal> totalDuesCollection = new List<decimal>();
-                List<decimal> totalExpenditures = new List<decimal>();
                 List<decimal> fines = new List<decimal>();
+                List<decimal> totalEventSales = new List<decimal>();
+
+                List<decimal> totalExpenditures = new List<decimal>();
+                List<decimal> totalEventExpenses = new List<decimal>();
 
                 var yearlyDue = db.FINANCIAL_REPORT.Where(x => x.isDeleted == false).ToList();
                 foreach (var item in yearlyDue)
@@ -84,27 +88,42 @@ namespace APC.DAL.DAO
                     {
                         totalDuesCollection.Add((decimal)due.monthlyDues);
                     }
+                    var allFines = db.FINED_MEMBER.Where(x => x.isdeleted == false && x.year == report.year).ToList();
+                    foreach (var fine in allFines)
+                    {
+                        fines.Add((decimal)fine.amountPaid);
+                    }
+                    var allEventSales = db.EVENT_SALES.Where(x => x.isDeleted == false && x.year == report.year).ToList();
+                    foreach (var eventSale in allEventSales)
+                    {
+                        totalEventSales.Add((decimal)eventSale.amountSold);
+                    }
+
+
                     var yearlyExpenditures = db.EXPENDITURE.Where(x => x.isDeleted == false && x.year == report.year).ToList();
                     foreach (var expense in yearlyExpenditures)
                     {
                         totalExpenditures.Add(expense.amountSpent);
                     }
-                    var allFines = db.FINED_MEMBER.Where(x => x.isdeleted == false && x.year == report.year).ToList();
-                    foreach (var fine in allFines)
+                    var allEventExpenses = db.EVENT_EXPENDITURE.Where(x => x.isDeleted == false && x.year == report.year).ToList();
+                    foreach (var eventExp in allEventExpenses)
                     {
-                        fines.Add((decimal)fine.amountPaid);
-                    }                    
+                        totalEventExpenses.Add(eventExp.amountSpent);
+                    }
+                                       
                     FinancialReportDetailDTO dto = new FinancialReportDetailDTO();
                     dto.FinancialReportID = report.financialReportID;
-                    dto.Summary = report.summary;                    
+                    dto.Summary = report.summary;
                     dto.Year = report.year.ToString();
-                    dto.TotalAmountRaised = totalDuesCollection.Sum() + fines.Sum();
-                    dto.TotalAmountSpent = totalExpenditures.Sum();
-                    dto.Balance = dto.TotalAmountRaised - dto.TotalAmountSpent;                    
+                    dto.TotalAmountRaised = totalDuesCollection.Sum() + fines.Sum() + totalEventSales.Sum();
+                    dto.TotalAmountSpent = totalExpenditures.Sum() + totalEventExpenses.Sum();
+                    dto.Balance = dto.TotalAmountRaised - dto.TotalAmountSpent;
                     financialReport.Add(dto);
                     totalDuesCollection.Clear();
                     totalExpenditures.Clear();
                     fines.Clear();
+                    totalEventExpenses.Clear();
+                    totalEventSales.Clear();
                 }
                 return financialReport;
             }
