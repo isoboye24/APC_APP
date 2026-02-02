@@ -268,7 +268,7 @@ namespace APC
             labelExpensesInThisYear.Text = "Total Expenses in " + yearToday;
             labelTotalDuesYear.Text = "Total Dues + Fines in " + yearToday;
 
-            labelMonthlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountMonthly(todayMonth);
+            labelMonthlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountMonthly(todayMonth, todayYear);
             labelYearlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountYearly(todayYear);
             labelExpendituresInYear.Text = "€ " + expenditureBLL.SelectTotalExpendituresYearly(todayYear);
             labelTotalExpenditures.Text = "€ " + expenditureBLL.SelectTotalExpenditures();

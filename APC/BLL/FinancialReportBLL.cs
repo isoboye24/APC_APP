@@ -54,9 +54,9 @@ namespace APC.BLL
         {
             return dao.SelectTotalRaisedAmountYealy(year);
         }
-        public decimal SelectTotalRaisedAmountMonthly(int month)
+        public decimal SelectTotalRaisedAmountMonthly(int month, int year)
         {
-            return dao.SelectTotalRaisedAmountMonthly(month);
+            return dao.SelectTotalRaisedAmountMonthly(month, year);
         }
         public decimal SelectTotalSpentAmount()
         {

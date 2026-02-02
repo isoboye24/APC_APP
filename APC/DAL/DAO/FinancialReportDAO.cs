@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xaml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
 
 namespace APC.DAL.DAO
@@ -185,18 +186,18 @@ namespace APC.DAL.DAO
                 throw ex;
             }
         }
-        public decimal SelectTotalRaisedAmountMonthly(int thisMonth)
+        public decimal SelectTotalRaisedAmountMonthly(int thisMonth, int thisYear)
         {
             try
             {
                 List<decimal> totalRaisedAmount = new List<decimal>();
                 List<decimal> fines = new List<decimal>();
-                var list = db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.monthID == thisMonth);
+                var list = db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.monthID == thisMonth && x.year == thisYear);
                 foreach (var item in list)
                 {
                     totalRaisedAmount.Add((decimal)item.monthlyDues);
                 }
-                var allFines = db.FINED_MEMBER.Where(x => x.isdeleted == false && x.monthID == thisMonth).ToList();
+                var allFines = db.FINED_MEMBER.Where(x => x.isdeleted == false && x.monthID == thisMonth && x.year == thisYear).ToList();
                 foreach (var fine in allFines)
                 {
                     fines.Add((decimal)fine.amountPaid);
