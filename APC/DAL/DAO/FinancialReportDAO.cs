@@ -272,12 +272,19 @@ namespace APC.DAL.DAO
             try
             {
                 List<decimal> totalSpentAmount = new List<decimal>();
+                List<decimal> totalEventSpentAmount = new List<decimal>();
+
                 var list = db.EXPENDITURE.Where(x => x.isDeleted == false);
                 foreach (var item in list)
                 {                                       
                     totalSpentAmount.Add(item.amountSpent);
                 }
-                decimal totalAmount = totalSpentAmount.Sum();
+                var eventExpenses = db.EVENT_EXPENDITURE.Where(x => x.isDeleted == false);
+                foreach (var eventExp in eventExpenses)
+                {                                       
+                    totalEventSpentAmount.Add(eventExp.amountSpent);
+                }
+                decimal totalAmount = totalSpentAmount.Sum() + totalEventSpentAmount.Sum();
                 return totalAmount;
             }
             catch (Exception ex)
