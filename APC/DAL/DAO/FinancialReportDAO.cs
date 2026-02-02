@@ -163,6 +163,7 @@ namespace APC.DAL.DAO
             {                
                 List<decimal> totalRaisedAmount = new List<decimal>();
                 List<decimal> fines = new List<decimal>();
+                List<decimal> totalEventSold = new List<decimal>();
                 var list = db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false);
                 foreach (var item in list)
                 {                                     
@@ -173,7 +174,12 @@ namespace APC.DAL.DAO
                 {
                     fines.Add((decimal)fine.amountPaid);
                 }
-                decimal totalAmount = totalRaisedAmount.Sum() + fines.Sum();
+                var allEvents = db.EVENT_SALES.Where(x => x.isDeleted == false).ToList();
+                foreach (var events in allEvents)
+                {
+                    totalEventSold.Add((decimal)events.amountSold);
+                }
+                decimal totalAmount = totalRaisedAmount.Sum() + fines.Sum() + totalEventSold.Sum();
                 return totalAmount;
             }
             catch (Exception ex)
