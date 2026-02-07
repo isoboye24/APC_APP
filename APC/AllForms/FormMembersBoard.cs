@@ -1325,7 +1325,7 @@ namespace APC.AllForms
 
         private void btnSearchCommittment_Click(object sender, EventArgs e)
         {            
-            if (cmbYearCommittment.SelectedIndex != 1)
+            if (cmbYearCommittment.SelectedIndex != -1)
             {
                 committmentBLL = new MembersCommittmentBLL();
                 committmentDTO = committmentBLL.Select(Convert.ToInt32(cmbYearCommittment.SelectedValue));
