@@ -99,7 +99,7 @@ namespace APC.DAL.DAO
                     foreach (var monthItem in monthIDs)
                     {
                         GeneralAttendanceDetailDTO dto = new GeneralAttendanceDetailDTO();
-                        var monthlyDue = db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.monthID == monthItem).ToList();
+                        var monthlyDue = db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false && x.monthID == monthItem && x.year == yearItem).ToList();
                         foreach (var due in monthlyDue)
                         {
                             totalDuesCollection.Add((decimal)due.monthlyDues);

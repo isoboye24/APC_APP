@@ -70,6 +70,14 @@ namespace APC
         {
             label1.Tag = "resizable";
             label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            label3.Tag = "resizable";
+            label4.Tag = "resizable";
+            label5.Tag = "resizable";
+            label6.Tag = "resizable";
+            labelOverallBalance.Tag = "resizable";
+            labelOverallSold.Tag = "resizable";
+            labelOverallSpent.Tag = "resizable";
+            
 
             txtEventTitle.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtEventYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
@@ -106,9 +114,6 @@ namespace APC
             decimal overallSales = bll.SelectOverallSales();
             decimal overallExpenditures = bll.SelectOverallExpenditures();
 
-            labelOverallSold.Text = overallSales > 0 ? overallSales.ToString() : 0.ToString();
-            labelOverallSpent.Text = overallExpenditures > 0 ? overallExpenditures.ToString() : 0.ToString();
-            labelOverallBalance.Text = (overallSales - overallExpenditures).ToString();
         }
         private void FillDataGrid()
         {
@@ -154,6 +159,11 @@ namespace APC
 
             string imagePath = Application.StartupPath + "\\images\\" + detail.CoverImagePath;
             picViewEventCoverImage.ImageLocation = imagePath;
+
+            label3.Text = detail.EventTitle + " " + detail.Year;
+            labelOverallSold.Text = detail.AmountSold.ToString();
+            labelOverallSpent.Text = detail.AmountSpent.ToString();
+            labelOverallBalance.Text = detail.Balance.ToString();
         }
     }
 }

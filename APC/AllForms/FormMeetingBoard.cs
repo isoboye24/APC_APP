@@ -132,7 +132,7 @@ namespace APC.AllForms
 
             #region
                 #region
-            dataGridView1.DataSource = dto.GeneralAttendance;
+                dataGridView1.DataSource = dto.GeneralAttendance;
                 dataGridView1.Columns[0].Visible = false;
                 dataGridView1.Columns[1].Visible = false;
                 dataGridView1.Columns[2].Visible = false;
