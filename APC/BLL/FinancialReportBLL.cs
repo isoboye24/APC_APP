@@ -12,6 +12,7 @@ namespace APC.BLL
     public class FinancialReportBLL:IBLL<FinancialReportDTO, FinancialReportDetailDTO>
     {
         FinancialReportDAO dao = new FinancialReportDAO();
+        ExpenditureDAO expDAO = new ExpenditureDAO();
 
         public bool Delete(FinancialReportDetailDTO entity)
         {
@@ -61,6 +62,11 @@ namespace APC.BLL
         public decimal SelectTotalSpentAmount()
         {
             return dao.SelectTotalSpentAmount();
+        }
+
+        public decimal SelectTotalExpenditure()
+        {
+            return expDAO.SelectTotalExpenditures();
         }
 
         public bool Update(FinancialReportDetailDTO entity)

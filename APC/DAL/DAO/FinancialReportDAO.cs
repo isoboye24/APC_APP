@@ -292,6 +292,7 @@ namespace APC.DAL.DAO
                 throw ex;
             }
         }
+        
 
         public bool Update(FINANCIAL_REPORT entity)
         {

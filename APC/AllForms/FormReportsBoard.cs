@@ -122,7 +122,7 @@ namespace APC.AllForms
             labelTotalAmountRaised.Text = finReportBLL.SelectTotalRaisedAmount().ToString();
 
             labelTotalAmountSpent.Text = finReportBLL.SelectTotalSpentAmount().ToString();
-            labelTotalExpReport.Text = "Total: " + finReportBLL.SelectTotalSpentAmount().ToString();
+            labelTotalExpReport.Text = "Total: " + finReportBLL.SelectTotalExpenditure().ToString();
 
             labelTotalBalance.Text = (finReportBLL.SelectTotalRaisedAmount() - finReportBLL.SelectTotalSpentAmount()).ToString();
         }
