@@ -15,7 +15,7 @@ namespace APC.DAL.DAO
             {
                 List<MembersCommittmentDetailDTO> membersCommittment = new List<MembersCommittmentDetailDTO>();
 
-                var memberList = db.MEMBER.Where(x => x.isDeleted == false && x.membershipStatusID == 1).ToList();
+                var memberList = db.MEMBER.Where(x => x.isDeleted == false && x.membershipStatusID == 1 && x.membershipDate.Value.Year <= year).ToList();
                 foreach (var member in memberList)
                 {
                     MembersCommittmentDetailDTO dto = new MembersCommittmentDetailDTO();
