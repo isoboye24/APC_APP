@@ -496,7 +496,6 @@ namespace APC.AllForms
             e.Handled = General.isNumber(e, (TextBox)sender);
         }
         
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (cmbYearMeeting.SelectedIndex == -1)
@@ -549,9 +548,11 @@ namespace APC.AllForms
                 }
                 if (cmbMonth.SelectedIndex != -1)
                 {
-                    list = list.Where(x => x.MonthID == Convert.ToInt32((cmbMonth.SelectedValue))).ToList();
+                    list = list.Where(x => x.MonthID == Convert.ToInt32((cmbMonth.SelectedValue)) && Convert.ToInt32(x.Year) == Convert.ToInt32((cmbYearMeeting.SelectedValue))).ToList();
                 }
                 dataGridView1.DataSource = list;
+
+                RefreshCounts();
             }
         }
 
