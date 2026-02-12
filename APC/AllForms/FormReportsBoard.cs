@@ -66,7 +66,7 @@ namespace APC.AllForms
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             }
 
-            expReportDTO = expReportBLL.Select();
+            expReportDTO = expReportBLL.Select(DateTime.Now.Year);
             cmbMonthExpReport.DataSource = expReportDTO.Months;
             General.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
 

@@ -94,10 +94,15 @@ namespace APC.DAL.DAO
 
         public List<ExpenditureDetailDTO> Select()
         {
+            throw new NotImplementedException();
+        }
+
+        public List<ExpenditureDetailDTO> Select(int year)
+        {
             try
             {
                 List<ExpenditureDetailDTO> expenditures = new List<ExpenditureDetailDTO>();
-                var list = (from e in db.EXPENDITURE.Where(x => x.isDeleted == false)
+                var list = (from e in db.EXPENDITURE.Where(x => x.isDeleted == false && x.year == year)
                             join m in db.MONTH on e.monthID equals m.monthID
                             select new
                             {
@@ -182,6 +187,26 @@ namespace APC.DAL.DAO
                 expenditure.expenditureDate = entity.expenditureDate;
                 db.SaveChanges();
                 return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<int> SelectOnlyExpYears()
+        {
+            try
+            {
+                List<int> years = new List<int>();
+                List<int> AllYears = new List<int>();
+                var list = db.EXPENDITURE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ToList();
+                foreach (var item in list)
+                {
+                    AllYears.Add(item.year);
+                }
+                years = AllYears.Distinct().ToList();
+                return years;
             }
             catch (Exception ex)
             {

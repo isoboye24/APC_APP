@@ -39,9 +39,15 @@ namespace APC.BLL
 
         public ExpenditureDTO Select()
         {
+            throw new NotImplementedException();
+        }
+
+        public ExpenditureDTO Select(int year)
+        {
             ExpenditureDTO dto = new ExpenditureDTO();
-            dto.Expenditures = dao.Select();
+            dto.Expenditures = dao.Select(year);
             dto.Months = monthDAO.Select();
+            dto.Years = dao.SelectOnlyExpYears();
             return dto;
         }
 

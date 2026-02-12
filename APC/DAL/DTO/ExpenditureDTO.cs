@@ -10,5 +10,6 @@ namespace APC.DAL.DTO
     {
         public List<ExpenditureDetailDTO> Expenditures { get; set; }
         public List<MonthDetailDTO> Months { get; set; }
+        public List<int> Years { get; set; }
     }
 }
