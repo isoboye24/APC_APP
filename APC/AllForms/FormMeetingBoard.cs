@@ -106,6 +106,7 @@ namespace APC.AllForms
             cmbGenderFinedMember.Font = new Font("Segoe UI", 16, FontStyle.Regular);
             cmbMonthFinedMember.Font = new Font("Segoe UI", 16, FontStyle.Regular);
             cmbFineStatus.Font = new Font("Segoe UI", 16, FontStyle.Regular);
+            cmbYearMeeting.Font = new Font("Segoe UI", 16, FontStyle.Regular);
             #endregion
 
             dto = bll.Select(DateTime.Now.Year);
@@ -498,50 +499,60 @@ namespace APC.AllForms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            List<GeneralAttendanceDetailDTO> list = dto.GeneralAttendance;
-            if (txtMonthlyDues.Text.Trim() != "")
+            if (cmbYearMeeting.SelectedIndex == -1)
             {
-                if (rbEqualMonDues.Checked)
-                {
-                    list = list.Where(x => x.TotalDuesPaid == Convert.ToInt32(txtMonthlyDues.Text)).ToList();
-                }
-                else if (rbLessMonDues.Checked)
-                {
-                    list = list.Where(x => x.TotalDuesPaid < Convert.ToInt32(txtMonthlyDues.Text)).ToList();
-                }
-                else if (rbMoreMonDues.Checked)
-                {
-                    list = list.Where(x => x.TotalDuesPaid > Convert.ToInt32(txtMonthlyDues.Text)).ToList();
-                }
-                else
-                {
-                    MessageBox.Show("Please select a criterion from the monthly dues group");
-                }
+                MessageBox.Show("Please select year");
             }
-            if (txtNoOfAttend.Text.Trim() != "")
+            else
             {
-                if (rbEqualAttend.Checked)
+                bll = new GeneralAttendanceBLL();
+                dto = bll.Select(Convert.ToInt32(cmbYearMeeting.SelectedValue));
+                List<GeneralAttendanceDetailDTO> list = dto.GeneralAttendance;
+
+                if (txtMonthlyDues.Text.Trim() != "")
                 {
-                    list = list.Where(x => x.TotalMembersPresent == Convert.ToInt32(txtNoOfAttend.Text)).ToList();
+                    if (rbEqualMonDues.Checked)
+                    {
+                        list = list.Where(x => x.TotalDuesPaid == Convert.ToInt32(txtMonthlyDues.Text)).ToList();
+                    }
+                    else if (rbLessMonDues.Checked)
+                    {
+                        list = list.Where(x => x.TotalDuesPaid < Convert.ToInt32(txtMonthlyDues.Text)).ToList();
+                    }
+                    else if (rbMoreMonDues.Checked)
+                    {
+                        list = list.Where(x => x.TotalDuesPaid > Convert.ToInt32(txtMonthlyDues.Text)).ToList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select a criterion from the monthly dues group");
+                    }
                 }
-                else if (rbLessAttend.Checked)
+                if (txtNoOfAttend.Text.Trim() != "")
                 {
-                    list = list.Where(x => x.TotalMembersPresent < Convert.ToInt32(txtNoOfAttend.Text)).ToList();
+                    if (rbEqualAttend.Checked)
+                    {
+                        list = list.Where(x => x.TotalMembersPresent == Convert.ToInt32(txtNoOfAttend.Text)).ToList();
+                    }
+                    else if (rbLessAttend.Checked)
+                    {
+                        list = list.Where(x => x.TotalMembersPresent < Convert.ToInt32(txtNoOfAttend.Text)).ToList();
+                    }
+                    else if (rbMoreAttend.Checked)
+                    {
+                        list = list.Where(x => x.TotalMembersPresent > Convert.ToInt32(txtNoOfAttend.Text)).ToList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select a criterion from the total number of attendance group");
+                    }
                 }
-                else if (rbMoreAttend.Checked)
+                if (cmbMonth.SelectedIndex != -1)
                 {
-                    list = list.Where(x => x.TotalMembersPresent > Convert.ToInt32(txtNoOfAttend.Text)).ToList();
+                    list = list.Where(x => x.MonthID == Convert.ToInt32((cmbMonth.SelectedValue))).ToList();
                 }
-                else
-                {
-                    MessageBox.Show("Please select a criterion from the total number of attendance group");
-                }
+                dataGridView1.DataSource = list;
             }
-            if (cmbMonth.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.MonthID == Convert.ToInt32((cmbMonth.SelectedValue))).ToList();
-            }
-            dataGridView1.DataSource = list;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -560,8 +571,9 @@ namespace APC.AllForms
             rbLessAttend.Checked = false;
             rbMoreAttend.Checked = false;
             cmbMonth.SelectedIndex = -1;
+            cmbYearMeeting.SelectedIndex = -1;
             bll = new GeneralAttendanceBLL();
-            dto = bll.Select();
+            dto = bll.Select(DateTime.Now.Year);
             dataGridView1.DataSource = dto.GeneralAttendance;
 
             txtNameComments.Clear();
