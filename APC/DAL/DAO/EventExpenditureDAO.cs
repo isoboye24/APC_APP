@@ -148,5 +148,25 @@ namespace APC.DAL
                 throw ex;
             }
         }
+
+        public List<int> SelectOnlyExpYears()
+        {
+            try
+            {
+                List<int> years = new List<int>();
+                List<int> AllYears = new List<int>();
+                var list = db.EXPENDITURE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ToList();
+                foreach (var item in list)
+                {
+                    AllYears.Add(item.year);
+                }
+                years = AllYears.Distinct().ToList();
+                return years;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
