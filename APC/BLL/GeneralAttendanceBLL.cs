@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Runtime.CompilerServices;
 
 namespace APC.BLL
 {
@@ -52,9 +53,14 @@ namespace APC.BLL
 
         public GeneralAttendanceDTO Select()
         {
+            throw new NotImplementedException();
+        }
+        public GeneralAttendanceDTO Select(int year)
+        {
             GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
             dto.Months = monthDAO.Select();
-            dto.GeneralAttendance = dao.Select();
+            dto.GeneralAttendance = dao.Select(year);
+            dto.Years = dao.SelectOnlyMeetingYears();
             return dto;
         }
 

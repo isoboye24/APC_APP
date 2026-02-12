@@ -170,6 +170,7 @@
             this.txtSection = new System.Windows.Forms.TextBox();
             this.txtFine = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
+            this.cmbYearMeeting = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.meetingsPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -249,6 +250,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtYear, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
@@ -405,7 +407,7 @@
             this.tableLayoutPanel2.Controls.Add(this.btnClear, 5, 2);
             this.tableLayoutPanel2.Controls.Add(this.btnSearch, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.label3, 3, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtYear, 4, 2);
+            this.tableLayoutPanel2.Controls.Add(this.cmbYearMeeting, 4, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(29, 17);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
@@ -644,12 +646,11 @@
             // 
             // txtYear
             // 
-            this.txtYear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtYear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYear.Location = new System.Drawing.Point(808, 51);
+            this.txtYear.Location = new System.Drawing.Point(1238, 17);
             this.txtYear.Margin = new System.Windows.Forms.Padding(4);
             this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(244, 34);
+            this.txtYear.Size = new System.Drawing.Size(18, 34);
             this.txtYear.TabIndex = 1;
             this.txtYear.TextChanged += new System.EventHandler(this.txtYear_TextChanged);
             this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYear_KeyPress);
@@ -2274,6 +2275,17 @@
             this.label21.TabIndex = 0;
             this.label21.Text = "Fine";
             // 
+            // cmbYearMeeting
+            // 
+            this.cmbYearMeeting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbYearMeeting.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbYearMeeting.FormattingEnabled = true;
+            this.cmbYearMeeting.Location = new System.Drawing.Point(808, 51);
+            this.cmbYearMeeting.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbYearMeeting.Name = "cmbYearMeeting";
+            this.cmbYearMeeting.Size = new System.Drawing.Size(244, 36);
+            this.cmbYearMeeting.TabIndex = 5;
+            // 
             // FormMeetingBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2287,6 +2299,7 @@
             this.tabControl1.ResumeLayout(false);
             this.meetingsPage.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -2485,5 +2498,6 @@
         private System.Windows.Forms.DataGridView dataGridViewSpecialContributions;
         private System.Windows.Forms.Label labelOverallTotalContributions;
         private System.Windows.Forms.ComboBox txtYearContribution;
+        private System.Windows.Forms.ComboBox cmbYearMeeting;
     }
 }

@@ -108,9 +108,11 @@ namespace APC.AllForms
             cmbFineStatus.Font = new Font("Segoe UI", 16, FontStyle.Regular);
             #endregion
 
-            dto = bll.Select();
+            dto = bll.Select(DateTime.Now.Year);
             cmbMonth.DataSource = dto.Months;
             General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+            cmbYearMeeting.DataSource = dto.Years;
+            cmbYearMeeting.SelectedIndex = -1;
 
             commentDTO = commentBLL.Select();
             cmbGenderComments.DataSource = commentDTO.Genders;
