@@ -43,7 +43,7 @@ namespace APC.AllForms
             label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelTotalRowsExpReport.Font = new Font("Segoe UI", 11, FontStyle.Regular);
             cmbMonthExpReport.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtYearExpReport.Font = new Font("Segoe UI", 16, FontStyle.Regular);
+            cmbYearExpenditure.Font = new Font("Segoe UI", 16, FontStyle.Regular);
             btnAddExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnUpdateExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnViewExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -69,6 +69,8 @@ namespace APC.AllForms
             expReportDTO = expReportBLL.Select(DateTime.Now.Year);
             cmbMonthExpReport.DataSource = expReportDTO.Months;
             General.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
+            cmbYearExpenditure.DataSource = expReportDTO.Years;
+            cmbYearExpenditure.SelectedIndex = -1;
 
             dataGridViewExpReport.DataSource = expReportDTO.Expenditures;
             dataGridViewExpReport.Columns[0].Visible = false;
@@ -104,11 +106,11 @@ namespace APC.AllForms
             finReportDTO = finReportBLL.Select();
             dataGridViewFinReport.DataSource = finReportDTO.FinancialReports;
 
-            txtYearExpReport.Clear();
             txtSummaryExpReport.Clear();
             cmbMonthExpReport.SelectedIndex = -1;
+            cmbYearExpenditure.SelectedIndex = -1;
             expReportBLL = new ExpenditureBLL();
-            expReportDTO = expReportBLL.Select();
+            expReportDTO = expReportBLL.Select(DateTime.Now.Year);
             dataGridViewExpReport.DataSource = expReportDTO.Expenditures;
 
             Counts();
@@ -257,13 +259,6 @@ namespace APC.AllForms
             }
         }
 
-        private void txtYearExpReport_TextChanged(object sender, EventArgs e)
-        {
-            List<ExpenditureDetailDTO> list = expReportDTO.Expenditures;
-            list = list.Where(x => x.Year.Contains(txtYearExpReport.Text)).ToList();
-            dataGridViewExpReport.DataSource = list;
-        }
-
         private void btnClearExpReport_Click(object sender, EventArgs e)
         {
             ClearFilters();
@@ -271,24 +266,26 @@ namespace APC.AllForms
 
         private void btnSearchExpReport_Click(object sender, EventArgs e)
         {
-            List<ExpenditureDetailDTO> list = expReportDTO.Expenditures;
-            if (txtYearExpReport.Text.Trim() == "")
+            
+            if (cmbYearExpenditure.SelectedIndex == -1)            
             {
-                MessageBox.Show("Year is empty.");
-            }
-            else if (cmbMonthExpReport.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthExpReport.SelectedValue)).ToList();
-            }
-            else if (cmbMonthExpReport.SelectedIndex != -1 && txtYearExpReport.Text.Trim() != "")
-            {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthExpReport.SelectedValue) && x.Year.ToString().Contains(txtYearExpReport.Text.Trim())).ToList();
-            }
+                MessageBox.Show("Select year");                
+            }            
             else
             {
-                MessageBox.Show("Unknown search!");
+                expReportBLL = new ExpenditureBLL();
+                expReportDTO = expReportBLL.Select(Convert.ToInt32(cmbYearExpenditure.SelectedValue));
+                List<ExpenditureDetailDTO> list = expReportDTO.Expenditures;
+
+                if (cmbMonthExpReport.SelectedIndex != -1 && cmbYearExpenditure.SelectedIndex != -1)
+                {
+                    list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthExpReport.SelectedValue) && Convert.ToInt32(x.Year) == Convert.ToInt32(cmbYearExpenditure.SelectedValue)).ToList();
+                    
+                }
+                
+                dataGridViewExpReport.DataSource = list;
             }
-            dataGridViewExpReport.DataSource = list;
+           
         }
 
         private void dataGridViewExpReport_RowEnter(object sender, DataGridViewCellEventArgs e)
