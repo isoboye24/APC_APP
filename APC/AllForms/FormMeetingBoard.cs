@@ -136,7 +136,8 @@ namespace APC.AllForms
             cmbGenderFinedMember.DataSource = finedMemberDTO.Genders;
             General.ComboBoxProps(cmbGenderFinedMember, "GenderName", "GenderID");
             cmbFineStatus.Items.Add("Completed");
-            cmbFineStatus.Items.Add("NOT completed");
+            cmbFineStatus.Items.Add("NOT Completed");
+            cmbFineStatus.Items.Add("NOT Paid");
 
             specialContributionDTO = specialContributionsBLL.Select();
             cmbMonthContribution.DataSource = specialContributionDTO.Months;
@@ -934,6 +935,10 @@ namespace APC.AllForms
             if (cmbFineStatus.SelectedIndex == 1)
             {
                 list = list.Where(x => x.FineStatus == "NOT completed").ToList();
+            }
+            if (cmbFineStatus.SelectedIndex == 2)
+            {
+                list = list.Where(x => x.FineStatus == "NOT Paid").ToList();
             }
             dataGridViewFinedMembers.DataSource = list;
         }
