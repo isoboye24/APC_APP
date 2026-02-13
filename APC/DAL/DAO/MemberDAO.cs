@@ -178,6 +178,7 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
+                    dto.BirthdayDate = item.birthday.Day + "." +item.birthday.Month + "." +item.birthday.Year;
                     members.Add(dto);
                 }
                 return members;
@@ -282,6 +283,7 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
                     members.Add(dto);
                 }
                 return members;
@@ -386,6 +388,7 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
                     members.Add(dto);
                 }
                 return members;
@@ -489,6 +492,7 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
                     members.Add(dto);
                 }
                 return members;
@@ -594,6 +598,7 @@ namespace APC.DAL.DAO
                     dto.RelationshipToKin = item.relationshipToKin;
                     TimeSpan difference = dto.DeadDate - dto.Birthday;
                     dto.DeadAge = Math.Floor(difference.TotalDays / 365.25);
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
                     members.Add(dto);
                 }
                 return members;
@@ -709,6 +714,7 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
                     members.Add(dto);
                 }
                 return members;
@@ -1040,6 +1046,7 @@ namespace APC.DAL.DAO
                     dto.LGA = item.LGA;
                     dto.MembershipStatusID = item.membershipStatusID;
                     dto.MembershipStatus = item.membershipStatus;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
                     //dto.NextOfKin = item.nextOfKin;
                     //dto.RelationshipToNextOfKinID = item.relationshipToNextOfKinID;
                     //dto.RelationshipToNextOfKin = item.relationshipToNextOfKin;
@@ -1146,6 +1153,7 @@ namespace APC.DAL.DAO
                     //dto.NextOfKin = item.nextOfKin;
                     //dto.RelationshipToNextOfKinID = item.relationshipToNextOfKinID;
                     //dto.RelationshipToNextOfKin = item.relationshipToNextOfKin;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
                     members.Add(dto);
                 }
                 return members;

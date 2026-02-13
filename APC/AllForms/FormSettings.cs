@@ -291,6 +291,7 @@ namespace APC.AllForms
             dataGridView1.Columns[40].Visible = false;
             dataGridView1.Columns[41].Visible = false;
             dataGridView1.Columns[42].Visible = false;
+            dataGridView1.Columns[43].Visible = false;
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -908,6 +909,7 @@ namespace APC.AllForms
                 dataGridView1.Columns[40].Visible = false;
                 dataGridView1.Columns[41].Visible = false;
                 dataGridView1.Columns[42].Visible = false;
+                dataGridView1.Columns[43].Visible = false;
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -1211,6 +1213,7 @@ namespace APC.AllForms
                 memberDeletedDataDetail.NameOfNextOfKin = dataGridView1.Rows[e.RowIndex].Cells[40].Value.ToString();
                 memberDeletedDataDetail.RelationshipToKinID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[41].Value);
                 memberDeletedDataDetail.RelationshipToKin = dataGridView1.Rows[e.RowIndex].Cells[42].Value.ToString();
+                memberDeletedDataDetail.BirthdayDate = dataGridView1.Rows[e.RowIndex].Cells[43].Value.ToString();
             }
             else if (cmbDeletedData.SelectedIndex == 1)
             {

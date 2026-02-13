@@ -237,18 +237,68 @@ namespace APC.AllForms
                 dataGridViewRegisteredMembers.Columns[40].Visible = false;
                 dataGridViewRegisteredMembers.Columns[41].Visible = false;
                 dataGridViewRegisteredMembers.Columns[42].Visible = false;
+                dataGridViewRegisteredMembers.Columns[43].Visible = false;
                 foreach (DataGridViewColumn column in dataGridViewRegisteredMembers.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
                 }
-                #endregion
+            #endregion
 
-                #region
-                
-                #endregion
+            #region
+            birthdayDTO = birthdayBLL.Select();
+            dataGridViewBirthday.DataSource = birthdayDTO.Members;
+            dataGridViewBirthday.Columns[0].Visible = false;
+            dataGridViewBirthday.Columns[1].Visible = false;
+            dataGridViewBirthday.Columns[2].Visible = false;
+            dataGridViewBirthday.Columns[3].HeaderText = "Surname";
+            dataGridViewBirthday.Columns[4].HeaderText = "Name";
+            dataGridViewBirthday.Columns[5].Visible = false;
+            dataGridViewBirthday.Columns[6].Visible = false;
+            dataGridViewBirthday.Columns[7].Visible = false;
+            dataGridViewBirthday.Columns[8].Visible = false;
+            dataGridViewBirthday.Columns[9].Visible = false;
+            dataGridViewBirthday.Columns[10].Visible = false;
+            dataGridViewBirthday.Columns[11].Visible = false;
+            dataGridViewBirthday.Columns[12].Visible = false;
+            dataGridViewBirthday.Columns[13].Visible = false;
+            dataGridViewBirthday.Columns[14].Visible = false;
+            dataGridViewBirthday.Columns[15].Visible = false;
+            dataGridViewBirthday.Columns[16].Visible = false;
+            dataGridViewBirthday.Columns[17].HeaderText = "Position";
+            dataGridViewBirthday.Columns[18].Visible = false;
+            dataGridViewBirthday.Columns[19].HeaderText = "Gender";
+            dataGridViewBirthday.Columns[20].Visible = false;
+            dataGridViewBirthday.Columns[21].Visible = false;
+            dataGridViewBirthday.Columns[22].Visible = false;
+            dataGridViewBirthday.Columns[23].Visible = false;
+            dataGridViewBirthday.Columns[24].Visible = false;
+            dataGridViewBirthday.Columns[25].Visible = false;
+            dataGridViewBirthday.Columns[26].Visible = false;
+            dataGridViewBirthday.Columns[27].Visible = false;
+            dataGridViewBirthday.Columns[28].Visible = false;
+            dataGridViewBirthday.Columns[29].Visible = false;
+            dataGridViewBirthday.Columns[30].Visible = false;
+            dataGridViewBirthday.Columns[31].Visible = false;
+            dataGridViewBirthday.Columns[32].Visible = false;
+            dataGridViewBirthday.Columns[33].Visible = false;
+            dataGridViewBirthday.Columns[34].Visible = false;
+            dataGridViewBirthday.Columns[35].Visible = false;
+            dataGridViewBirthday.Columns[36].Visible = false;
+            dataGridViewBirthday.Columns[37].Visible = false;
+            dataGridViewBirthday.Columns[38].Visible = false;
+            dataGridViewBirthday.Columns[39].Visible = false;
+            dataGridViewBirthday.Columns[40].Visible = false;
+            dataGridViewBirthday.Columns[41].Visible = false;
+            dataGridViewBirthday.Columns[42].Visible = false;
+            dataGridViewBirthday.Columns[43].HeaderText = "Birthday";
+            foreach (DataGridViewColumn column in dataGridViewBirthday.Columns)
+            {
+                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            }
+            #endregion
 
-                #region
-                contactsDTO = contactsBLL.Select();
+            #region
+            contactsDTO = contactsBLL.Select();
                 dataGridViewContacts.DataSource = contactsDTO.Members;
                 dataGridViewContacts.Columns[0].Visible = false;
                 dataGridViewContacts.Columns[1].Visible = false;
@@ -293,6 +343,7 @@ namespace APC.AllForms
                 dataGridViewContacts.Columns[40].Visible = false;
                 dataGridViewContacts.Columns[41].Visible = false;
                 dataGridViewContacts.Columns[42].Visible = false;
+                dataGridViewContacts.Columns[43].Visible = false;
                 foreach (DataGridViewColumn column in dataGridViewContacts.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -345,6 +396,7 @@ namespace APC.AllForms
                 dataGridViewFormerMembers.Columns[40].Visible = false;
                 dataGridViewFormerMembers.Columns[41].Visible = false;
                 dataGridViewFormerMembers.Columns[42].Visible = false;
+                dataGridViewFormerMembers.Columns[43].Visible = false;
                 foreach (DataGridViewColumn column in dataGridViewFormerMembers.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -399,6 +451,7 @@ namespace APC.AllForms
                 dataGridViewDeadMembers.Columns[40].Visible = false;
                 dataGridViewDeadMembers.Columns[41].Visible = false;
                 dataGridViewDeadMembers.Columns[42].Visible = false;
+                dataGridViewDeadMembers.Columns[43].Visible = false;
                 foreach (DataGridViewColumn column in dataGridViewDeadMembers.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -497,6 +550,7 @@ namespace APC.AllForms
                 dataGridViewInactiveMembers.Columns[40].Visible = false;
                 dataGridViewInactiveMembers.Columns[41].Visible = false;
                 dataGridViewInactiveMembers.Columns[42].Visible = false;
+                dataGridViewInactiveMembers.Columns[43].Visible = false;
                 foreach (DataGridViewColumn column in dataGridViewInactiveMembers.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -746,6 +800,7 @@ namespace APC.AllForms
             registeredMembersDetail.NameOfNextOfKin = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
             registeredMembersDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[41].Value);
             registeredMembersDetail.RelationshipToKin = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[42].Value.ToString();
+            registeredMembersDetail.BirthdayDate = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[43].Value.ToString();
 
             string imagePath = Application.StartupPath + "\\images\\" + registeredMembersDetail.ImagePath;
             picRegisteredMember.ImageLocation = imagePath;
@@ -827,6 +882,7 @@ namespace APC.AllForms
             contactsDetail.NameOfNextOfKin = dataGridViewContacts.Rows[e.RowIndex].Cells[40].Value.ToString();
             contactsDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[41].Value);
             contactsDetail.RelationshipToKin = dataGridViewContacts.Rows[e.RowIndex].Cells[42].Value.ToString();
+            contactsDetail.BirthdayDate = dataGridViewContacts.Rows[e.RowIndex].Cells[43].Value.ToString();
         }
 
         MemberDetailDTO formerMembersDetail = new MemberDetailDTO();
@@ -922,6 +978,7 @@ namespace APC.AllForms
             formerMembersDetail.NameOfNextOfKin = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
             formerMembersDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[41].Value);
             formerMembersDetail.RelationshipToKin = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[42].Value.ToString();
+            formerMembersDetail.BirthdayDate = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[43].Value.ToString();
         }
 
         private void txtNameFormerMembers_TextChanged(object sender, EventArgs e)
@@ -1028,7 +1085,7 @@ namespace APC.AllForms
             deadMembersDetail.LGA = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[39].Value.ToString();
             deadMembersDetail.NameOfNextOfKin = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
             deadMembersDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[41].Value);
-            deadMembersDetail.RelationshipToKin = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[42].Value.ToString();
+            deadMembersDetail.BirthdayDate = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[43].Value.ToString();
         }
         private void txtNameDeadMembers_TextChanged(object sender, EventArgs e)
         {
@@ -1320,7 +1377,11 @@ namespace APC.AllForms
             }
         }
 
-        
+
+        MemberBLL birthdayBLL = new MemberBLL();
+        MemberDTO birthdayDTO = new MemberDTO();
+        MemberDetailDTO birthdayDetail = new MemberDetailDTO();
+
         private void txtNameBirthday_TextChanged(object sender, EventArgs e)
         {
 

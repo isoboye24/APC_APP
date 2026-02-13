@@ -51,5 +51,6 @@ namespace APC.DAL.DTO
         public string NameOfNextOfKin { get; set; }
         public int RelationshipToKinID { get; set; }
         public string RelationshipToKin { get; set; }
+        public string BirthdayDate { get; set; }
     }
 }
