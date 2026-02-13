@@ -41,7 +41,6 @@ namespace APC.AllForms
         }
         public MemberDetailDTO detail = new MemberDetailDTO();
         public bool isView = false;
-        int noOfChildren =  0;
         MemberBLL bll = new MemberBLL();
         int attendancePresentCount = 0;
         int attendanceAbsentCount = 0;

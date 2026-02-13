@@ -257,7 +257,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 51F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel10, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel15, 1, 0);
@@ -277,7 +277,7 @@
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.groupBox1, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(963, 4);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(962, 4);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
@@ -573,7 +573,7 @@
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 1;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(481, 583);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(480, 583);
             this.tableLayoutPanel10.TabIndex = 2;
             // 
             // tableLayoutPanel6
@@ -621,7 +621,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 4F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(473, 575);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(472, 575);
             this.tableLayoutPanel6.TabIndex = 1;
             // 
             // labelAccessLevel
@@ -643,7 +643,7 @@
             this.cmbPermission.Location = new System.Drawing.Point(240, 4);
             this.cmbPermission.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPermission.Name = "cmbPermission";
-            this.cmbPermission.Size = new System.Drawing.Size(229, 36);
+            this.cmbPermission.Size = new System.Drawing.Size(228, 36);
             this.cmbPermission.TabIndex = 3;
             // 
             // labelPhone3
@@ -664,7 +664,7 @@
             this.txtPhone3.Location = new System.Drawing.Point(240, 375);
             this.txtPhone3.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone3.Name = "txtPhone3";
-            this.txtPhone3.Size = new System.Drawing.Size(229, 34);
+            this.txtPhone3.Size = new System.Drawing.Size(228, 34);
             this.txtPhone3.TabIndex = 0;
             // 
             // labelPhone2
@@ -685,7 +685,7 @@
             this.txtPhone2.Location = new System.Drawing.Point(240, 322);
             this.txtPhone2.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone2.Name = "txtPhone2";
-            this.txtPhone2.Size = new System.Drawing.Size(229, 34);
+            this.txtPhone2.Size = new System.Drawing.Size(228, 34);
             this.txtPhone2.TabIndex = 0;
             // 
             // labelMorePhone
@@ -718,7 +718,7 @@
             this.txtPhone1.Location = new System.Drawing.Point(240, 216);
             this.txtPhone1.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone1.Name = "txtPhone1";
-            this.txtPhone1.Size = new System.Drawing.Size(229, 34);
+            this.txtPhone1.Size = new System.Drawing.Size(228, 34);
             this.txtPhone1.TabIndex = 0;
             // 
             // label3
@@ -740,7 +740,7 @@
             this.cmbRelationshipToNextOfKin.Location = new System.Drawing.Point(240, 163);
             this.cmbRelationshipToNextOfKin.Margin = new System.Windows.Forms.Padding(4);
             this.cmbRelationshipToNextOfKin.Name = "cmbRelationshipToNextOfKin";
-            this.cmbRelationshipToNextOfKin.Size = new System.Drawing.Size(229, 36);
+            this.cmbRelationshipToNextOfKin.Size = new System.Drawing.Size(228, 36);
             this.cmbRelationshipToNextOfKin.TabIndex = 3;
             // 
             // label4
@@ -761,7 +761,7 @@
             this.txtNameOfNextOfKin.Location = new System.Drawing.Point(240, 110);
             this.txtNameOfNextOfKin.Margin = new System.Windows.Forms.Padding(4);
             this.txtNameOfNextOfKin.Name = "txtNameOfNextOfKin";
-            this.txtNameOfNextOfKin.Size = new System.Drawing.Size(229, 34);
+            this.txtNameOfNextOfKin.Size = new System.Drawing.Size(228, 34);
             this.txtNameOfNextOfKin.TabIndex = 0;
             // 
             // label12
@@ -782,7 +782,7 @@
             this.txtLGA.Location = new System.Drawing.Point(240, 57);
             this.txtLGA.Margin = new System.Windows.Forms.Padding(4);
             this.txtLGA.Name = "txtLGA";
-            this.txtLGA.Size = new System.Drawing.Size(229, 34);
+            this.txtLGA.Size = new System.Drawing.Size(228, 34);
             this.txtLGA.TabIndex = 0;
             // 
             // tableLayoutPanel15

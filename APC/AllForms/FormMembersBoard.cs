@@ -153,10 +153,11 @@ namespace APC.AllForms
             General.ComboBoxProps(cmbGenderBirthday, "GenderName", "GenderID");
             cmbNationalityBirthday.DataSource = registeredMembersDTO.Nationalities;
             General.ComboBoxProps(cmbNationalityBirthday, "Nationality", "NationalityID");
+
             cmbPositionBirthday.DataSource = registeredMembersDTO.Positions;
-            General.ComboBoxProps(cmbNationalityBirthday, "PositionName", "PositionID");
+            General.ComboBoxProps(cmbPositionBirthday, "PositionName", "PositionID");
             cmbProfessionBirthday.DataSource = registeredMembersDTO.Professions;
-            General.ComboBoxProps(cmbNationalityBirthday, "Profession", "professionID");
+            General.ComboBoxProps(cmbProfessionBirthday, "Profession", "professionID");
 
             formerMembersDTO = formerMembersBLL.SelectFormerMembers();
             cmbGenderFormerMembers.DataSource = formerMembersDTO.Genders;
@@ -1319,22 +1320,6 @@ namespace APC.AllForms
             }
         }
 
-
-       
-        private void btnSearchChildren_Click(object sender, EventArgs e)
-        {
-            List<MemberDetailDTO> list = registeredMembersDTO.Members;
-            if (cmbGenderBirthday.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.GenderID == Convert.ToInt32(cmbGenderBirthday.SelectedValue)).ToList();
-            }
-            if (cmbNationalityBirthday.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.NationalityID == Convert.ToInt32(cmbNationalityBirthday.SelectedValue)).ToList();
-            }
-            dataGridViewBirthday.DataSource = list;
-        }
-
         
         private void txtNameBirthday_TextChanged(object sender, EventArgs e)
         {
@@ -1348,7 +1333,7 @@ namespace APC.AllForms
 
         private void btnSearchBirthday_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnClearBirthday_Click(object sender, EventArgs e)
