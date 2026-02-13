@@ -69,6 +69,11 @@ namespace APC.BLL
             return expDAO.SelectTotalExpenditures();
         }
 
+        public decimal SelectTotalExpenditureYearly(int year)
+        {
+            return expDAO.SelectTotalExpenditureYearly(year);
+        }
+
         public bool Update(FinancialReportDetailDTO entity)
         {
             FINANCIAL_REPORT financialReport = new FINANCIAL_REPORT();

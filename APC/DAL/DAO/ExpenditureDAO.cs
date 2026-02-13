@@ -78,6 +78,25 @@ namespace APC.DAL.DAO
             }
         }
 
+        public decimal SelectTotalExpenditureYearly(int year)
+        {
+            try
+            {
+                List<decimal> totalExpenditures = new List<decimal>();
+                var list = db.EXPENDITURE.Where(x=>x.isDeleted==false && x.year == year).ToList();
+                foreach (var item in list)
+                {
+                    totalExpenditures.Add(item.amountSpent);
+                }
+                decimal totalAmount = totalExpenditures.Sum();
+                return totalAmount;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool Insert(EXPENDITURE entity)
         {
             try

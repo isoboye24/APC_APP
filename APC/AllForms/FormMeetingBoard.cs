@@ -33,6 +33,15 @@ namespace APC.AllForms
         SpecialContributionDetailDTO specialContributionDetail = new SpecialContributionDetailDTO();
         SpecialContributionsBLL specialContributionsBLL = new SpecialContributionsBLL();
         SpecialContributionDTO specialContributionDTO = new SpecialContributionDTO();
+
+        FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
+        FinedMemberDTO finedMemberDTO = new FinedMemberDTO();
+        FinedMemberDetailDTO finedMemberDetail = new FinedMemberDetailDTO();
+
+        ConstitutionBLL constitutionBLL = new ConstitutionBLL();
+        ConstitutionDTO constitutionDTO = new ConstitutionDTO();
+        ConstitutionDetailDTO constitutionDetail = new ConstitutionDetailDTO();
+
         private void FormMeetingBoard_Load(object sender, EventArgs e)
         {
             #region
@@ -787,9 +796,6 @@ namespace APC.AllForms
         // -------------------- FINED MEMBERS ----------------------
         // -------------------------------------------------------------------------
 
-        FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
-        FinedMemberDTO finedMemberDTO = new FinedMemberDTO();
-        FinedMemberDetailDTO finedMemberDetail = new FinedMemberDetailDTO();
         private void dataGridViewFinedMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             finedMemberDetail = new FinedMemberDetailDTO();
@@ -942,9 +948,6 @@ namespace APC.AllForms
         // -------------------- CONSTITUTION ----------------------
         // -------------------------------------------------------------------------
 
-        ConstitutionBLL constitutionBLL = new ConstitutionBLL();
-        ConstitutionDTO constitutionDTO = new ConstitutionDTO();
-        ConstitutionDetailDTO constitutionDetail = new ConstitutionDetailDTO();
         private void btnAddConstitution_Click(object sender, EventArgs e)
         {
             FormConstitution open = new FormConstitution();

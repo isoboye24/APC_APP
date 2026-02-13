@@ -50,6 +50,10 @@ namespace APC.AllForms
             btnDeleteExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnSearchExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnClearExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+
+            labelTotalExpReportYearly.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            labelTotalExpReport.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+
             #endregion
 
             #region
@@ -97,6 +101,14 @@ namespace APC.AllForms
             }
 
             Counts();
+            RowsCount();
+            ResizeableControls();
+        }
+
+        private void ResizeableControls()
+        {
+            labelTotalExpReportYearly.Tag = "Sizeable";
+            labelTotalExpReport.Tag = "Sizeable";
         }
 
         private void ClearFilters()
@@ -114,19 +126,24 @@ namespace APC.AllForms
             dataGridViewExpReport.DataSource = expReportDTO.Expenditures;
 
             Counts();
+            RowsCount();
         }
 
+        int currentYear = DateTime.Now.Year;
         private void Counts()
-        {
+        {            
             labelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
-            labelTotalRowsExpReport.Text = "Row: " + dataGridViewExpReport.RowCount.ToString();
-
             labelTotalAmountRaised.Text = finReportBLL.SelectTotalRaisedAmount().ToString();
-
             labelTotalAmountSpent.Text = finReportBLL.SelectTotalSpentAmount().ToString();
-            labelTotalExpReport.Text = "Total: " + finReportBLL.SelectTotalExpenditure().ToString();
-
             labelTotalBalance.Text = (finReportBLL.SelectTotalRaisedAmount() - finReportBLL.SelectTotalSpentAmount()).ToString();
+
+            labelTotalExpReport.Text = "Overall Total: " + finReportBLL.SelectTotalExpenditure().ToString() + " €";
+            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + finReportBLL.SelectTotalExpenditureYearly(currentYear).ToString() + " €";
+        }
+
+        private void RowsCount()
+        {
+            labelTotalRowsExpReport.Text = "Row: " + dataGridViewExpReport.RowCount.ToString();
         }
 
         private void btnAddFinReport_Click(object sender, EventArgs e)
@@ -265,8 +282,7 @@ namespace APC.AllForms
         }
 
         private void btnSearchExpReport_Click(object sender, EventArgs e)
-        {
-            
+        {            
             if (cmbYearExpenditure.SelectedIndex == -1)            
             {
                 MessageBox.Show("Select year");                
@@ -280,10 +296,11 @@ namespace APC.AllForms
                 if (cmbMonthExpReport.SelectedIndex != -1 && cmbYearExpenditure.SelectedIndex != -1)
                 {
                     list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthExpReport.SelectedValue) && Convert.ToInt32(x.Year) == Convert.ToInt32(cmbYearExpenditure.SelectedValue)).ToList();
-                    
                 }
                 
                 dataGridViewExpReport.DataSource = list;
+                RowsCount();
+                labelTotalExpReportYearly.Text = "Total in " + cmbYearExpenditure.SelectedValue + ": " + finReportBLL.SelectTotalExpenditureYearly(Convert.ToInt32(cmbYearExpenditure.SelectedValue)).ToString() + " €";
             }
            
         }
