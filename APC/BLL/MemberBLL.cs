@@ -27,7 +27,6 @@ namespace APC.BLL
 
         // These classes are here for the sake of deletedData form
         GeneralAttendanceDAO genAttendDAO = new GeneralAttendanceDAO();
-        ChildDAO childDAO = new ChildDAO();
         PersonalAttendanceDAO perAttendDAO = new PersonalAttendanceDAO();
         FinancialReportDAO finRepDAO = new FinancialReportDAO();
         ExpenditureDAO expenditureDAO = new ExpenditureDAO();
@@ -163,7 +162,6 @@ namespace APC.BLL
             dto.EmploymentStatuses = empStatusDAO.Select(isDeleted);
             dto.Positions = positionDAO.Select(isDeleted);
             dto.MaritalStatuses = marStatusDAO.Select(isDeleted);
-            dto.Children = childDAO.Select(isDeleted);
             dto.Comments = commenntDAO.Select(isDeleted);
             dto.Documents = documentDAO.Select(isDeleted);
             dto.EventImages = eventImageDAO.Select(isDeleted);

@@ -34,7 +34,6 @@ namespace APC.AllForms
             if (LoginInfo.AccessLevel != 4)
             {
                 btnDeleteRegisteredMembers.Hide();
-                btnDeleteChildren.Hide();
             }
             #region
             label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -68,22 +67,15 @@ namespace APC.AllForms
             label15.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label16.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label17.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label11.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelFemaleChildren.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelMaleChildren.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label10.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtNameChildren.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtFathersNameChildren.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtMothersNameChildren.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtSurnameChildren.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbGenderChildren.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbNationalityChildren.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnAddChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearchChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            txtNameBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
+            txtSurnameBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
+            cmbGenderBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
+            cmbNationalityBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
+            cmbProfessionBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
+            cmbPositionBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
+            btnViewBirthday.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            btnSearchBirthday.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            btnClearBirthday.Font = new Font("Segoe UI", 14, FontStyle.Bold);
 
             label18.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelTotalContacts.Font = new Font("Segoe UI", 11, FontStyle.Regular);
@@ -147,6 +139,7 @@ namespace APC.AllForms
             #region
             registeredMembersDTO = registeredMembersBLL.Select();
             cmbGenderRegisteredMembers.DataSource = registeredMembersDTO.Genders;
+
             General.ComboBoxProps(cmbGenderRegisteredMembers, "GenderName", "genderID");
             cmbProfessionRegisteredMembers.DataSource = registeredMembersDTO.Professions;
             General.ComboBoxProps(cmbProfessionRegisteredMembers, "Profession", "professionID");
@@ -155,11 +148,15 @@ namespace APC.AllForms
             cmbNationalityRegisteredMembers.DataSource = registeredMembersDTO.Nationalities;
             General.ComboBoxProps(cmbNationalityRegisteredMembers, "Nationality", "NationalityID");
 
-            childrenDTO = childrenBLL.Select();
-            cmbGenderChildren.DataSource = childrenDTO.Genders;
-            cmbNationalityChildren.DataSource = childrenDTO.Nationalities;
-            General.ComboBoxProps(cmbGenderChildren, "GenderName", "GenderID");
-            General.ComboBoxProps(cmbNationalityChildren, "Nationality", "NationalityID");
+            
+            cmbGenderBirthday.DataSource = registeredMembersDTO.Genders;
+            General.ComboBoxProps(cmbGenderBirthday, "GenderName", "GenderID");
+            cmbNationalityBirthday.DataSource = registeredMembersDTO.Nationalities;
+            General.ComboBoxProps(cmbNationalityBirthday, "Nationality", "NationalityID");
+            cmbPositionBirthday.DataSource = registeredMembersDTO.Positions;
+            General.ComboBoxProps(cmbNationalityBirthday, "PositionName", "PositionID");
+            cmbProfessionBirthday.DataSource = registeredMembersDTO.Professions;
+            General.ComboBoxProps(cmbNationalityBirthday, "Profession", "professionID");
 
             formerMembersDTO = formerMembersBLL.SelectFormerMembers();
             cmbGenderFormerMembers.DataSource = formerMembersDTO.Genders;
@@ -246,33 +243,7 @@ namespace APC.AllForms
                 #endregion
 
                 #region
-                dataGridViewChildren.DataSource = childrenDTO.Children;
-                dataGridViewChildren.Columns[0].Visible = false;
-                dataGridViewChildren.Columns[1].HeaderText = "Surname";
-                dataGridViewChildren.Columns[2].HeaderText = "Name";
-                dataGridViewChildren.Columns[3].Visible = false;
-                dataGridViewChildren.Columns[4].Visible = false;
-                dataGridViewChildren.Columns[5].Visible = false;
-                dataGridViewChildren.Columns[6].HeaderText = "Gender";
-                dataGridViewChildren.Columns[7].Visible = false;
-                dataGridViewChildren.Columns[8].HeaderText = "Nationality";
-                dataGridViewChildren.Columns[9].Visible = false;
-                dataGridViewChildren.Columns[10].HeaderText = "Mother's name";
-                dataGridViewChildren.Columns[11].Visible = false;
-                dataGridViewChildren.Columns[12].Visible = false;
-                dataGridViewChildren.Columns[13].Visible = false;
-                dataGridViewChildren.Columns[14].Visible = false;
-                dataGridViewChildren.Columns[15].Visible = false;
-                dataGridViewChildren.Columns[16].HeaderText = "Father's name";
-                dataGridViewChildren.Columns[17].Visible = false;
-                dataGridViewChildren.Columns[18].Visible = false;
-                dataGridViewChildren.Columns[19].Visible = false;
-                dataGridViewChildren.Columns[20].Visible = false;
-                dataGridViewChildren.Columns[21].Visible = false;
-                foreach (DataGridViewColumn column in dataGridViewChildren.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                
                 #endregion
 
                 #region
@@ -558,15 +529,14 @@ namespace APC.AllForms
             registeredMembersDTO = registeredMembersBLL.Select();
             dataGridViewRegisteredMembers.DataSource = registeredMembersDTO.Members;
 
-            txtNameChildren.Clear();
-            txtSurnameChildren.Clear();
-            txtFathersNameChildren.Clear();
-            txtMothersNameChildren.Clear();
-            cmbGenderChildren.SelectedIndex = -1;
-            cmbNationalityChildren.SelectedIndex = -1;
-            childrenBLL = new ChildBLL();
-            childrenDTO = childrenBLL.Select();
-            dataGridViewChildren.DataSource = childrenDTO.Children;
+            txtNameBirthday.Clear();
+            txtSurnameBirthday.Clear();
+            cmbGenderBirthday.SelectedIndex = -1;
+            cmbNationalityBirthday.SelectedIndex = -1;
+            cmbProfessionBirthday.SelectedIndex = -1;
+            cmbPositionBirthday.SelectedIndex = -1;
+
+            
 
             txtSurnameContacts.Clear();
             contactsBLL = new MemberBLL();
@@ -618,9 +588,6 @@ namespace APC.AllForms
             labelNoOfMenRegisteredMembers.Text = registeredMembersBLL.SelectCountMale().ToString();
             labelNoOfFemaleRegisteredMembers.Text = registeredMembersBLL.SelectCountFemale().ToString();
             labelNoOfDivisorRegisteredMembers.Text = registeredMembersBLL.SelectCountDivisor().ToString();
-
-            labelMaleChildren.Text = childrenBLL.SelectAllMaleChildren().ToString();
-            labelFemaleChildren.Text = childrenBLL.SelectAllFemaleChildren().ToString();
 
             labelTotalContacts.Text = "Total: " + dataGridViewContacts.RowCount.ToString();
 
@@ -783,141 +750,6 @@ namespace APC.AllForms
             picRegisteredMember.ImageLocation = imagePath;
         }
 
-        ChildBLL childrenBLL = new ChildBLL();
-        ChildDTO childrenDTO = new ChildDTO();
-        ChildDetailDTO childrenDetail = new ChildDetailDTO();
-        private void btnAddChildren_Click(object sender, EventArgs e)
-        {
-            FormChildren open = new FormChildren();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            ClearFilters();
-        }
-
-        private void btnViewChildren_Click(object sender, EventArgs e)
-        {
-            if (childrenDetail.ChildID == 0)
-            {
-                MessageBox.Show("Please choose a child from the table");
-            }
-            else
-            {
-                FormViewChild open = new FormViewChild();
-                open.detail = childrenDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
-
-        private void txtNameChildren_TextChanged(object sender, EventArgs e)
-        {
-            List<ChildDetailDTO> list = childrenDTO.Children;
-            list = list.Where(x => x.Name.Contains(txtNameChildren.Text)).ToList();
-            dataGridViewChildren.DataSource = list;
-        }
-
-        private void txtSurnameChildren_TextChanged(object sender, EventArgs e)
-        {
-            List<ChildDetailDTO> list = childrenDTO.Children;
-            list = list.Where(x => x.Surname.Contains(txtSurnameChildren.Text)).ToList();
-            dataGridViewChildren.DataSource = list;
-        }
-
-        private void txtMothersNameChildren_TextChanged(object sender, EventArgs e)
-        {
-            List<ChildDetailDTO> list = childrenDTO.Children;
-            list = list.Where(x => x.MothersName.Contains(txtMothersNameChildren.Text)).ToList();
-            dataGridViewChildren.DataSource = list;
-        }
-
-        private void txtFathersNameChildren_TextChanged(object sender, EventArgs e)
-        {
-            List<ChildDetailDTO> list = childrenDTO.Children;
-            list = list.Where(x => x.FathersName.Contains(txtFathersNameChildren.Text)).ToList();
-            dataGridViewChildren.DataSource = list;
-        }
-
-        private void btnSearchChildren_Click(object sender, EventArgs e)
-        {
-            List<ChildDetailDTO> list = childrenDTO.Children;
-            if (cmbGenderChildren.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.GenderID == Convert.ToInt32(cmbGenderChildren.SelectedValue)).ToList();
-            }
-            if (cmbNationalityChildren.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.NationalityID == Convert.ToInt32(cmbNationalityChildren.SelectedValue)).ToList();
-            }
-            dataGridViewChildren.DataSource = list;
-        }
-
-        private void btnDeleteChildren_Click(object sender, EventArgs e)
-        {
-            if (childrenDetail.ChildID == 0)
-            {
-                MessageBox.Show("Please select a child from the table");
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (childrenBLL.Delete(childrenDetail))
-                    {
-                        MessageBox.Show("Child was deleted");                        
-                        ClearFilters();
-                    }
-                }
-            }
-        }
-
-        private void dataGridViewChildren_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            childrenDetail = new ChildDetailDTO();
-            childrenDetail.ChildID = Convert.ToInt32(dataGridViewChildren.Rows[e.RowIndex].Cells[0].Value);
-            childrenDetail.Surname = dataGridViewChildren.Rows[e.RowIndex].Cells[1].Value.ToString();
-            childrenDetail.Name = dataGridViewChildren.Rows[e.RowIndex].Cells[2].Value.ToString();
-            childrenDetail.Birthday = Convert.ToDateTime(dataGridViewChildren.Rows[e.RowIndex].Cells[3].Value);
-            childrenDetail.ImagePath = dataGridViewChildren.Rows[e.RowIndex].Cells[4].Value.ToString();
-            childrenDetail.GenderID = Convert.ToInt32(dataGridViewChildren.Rows[e.RowIndex].Cells[5].Value);
-            childrenDetail.GenderName = dataGridViewChildren.Rows[e.RowIndex].Cells[6].Value.ToString();
-            childrenDetail.NationalityID = Convert.ToInt32(dataGridViewChildren.Rows[e.RowIndex].Cells[7].Value);
-            childrenDetail.NationalityName = dataGridViewChildren.Rows[e.RowIndex].Cells[8].Value.ToString();
-            childrenDetail.MotherID = Convert.ToInt32(dataGridViewChildren.Rows[e.RowIndex].Cells[9].Value);
-            childrenDetail.MothersName = dataGridViewChildren.Rows[e.RowIndex].Cells[10].Value.ToString();
-            childrenDetail.MothersSurname = dataGridViewChildren.Rows[e.RowIndex].Cells[11].Value.ToString();
-            childrenDetail.MotherNationalityID = Convert.ToInt32(dataGridViewChildren.Rows[e.RowIndex].Cells[12].Value);
-            childrenDetail.MotherNationalityName = dataGridViewChildren.Rows[e.RowIndex].Cells[13].Value.ToString();
-            childrenDetail.MotherImagePath = dataGridViewChildren.Rows[e.RowIndex].Cells[14].Value.ToString();
-            childrenDetail.FatherID = Convert.ToInt32(dataGridViewChildren.Rows[e.RowIndex].Cells[15].Value);
-            childrenDetail.FathersName = dataGridViewChildren.Rows[e.RowIndex].Cells[16].Value.ToString();
-            childrenDetail.FathersSurname = dataGridViewChildren.Rows[e.RowIndex].Cells[17].Value.ToString();
-            childrenDetail.FatherNationalityID = Convert.ToInt32(dataGridViewChildren.Rows[e.RowIndex].Cells[18].Value);
-            childrenDetail.FatherNationalityName = dataGridViewChildren.Rows[e.RowIndex].Cells[19].Value.ToString();
-            childrenDetail.FatherImagePath = dataGridViewChildren.Rows[e.RowIndex].Cells[20].Value.ToString();
-            childrenDetail.isNationalityDeleted = Convert.ToBoolean(dataGridViewChildren.Rows[e.RowIndex].Cells[21].Value);
-        }
-
-        private void btnUpdateChildren_Click(object sender, EventArgs e)
-        {
-            if (childrenDetail.ChildID == 0)
-            {
-                MessageBox.Show("Please choose a child from the table");
-            }
-            else
-            {
-                FormChildren open = new FormChildren();
-                open.detail = childrenDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
 
         MemberBLL contactsBLL = new MemberBLL();
         MemberDTO contactsDTO = new MemberDTO();
@@ -1485,6 +1317,53 @@ namespace APC.AllForms
                 this.Visible = true;
                 ClearFilters();
             }
+        }
+
+
+       
+        private void btnSearchChildren_Click(object sender, EventArgs e)
+        {
+            List<MemberDetailDTO> list = registeredMembersDTO.Members;
+            if (cmbGenderBirthday.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.GenderID == Convert.ToInt32(cmbGenderBirthday.SelectedValue)).ToList();
+            }
+            if (cmbNationalityBirthday.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.NationalityID == Convert.ToInt32(cmbNationalityBirthday.SelectedValue)).ToList();
+            }
+            dataGridViewBirthday.DataSource = list;
+        }
+
+        
+        private void txtNameBirthday_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSurnameBirthday_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSearchBirthday_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClearBirthday_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnViewBirthday_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewBirthday_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -131,7 +131,6 @@ namespace APC
         }
         MemberBLL memberBLL = new MemberBLL();
         CommentBLL commentBLL = new CommentBLL();
-        ChildBLL childBLL = new ChildBLL();
         GeneralAttendanceBLL generalAttendanceBLL = new GeneralAttendanceBLL();
         PersonalAttendanceBLL personalAttendanceBLL = new PersonalAttendanceBLL();
         EventsBLL eventBLL = new EventsBLL();

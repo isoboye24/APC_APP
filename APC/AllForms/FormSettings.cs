@@ -841,8 +841,6 @@ namespace APC.AllForms
         EmploymentStatusDetailDTO empStatusDeletedDataDetail = new EmploymentStatusDetailDTO();
         MaritalStatusBLL marStatusDeletedDataBLL = new MaritalStatusBLL();
         MaritalStatusDetailDTO marStatusDeletedDataDetail = new MaritalStatusDetailDTO();
-        ChildBLL childDeletedDataBLL = new ChildBLL();
-        ChildDetailDTO childDeletedDataDetail = new ChildDetailDTO();
         CommentBLL commentDeletedDataBLL = new CommentBLL();
         CommentDetailDTO commentDeletedDataDetail = new CommentDetailDTO();
         DocumentBLL documentDeletedDataBLL = new DocumentBLL();
@@ -970,37 +968,6 @@ namespace APC.AllForms
                 dataGridView1.DataSource = memberDeletedDataDTO.MaritalStatuses;
                 dataGridView1.Columns[0].Visible = false;
                 dataGridView1.Columns[1].HeaderText = "Marital Status";
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
-            }
-            else if (cmbDeletedData.SelectedIndex == 7)
-            {
-                dataGridView1.DataSource = memberDeletedDataDTO.Children;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Surname";
-                dataGridView1.Columns[2].HeaderText = "Name";
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].HeaderText = "Gender";
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].HeaderText = "Nationality";
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].HeaderText = "Mother's name";
-                dataGridView1.Columns[11].Visible = false;
-                dataGridView1.Columns[12].Visible = false;
-                dataGridView1.Columns[13].Visible = false;
-                dataGridView1.Columns[14].Visible = false;
-                dataGridView1.Columns[15].Visible = false;
-                dataGridView1.Columns[16].HeaderText = "Father's name";
-                dataGridView1.Columns[17].Visible = false;
-                dataGridView1.Columns[18].Visible = false;
-                dataGridView1.Columns[19].Visible = false;
-                dataGridView1.Columns[20].Visible = false;
-                dataGridView1.Columns[20].Visible = false;
-                dataGridView1.Columns[21].Visible = false;
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
                     column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -1280,33 +1247,7 @@ namespace APC.AllForms
                 marStatusDeletedDataDetail = new MaritalStatusDetailDTO();
                 marStatusDeletedDataDetail.MaritalStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
                 marStatusDeletedDataDetail.MaritalStatus = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            }
-            else if (cmbDeletedData.SelectedIndex == 7)
-            {
-                childDeletedDataDetail = new ChildDetailDTO();
-                childDeletedDataDetail.ChildID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                childDeletedDataDetail.Surname = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                childDeletedDataDetail.Name = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                childDeletedDataDetail.Birthday = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-                childDeletedDataDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                childDeletedDataDetail.GenderID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
-                childDeletedDataDetail.GenderName = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                childDeletedDataDetail.NationalityID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
-                childDeletedDataDetail.NationalityName = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
-                childDeletedDataDetail.MotherID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
-                childDeletedDataDetail.MothersName = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
-                childDeletedDataDetail.MothersSurname = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-                childDeletedDataDetail.MotherNationalityID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[12].Value);
-                childDeletedDataDetail.MotherNationalityName = dataGridView1.Rows[e.RowIndex].Cells[13].Value.ToString();
-                childDeletedDataDetail.MotherImagePath = dataGridView1.Rows[e.RowIndex].Cells[14].Value.ToString();
-                childDeletedDataDetail.FatherID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[15].Value);
-                childDeletedDataDetail.FathersName = dataGridView1.Rows[e.RowIndex].Cells[16].Value.ToString();
-                childDeletedDataDetail.FathersSurname = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
-                childDeletedDataDetail.FatherNationalityID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[18].Value);
-                childDeletedDataDetail.FatherNationalityName = dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString();
-                childDeletedDataDetail.FatherImagePath = dataGridView1.Rows[e.RowIndex].Cells[20].Value.ToString();
-                childDeletedDataDetail.isNationalityDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[21].Value);
-            }
+            }            
             else if (cmbDeletedData.SelectedIndex == 8)
             {
                 commentDeletedDataDetail = new CommentDetailDTO();
@@ -1581,26 +1522,6 @@ namespace APC.AllForms
                         MessageBox.Show("Marital status was retrieved");
                         memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
                         dataGridView1.DataSource = memberDeletedDataDTO.MaritalStatuses;
-                    }
-                }
-            }
-            else if (cmbDeletedData.SelectedIndex == 7)
-            {
-                if (childDeletedDataDetail.ChildID == 0)
-                {
-                    MessageBox.Show("Please choose a child from the table");
-                }
-                else
-                {
-                    if (childDeletedDataDetail.isNationalityDeleted)
-                    {
-                        MessageBox.Show("Nationality was deleted. Get back the nationality first.");
-                    }
-                    else if (childDeletedDataBLL.GetBack(childDeletedDataDetail))
-                    {
-                        MessageBox.Show("Child was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Children;
                     }
                 }
             }

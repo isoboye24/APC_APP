@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.activeMembersPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -100,39 +100,31 @@
             this.tableLayoutPanel42 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalRowsCommittment = new System.Windows.Forms.Label();
             this.btnViewCommittment = new System.Windows.Forms.Button();
-            this.childrenPage = new System.Windows.Forms.TabPage();
+            this.membersBirthdayPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAddChildren = new System.Windows.Forms.Button();
-            this.btnUpdateChildren = new System.Windows.Forms.Button();
-            this.btnDeleteChildren = new System.Windows.Forms.Button();
-            this.btnViewChildren = new System.Windows.Forms.Button();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelFemaleChildren = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.labelMaleChildren = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.btnViewBirthday = new System.Windows.Forms.Button();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.txtNameChildren = new System.Windows.Forms.TextBox();
-            this.txtSurnameChildren = new System.Windows.Forms.TextBox();
+            this.txtNameBirthday = new System.Windows.Forms.TextBox();
+            this.txtSurnameBirthday = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.cmbGenderChildren = new System.Windows.Forms.ComboBox();
-            this.cmbNationalityChildren = new System.Windows.Forms.ComboBox();
+            this.cmbGenderBirthday = new System.Windows.Forms.ComboBox();
+            this.cmbNationalityBirthday = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbProfessionBirthday = new System.Windows.Forms.ComboBox();
+            this.cmbPositionBirthday = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtMothersNameChildren = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.txtFathersNameChildren = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSearchChildren = new System.Windows.Forms.Button();
-            this.btnClearChildren = new System.Windows.Forms.Button();
-            this.dataGridViewChildren = new System.Windows.Forms.DataGridView();
+            this.btnSearchBirthday = new System.Windows.Forms.Button();
+            this.btnClearBirthday = new System.Windows.Forms.Button();
+            this.dataGridViewBirthday = new System.Windows.Forms.DataGridView();
             this.contactPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewContacts = new System.Windows.Forms.DataGridView();
@@ -268,17 +260,16 @@
             this.tableLayoutPanel49.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCommitments)).BeginInit();
             this.tableLayoutPanel42.SuspendLayout();
-            this.childrenPage.SuspendLayout();
+            this.membersBirthdayPage.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
             this.tableLayoutPanel15.SuspendLayout();
             this.tableLayoutPanel16.SuspendLayout();
             this.tableLayoutPanel17.SuspendLayout();
             this.tableLayoutPanel18.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChildren)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBirthday)).BeginInit();
             this.contactPage.SuspendLayout();
             this.tableLayoutPanel19.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewContacts)).BeginInit();
@@ -326,7 +317,7 @@
             // 
             this.tabControl1.Controls.Add(this.activeMembersPage);
             this.tabControl1.Controls.Add(this.commitmentsPage);
-            this.tabControl1.Controls.Add(this.childrenPage);
+            this.tabControl1.Controls.Add(this.membersBirthdayPage);
             this.tabControl1.Controls.Add(this.contactPage);
             this.tabControl1.Controls.Add(this.inactiveMembersPage);
             this.tabControl1.Controls.Add(this.formerMembersPage);
@@ -888,8 +879,8 @@
             this.dataGridViewRegisteredMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewRegisteredMembers.Name = "dataGridViewRegisteredMembers";
             this.dataGridViewRegisteredMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewRegisteredMembers.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewRegisteredMembers.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewRegisteredMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewRegisteredMembers.RowTemplate.Height = 40;
             this.dataGridViewRegisteredMembers.Size = new System.Drawing.Size(1201, 392);
@@ -1237,8 +1228,8 @@
             this.dataGridViewCommitments.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewCommitments.Name = "dataGridViewCommitments";
             this.dataGridViewCommitments.RowHeadersWidth = 51;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewCommitments.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCommitments.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewCommitments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewCommitments.RowTemplate.Height = 40;
             this.dataGridViewCommitments.Size = new System.Drawing.Size(1209, 439);
@@ -1294,17 +1285,17 @@
             this.btnViewCommittment.UseVisualStyleBackColor = false;
             this.btnViewCommittment.Click += new System.EventHandler(this.btnViewCommittment_Click);
             // 
-            // childrenPage
+            // membersBirthdayPage
             // 
-            this.childrenPage.Controls.Add(this.tableLayoutPanel10);
-            this.childrenPage.Location = new System.Drawing.Point(4, 46);
-            this.childrenPage.Margin = new System.Windows.Forms.Padding(4);
-            this.childrenPage.Name = "childrenPage";
-            this.childrenPage.Padding = new System.Windows.Forms.Padding(4);
-            this.childrenPage.Size = new System.Drawing.Size(1268, 688);
-            this.childrenPage.TabIndex = 1;
-            this.childrenPage.Text = "Children    ";
-            this.childrenPage.UseVisualStyleBackColor = true;
+            this.membersBirthdayPage.Controls.Add(this.tableLayoutPanel10);
+            this.membersBirthdayPage.Location = new System.Drawing.Point(4, 46);
+            this.membersBirthdayPage.Margin = new System.Windows.Forms.Padding(4);
+            this.membersBirthdayPage.Name = "membersBirthdayPage";
+            this.membersBirthdayPage.Padding = new System.Windows.Forms.Padding(4);
+            this.membersBirthdayPage.Size = new System.Drawing.Size(1268, 688);
+            this.membersBirthdayPage.TabIndex = 1;
+            this.membersBirthdayPage.Text = "Birthdays    ";
+            this.membersBirthdayPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel10
             // 
@@ -1314,7 +1305,7 @@
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
             this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel11, 1, 4);
             this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel13, 1, 1);
-            this.tableLayoutPanel10.Controls.Add(this.dataGridViewChildren, 1, 2);
+            this.tableLayoutPanel10.Controls.Add(this.dataGridViewBirthday, 1, 2);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(4, 4);
             this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(4);
@@ -1331,21 +1322,17 @@
             // 
             // tableLayoutPanel11
             // 
-            this.tableLayoutPanel11.ColumnCount = 9;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21F));
+            this.tableLayoutPanel11.ColumnCount = 3;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21F));
-            this.tableLayoutPanel11.Controls.Add(this.btnAddChildren, 1, 1);
-            this.tableLayoutPanel11.Controls.Add(this.btnUpdateChildren, 3, 1);
-            this.tableLayoutPanel11.Controls.Add(this.btnDeleteChildren, 7, 1);
-            this.tableLayoutPanel11.Controls.Add(this.btnViewChildren, 5, 1);
-            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel12, 8, 2);
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.Controls.Add(this.btnViewBirthday, 1, 1);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(29, 567);
             this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(4);
@@ -1357,143 +1344,22 @@
             this.tableLayoutPanel11.Size = new System.Drawing.Size(1201, 94);
             this.tableLayoutPanel11.TabIndex = 2;
             // 
-            // btnAddChildren
+            // btnViewBirthday
             // 
-            this.btnAddChildren.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnAddChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddChildren.FlatAppearance.BorderSize = 0;
-            this.btnAddChildren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddChildren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddChildren.ForeColor = System.Drawing.Color.White;
-            this.btnAddChildren.Location = new System.Drawing.Point(256, 27);
-            this.btnAddChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddChildren.Name = "btnAddChildren";
-            this.btnAddChildren.Size = new System.Drawing.Size(148, 39);
-            this.btnAddChildren.TabIndex = 0;
-            this.btnAddChildren.Text = "Add";
-            this.btnAddChildren.UseVisualStyleBackColor = false;
-            this.btnAddChildren.Click += new System.EventHandler(this.btnAddChildren_Click);
-            // 
-            // btnUpdateChildren
-            // 
-            this.btnUpdateChildren.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnUpdateChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnUpdateChildren.FlatAppearance.BorderSize = 0;
-            this.btnUpdateChildren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateChildren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateChildren.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateChildren.Location = new System.Drawing.Point(436, 27);
-            this.btnUpdateChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUpdateChildren.Name = "btnUpdateChildren";
-            this.btnUpdateChildren.Size = new System.Drawing.Size(148, 39);
-            this.btnUpdateChildren.TabIndex = 1;
-            this.btnUpdateChildren.Text = "Edit";
-            this.btnUpdateChildren.UseVisualStyleBackColor = false;
-            this.btnUpdateChildren.Click += new System.EventHandler(this.btnUpdateChildren_Click);
-            // 
-            // btnDeleteChildren
-            // 
-            this.btnDeleteChildren.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnDeleteChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeleteChildren.FlatAppearance.BorderSize = 0;
-            this.btnDeleteChildren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteChildren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteChildren.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteChildren.Location = new System.Drawing.Point(796, 27);
-            this.btnDeleteChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDeleteChildren.Name = "btnDeleteChildren";
-            this.btnDeleteChildren.Size = new System.Drawing.Size(148, 39);
-            this.btnDeleteChildren.TabIndex = 2;
-            this.btnDeleteChildren.Text = "Delete";
-            this.btnDeleteChildren.UseVisualStyleBackColor = false;
-            this.btnDeleteChildren.Click += new System.EventHandler(this.btnDeleteChildren_Click);
-            // 
-            // btnViewChildren
-            // 
-            this.btnViewChildren.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnViewChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnViewChildren.FlatAppearance.BorderSize = 0;
-            this.btnViewChildren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewChildren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewChildren.ForeColor = System.Drawing.Color.White;
-            this.btnViewChildren.Location = new System.Drawing.Point(616, 27);
-            this.btnViewChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.btnViewChildren.Name = "btnViewChildren";
-            this.btnViewChildren.Size = new System.Drawing.Size(148, 39);
-            this.btnViewChildren.TabIndex = 3;
-            this.btnViewChildren.Text = "View";
-            this.btnViewChildren.UseVisualStyleBackColor = false;
-            this.btnViewChildren.Click += new System.EventHandler(this.btnViewChildren_Click);
-            // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.ColumnCount = 8;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.Controls.Add(this.labelFemaleChildren, 5, 0);
-            this.tableLayoutPanel12.Controls.Add(this.label10, 4, 0);
-            this.tableLayoutPanel12.Controls.Add(this.labelMaleChildren, 3, 0);
-            this.tableLayoutPanel12.Controls.Add(this.label11, 2, 0);
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(952, 74);
-            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 1;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(245, 16);
-            this.tableLayoutPanel12.TabIndex = 5;
-            // 
-            // labelFemaleChildren
-            // 
-            this.labelFemaleChildren.AutoSize = true;
-            this.labelFemaleChildren.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFemaleChildren.Location = new System.Drawing.Point(170, 0);
-            this.labelFemaleChildren.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelFemaleChildren.Name = "labelFemaleChildren";
-            this.labelFemaleChildren.Size = new System.Drawing.Size(19, 16);
-            this.labelFemaleChildren.TabIndex = 0;
-            this.labelFemaleChildren.Text = "0";
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(139, 0);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(23, 16);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "F:";
-            // 
-            // labelMaleChildren
-            // 
-            this.labelMaleChildren.AutoSize = true;
-            this.labelMaleChildren.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMaleChildren.Location = new System.Drawing.Point(84, 0);
-            this.labelMaleChildren.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelMaleChildren.Name = "labelMaleChildren";
-            this.labelMaleChildren.Size = new System.Drawing.Size(19, 16);
-            this.labelMaleChildren.TabIndex = 0;
-            this.labelMaleChildren.Text = "0";
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(46, 0);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(30, 16);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "M:";
+            this.btnViewBirthday.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnViewBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnViewBirthday.FlatAppearance.BorderSize = 0;
+            this.btnViewBirthday.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewBirthday.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewBirthday.ForeColor = System.Drawing.Color.White;
+            this.btnViewBirthday.Location = new System.Drawing.Point(526, 27);
+            this.btnViewBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.btnViewBirthday.Name = "btnViewBirthday";
+            this.btnViewBirthday.Size = new System.Drawing.Size(148, 39);
+            this.btnViewBirthday.TabIndex = 3;
+            this.btnViewBirthday.Text = "View";
+            this.btnViewBirthday.UseVisualStyleBackColor = false;
+            this.btnViewBirthday.Click += new System.EventHandler(this.btnViewBirthday_Click);
             // 
             // tableLayoutPanel13
             // 
@@ -1526,8 +1392,8 @@
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel14.Controls.Add(this.label12, 0, 2);
             this.tableLayoutPanel14.Controls.Add(this.label13, 0, 0);
-            this.tableLayoutPanel14.Controls.Add(this.txtNameChildren, 0, 1);
-            this.tableLayoutPanel14.Controls.Add(this.txtSurnameChildren, 0, 3);
+            this.tableLayoutPanel14.Controls.Add(this.txtNameBirthday, 0, 1);
+            this.tableLayoutPanel14.Controls.Add(this.txtSurnameBirthday, 0, 3);
             this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel14.Location = new System.Drawing.Point(4, 4);
             this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(4);
@@ -1564,27 +1430,27 @@
             this.label13.TabIndex = 0;
             this.label13.Text = "Name";
             // 
-            // txtNameChildren
+            // txtNameBirthday
             // 
-            this.txtNameChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtNameChildren.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNameChildren.Location = new System.Drawing.Point(4, 41);
-            this.txtNameChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNameChildren.Name = "txtNameChildren";
-            this.txtNameChildren.Size = new System.Drawing.Size(214, 32);
-            this.txtNameChildren.TabIndex = 2;
-            this.txtNameChildren.TextChanged += new System.EventHandler(this.txtNameChildren_TextChanged);
+            this.txtNameBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtNameBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNameBirthday.Location = new System.Drawing.Point(4, 41);
+            this.txtNameBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNameBirthday.Name = "txtNameBirthday";
+            this.txtNameBirthday.Size = new System.Drawing.Size(214, 32);
+            this.txtNameBirthday.TabIndex = 2;
+            this.txtNameBirthday.TextChanged += new System.EventHandler(this.txtNameBirthday_TextChanged);
             // 
-            // txtSurnameChildren
+            // txtSurnameBirthday
             // 
-            this.txtSurnameChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSurnameChildren.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSurnameChildren.Location = new System.Drawing.Point(4, 118);
-            this.txtSurnameChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSurnameChildren.Name = "txtSurnameChildren";
-            this.txtSurnameChildren.Size = new System.Drawing.Size(214, 32);
-            this.txtSurnameChildren.TabIndex = 2;
-            this.txtSurnameChildren.TextChanged += new System.EventHandler(this.txtSurnameChildren_TextChanged);
+            this.txtSurnameBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSurnameBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSurnameBirthday.Location = new System.Drawing.Point(4, 118);
+            this.txtSurnameBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSurnameBirthday.Name = "txtSurnameBirthday";
+            this.txtSurnameBirthday.Size = new System.Drawing.Size(214, 32);
+            this.txtSurnameBirthday.TabIndex = 2;
+            this.txtSurnameBirthday.TextChanged += new System.EventHandler(this.txtSurnameBirthday_TextChanged);
             // 
             // tableLayoutPanel15
             // 
@@ -1592,8 +1458,8 @@
             this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel15.Controls.Add(this.label14, 0, 2);
             this.tableLayoutPanel15.Controls.Add(this.label15, 0, 0);
-            this.tableLayoutPanel15.Controls.Add(this.cmbGenderChildren, 0, 1);
-            this.tableLayoutPanel15.Controls.Add(this.cmbNationalityChildren, 0, 3);
+            this.tableLayoutPanel15.Controls.Add(this.cmbGenderBirthday, 0, 1);
+            this.tableLayoutPanel15.Controls.Add(this.cmbNationalityBirthday, 0, 3);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel15.Location = new System.Drawing.Point(246, 4);
             this.tableLayoutPanel15.Margin = new System.Windows.Forms.Padding(4);
@@ -1630,36 +1496,36 @@
             this.label15.TabIndex = 0;
             this.label15.Text = "Gender";
             // 
-            // cmbGenderChildren
+            // cmbGenderBirthday
             // 
-            this.cmbGenderChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbGenderChildren.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGenderChildren.FormattingEnabled = true;
-            this.cmbGenderChildren.Location = new System.Drawing.Point(4, 34);
-            this.cmbGenderChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbGenderChildren.Name = "cmbGenderChildren";
-            this.cmbGenderChildren.Size = new System.Drawing.Size(214, 33);
-            this.cmbGenderChildren.TabIndex = 1;
+            this.cmbGenderBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbGenderBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGenderBirthday.FormattingEnabled = true;
+            this.cmbGenderBirthday.Location = new System.Drawing.Point(4, 34);
+            this.cmbGenderBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbGenderBirthday.Name = "cmbGenderBirthday";
+            this.cmbGenderBirthday.Size = new System.Drawing.Size(214, 33);
+            this.cmbGenderBirthday.TabIndex = 1;
             // 
-            // cmbNationalityChildren
+            // cmbNationalityBirthday
             // 
-            this.cmbNationalityChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbNationalityChildren.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbNationalityChildren.FormattingEnabled = true;
-            this.cmbNationalityChildren.Location = new System.Drawing.Point(4, 110);
-            this.cmbNationalityChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbNationalityChildren.Name = "cmbNationalityChildren";
-            this.cmbNationalityChildren.Size = new System.Drawing.Size(214, 33);
-            this.cmbNationalityChildren.TabIndex = 1;
+            this.cmbNationalityBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbNationalityBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbNationalityBirthday.FormattingEnabled = true;
+            this.cmbNationalityBirthday.Location = new System.Drawing.Point(4, 110);
+            this.cmbNationalityBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbNationalityBirthday.Name = "cmbNationalityBirthday";
+            this.cmbNationalityBirthday.Size = new System.Drawing.Size(214, 33);
+            this.cmbNationalityBirthday.TabIndex = 1;
             // 
             // tableLayoutPanel16
             // 
             this.tableLayoutPanel16.ColumnCount = 1;
             this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel16.Controls.Add(this.cmbProfessionBirthday, 0, 3);
+            this.tableLayoutPanel16.Controls.Add(this.cmbPositionBirthday, 0, 1);
             this.tableLayoutPanel16.Controls.Add(this.label16, 0, 0);
-            this.tableLayoutPanel16.Controls.Add(this.txtMothersNameChildren, 0, 1);
             this.tableLayoutPanel16.Controls.Add(this.label17, 0, 2);
-            this.tableLayoutPanel16.Controls.Add(this.txtFathersNameChildren, 0, 3);
             this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel16.Location = new System.Drawing.Point(488, 4);
             this.tableLayoutPanel16.Margin = new System.Windows.Forms.Padding(4);
@@ -1672,6 +1538,28 @@
             this.tableLayoutPanel16.Size = new System.Drawing.Size(222, 154);
             this.tableLayoutPanel16.TabIndex = 0;
             // 
+            // cmbProfessionBirthday
+            // 
+            this.cmbProfessionBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbProfessionBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbProfessionBirthday.FormattingEnabled = true;
+            this.cmbProfessionBirthday.Location = new System.Drawing.Point(4, 118);
+            this.cmbProfessionBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbProfessionBirthday.Name = "cmbProfessionBirthday";
+            this.cmbProfessionBirthday.Size = new System.Drawing.Size(214, 33);
+            this.cmbProfessionBirthday.TabIndex = 3;
+            // 
+            // cmbPositionBirthday
+            // 
+            this.cmbPositionBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbPositionBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPositionBirthday.FormattingEnabled = true;
+            this.cmbPositionBirthday.Location = new System.Drawing.Point(4, 41);
+            this.cmbPositionBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbPositionBirthday.Name = "cmbPositionBirthday";
+            this.cmbPositionBirthday.Size = new System.Drawing.Size(214, 33);
+            this.cmbPositionBirthday.TabIndex = 2;
+            // 
             // label16
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1680,20 +1568,9 @@
             this.label16.Location = new System.Drawing.Point(4, 9);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(154, 28);
+            this.label16.Size = new System.Drawing.Size(88, 28);
             this.label16.TabIndex = 0;
-            this.label16.Text = "Mother\'s name";
-            // 
-            // txtMothersNameChildren
-            // 
-            this.txtMothersNameChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMothersNameChildren.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMothersNameChildren.Location = new System.Drawing.Point(4, 41);
-            this.txtMothersNameChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.txtMothersNameChildren.Name = "txtMothersNameChildren";
-            this.txtMothersNameChildren.Size = new System.Drawing.Size(214, 32);
-            this.txtMothersNameChildren.TabIndex = 2;
-            this.txtMothersNameChildren.TextChanged += new System.EventHandler(this.txtMothersNameChildren_TextChanged);
+            this.label16.Text = "Position";
             // 
             // label17
             // 
@@ -1703,20 +1580,9 @@
             this.label17.Location = new System.Drawing.Point(4, 86);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(143, 28);
+            this.label17.Size = new System.Drawing.Size(111, 28);
             this.label17.TabIndex = 0;
-            this.label17.Text = "Father\'s name";
-            // 
-            // txtFathersNameChildren
-            // 
-            this.txtFathersNameChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtFathersNameChildren.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFathersNameChildren.Location = new System.Drawing.Point(4, 118);
-            this.txtFathersNameChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFathersNameChildren.Name = "txtFathersNameChildren";
-            this.txtFathersNameChildren.Size = new System.Drawing.Size(214, 32);
-            this.txtFathersNameChildren.TabIndex = 2;
-            this.txtFathersNameChildren.TextChanged += new System.EventHandler(this.txtFathersNameChildren_TextChanged);
+            this.label17.Text = "Profession";
             // 
             // tableLayoutPanel17
             // 
@@ -1738,8 +1604,8 @@
             this.tableLayoutPanel18.ColumnCount = 2;
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel18.Controls.Add(this.btnSearchChildren, 0, 0);
-            this.tableLayoutPanel18.Controls.Add(this.btnClearChildren, 1, 0);
+            this.tableLayoutPanel18.Controls.Add(this.btnSearchBirthday, 0, 0);
+            this.tableLayoutPanel18.Controls.Add(this.btnClearBirthday, 1, 0);
             this.tableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel18.Location = new System.Drawing.Point(4, 96);
             this.tableLayoutPanel18.Margin = new System.Windows.Forms.Padding(4);
@@ -1749,55 +1615,56 @@
             this.tableLayoutPanel18.Size = new System.Drawing.Size(230, 54);
             this.tableLayoutPanel18.TabIndex = 3;
             // 
-            // btnSearchChildren
+            // btnSearchBirthday
             // 
-            this.btnSearchChildren.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnSearchChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearchChildren.FlatAppearance.BorderSize = 0;
-            this.btnSearchChildren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchChildren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchChildren.ForeColor = System.Drawing.Color.White;
-            this.btnSearchChildren.Location = new System.Drawing.Point(4, 4);
-            this.btnSearchChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSearchChildren.Name = "btnSearchChildren";
-            this.btnSearchChildren.Size = new System.Drawing.Size(107, 46);
-            this.btnSearchChildren.TabIndex = 0;
-            this.btnSearchChildren.Text = "Search";
-            this.btnSearchChildren.UseVisualStyleBackColor = false;
-            this.btnSearchChildren.Click += new System.EventHandler(this.btnSearchChildren_Click);
+            this.btnSearchBirthday.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnSearchBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSearchBirthday.FlatAppearance.BorderSize = 0;
+            this.btnSearchBirthday.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearchBirthday.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchBirthday.ForeColor = System.Drawing.Color.White;
+            this.btnSearchBirthday.Location = new System.Drawing.Point(4, 4);
+            this.btnSearchBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearchBirthday.Name = "btnSearchBirthday";
+            this.btnSearchBirthday.Size = new System.Drawing.Size(107, 46);
+            this.btnSearchBirthday.TabIndex = 0;
+            this.btnSearchBirthday.Text = "Search";
+            this.btnSearchBirthday.UseVisualStyleBackColor = false;
+            this.btnSearchBirthday.Click += new System.EventHandler(this.btnSearchBirthday_Click);
             // 
-            // btnClearChildren
+            // btnClearBirthday
             // 
-            this.btnClearChildren.BackColor = System.Drawing.Color.SaddleBrown;
-            this.btnClearChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearChildren.FlatAppearance.BorderSize = 0;
-            this.btnClearChildren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearChildren.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearChildren.ForeColor = System.Drawing.Color.White;
-            this.btnClearChildren.Location = new System.Drawing.Point(119, 4);
-            this.btnClearChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.btnClearChildren.Name = "btnClearChildren";
-            this.btnClearChildren.Size = new System.Drawing.Size(107, 46);
-            this.btnClearChildren.TabIndex = 0;
-            this.btnClearChildren.Text = "Clear";
-            this.btnClearChildren.UseVisualStyleBackColor = false;
+            this.btnClearBirthday.BackColor = System.Drawing.Color.SaddleBrown;
+            this.btnClearBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearBirthday.FlatAppearance.BorderSize = 0;
+            this.btnClearBirthday.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearBirthday.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearBirthday.ForeColor = System.Drawing.Color.White;
+            this.btnClearBirthday.Location = new System.Drawing.Point(119, 4);
+            this.btnClearBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClearBirthday.Name = "btnClearBirthday";
+            this.btnClearBirthday.Size = new System.Drawing.Size(107, 46);
+            this.btnClearBirthday.TabIndex = 0;
+            this.btnClearBirthday.Text = "Clear";
+            this.btnClearBirthday.UseVisualStyleBackColor = false;
+            this.btnClearBirthday.Click += new System.EventHandler(this.btnClearBirthday_Click);
             // 
-            // dataGridViewChildren
+            // dataGridViewBirthday
             // 
-            this.dataGridViewChildren.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewChildren.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewChildren.Location = new System.Drawing.Point(29, 187);
-            this.dataGridViewChildren.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridViewChildren.Name = "dataGridViewChildren";
-            this.dataGridViewChildren.RowHeadersWidth = 51;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewChildren.RowsDefaultCellStyle = dataGridViewCellStyle10;
-            this.dataGridViewChildren.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewChildren.RowTemplate.Height = 40;
-            this.dataGridViewChildren.Size = new System.Drawing.Size(1201, 359);
-            this.dataGridViewChildren.TabIndex = 5;
-            this.dataGridViewChildren.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewChildren_RowEnter);
+            this.dataGridViewBirthday.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewBirthday.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewBirthday.Location = new System.Drawing.Point(29, 187);
+            this.dataGridViewBirthday.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewBirthday.Name = "dataGridViewBirthday";
+            this.dataGridViewBirthday.RowHeadersWidth = 51;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewBirthday.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewBirthday.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewBirthday.RowTemplate.Height = 40;
+            this.dataGridViewBirthday.Size = new System.Drawing.Size(1201, 359);
+            this.dataGridViewBirthday.TabIndex = 5;
+            this.dataGridViewBirthday.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBirthday_RowEnter);
             // 
             // contactPage
             // 
@@ -1840,8 +1707,8 @@
             this.dataGridViewContacts.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewContacts.Name = "dataGridViewContacts";
             this.dataGridViewContacts.RowHeadersWidth = 51;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewContacts.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewContacts.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewContacts.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewContacts.RowTemplate.Height = 40;
             this.dataGridViewContacts.Size = new System.Drawing.Size(1209, 485);
@@ -2436,8 +2303,8 @@
             this.dataGridViewInactiveMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewInactiveMembers.Name = "dataGridViewInactiveMembers";
             this.dataGridViewInactiveMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewInactiveMembers.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewInactiveMembers.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewInactiveMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewInactiveMembers.RowTemplate.Height = 40;
             this.dataGridViewInactiveMembers.Size = new System.Drawing.Size(1209, 397);
@@ -2924,8 +2791,8 @@
             this.dataGridViewFormerMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewFormerMembers.Name = "dataGridViewFormerMembers";
             this.dataGridViewFormerMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewFormerMembers.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewFormerMembers.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewFormerMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewFormerMembers.RowTemplate.Height = 40;
             this.dataGridViewFormerMembers.Size = new System.Drawing.Size(1209, 397);
@@ -3418,8 +3285,8 @@
             this.dataGridViewDeadMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewDeadMembers.Name = "dataGridViewDeadMembers";
             this.dataGridViewDeadMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewDeadMembers.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewDeadMembers.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewDeadMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewDeadMembers.RowTemplate.Height = 40;
             this.dataGridViewDeadMembers.Size = new System.Drawing.Size(1209, 397);
@@ -3470,11 +3337,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCommitments)).EndInit();
             this.tableLayoutPanel42.ResumeLayout(false);
             this.tableLayoutPanel42.PerformLayout();
-            this.childrenPage.ResumeLayout(false);
+            this.membersBirthdayPage.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
-            this.tableLayoutPanel12.ResumeLayout(false);
-            this.tableLayoutPanel12.PerformLayout();
             this.tableLayoutPanel13.ResumeLayout(false);
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
@@ -3484,7 +3349,7 @@
             this.tableLayoutPanel16.PerformLayout();
             this.tableLayoutPanel17.ResumeLayout(false);
             this.tableLayoutPanel18.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChildren)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBirthday)).EndInit();
             this.contactPage.ResumeLayout(false);
             this.tableLayoutPanel19.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewContacts)).EndInit();
@@ -3548,7 +3413,7 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage activeMembersPage;
-        private System.Windows.Forms.TabPage childrenPage;
+        private System.Windows.Forms.TabPage membersBirthdayPage;
         private System.Windows.Forms.TabPage contactPage;
         private System.Windows.Forms.TabPage formerMembersPage;
         private System.Windows.Forms.TabPage deadMembersPage;
@@ -3588,36 +3453,26 @@
         private System.Windows.Forms.DataGridView dataGridViewRegisteredMembers;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
-        private System.Windows.Forms.Button btnAddChildren;
-        private System.Windows.Forms.Button btnUpdateChildren;
-        private System.Windows.Forms.Button btnDeleteChildren;
-        private System.Windows.Forms.Button btnViewChildren;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
-        private System.Windows.Forms.Label labelFemaleChildren;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label labelMaleChildren;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnViewBirthday;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtNameChildren;
-        private System.Windows.Forms.TextBox txtSurnameChildren;
+        private System.Windows.Forms.TextBox txtNameBirthday;
+        private System.Windows.Forms.TextBox txtSurnameBirthday;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox cmbGenderChildren;
-        private System.Windows.Forms.ComboBox cmbNationalityChildren;
+        private System.Windows.Forms.ComboBox cmbGenderBirthday;
+        private System.Windows.Forms.ComboBox cmbNationalityBirthday;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtMothersNameChildren;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txtFathersNameChildren;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel18;
-        private System.Windows.Forms.Button btnSearchChildren;
-        private System.Windows.Forms.Button btnClearChildren;
-        private System.Windows.Forms.DataGridView dataGridViewChildren;
+        private System.Windows.Forms.Button btnSearchBirthday;
+        private System.Windows.Forms.Button btnClearBirthday;
+        private System.Windows.Forms.DataGridView dataGridViewBirthday;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
         private System.Windows.Forms.DataGridView dataGridViewContacts;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel20;
@@ -3753,5 +3608,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel60;
         private System.Windows.Forms.PictureBox picInactiveMember;
         private System.Windows.Forms.DataGridView dataGridViewInactiveMembers;
+        private System.Windows.Forms.ComboBox cmbProfessionBirthday;
+        private System.Windows.Forms.ComboBox cmbPositionBirthday;
     }
 }

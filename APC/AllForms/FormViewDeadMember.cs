@@ -41,7 +41,6 @@ namespace APC.AllForms
         }
         public MemberDetailDTO detail = new MemberDetailDTO();
         public bool isView = false;
-        ChildBLL childBLL = new ChildBLL();
         int noOfChildren =  0;
         MemberBLL bll = new MemberBLL();
         int attendancePresentCount = 0;
@@ -96,10 +95,6 @@ namespace APC.AllForms
             btnNoComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             #endregion
 
-            noOfChildren = childBLL.SelectAllChildrenCount(detail.MemberID);
-            
-            btnViewChildren.Hide();
-            labelNoOfChildren.Text = noOfChildren.ToString();
             if (Convert.ToInt32(labelNoOfChildren.Text) > 0)
             {
                 labelChildren.Text = "Child";
@@ -175,24 +170,7 @@ namespace APC.AllForms
 
         private void btnViewChildren_Click(object sender, EventArgs e)
         {
-            if (noOfChildren > 1)
-            {
-                FormViewChildrenList open = new FormViewChildrenList();
-                open.memberID = detail.MemberID;
-                open.isParent = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-            }
-            else if (noOfChildren < 2 && noOfChildren > 0)
-            {
-                FormViewChild open = new FormViewChild();
-                open.memberID = detail.MemberID;
-                open.isParent = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-            }
+
         }
 
         private void btnViewPresentAttendance_Click(object sender, EventArgs e)

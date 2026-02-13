@@ -357,18 +357,6 @@
     <Compile Include="AllForms\FormPersonalAttendance.Designer.cs">
       <DependentUpon>FormPersonalAttendance.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormChildren.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormChildren.Designer.cs">
-      <DependentUpon>FormChildren.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AllForms\FormChildrenOfSingleParent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormChildrenOfSingleParent.Designer.cs">
-      <DependentUpon>FormChildrenOfSingleParent.cs</DependentUpon>
-    </Compile>
     <Compile Include="AllForms\FormComments.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -429,18 +417,6 @@
     <Compile Include="AllForms\FormViewGeneralAttendance.Designer.cs">
       <DependentUpon>FormViewGeneralAttendance.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormViewChild.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormViewChild.Designer.cs">
-      <DependentUpon>FormViewChild.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AllForms\FormViewChildrenList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormViewChildrenList.Designer.cs">
-      <DependentUpon>FormViewChildrenList.cs</DependentUpon>
-    </Compile>
     <Compile Include="AllForms\FormViewComment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -470,19 +446,16 @@
     <Compile Include="BLL\FinancialReportBLL.cs" />
     <Compile Include="BLL\PersonalAttendanceBLL.cs" />
     <Compile Include="BLL\AttendanceStatusBLL.cs" />
-    <Compile Include="BLL\ChildBLL.cs" />
     <Compile Include="BLL\CommentBLL.cs" />
     <Compile Include="BLL\CountryBLL.cs" />
     <Compile Include="BLL\DualNationalityBLL.cs" />
     <Compile Include="BLL\EmploymentStatusBLL.cs" />
     <Compile Include="BLL\ExpenditureBLL.cs" />
-    <Compile Include="BLL\FatherBLL.cs" />
     <Compile Include="BLL\GenderBLL.cs" />
     <Compile Include="BLL\IBLL.cs" />
     <Compile Include="BLL\MaritalStatusBLL.cs" />
     <Compile Include="BLL\MemberBLL.cs" />
     <Compile Include="BLL\MonthBLL.cs" />
-    <Compile Include="BLL\MotherBLL.cs" />
     <Compile Include="BLL\NationalityBLL.cs" />
     <Compile Include="BLL\PermissionBLL.cs" />
     <Compile Include="BLL\PositionBLL.cs" />
@@ -494,19 +467,16 @@
     <Compile Include="DAL\DAO\GeneralAttendanceDAO.cs" />
     <Compile Include="DAL\DAO\PersonalAttendanceDAO.cs" />
     <Compile Include="DAL\DAO\AttendanceStatusDAO.cs" />
-    <Compile Include="DAL\DAO\ChildDAO.cs" />
     <Compile Include="DAL\DAO\CommentDAO.cs" />
     <Compile Include="DAL\DAO\CountryDAO.cs" />
     <Compile Include="DAL\DAO\DualNationalityDAO.cs" />
     <Compile Include="DAL\DAO\EmploymentStatusDAO.cs" />
     <Compile Include="DAL\DAO\ExpenditureDAO.cs" />
-    <Compile Include="DAL\DAO\FatherDAO.cs" />
     <Compile Include="DAL\DAO\GenderDAO.cs" />
     <Compile Include="DAL\DAO\IDAO.cs" />
     <Compile Include="DAL\DAO\MaritalStatusDAO.cs" />
     <Compile Include="DAL\DAO\MemberDAO.cs" />
     <Compile Include="DAL\DAO\MonthDAO.cs" />
-    <Compile Include="DAL\DAO\MotherDAO.cs" />
     <Compile Include="DAL\DAO\NationalityDAO.cs" />
     <Compile Include="DAL\DAO\PermissionDAO.cs" />
     <Compile Include="DAL\DAO\PositionDAO.cs" />
@@ -538,8 +508,6 @@
     <Compile Include="DAL\DTO\GeneralAttendanceDTO.cs" />
     <Compile Include="DAL\DTO\AttendanceStatusDetailDTO.cs" />
     <Compile Include="DAL\DTO\AttendanceStatusDTO.cs" />
-    <Compile Include="DAL\DTO\ChildDetailDTO.cs" />
-    <Compile Include="DAL\DTO\ChildDTO.cs" />
     <Compile Include="DAL\DTO\CommentDetailDTO.cs" />
     <Compile Include="DAL\DTO\CommentDTO.cs" />
     <Compile Include="DAL\DTO\CountryDetailDTO.cs" />
@@ -755,12 +723,6 @@
     <EmbeddedResource Include="AllForms\FormPersonalAttendance.resx">
       <DependentUpon>FormPersonalAttendance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormChildren.resx">
-      <DependentUpon>FormChildren.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormChildrenOfSingleParent.resx">
-      <DependentUpon>FormChildrenOfSingleParent.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormComments.resx">
       <DependentUpon>FormComments.cs</DependentUpon>
     </EmbeddedResource>
@@ -835,12 +797,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormViewGeneralAttendance.resx">
       <DependentUpon>FormViewGeneralAttendance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormViewChild.resx">
-      <DependentUpon>FormViewChild.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormViewChildrenList.resx">
-      <DependentUpon>FormViewChildrenList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormViewComment.resx">
       <DependentUpon>FormViewComment.cs</DependentUpon>

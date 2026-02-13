@@ -15,7 +15,6 @@ namespace APC.DAL.DTO
         public List<MaritalStatusDetailDTO> MaritalStatuses { get; set; }
         public List<CountryDetailDTO> Countries { get; set; }
         public List<NationalityDetailDTO> Nationalities { get; set; }
-        public List<ChildDetailDTO> Children { get; set; }
         public List<CommentDetailDTO> Comments { get; set; }
         public List<DocumentDetailDTO> Documents { get; set; }
         public List<EventImageDetailDTO> EventImages { get; set; }

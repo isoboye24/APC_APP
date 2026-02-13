@@ -44,8 +44,6 @@ namespace APC.AllForms
         decimal amountContributed = 0;
         decimal amountExpected = 0;
         decimal Balance = 0;
-        ChildBLL childBLL = new ChildBLL();
-        int noOfChildren = 0;
         CommentBLL commentBLL = new CommentBLL();
         CommentDetailDTO commentDetail = new CommentDetailDTO();
         CommentDTO dto = new CommentDTO();
@@ -207,22 +205,7 @@ namespace APC.AllForms
                 btnNoComments.Visible = true;
             }
 
-            noOfChildren = childBLL.SelectAllChildrenCount(detail.MemberID);
-            btnViewChildren.Hide();
-            labelNoOfChildren.Text = noOfChildren.ToString();
-            if (noOfChildren > 0)
-            {
-                labelChildren.Text = "Child";
-                btnViewChildren.Text = "View Child";
-                btnViewChildren.Visible = true;
-            }
-            if (noOfChildren > 1)
-            {
-                labelChildren.Text = "Children";
-                btnViewChildren.Text = "View Children";
-                btnViewChildren.Visible = true;
-            }
-
+            
             finesCount = finedMemberBLL.SelectAllFinesCount(detail.MemberID);
             btnViewFines.Hide();
             labelNoOfFines.Text = finesCount.ToString();
@@ -366,24 +349,7 @@ namespace APC.AllForms
 
         private void btnViewChildren_Click_1(object sender, EventArgs e)
         {
-            if (noOfChildren > 1)
-            {
-                FormViewChildrenList open = new FormViewChildrenList();
-                open.memberID = detail.MemberID;
-                open.isParent = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-            }
-            else if (noOfChildren < 2 && noOfChildren > 0)
-            {
-                FormViewChild open = new FormViewChild();
-                open.memberID = detail.MemberID;
-                open.isParent = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-            }
+            
         }
 
         private void btnNoComments_Click(object sender, EventArgs e)
