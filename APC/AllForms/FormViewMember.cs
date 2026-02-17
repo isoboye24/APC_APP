@@ -87,11 +87,9 @@ namespace APC.AllForms
             labelMemSince.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelAmountContributed.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelAmountExpected.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelCommentText.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelFinesText.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelNoOfAbsent.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelNoOfComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelNoOfFines.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             labelNoOfPresent.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -112,18 +110,15 @@ namespace APC.AllForms
             txtNationality.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtNextOfKin.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtNextOfKinRelationship.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPassword.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtPermission.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtPosition.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtProfession.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtUsername.Font = new Font("Segoe UI", 14, FontStyle.Regular);
 
             btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnNoComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnViewAbsentAttendance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnViewAmountContributed.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnViewAmountExpected.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnViewFines.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnViewPersonalBalance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnViewPresentAttendance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -152,8 +147,6 @@ namespace APC.AllForms
                     txtPosition.Text = detail.PositionName;
                     labelBirthday.Text = detail.Birthday.ToShortDateString();
                     labelMemSince.Text = detail.MembershipDate.ToShortDateString();
-                    txtUsername.Text = detail.Username;
-                    txtPassword.Text = detail.Password;
                     txtEmail.Text = detail.EmailAddress;
                     txtPhone1.Text = detail.PhoneNumber;
                     txtLGA.Text = detail.LGA;
@@ -281,8 +274,6 @@ namespace APC.AllForms
                 txtPosition.Text = detail.PositionName;
                 labelBirthday.Text = detail.Birthday.ToShortDateString();
                 labelMemSince.Text = detail.MembershipDate.ToShortDateString();
-                txtUsername.Text = detail.Username;
-                txtPassword.Text = detail.Password;
                 txtEmail.Text = detail.EmailAddress;
                 txtPhone1.Text = detail.PhoneNumber;
                 txtLGA.Text = detail.LGA;
@@ -345,11 +336,6 @@ namespace APC.AllForms
             {
                 WindowState = FormWindowState.Normal;
             }
-        }
-
-        private void btnViewChildren_Click_1(object sender, EventArgs e)
-        {
-            
         }
 
         private void btnNoComments_Click(object sender, EventArgs e)
