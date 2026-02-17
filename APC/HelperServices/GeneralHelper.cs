@@ -14,7 +14,7 @@ using Xceed.Document.NET;
 
 namespace APC
 {
-    public class General
+    public class GeneralHelper
     {
         static string connectingString = "Server=localhost\\sqlexpress;Database=APC;integrated security=True;encrypt=True;trustservercertificate=True;";
 
@@ -371,5 +371,62 @@ namespace APC
             return monthsToPay * monthlyDue;
         }
 
+        public static void ApplyBoldFont11(params Control[] controls)
+        {
+            foreach (var control in controls)
+            {
+                control.Font = new System.Drawing.Font("Segoe UI", 11, FontStyle.Bold);
+            }
+        }
+        public static void ApplyRegularFont11(params Control[] controls)
+        {
+            foreach (var control in controls)
+            {
+                control.Font = new System.Drawing.Font("Segoe UI", 11, FontStyle.Regular);
+            }
+        }
+        public static void ApplyBoldFont12(params Control[] controls)
+        {
+            foreach (var control in controls)
+            {
+                control.Font = new System.Drawing.Font("Segoe UI", 12, FontStyle.Bold);
+            }
+        }
+        public static void ApplyRegularFont12(params Control[] controls)
+        {
+            foreach (var control in controls)
+            {
+                control.Font = new System.Drawing.Font("Segoe UI", 12, FontStyle.Regular);
+            }
+        }
+
+        public static void ApplyBoldFont14(params Control[] controls)
+        {
+            foreach (var control in controls)
+            {
+                control.Font = new System.Drawing.Font("Segoe UI", 14, FontStyle.Bold);
+            }
+        }
+        public static void ApplyRegularFont14(params Control[] controls)
+        {
+            foreach (var control in controls)
+            {
+                control.Font = new System.Drawing.Font("Segoe UI", 14, FontStyle.Regular);
+            }
+        }
+        public static void ApplyBoldFont16(params Control[] controls)
+        {
+            foreach (var control in controls)
+            {
+                control.Font = new System.Drawing.Font("Segoe UI", 16, FontStyle.Bold);
+            }
+        }
+        public static void ApplyRegularFont16(params Control[] controls)
+        {
+            foreach (var control in controls)
+            {
+                control.Font = new System.Drawing.Font("Segoe UI", 16, FontStyle.Regular);
+            }
+        }
     }
 }

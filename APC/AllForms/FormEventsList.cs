@@ -138,7 +138,7 @@ namespace APC
 
         private void txtEventYear_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e, (TextBox)sender);
+            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
         EventsDetailDTO detail = new EventsDetailDTO();
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)

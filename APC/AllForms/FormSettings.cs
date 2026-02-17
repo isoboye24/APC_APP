@@ -133,7 +133,7 @@ namespace APC.AllForms
 
             permissionDTO = permissionBLL.Select();
             cmbPermission.DataSource = permissionDTO.Permissions;
-            General.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
+            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
 
             dataGridViewPermissions.DataSource = permissionDTO.Members;
             dataGridViewPermissions.Columns[0].Visible = false;

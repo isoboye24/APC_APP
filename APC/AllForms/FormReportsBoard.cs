@@ -72,7 +72,7 @@ namespace APC.AllForms
 
             expReportDTO = expReportBLL.Select(DateTime.Now.Year);
             cmbMonthExpReport.DataSource = expReportDTO.Months;
-            General.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
             cmbYearExpenditure.DataSource = expReportDTO.Years;
             cmbYearExpenditure.SelectedIndex = -1;
 

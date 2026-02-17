@@ -35,99 +35,34 @@ namespace APC.AllForms
             {
                 btnDeleteRegisteredMembers.Hide();
             }
+
             #region
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label7.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label8.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfDivisorRegisteredMembers.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelNoOfFemaleRegisteredMembers.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelNoOfMenRegisteredMembers.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtNameRegisteredMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtSurnameRegisteredMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbGenderRegisteredMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbNationalityRegisteredMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbPositionRegisteredMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbProfessionRegisteredMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnAddRegisteredMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateRegisteredMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewRegisteredMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteRegisteredMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearchRegisteredMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearRegisteredMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            GeneralHelper.ApplyRegularFont11(label4, label7, label8, label19, label20, label21, label28, label29, label30,
+                label31, labelTotalContacts,
+                labelNoOfDivisorRegisteredMembers, labelNoOfFemaleRegisteredMembers, labelNoOfMenRegisteredMembers,
+                labelNoOfDivisorFormerMembers, labelNoOfFemaleFormerMembers, labelNoOfMenFormerMembers,
+                labelNoOfDivisorDeadMembers, labelNoOfFemaleDeadMembers, labelNoOfMenDeadMembers);
 
-            label12.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label13.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label14.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label15.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label16.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label17.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            txtNameBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtSurnameBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbGenderBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbNationalityBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbProfessionBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbPositionBirthday.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnViewBirthday.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearchBirthday.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearBirthday.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            GeneralHelper.ApplyBoldFont11(label24, label25, label26);
 
-            label18.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalContacts.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtSurnameContacts.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnUpdateContacts.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            GeneralHelper.ApplyBoldFont14(label1, label2, label3, label5, label6, label9, label10, label12, 
+                label13, label14, label15, label16, label17, label18, label22, label23, label27, label32,
+                label33, label34, label35, label36, btnAddRegisteredMembers,
+                btnUpdateRegisteredMembers, btnViewRegisteredMembers, btnDeleteRegisteredMembers, 
+                btnSearchRegisteredMembers, btnClearRegisteredMembers, btnViewBirthday, btnSearchBirthday,
+                btnClearBirthday, btnUpdateContacts, btnUpdateFormerMembers, btnViewFormerMembers,
+                btnSearchFormerMembers, btnClearFormerMembers, btnUpdateDeadMembers, btnViewDeadMembers,
+                btnSearchDeadMembers, btnClearDeadMembers);
 
-            label19.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label20.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label21.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label22.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label23.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label24.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-            label25.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-            label26.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-            label27.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfDivisorFormerMembers.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelNoOfFemaleFormerMembers.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelNoOfMenFormerMembers.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtNameFormerMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtSurnameFormerMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbGenderFormerMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbNationalityFormerMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbPositionFormerMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbProfessionFormerMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnUpdateFormerMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewFormerMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearchFormerMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearFormerMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label28.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label29.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label30.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            label31.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-            label32.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label33.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label34.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label35.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label36.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfDivisorDeadMembers.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelNoOfFemaleDeadMembers.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelNoOfMenDeadMembers.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtNameDeadMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtSurnameDeadMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbGenderDeadMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbNationalityDeadMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbPositionDeadMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbProfessionDeadMembers.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnUpdateDeadMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewDeadMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearchDeadMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearDeadMembers.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
+            GeneralHelper.ApplyRegularFont16(txtNameRegisteredMembers, txtSurnameRegisteredMembers, 
+                cmbGenderRegisteredMembers, cmbNationalityRegisteredMembers, cmbPositionRegisteredMembers,
+                cmbProfessionRegisteredMembers, txtNameBirthday, txtSurnameBirthday, cmbGenderBirthday,
+                cmbNationalityBirthday, cmbProfessionBirthday, cmbPositionBirthday, cmbMonthBirthday,
+                txtSurnameContacts, txtNameFormerMembers, txtSurnameFormerMembers, cmbGenderFormerMembers,
+                cmbNationalityFormerMembers, cmbPositionFormerMembers, cmbProfessionFormerMembers,
+                txtNameDeadMembers, txtSurnameDeadMembers, cmbGenderDeadMembers, cmbNationalityDeadMembers,
+                cmbPositionDeadMembers, cmbProfessionDeadMembers
+                );
 
             txtNameCommittment.Tag = "resizeable";
             txtSurnameCommittment.Tag = "resizeable";
@@ -138,56 +73,59 @@ namespace APC.AllForms
 
             #region
             registeredMembersDTO = registeredMembersBLL.Select();
+
             cmbGenderRegisteredMembers.DataSource = registeredMembersDTO.Genders;
-
-            General.ComboBoxProps(cmbGenderRegisteredMembers, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGenderRegisteredMembers, "GenderName", "genderID");
             cmbProfessionRegisteredMembers.DataSource = registeredMembersDTO.Professions;
-            General.ComboBoxProps(cmbProfessionRegisteredMembers, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionRegisteredMembers, "Profession", "professionID");
             cmbPositionRegisteredMembers.DataSource = registeredMembersDTO.Positions;
-            General.ComboBoxProps(cmbPositionRegisteredMembers, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPositionRegisteredMembers, "PositionName", "positionID");
             cmbNationalityRegisteredMembers.DataSource = registeredMembersDTO.Nationalities;
-            General.ComboBoxProps(cmbNationalityRegisteredMembers, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityRegisteredMembers, "Nationality", "NationalityID");
 
-            
-            cmbGenderBirthday.DataSource = registeredMembersDTO.Genders;
-            General.ComboBoxProps(cmbGenderBirthday, "GenderName", "GenderID");
-            cmbNationalityBirthday.DataSource = registeredMembersDTO.Nationalities;
-            General.ComboBoxProps(cmbNationalityBirthday, "Nationality", "NationalityID");
+            birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
 
-            cmbPositionBirthday.DataSource = registeredMembersDTO.Positions;
-            General.ComboBoxProps(cmbPositionBirthday, "PositionName", "PositionID");
-            cmbProfessionBirthday.DataSource = registeredMembersDTO.Professions;
-            General.ComboBoxProps(cmbProfessionBirthday, "Profession", "professionID");
+            cmbGenderBirthday.DataSource = birthdayDTO.Genders;
+            GeneralHelper.ComboBoxProps(cmbGenderBirthday, "GenderName", "GenderID");
+            cmbNationalityBirthday.DataSource = birthdayDTO.Nationalities;
+            GeneralHelper.ComboBoxProps(cmbNationalityBirthday, "Nationality", "NationalityID");
+
+            cmbMonthBirthday.DataSource = birthdayDTO.Months;
+            GeneralHelper.ComboBoxProps(cmbMonthBirthday, "MonthName", "MonthID");
+            cmbPositionBirthday.DataSource = birthdayDTO.Positions;
+            GeneralHelper.ComboBoxProps(cmbPositionBirthday, "PositionName", "PositionID");
+            cmbProfessionBirthday.DataSource = birthdayDTO.Professions;
+            GeneralHelper.ComboBoxProps(cmbProfessionBirthday, "Profession", "professionID");
 
             formerMembersDTO = formerMembersBLL.SelectFormerMembers();
             cmbGenderFormerMembers.DataSource = formerMembersDTO.Genders;
-            General.ComboBoxProps(cmbGenderFormerMembers, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGenderFormerMembers, "GenderName", "genderID");
             cmbProfessionFormerMembers.DataSource = formerMembersDTO.Professions;
-            General.ComboBoxProps(cmbProfessionFormerMembers, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionFormerMembers, "Profession", "professionID");
             cmbPositionFormerMembers.DataSource = formerMembersDTO.Positions;
-            General.ComboBoxProps(cmbPositionFormerMembers, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPositionFormerMembers, "PositionName", "positionID");
             cmbNationalityFormerMembers.DataSource = formerMembersDTO.Nationalities;
-            General.ComboBoxProps(cmbNationalityFormerMembers, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityFormerMembers, "Nationality", "NationalityID");
 
             deadMembersDTO = deadMembersBLL.SelectDeadMembers();
             cmbGenderDeadMembers.DataSource = deadMembersDTO.Genders;
-            General.ComboBoxProps(cmbGenderDeadMembers, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGenderDeadMembers, "GenderName", "genderID");
             cmbProfessionDeadMembers.DataSource = deadMembersDTO.Professions;
-            General.ComboBoxProps(cmbProfessionDeadMembers, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionDeadMembers, "Profession", "professionID");
             cmbPositionDeadMembers.DataSource = deadMembersDTO.Positions;
-            General.ComboBoxProps(cmbPositionDeadMembers, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPositionDeadMembers, "PositionName", "positionID");
             cmbNationalityDeadMembers.DataSource = deadMembersDTO.Nationalities;
-            General.ComboBoxProps(cmbNationalityDeadMembers, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityDeadMembers, "Nationality", "NationalityID");
 
             inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
             cmbGenderInactiveMembers.DataSource = inactiveMembersDTO.Genders;
-            General.ComboBoxProps(cmbGenderInactiveMembers, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGenderInactiveMembers, "GenderName", "genderID");
             cmbProfessionInactiveMembers.DataSource = inactiveMembersDTO.Professions;
-            General.ComboBoxProps(cmbProfessionInactiveMembers, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionInactiveMembers, "Profession", "professionID");
             cmbPositionInactiveMembers.DataSource = inactiveMembersDTO.Positions;
-            General.ComboBoxProps(cmbPositionInactiveMembers, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPositionInactiveMembers, "PositionName", "positionID");
             cmbNationalityInactiveMembers.DataSource = inactiveMembersDTO.Nationalities;
-            General.ComboBoxProps(cmbNationalityInactiveMembers, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityInactiveMembers, "Nationality", "NationalityID");
 
             #endregion
 
@@ -245,7 +183,7 @@ namespace APC.AllForms
             #endregion
 
             #region
-            birthdayDTO = birthdayBLL.Select();
+            
             dataGridViewBirthday.DataSource = birthdayDTO.Members;
             dataGridViewBirthday.Columns[0].Visible = false;
             dataGridViewBirthday.Columns[1].Visible = false;
@@ -590,8 +528,10 @@ namespace APC.AllForms
             cmbNationalityBirthday.SelectedIndex = -1;
             cmbProfessionBirthday.SelectedIndex = -1;
             cmbPositionBirthday.SelectedIndex = -1;
+            cmbMonthBirthday.SelectedIndex = -1;
+            birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
+            dataGridViewBirthday.DataSource = birthdayDTO.Members;
 
-            
 
             txtSurnameContacts.Clear();
             contactsBLL = new MemberBLL();
@@ -655,6 +595,8 @@ namespace APC.AllForms
             labelNoOfDivisorDeadMembers.Text = deadMembersBLL.SelectCountDeadDivisor().ToString();
 
             labelTotalRowsCommittment.Text = "Row : " + dataGridViewCommitments.RowCount.ToString();
+
+            labelTotalRowsCommittment.Text = "Row : " + dataGridViewBirthday.RowCount.ToString();
         }
 
         private void btnUpdateRegisteredMembers_Click(object sender, EventArgs e)
@@ -1394,12 +1336,80 @@ namespace APC.AllForms
 
         private void btnSearchBirthday_Click(object sender, EventArgs e)
         {
-            
+            birthdayBLL = new MemberBLL();
+            List<MemberDetailDTO> list = birthdayDTO.Members;
+
+            if (cmbMonthBirthday.SelectedIndex != -1)
+            {
+                birthdayDTO = birthdayBLL.SelectBirthdayMembers(Convert.ToInt32(cmbMonthBirthday.SelectedValue));
+                
+                if (cmbGenderBirthday.SelectedIndex != -1)
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.GenderName == cmbGenderBirthday.SelectedValue.ToString()).ToList();
+                }
+                else if (cmbPositionBirthday.SelectedIndex != -1)
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.PositionName == cmbPositionBirthday.SelectedValue.ToString()).ToList();
+                }
+                else if (cmbProfessionBirthday.SelectedIndex != -1)
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.ProfessionName == cmbProfessionBirthday.SelectedValue.ToString()).ToList();
+                }
+                else if (cmbNationalityBirthday.SelectedIndex != -1)
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.NationalityName == cmbNationalityBirthday.SelectedValue.ToString()).ToList();
+                }
+                else if (txtNameBirthday.Text.Trim() != "")
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.Name.Contains(txtNameBirthday.Text.Trim())).ToList();
+                }
+                else if (txtSurnameBirthday.Text.Trim() != "")
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.Surname.Contains(txtSurnameBirthday.Text.Trim())).ToList();
+                }
+                else
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue)).ToList();
+                }                    
+            }
+            else
+            {
+                if (cmbGenderBirthday.SelectedIndex != -1)
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.GenderName == cmbGenderBirthday.SelectedValue.ToString()).ToList();
+                }
+                else if (cmbPositionBirthday.SelectedIndex != -1)
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.PositionName == cmbPositionBirthday.SelectedValue.ToString()).ToList();
+                }
+                else if (cmbProfessionBirthday.SelectedIndex != -1)
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.ProfessionName == cmbProfessionBirthday.SelectedValue.ToString()).ToList();
+                }
+                else if (cmbNationalityBirthday.SelectedIndex != -1)
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.NationalityName == cmbNationalityBirthday.SelectedValue.ToString()).ToList();
+                }
+                else if (txtNameBirthday.Text.Trim() != "")
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.Name.Contains(txtNameBirthday.Text.Trim())).ToList();
+                }
+                else if (txtSurnameBirthday.Text.Trim() != "")
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.Surname.Contains(txtSurnameBirthday.Text.Trim())).ToList();
+                }
+                else
+                {
+                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month)).ToList();
+                }
+            }
+
+            dataGridViewBirthday.DataSource = list;
         }
 
         private void btnClearBirthday_Click(object sender, EventArgs e)
         {
-
+            ClearFilters();
         }
 
         private void btnViewBirthday_Click(object sender, EventArgs e)

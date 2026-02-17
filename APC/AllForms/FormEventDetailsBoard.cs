@@ -225,7 +225,7 @@ namespace APC.AllForms
             #region
             eventExpDTO = eventExpBLL.Select(detail.EventID);
             cmbMonthExpReport.DataSource = eventExpDTO.Months;
-            General.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
 
             dataGridEventExpenditures.DataSource = eventExpDTO.EventExpenditures;
             dataGridEventExpenditures.Columns[0].Visible = false;
@@ -267,7 +267,7 @@ namespace APC.AllForms
             #region
             eventSalesDTO = eventSalesBLL.Select(detail.EventID);
             cmbMonthEventSales.DataSource = eventSalesDTO.Months;
-            General.ComboBoxProps(cmbMonthEventSales, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonthEventSales, "MonthName", "MonthID");
 
             dataGridEventSales.DataSource = eventSalesDTO.EventSales;
             dataGridEventSales.Columns[0].Visible = false;
@@ -327,7 +327,7 @@ namespace APC.AllForms
             #region
             eventReceiptsDTO = eventReceiptsBLL.Select(detail.EventID);
             cmbMonthEventReceipt.DataSource = eventReceiptsDTO.Months;
-            General.ComboBoxProps(cmbMonthEventReceipt, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonthEventReceipt, "MonthName", "MonthID");
 
             dataGridViewEventReceipt.DataSource = eventReceiptsDTO.EventReceipts;
             dataGridViewEventReceipt.Columns[0].Visible = false;

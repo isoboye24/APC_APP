@@ -120,28 +120,28 @@ namespace APC.AllForms
 
             dto = bll.Select(DateTime.Now.Year);
             cmbMonth.DataSource = dto.Months;
-            General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
             cmbYearMeeting.DataSource = dto.Years;
             cmbYearMeeting.SelectedIndex = -1;
 
             commentDTO = commentBLL.Select();
             cmbGenderComments.DataSource = commentDTO.Genders;
-            General.ComboBoxProps(cmbGenderComments, "GenderName", "GenderID");
+            GeneralHelper.ComboBoxProps(cmbGenderComments, "GenderName", "GenderID");
             cmbMonthComments.DataSource = commentDTO.Months;
-            General.ComboBoxProps(cmbMonthComments, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonthComments, "MonthName", "MonthID");
 
             finedMemberDTO = finedMemberBLL.Select();
             cmbMonthFinedMember.DataSource = finedMemberDTO.Months;
-            General.ComboBoxProps(cmbMonthFinedMember, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonthFinedMember, "MonthName", "MonthID");
             cmbGenderFinedMember.DataSource = finedMemberDTO.Genders;
-            General.ComboBoxProps(cmbGenderFinedMember, "GenderName", "GenderID");
+            GeneralHelper.ComboBoxProps(cmbGenderFinedMember, "GenderName", "GenderID");
             cmbFineStatus.Items.Add("Completed");
             cmbFineStatus.Items.Add("NOT Completed");
             cmbFineStatus.Items.Add("NOT Paid");
 
             specialContributionDTO = specialContributionsBLL.Select();
             cmbMonthContribution.DataSource = specialContributionDTO.Months;
-            General.ComboBoxProps(cmbMonthContribution, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonthContribution, "MonthName", "MonthID");
 
             #region
                 #region
@@ -493,17 +493,17 @@ namespace APC.AllForms
 
         private void txtYear_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e, (TextBox)sender);
+            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
 
         private void txtNoOfAttend_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e, (TextBox)sender);
+            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
 
         private void txtMonthlyDues_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e, (TextBox)sender);
+            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
         
         private void btnSearch_Click(object sender, EventArgs e)
@@ -900,7 +900,7 @@ namespace APC.AllForms
 
         private void txtYearFinedMember_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e, (TextBox)sender);
+            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
 
         private void txtNameFinedMember_TextChanged(object sender, EventArgs e)

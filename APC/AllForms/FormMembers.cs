@@ -114,25 +114,25 @@ namespace APC
             #region
             dto = bll.Select();
             cmbCountry.DataSource = dto.Countries;
-            General.ComboBoxProps(cmbCountry, "CountryName", "countryID");
+            GeneralHelper.ComboBoxProps(cmbCountry, "CountryName", "countryID");
             cmbGender.DataSource = dto.Genders;
-            General.ComboBoxProps(cmbGender, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGender, "GenderName", "genderID");
             cmbProfession.DataSource = dto.Professions;
-            General.ComboBoxProps(cmbProfession, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfession, "Profession", "professionID");
             cmbPosition.DataSource = dto.Positions;
-            General.ComboBoxProps(cmbPosition, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPosition, "PositionName", "positionID");
             cmbMaritalStatus.DataSource = dto.MaritalStatuses;
-            General.ComboBoxProps(cmbMaritalStatus, "MaritalStatus", "MaritalStatusID");
+            GeneralHelper.ComboBoxProps(cmbMaritalStatus, "MaritalStatus", "MaritalStatusID");
             cmbEmpStatus.DataSource = dto.EmploymentStatuses;
-            General.ComboBoxProps(cmbEmpStatus, "EmploymentStatus", "EmploymentStatusID");
+            GeneralHelper.ComboBoxProps(cmbEmpStatus, "EmploymentStatus", "EmploymentStatusID");
             cmbNationality.DataSource = dto.Nationalities;
-            General.ComboBoxProps(cmbNationality, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationality, "Nationality", "NationalityID");
             cmbPermission.DataSource = dto.Permissions;
-            General.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
+            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
             cmbMembershipStatus.DataSource = dto.MembershipStatuses;
-            General.ComboBoxProps(cmbMembershipStatus, "MembershipStatus", "MembershipStatusID");
+            GeneralHelper.ComboBoxProps(cmbMembershipStatus, "MembershipStatus", "MembershipStatusID");
             cmbRelationshipToNextOfKin.DataSource = dto.RelationshipsToNextOfKin;
-            General.ComboBoxProps(cmbRelationshipToNextOfKin, "Relationship", "RelationshipToKinID");
+            GeneralHelper.ComboBoxProps(cmbRelationshipToNextOfKin, "Relationship", "RelationshipToKinID");
             #endregion
 
             txtPhone2.Hide();

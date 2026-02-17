@@ -24,6 +24,7 @@ namespace APC.BLL
         MembershipStatusDAO memStatus = new MembershipStatusDAO();
         RelationshipToNextOfKinDAO kinsDAO = new RelationshipToNextOfKinDAO();
         FinedMemberDAO finedMemberDAO = new FinedMemberDAO();
+        MonthDAO monthDAO = new MonthDAO();
 
         // These classes are here for the sake of deletedData form
         GeneralAttendanceDAO genAttendDAO = new GeneralAttendanceDAO();
@@ -101,6 +102,25 @@ namespace APC.BLL
             dto.MembershipStatuses = memStatus.Select();
             dto.Absentees = memberDAO.Select3MonthsAbsentes();
             dto.RelationshipsToNextOfKin = kinsDAO.Select();
+            return dto;
+        }
+
+        public MemberDTO SelectBirthdayMembers(int month)
+        {
+            MemberDTO dto = new MemberDTO();
+            dto.Members = memberDAO.SelectBirthdayMembers(month);
+            dto.Professions = professionDAO.Select();
+            dto.Countries = countryDAO.Select();
+            dto.Nationalities = nationalityDAO.Select();
+            dto.EmploymentStatuses = empStatusDAO.Select();
+            dto.Genders = genderDAO.Select();
+            dto.Positions = positionDAO.Select();
+            dto.MaritalStatuses = marStatusDAO.Select();
+            dto.Permissions = permissionDAO.Select();
+            dto.MembershipStatuses = memStatus.Select();
+            dto.Absentees = memberDAO.Select3MonthsAbsentes();
+            dto.RelationshipsToNextOfKin = kinsDAO.Select();
+            dto.Months = monthDAO.Select();
             return dto;
         }
 

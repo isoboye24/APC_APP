@@ -100,7 +100,7 @@ namespace APC.AllForms
 
             dto = bll.Select();
             cmbMonth.DataSource = dto.Months;
-            General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
 
             dataGridView1.DataSource = dto.Documents;
             dataGridView1.Columns[0].Visible = false;

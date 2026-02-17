@@ -72,7 +72,7 @@ namespace APC.AllForms
 
             dto = bll.Select(detail.MemberID);
             cmbMonth.DataSource = dto.Months;
-            General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
             cmbYear.DataSource = dto.Years;
             cmbYear.SelectedIndex = -1;
             tableLayoutPanelChangingAmount.Hide();

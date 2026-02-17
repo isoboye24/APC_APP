@@ -178,7 +178,111 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
-                    dto.BirthdayDate = item.birthday.Day + "." +item.birthday.Month + "." +item.birthday.Year;
+                    dto.BirthdayDate = item.birthday.Day + "." +item.birthday.Month;
+                    members.Add(dto);
+                }
+                return members;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
+        }
+        public List<MemberDetailDTO> SelectBirthdayMembers(int month)
+        {
+            try
+            {
+                List<MemberDetailDTO> members = new List<MemberDetailDTO>();
+                var list = (from m in db.MEMBER.Where(x=>x.isDeleted==false && x.birthday.Month == month)
+                            join g in db.GENDER on m.genderID equals g.genderID
+                            join e in db.EMPLOYMENT_STATUS.Where(x => x.isDeleted == false) on m.employmentStatusID equals e.employmentStatusID
+                            join p in db.PROFESSION.Where(x => x.isDeleted == false) on m.professionID equals p.professionID
+                            join pos in db.POSITION.Where(x => x.isDeleted == false) on m.positionID equals pos.positionID
+                            join mar in db.MARITAL_STATUS.Where(x => x.isDeleted == false) on m.maritalStatusID equals mar.maritalStatusID
+                            join c in db.COUNTRY.Where(x => x.isDeleted == false) on m.countryID equals c.countryID
+                            join n in db.NATIONALITY.Where(x => x.isDeleted == false) on m.nationalityID equals n.nationalityID
+                            join perm in db.PERMISSION.Where(x => x.isDeleted == false) on m.permissionID equals perm.permissionID
+                            join kin in db.NEXT_OF_KIN_RELATIONSHIP on m.relationshipToKinID equals kin.RelationshipToKinID
+                            join ms in db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
+                            select new
+                            {
+                                memberID = m.memberID,
+                                username = m.username,
+                                name = m.name,
+                                surname = m.surname,
+                                password = m.password,
+                                birthday = m.birthday,
+                                imagePath = m.imagePath,
+                                emailAddress = m.emailAddress,
+                                houseAddress = m.houseAddress,
+                                membershipDate = m.membershipDate,
+                                countryID = m.countryID,
+                                countryName = c.countryName,
+                                nationalityID = m.nationalityID,
+                                nationalityName = n.nationality1,
+                                professionID = m.professionID,
+                                professionName = p.profession1,
+                                positionID = m.positionID,
+                                positionName = pos.positionName,
+                                genderID = m.genderID,
+                                genderName = g.genderName,
+                                employmenStatusID = m.employmentStatusID,
+                                employmenStatusName = e.employmentStatus,
+                                maritalStatusID = m.maritalStatusID,
+                                maritalStatusName = mar.maritalStatus,
+                                permissionID = m.permissionID,
+                                permissionName = perm.permission1,
+                                phoneNumber = m.phoneNumber,
+                                phoneNumber2 = m.phoneNumber2,
+                                phoneNumber3 = m.phoneNumber3,
+                                deadDate = m.deadDate,
+                                membershipStatusID = m.membershipStatusID,
+                                membershipStatus = ms.membershipStatus,
+                                LGA = m.LGAOfCountryOrigin,
+                                nameOfNextOfKin = m.nextOfKin,
+                                relationshipToKinID = m.relationshipToKinID,
+                                relationshipToKin = kin.RelationshipToKin,
+                            }).OrderBy(x=>x.surname).ToList();
+                foreach (var item in list)
+                {
+                    MemberDetailDTO dto = new MemberDetailDTO();
+                    dto.MemberID = item.memberID;
+                    dto.Username = item.username;
+                    dto.Name = item.name;
+                    dto.Surname = item.surname;
+                    dto.Password = item.password;
+                    dto.Birthday = item.birthday;
+                    dto.ImagePath = item.imagePath;
+                    dto.EmailAddress = item.emailAddress;
+                    dto.HouseAddress = item.houseAddress;
+                    dto.MembershipDate = (DateTime)item.membershipDate;
+                    dto.CountryID = item.countryID;
+                    dto.CountryName = item.countryName;
+                    dto.NationalityID = item.nationalityID;
+                    dto.NationalityName = item.nationalityName;
+                    dto.ProfessionID = item.professionID;
+                    dto.ProfessionName = item.professionName;
+                    dto.PositionID = item.positionID;
+                    dto.PositionName = item.positionName;
+                    dto.GenderID = item.genderID;
+                    dto.GenderName = item.genderName;
+                    dto.EmploymentStatusID = item.employmenStatusID;
+                    dto.EmploymentStatusName = item.employmenStatusName;
+                    dto.MaritalStatusID = item.maritalStatusID;
+                    dto.MaritalStatusName = item.maritalStatusName;
+                    dto.PermissionID = item.permissionID;
+                    dto.PermissionName = item.permissionName;
+                    dto.PhoneNumber = item.phoneNumber;
+                    dto.PhoneNumber2 = item.phoneNumber2;
+                    dto.PhoneNumber3 = item.phoneNumber3;
+                    dto.DeadDate = item.deadDate;
+                    dto.LGA = item.LGA;
+                    dto.MembershipStatusID = item.membershipStatusID;
+                    dto.MembershipStatus = item.membershipStatus;
+                    dto.NameOfNextOfKin = item.nameOfNextOfKin;
+                    dto.RelationshipToKinID = item.relationshipToKinID;
+                    dto.RelationshipToKin = item.relationshipToKin;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month;
                     members.Add(dto);
                 }
                 return members;
@@ -283,7 +387,7 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
-                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month;
                     members.Add(dto);
                 }
                 return members;
@@ -388,7 +492,7 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
-                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month;
                     members.Add(dto);
                 }
                 return members;
@@ -492,7 +596,7 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
-                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month;
                     members.Add(dto);
                 }
                 return members;
@@ -598,7 +702,7 @@ namespace APC.DAL.DAO
                     dto.RelationshipToKin = item.relationshipToKin;
                     TimeSpan difference = dto.DeadDate - dto.Birthday;
                     dto.DeadAge = Math.Floor(difference.TotalDays / 365.25);
-                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month;
                     members.Add(dto);
                 }
                 return members;
@@ -714,7 +818,7 @@ namespace APC.DAL.DAO
                     dto.NameOfNextOfKin = item.nameOfNextOfKin;
                     dto.RelationshipToKinID = item.relationshipToKinID;
                     dto.RelationshipToKin = item.relationshipToKin;
-                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month;
                     members.Add(dto);
                 }
                 return members;
@@ -1046,7 +1150,7 @@ namespace APC.DAL.DAO
                     dto.LGA = item.LGA;
                     dto.MembershipStatusID = item.membershipStatusID;
                     dto.MembershipStatus = item.membershipStatus;
-                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month;
                     //dto.NextOfKin = item.nextOfKin;
                     //dto.RelationshipToNextOfKinID = item.relationshipToNextOfKinID;
                     //dto.RelationshipToNextOfKin = item.relationshipToNextOfKin;
@@ -1153,7 +1257,7 @@ namespace APC.DAL.DAO
                     //dto.NextOfKin = item.nextOfKin;
                     //dto.RelationshipToNextOfKinID = item.relationshipToNextOfKinID;
                     //dto.RelationshipToNextOfKin = item.relationshipToNextOfKin;
-                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month + "." + item.birthday.Year;
+                    dto.BirthdayDate = item.birthday.Day + "." + item.birthday.Month;
                     members.Add(dto);
                 }
                 return members;
@@ -1194,7 +1298,7 @@ namespace APC.DAL.DAO
             {
                 members.Add(item.memberID);
             }
-            var membersAppearingThreeTimes = General.FindMembersAppearingThreeTimes(members);
+            var membersAppearingThreeTimes = GeneralHelper.FindMembersAppearingThreeTimes(members);
             if (membersAppearingThreeTimes.Any())
             {
                 foreach (var memberID in membersAppearingThreeTimes)
@@ -1250,7 +1354,7 @@ namespace APC.DAL.DAO
                     members.Add(member.memberID);
                 }
             }
-            var membersAppearingThreeTimes = General.FindMembersAppearingThreeTimes(members);
+            var membersAppearingThreeTimes = GeneralHelper.FindMembersAppearingThreeTimes(members);
             int memberCount = membersAppearingThreeTimes.Count();
             if (memberCount > 0)
             {

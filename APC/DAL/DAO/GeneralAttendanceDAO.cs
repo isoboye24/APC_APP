@@ -142,7 +142,7 @@ namespace APC.DAL.DAO
                         {
                             dto.FinancialStatus = "Deficit";
                         }
-                        dto.Month = General.ConventIntToMonth(monthItem);
+                        dto.Month = GeneralHelper.ConventIntToMonth(monthItem);
                         dto.TotalMembersPresent = db.PERSONAL_ATTENDANCE.Count(x => x.isDeleted == false && x.year == year && x.monthID == monthItem && x.attendanceStatusID == 2);
                         dto.TotalMembersAbsent = db.PERSONAL_ATTENDANCE.Count(x => x.isDeleted == false && x.year == year && x.monthID == monthItem && x.attendanceStatusID == 3);
                         MeetingReports.Add(dto);

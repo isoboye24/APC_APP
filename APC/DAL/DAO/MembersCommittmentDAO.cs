@@ -53,7 +53,7 @@ namespace APC.DAL.DAO
                     dto.NumberOfPresence = NumberOfPresence.Sum();
                     dto.NumberOfAbsence = NumberOfAbsence.Sum();
                     
-                    dto.ExpectedAmount = General.CalculateYearlyDue((DateTime)member.membershipDate, year);
+                    dto.ExpectedAmount = GeneralHelper.CalculateYearlyDue((DateTime)member.membershipDate, year);
 
                     if (120 > amountContributed.Sum())
                     {

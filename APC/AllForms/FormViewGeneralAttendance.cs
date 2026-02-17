@@ -99,7 +99,7 @@ namespace APC.AllForms
             dto = bll.Select();
 
             cmbAttendanceStatus.DataSource = dto.AttendanceStatuses;
-            General.ComboBoxProps(cmbAttendanceStatus, "AttendanceStatusName", "AttendanceStatusID");
+            GeneralHelper.ComboBoxProps(cmbAttendanceStatus, "AttendanceStatusName", "AttendanceStatusID");
 
             dto = bll.SelectMembersSet(detail.GeneralAttendanceID);
             dataGridView1.DataSource = dto.PersonalAttendances;
@@ -130,8 +130,8 @@ namespace APC.AllForms
         }
         private void ShowRecordData()
         {
-            General.ValueCount(labelTotalMembersPresent, detail.TotalMembersPresent, 100, 57);
-            General.ValueCount(labelTotalMembersAbsent, detail.TotalMembersAbsent, 100, 57);
+            GeneralHelper.ValueCount(labelTotalMembersPresent, detail.TotalMembersPresent, 100, 57);
+            GeneralHelper.ValueCount(labelTotalMembersAbsent, detail.TotalMembersAbsent, 100, 57);
 
             labelTotalDuesPaid.Text = bll.DuesContributed(detail.GeneralAttendanceID).ToString();
             labelTotalDuesExpected.Text = bll.TotalDuesExpected(detail.GeneralAttendanceID).ToString();

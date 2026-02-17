@@ -180,7 +180,7 @@ namespace APC.AllForms
 
                 // If in Debug or writable folder, use app directory
                 if (Directory.Exists(Application.StartupPath) &&
-                   General.IsDirectoryWritable(Application.StartupPath))
+                   GeneralHelper.IsDirectoryWritable(Application.StartupPath))
                 {
                     imagesDir = Path.Combine(Application.StartupPath, "images");
                 }
@@ -266,7 +266,7 @@ namespace APC.AllForms
 
         private void txtReceiptAmount_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e, (TextBox)sender);
+            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
     }
 }

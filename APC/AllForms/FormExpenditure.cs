@@ -126,7 +126,7 @@ namespace APC.AllForms
 
         private void txtAmountSpent_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e, (TextBox)sender);
+            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
         
 

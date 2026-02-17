@@ -276,8 +276,8 @@ namespace APC
 
             labelAmountRaisedYearly.Text = "Dues Raised in each year";
             labelExpendituresYearly.Text = "Expenditures in each year";
-            General.CreateChart(chartAmountRaisedYearly, yearlyDues, SeriesChartType.Column, "Dues", "");
-            General.CreateChart(chartExpenditures, yearlyExpenditures, SeriesChartType.Column, "Expenses", "");
+            GeneralHelper.CreateChart(chartAmountRaisedYearly, yearlyDues, SeriesChartType.Column, "Dues", "");
+            GeneralHelper.CreateChart(chartExpenditures, yearlyExpenditures, SeriesChartType.Column, "Expenses", "");
         }
 
         private void iconClose_MouseEnter(object sender, EventArgs e)

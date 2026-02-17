@@ -23,5 +23,6 @@ namespace APC.DAL.DTO
         public List<MembershipStatusDetailDTO> MembershipStatuses { get; set; }
         public List<AbsenteesDetailDTO> Absentees { get; set; }
         public List<RelationshipToNextOfKinDetailDTO> RelationshipsToNextOfKin { get; set; }
+        public List<MonthDetailDTO> Months { get; set; }
     }
 }

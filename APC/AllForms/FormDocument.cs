@@ -83,7 +83,7 @@ namespace APC.AllForms
                     DocumentDetailDTO document = new DocumentDetailDTO();
                     document.DocumentName = txtDocumentName.Text;
                     document.DocumentPath = fileName;
-                    document.DocumentType = General.GetDocumentType(fileExtension);
+                    document.DocumentType = GeneralHelper.GetDocumentType(fileExtension);
                     document.Day = DateTime.Today.Day;
                     document.MonthID = DateTime.Today.Month;
                     document.Year = DateTime.Today.Year.ToString();
@@ -120,7 +120,7 @@ namespace APC.AllForms
                             File.Copy(txtDocumentPath.Text, @"documents\\" + fileName);
                             detail.DocumentPath = fileName;
                             fileExtension = Path.GetExtension(detail.DocumentPath);
-                            detail.DocumentType = General.GetDocumentType(fileExtension);
+                            detail.DocumentType = GeneralHelper.GetDocumentType(fileExtension);
                         }
                         else if (txtDocumentPath.Text == detail.DocumentPath)
                         {
