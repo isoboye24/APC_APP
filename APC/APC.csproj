@@ -287,6 +287,7 @@
     <Compile Include="BLL\GraphBLL.cs" />
     <Compile Include="BLL\MembersCommittmentBLL.cs" />
     <Compile Include="BLL\MembershipStatusBLL.cs" />
+    <Compile Include="BLL\PaymentStatusBLL.cs" />
     <Compile Include="BLL\RelationshipsToKinBLL.cs" />
     <Compile Include="BLL\SpecialContributionsBLL.cs" />
     <Compile Include="BLL\SpecialContributorsBLL.cs" />
@@ -316,6 +317,7 @@
     <Compile Include="DAL\DAO\GraphDAO.cs" />
     <Compile Include="DAL\DAO\MembersCommittmentDAO.cs" />
     <Compile Include="DAL\DAO\MembershipStatusDAO.cs" />
+    <Compile Include="DAL\DAO\PaymentStatusDAO.cs" />
     <Compile Include="DAL\DAO\RelationshipToNextOfKinDAO.cs" />
     <Compile Include="DAL\DAO\SpecialContributionsDAO.cs" />
     <Compile Include="DAL\DAO\SpecialContributorsDAO.cs" />
@@ -502,6 +504,8 @@
     <Compile Include="DAL\DTO\MembersCommittmentDTO.cs" />
     <Compile Include="DAL\DTO\MembershipStatusDetailDTO.cs" />
     <Compile Include="DAL\DTO\MembershipStatusDTO.cs" />
+    <Compile Include="DAL\DTO\PaymentStatusDetailDTO.cs" />
+    <Compile Include="DAL\DTO\PaymentStatusDTO.cs" />
     <Compile Include="DAL\DTO\PersonalAttendanceDetailDTO.cs" />
     <Compile Include="DAL\DTO\PersonalAttendanceDTO.cs" />
     <Compile Include="DAL\DTO\GeneralAttendanceDetailDTO.cs" />
@@ -599,6 +603,9 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\NEXT_OF_KIN_RELATIONSHIP.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\PAYMENT_STATUS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PERMISSION.cs">

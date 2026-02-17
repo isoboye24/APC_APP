@@ -309,6 +309,19 @@
           <Property Name="RelationshipToKinID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RelationshipToKin" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Während der Generierung sind Fehler aufgetreten:
+Warnung 6002: Für Tabelle/Sicht 'APC.dbo.PAYMENT_STATUS' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
+        <EntityType Name="PAYMENT_STATUS">
+          <Key>
+            <PropertyRef Name="paymentStatusID" />
+            <PropertyRef Name="paymentStatusName" />
+            <PropertyRef Name="isDeleted" />
+          </Key>
+          <Property Name="paymentStatusID" Type="int" Nullable="false" />
+          <Property Name="paymentStatusName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
         <EntityType Name="PERMISSION">
           <Key>
             <PropertyRef Name="permissionID" />
@@ -412,6 +425,14 @@
           <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SPECIAL_CONTRIBUTIONS" EntityType="Self.SPECIAL_CONTRIBUTIONS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SPECIAL_CONTRIBUTORS" EntityType="Self.SPECIAL_CONTRIBUTORS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAYMENT_STATUS" EntityType="Self.PAYMENT_STATUS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PAYMENT_STATUS].[paymentStatusID] AS [paymentStatusID], 
+    [PAYMENT_STATUS].[paymentStatusName] AS [paymentStatusName], 
+    [PAYMENT_STATUS].[isDeleted] AS [isDeleted], 
+    [PAYMENT_STATUS].[deletedDate] AS [deletedDate]
+    FROM [dbo].[PAYMENT_STATUS] AS [PAYMENT_STATUS]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -794,6 +815,17 @@
           <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="specialContributionID" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="PAYMENT_STATUS">
+          <Key>
+            <PropertyRef Name="paymentStatusID" />
+            <PropertyRef Name="paymentStatusName" />
+            <PropertyRef Name="isDeleted" />
+          </Key>
+          <Property Name="paymentStatusID" Type="Int32" Nullable="false" />
+          <Property Name="paymentStatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
         <EntityContainer Name="APCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" />
           <EntitySet Name="CHILD" EntityType="Self.CHILD" />
@@ -825,6 +857,7 @@
           <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" />
           <EntitySet Name="SPECIAL_CONTRIBUTIONS" EntityType="Self.SPECIAL_CONTRIBUTIONS" />
           <EntitySet Name="SPECIAL_CONTRIBUTORS" EntityType="Self.SPECIAL_CONTRIBUTORS" />
+          <EntitySet Name="PAYMENT_STATUS" EntityType="Self.PAYMENT_STATUS" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1235,6 +1268,16 @@
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
                 <ScalarProperty Name="summary" ColumnName="summary" />
                 <ScalarProperty Name="specialContributionID" ColumnName="specialContributionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAYMENT_STATUS">
+            <EntityTypeMapping TypeName="APCModel.PAYMENT_STATUS">
+              <MappingFragment StoreEntitySet="PAYMENT_STATUS">
+                <ScalarProperty Name="paymentStatusID" ColumnName="paymentStatusID" />
+                <ScalarProperty Name="paymentStatusName" ColumnName="paymentStatusName" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
