@@ -1,5 +1,6 @@
 ﻿using APC.BLL;
 using APC.DAL.DTO;
+using APC.HelperServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static APC.HelperServices.MemberHelperService;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
@@ -36,6 +38,124 @@ namespace APC.AllForms
                 btnDeleteRegisteredMembers.Hide();
             }
 
+            ResizeControls();
+
+
+            #region
+            registeredMembersDTO = registeredMembersBLL.Select();
+            birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
+            formerMembersDTO = formerMembersBLL.SelectFormerMembers();
+            deadMembersDTO = deadMembersBLL.SelectDeadMembers();
+            inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
+            contactsDTO = contactsBLL.Select();
+
+            LoadRegisteredMembers();
+            FillRegisteredMemberComboBoxes();
+
+            LoadBirthDayMembers();
+            FillBirthdayMemberComboBoxes();
+
+            LoadFormerMembers();
+            FillFormerMemberComboBoxes();
+
+            LoadDeadMembers();
+            FillDeadMemberComboBoxes();
+
+            LoadInactiveMembers();
+            FillInactiveMemberComboBoxes();
+
+            LoadMembersContact();
+
+            #endregion
+
+            // Members' Commitments
+            #region
+            committmentDTO = committmentBLL.Select(DateTime.Now.Year);
+
+            cmbYearCommittment.DataSource = committmentDTO.Years;
+            cmbYearCommittment.SelectedIndex = -1;
+
+            cmbDuesStatusCommittment.Items.Add("Incomplete");
+            cmbDuesStatusCommittment.Items.Add("Completed");
+            cmbDuesStatusCommittment.Items.Add("Extra");
+
+            cmbFineStatusCommittment.Items.Add("Incomplete");
+            cmbFineStatusCommittment.Items.Add("Completed");
+            cmbFineStatusCommittment.Items.Add("Extra");
+
+            dataGridViewCommitments.DataSource = committmentDTO.Committments;
+            dataGridViewCommitments.Columns[0].Visible = false;
+            dataGridViewCommitments.Columns[1].HeaderText = "Rank Ratio";
+            dataGridViewCommitments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCommitments.Columns[2].HeaderText = "Name";
+            dataGridViewCommitments.Columns[3].HeaderText = "Surname";
+            dataGridViewCommitments.Columns[4].Visible = false;
+            dataGridViewCommitments.Columns[5].HeaderText = "Exp (€)";
+            dataGridViewCommitments.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCommitments.Columns[6].HeaderText = "Cont (€)";
+            dataGridViewCommitments.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCommitments.Columns[7].HeaderText = "Dues Bal.";
+            dataGridViewCommitments.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCommitments.Columns[8].HeaderText = "Fines (€)";
+            dataGridViewCommitments.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCommitments.Columns[9].HeaderText = "P. Fines (€)";
+            dataGridViewCommitments.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCommitments.Columns[10].HeaderText = "Pres.";
+            dataGridViewCommitments.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCommitments.Columns[11].HeaderText = "Abs.";
+            dataGridViewCommitments.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCommitments.Columns[12].Visible = false;
+
+            foreach (DataGridViewColumn column in dataGridViewCommitments.Columns)
+            {
+                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            }
+            dataGridViewCommitments.DefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+
+            #endregion
+
+
+            GetCounts();
+        }
+
+        private void LoadBirthDayMembers()
+        {
+            dataGridViewBirthday.DataSource = birthdayDTO.Members;
+            ConfigureMemberGrid(dataGridViewBirthday, MemberGridType.Birthday);
+        }
+
+        private void LoadRegisteredMembers()
+        {
+            dataGridViewRegisteredMembers.DataSource = registeredMembersDTO.Members;
+            ConfigureMemberGrid(dataGridViewRegisteredMembers, MemberGridType.Basic);
+        }
+
+        private void LoadMembersContact()
+        {
+            dataGridViewContacts.DataSource = contactsDTO.Members;
+            ConfigureMemberGrid(dataGridViewContacts, MemberGridType.Contact);
+        }
+
+        private void LoadInactiveMembers()
+        {
+            dataGridViewInactiveMembers.DataSource = inactiveMembersDTO.Members;
+            ConfigureMemberGrid(dataGridViewInactiveMembers, MemberGridType.Basic);
+        }
+
+        private void LoadDeadMembers()
+        {
+            dataGridViewDeadMembers.DataSource = deadMembersDTO.Members;
+            ConfigureMemberGrid(dataGridViewDeadMembers, MemberGridType.Dead);
+        }
+
+        private void LoadFormerMembers()
+        {
+            dataGridViewFormerMembers.DataSource = formerMembersDTO.Members;
+            ConfigureMemberGrid(dataGridViewFormerMembers, MemberGridType.Basic);
+        }
+
+        private void ResizeControls()
+        {
             #region
             GeneralHelper.ApplyRegularFont11(label4, label7, label8, label19, label20, label21, label28, label29, label30,
                 label31, labelTotalContacts,
@@ -45,16 +165,16 @@ namespace APC.AllForms
 
             GeneralHelper.ApplyBoldFont11(label24, label25, label26);
 
-            GeneralHelper.ApplyBoldFont14(label1, label2, label3, label5, label6, label9, label10, label12, 
+            GeneralHelper.ApplyBoldFont14(label1, label2, label3, label5, label6, label9, label10, label12,
                 label13, label14, label15, label16, label17, label18, label22, label23, label27, label32,
                 label33, label34, label35, label36, btnAddRegisteredMembers,
-                btnUpdateRegisteredMembers, btnViewRegisteredMembers, btnDeleteRegisteredMembers, 
+                btnUpdateRegisteredMembers, btnViewRegisteredMembers, btnDeleteRegisteredMembers,
                 btnSearchRegisteredMembers, btnClearRegisteredMembers, btnViewBirthday, btnSearchBirthday,
                 btnClearBirthday, btnUpdateContacts, btnUpdateFormerMembers, btnViewFormerMembers,
                 btnSearchFormerMembers, btnClearFormerMembers, btnUpdateDeadMembers, btnViewDeadMembers,
                 btnSearchDeadMembers, btnClearDeadMembers);
 
-            GeneralHelper.ApplyRegularFont16(txtNameRegisteredMembers, txtSurnameRegisteredMembers, 
+            GeneralHelper.ApplyRegularFont16(txtNameRegisteredMembers, txtSurnameRegisteredMembers,
                 cmbGenderRegisteredMembers, cmbNationalityRegisteredMembers, cmbPositionRegisteredMembers,
                 cmbProfessionRegisteredMembers, txtNameBirthday, txtSurnameBirthday, cmbGenderBirthday,
                 cmbNationalityBirthday, cmbProfessionBirthday, cmbPositionBirthday, cmbMonthBirthday,
@@ -70,10 +190,10 @@ namespace APC.AllForms
             cmbFineStatusCommittment.Tag = "resizeable";
             cmbYearCommittment.Tag = "resizeable";
             #endregion
+        }
 
-            #region
-            registeredMembersDTO = registeredMembersBLL.Select();
-
+        private void FillRegisteredMemberComboBoxes()
+        {
             cmbGenderRegisteredMembers.DataSource = registeredMembersDTO.Genders;
             GeneralHelper.ComboBoxProps(cmbGenderRegisteredMembers, "GenderName", "genderID");
             cmbProfessionRegisteredMembers.DataSource = registeredMembersDTO.Professions;
@@ -82,22 +202,23 @@ namespace APC.AllForms
             GeneralHelper.ComboBoxProps(cmbPositionRegisteredMembers, "PositionName", "positionID");
             cmbNationalityRegisteredMembers.DataSource = registeredMembersDTO.Nationalities;
             GeneralHelper.ComboBoxProps(cmbNationalityRegisteredMembers, "Nationality", "NationalityID");
+        }
 
-            birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
-
+        private void FillBirthdayMemberComboBoxes()
+        {
             cmbGenderBirthday.DataSource = birthdayDTO.Genders;
             GeneralHelper.ComboBoxProps(cmbGenderBirthday, "GenderName", "GenderID");
             cmbNationalityBirthday.DataSource = birthdayDTO.Nationalities;
             GeneralHelper.ComboBoxProps(cmbNationalityBirthday, "Nationality", "NationalityID");
-
             cmbMonthBirthday.DataSource = birthdayDTO.Months;
             GeneralHelper.ComboBoxProps(cmbMonthBirthday, "MonthName", "MonthID");
             cmbPositionBirthday.DataSource = birthdayDTO.Positions;
             GeneralHelper.ComboBoxProps(cmbPositionBirthday, "PositionName", "PositionID");
             cmbProfessionBirthday.DataSource = birthdayDTO.Professions;
             GeneralHelper.ComboBoxProps(cmbProfessionBirthday, "Profession", "professionID");
-
-            formerMembersDTO = formerMembersBLL.SelectFormerMembers();
+        }
+        private void FillFormerMemberComboBoxes()
+        {
             cmbGenderFormerMembers.DataSource = formerMembersDTO.Genders;
             GeneralHelper.ComboBoxProps(cmbGenderFormerMembers, "GenderName", "genderID");
             cmbProfessionFormerMembers.DataSource = formerMembersDTO.Professions;
@@ -106,8 +227,10 @@ namespace APC.AllForms
             GeneralHelper.ComboBoxProps(cmbPositionFormerMembers, "PositionName", "positionID");
             cmbNationalityFormerMembers.DataSource = formerMembersDTO.Nationalities;
             GeneralHelper.ComboBoxProps(cmbNationalityFormerMembers, "Nationality", "NationalityID");
+        }
 
-            deadMembersDTO = deadMembersBLL.SelectDeadMembers();
+        private void FillDeadMemberComboBoxes()
+        {
             cmbGenderDeadMembers.DataSource = deadMembersDTO.Genders;
             GeneralHelper.ComboBoxProps(cmbGenderDeadMembers, "GenderName", "genderID");
             cmbProfessionDeadMembers.DataSource = deadMembersDTO.Professions;
@@ -116,8 +239,10 @@ namespace APC.AllForms
             GeneralHelper.ComboBoxProps(cmbPositionDeadMembers, "PositionName", "positionID");
             cmbNationalityDeadMembers.DataSource = deadMembersDTO.Nationalities;
             GeneralHelper.ComboBoxProps(cmbNationalityDeadMembers, "Nationality", "NationalityID");
+        }
 
-            inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
+        private void FillInactiveMemberComboBoxes()
+        {
             cmbGenderInactiveMembers.DataSource = inactiveMembersDTO.Genders;
             GeneralHelper.ComboBoxProps(cmbGenderInactiveMembers, "GenderName", "genderID");
             cmbProfessionInactiveMembers.DataSource = inactiveMembersDTO.Professions;
@@ -126,379 +251,6 @@ namespace APC.AllForms
             GeneralHelper.ComboBoxProps(cmbPositionInactiveMembers, "PositionName", "positionID");
             cmbNationalityInactiveMembers.DataSource = inactiveMembersDTO.Nationalities;
             GeneralHelper.ComboBoxProps(cmbNationalityInactiveMembers, "Nationality", "NationalityID");
-
-            #endregion
-
-            #region
-            #region
-            dataGridViewRegisteredMembers.DataSource = registeredMembersDTO.Members;
-                dataGridViewRegisteredMembers.Columns[0].Visible = false;
-                dataGridViewRegisteredMembers.Columns[1].Visible = false;
-                dataGridViewRegisteredMembers.Columns[2].Visible = false;
-                dataGridViewRegisteredMembers.Columns[3].HeaderText = "Surname";
-                dataGridViewRegisteredMembers.Columns[4].HeaderText = "Name";
-                dataGridViewRegisteredMembers.Columns[5].Visible = false;
-                dataGridViewRegisteredMembers.Columns[6].Visible = false;
-                dataGridViewRegisteredMembers.Columns[7].Visible = false;
-                dataGridViewRegisteredMembers.Columns[8].Visible = false;
-                dataGridViewRegisteredMembers.Columns[9].Visible = false;
-                dataGridViewRegisteredMembers.Columns[10].Visible = false;
-                dataGridViewRegisteredMembers.Columns[11].Visible = false;
-                dataGridViewRegisteredMembers.Columns[12].Visible = false;
-                dataGridViewRegisteredMembers.Columns[13].HeaderText = "Nationality";
-                dataGridViewRegisteredMembers.Columns[14].Visible = false;
-                dataGridViewRegisteredMembers.Columns[15].HeaderText = "Profession";
-                dataGridViewRegisteredMembers.Columns[16].Visible = false;
-                dataGridViewRegisteredMembers.Columns[17].HeaderText = "Position";
-                dataGridViewRegisteredMembers.Columns[18].Visible = false;
-                dataGridViewRegisteredMembers.Columns[19].HeaderText = "Gender";
-                dataGridViewRegisteredMembers.Columns[20].Visible = false;
-                dataGridViewRegisteredMembers.Columns[21].Visible = false;
-                dataGridViewRegisteredMembers.Columns[22].Visible = false;
-                dataGridViewRegisteredMembers.Columns[23].Visible = false;
-                dataGridViewRegisteredMembers.Columns[24].Visible = false;
-                dataGridViewRegisteredMembers.Columns[25].Visible = false;
-                dataGridViewRegisteredMembers.Columns[26].Visible = false;
-                dataGridViewRegisteredMembers.Columns[27].Visible = false;
-                dataGridViewRegisteredMembers.Columns[28].Visible = false;
-                dataGridViewRegisteredMembers.Columns[29].Visible = false;
-                dataGridViewRegisteredMembers.Columns[30].Visible = false;
-                dataGridViewRegisteredMembers.Columns[31].Visible = false;
-                dataGridViewRegisteredMembers.Columns[32].Visible = false;
-                dataGridViewRegisteredMembers.Columns[33].Visible = false;
-                dataGridViewRegisteredMembers.Columns[34].Visible = false;
-                dataGridViewRegisteredMembers.Columns[35].Visible = false;
-                dataGridViewRegisteredMembers.Columns[36].Visible = false;
-                dataGridViewRegisteredMembers.Columns[37].Visible = false;
-                dataGridViewRegisteredMembers.Columns[38].Visible = false;
-                dataGridViewRegisteredMembers.Columns[39].Visible = false;
-                dataGridViewRegisteredMembers.Columns[40].Visible = false;
-                dataGridViewRegisteredMembers.Columns[41].Visible = false;
-                dataGridViewRegisteredMembers.Columns[42].Visible = false;
-                dataGridViewRegisteredMembers.Columns[43].Visible = false;
-                foreach (DataGridViewColumn column in dataGridViewRegisteredMembers.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
-            #endregion
-
-            #region
-            
-            dataGridViewBirthday.DataSource = birthdayDTO.Members;
-            dataGridViewBirthday.Columns[0].Visible = false;
-            dataGridViewBirthday.Columns[1].Visible = false;
-            dataGridViewBirthday.Columns[2].Visible = false;
-            dataGridViewBirthday.Columns[3].HeaderText = "Surname";
-            dataGridViewBirthday.Columns[4].HeaderText = "Name";
-            dataGridViewBirthday.Columns[5].Visible = false;
-            dataGridViewBirthday.Columns[6].Visible = false;
-            dataGridViewBirthday.Columns[7].Visible = false;
-            dataGridViewBirthday.Columns[8].Visible = false;
-            dataGridViewBirthday.Columns[9].Visible = false;
-            dataGridViewBirthday.Columns[10].Visible = false;
-            dataGridViewBirthday.Columns[11].Visible = false;
-            dataGridViewBirthday.Columns[12].Visible = false;
-            dataGridViewBirthday.Columns[13].Visible = false;
-            dataGridViewBirthday.Columns[14].Visible = false;
-            dataGridViewBirthday.Columns[15].Visible = false;
-            dataGridViewBirthday.Columns[16].Visible = false;
-            dataGridViewBirthday.Columns[17].HeaderText = "Position";
-            dataGridViewBirthday.Columns[18].Visible = false;
-            dataGridViewBirthday.Columns[19].HeaderText = "Gender";
-            dataGridViewBirthday.Columns[20].Visible = false;
-            dataGridViewBirthday.Columns[21].Visible = false;
-            dataGridViewBirthday.Columns[22].Visible = false;
-            dataGridViewBirthday.Columns[23].Visible = false;
-            dataGridViewBirthday.Columns[24].Visible = false;
-            dataGridViewBirthday.Columns[25].Visible = false;
-            dataGridViewBirthday.Columns[26].Visible = false;
-            dataGridViewBirthday.Columns[27].Visible = false;
-            dataGridViewBirthday.Columns[28].Visible = false;
-            dataGridViewBirthday.Columns[29].Visible = false;
-            dataGridViewBirthday.Columns[30].Visible = false;
-            dataGridViewBirthday.Columns[31].Visible = false;
-            dataGridViewBirthday.Columns[32].Visible = false;
-            dataGridViewBirthday.Columns[33].Visible = false;
-            dataGridViewBirthday.Columns[34].Visible = false;
-            dataGridViewBirthday.Columns[35].Visible = false;
-            dataGridViewBirthday.Columns[36].Visible = false;
-            dataGridViewBirthday.Columns[37].Visible = false;
-            dataGridViewBirthday.Columns[38].Visible = false;
-            dataGridViewBirthday.Columns[39].Visible = false;
-            dataGridViewBirthday.Columns[40].Visible = false;
-            dataGridViewBirthday.Columns[41].Visible = false;
-            dataGridViewBirthday.Columns[42].Visible = false;
-            dataGridViewBirthday.Columns[43].HeaderText = "Birthday";
-            foreach (DataGridViewColumn column in dataGridViewBirthday.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-            #endregion
-
-            #region
-            contactsDTO = contactsBLL.Select();
-                dataGridViewContacts.DataSource = contactsDTO.Members;
-                dataGridViewContacts.Columns[0].Visible = false;
-                dataGridViewContacts.Columns[1].Visible = false;
-                dataGridViewContacts.Columns[2].Visible = false;
-                dataGridViewContacts.Columns[3].HeaderText = "Surname";
-                dataGridViewContacts.Columns[4].HeaderText = "Name";
-                dataGridViewContacts.Columns[5].Visible = false;
-                dataGridViewContacts.Columns[6].Visible = false;
-                dataGridViewContacts.Columns[7].HeaderText = "Email";
-                dataGridViewContacts.Columns[8].Visible = false;
-                dataGridViewContacts.Columns[9].Visible = false;
-                dataGridViewContacts.Columns[10].Visible = false;
-                dataGridViewContacts.Columns[11].Visible = false;
-                dataGridViewContacts.Columns[12].Visible = false;
-                dataGridViewContacts.Columns[13].Visible = false;
-                dataGridViewContacts.Columns[14].Visible = false;
-                dataGridViewContacts.Columns[15].Visible = false;
-                dataGridViewContacts.Columns[16].Visible = false;
-                dataGridViewContacts.Columns[17].Visible = false;
-                dataGridViewContacts.Columns[18].Visible = false;
-                dataGridViewContacts.Columns[19].Visible = false;
-                dataGridViewContacts.Columns[20].Visible = false;
-                dataGridViewContacts.Columns[21].Visible = false;
-                dataGridViewContacts.Columns[22].Visible = false;
-                dataGridViewContacts.Columns[23].Visible = false;
-                dataGridViewContacts.Columns[24].Visible = false;
-                dataGridViewContacts.Columns[25].Visible = false;
-                dataGridViewContacts.Columns[26].HeaderText = "Phone Number";
-                dataGridViewContacts.Columns[27].HeaderText = "Phone Number 2";
-                dataGridViewContacts.Columns[28].HeaderText = "Phone Number 3";
-                dataGridViewContacts.Columns[29].Visible = false;
-                dataGridViewContacts.Columns[30].Visible = false;
-                dataGridViewContacts.Columns[31].Visible = false;
-                dataGridViewContacts.Columns[32].Visible = false;
-                dataGridViewContacts.Columns[33].Visible = false;
-                dataGridViewContacts.Columns[34].Visible = false;
-                dataGridViewContacts.Columns[35].Visible = false;
-                dataGridViewContacts.Columns[36].Visible = false;
-                dataGridViewContacts.Columns[37].Visible = false;
-                dataGridViewContacts.Columns[38].Visible = false;
-                dataGridViewContacts.Columns[39].Visible = false;
-                dataGridViewContacts.Columns[40].Visible = false;
-                dataGridViewContacts.Columns[41].Visible = false;
-                dataGridViewContacts.Columns[42].Visible = false;
-                dataGridViewContacts.Columns[43].Visible = false;
-                foreach (DataGridViewColumn column in dataGridViewContacts.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
-                #endregion
-
-                #region
-                dataGridViewFormerMembers.DataSource = formerMembersDTO.Members;
-                dataGridViewFormerMembers.Columns[0].Visible = false;
-                dataGridViewFormerMembers.Columns[1].Visible = false;
-                dataGridViewFormerMembers.Columns[2].Visible = false;
-                dataGridViewFormerMembers.Columns[3].HeaderText = "Surname";
-                dataGridViewFormerMembers.Columns[4].HeaderText = "Name";
-                dataGridViewFormerMembers.Columns[5].Visible = false;
-                dataGridViewFormerMembers.Columns[6].Visible = false;
-                dataGridViewFormerMembers.Columns[7].Visible = false;
-                dataGridViewFormerMembers.Columns[8].Visible = false;
-                dataGridViewFormerMembers.Columns[9].Visible = false;
-                dataGridViewFormerMembers.Columns[10].Visible = false;
-                dataGridViewFormerMembers.Columns[11].Visible = false;
-                dataGridViewFormerMembers.Columns[12].Visible = false;
-                dataGridViewFormerMembers.Columns[13].HeaderText = "Nationality";
-                dataGridViewFormerMembers.Columns[14].Visible = false;
-                dataGridViewFormerMembers.Columns[15].HeaderText = "Profession";
-                dataGridViewFormerMembers.Columns[16].Visible = false;
-                dataGridViewFormerMembers.Columns[17].HeaderText = "Position";
-                dataGridViewFormerMembers.Columns[18].Visible = false;
-                dataGridViewFormerMembers.Columns[19].HeaderText = "Gender";
-                dataGridViewFormerMembers.Columns[19].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewFormerMembers.Columns[20].Visible = false;
-                dataGridViewFormerMembers.Columns[21].Visible = false;
-                dataGridViewFormerMembers.Columns[22].Visible = false;
-                dataGridViewFormerMembers.Columns[23].Visible = false;
-                dataGridViewFormerMembers.Columns[24].Visible = false;
-                dataGridViewFormerMembers.Columns[25].Visible = false;
-                dataGridViewFormerMembers.Columns[26].Visible = false;
-                dataGridViewFormerMembers.Columns[27].Visible = false;
-                dataGridViewFormerMembers.Columns[28].Visible = false;
-                dataGridViewFormerMembers.Columns[29].Visible = false;
-                dataGridViewFormerMembers.Columns[30].Visible = false;
-                dataGridViewFormerMembers.Columns[31].Visible = false;
-                dataGridViewFormerMembers.Columns[32].Visible = false;
-                dataGridViewFormerMembers.Columns[33].Visible = false;
-                dataGridViewFormerMembers.Columns[34].Visible = false;
-                dataGridViewFormerMembers.Columns[35].Visible = false;
-                dataGridViewFormerMembers.Columns[36].Visible = false;
-                dataGridViewFormerMembers.Columns[37].Visible = false;
-                dataGridViewFormerMembers.Columns[38].Visible = false;
-                dataGridViewFormerMembers.Columns[39].Visible = false;
-                dataGridViewFormerMembers.Columns[40].Visible = false;
-                dataGridViewFormerMembers.Columns[41].Visible = false;
-                dataGridViewFormerMembers.Columns[42].Visible = false;
-                dataGridViewFormerMembers.Columns[43].Visible = false;
-                foreach (DataGridViewColumn column in dataGridViewFormerMembers.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
-                #endregion
-
-                #region
-                dataGridViewDeadMembers.DataSource = deadMembersDTO.Members;
-                dataGridViewDeadMembers.Columns[0].Visible = false;
-                dataGridViewDeadMembers.Columns[1].Visible = false;
-                dataGridViewDeadMembers.Columns[2].Visible = false;
-                dataGridViewDeadMembers.Columns[3].HeaderText = "Surname";
-                dataGridViewDeadMembers.Columns[4].HeaderText = "Name";
-                dataGridViewDeadMembers.Columns[5].Visible = false;
-                dataGridViewDeadMembers.Columns[6].Visible = false;
-                dataGridViewDeadMembers.Columns[7].Visible = false;
-                dataGridViewDeadMembers.Columns[8].Visible = false;
-                dataGridViewDeadMembers.Columns[9].Visible = false;
-                dataGridViewDeadMembers.Columns[10].Visible = false;
-                dataGridViewDeadMembers.Columns[11].Visible = false;
-                dataGridViewDeadMembers.Columns[12].Visible = false;
-                dataGridViewDeadMembers.Columns[13].HeaderText = "Nationality";
-                dataGridViewDeadMembers.Columns[14].Visible = false;
-                dataGridViewDeadMembers.Columns[15].HeaderText = "Profession";
-                dataGridViewDeadMembers.Columns[16].Visible = false;
-                dataGridViewDeadMembers.Columns[17].HeaderText = "Position";
-                dataGridViewDeadMembers.Columns[18].Visible = false;
-                dataGridViewDeadMembers.Columns[19].HeaderText = "Gender";
-                dataGridViewDeadMembers.Columns[19].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewDeadMembers.Columns[20].Visible = false;
-                dataGridViewDeadMembers.Columns[21].Visible = false;
-                dataGridViewDeadMembers.Columns[22].Visible = false;
-                dataGridViewDeadMembers.Columns[23].Visible = false;
-                dataGridViewDeadMembers.Columns[24].Visible = false;
-                dataGridViewDeadMembers.Columns[25].Visible = false;
-                dataGridViewDeadMembers.Columns[26].Visible = false;
-                dataGridViewDeadMembers.Columns[27].Visible = false;
-                dataGridViewDeadMembers.Columns[28].Visible = false;
-                dataGridViewDeadMembers.Columns[29].Visible = false;
-                dataGridViewDeadMembers.Columns[30].Visible = false;
-                dataGridViewDeadMembers.Columns[31].Visible = false;
-                dataGridViewDeadMembers.Columns[32].Visible = false;
-                dataGridViewDeadMembers.Columns[33].Visible = false;
-                dataGridViewDeadMembers.Columns[34].Visible = false;
-                dataGridViewDeadMembers.Columns[35].Visible = false;
-                dataGridViewDeadMembers.Columns[36].Visible = false;
-                dataGridViewDeadMembers.Columns[37].HeaderText = "Died on";
-                dataGridViewDeadMembers.Columns[37].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewDeadMembers.Columns[38].HeaderText = "Aged";
-                dataGridViewDeadMembers.Columns[38].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewDeadMembers.Columns[39].Visible = false;
-                dataGridViewDeadMembers.Columns[40].Visible = false;
-                dataGridViewDeadMembers.Columns[41].Visible = false;
-                dataGridViewDeadMembers.Columns[42].Visible = false;
-                dataGridViewDeadMembers.Columns[43].Visible = false;
-                foreach (DataGridViewColumn column in dataGridViewDeadMembers.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
-            #endregion
-
-                // Members' Commitments
-                #region
-                committmentDTO = committmentBLL.Select(DateTime.Now.Year);
-
-                cmbYearCommittment.DataSource = committmentDTO.Years;
-                cmbYearCommittment.SelectedIndex = -1;
-
-                cmbDuesStatusCommittment.Items.Add("Incomplete");
-                cmbDuesStatusCommittment.Items.Add("Completed");
-                cmbDuesStatusCommittment.Items.Add("Extra");
-
-                cmbFineStatusCommittment.Items.Add("Incomplete");
-                cmbFineStatusCommittment.Items.Add("Completed");
-                cmbFineStatusCommittment.Items.Add("Extra");
-
-                dataGridViewCommitments.DataSource = committmentDTO.Committments;
-                dataGridViewCommitments.Columns[0].Visible = false;
-                dataGridViewCommitments.Columns[1].HeaderText = "Rank Ratio";
-                dataGridViewCommitments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewCommitments.Columns[2].HeaderText = "Name";
-                dataGridViewCommitments.Columns[3].HeaderText = "Surname";
-                dataGridViewCommitments.Columns[4].Visible = false;
-                dataGridViewCommitments.Columns[5].HeaderText = "Exp (€)";
-                dataGridViewCommitments.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewCommitments.Columns[6].HeaderText = "Cont (€)";
-                dataGridViewCommitments.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewCommitments.Columns[7].HeaderText = "Dues Bal.";
-                dataGridViewCommitments.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewCommitments.Columns[8].HeaderText = "Fines (€)";
-                dataGridViewCommitments.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewCommitments.Columns[9].HeaderText = "P. Fines (€)";
-                dataGridViewCommitments.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewCommitments.Columns[10].HeaderText = "Pres.";
-                dataGridViewCommitments.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewCommitments.Columns[11].HeaderText = "Abs.";
-                dataGridViewCommitments.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridViewCommitments.Columns[12].Visible = false;
-
-                foreach (DataGridViewColumn column in dataGridViewCommitments.Columns)
-                    {
-                        column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                    }
-                dataGridViewCommitments.DefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            #endregion
-
-                // Inactive Members
-                #region
-                dataGridViewInactiveMembers.DataSource = inactiveMembersDTO.Members;
-                dataGridViewInactiveMembers.Columns[0].Visible = false;
-                dataGridViewInactiveMembers.Columns[1].Visible = false;
-                dataGridViewInactiveMembers.Columns[2].Visible = false;
-                dataGridViewInactiveMembers.Columns[3].HeaderText = "Surname";
-                dataGridViewInactiveMembers.Columns[4].HeaderText = "Name";
-                dataGridViewInactiveMembers.Columns[5].Visible = false;
-                dataGridViewInactiveMembers.Columns[6].Visible = false;
-                dataGridViewInactiveMembers.Columns[7].Visible = false;
-                dataGridViewInactiveMembers.Columns[8].Visible = false;
-                dataGridViewInactiveMembers.Columns[9].Visible = false;
-                dataGridViewInactiveMembers.Columns[10].Visible = false;
-                dataGridViewInactiveMembers.Columns[11].Visible = false;
-                dataGridViewInactiveMembers.Columns[12].Visible = false;
-                dataGridViewInactiveMembers.Columns[13].HeaderText = "Nationality";
-                dataGridViewInactiveMembers.Columns[14].Visible = false;
-                dataGridViewInactiveMembers.Columns[15].HeaderText = "Profession";
-                dataGridViewInactiveMembers.Columns[16].Visible = false;
-                dataGridViewInactiveMembers.Columns[17].HeaderText = "Position";
-                dataGridViewInactiveMembers.Columns[18].Visible = false;
-                dataGridViewInactiveMembers.Columns[19].HeaderText = "Gender";
-                dataGridViewInactiveMembers.Columns[20].Visible = false;
-                dataGridViewInactiveMembers.Columns[21].Visible = false;
-                dataGridViewInactiveMembers.Columns[22].Visible = false;
-                dataGridViewInactiveMembers.Columns[23].Visible = false;
-                dataGridViewInactiveMembers.Columns[24].Visible = false;
-                dataGridViewInactiveMembers.Columns[25].Visible = false;
-                dataGridViewInactiveMembers.Columns[26].Visible = false;
-                dataGridViewInactiveMembers.Columns[27].Visible = false;
-                dataGridViewInactiveMembers.Columns[28].Visible = false;
-                dataGridViewInactiveMembers.Columns[29].Visible = false;
-                dataGridViewInactiveMembers.Columns[30].Visible = false;
-                dataGridViewInactiveMembers.Columns[31].Visible = false;
-                dataGridViewInactiveMembers.Columns[32].Visible = false;
-                dataGridViewInactiveMembers.Columns[33].Visible = false;
-                dataGridViewInactiveMembers.Columns[34].Visible = false;
-                dataGridViewInactiveMembers.Columns[35].Visible = false;
-                dataGridViewInactiveMembers.Columns[36].Visible = false;
-                dataGridViewInactiveMembers.Columns[37].Visible = false;
-                dataGridViewInactiveMembers.Columns[38].Visible = false;
-                dataGridViewInactiveMembers.Columns[39].Visible = false;
-                dataGridViewInactiveMembers.Columns[40].Visible = false;
-                dataGridViewInactiveMembers.Columns[41].Visible = false;
-                dataGridViewInactiveMembers.Columns[42].Visible = false;
-                dataGridViewInactiveMembers.Columns[43].Visible = false;
-                foreach (DataGridViewColumn column in dataGridViewInactiveMembers.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
-                #endregion
-
-
-            #endregion
-
-            GetCounts();
         }
 
         private void btnAddRegisteredMembers_Click(object sender, EventArgs e)
