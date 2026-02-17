@@ -45,14 +45,33 @@ namespace APC.HelperServices
             {
                 case MemberCommittmentGridType.Basic:
                     GeneralHelper.SetVisibleColumns(grid, "ShowRank", "Name", "Surname", "Contributed", "Balance", "Fines", "PaidFines", "NumberOfPresence", "NumberOfAbsence");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "ShowRank", "Rank" },
+                                    { "Contributed", "Cont. (€)" },
+                                    { "PaidFines", "P. Fines (€)" },
+                                    { "NumberOfPresence", "Pres." },
+                                    { "NumberOfAbsence", "Abs." }
+                                });
                     break;
 
                 case MemberCommittmentGridType.Fines:
                     GeneralHelper.SetVisibleColumns(grid, "ShowRank", "Name", "Surname", "Fines", "PaidFines");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "ShowRank", "Rank" },
+                                    { "Fines", "Fines (€)" },
+                                    { "PaidFines", "P. Fines (€)" }
+                                });
                     break;
 
                 case MemberCommittmentGridType.Dues:
                     GeneralHelper.SetVisibleColumns(grid, "ShowRank", "Name", "Surname", "Contributed", "Balance");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "ShowRank", "Rank" },
+                                    { "Contributed", "Contributed (€)" },
+                                });
                     break;
 
             }

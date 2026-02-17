@@ -437,5 +437,14 @@ namespace APC
                 column.HeaderCell.Style.Font = new System.Drawing.Font("Segoe UI", 16, FontStyle.Bold);
             }
         }
+
+        public static void RenameColumns(DataGridView grid, Dictionary<string, string> mappings)
+        {
+            foreach (var map in mappings)
+            {
+                if (grid.Columns.Contains(map.Key))
+                    grid.Columns[map.Key].HeaderText = map.Value;
+            }
+        }
     }
 }

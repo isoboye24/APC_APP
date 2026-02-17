@@ -82,18 +82,48 @@ namespace APC.HelperServices
             {
                 case MemberGridType.Basic:
                     GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "NationalityName", "PositionName", "GenderName");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "NationalityName", "Nationality" },
+                                    { "PositionName", "Position" },
+                                    { "GenderName", "Gender" },                                    
+                                });
                     break;
 
                 case MemberGridType.Contact:
                     GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "EmailAddress", "PhoneNumber", "PhoneNumber2", "PhoneNumber3");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "EmailAddress", "Email" },
+                                    { "PhoneNumber", "Mobile" },
+                                    { "PhoneNumber2", "Mobile 2" },
+                                    { "PhoneNumber3", "Mobile 3" },
+                                });
                     break;
 
                 case MemberGridType.Birthday:
                     GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "PositionName", "GenderName", "BirthdayDate");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "PositionName", "Position" },
+                                    { "GenderName", "Gender" },
+                                    { "BirthdayDate", "Birthday" },
+                                });
                     break;
 
                 case MemberGridType.Dead:
                     GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "PositionName", "GenderName", "Birthday", "DeadDate", "DeadAge");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "PositionName", "Position" },
+                                    { "GenderName", "Gender" },
+                                    { "Birthday", "Born on" },
+                                    { "DeadDate", "Died on" },
+                                    { "DeadAge", "Age" }
+                                });
+                    break;
+                default:
+                    GeneralHelper.SetVisibleColumns(grid, "", "", "");
                     break;
             }
         }
