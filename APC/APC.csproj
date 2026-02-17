@@ -620,6 +620,7 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FormProperties.cs" />
+    <Compile Include="HelperServices\CommittmentHelperService.cs" />
     <Compile Include="HelperServices\MemberHelperService.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="ReadFiles.cs" />

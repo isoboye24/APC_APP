@@ -68,15 +68,6 @@ namespace APC.HelperServices
             };
         }
 
-        private static void SetVisibleColumns(DataGridView grid, params string[] visibleColumns)
-        {
-            foreach (DataGridViewColumn column in grid.Columns)
-            {
-                column.Visible = visibleColumns.Contains(column.Name);
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-        }
-
         public enum MemberGridType
         {
             Basic,
@@ -90,19 +81,19 @@ namespace APC.HelperServices
             switch (type)
             {
                 case MemberGridType.Basic:
-                    SetVisibleColumns(grid, "Name", "Surname", "NationalityName", "PositionName", "GenderName");
+                    GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "NationalityName", "PositionName", "GenderName");
                     break;
 
                 case MemberGridType.Contact:
-                    SetVisibleColumns(grid, "Name", "Surname", "EmailAddress", "PhoneNumber", "PhoneNumber2", "PhoneNumber3");
+                    GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "EmailAddress", "PhoneNumber", "PhoneNumber2", "PhoneNumber3");
                     break;
 
                 case MemberGridType.Birthday:
-                    SetVisibleColumns(grid, "Name", "Surname", "PositionName", "GenderName", "BirthdayDate");
+                    GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "PositionName", "GenderName", "BirthdayDate");
                     break;
 
                 case MemberGridType.Dead:
-                    SetVisibleColumns(grid, "Name", "Surname", "PositionName", "GenderName", "Birthday", "DeadDate", "DeadAge");
+                    GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "PositionName", "GenderName", "Birthday", "DeadDate", "DeadAge");
                     break;
             }
         }

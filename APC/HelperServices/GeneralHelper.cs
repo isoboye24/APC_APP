@@ -428,5 +428,14 @@ namespace APC
                 control.Font = new System.Drawing.Font("Segoe UI", 16, FontStyle.Regular);
             }
         }
+
+        public static void SetVisibleColumns(DataGridView grid, params string[] visibleColumns)
+        {
+            foreach (DataGridViewColumn column in grid.Columns)
+            {
+                column.Visible = visibleColumns.Contains(column.Name);
+                column.HeaderCell.Style.Font = new System.Drawing.Font("Segoe UI", 16, FontStyle.Bold);
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static APC.HelperServices.CommittmentHelperService;
 using static APC.HelperServices.MemberHelperService;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
@@ -41,7 +42,6 @@ namespace APC.AllForms
 
             ResizeControls();
 
-
             #region
             registeredMembersDTO = registeredMembersBLL.Select();
             birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
@@ -49,6 +49,7 @@ namespace APC.AllForms
             deadMembersDTO = deadMembersBLL.SelectDeadMembers();
             inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
             contactsDTO = contactsBLL.Select();
+            committmentDTO = committmentBLL.Select(DateTime.Now.Year);
 
             LoadRegisteredMembers();
             FillRegisteredMemberComboBoxes();
@@ -67,12 +68,11 @@ namespace APC.AllForms
 
             LoadMembersContact();
 
+            LoadMemberCommittments();
             #endregion
 
             // Members' Commitments
             #region
-            committmentDTO = committmentBLL.Select(DateTime.Now.Year);
-
             cmbYearCommittment.DataSource = committmentDTO.Years;
             cmbYearCommittment.SelectedIndex = -1;
 
@@ -83,38 +83,7 @@ namespace APC.AllForms
             cmbFineStatusCommittment.Items.Add("Incomplete");
             cmbFineStatusCommittment.Items.Add("Completed");
             cmbFineStatusCommittment.Items.Add("Extra");
-
-            dataGridViewCommitments.DataSource = committmentDTO.Committments;
-            dataGridViewCommitments.Columns[0].Visible = false;
-            dataGridViewCommitments.Columns[1].HeaderText = "Rank Ratio";
-            dataGridViewCommitments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCommitments.Columns[2].HeaderText = "Name";
-            dataGridViewCommitments.Columns[3].HeaderText = "Surname";
-            dataGridViewCommitments.Columns[4].Visible = false;
-            dataGridViewCommitments.Columns[5].HeaderText = "Exp (€)";
-            dataGridViewCommitments.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCommitments.Columns[6].HeaderText = "Cont (€)";
-            dataGridViewCommitments.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCommitments.Columns[7].HeaderText = "Dues Bal.";
-            dataGridViewCommitments.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCommitments.Columns[8].HeaderText = "Fines (€)";
-            dataGridViewCommitments.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCommitments.Columns[9].HeaderText = "P. Fines (€)";
-            dataGridViewCommitments.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCommitments.Columns[10].HeaderText = "Pres.";
-            dataGridViewCommitments.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCommitments.Columns[11].HeaderText = "Abs.";
-            dataGridViewCommitments.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCommitments.Columns[12].Visible = false;
-
-            foreach (DataGridViewColumn column in dataGridViewCommitments.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-            dataGridViewCommitments.DefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
             #endregion
-
 
             GetCounts();
         }
@@ -153,6 +122,12 @@ namespace APC.AllForms
         {
             dataGridViewFormerMembers.DataSource = formerMembersDTO.Members;
             ConfigureMemberGrid(dataGridViewFormerMembers, MemberGridType.Basic);
+        }
+
+        private void LoadMemberCommittments()
+        {
+            dataGridViewCommitments.DataSource = committmentDTO.Committments;
+            ConfigureMemberCommittmentGrid(dataGridViewCommitments, MemberCommittmentGridType.Basic);
         }
 
         private void ResizeControls()
@@ -352,22 +327,27 @@ namespace APC.AllForms
             labelTotalRowsCommittment.Text = "Row : " + dataGridViewBirthday.RowCount.ToString();
         }
 
-        private void btnUpdateRegisteredMembers_Click(object sender, EventArgs e)
+        private void updateMember(MemberDetailDTO detail)
         {
-            if (registeredMembersDetail.MemberID == 0)
+            if (detail.MemberID == 0)
             {
                 MessageBox.Show("Please choose a member from the table");
             }
             else
             {
                 FormMembers open = new FormMembers();
-                open.detail = registeredMembersDetail;
+                open.detail = detail;
                 open.isUpdate = true;
                 this.Hide();
                 open.ShowDialog();
                 this.Visible = true;
                 ClearFilters();
             }
+        }
+
+        private void btnUpdateRegisteredMembers_Click(object sender, EventArgs e)
+        {
+            updateMember(registeredMembersDetail);
         }
 
         private void btnViewRegisteredMembers_Click(object sender, EventArgs e)
@@ -460,20 +440,7 @@ namespace APC.AllForms
 
         private void btnUpdateContacts_Click(object sender, EventArgs e)
         {
-            if (contactsDetail.MemberID == 0)
-            {
-                MessageBox.Show("Please choose a member from the table");
-            }
-            else
-            {
-                FormMembers open = new FormMembers();
-                open.detail = contactsDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;                
-                ClearFilters();
-            }
+            updateMember(contactsDetail);
         }
 
         private void dataGridViewContacts_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -645,21 +612,10 @@ namespace APC.AllForms
         
         private void dataGridViewCommitments_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            committmentDetail = new MembersCommittmentDetailDTO();
-            committmentDetail.MemberID = Convert.ToInt32(dataGridViewCommitments.Rows[e.RowIndex].Cells[0].Value);
-            committmentDetail.Rank = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[1].Value);
-            committmentDetail.Name = dataGridViewCommitments.Rows[e.RowIndex].Cells[2].Value.ToString();
-            committmentDetail.Surname = dataGridViewCommitments.Rows[e.RowIndex].Cells[3].Value.ToString();
-            committmentDetail.ImagePath = dataGridViewCommitments.Rows[e.RowIndex].Cells[4].Value.ToString();
-            committmentDetail.ExpectedAmount = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[5].Value);
-            committmentDetail.Contributed = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[6].Value);
-            committmentDetail.Balance = dataGridViewCommitments.Rows[e.RowIndex].Cells[7].Value.ToString();
-            committmentDetail.Fines = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[8].Value);
-            committmentDetail.PaidFines = Convert.ToDecimal(dataGridViewCommitments.Rows[e.RowIndex].Cells[9].Value);
-            committmentDetail.NumberOfPresence = Convert.ToInt32(dataGridViewCommitments.Rows[e.RowIndex].Cells[10].Value);
-            committmentDetail.NumberOfAbsence = Convert.ToInt32(dataGridViewCommitments.Rows[e.RowIndex].Cells[11].Value);
+            if (e.RowIndex < 0) return;
+            committmentDetail = MapMemberCommittmentFromGrid(dataGridViewCommitments, e.RowIndex);
 
-            string imagePath = Application.StartupPath + "\\images\\" + committmentDetail.ImagePath;
+            string imagePath = Path.Combine(Application.StartupPath, "images", committmentDetail.ImagePath);
             picCommittment.ImageLocation = imagePath;
         }
 

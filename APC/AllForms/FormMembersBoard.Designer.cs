@@ -345,7 +345,7 @@
             this.activeMembersPage.Padding = new System.Windows.Forms.Padding(4);
             this.activeMembersPage.Size = new System.Drawing.Size(1268, 688);
             this.activeMembersPage.TabIndex = 0;
-            this.activeMembersPage.Text = "Registered Members    ";
+            this.activeMembersPage.Text = "Registered    ";
             this.activeMembersPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -1886,7 +1886,7 @@
             this.inactiveMembersPage.Name = "inactiveMembersPage";
             this.inactiveMembersPage.Size = new System.Drawing.Size(1268, 688);
             this.inactiveMembersPage.TabIndex = 6;
-            this.inactiveMembersPage.Text = "Inactive Members    ";
+            this.inactiveMembersPage.Text = "Inactive    ";
             this.inactiveMembersPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel51
@@ -2377,7 +2377,7 @@
             this.formerMembersPage.Name = "formerMembersPage";
             this.formerMembersPage.Size = new System.Drawing.Size(1268, 688);
             this.formerMembersPage.TabIndex = 3;
-            this.formerMembersPage.Text = "Former Members    ";
+            this.formerMembersPage.Text = "Former    ";
             this.formerMembersPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel23
@@ -2865,7 +2865,7 @@
             this.deadMembersPage.Name = "deadMembersPage";
             this.deadMembersPage.Size = new System.Drawing.Size(1268, 688);
             this.deadMembersPage.TabIndex = 4;
-            this.deadMembersPage.Text = "Dead Members    ";
+            this.deadMembersPage.Text = "Dead    ";
             this.deadMembersPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel32
