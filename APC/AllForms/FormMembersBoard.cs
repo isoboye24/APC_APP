@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -370,21 +371,8 @@ namespace APC.AllForms
         }
 
         private void btnViewRegisteredMembers_Click(object sender, EventArgs e)
-        {
-            if (registeredMembersDetail.MemberID == 0)
-            {
-                MessageBox.Show("Please choose a member from the table");
-            }
-            else
-            {
-                FormViewMember open = new FormViewMember();
-                open.detail = registeredMembersDetail;
-                open.isView = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+        {            
+            ViewMember(registeredMembersDetail, false);
         }
 
         private void txtNameRegisteredMembers_TextChanged(object sender, EventArgs e)
@@ -450,53 +438,11 @@ namespace APC.AllForms
 
         private void dataGridViewRegisteredMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            registeredMembersDetail = new MemberDetailDTO();
-            registeredMembersDetail.MemberID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[0].Value);
-            registeredMembersDetail.Username = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[1].Value.ToString();
-            registeredMembersDetail.Password = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[2].Value.ToString();
-            registeredMembersDetail.Surname = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[3].Value.ToString();
-            registeredMembersDetail.Name = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[4].Value.ToString();
-            registeredMembersDetail.Birthday = Convert.ToDateTime(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[5].Value);
-            registeredMembersDetail.ImagePath = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[6].Value.ToString();
-            registeredMembersDetail.EmailAddress = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[7].Value.ToString();
-            registeredMembersDetail.HouseAddress = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[8].Value.ToString();
-            registeredMembersDetail.MembershipDate = Convert.ToDateTime(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[9].Value);
-            registeredMembersDetail.CountryID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[10].Value);
-            registeredMembersDetail.CountryName = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[11].Value.ToString();
-            registeredMembersDetail.NationalityID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[12].Value);
-            registeredMembersDetail.NationalityName = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[13].Value.ToString();
-            registeredMembersDetail.ProfessionID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[14].Value);
-            registeredMembersDetail.ProfessionName = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[15].Value.ToString();
-            registeredMembersDetail.PositionID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[16].Value);
-            registeredMembersDetail.PositionName = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[17].Value.ToString();
-            registeredMembersDetail.GenderID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[18].Value);
-            registeredMembersDetail.GenderName = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[19].Value.ToString();
-            registeredMembersDetail.EmploymentStatusID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[20].Value);
-            registeredMembersDetail.EmploymentStatusName = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[21].Value.ToString();
-            registeredMembersDetail.MaritalStatusID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[22].Value);
-            registeredMembersDetail.MaritalStatusName = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[23].Value.ToString();
-            registeredMembersDetail.PermissionID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[24].Value);
-            registeredMembersDetail.PermissionName = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[25].Value.ToString();
-            registeredMembersDetail.PhoneNumber = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[26].Value.ToString();
-            registeredMembersDetail.PhoneNumber2 = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[27].Value.ToString();
-            registeredMembersDetail.PhoneNumber3 = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[28].Value.ToString();
-            registeredMembersDetail.isCountryDeleted = Convert.ToBoolean(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[29].Value);
-            registeredMembersDetail.isNationalityDeleted = Convert.ToBoolean(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[30].Value);
-            registeredMembersDetail.isProfessionDeleted = Convert.ToBoolean(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[31].Value);
-            registeredMembersDetail.isPositionDeleted = Convert.ToBoolean(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[32].Value);
-            registeredMembersDetail.isEmpStatusDeleted = Convert.ToBoolean(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[33].Value);
-            registeredMembersDetail.isMarStatusDeleted = Convert.ToBoolean(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[34].Value);
-            registeredMembersDetail.MembershipStatusID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[35].Value);
-            registeredMembersDetail.MembershipStatus = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[36].Value.ToString();
-            registeredMembersDetail.DeadDate = Convert.ToDateTime(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[37].Value);
-            registeredMembersDetail.DeadAge = Convert.ToDouble(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[38].Value);
-            registeredMembersDetail.LGA = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[39].Value.ToString();
-            registeredMembersDetail.NameOfNextOfKin = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
-            registeredMembersDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[41].Value);
-            registeredMembersDetail.RelationshipToKin = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[42].Value.ToString();
-            registeredMembersDetail.BirthdayDate = dataGridViewRegisteredMembers.Rows[e.RowIndex].Cells[43].Value.ToString();
+            if (e.RowIndex < 0) return;
+            registeredMembersDetail = MapMemberFromGrid(dataGridViewRegisteredMembers, e.RowIndex);
 
-            string imagePath = Application.StartupPath + "\\images\\" + registeredMembersDetail.ImagePath;
+            // Load image
+            string imagePath = Path.Combine(Application.StartupPath, "images", registeredMembersDetail.ImagePath);
             picRegisteredMember.ImageLocation = imagePath;
         }
 
@@ -532,51 +478,8 @@ namespace APC.AllForms
 
         private void dataGridViewContacts_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            contactsDetail = new MemberDetailDTO();
-            contactsDetail.MemberID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[0].Value);
-            contactsDetail.Username = dataGridViewContacts.Rows[e.RowIndex].Cells[1].Value.ToString();
-            contactsDetail.Password = dataGridViewContacts.Rows[e.RowIndex].Cells[2].Value.ToString();
-            contactsDetail.Surname = dataGridViewContacts.Rows[e.RowIndex].Cells[3].Value.ToString();
-            contactsDetail.Name = dataGridViewContacts.Rows[e.RowIndex].Cells[4].Value.ToString();
-            contactsDetail.Birthday = Convert.ToDateTime(dataGridViewContacts.Rows[e.RowIndex].Cells[5].Value);
-            contactsDetail.ImagePath = dataGridViewContacts.Rows[e.RowIndex].Cells[6].Value.ToString();
-            contactsDetail.EmailAddress = dataGridViewContacts.Rows[e.RowIndex].Cells[7].Value.ToString();
-            contactsDetail.HouseAddress = dataGridViewContacts.Rows[e.RowIndex].Cells[8].Value.ToString();
-            contactsDetail.MembershipDate = Convert.ToDateTime(dataGridViewContacts.Rows[e.RowIndex].Cells[9].Value);
-            contactsDetail.CountryID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[10].Value);
-            contactsDetail.CountryName = dataGridViewContacts.Rows[e.RowIndex].Cells[11].Value.ToString();
-            contactsDetail.NationalityID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[12].Value);
-            contactsDetail.NationalityName = dataGridViewContacts.Rows[e.RowIndex].Cells[13].Value.ToString();
-            contactsDetail.ProfessionID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[14].Value);
-            contactsDetail.ProfessionName = dataGridViewContacts.Rows[e.RowIndex].Cells[15].Value.ToString();
-            contactsDetail.PositionID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[16].Value);
-            contactsDetail.PositionName = dataGridViewContacts.Rows[e.RowIndex].Cells[17].Value.ToString();
-            contactsDetail.GenderID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[18].Value);
-            contactsDetail.GenderName = dataGridViewContacts.Rows[e.RowIndex].Cells[19].Value.ToString();
-            contactsDetail.EmploymentStatusID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[20].Value);
-            contactsDetail.EmploymentStatusName = dataGridViewContacts.Rows[e.RowIndex].Cells[21].Value.ToString();
-            contactsDetail.MaritalStatusID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[22].Value);
-            contactsDetail.MaritalStatusName = dataGridViewContacts.Rows[e.RowIndex].Cells[23].Value.ToString();
-            contactsDetail.PermissionID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[24].Value);
-            contactsDetail.PermissionName = dataGridViewContacts.Rows[e.RowIndex].Cells[25].Value.ToString();
-            contactsDetail.PhoneNumber = dataGridViewContacts.Rows[e.RowIndex].Cells[26].Value.ToString();
-            contactsDetail.PhoneNumber2 = dataGridViewContacts.Rows[e.RowIndex].Cells[27].Value.ToString();
-            contactsDetail.PhoneNumber3 = dataGridViewContacts.Rows[e.RowIndex].Cells[28].Value.ToString();
-            contactsDetail.isCountryDeleted = Convert.ToBoolean(dataGridViewContacts.Rows[e.RowIndex].Cells[29].Value);
-            contactsDetail.isNationalityDeleted = Convert.ToBoolean(dataGridViewContacts.Rows[e.RowIndex].Cells[30].Value);
-            contactsDetail.isProfessionDeleted = Convert.ToBoolean(dataGridViewContacts.Rows[e.RowIndex].Cells[31].Value);
-            contactsDetail.isPositionDeleted = Convert.ToBoolean(dataGridViewContacts.Rows[e.RowIndex].Cells[32].Value);
-            contactsDetail.isEmpStatusDeleted = Convert.ToBoolean(dataGridViewContacts.Rows[e.RowIndex].Cells[33].Value);
-            contactsDetail.isMarStatusDeleted = Convert.ToBoolean(dataGridViewContacts.Rows[e.RowIndex].Cells[34].Value);
-            contactsDetail.MembershipStatusID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[35].Value);
-            contactsDetail.MembershipStatus = dataGridViewContacts.Rows[e.RowIndex].Cells[36].Value.ToString();
-            contactsDetail.DeadDate = Convert.ToDateTime(dataGridViewContacts.Rows[e.RowIndex].Cells[37].Value);
-            contactsDetail.DeadAge = Convert.ToDouble(dataGridViewContacts.Rows[e.RowIndex].Cells[38].Value);
-            contactsDetail.LGA = dataGridViewContacts.Rows[e.RowIndex].Cells[39].Value.ToString();
-            contactsDetail.NameOfNextOfKin = dataGridViewContacts.Rows[e.RowIndex].Cells[40].Value.ToString();
-            contactsDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewContacts.Rows[e.RowIndex].Cells[41].Value);
-            contactsDetail.RelationshipToKin = dataGridViewContacts.Rows[e.RowIndex].Cells[42].Value.ToString();
-            contactsDetail.BirthdayDate = dataGridViewContacts.Rows[e.RowIndex].Cells[43].Value.ToString();
+            if (e.RowIndex < 0) return;
+            contactsDetail = MapMemberFromGrid(dataGridViewContacts, e.RowIndex);
         }
 
         MemberDetailDTO formerMembersDetail = new MemberDetailDTO();
@@ -608,71 +511,14 @@ namespace APC.AllForms
         }
 
         private void btnViewFormerMembers_Click(object sender, EventArgs e)
-        {
-            if (formerMembersDetail.MemberID == 0)
-            {
-                MessageBox.Show("Please choose a member from the table");
-            }
-            else
-            {
-                FormViewMember open = new FormViewMember();
-                open.detail = formerMembersDetail;
-                open.isView = true;
-                open.isFormer = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;                
-                ClearFilters();
-            }
+        {            
+            ViewMember(formerMembersDetail, true);
         }
 
         private void dataGridViewFormerMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            formerMembersDetail = new MemberDetailDTO();
-            formerMembersDetail.MemberID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[0].Value);
-            formerMembersDetail.Username = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[1].Value.ToString();
-            formerMembersDetail.Password = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[2].Value.ToString();
-            formerMembersDetail.Surname = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[3].Value.ToString();
-            formerMembersDetail.Name = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[4].Value.ToString();
-            formerMembersDetail.Birthday = Convert.ToDateTime(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[5].Value);
-            formerMembersDetail.ImagePath = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[6].Value.ToString();
-            formerMembersDetail.EmailAddress = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[7].Value.ToString();
-            formerMembersDetail.HouseAddress = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[8].Value.ToString();
-            formerMembersDetail.MembershipDate = Convert.ToDateTime(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[9].Value);
-            formerMembersDetail.CountryID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[10].Value);
-            formerMembersDetail.CountryName = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[11].Value.ToString();
-            formerMembersDetail.NationalityID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[12].Value);
-            formerMembersDetail.NationalityName = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[13].Value.ToString();
-            formerMembersDetail.ProfessionID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[14].Value);
-            formerMembersDetail.ProfessionName = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[15].Value.ToString();
-            formerMembersDetail.PositionID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[16].Value);
-            formerMembersDetail.PositionName = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[17].Value.ToString();
-            formerMembersDetail.GenderID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[18].Value);
-            formerMembersDetail.GenderName = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[19].Value.ToString();
-            formerMembersDetail.EmploymentStatusID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[20].Value);
-            formerMembersDetail.EmploymentStatusName = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[21].Value.ToString();
-            formerMembersDetail.MaritalStatusID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[22].Value);
-            formerMembersDetail.MaritalStatusName = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[23].Value.ToString();
-            formerMembersDetail.PermissionID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[24].Value);
-            formerMembersDetail.PermissionName = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[25].Value.ToString();
-            formerMembersDetail.PhoneNumber = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[26].Value.ToString();
-            formerMembersDetail.PhoneNumber2 = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[27].Value.ToString();
-            formerMembersDetail.PhoneNumber3 = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[28].Value.ToString();
-            formerMembersDetail.isCountryDeleted = Convert.ToBoolean(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[29].Value);
-            formerMembersDetail.isNationalityDeleted = Convert.ToBoolean(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[30].Value);
-            formerMembersDetail.isProfessionDeleted = Convert.ToBoolean(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[31].Value);
-            formerMembersDetail.isPositionDeleted = Convert.ToBoolean(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[32].Value);
-            formerMembersDetail.isEmpStatusDeleted = Convert.ToBoolean(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[33].Value);
-            formerMembersDetail.isMarStatusDeleted = Convert.ToBoolean(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[34].Value);
-            formerMembersDetail.MembershipStatusID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[35].Value);
-            formerMembersDetail.MembershipStatus = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[36].Value.ToString();
-            formerMembersDetail.DeadDate = Convert.ToDateTime(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[37].Value);
-            formerMembersDetail.DeadAge = Convert.ToDouble(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[38].Value);
-            formerMembersDetail.LGA = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[39].Value.ToString();
-            formerMembersDetail.NameOfNextOfKin = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
-            formerMembersDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewFormerMembers.Rows[e.RowIndex].Cells[41].Value);
-            formerMembersDetail.RelationshipToKin = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[42].Value.ToString();
-            formerMembersDetail.BirthdayDate = dataGridViewFormerMembers.Rows[e.RowIndex].Cells[43].Value.ToString();
+            if (e.RowIndex < 0) return;
+            formerMembersDetail = MapMemberFromGrid(dataGridViewFormerMembers, e.RowIndex);
         }
 
         private void txtNameFormerMembers_TextChanged(object sender, EventArgs e)
@@ -736,50 +582,8 @@ namespace APC.AllForms
 
         private void dataGridViewDeadMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            deadMembersDetail = new MemberDetailDTO();
-            deadMembersDetail.MemberID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[0].Value);
-            deadMembersDetail.Username = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[1].Value.ToString();
-            deadMembersDetail.Password = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[2].Value.ToString();
-            deadMembersDetail.Surname = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[3].Value.ToString();
-            deadMembersDetail.Name = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[4].Value.ToString();
-            deadMembersDetail.Birthday = Convert.ToDateTime(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[5].Value);
-            deadMembersDetail.ImagePath = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[6].Value.ToString();
-            deadMembersDetail.EmailAddress = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[7].Value.ToString();
-            deadMembersDetail.HouseAddress = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[8].Value.ToString();
-            deadMembersDetail.MembershipDate = Convert.ToDateTime(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[9].Value);
-            deadMembersDetail.CountryID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[10].Value);
-            deadMembersDetail.CountryName = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[11].Value.ToString();
-            deadMembersDetail.NationalityID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[12].Value);
-            deadMembersDetail.NationalityName = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[13].Value.ToString();
-            deadMembersDetail.ProfessionID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[14].Value);
-            deadMembersDetail.ProfessionName = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[15].Value.ToString();
-            deadMembersDetail.PositionID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[16].Value);
-            deadMembersDetail.PositionName = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[17].Value.ToString();
-            deadMembersDetail.GenderID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[18].Value);
-            deadMembersDetail.GenderName = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[19].Value.ToString();
-            deadMembersDetail.EmploymentStatusID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[20].Value);
-            deadMembersDetail.EmploymentStatusName = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[21].Value.ToString();
-            deadMembersDetail.MaritalStatusID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[22].Value);
-            deadMembersDetail.MaritalStatusName = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[23].Value.ToString();
-            deadMembersDetail.PermissionID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[24].Value);
-            deadMembersDetail.PermissionName = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[25].Value.ToString();
-            deadMembersDetail.PhoneNumber = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[26].Value.ToString();
-            deadMembersDetail.PhoneNumber2 = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[27].Value.ToString();
-            deadMembersDetail.PhoneNumber3 = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[28].Value.ToString();
-            deadMembersDetail.isCountryDeleted = Convert.ToBoolean(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[29].Value);
-            deadMembersDetail.isNationalityDeleted = Convert.ToBoolean(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[30].Value);
-            deadMembersDetail.isProfessionDeleted = Convert.ToBoolean(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[31].Value);
-            deadMembersDetail.isPositionDeleted = Convert.ToBoolean(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[32].Value);
-            deadMembersDetail.isEmpStatusDeleted = Convert.ToBoolean(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[33].Value);
-            deadMembersDetail.isMarStatusDeleted = Convert.ToBoolean(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[34].Value);
-            deadMembersDetail.MembershipStatusID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[35].Value);
-            deadMembersDetail.MembershipStatus = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[36].Value.ToString();
-            deadMembersDetail.DeadDate = Convert.ToDateTime(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[37].Value);
-            deadMembersDetail.DeadAge = Convert.ToDouble(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[38].Value);
-            deadMembersDetail.LGA = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[39].Value.ToString();
-            deadMembersDetail.NameOfNextOfKin = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
-            deadMembersDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewDeadMembers.Rows[e.RowIndex].Cells[41].Value);
-            deadMembersDetail.BirthdayDate = dataGridViewDeadMembers.Rows[e.RowIndex].Cells[43].Value.ToString();
+            if (e.RowIndex < 0) return;
+            deadMembersDetail = MapMemberFromGrid(dataGridViewDeadMembers, e.RowIndex);
         }
         private void txtNameDeadMembers_TextChanged(object sender, EventArgs e)
         {
@@ -790,7 +594,6 @@ namespace APC.AllForms
 
         private void txtSurnameDeadMembers_TextChanged(object sender, EventArgs e)
         {
-
             List<MemberDetailDTO> list = deadMembersDTO.Members;
             list = list.Where(x => x.Surname.Contains(txtSurnameDeadMembers.Text)).ToList();
             dataGridViewDeadMembers.DataSource = list;
@@ -989,68 +792,13 @@ namespace APC.AllForms
 
         private void dataGridViewInactiveMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            inactiveMembersDetail = new MemberDetailDTO();
-            inactiveMembersDetail.MemberID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[0].Value);
-            inactiveMembersDetail.Username = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[1].Value.ToString();
-            inactiveMembersDetail.Password = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[2].Value.ToString();
-            inactiveMembersDetail.Surname = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[3].Value.ToString();
-            inactiveMembersDetail.Name = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[4].Value.ToString();
-            inactiveMembersDetail.Birthday = Convert.ToDateTime(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[5].Value);
-            inactiveMembersDetail.ImagePath = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[6].Value.ToString();
-            inactiveMembersDetail.EmailAddress = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[7].Value.ToString();
-            inactiveMembersDetail.HouseAddress = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[8].Value.ToString();
-            inactiveMembersDetail.MembershipDate = Convert.ToDateTime(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[9].Value);
-            inactiveMembersDetail.CountryID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[10].Value);
-            inactiveMembersDetail.CountryName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[11].Value.ToString();
-            inactiveMembersDetail.NationalityID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[12].Value);
-            inactiveMembersDetail.NationalityName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[13].Value.ToString();
-            inactiveMembersDetail.ProfessionID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[14].Value);
-            inactiveMembersDetail.ProfessionName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[15].Value.ToString();
-            inactiveMembersDetail.PositionID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[16].Value);
-            inactiveMembersDetail.PositionName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[17].Value.ToString();
-            inactiveMembersDetail.GenderID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[18].Value);
-            inactiveMembersDetail.GenderName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[19].Value.ToString();
-            inactiveMembersDetail.EmploymentStatusID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[20].Value);
-            inactiveMembersDetail.EmploymentStatusName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[21].Value.ToString();
-            inactiveMembersDetail.MaritalStatusID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[22].Value);
-            inactiveMembersDetail.MaritalStatusName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[23].Value.ToString();
-            inactiveMembersDetail.PermissionID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[24].Value);
-            inactiveMembersDetail.PermissionName = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[25].Value.ToString();
-            inactiveMembersDetail.PhoneNumber = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[26].Value.ToString();
-            inactiveMembersDetail.PhoneNumber2 = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[27].Value.ToString();
-            inactiveMembersDetail.PhoneNumber3 = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[28].Value.ToString();
-            inactiveMembersDetail.isCountryDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[29].Value);
-            inactiveMembersDetail.isNationalityDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[30].Value);
-            inactiveMembersDetail.isProfessionDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[31].Value);
-            inactiveMembersDetail.isPositionDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[32].Value);
-            inactiveMembersDetail.isEmpStatusDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[33].Value);
-            inactiveMembersDetail.isMarStatusDeleted = Convert.ToBoolean(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[34].Value);
-            inactiveMembersDetail.MembershipStatusID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[35].Value);
-            inactiveMembersDetail.MembershipStatus = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[36].Value.ToString();
-            inactiveMembersDetail.DeadDate = Convert.ToDateTime(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[37].Value);
-            inactiveMembersDetail.DeadAge = Convert.ToDouble(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[38].Value);
-            inactiveMembersDetail.LGA = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[39].Value.ToString();
-            inactiveMembersDetail.NameOfNextOfKin = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
-            inactiveMembersDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[41].Value);
-            inactiveMembersDetail.RelationshipToKin = dataGridViewInactiveMembers.Rows[e.RowIndex].Cells[42].Value.ToString();
+            if (e.RowIndex < 0) return;
+            inactiveMembersDetail = MapMemberFromGrid(dataGridViewInactiveMembers, e.RowIndex);
         }
 
         private void btnViewInactiveMembers_Click(object sender, EventArgs e)
         {
-            if (inactiveMembersDetail.MemberID == 0)
-            {
-                MessageBox.Show("Please choose a member from the table");
-            }
-            else
-            {
-                FormViewMember open = new FormViewMember();
-                open.detail = inactiveMembersDetail;
-                open.isView = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+            ViewMember(inactiveMembersDetail, false);
         }
 
         private void btnUpdateInactiveMembers_Click(object sender, EventArgs e)
@@ -1166,12 +914,35 @@ namespace APC.AllForms
 
         private void btnViewBirthday_Click(object sender, EventArgs e)
         {
-
+            ViewMember(birthdayDetail, false);
         }
 
         private void dataGridViewBirthday_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
+            birthdayDetail = MapMemberFromGrid(dataGridViewBirthday, e.RowIndex);
+        }
 
+        private void ViewMember(MemberDetailDTO detail, bool isFormer)
+        {
+            if (detail.MemberID == 0)
+            {
+                MessageBox.Show("Please choose a member from the table");
+            }
+            else
+            {
+                FormViewMember open = new FormViewMember();
+                open.detail = detail;
+                open.isView = true;
+                if (isFormer)
+                {
+                    open.isFormer = true;
+                }                
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
         }
     }
 }
