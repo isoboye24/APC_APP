@@ -30,8 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.picClose = new System.Windows.Forms.PictureBox();
-            this.picMinimize = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.txtPaymentStatus = new System.Windows.Forms.TextBox();
@@ -39,6 +37,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.picClose = new System.Windows.Forms.PictureBox();
+            this.picMinimize = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
@@ -54,7 +54,7 @@
             this.panel1.Location = new System.Drawing.Point(7, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(553, 63);
+            this.panel1.Size = new System.Drawing.Size(622, 63);
             this.panel1.TabIndex = 35;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
@@ -69,50 +69,26 @@
             this.labelTitle.TabIndex = 5;
             this.labelTitle.Text = "ADD PAYMENT STATUS";
             // 
-            // picClose
-            // 
-            this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picClose.Image = global::APC.Properties.Resources.icons8_multiply_32;
-            this.picClose.Location = new System.Drawing.Point(499, 9);
-            this.picClose.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
-            this.picClose.Name = "picClose";
-            this.picClose.Size = new System.Drawing.Size(43, 39);
-            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picClose.TabIndex = 6;
-            this.picClose.TabStop = false;
-            this.picClose.Click += new System.EventHandler(this.picClose_Click);
-            // 
-            // picMinimize
-            // 
-            this.picMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picMinimize.Image = global::APC.Properties.Resources.icons8_minimize_24;
-            this.picMinimize.Location = new System.Drawing.Point(441, 9);
-            this.picMinimize.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
-            this.picMinimize.Name = "picMinimize";
-            this.picMinimize.Size = new System.Drawing.Size(43, 39);
-            this.picMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picMinimize.TabIndex = 5;
-            this.picMinimize.TabStop = false;
-            // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(303, 222);
+            this.btnSave.Location = new System.Drawing.Point(362, 226);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(171, 49);
             this.btnSave.TabIndex = 32;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(120, 222);
+            this.btnClose.Location = new System.Drawing.Point(179, 226);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(171, 49);
@@ -124,7 +100,7 @@
             // txtPaymentStatus
             // 
             this.txtPaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPaymentStatus.Location = new System.Drawing.Point(238, 117);
+            this.txtPaymentStatus.Location = new System.Drawing.Point(297, 121);
             this.txtPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
             this.txtPaymentStatus.Name = "txtPaymentStatus";
             this.txtPaymentStatus.Size = new System.Drawing.Size(236, 34);
@@ -145,20 +121,20 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.DarkOrange;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(560, 0);
+            this.panel3.Location = new System.Drawing.Point(629, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(7, 325);
+            this.panel3.Size = new System.Drawing.Size(7, 323);
             this.panel3.TabIndex = 38;
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.DarkOrange;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(7, 325);
+            this.panel4.Location = new System.Drawing.Point(7, 323);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(560, 6);
+            this.panel4.Size = new System.Drawing.Size(629, 6);
             this.panel4.TabIndex = 37;
             // 
             // panel2
@@ -168,14 +144,39 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(7, 331);
+            this.panel2.Size = new System.Drawing.Size(7, 329);
             this.panel2.TabIndex = 36;
+            // 
+            // picClose
+            // 
+            this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picClose.Image = global::APC.Properties.Resources.icons8_multiply_32;
+            this.picClose.Location = new System.Drawing.Point(568, 9);
+            this.picClose.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.picClose.Name = "picClose";
+            this.picClose.Size = new System.Drawing.Size(43, 39);
+            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picClose.TabIndex = 6;
+            this.picClose.TabStop = false;
+            this.picClose.Click += new System.EventHandler(this.picClose_Click);
+            // 
+            // picMinimize
+            // 
+            this.picMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picMinimize.Image = global::APC.Properties.Resources.icons8_minimize_24;
+            this.picMinimize.Location = new System.Drawing.Point(510, 9);
+            this.picMinimize.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.picMinimize.Name = "picMinimize";
+            this.picMinimize.Size = new System.Drawing.Size(43, 39);
+            this.picMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picMinimize.TabIndex = 5;
+            this.picMinimize.TabStop = false;
             // 
             // FormPaymentStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 331);
+            this.ClientSize = new System.Drawing.Size(636, 329);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);

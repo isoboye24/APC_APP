@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace APC.DAL.DAO
 {
-    public class PaymentStatusDAO : IDAO<PaymentStatusDetailDTO, PAYMENT_STATUS>
+    public class PaymentStatusDAO : APCContexts, IDAO<PaymentStatusDetailDTO, PAYMENT_STATUS>
     {
         public bool Delete(PAYMENT_STATUS entity)
         {
@@ -21,12 +21,38 @@ namespace APC.DAL.DAO
 
         public bool Insert(PAYMENT_STATUS entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                db.PAYMENT_STATUS.Add(entity);
+                db.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<PaymentStatusDetailDTO> Select()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<PaymentStatusDetailDTO> statuses = new List<PaymentStatusDetailDTO>();
+                var list = db.PAYMENT_STATUS.Where(x => x.isDeleted == false).OrderBy(x => x.paymentStatusName).ToList();
+                foreach (var item in list)
+                {
+                    PaymentStatusDetailDTO dto = new PaymentStatusDetailDTO();
+                    dto.PaymentStatusID = item.paymentStatusID;
+                    dto.PaymentStatusName = item.paymentStatusName;
+                    statuses.Add(dto);
+                }
+                return statuses;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool Update(PAYMENT_STATUS entity)

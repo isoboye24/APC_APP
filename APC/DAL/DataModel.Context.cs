@@ -49,12 +49,12 @@ namespace APC.DAL
         public virtual DbSet<MONTH> MONTH { get; set; }
         public virtual DbSet<NATIONALITY> NATIONALITY { get; set; }
         public virtual DbSet<NEXT_OF_KIN_RELATIONSHIP> NEXT_OF_KIN_RELATIONSHIP { get; set; }
+        public virtual DbSet<PAYMENT_STATUS> PAYMENT_STATUS { get; set; }
         public virtual DbSet<PERMISSION> PERMISSION { get; set; }
         public virtual DbSet<PERSONAL_ATTENDANCE> PERSONAL_ATTENDANCE { get; set; }
         public virtual DbSet<POSITION> POSITION { get; set; }
         public virtual DbSet<PROFESSION> PROFESSION { get; set; }
         public virtual DbSet<SPECIAL_CONTRIBUTIONS> SPECIAL_CONTRIBUTIONS { get; set; }
         public virtual DbSet<SPECIAL_CONTRIBUTORS> SPECIAL_CONTRIBUTORS { get; set; }
-        public virtual DbSet<PAYMENT_STATUS> PAYMENT_STATUS { get; set; }
     }
 }

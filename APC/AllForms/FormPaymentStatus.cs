@@ -54,5 +54,26 @@ namespace APC.AllForms
         {
             this.Close();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (txtPaymentStatus.Text.Trim() == "")
+            {
+                MessageBox.Show("Please enter payment status");
+            }
+            else
+            {
+                if (!isUpdate)
+                {
+                    PaymentStatusDetailDTO status = new PaymentStatusDetailDTO();
+                    status.PaymentStatusName = txtPaymentStatus.Text.Trim();
+                    if (bll.Insert(status))
+                    {
+                        MessageBox.Show("Payment status added successfully");
+                        txtPaymentStatus.Clear();
+                    }
+                }
+            }
+        }
     }
 }

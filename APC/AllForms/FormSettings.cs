@@ -1,19 +1,21 @@
 ﻿using APC.BLL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
+using APC.HelperServices;
+using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static APC.HelperServices.PaymentStatusHelperService;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Drawing.Drawing2D;
-using FontAwesome.Sharp;
 
 namespace APC.AllForms
 {
@@ -25,8 +27,10 @@ namespace APC.AllForms
         }
         MemberBLL memberBLL = new MemberBLL();        
         EventsBLL eventBLL = new EventsBLL();
+        PaymentStatusBLL paymentStatusBLL = new PaymentStatusBLL();
+        PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
         private void FormSettings_Load(object sender, EventArgs e)
-        {
+        {            
             //Button label
             #region
             label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -93,6 +97,9 @@ namespace APC.AllForms
             label14.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             label17.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             #endregion
+
+            paymentStatusDTO = paymentStatusBLL.Select();
+            LoadPaymentStatus();
 
             #region
             countryDTO = countryBLL.Select();
@@ -307,9 +314,16 @@ namespace APC.AllForms
                 btnDeletePermissions.Hide();
                 btnDeletePositions.Hide();
                 btnDeleteProfessions.Hide();
+                btnDeletePaymentStatus.Hide();
             }
 
             Counts();
+        }
+
+        private void LoadPaymentStatus()
+        {
+            dataGridViewPaymentStatus.DataSource = paymentStatusDTO.PaymentStatuses;
+            PaymentStatusHelperService.ConfigurePaymentStatusGrid(dataGridViewPaymentStatus, PaymentStatusGridType.Basic);
         }
 
         private void picProfilePic_Paint(object sender, PaintEventArgs e)
@@ -335,6 +349,11 @@ namespace APC.AllForms
 
         private void ClearFilters()
         {
+            txtPaymentStatus.Clear();
+            paymentStatusBLL = new PaymentStatusBLL();
+            paymentStatusDTO = paymentStatusBLL.Select();
+            dataGridViewPaymentStatus.DataSource = paymentStatusDTO.PaymentStatuses;
+
             txtCountry.Clear();
             countryBLL = new CountryBLL();
             countryDTO = countryBLL.Select();
@@ -1697,6 +1716,13 @@ namespace APC.AllForms
             }
         }
 
-        
+        private void btnAddPaymentStatus_Click(object sender, EventArgs e)
+        {
+            FormPaymentStatus open = new FormPaymentStatus();
+            this.Hide();
+            open.ShowDialog();
+            this.Visible = true;
+            ClearFilters();
+        }
     }
 }

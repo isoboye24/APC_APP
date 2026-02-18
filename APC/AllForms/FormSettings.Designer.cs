@@ -44,27 +44,22 @@
             this.panelTotalNationality = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalNationalitySettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.iconTotalCountryCard = new FontAwesome.Sharp.IconPictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panelTotalPosition = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalPositionSettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.iconTotalPositionCard = new FontAwesome.Sharp.IconPictureBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panelTotalEvent = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalEventSettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.iconTotalEventCard = new FontAwesome.Sharp.IconPictureBox();
             this.label12 = new System.Windows.Forms.Label();
             this.panelTotalProfssion = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalProfessionSettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.iconProfessionCard = new FontAwesome.Sharp.IconPictureBox();
             this.label16 = new System.Windows.Forms.Label();
             this.panelTotalProfession = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalPermissionSettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.iconTotalPermissionCard = new FontAwesome.Sharp.IconPictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel32 = new System.Windows.Forms.TableLayoutPanel();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -164,7 +159,6 @@
             this.labelPosition = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.picProfilePic = new System.Windows.Forms.PictureBox();
             this.paymentStatusPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel35 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewPaymentStatus = new System.Windows.Forms.DataGridView();
@@ -176,25 +170,26 @@
             this.tableLayoutPanel37 = new System.Windows.Forms.TableLayoutPanel();
             this.txtPaymentStatus = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
+            this.iconTotalCountryCard = new FontAwesome.Sharp.IconPictureBox();
+            this.iconTotalPositionCard = new FontAwesome.Sharp.IconPictureBox();
+            this.iconTotalEventCard = new FontAwesome.Sharp.IconPictureBox();
+            this.iconProfessionCard = new FontAwesome.Sharp.IconPictureBox();
+            this.iconTotalPermissionCard = new FontAwesome.Sharp.IconPictureBox();
+            this.picProfilePic = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.dashboardPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelTotalNationality.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalCountryCard)).BeginInit();
             this.panelTotalPosition.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPositionCard)).BeginInit();
             this.panelTotalEvent.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalEventCard)).BeginInit();
             this.panelTotalProfssion.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconProfessionCard)).BeginInit();
             this.panelTotalProfession.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPermissionCard)).BeginInit();
             this.tableLayoutPanel32.SuspendLayout();
             this.countryPage.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -239,12 +234,17 @@
             this.personalDataPage.SuspendLayout();
             this.tableLayoutPanel33.SuspendLayout();
             this.tableLayoutPanel34.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).BeginInit();
             this.paymentStatusPage.SuspendLayout();
             this.tableLayoutPanel35.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPaymentStatus)).BeginInit();
             this.tableLayoutPanel36.SuspendLayout();
             this.tableLayoutPanel37.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalCountryCard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPositionCard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalEventCard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconProfessionCard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPermissionCard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -372,21 +372,6 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(265, 57);
             this.tableLayoutPanel5.TabIndex = 8;
             // 
-            // iconTotalCountryCard
-            // 
-            this.iconTotalCountryCard.BackColor = System.Drawing.Color.DeepPink;
-            this.iconTotalCountryCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconTotalCountryCard.IconChar = FontAwesome.Sharp.IconChar.EarthAfrica;
-            this.iconTotalCountryCard.IconColor = System.Drawing.Color.White;
-            this.iconTotalCountryCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconTotalCountryCard.IconSize = 45;
-            this.iconTotalCountryCard.Location = new System.Drawing.Point(216, 4);
-            this.iconTotalCountryCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconTotalCountryCard.Name = "iconTotalCountryCard";
-            this.iconTotalCountryCard.Size = new System.Drawing.Size(45, 49);
-            this.iconTotalCountryCard.TabIndex = 1;
-            this.iconTotalCountryCard.TabStop = false;
-            // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -445,21 +430,6 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(265, 58);
             this.tableLayoutPanel7.TabIndex = 8;
-            // 
-            // iconTotalPositionCard
-            // 
-            this.iconTotalPositionCard.BackColor = System.Drawing.Color.MidnightBlue;
-            this.iconTotalPositionCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconTotalPositionCard.IconChar = FontAwesome.Sharp.IconChar.Couch;
-            this.iconTotalPositionCard.IconColor = System.Drawing.Color.White;
-            this.iconTotalPositionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconTotalPositionCard.IconSize = 45;
-            this.iconTotalPositionCard.Location = new System.Drawing.Point(216, 4);
-            this.iconTotalPositionCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconTotalPositionCard.Name = "iconTotalPositionCard";
-            this.iconTotalPositionCard.Size = new System.Drawing.Size(45, 50);
-            this.iconTotalPositionCard.TabIndex = 1;
-            this.iconTotalPositionCard.TabStop = false;
             // 
             // label10
             // 
@@ -521,21 +491,6 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(265, 57);
             this.tableLayoutPanel9.TabIndex = 8;
             // 
-            // iconTotalEventCard
-            // 
-            this.iconTotalEventCard.BackColor = System.Drawing.Color.DarkOrchid;
-            this.iconTotalEventCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconTotalEventCard.IconChar = FontAwesome.Sharp.IconChar.GlassCheers;
-            this.iconTotalEventCard.IconColor = System.Drawing.Color.White;
-            this.iconTotalEventCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconTotalEventCard.IconSize = 45;
-            this.iconTotalEventCard.Location = new System.Drawing.Point(216, 4);
-            this.iconTotalEventCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconTotalEventCard.Name = "iconTotalEventCard";
-            this.iconTotalEventCard.Size = new System.Drawing.Size(45, 49);
-            this.iconTotalEventCard.TabIndex = 1;
-            this.iconTotalEventCard.TabStop = false;
-            // 
             // label12
             // 
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -596,21 +551,6 @@
             this.tableLayoutPanel11.Size = new System.Drawing.Size(265, 57);
             this.tableLayoutPanel11.TabIndex = 8;
             // 
-            // iconProfessionCard
-            // 
-            this.iconProfessionCard.BackColor = System.Drawing.Color.Magenta;
-            this.iconProfessionCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconProfessionCard.IconChar = FontAwesome.Sharp.IconChar.GraduationCap;
-            this.iconProfessionCard.IconColor = System.Drawing.Color.White;
-            this.iconProfessionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconProfessionCard.IconSize = 45;
-            this.iconProfessionCard.Location = new System.Drawing.Point(216, 4);
-            this.iconProfessionCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconProfessionCard.Name = "iconProfessionCard";
-            this.iconProfessionCard.Size = new System.Drawing.Size(45, 49);
-            this.iconProfessionCard.TabIndex = 1;
-            this.iconProfessionCard.TabStop = false;
-            // 
             // label16
             // 
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -670,21 +610,6 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(265, 57);
             this.tableLayoutPanel6.TabIndex = 8;
-            // 
-            // iconTotalPermissionCard
-            // 
-            this.iconTotalPermissionCard.BackColor = System.Drawing.Color.Green;
-            this.iconTotalPermissionCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconTotalPermissionCard.IconChar = FontAwesome.Sharp.IconChar.UniversalAccess;
-            this.iconTotalPermissionCard.IconColor = System.Drawing.Color.White;
-            this.iconTotalPermissionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconTotalPermissionCard.IconSize = 45;
-            this.iconTotalPermissionCard.Location = new System.Drawing.Point(216, 4);
-            this.iconTotalPermissionCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconTotalPermissionCard.Name = "iconTotalPermissionCard";
-            this.iconTotalPermissionCard.Size = new System.Drawing.Size(45, 49);
-            this.iconTotalPermissionCard.TabIndex = 1;
-            this.iconTotalPermissionCard.TabStop = false;
             // 
             // label6
             // 
@@ -2296,17 +2221,6 @@
             this.label17.Text = "Access:";
             this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // picProfilePic
-            // 
-            this.picProfilePic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picProfilePic.Location = new System.Drawing.Point(3, 3);
-            this.picProfilePic.Name = "picProfilePic";
-            this.picProfilePic.Size = new System.Drawing.Size(304, 286);
-            this.picProfilePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picProfilePic.TabIndex = 1;
-            this.picProfilePic.TabStop = false;
-            this.picProfilePic.Paint += new System.Windows.Forms.PaintEventHandler(this.picProfilePic_Paint);
-            // 
             // paymentStatusPage
             // 
             this.paymentStatusPage.Controls.Add(this.tableLayoutPanel35);
@@ -2397,6 +2311,7 @@
             this.btnAddPaymentStatus.TabIndex = 0;
             this.btnAddPaymentStatus.Text = "Add";
             this.btnAddPaymentStatus.UseVisualStyleBackColor = false;
+            this.btnAddPaymentStatus.Click += new System.EventHandler(this.btnAddPaymentStatus_Click);
             // 
             // btnUpdatePaymentStatus
             // 
@@ -2480,6 +2395,92 @@
             this.label19.TabIndex = 1;
             this.label19.Text = "Payment Status";
             // 
+            // iconTotalCountryCard
+            // 
+            this.iconTotalCountryCard.BackColor = System.Drawing.Color.DeepPink;
+            this.iconTotalCountryCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconTotalCountryCard.IconChar = FontAwesome.Sharp.IconChar.EarthAfrica;
+            this.iconTotalCountryCard.IconColor = System.Drawing.Color.White;
+            this.iconTotalCountryCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconTotalCountryCard.IconSize = 45;
+            this.iconTotalCountryCard.Location = new System.Drawing.Point(216, 4);
+            this.iconTotalCountryCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconTotalCountryCard.Name = "iconTotalCountryCard";
+            this.iconTotalCountryCard.Size = new System.Drawing.Size(45, 49);
+            this.iconTotalCountryCard.TabIndex = 1;
+            this.iconTotalCountryCard.TabStop = false;
+            // 
+            // iconTotalPositionCard
+            // 
+            this.iconTotalPositionCard.BackColor = System.Drawing.Color.MidnightBlue;
+            this.iconTotalPositionCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconTotalPositionCard.IconChar = FontAwesome.Sharp.IconChar.Couch;
+            this.iconTotalPositionCard.IconColor = System.Drawing.Color.White;
+            this.iconTotalPositionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconTotalPositionCard.IconSize = 45;
+            this.iconTotalPositionCard.Location = new System.Drawing.Point(216, 4);
+            this.iconTotalPositionCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconTotalPositionCard.Name = "iconTotalPositionCard";
+            this.iconTotalPositionCard.Size = new System.Drawing.Size(45, 50);
+            this.iconTotalPositionCard.TabIndex = 1;
+            this.iconTotalPositionCard.TabStop = false;
+            // 
+            // iconTotalEventCard
+            // 
+            this.iconTotalEventCard.BackColor = System.Drawing.Color.DarkOrchid;
+            this.iconTotalEventCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconTotalEventCard.IconChar = FontAwesome.Sharp.IconChar.GlassCheers;
+            this.iconTotalEventCard.IconColor = System.Drawing.Color.White;
+            this.iconTotalEventCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconTotalEventCard.IconSize = 45;
+            this.iconTotalEventCard.Location = new System.Drawing.Point(216, 4);
+            this.iconTotalEventCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconTotalEventCard.Name = "iconTotalEventCard";
+            this.iconTotalEventCard.Size = new System.Drawing.Size(45, 49);
+            this.iconTotalEventCard.TabIndex = 1;
+            this.iconTotalEventCard.TabStop = false;
+            // 
+            // iconProfessionCard
+            // 
+            this.iconProfessionCard.BackColor = System.Drawing.Color.Magenta;
+            this.iconProfessionCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconProfessionCard.IconChar = FontAwesome.Sharp.IconChar.GraduationCap;
+            this.iconProfessionCard.IconColor = System.Drawing.Color.White;
+            this.iconProfessionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconProfessionCard.IconSize = 45;
+            this.iconProfessionCard.Location = new System.Drawing.Point(216, 4);
+            this.iconProfessionCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconProfessionCard.Name = "iconProfessionCard";
+            this.iconProfessionCard.Size = new System.Drawing.Size(45, 49);
+            this.iconProfessionCard.TabIndex = 1;
+            this.iconProfessionCard.TabStop = false;
+            // 
+            // iconTotalPermissionCard
+            // 
+            this.iconTotalPermissionCard.BackColor = System.Drawing.Color.Green;
+            this.iconTotalPermissionCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconTotalPermissionCard.IconChar = FontAwesome.Sharp.IconChar.UniversalAccess;
+            this.iconTotalPermissionCard.IconColor = System.Drawing.Color.White;
+            this.iconTotalPermissionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconTotalPermissionCard.IconSize = 45;
+            this.iconTotalPermissionCard.Location = new System.Drawing.Point(216, 4);
+            this.iconTotalPermissionCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconTotalPermissionCard.Name = "iconTotalPermissionCard";
+            this.iconTotalPermissionCard.Size = new System.Drawing.Size(45, 49);
+            this.iconTotalPermissionCard.TabIndex = 1;
+            this.iconTotalPermissionCard.TabStop = false;
+            // 
+            // picProfilePic
+            // 
+            this.picProfilePic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picProfilePic.Location = new System.Drawing.Point(3, 3);
+            this.picProfilePic.Name = "picProfilePic";
+            this.picProfilePic.Size = new System.Drawing.Size(304, 286);
+            this.picProfilePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picProfilePic.TabIndex = 1;
+            this.picProfilePic.TabStop = false;
+            this.picProfilePic.Paint += new System.Windows.Forms.PaintEventHandler(this.picProfilePic_Paint);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2498,27 +2499,22 @@
             this.panelTotalNationality.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalCountryCard)).EndInit();
             this.panelTotalPosition.ResumeLayout(false);
             this.panelTotalPosition.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPositionCard)).EndInit();
             this.panelTotalEvent.ResumeLayout(false);
             this.panelTotalEvent.PerformLayout();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalEventCard)).EndInit();
             this.panelTotalProfssion.ResumeLayout(false);
             this.panelTotalProfssion.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel11.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconProfessionCard)).EndInit();
             this.panelTotalProfession.ResumeLayout(false);
             this.panelTotalProfession.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPermissionCard)).EndInit();
             this.tableLayoutPanel32.ResumeLayout(false);
             this.countryPage.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -2579,7 +2575,6 @@
             this.tableLayoutPanel33.ResumeLayout(false);
             this.tableLayoutPanel34.ResumeLayout(false);
             this.tableLayoutPanel34.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).EndInit();
             this.paymentStatusPage.ResumeLayout(false);
             this.tableLayoutPanel35.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPaymentStatus)).EndInit();
@@ -2587,6 +2582,12 @@
             this.tableLayoutPanel36.PerformLayout();
             this.tableLayoutPanel37.ResumeLayout(false);
             this.tableLayoutPanel37.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalCountryCard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPositionCard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalEventCard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconProfessionCard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPermissionCard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).EndInit();
             this.ResumeLayout(false);
 
         }

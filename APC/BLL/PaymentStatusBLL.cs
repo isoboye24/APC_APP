@@ -1,4 +1,6 @@
-﻿using APC.DAL.DTO;
+﻿using APC.DAL;
+using APC.DAL.DAO;
+using APC.DAL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ namespace APC.BLL
 {
     public class PaymentStatusBLL : IBLL<PaymentStatusDTO, PaymentStatusDetailDTO>
     {
+        PaymentStatusDAO dao = new PaymentStatusDAO();
         public bool Delete(PaymentStatusDetailDTO entity)
         {
             throw new NotImplementedException();
@@ -21,12 +24,16 @@ namespace APC.BLL
 
         public bool Insert(PaymentStatusDetailDTO entity)
         {
-            throw new NotImplementedException();
+            PAYMENT_STATUS status = new PAYMENT_STATUS();
+            status.paymentStatusName = entity.PaymentStatusName;
+            return dao.Insert(status);
         }
 
         public PaymentStatusDTO Select()
         {
-            throw new NotImplementedException();
+            PaymentStatusDTO dto = new PaymentStatusDTO();
+            dto.PaymentStatuses = dao.Select();
+            return dto;
         }
 
         public bool Update(PaymentStatusDetailDTO entity)
