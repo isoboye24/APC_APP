@@ -7,27 +7,27 @@ using System.Windows.Forms;
 
 namespace APC.HelperServices
 {
-    public class PaymentStatusHelperService
+    public class SingleColumnHelperService
     {
-        public enum PaymentStatusGridType
+        public enum SingleColumnGridType
         {
             Basic,            
         }
 
-        public static void ConfigurePaymentStatusGrid(DataGridView grid, PaymentStatusGridType type)
+        public static void ConfigureSingleColumnGrid(DataGridView grid, SingleColumnGridType type, string columnName, string newColumnName)
         {
             switch (type)
             {
-                case PaymentStatusGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "PaymentStatusName");
+                case SingleColumnGridType.Basic:
+                    GeneralHelper.SetVisibleColumns(grid, columnName);
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
-                                    { "PaymentStatusName", "Payment Status" }
+                                    { columnName, newColumnName }
                                 });
                     break;
 
                 default:
-                    GeneralHelper.SetVisibleColumns(grid, "", "", "");
+                    GeneralHelper.SetVisibleColumns(grid, "");
                     break;
             }
         }

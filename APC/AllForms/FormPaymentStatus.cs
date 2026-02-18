@@ -38,11 +38,20 @@ namespace APC.AllForms
 
         PaymentStatusBLL bll = new PaymentStatusBLL();
         PaymentStatusDetailDTO dto = new PaymentStatusDetailDTO();
-        bool isUpdate = false;
+        public PaymentStatusDetailDTO detail = new PaymentStatusDetailDTO();
+        public bool isUpdate = false;
 
         private void FormPaymentStatus_Load(object sender, EventArgs e)
-        {
-
+        {            
+            if (isUpdate)
+            {
+                txtPaymentStatus.Text = detail.PaymentStatusName;
+                labelTitle.Text = "Edit " + detail.PaymentStatusName;
+            }
+            else
+            {
+                labelTitle.Text = "Add Payment Status";
+            }
         }
 
         private void picClose_Click(object sender, EventArgs e)
@@ -71,6 +80,15 @@ namespace APC.AllForms
                     {
                         MessageBox.Show("Payment status added successfully");
                         txtPaymentStatus.Clear();
+                    }
+                }
+                else if(isUpdate)
+                {                    
+                    detail.PaymentStatusName = txtPaymentStatus.Text.Trim();
+                    if (bll.Update(detail))
+                    {
+                        MessageBox.Show("Payment status updated successfully");
+                        this.Close();
                     }
                 }
             }

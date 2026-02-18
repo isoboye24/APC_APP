@@ -14,7 +14,9 @@ namespace APC.BLL
         PaymentStatusDAO dao = new PaymentStatusDAO();
         public bool Delete(PaymentStatusDetailDTO entity)
         {
-            throw new NotImplementedException();
+            PAYMENT_STATUS status = new PAYMENT_STATUS();
+            status.paymentStatusID = entity.PaymentStatusID;
+            return dao.Delete(status);
         }
 
         public bool GetBack(PaymentStatusDetailDTO entity)
@@ -38,7 +40,10 @@ namespace APC.BLL
 
         public bool Update(PaymentStatusDetailDTO entity)
         {
-            throw new NotImplementedException();
+            PAYMENT_STATUS status = new PAYMENT_STATUS();
+            status.paymentStatusID = entity.PaymentStatusID;
+            status.paymentStatusName = entity.PaymentStatusName;
+            return dao.Update(status);
         }
     }
 }

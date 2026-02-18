@@ -11,7 +11,18 @@ namespace APC.DAL.DAO
     {
         public bool Delete(PAYMENT_STATUS entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                PAYMENT_STATUS status = db.PAYMENT_STATUS.First(x => x.paymentStatusID == entity.paymentStatusID);
+                status.isDeleted = true;
+                status.deletedDate = DateTime.Today;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool GetBack(int ID)
@@ -57,7 +68,17 @@ namespace APC.DAL.DAO
 
         public bool Update(PAYMENT_STATUS entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                PAYMENT_STATUS status = db.PAYMENT_STATUS.First(x => x.paymentStatusID == entity.paymentStatusID);
+                status.paymentStatusName = entity.paymentStatusName;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -16,7 +16,8 @@ namespace APC.HelperServices
             Basic,
             Contact,
             Birthday,
-            Dead
+            Dead,
+            Permission
         }
 
         public static void ConfigureMemberGrid(DataGridView grid, MemberGridType type)
@@ -63,6 +64,14 @@ namespace APC.HelperServices
                                     { "Birthday", "Born on" },
                                     { "DeadDate", "Died on" },
                                     { "DeadAge", "Age" }
+                                });
+                    break;
+                case MemberGridType.Permission:
+                    GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "PositionName", "PermissionName");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "PositionName", "Position" },
+                                    { "PermissionName", "Access Level" }                                    
                                 });
                     break;
                 default:

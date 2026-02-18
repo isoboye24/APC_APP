@@ -14,7 +14,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static APC.HelperServices.PaymentStatusHelperService;
+using static APC.HelperServices.MemberHelperService;
+using static APC.HelperServices.SingleColumnHelperService;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
@@ -29,6 +30,7 @@ namespace APC.AllForms
         EventsBLL eventBLL = new EventsBLL();
         PaymentStatusBLL paymentStatusBLL = new PaymentStatusBLL();
         PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
+        PaymentStatusDetailDTO paymentStatusDetail = new PaymentStatusDetailDTO();
         private void FormSettings_Load(object sender, EventArgs e)
         {            
             //Button label
@@ -99,120 +101,33 @@ namespace APC.AllForms
             #endregion
 
             paymentStatusDTO = paymentStatusBLL.Select();
-            LoadPaymentStatus();
+            loadPaymentStatuses();
 
-            #region
             countryDTO = countryBLL.Select();
-            dataGridViewCountry.DataSource = countryDTO.Countries;
-            dataGridViewCountry.Columns[0].Visible = false;
-            dataGridViewCountry.Columns[1].HeaderText = "Country Name";
-            foreach (DataGridViewColumn column in dataGridViewCountry.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
+            loadCountries();
 
             empStatusDTO = empStatusBLL.Select();
-            dataGridViewEmpStatus.DataSource = empStatusDTO.EmploymentStatuses;
-            dataGridViewEmpStatus.Columns[0].Visible = false;
-            dataGridViewEmpStatus.Columns[1].HeaderText = "Employment Status";
-            foreach (DataGridViewColumn column in dataGridViewEmpStatus.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
+            loadEmploymentStatuses();
 
             marStatusDTO = marStatusBLL.Select();
-            dataGridViewMarStatus.DataSource = marStatusDTO.MaritalStatuses;
-            dataGridViewMarStatus.Columns[0].Visible = false;
-            dataGridViewMarStatus.Columns[1].HeaderText = "Marital Status Name";
-            foreach (DataGridViewColumn column in dataGridViewMarStatus.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
+            loadMaritalStatuses();
 
             nationalityDTO = nationalityBLL.Select();
-            dataGridViewNationality.DataSource = nationalityDTO.Nationalities;
-            dataGridViewNationality.Columns[0].Visible = false;
-            dataGridViewNationality.Columns[1].HeaderText = "Nationality Name";
-            foreach (DataGridViewColumn column in dataGridViewNationality.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
+            loadNationalities();
+
+            positionDTO = positionBLL.Select();
+            loadPositions();
+
+            professionDTO = professionBLL.Select();
+            loadProfessions();
+
+            #region
 
             permissionDTO = permissionBLL.Select();
             cmbPermission.DataSource = permissionDTO.Permissions;
             GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
 
-            dataGridViewPermissions.DataSource = permissionDTO.Members;
-            dataGridViewPermissions.Columns[0].Visible = false;
-            dataGridViewPermissions.Columns[1].Visible = false;
-            dataGridViewPermissions.Columns[2].Visible = false;
-            dataGridViewPermissions.Columns[3].HeaderText = "Surname";
-            dataGridViewPermissions.Columns[4].HeaderText = "Name";
-            dataGridViewPermissions.Columns[5].Visible = false;
-            dataGridViewPermissions.Columns[6].Visible = false;
-            dataGridViewPermissions.Columns[7].Visible = false;
-            dataGridViewPermissions.Columns[8].Visible = false;
-            dataGridViewPermissions.Columns[9].Visible = false;
-            dataGridViewPermissions.Columns[10].Visible = false;
-            dataGridViewPermissions.Columns[11].Visible = false;
-            dataGridViewPermissions.Columns[12].Visible = false;
-            dataGridViewPermissions.Columns[13].HeaderText = "Nationality";
-            dataGridViewPermissions.Columns[14].Visible = false;
-            dataGridViewPermissions.Columns[15].Visible = false;
-            dataGridViewPermissions.Columns[16].Visible = false;
-            dataGridViewPermissions.Columns[17].HeaderText = "Position";
-            dataGridViewPermissions.Columns[18].Visible = false;
-            dataGridViewPermissions.Columns[19].Visible = false;
-            dataGridViewPermissions.Columns[20].Visible = false;
-            dataGridViewPermissions.Columns[21].Visible = false;
-            dataGridViewPermissions.Columns[22].Visible = false;
-            dataGridViewPermissions.Columns[23].Visible = false;
-            dataGridViewPermissions.Columns[24].Visible = false;
-            dataGridViewPermissions.Columns[25].HeaderText = "Access Level";
-            dataGridViewPermissions.Columns[26].Visible = false;
-            dataGridViewPermissions.Columns[27].Visible = false;
-            dataGridViewPermissions.Columns[28].Visible = false;
-            dataGridViewPermissions.Columns[29].Visible = false;
-            dataGridViewPermissions.Columns[30].Visible = false;
-            dataGridViewPermissions.Columns[31].Visible = false;
-            dataGridViewPermissions.Columns[32].Visible = false;
-            dataGridViewPermissions.Columns[33].Visible = false;
-            dataGridViewPermissions.Columns[34].Visible = false;
-            dataGridViewPermissions.Columns[35].Visible = false;
-            dataGridViewPermissions.Columns[36].Visible = false;
-            dataGridViewPermissions.Columns[37].Visible = false;
-            dataGridViewPermissions.Columns[38].Visible = false;
-            dataGridViewPermissions.Columns[39].Visible = false;
-            dataGridViewPermissions.Columns[40].Visible = false;
-            dataGridViewPermissions.Columns[41].Visible = false;
-            dataGridViewPermissions.Columns[42].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewPermissions.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-
-            positionDTO = positionBLL.Select();
-            dataGridViewPositions.DataSource = positionDTO.Positions;
-            dataGridViewPositions.Columns[0].Visible = false;
-            dataGridViewPositions.Columns[1].HeaderText = "Position Name";
-            foreach (DataGridViewColumn column in dataGridViewPositions.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-
-            professionDTO = professionBLL.Select();
-            dataGridViewProfessions.DataSource = professionDTO.Professions;
-            dataGridViewProfessions.Columns[0].Visible = false;
-            dataGridViewProfessions.Columns[1].HeaderText = "Profession Name";
-            foreach (DataGridViewColumn column in dataGridViewProfessions.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-
-            picProfilePic.SizeMode = PictureBoxSizeMode.StretchImage;
-            picProfilePic.BorderStyle = BorderStyle.None;
-            picProfilePic.Width = picProfilePic.Height = 40;
-            picProfilePic.Paint += new PaintEventHandler(picProfilePic_Paint);
+            loadPermissions();
 
             picProfilePic.SizeMode = PictureBoxSizeMode.StretchImage;
             picProfilePic.BorderStyle = BorderStyle.None;
@@ -253,56 +168,8 @@ namespace APC.AllForms
             cmbDeletedData.Items.Add("Fined Member");
 
             memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-            dataGridView1.DataSource = memberDeletedDataDTO.Members;
+            loadMembers();
 
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].Visible = false;
-            dataGridView1.Columns[3].HeaderText = "Surname";
-            dataGridView1.Columns[4].HeaderText = "Name";
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].Visible = false;
-            dataGridView1.Columns[7].Visible = false;
-            dataGridView1.Columns[8].Visible = false;
-            dataGridView1.Columns[9].Visible = false;
-            dataGridView1.Columns[10].Visible = false;
-            dataGridView1.Columns[11].Visible = false;
-            dataGridView1.Columns[12].Visible = false;
-            dataGridView1.Columns[13].HeaderText = "Nationality";
-            dataGridView1.Columns[14].Visible = false;
-            dataGridView1.Columns[15].HeaderText = "Profession";
-            dataGridView1.Columns[16].Visible = false;
-            dataGridView1.Columns[17].HeaderText = "Position";
-            dataGridView1.Columns[18].Visible = false;
-            dataGridView1.Columns[19].HeaderText = "Gender";
-            dataGridView1.Columns[20].Visible = false;
-            dataGridView1.Columns[21].Visible = false;
-            dataGridView1.Columns[22].Visible = false;
-            dataGridView1.Columns[23].Visible = false;
-            dataGridView1.Columns[24].Visible = false;
-            dataGridView1.Columns[25].Visible = false;
-            dataGridView1.Columns[26].Visible = false;
-            dataGridView1.Columns[27].Visible = false;
-            dataGridView1.Columns[28].Visible = false;
-            dataGridView1.Columns[29].Visible = false;
-            dataGridView1.Columns[30].Visible = false;
-            dataGridView1.Columns[31].Visible = false;
-            dataGridView1.Columns[32].Visible = false;
-            dataGridView1.Columns[33].Visible = false;
-            dataGridView1.Columns[34].Visible = false;
-            dataGridView1.Columns[35].Visible = false;
-            dataGridView1.Columns[36].Visible = false;
-            dataGridView1.Columns[37].Visible = false;
-            dataGridView1.Columns[38].Visible = false;
-            dataGridView1.Columns[39].Visible = false;
-            dataGridView1.Columns[40].Visible = false;
-            dataGridView1.Columns[41].Visible = false;
-            dataGridView1.Columns[42].Visible = false;
-            dataGridView1.Columns[43].Visible = false;
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
             #endregion
 
             if (LoginInfo.AccessLevel != 4)
@@ -320,10 +187,52 @@ namespace APC.AllForms
             Counts();
         }
 
-        private void LoadPaymentStatus()
+        private void loadPaymentStatuses()
         {
             dataGridViewPaymentStatus.DataSource = paymentStatusDTO.PaymentStatuses;
-            PaymentStatusHelperService.ConfigurePaymentStatusGrid(dataGridViewPaymentStatus, PaymentStatusGridType.Basic);
+            ConfigureSingleColumnGrid(dataGridViewPaymentStatus, SingleColumnGridType.Basic, "PaymentStatusName", "Payment Status");
+        }
+
+        private void loadPositions()
+        {
+            dataGridViewPositions.DataSource = positionDTO.Positions;
+            ConfigureSingleColumnGrid(dataGridViewPositions, SingleColumnGridType.Basic, "PositionName", "Positions");
+        }
+        private void loadEmploymentStatuses()
+        {
+            dataGridViewEmpStatus.DataSource = empStatusDTO.EmploymentStatuses;
+            ConfigureSingleColumnGrid(dataGridViewEmpStatus, SingleColumnGridType.Basic, "EmploymentStatus", "Employment Statuses");
+        }
+        private void loadMaritalStatuses()
+        {
+            dataGridViewMarStatus.DataSource = marStatusDTO.MaritalStatuses;
+            ConfigureSingleColumnGrid(dataGridViewMarStatus, SingleColumnGridType.Basic, "MaritalStatus", "Marital Statuses");
+        }
+        private void loadCountries()
+        {
+            dataGridViewCountry.DataSource = countryDTO.Countries;
+            ConfigureSingleColumnGrid(dataGridViewCountry, SingleColumnGridType.Basic, "CountryName", "Countries");
+        }
+        private void loadNationalities()
+        {
+            dataGridViewNationality.DataSource = nationalityDTO.Nationalities;
+            ConfigureSingleColumnGrid(dataGridViewNationality, SingleColumnGridType.Basic, "Nationality", "Nationalities");
+        }
+        private void loadProfessions()
+        {
+            dataGridViewProfessions.DataSource = professionDTO.Professions;
+            ConfigureSingleColumnGrid(dataGridViewProfessions, SingleColumnGridType.Basic, "Profession", "Professions");
+        }
+
+        private void loadPermissions()
+        {
+            dataGridViewPermissions.DataSource = permissionDTO.Members;
+            ConfigureMemberGrid(dataGridViewPermissions, MemberGridType.Permission);
+        }
+        private void loadMembers()
+        {
+            dataGridView1.DataSource = memberDeletedDataDTO.Members;
+            ConfigureMemberGrid(dataGridView1, MemberGridType.Basic);
         }
 
         private void picProfilePic_Paint(object sender, PaintEventArgs e)
@@ -1723,6 +1632,50 @@ namespace APC.AllForms
             open.ShowDialog();
             this.Visible = true;
             ClearFilters();
+        }
+
+        private void btnUpdatePaymentStatus_Click(object sender, EventArgs e)
+        {
+            if (paymentStatusDetail.PaymentStatusID == 0)
+            {
+                MessageBox.Show("Please select a payment status from the table");
+            }
+            else
+            {
+                FormPaymentStatus open = new FormPaymentStatus();
+                open.detail = paymentStatusDetail;
+                open.isUpdate = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void btnDeletePaymentStatus_Click(object sender, EventArgs e)
+        {
+            if (paymentStatusDetail.PaymentStatusID == 0)
+            {
+                MessageBox.Show("Please select a payment status from the table");
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    if (paymentStatusBLL.Delete(paymentStatusDetail))
+                    {
+                        MessageBox.Show("Payment status was deleted successfully");
+                        ClearFilters();
+                    }
+                }
+            }
+        }
+
+        private void dataGridViewPaymentStatus_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            paymentStatusDetail = GeneralHelper.MapFromGrid<PaymentStatusDetailDTO>(dataGridViewPaymentStatus, e.RowIndex);
         }
     }
 }

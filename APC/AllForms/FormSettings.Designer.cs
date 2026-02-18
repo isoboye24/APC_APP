@@ -35,8 +35,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.dashboardPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -44,22 +44,27 @@
             this.panelTotalNationality = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalNationalitySettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconTotalCountryCard = new FontAwesome.Sharp.IconPictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panelTotalPosition = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalPositionSettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconTotalPositionCard = new FontAwesome.Sharp.IconPictureBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panelTotalEvent = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalEventSettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconTotalEventCard = new FontAwesome.Sharp.IconPictureBox();
             this.label12 = new System.Windows.Forms.Label();
             this.panelTotalProfssion = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalProfessionSettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconProfessionCard = new FontAwesome.Sharp.IconPictureBox();
             this.label16 = new System.Windows.Forms.Label();
             this.panelTotalProfession = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalPermissionSettingsDashboard = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconTotalPermissionCard = new FontAwesome.Sharp.IconPictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel32 = new System.Windows.Forms.TableLayoutPanel();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -140,25 +145,6 @@
             this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
             this.txtProfession = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.deletedDataPage = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel31 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRetrieve = new System.Windows.Forms.Button();
-            this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
-            this.cmbDeletedData = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.personalDataPage = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel33 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel34 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelName = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.labelSurname = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.labelAccessLevel = new System.Windows.Forms.Label();
-            this.labelPosition = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.paymentStatusPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel35 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewPaymentStatus = new System.Windows.Forms.DataGridView();
@@ -170,26 +156,45 @@
             this.tableLayoutPanel37 = new System.Windows.Forms.TableLayoutPanel();
             this.txtPaymentStatus = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.iconTotalCountryCard = new FontAwesome.Sharp.IconPictureBox();
-            this.iconTotalPositionCard = new FontAwesome.Sharp.IconPictureBox();
-            this.iconTotalEventCard = new FontAwesome.Sharp.IconPictureBox();
-            this.iconProfessionCard = new FontAwesome.Sharp.IconPictureBox();
-            this.iconTotalPermissionCard = new FontAwesome.Sharp.IconPictureBox();
+            this.personalDataPage = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel33 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel34 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelName = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.labelSurname = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.labelAccessLevel = new System.Windows.Forms.Label();
+            this.labelPosition = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.picProfilePic = new System.Windows.Forms.PictureBox();
+            this.deletedDataPage = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel31 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnRetrieve = new System.Windows.Forms.Button();
+            this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbDeletedData = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.dashboardPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelTotalNationality.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalCountryCard)).BeginInit();
             this.panelTotalPosition.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPositionCard)).BeginInit();
             this.panelTotalEvent.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalEventCard)).BeginInit();
             this.panelTotalProfssion.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconProfessionCard)).BeginInit();
             this.panelTotalProfession.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPermissionCard)).BeginInit();
             this.tableLayoutPanel32.SuspendLayout();
             this.countryPage.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -226,25 +231,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProfessions)).BeginInit();
             this.tableLayoutPanel28.SuspendLayout();
             this.tableLayoutPanel27.SuspendLayout();
-            this.deletedDataPage.SuspendLayout();
-            this.tableLayoutPanel29.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tableLayoutPanel31.SuspendLayout();
-            this.tableLayoutPanel30.SuspendLayout();
-            this.personalDataPage.SuspendLayout();
-            this.tableLayoutPanel33.SuspendLayout();
-            this.tableLayoutPanel34.SuspendLayout();
             this.paymentStatusPage.SuspendLayout();
             this.tableLayoutPanel35.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPaymentStatus)).BeginInit();
             this.tableLayoutPanel36.SuspendLayout();
             this.tableLayoutPanel37.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalCountryCard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPositionCard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalEventCard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconProfessionCard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPermissionCard)).BeginInit();
+            this.personalDataPage.SuspendLayout();
+            this.tableLayoutPanel33.SuspendLayout();
+            this.tableLayoutPanel34.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).BeginInit();
+            this.deletedDataPage.SuspendLayout();
+            this.tableLayoutPanel29.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tableLayoutPanel31.SuspendLayout();
+            this.tableLayoutPanel30.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -372,6 +372,21 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(265, 57);
             this.tableLayoutPanel5.TabIndex = 8;
             // 
+            // iconTotalCountryCard
+            // 
+            this.iconTotalCountryCard.BackColor = System.Drawing.Color.DeepPink;
+            this.iconTotalCountryCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconTotalCountryCard.IconChar = FontAwesome.Sharp.IconChar.EarthAfrica;
+            this.iconTotalCountryCard.IconColor = System.Drawing.Color.White;
+            this.iconTotalCountryCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconTotalCountryCard.IconSize = 45;
+            this.iconTotalCountryCard.Location = new System.Drawing.Point(216, 4);
+            this.iconTotalCountryCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconTotalCountryCard.Name = "iconTotalCountryCard";
+            this.iconTotalCountryCard.Size = new System.Drawing.Size(45, 49);
+            this.iconTotalCountryCard.TabIndex = 1;
+            this.iconTotalCountryCard.TabStop = false;
+            // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -430,6 +445,21 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(265, 58);
             this.tableLayoutPanel7.TabIndex = 8;
+            // 
+            // iconTotalPositionCard
+            // 
+            this.iconTotalPositionCard.BackColor = System.Drawing.Color.MidnightBlue;
+            this.iconTotalPositionCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconTotalPositionCard.IconChar = FontAwesome.Sharp.IconChar.Couch;
+            this.iconTotalPositionCard.IconColor = System.Drawing.Color.White;
+            this.iconTotalPositionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconTotalPositionCard.IconSize = 45;
+            this.iconTotalPositionCard.Location = new System.Drawing.Point(216, 4);
+            this.iconTotalPositionCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconTotalPositionCard.Name = "iconTotalPositionCard";
+            this.iconTotalPositionCard.Size = new System.Drawing.Size(45, 50);
+            this.iconTotalPositionCard.TabIndex = 1;
+            this.iconTotalPositionCard.TabStop = false;
             // 
             // label10
             // 
@@ -491,6 +521,21 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(265, 57);
             this.tableLayoutPanel9.TabIndex = 8;
             // 
+            // iconTotalEventCard
+            // 
+            this.iconTotalEventCard.BackColor = System.Drawing.Color.DarkOrchid;
+            this.iconTotalEventCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconTotalEventCard.IconChar = FontAwesome.Sharp.IconChar.GlassCheers;
+            this.iconTotalEventCard.IconColor = System.Drawing.Color.White;
+            this.iconTotalEventCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconTotalEventCard.IconSize = 45;
+            this.iconTotalEventCard.Location = new System.Drawing.Point(216, 4);
+            this.iconTotalEventCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconTotalEventCard.Name = "iconTotalEventCard";
+            this.iconTotalEventCard.Size = new System.Drawing.Size(45, 49);
+            this.iconTotalEventCard.TabIndex = 1;
+            this.iconTotalEventCard.TabStop = false;
+            // 
             // label12
             // 
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -551,6 +596,21 @@
             this.tableLayoutPanel11.Size = new System.Drawing.Size(265, 57);
             this.tableLayoutPanel11.TabIndex = 8;
             // 
+            // iconProfessionCard
+            // 
+            this.iconProfessionCard.BackColor = System.Drawing.Color.Magenta;
+            this.iconProfessionCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconProfessionCard.IconChar = FontAwesome.Sharp.IconChar.GraduationCap;
+            this.iconProfessionCard.IconColor = System.Drawing.Color.White;
+            this.iconProfessionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconProfessionCard.IconSize = 45;
+            this.iconProfessionCard.Location = new System.Drawing.Point(216, 4);
+            this.iconProfessionCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconProfessionCard.Name = "iconProfessionCard";
+            this.iconProfessionCard.Size = new System.Drawing.Size(45, 49);
+            this.iconProfessionCard.TabIndex = 1;
+            this.iconProfessionCard.TabStop = false;
+            // 
             // label16
             // 
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -610,6 +670,21 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(265, 57);
             this.tableLayoutPanel6.TabIndex = 8;
+            // 
+            // iconTotalPermissionCard
+            // 
+            this.iconTotalPermissionCard.BackColor = System.Drawing.Color.Green;
+            this.iconTotalPermissionCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconTotalPermissionCard.IconChar = FontAwesome.Sharp.IconChar.UniversalAccess;
+            this.iconTotalPermissionCard.IconColor = System.Drawing.Color.White;
+            this.iconTotalPermissionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconTotalPermissionCard.IconSize = 45;
+            this.iconTotalPermissionCard.Location = new System.Drawing.Point(216, 4);
+            this.iconTotalPermissionCard.Margin = new System.Windows.Forms.Padding(4);
+            this.iconTotalPermissionCard.Name = "iconTotalPermissionCard";
+            this.iconTotalPermissionCard.Size = new System.Drawing.Size(45, 49);
+            this.iconTotalPermissionCard.TabIndex = 1;
+            this.iconTotalPermissionCard.TabStop = false;
             // 
             // label6
             // 
@@ -1921,136 +1996,182 @@
             this.label9.TabIndex = 1;
             this.label9.Text = "Profession";
             // 
-            // deletedDataPage
+            // paymentStatusPage
             // 
-            this.deletedDataPage.Controls.Add(this.tableLayoutPanel29);
-            this.deletedDataPage.Location = new System.Drawing.Point(4, 46);
-            this.deletedDataPage.Margin = new System.Windows.Forms.Padding(4);
-            this.deletedDataPage.Name = "deletedDataPage";
-            this.deletedDataPage.Size = new System.Drawing.Size(1268, 688);
-            this.deletedDataPage.TabIndex = 8;
-            this.deletedDataPage.Text = "Deleted Data   ";
-            this.deletedDataPage.UseVisualStyleBackColor = true;
+            this.paymentStatusPage.Controls.Add(this.tableLayoutPanel35);
+            this.paymentStatusPage.Location = new System.Drawing.Point(4, 46);
+            this.paymentStatusPage.Name = "paymentStatusPage";
+            this.paymentStatusPage.Size = new System.Drawing.Size(1268, 688);
+            this.paymentStatusPage.TabIndex = 10;
+            this.paymentStatusPage.Text = "Pay. Status   ";
+            this.paymentStatusPage.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel29
+            // tableLayoutPanel35
             // 
-            this.tableLayoutPanel29.ColumnCount = 3;
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96F));
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel29.Controls.Add(this.dataGridView1, 1, 2);
-            this.tableLayoutPanel29.Controls.Add(this.tableLayoutPanel31, 1, 4);
-            this.tableLayoutPanel29.Controls.Add(this.tableLayoutPanel30, 1, 1);
-            this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel29.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel29.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel29.Name = "tableLayoutPanel29";
-            this.tableLayoutPanel29.RowCount = 6;
-            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64F));
-            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel29.Size = new System.Drawing.Size(1268, 688);
-            this.tableLayoutPanel29.TabIndex = 3;
+            this.tableLayoutPanel35.ColumnCount = 3;
+            this.tableLayoutPanel35.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel35.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96F));
+            this.tableLayoutPanel35.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel35.Controls.Add(this.dataGridViewPaymentStatus, 1, 2);
+            this.tableLayoutPanel35.Controls.Add(this.tableLayoutPanel36, 1, 3);
+            this.tableLayoutPanel35.Controls.Add(this.tableLayoutPanel37, 1, 1);
+            this.tableLayoutPanel35.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel35.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel35.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel35.Name = "tableLayoutPanel35";
+            this.tableLayoutPanel35.RowCount = 4;
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel35.Size = new System.Drawing.Size(1268, 688);
+            this.tableLayoutPanel35.TabIndex = 2;
             // 
-            // dataGridView1
+            // dataGridViewPaymentStatus
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(29, 120);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowTemplate.Height = 40;
-            this.dataGridView1.Size = new System.Drawing.Size(1209, 432);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
+            this.dataGridViewPaymentStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewPaymentStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewPaymentStatus.Location = new System.Drawing.Point(29, 65);
+            this.dataGridViewPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewPaymentStatus.Name = "dataGridViewPaymentStatus";
+            this.dataGridViewPaymentStatus.RowHeadersWidth = 51;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewPaymentStatus.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewPaymentStatus.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewPaymentStatus.RowTemplate.Height = 40;
+            this.dataGridViewPaymentStatus.Size = new System.Drawing.Size(1209, 524);
+            this.dataGridViewPaymentStatus.TabIndex = 0;
+            this.dataGridViewPaymentStatus.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPaymentStatus_RowEnter);
             // 
-            // tableLayoutPanel31
+            // tableLayoutPanel36
             // 
-            this.tableLayoutPanel31.ColumnCount = 3;
-            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
-            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
-            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel31.Controls.Add(this.btnRetrieve, 1, 1);
-            this.tableLayoutPanel31.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel31.Location = new System.Drawing.Point(29, 573);
-            this.tableLayoutPanel31.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel31.Name = "tableLayoutPanel31";
-            this.tableLayoutPanel31.RowCount = 3;
-            this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel31.Size = new System.Drawing.Size(1209, 95);
-            this.tableLayoutPanel31.TabIndex = 2;
+            this.tableLayoutPanel36.ColumnCount = 7;
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.5F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.5F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel36.Controls.Add(this.btnAddPaymentStatus, 1, 1);
+            this.tableLayoutPanel36.Controls.Add(this.btnUpdatePaymentStatus, 3, 1);
+            this.tableLayoutPanel36.Controls.Add(this.btnDeletePaymentStatus, 5, 1);
+            this.tableLayoutPanel36.Controls.Add(this.labelTotalPaymentStatus, 6, 1);
+            this.tableLayoutPanel36.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel36.Location = new System.Drawing.Point(29, 597);
+            this.tableLayoutPanel36.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel36.Name = "tableLayoutPanel36";
+            this.tableLayoutPanel36.RowCount = 3;
+            this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel36.Size = new System.Drawing.Size(1209, 87);
+            this.tableLayoutPanel36.TabIndex = 2;
             // 
-            // btnRetrieve
+            // btnAddPaymentStatus
             // 
-            this.btnRetrieve.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnRetrieve.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRetrieve.FlatAppearance.BorderSize = 0;
-            this.btnRetrieve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRetrieve.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRetrieve.Location = new System.Drawing.Point(529, 27);
-            this.btnRetrieve.Margin = new System.Windows.Forms.Padding(4);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(149, 39);
-            this.btnRetrieve.TabIndex = 0;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = false;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            this.btnAddPaymentStatus.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnAddPaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddPaymentStatus.FlatAppearance.BorderSize = 0;
+            this.btnAddPaymentStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddPaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPaymentStatus.Location = new System.Drawing.Point(348, 25);
+            this.btnAddPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddPaymentStatus.Name = "btnAddPaymentStatus";
+            this.btnAddPaymentStatus.Size = new System.Drawing.Size(149, 35);
+            this.btnAddPaymentStatus.TabIndex = 0;
+            this.btnAddPaymentStatus.Text = "Add";
+            this.btnAddPaymentStatus.UseVisualStyleBackColor = false;
+            this.btnAddPaymentStatus.Click += new System.EventHandler(this.btnAddPaymentStatus_Click);
             // 
-            // tableLayoutPanel30
+            // btnUpdatePaymentStatus
             // 
-            this.tableLayoutPanel30.ColumnCount = 4;
-            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel30.Controls.Add(this.cmbDeletedData, 2, 1);
-            this.tableLayoutPanel30.Controls.Add(this.label11, 1, 1);
-            this.tableLayoutPanel30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel30.Location = new System.Drawing.Point(29, 17);
-            this.tableLayoutPanel30.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel30.Name = "tableLayoutPanel30";
-            this.tableLayoutPanel30.RowCount = 3;
-            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel30.Size = new System.Drawing.Size(1209, 95);
-            this.tableLayoutPanel30.TabIndex = 4;
+            this.btnUpdatePaymentStatus.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnUpdatePaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnUpdatePaymentStatus.FlatAppearance.BorderSize = 0;
+            this.btnUpdatePaymentStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdatePaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdatePaymentStatus.Location = new System.Drawing.Point(529, 25);
+            this.btnUpdatePaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdatePaymentStatus.Name = "btnUpdatePaymentStatus";
+            this.btnUpdatePaymentStatus.Size = new System.Drawing.Size(149, 35);
+            this.btnUpdatePaymentStatus.TabIndex = 1;
+            this.btnUpdatePaymentStatus.Text = "Edit";
+            this.btnUpdatePaymentStatus.UseVisualStyleBackColor = false;
+            this.btnUpdatePaymentStatus.Click += new System.EventHandler(this.btnUpdatePaymentStatus_Click);
             // 
-            // cmbDeletedData
+            // btnDeletePaymentStatus
             // 
-            this.cmbDeletedData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbDeletedData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbDeletedData.FormattingEnabled = true;
-            this.cmbDeletedData.Location = new System.Drawing.Point(486, 29);
-            this.cmbDeletedData.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbDeletedData.Name = "cmbDeletedData";
-            this.cmbDeletedData.Size = new System.Drawing.Size(475, 36);
-            this.cmbDeletedData.TabIndex = 2;
-            this.cmbDeletedData.SelectedIndexChanged += new System.EventHandler(this.cmbDeletedData_SelectedIndexChanged);
+            this.btnDeletePaymentStatus.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnDeletePaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeletePaymentStatus.FlatAppearance.BorderSize = 0;
+            this.btnDeletePaymentStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeletePaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeletePaymentStatus.Location = new System.Drawing.Point(710, 25);
+            this.btnDeletePaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeletePaymentStatus.Name = "btnDeletePaymentStatus";
+            this.btnDeletePaymentStatus.Size = new System.Drawing.Size(149, 35);
+            this.btnDeletePaymentStatus.TabIndex = 2;
+            this.btnDeletePaymentStatus.Text = "Delete";
+            this.btnDeletePaymentStatus.UseVisualStyleBackColor = false;
+            this.btnDeletePaymentStatus.Click += new System.EventHandler(this.btnDeletePaymentStatus_Click);
             // 
-            // label11
+            // labelTotalPaymentStatus
             // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(341, 41);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(137, 25);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Deleted Data";
+            this.labelTotalPaymentStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalPaymentStatus.AutoSize = true;
+            this.labelTotalPaymentStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalPaymentStatus.Location = new System.Drawing.Point(1155, 41);
+            this.labelTotalPaymentStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTotalPaymentStatus.Name = "labelTotalPaymentStatus";
+            this.labelTotalPaymentStatus.Size = new System.Drawing.Size(50, 23);
+            this.labelTotalPaymentStatus.TabIndex = 7;
+            this.labelTotalPaymentStatus.Text = "Total:";
+            // 
+            // tableLayoutPanel37
+            // 
+            this.tableLayoutPanel37.ColumnCount = 4;
+            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24F));
+            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24F));
+            this.tableLayoutPanel37.Controls.Add(this.txtPaymentStatus, 2, 0);
+            this.tableLayoutPanel37.Controls.Add(this.label19, 1, 0);
+            this.tableLayoutPanel37.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel37.Location = new System.Drawing.Point(29, 16);
+            this.tableLayoutPanel37.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel37.Name = "tableLayoutPanel37";
+            this.tableLayoutPanel37.RowCount = 1;
+            this.tableLayoutPanel37.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel37.Size = new System.Drawing.Size(1209, 41);
+            this.tableLayoutPanel37.TabIndex = 3;
+            // 
+            // txtPaymentStatus
+            // 
+            this.txtPaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtPaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPaymentStatus.Location = new System.Drawing.Point(559, 4);
+            this.txtPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPaymentStatus.Name = "txtPaymentStatus";
+            this.txtPaymentStatus.Size = new System.Drawing.Size(354, 34);
+            this.txtPaymentStatus.TabIndex = 0;
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(387, 9);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 9, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(164, 25);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Payment Status";
             // 
             // personalDataPage
             // 
@@ -2221,255 +2342,6 @@
             this.label17.Text = "Access:";
             this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // paymentStatusPage
-            // 
-            this.paymentStatusPage.Controls.Add(this.tableLayoutPanel35);
-            this.paymentStatusPage.Location = new System.Drawing.Point(4, 46);
-            this.paymentStatusPage.Name = "paymentStatusPage";
-            this.paymentStatusPage.Size = new System.Drawing.Size(1268, 688);
-            this.paymentStatusPage.TabIndex = 10;
-            this.paymentStatusPage.Text = "Pay. Status   ";
-            this.paymentStatusPage.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel35
-            // 
-            this.tableLayoutPanel35.ColumnCount = 3;
-            this.tableLayoutPanel35.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel35.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96F));
-            this.tableLayoutPanel35.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel35.Controls.Add(this.dataGridViewPaymentStatus, 1, 2);
-            this.tableLayoutPanel35.Controls.Add(this.tableLayoutPanel36, 1, 3);
-            this.tableLayoutPanel35.Controls.Add(this.tableLayoutPanel37, 1, 1);
-            this.tableLayoutPanel35.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel35.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel35.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel35.Name = "tableLayoutPanel35";
-            this.tableLayoutPanel35.RowCount = 4;
-            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
-            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel35.Size = new System.Drawing.Size(1268, 688);
-            this.tableLayoutPanel35.TabIndex = 2;
-            // 
-            // dataGridViewPaymentStatus
-            // 
-            this.dataGridViewPaymentStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewPaymentStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewPaymentStatus.Location = new System.Drawing.Point(29, 65);
-            this.dataGridViewPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridViewPaymentStatus.Name = "dataGridViewPaymentStatus";
-            this.dataGridViewPaymentStatus.RowHeadersWidth = 51;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewPaymentStatus.RowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewPaymentStatus.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewPaymentStatus.RowTemplate.Height = 40;
-            this.dataGridViewPaymentStatus.Size = new System.Drawing.Size(1209, 524);
-            this.dataGridViewPaymentStatus.TabIndex = 0;
-            // 
-            // tableLayoutPanel36
-            // 
-            this.tableLayoutPanel36.ColumnCount = 7;
-            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.5F));
-            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.5F));
-            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel36.Controls.Add(this.btnAddPaymentStatus, 1, 1);
-            this.tableLayoutPanel36.Controls.Add(this.btnUpdatePaymentStatus, 3, 1);
-            this.tableLayoutPanel36.Controls.Add(this.btnDeletePaymentStatus, 5, 1);
-            this.tableLayoutPanel36.Controls.Add(this.labelTotalPaymentStatus, 6, 1);
-            this.tableLayoutPanel36.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel36.Location = new System.Drawing.Point(29, 597);
-            this.tableLayoutPanel36.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel36.Name = "tableLayoutPanel36";
-            this.tableLayoutPanel36.RowCount = 3;
-            this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel36.Size = new System.Drawing.Size(1209, 87);
-            this.tableLayoutPanel36.TabIndex = 2;
-            // 
-            // btnAddPaymentStatus
-            // 
-            this.btnAddPaymentStatus.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnAddPaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddPaymentStatus.FlatAppearance.BorderSize = 0;
-            this.btnAddPaymentStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddPaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPaymentStatus.Location = new System.Drawing.Point(348, 25);
-            this.btnAddPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddPaymentStatus.Name = "btnAddPaymentStatus";
-            this.btnAddPaymentStatus.Size = new System.Drawing.Size(149, 35);
-            this.btnAddPaymentStatus.TabIndex = 0;
-            this.btnAddPaymentStatus.Text = "Add";
-            this.btnAddPaymentStatus.UseVisualStyleBackColor = false;
-            this.btnAddPaymentStatus.Click += new System.EventHandler(this.btnAddPaymentStatus_Click);
-            // 
-            // btnUpdatePaymentStatus
-            // 
-            this.btnUpdatePaymentStatus.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnUpdatePaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnUpdatePaymentStatus.FlatAppearance.BorderSize = 0;
-            this.btnUpdatePaymentStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdatePaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdatePaymentStatus.Location = new System.Drawing.Point(529, 25);
-            this.btnUpdatePaymentStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUpdatePaymentStatus.Name = "btnUpdatePaymentStatus";
-            this.btnUpdatePaymentStatus.Size = new System.Drawing.Size(149, 35);
-            this.btnUpdatePaymentStatus.TabIndex = 1;
-            this.btnUpdatePaymentStatus.Text = "Edit";
-            this.btnUpdatePaymentStatus.UseVisualStyleBackColor = false;
-            // 
-            // btnDeletePaymentStatus
-            // 
-            this.btnDeletePaymentStatus.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnDeletePaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeletePaymentStatus.FlatAppearance.BorderSize = 0;
-            this.btnDeletePaymentStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeletePaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeletePaymentStatus.Location = new System.Drawing.Point(710, 25);
-            this.btnDeletePaymentStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDeletePaymentStatus.Name = "btnDeletePaymentStatus";
-            this.btnDeletePaymentStatus.Size = new System.Drawing.Size(149, 35);
-            this.btnDeletePaymentStatus.TabIndex = 2;
-            this.btnDeletePaymentStatus.Text = "Delete";
-            this.btnDeletePaymentStatus.UseVisualStyleBackColor = false;
-            // 
-            // labelTotalPaymentStatus
-            // 
-            this.labelTotalPaymentStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalPaymentStatus.AutoSize = true;
-            this.labelTotalPaymentStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalPaymentStatus.Location = new System.Drawing.Point(1155, 41);
-            this.labelTotalPaymentStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalPaymentStatus.Name = "labelTotalPaymentStatus";
-            this.labelTotalPaymentStatus.Size = new System.Drawing.Size(50, 23);
-            this.labelTotalPaymentStatus.TabIndex = 7;
-            this.labelTotalPaymentStatus.Text = "Total:";
-            // 
-            // tableLayoutPanel37
-            // 
-            this.tableLayoutPanel37.ColumnCount = 4;
-            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24F));
-            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24F));
-            this.tableLayoutPanel37.Controls.Add(this.txtPaymentStatus, 2, 0);
-            this.tableLayoutPanel37.Controls.Add(this.label19, 1, 0);
-            this.tableLayoutPanel37.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel37.Location = new System.Drawing.Point(29, 16);
-            this.tableLayoutPanel37.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel37.Name = "tableLayoutPanel37";
-            this.tableLayoutPanel37.RowCount = 1;
-            this.tableLayoutPanel37.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel37.Size = new System.Drawing.Size(1209, 41);
-            this.tableLayoutPanel37.TabIndex = 3;
-            // 
-            // txtPaymentStatus
-            // 
-            this.txtPaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtPaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPaymentStatus.Location = new System.Drawing.Point(559, 4);
-            this.txtPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPaymentStatus.Name = "txtPaymentStatus";
-            this.txtPaymentStatus.Size = new System.Drawing.Size(354, 34);
-            this.txtPaymentStatus.TabIndex = 0;
-            // 
-            // label19
-            // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(387, 9);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 9, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(164, 25);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "Payment Status";
-            // 
-            // iconTotalCountryCard
-            // 
-            this.iconTotalCountryCard.BackColor = System.Drawing.Color.DeepPink;
-            this.iconTotalCountryCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconTotalCountryCard.IconChar = FontAwesome.Sharp.IconChar.EarthAfrica;
-            this.iconTotalCountryCard.IconColor = System.Drawing.Color.White;
-            this.iconTotalCountryCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconTotalCountryCard.IconSize = 45;
-            this.iconTotalCountryCard.Location = new System.Drawing.Point(216, 4);
-            this.iconTotalCountryCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconTotalCountryCard.Name = "iconTotalCountryCard";
-            this.iconTotalCountryCard.Size = new System.Drawing.Size(45, 49);
-            this.iconTotalCountryCard.TabIndex = 1;
-            this.iconTotalCountryCard.TabStop = false;
-            // 
-            // iconTotalPositionCard
-            // 
-            this.iconTotalPositionCard.BackColor = System.Drawing.Color.MidnightBlue;
-            this.iconTotalPositionCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconTotalPositionCard.IconChar = FontAwesome.Sharp.IconChar.Couch;
-            this.iconTotalPositionCard.IconColor = System.Drawing.Color.White;
-            this.iconTotalPositionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconTotalPositionCard.IconSize = 45;
-            this.iconTotalPositionCard.Location = new System.Drawing.Point(216, 4);
-            this.iconTotalPositionCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconTotalPositionCard.Name = "iconTotalPositionCard";
-            this.iconTotalPositionCard.Size = new System.Drawing.Size(45, 50);
-            this.iconTotalPositionCard.TabIndex = 1;
-            this.iconTotalPositionCard.TabStop = false;
-            // 
-            // iconTotalEventCard
-            // 
-            this.iconTotalEventCard.BackColor = System.Drawing.Color.DarkOrchid;
-            this.iconTotalEventCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconTotalEventCard.IconChar = FontAwesome.Sharp.IconChar.GlassCheers;
-            this.iconTotalEventCard.IconColor = System.Drawing.Color.White;
-            this.iconTotalEventCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconTotalEventCard.IconSize = 45;
-            this.iconTotalEventCard.Location = new System.Drawing.Point(216, 4);
-            this.iconTotalEventCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconTotalEventCard.Name = "iconTotalEventCard";
-            this.iconTotalEventCard.Size = new System.Drawing.Size(45, 49);
-            this.iconTotalEventCard.TabIndex = 1;
-            this.iconTotalEventCard.TabStop = false;
-            // 
-            // iconProfessionCard
-            // 
-            this.iconProfessionCard.BackColor = System.Drawing.Color.Magenta;
-            this.iconProfessionCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconProfessionCard.IconChar = FontAwesome.Sharp.IconChar.GraduationCap;
-            this.iconProfessionCard.IconColor = System.Drawing.Color.White;
-            this.iconProfessionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconProfessionCard.IconSize = 45;
-            this.iconProfessionCard.Location = new System.Drawing.Point(216, 4);
-            this.iconProfessionCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconProfessionCard.Name = "iconProfessionCard";
-            this.iconProfessionCard.Size = new System.Drawing.Size(45, 49);
-            this.iconProfessionCard.TabIndex = 1;
-            this.iconProfessionCard.TabStop = false;
-            // 
-            // iconTotalPermissionCard
-            // 
-            this.iconTotalPermissionCard.BackColor = System.Drawing.Color.Green;
-            this.iconTotalPermissionCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconTotalPermissionCard.IconChar = FontAwesome.Sharp.IconChar.UniversalAccess;
-            this.iconTotalPermissionCard.IconColor = System.Drawing.Color.White;
-            this.iconTotalPermissionCard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconTotalPermissionCard.IconSize = 45;
-            this.iconTotalPermissionCard.Location = new System.Drawing.Point(216, 4);
-            this.iconTotalPermissionCard.Margin = new System.Windows.Forms.Padding(4);
-            this.iconTotalPermissionCard.Name = "iconTotalPermissionCard";
-            this.iconTotalPermissionCard.Size = new System.Drawing.Size(45, 49);
-            this.iconTotalPermissionCard.TabIndex = 1;
-            this.iconTotalPermissionCard.TabStop = false;
-            // 
             // picProfilePic
             // 
             this.picProfilePic.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2480,6 +2352,137 @@
             this.picProfilePic.TabIndex = 1;
             this.picProfilePic.TabStop = false;
             this.picProfilePic.Paint += new System.Windows.Forms.PaintEventHandler(this.picProfilePic_Paint);
+            // 
+            // deletedDataPage
+            // 
+            this.deletedDataPage.Controls.Add(this.tableLayoutPanel29);
+            this.deletedDataPage.Location = new System.Drawing.Point(4, 46);
+            this.deletedDataPage.Margin = new System.Windows.Forms.Padding(4);
+            this.deletedDataPage.Name = "deletedDataPage";
+            this.deletedDataPage.Size = new System.Drawing.Size(1268, 688);
+            this.deletedDataPage.TabIndex = 8;
+            this.deletedDataPage.Text = "Deleted Data   ";
+            this.deletedDataPage.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel29
+            // 
+            this.tableLayoutPanel29.ColumnCount = 3;
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96F));
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel29.Controls.Add(this.dataGridView1, 1, 2);
+            this.tableLayoutPanel29.Controls.Add(this.tableLayoutPanel31, 1, 4);
+            this.tableLayoutPanel29.Controls.Add(this.tableLayoutPanel30, 1, 1);
+            this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel29.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel29.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel29.Name = "tableLayoutPanel29";
+            this.tableLayoutPanel29.RowCount = 6;
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel29.Size = new System.Drawing.Size(1268, 688);
+            this.tableLayoutPanel29.TabIndex = 3;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(29, 120);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowTemplate.Height = 40;
+            this.dataGridView1.Size = new System.Drawing.Size(1209, 432);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
+            // 
+            // tableLayoutPanel31
+            // 
+            this.tableLayoutPanel31.ColumnCount = 3;
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel31.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel31.Controls.Add(this.btnRetrieve, 1, 1);
+            this.tableLayoutPanel31.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel31.Location = new System.Drawing.Point(29, 573);
+            this.tableLayoutPanel31.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel31.Name = "tableLayoutPanel31";
+            this.tableLayoutPanel31.RowCount = 3;
+            this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel31.Size = new System.Drawing.Size(1209, 95);
+            this.tableLayoutPanel31.TabIndex = 2;
+            // 
+            // btnRetrieve
+            // 
+            this.btnRetrieve.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnRetrieve.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRetrieve.FlatAppearance.BorderSize = 0;
+            this.btnRetrieve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRetrieve.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRetrieve.Location = new System.Drawing.Point(529, 27);
+            this.btnRetrieve.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRetrieve.Name = "btnRetrieve";
+            this.btnRetrieve.Size = new System.Drawing.Size(149, 39);
+            this.btnRetrieve.TabIndex = 0;
+            this.btnRetrieve.Text = "Retrieve";
+            this.btnRetrieve.UseVisualStyleBackColor = false;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            // 
+            // tableLayoutPanel30
+            // 
+            this.tableLayoutPanel30.ColumnCount = 4;
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel30.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel30.Controls.Add(this.cmbDeletedData, 2, 1);
+            this.tableLayoutPanel30.Controls.Add(this.label11, 1, 1);
+            this.tableLayoutPanel30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel30.Location = new System.Drawing.Point(29, 17);
+            this.tableLayoutPanel30.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel30.Name = "tableLayoutPanel30";
+            this.tableLayoutPanel30.RowCount = 3;
+            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel30.Size = new System.Drawing.Size(1209, 95);
+            this.tableLayoutPanel30.TabIndex = 4;
+            // 
+            // cmbDeletedData
+            // 
+            this.cmbDeletedData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbDeletedData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDeletedData.FormattingEnabled = true;
+            this.cmbDeletedData.Location = new System.Drawing.Point(486, 29);
+            this.cmbDeletedData.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbDeletedData.Name = "cmbDeletedData";
+            this.cmbDeletedData.Size = new System.Drawing.Size(475, 36);
+            this.cmbDeletedData.TabIndex = 2;
+            this.cmbDeletedData.SelectedIndexChanged += new System.EventHandler(this.cmbDeletedData_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(341, 41);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(137, 25);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Deleted Data";
             // 
             // FormSettings
             // 
@@ -2499,22 +2502,27 @@
             this.panelTotalNationality.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalCountryCard)).EndInit();
             this.panelTotalPosition.ResumeLayout(false);
             this.panelTotalPosition.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPositionCard)).EndInit();
             this.panelTotalEvent.ResumeLayout(false);
             this.panelTotalEvent.PerformLayout();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalEventCard)).EndInit();
             this.panelTotalProfssion.ResumeLayout(false);
             this.panelTotalProfssion.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconProfessionCard)).EndInit();
             this.panelTotalProfession.ResumeLayout(false);
             this.panelTotalProfession.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPermissionCard)).EndInit();
             this.tableLayoutPanel32.ResumeLayout(false);
             this.countryPage.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -2565,16 +2573,6 @@
             this.tableLayoutPanel28.PerformLayout();
             this.tableLayoutPanel27.ResumeLayout(false);
             this.tableLayoutPanel27.PerformLayout();
-            this.deletedDataPage.ResumeLayout(false);
-            this.tableLayoutPanel29.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.tableLayoutPanel31.ResumeLayout(false);
-            this.tableLayoutPanel30.ResumeLayout(false);
-            this.tableLayoutPanel30.PerformLayout();
-            this.personalDataPage.ResumeLayout(false);
-            this.tableLayoutPanel33.ResumeLayout(false);
-            this.tableLayoutPanel34.ResumeLayout(false);
-            this.tableLayoutPanel34.PerformLayout();
             this.paymentStatusPage.ResumeLayout(false);
             this.tableLayoutPanel35.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPaymentStatus)).EndInit();
@@ -2582,12 +2580,17 @@
             this.tableLayoutPanel36.PerformLayout();
             this.tableLayoutPanel37.ResumeLayout(false);
             this.tableLayoutPanel37.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalCountryCard)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPositionCard)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalEventCard)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconProfessionCard)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconTotalPermissionCard)).EndInit();
+            this.personalDataPage.ResumeLayout(false);
+            this.tableLayoutPanel33.ResumeLayout(false);
+            this.tableLayoutPanel34.ResumeLayout(false);
+            this.tableLayoutPanel34.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).EndInit();
+            this.deletedDataPage.ResumeLayout(false);
+            this.tableLayoutPanel29.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tableLayoutPanel31.ResumeLayout(false);
+            this.tableLayoutPanel30.ResumeLayout(false);
+            this.tableLayoutPanel30.PerformLayout();
             this.ResumeLayout(false);
 
         }
