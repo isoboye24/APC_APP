@@ -27,7 +27,18 @@ namespace APC.DAL.DAO
 
         public bool GetBack(int ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                PAYMENT_STATUS status = db.PAYMENT_STATUS.First(x => x.paymentStatusID == ID);
+                status.isDeleted = false;
+                status.deletedDate = null;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool Insert(PAYMENT_STATUS entity)

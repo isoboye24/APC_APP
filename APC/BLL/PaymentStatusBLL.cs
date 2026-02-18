@@ -21,7 +21,7 @@ namespace APC.BLL
 
         public bool GetBack(PaymentStatusDetailDTO entity)
         {
-            throw new NotImplementedException();
+            return dao.GetBack(entity.PaymentStatusID);
         }
 
         public bool Insert(PaymentStatusDetailDTO entity)
