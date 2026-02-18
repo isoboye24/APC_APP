@@ -9,6 +9,7 @@ namespace APC.DAL.DTO
     public class MembersCommittmentDTO
     {
         public List<MembersCommittmentDetailDTO> Committments { get; set; }
+        public List<PaymentStatusDetailDTO> PaymentStatuses { get; set; }
         public List<int> Years { get; set; }
     }
 }

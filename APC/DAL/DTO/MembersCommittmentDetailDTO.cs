@@ -21,5 +21,6 @@ namespace APC.DAL.DTO
         public int NumberOfPresence { get; set; }
         public int NumberOfAbsence { get; set; }
         public decimal Rank { get; set; }
+        public string PaymentStatus { get; set; }
     }
 }

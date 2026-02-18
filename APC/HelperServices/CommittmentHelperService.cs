@@ -1,4 +1,5 @@
-﻿using APC.DAL.DTO;
+﻿using APC.DAL;
+using APC.DAL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,18 @@ namespace APC.HelperServices
             switch (type)
             {
                 case MemberCommittmentGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "ShowRank", "Name", "Surname", "Contributed", "Balance", "Fines", "PaidFines", "NumberOfPresence", "NumberOfAbsence");
+                    GeneralHelper.SetVisibleColumns(grid, "ShowRank", "Name", "Surname", "ExpectedAmount", 
+                        "Contributed", "Balance", "Fines", "PaidFines", "PaymentStatus", "NumberOfPresence", 
+                        "NumberOfAbsence");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "ShowRank", "Rank" },
-                                    { "Contributed", "Cont. (€)" },
+                                    { "ExpectedAmount", "Exp. (€)" },
+                                    { "Contributed", "Con. (€)" },
+                                    { "Balance", "Cont. Bal." },
+                                    { "Fines", "Fines (€)" },
                                     { "PaidFines", "P. Fines (€)" },
+                                    { "PaymentStatus", "Status" },
                                     { "NumberOfPresence", "Pres." },
                                     { "NumberOfAbsence", "Abs." }
                                 });

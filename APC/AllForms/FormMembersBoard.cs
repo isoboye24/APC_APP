@@ -33,6 +33,26 @@ namespace APC.AllForms
         MembersCommittmentDetailDTO committmentDetail = new MembersCommittmentDetailDTO();
         MembersCommittmentDTO committmentDTO = new MembersCommittmentDTO();
 
+        MemberBLL contactsBLL = new MemberBLL();
+        MemberDTO contactsDTO = new MemberDTO();
+        MemberDetailDTO contactsDetail = new MemberDetailDTO();
+
+        MemberDetailDTO deadMembersDetail = new MemberDetailDTO();
+        MemberBLL deadMembersBLL = new MemberBLL();
+        MemberDTO deadMembersDTO = new MemberDTO();
+
+        MemberDetailDTO formerMembersDetail = new MemberDetailDTO();
+        MemberBLL formerMembersBLL = new MemberBLL();
+        MemberDTO formerMembersDTO = new MemberDTO();
+
+        MemberDetailDTO inactiveMembersDetail = new MemberDetailDTO();
+        MemberBLL inactiveMembersBLL = new MemberBLL();
+        MemberDTO inactiveMembersDTO = new MemberDTO();
+
+        MemberBLL birthdayBLL = new MemberBLL();
+        MemberDTO birthdayDTO = new MemberDTO();
+        MemberDetailDTO birthdayDetail = new MemberDetailDTO();
+
         private void FormMembersBoard_Load(object sender, EventArgs e)
         {
             if (LoginInfo.AccessLevel != 4)
@@ -69,6 +89,7 @@ namespace APC.AllForms
             LoadMembersContact();
 
             LoadMemberCommittments();
+            FillMemberCommittmentComboBoxes();
             #endregion
 
             // Members' Commitments
@@ -76,13 +97,6 @@ namespace APC.AllForms
             cmbYearCommittment.DataSource = committmentDTO.Years;
             cmbYearCommittment.SelectedIndex = -1;
 
-            cmbDuesStatusCommittment.Items.Add("Incomplete");
-            cmbDuesStatusCommittment.Items.Add("Completed");
-            cmbDuesStatusCommittment.Items.Add("Extra");
-
-            cmbFineStatusCommittment.Items.Add("Incomplete");
-            cmbFineStatusCommittment.Items.Add("Completed");
-            cmbFineStatusCommittment.Items.Add("Extra");
             #endregion
 
             GetCounts();
@@ -157,13 +171,13 @@ namespace APC.AllForms
                 txtSurnameContacts, txtNameFormerMembers, txtSurnameFormerMembers, cmbGenderFormerMembers,
                 cmbNationalityFormerMembers, cmbPositionFormerMembers, cmbProfessionFormerMembers,
                 txtNameDeadMembers, txtSurnameDeadMembers, cmbGenderDeadMembers, cmbNationalityDeadMembers,
-                cmbPositionDeadMembers, cmbProfessionDeadMembers
+                cmbPositionDeadMembers, cmbProfessionDeadMembers, cmbYearCommittment, cmbStatusCommittment, 
+                txtNameCommittment, txtSurnameCommittment
                 );
 
             txtNameCommittment.Tag = "resizeable";
             txtSurnameCommittment.Tag = "resizeable";
-            cmbDuesStatusCommittment.Tag = "resizeable";
-            cmbFineStatusCommittment.Tag = "resizeable";
+            cmbStatusCommittment.Tag = "resizeable";
             cmbYearCommittment.Tag = "resizeable";
             #endregion
         }
@@ -229,6 +243,12 @@ namespace APC.AllForms
             GeneralHelper.ComboBoxProps(cmbNationalityInactiveMembers, "Nationality", "NationalityID");
         }
 
+        private void FillMemberCommittmentComboBoxes()
+        {
+            cmbStatusCommittment.DataSource = committmentDTO.PaymentStatuses;
+            GeneralHelper.ComboBoxProps(cmbStatusCommittment, "PaymentStatusName", "PaymentStatusID");
+        }
+
         private void btnAddRegisteredMembers_Click(object sender, EventArgs e)
         {
             FormMembers open = new FormMembers();
@@ -292,8 +312,7 @@ namespace APC.AllForms
             txtNameCommittment.Clear();
             txtSurnameCommittment.Clear();            
             cmbYearCommittment.SelectedIndex = -1;
-            cmbDuesStatusCommittment.SelectedIndex = -1;
-            cmbFineStatusCommittment.SelectedIndex = -1;
+            cmbStatusCommittment.SelectedIndex = -1;
 
             inactiveMembersBLL = new MemberBLL();
             inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
@@ -322,9 +341,8 @@ namespace APC.AllForms
             labelNoOfFemaleDeadMembers.Text = deadMembersBLL.SelectCountDeadFemale().ToString();
             labelNoOfDivisorDeadMembers.Text = deadMembersBLL.SelectCountDeadDivisor().ToString();
 
-            labelTotalRowsCommittment.Text = "Row : " + dataGridViewCommitments.RowCount.ToString();
+            labelTotalRowsCommittment.Text = "Row" + (dataGridViewCommitments.RowCount > 1 ? "s : " : " : ") + dataGridViewCommitments.RowCount.ToString();
 
-            labelTotalRowsCommittment.Text = "Row : " + dataGridViewBirthday.RowCount.ToString();
         }
 
         private void updateMember(MemberDetailDTO detail)
@@ -371,24 +389,7 @@ namespace APC.AllForms
 
         private void btnSearchRegisteredMembers_Click(object sender, EventArgs e)
         {
-            List<MemberDetailDTO> list = registeredMembersDTO.Members;
-            if (cmbNationalityRegisteredMembers.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.NationalityID == Convert.ToInt32(cmbNationalityRegisteredMembers.SelectedValue)).ToList();
-            }
-            if (cmbGenderRegisteredMembers.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.GenderID == Convert.ToInt32(cmbGenderRegisteredMembers.SelectedValue)).ToList();
-            }
-            if (cmbPositionRegisteredMembers.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.PositionID == Convert.ToInt32(cmbPositionRegisteredMembers.SelectedValue)).ToList();
-            }
-            if (cmbProfessionRegisteredMembers.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.ProfessionID == Convert.ToInt32(cmbProfessionRegisteredMembers.SelectedValue)).ToList();
-            }
-            dataGridViewRegisteredMembers.DataSource = list;
+            
         }
 
         private void btnClearRegisteredMembers_Click(object sender, EventArgs e)
@@ -426,11 +427,6 @@ namespace APC.AllForms
             picRegisteredMember.ImageLocation = imagePath;
         }
 
-
-        MemberBLL contactsBLL = new MemberBLL();
-        MemberDTO contactsDTO = new MemberDTO();
-        MemberDetailDTO contactsDetail = new MemberDetailDTO();
-
         private void txtSurnameContacts_TextChanged(object sender, EventArgs e)
         {
             List<MemberDetailDTO> list = contactsDTO.Members;
@@ -448,10 +444,6 @@ namespace APC.AllForms
             if (e.RowIndex < 0) return;
             contactsDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewContacts, e.RowIndex);
         }
-
-        MemberDetailDTO formerMembersDetail = new MemberDetailDTO();
-        MemberBLL formerMembersBLL = new MemberBLL();
-        MemberDTO formerMembersDTO = new MemberDTO();
 
         private void btnClearFormerMembers_Click(object sender, EventArgs e)
         {
@@ -523,10 +515,6 @@ namespace APC.AllForms
             }
             dataGridViewFormerMembers.DataSource = list;
         }
-
-        MemberDetailDTO deadMembersDetail = new MemberDetailDTO();
-        MemberBLL deadMembersBLL = new MemberBLL();
-        MemberDTO deadMembersDTO = new MemberDTO();
 
         private void btnUpdateDeadMembers_Click(object sender, EventArgs e)
         {
@@ -667,61 +655,6 @@ namespace APC.AllForms
             }
         }
 
-        private void btnSearchCommittment_Click(object sender, EventArgs e)
-        {            
-            if (cmbYearCommittment.SelectedIndex != -1)
-            {
-                committmentBLL = new MembersCommittmentBLL();
-                committmentDTO = committmentBLL.Select(Convert.ToInt32(cmbYearCommittment.SelectedValue));
-                dataGridViewCommitments.DataSource = committmentDTO.Committments;
-
-                List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
-                if (cmbDuesStatusCommittment.SelectedIndex != -1)
-                {
-                    if (cmbDuesStatusCommittment.SelectedIndex == 0)
-                    {
-                        list = list.Where(x => x.Balance.Contains("€ Remaining")).ToList();
-                    }
-                    if (cmbDuesStatusCommittment.SelectedIndex == 1)
-                    {
-                        list = list.Where(x => x.Balance.Contains("Completed")).ToList();
-                    }
-                    if (cmbDuesStatusCommittment.SelectedIndex == 2)
-                    {
-                        list = list.Where(x => x.Balance.Contains("€ Extra")).ToList();
-                    }
-                }
-                if (cmbFineStatusCommittment.SelectedIndex != -1)
-                {
-                    if (cmbFineStatusCommittment.SelectedIndex == 0)
-                    {
-                        list = list.Where(x => x.PaidFines < x.Fines).ToList();
-                    }
-                    if (cmbFineStatusCommittment.SelectedIndex == 1)
-                    {
-                        list = list.Where(x => x.PaidFines == x.Fines).ToList();
-                    }
-                    if (cmbFineStatusCommittment.SelectedIndex == 2)
-                    {
-                        list = list.Where(x => x.PaidFines > x.Fines).ToList();
-                    }
-                }
-
-                dataGridViewCommitments.DataSource = list;
-                GetCounts();
-            }
-            else
-            {
-                MessageBox.Show("Please select year");
-            }
-
-        }
-
-        private void btnClearCommittment_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
-        }
-
         private void txtNameCommittment_TextChanged(object sender, EventArgs e)
         {
             List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
@@ -738,9 +671,6 @@ namespace APC.AllForms
             GetCounts();
         }
 
-        MemberDetailDTO inactiveMembersDetail = new MemberDetailDTO();
-        MemberBLL inactiveMembersBLL = new MemberBLL();
-        MemberDTO inactiveMembersDTO = new MemberDTO();
 
         private void btnClearInactiveMembers_Click(object sender, EventArgs e)
         {
@@ -776,16 +706,11 @@ namespace APC.AllForms
             }
         }
 
-
-        MemberBLL birthdayBLL = new MemberBLL();
-        MemberDTO birthdayDTO = new MemberDTO();
-        MemberDetailDTO birthdayDetail = new MemberDetailDTO();
-
         private void txtNameBirthday_TextChanged(object sender, EventArgs e)
         {
 
         }
-
+        
         private void txtSurnameBirthday_TextChanged(object sender, EventArgs e)
         {
 
@@ -900,6 +825,40 @@ namespace APC.AllForms
                 this.Visible = true;
                 ClearFilters();
             }
+        }
+
+        private void btnSearchInactiveMembers_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSearchCommittment_Click_1(object sender, EventArgs e)
+        {
+            if (cmbYearCommittment.SelectedIndex != -1)
+            {
+                committmentBLL = new MembersCommittmentBLL();
+                committmentDTO = committmentBLL.Select(Convert.ToInt32(cmbYearCommittment.SelectedValue));
+                dataGridViewCommitments.DataSource = committmentDTO.Committments;
+
+                List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
+                if (cmbStatusCommittment.SelectedIndex != -1)
+                {
+                    string selectedStatus = cmbStatusCommittment.Text;
+
+                    list = list.Where(x => x.PaymentStatus == selectedStatus).ToList();
+                    dataGridViewCommitments.DataSource = list;
+                    GetCounts();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select year");
+            }
+        }
+
+        private void btnClearCommittment_Click_1(object sender, EventArgs e)
+        {
+            ClearFilters();
         }
     }
 }

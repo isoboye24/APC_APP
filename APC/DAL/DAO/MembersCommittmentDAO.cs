@@ -55,7 +55,7 @@ namespace APC.DAL.DAO
                     
                     dto.ExpectedAmount = GeneralHelper.CalculateYearlyDue((DateTime)member.membershipDate, year);
 
-                    if (120 > amountContributed.Sum())
+                    if (dto.ExpectedAmount > amountContributed.Sum())
                     {
                         dto.Balance = (dto.ExpectedAmount - amountContributed.Sum()) + " € Remaining";
                     }
@@ -88,6 +88,25 @@ namespace APC.DAL.DAO
                         paidFines.Add((decimal)paidFine.amountPaid);
                     }
                     dto.PaidFines = paidFines.Sum();
+
+                    if (dto.Contributed == 0 && dto.PaidFines == 0)
+                    {
+                        dto.PaymentStatus = "Not Paid";
+                    }
+                    else if (dto.Contributed == dto.ExpectedAmount
+                             && dto.PaidFines == dto.Fines)
+                    {
+                        dto.PaymentStatus = "Completed";
+                    }
+                    else if (dto.Contributed > dto.ExpectedAmount
+                             || dto.PaidFines > dto.Fines)
+                    {
+                        dto.PaymentStatus = "Extra";
+                    }
+                    else
+                    {
+                        dto.PaymentStatus = "Incomplete";
+                    }
 
                     // -------------------------------------------------------------------------
                     // -------------------- RANK RATIO CALCULATION ----------------------

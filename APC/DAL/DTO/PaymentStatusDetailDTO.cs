@@ -10,7 +10,5 @@ namespace APC.DAL.DTO
     {
         public int PaymentStatusID { get; set; }
         public string PaymentStatusName { get; set; }
-        public bool isDeleted { get; set; }
-        public DateTime deletedDate { get; set; }
     }
 }
