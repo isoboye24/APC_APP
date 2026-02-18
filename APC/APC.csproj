@@ -181,6 +181,12 @@
     <Compile Include="AllForms\FormMembersBoard.Designer.cs">
       <DependentUpon>FormMembersBoard.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormPaymentStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormPaymentStatus.Designer.cs">
+      <DependentUpon>FormPaymentStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormReportsBoard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -728,6 +734,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormMembersBoard.resx">
       <DependentUpon>FormMembersBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormPaymentStatus.resx">
+      <DependentUpon>FormPaymentStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormPersonalAttendance.resx">
       <DependentUpon>FormPersonalAttendance.cs</DependentUpon>

@@ -419,7 +419,7 @@ namespace APC.AllForms
         private void dataGridViewRegisteredMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            registeredMembersDetail = MapMemberFromGrid(dataGridViewRegisteredMembers, e.RowIndex);
+            registeredMembersDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewRegisteredMembers, e.RowIndex);
 
             // Load image
             string imagePath = Path.Combine(Application.StartupPath, "images", registeredMembersDetail.ImagePath);
@@ -446,7 +446,7 @@ namespace APC.AllForms
         private void dataGridViewContacts_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            contactsDetail = MapMemberFromGrid(dataGridViewContacts, e.RowIndex);
+            contactsDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewContacts, e.RowIndex);
         }
 
         MemberDetailDTO formerMembersDetail = new MemberDetailDTO();
@@ -485,7 +485,7 @@ namespace APC.AllForms
         private void dataGridViewFormerMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            formerMembersDetail = MapMemberFromGrid(dataGridViewFormerMembers, e.RowIndex);
+            formerMembersDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewFormerMembers, e.RowIndex);
         }
 
         private void txtNameFormerMembers_TextChanged(object sender, EventArgs e)
@@ -550,7 +550,7 @@ namespace APC.AllForms
         private void dataGridViewDeadMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            deadMembersDetail = MapMemberFromGrid(dataGridViewDeadMembers, e.RowIndex);
+            deadMembersDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewDeadMembers, e.RowIndex);
         }
         private void txtNameDeadMembers_TextChanged(object sender, EventArgs e)
         {
@@ -613,8 +613,9 @@ namespace APC.AllForms
         private void dataGridViewCommitments_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            committmentDetail = MapMemberCommittmentFromGrid(dataGridViewCommitments, e.RowIndex);
+            committmentDetail = GeneralHelper.MapFromGrid<MembersCommittmentDetailDTO>(dataGridViewCommitments, e.RowIndex);
 
+            // Load image
             string imagePath = Path.Combine(Application.StartupPath, "images", committmentDetail.ImagePath);
             picCommittment.ImageLocation = imagePath;
         }
@@ -749,7 +750,7 @@ namespace APC.AllForms
         private void dataGridViewInactiveMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            inactiveMembersDetail = MapMemberFromGrid(dataGridViewInactiveMembers, e.RowIndex);
+            inactiveMembersDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewInactiveMembers, e.RowIndex);
         }
 
         private void btnViewInactiveMembers_Click(object sender, EventArgs e)
@@ -876,7 +877,7 @@ namespace APC.AllForms
         private void dataGridViewBirthday_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            birthdayDetail = MapMemberFromGrid(dataGridViewBirthday, e.RowIndex);
+            birthdayDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewBirthday, e.RowIndex);
         }
 
         private void ViewMember(MemberDetailDTO detail, bool isFormer)

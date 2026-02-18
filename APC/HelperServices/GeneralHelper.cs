@@ -446,5 +446,30 @@ namespace APC
                     grid.Columns[map.Key].HeaderText = map.Value;
             }
         }
+
+        // Generic reflection mapping pattern
+        public static T MapFromGrid<T>(DataGridView grid, int rowIndex) where T : new()
+        {
+            var row = grid.Rows[rowIndex];
+            var obj = new T();
+
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                if (!grid.Columns.Contains(prop.Name))
+                    continue;
+
+                var value = row.Cells[prop.Name].Value;
+
+                if (value == null || value == DBNull.Value)
+                    continue;
+
+                var convertedValue = Convert.ChangeType(value, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+
+                prop.SetValue(obj, convertedValue);
+            }
+
+            return obj;
+        }
+
     }
 }
