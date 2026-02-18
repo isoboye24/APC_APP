@@ -35,6 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.dashboardPage = new System.Windows.Forms.TabPage();
@@ -164,6 +165,17 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.picProfilePic = new System.Windows.Forms.PictureBox();
+            this.paymentStatusPage = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel35 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridViewPaymentStatus = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel36 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAddPaymentStatus = new System.Windows.Forms.Button();
+            this.btnUpdatePaymentStatus = new System.Windows.Forms.Button();
+            this.btnDeletePaymentStatus = new System.Windows.Forms.Button();
+            this.labelTotalPaymentStatus = new System.Windows.Forms.Label();
+            this.tableLayoutPanel37 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtPaymentStatus = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.dashboardPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -228,6 +240,11 @@
             this.tableLayoutPanel33.SuspendLayout();
             this.tableLayoutPanel34.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).BeginInit();
+            this.paymentStatusPage.SuspendLayout();
+            this.tableLayoutPanel35.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPaymentStatus)).BeginInit();
+            this.tableLayoutPanel36.SuspendLayout();
+            this.tableLayoutPanel37.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -240,8 +257,9 @@
             this.tabControl1.Controls.Add(this.permissionPage);
             this.tabControl1.Controls.Add(this.positionPage);
             this.tabControl1.Controls.Add(this.professionPage);
-            this.tabControl1.Controls.Add(this.deletedDataPage);
+            this.tabControl1.Controls.Add(this.paymentStatusPage);
             this.tabControl1.Controls.Add(this.personalDataPage);
+            this.tabControl1.Controls.Add(this.deletedDataPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -2021,8 +2039,8 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.RowTemplate.Height = 40;
             this.dataGridView1.Size = new System.Drawing.Size(1209, 432);
@@ -2289,6 +2307,179 @@
             this.picProfilePic.TabStop = false;
             this.picProfilePic.Paint += new System.Windows.Forms.PaintEventHandler(this.picProfilePic_Paint);
             // 
+            // paymentStatusPage
+            // 
+            this.paymentStatusPage.Controls.Add(this.tableLayoutPanel35);
+            this.paymentStatusPage.Location = new System.Drawing.Point(4, 46);
+            this.paymentStatusPage.Name = "paymentStatusPage";
+            this.paymentStatusPage.Size = new System.Drawing.Size(1268, 688);
+            this.paymentStatusPage.TabIndex = 10;
+            this.paymentStatusPage.Text = "Pay. Status   ";
+            this.paymentStatusPage.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel35
+            // 
+            this.tableLayoutPanel35.ColumnCount = 3;
+            this.tableLayoutPanel35.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel35.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96F));
+            this.tableLayoutPanel35.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel35.Controls.Add(this.dataGridViewPaymentStatus, 1, 2);
+            this.tableLayoutPanel35.Controls.Add(this.tableLayoutPanel36, 1, 3);
+            this.tableLayoutPanel35.Controls.Add(this.tableLayoutPanel37, 1, 1);
+            this.tableLayoutPanel35.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel35.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel35.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel35.Name = "tableLayoutPanel35";
+            this.tableLayoutPanel35.RowCount = 4;
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel35.Size = new System.Drawing.Size(1268, 688);
+            this.tableLayoutPanel35.TabIndex = 2;
+            // 
+            // dataGridViewPaymentStatus
+            // 
+            this.dataGridViewPaymentStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewPaymentStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewPaymentStatus.Location = new System.Drawing.Point(29, 65);
+            this.dataGridViewPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewPaymentStatus.Name = "dataGridViewPaymentStatus";
+            this.dataGridViewPaymentStatus.RowHeadersWidth = 51;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewPaymentStatus.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewPaymentStatus.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewPaymentStatus.RowTemplate.Height = 40;
+            this.dataGridViewPaymentStatus.Size = new System.Drawing.Size(1209, 524);
+            this.dataGridViewPaymentStatus.TabIndex = 0;
+            // 
+            // tableLayoutPanel36
+            // 
+            this.tableLayoutPanel36.ColumnCount = 7;
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.5F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.5F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel36.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel36.Controls.Add(this.btnAddPaymentStatus, 1, 1);
+            this.tableLayoutPanel36.Controls.Add(this.btnUpdatePaymentStatus, 3, 1);
+            this.tableLayoutPanel36.Controls.Add(this.btnDeletePaymentStatus, 5, 1);
+            this.tableLayoutPanel36.Controls.Add(this.labelTotalPaymentStatus, 6, 1);
+            this.tableLayoutPanel36.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel36.Location = new System.Drawing.Point(29, 597);
+            this.tableLayoutPanel36.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel36.Name = "tableLayoutPanel36";
+            this.tableLayoutPanel36.RowCount = 3;
+            this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel36.Size = new System.Drawing.Size(1209, 87);
+            this.tableLayoutPanel36.TabIndex = 2;
+            // 
+            // btnAddPaymentStatus
+            // 
+            this.btnAddPaymentStatus.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnAddPaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddPaymentStatus.FlatAppearance.BorderSize = 0;
+            this.btnAddPaymentStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddPaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPaymentStatus.Location = new System.Drawing.Point(348, 25);
+            this.btnAddPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddPaymentStatus.Name = "btnAddPaymentStatus";
+            this.btnAddPaymentStatus.Size = new System.Drawing.Size(149, 35);
+            this.btnAddPaymentStatus.TabIndex = 0;
+            this.btnAddPaymentStatus.Text = "Add";
+            this.btnAddPaymentStatus.UseVisualStyleBackColor = false;
+            // 
+            // btnUpdatePaymentStatus
+            // 
+            this.btnUpdatePaymentStatus.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnUpdatePaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnUpdatePaymentStatus.FlatAppearance.BorderSize = 0;
+            this.btnUpdatePaymentStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdatePaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdatePaymentStatus.Location = new System.Drawing.Point(529, 25);
+            this.btnUpdatePaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdatePaymentStatus.Name = "btnUpdatePaymentStatus";
+            this.btnUpdatePaymentStatus.Size = new System.Drawing.Size(149, 35);
+            this.btnUpdatePaymentStatus.TabIndex = 1;
+            this.btnUpdatePaymentStatus.Text = "Edit";
+            this.btnUpdatePaymentStatus.UseVisualStyleBackColor = false;
+            // 
+            // btnDeletePaymentStatus
+            // 
+            this.btnDeletePaymentStatus.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnDeletePaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeletePaymentStatus.FlatAppearance.BorderSize = 0;
+            this.btnDeletePaymentStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeletePaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeletePaymentStatus.Location = new System.Drawing.Point(710, 25);
+            this.btnDeletePaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeletePaymentStatus.Name = "btnDeletePaymentStatus";
+            this.btnDeletePaymentStatus.Size = new System.Drawing.Size(149, 35);
+            this.btnDeletePaymentStatus.TabIndex = 2;
+            this.btnDeletePaymentStatus.Text = "Delete";
+            this.btnDeletePaymentStatus.UseVisualStyleBackColor = false;
+            // 
+            // labelTotalPaymentStatus
+            // 
+            this.labelTotalPaymentStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalPaymentStatus.AutoSize = true;
+            this.labelTotalPaymentStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalPaymentStatus.Location = new System.Drawing.Point(1155, 41);
+            this.labelTotalPaymentStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTotalPaymentStatus.Name = "labelTotalPaymentStatus";
+            this.labelTotalPaymentStatus.Size = new System.Drawing.Size(50, 23);
+            this.labelTotalPaymentStatus.TabIndex = 7;
+            this.labelTotalPaymentStatus.Text = "Total:";
+            // 
+            // tableLayoutPanel37
+            // 
+            this.tableLayoutPanel37.ColumnCount = 4;
+            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24F));
+            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel37.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24F));
+            this.tableLayoutPanel37.Controls.Add(this.txtPaymentStatus, 2, 0);
+            this.tableLayoutPanel37.Controls.Add(this.label19, 1, 0);
+            this.tableLayoutPanel37.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel37.Location = new System.Drawing.Point(29, 16);
+            this.tableLayoutPanel37.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel37.Name = "tableLayoutPanel37";
+            this.tableLayoutPanel37.RowCount = 1;
+            this.tableLayoutPanel37.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel37.Size = new System.Drawing.Size(1209, 41);
+            this.tableLayoutPanel37.TabIndex = 3;
+            // 
+            // txtPaymentStatus
+            // 
+            this.txtPaymentStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtPaymentStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPaymentStatus.Location = new System.Drawing.Point(559, 4);
+            this.txtPaymentStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPaymentStatus.Name = "txtPaymentStatus";
+            this.txtPaymentStatus.Size = new System.Drawing.Size(354, 34);
+            this.txtPaymentStatus.TabIndex = 0;
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(387, 9);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 9, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(164, 25);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Payment Status";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2389,6 +2580,13 @@
             this.tableLayoutPanel34.ResumeLayout(false);
             this.tableLayoutPanel34.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfilePic)).EndInit();
+            this.paymentStatusPage.ResumeLayout(false);
+            this.tableLayoutPanel35.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPaymentStatus)).EndInit();
+            this.tableLayoutPanel36.ResumeLayout(false);
+            this.tableLayoutPanel36.PerformLayout();
+            this.tableLayoutPanel37.ResumeLayout(false);
+            this.tableLayoutPanel37.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2523,5 +2721,16 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.PictureBox picProfilePic;
+        private System.Windows.Forms.TabPage paymentStatusPage;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel35;
+        private System.Windows.Forms.DataGridView dataGridViewPaymentStatus;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel36;
+        private System.Windows.Forms.Button btnAddPaymentStatus;
+        private System.Windows.Forms.Button btnUpdatePaymentStatus;
+        private System.Windows.Forms.Button btnDeletePaymentStatus;
+        private System.Windows.Forms.Label labelTotalPaymentStatus;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel37;
+        private System.Windows.Forms.TextBox txtPaymentStatus;
+        private System.Windows.Forms.Label label19;
     }
 }
