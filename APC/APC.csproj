@@ -633,7 +633,11 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FormProperties.cs" />
+    <Compile Include="HelperServices\CommentHelperService.cs" />
     <Compile Include="HelperServices\CommittmentHelperService.cs" />
+    <Compile Include="HelperServices\DocumentHelperService.cs" />
+    <Compile Include="HelperServices\EventsHelperService.cs" />
+    <Compile Include="HelperServices\GeneralAttendanceHelperService.cs" />
     <Compile Include="HelperServices\MemberHelperService.cs" />
     <Compile Include="HelperServices\SingleColumnHelperService.cs" />
     <Compile Include="LoginInfo.cs" />

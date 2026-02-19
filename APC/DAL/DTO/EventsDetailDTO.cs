@@ -18,7 +18,9 @@ namespace APC.DAL.DTO
         public string CoverImagePath { get; set; }
         public DateTime EventDate { get; set; }
         public decimal AmountSold { get; set; }
+        public string AmountSoldWithCurrency { get; set; }
         public decimal AmountSpent { get; set; }
-        public decimal Balance { get; set; }
+        public string AmountSpentWithCurrency { get; set; }
+        public string Balance { get; set; }
     }
 }

@@ -86,6 +86,7 @@ namespace APC.DAL.DAO
                     dto.EventID = item.eventID;
                     dto.Summary = item.summary;
                     dto.AmountSold = item.amountSold;
+                    dto.AmountSoldWithCurrency = item.amountSold + " €";
                     dto.Day = item.day;
                     dto.MonthID = item.monthID;
                     dto.MonthName = item.monthName;
@@ -127,6 +128,7 @@ namespace APC.DAL.DAO
                     dto.EventID = item.eventID;
                     dto.Summary = item.summary;
                     dto.AmountSold = item.amountSold;
+                    dto.AmountSoldWithCurrency = item.amountSold + " €";
                     dto.Day = item.day;
                     dto.MonthID = item.monthID;
                     dto.MonthName = item.monthName;

@@ -113,6 +113,48 @@ namespace APC.DAL
                     dto.EventID = item.eventID;
                     dto.Summary = item.summary;
                     dto.AmountSpent = item.amountSpent;
+                    dto.AmountSpentWithCurrency = item.amountSpent + " €";
+                    dto.Day = item.day;
+                    dto.MonthID = item.monthID;
+                    dto.MonthName = item.monthName;
+                    dto.Year = item.year;
+                    dto.ExpenditureDate = item.expenditureDate;
+                    expenditures.Add(dto);
+                }
+                return expenditures;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<EventExpenditureDetailDTO> Select(bool isDeleted)
+        {
+            try
+            {
+                List<EventExpenditureDetailDTO> expenditures = new List<EventExpenditureDetailDTO>();
+                var list = (from e in db.EVENT_EXPENDITURE.Where(x => x.isDeleted == isDeleted)
+                            join m in db.MONTH on e.monthID equals m.monthID
+                            select new
+                            {
+                                eventExpenditureID = e.eventExpenditureID,
+                                eventID = e.eventID,
+                                amountSpent = e.amountSpent,
+                                summary = e.summary,
+                                day = e.day,
+                                monthID = e.monthID,
+                                monthName = m.monthName,
+                                year = e.year,
+                                expenditureDate = e.expenditureDate,
+                            }).OrderByDescending(x => x.year).OrderByDescending(x => x.monthID).OrderByDescending(x => x.day).ToList();
+                foreach (var item in list)
+                {
+                    EventExpenditureDetailDTO dto = new EventExpenditureDetailDTO();
+                    dto.EventExpenditureID = item.eventExpenditureID;
+                    dto.EventID = item.eventID;
+                    dto.Summary = item.summary;
+                    dto.AmountSpent = item.amountSpent;
+                    dto.AmountSpentWithCurrency = item.amountSpent + " €";
                     dto.Day = item.day;
                     dto.MonthID = item.monthID;
                     dto.MonthName = item.monthName;

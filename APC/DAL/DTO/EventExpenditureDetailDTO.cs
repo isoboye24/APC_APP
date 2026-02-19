@@ -12,6 +12,7 @@ namespace APC.DAL.DTO
         public int EventID { get; set; }
         public string Summary { get; set; }
         public decimal AmountSpent { get; set; }
+        public string AmountSpentWithCurrency { get; set; }
         public DateTime ExpenditureDate { get; set; }
         public int Day { get; set; }
         public int MonthID { get; set; }

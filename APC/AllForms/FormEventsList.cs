@@ -1,15 +1,18 @@
 ﻿using APC.AllForms;
 using APC.BLL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static APC.HelperServices.EventsHelperService;
 
 namespace APC
 {
@@ -89,27 +92,8 @@ namespace APC
             dto = bll.Select();
 
             dataGridView1.DataSource = dto.Events;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].Visible = false;
-            dataGridView1.Columns[3].Visible = false;
-            dataGridView1.Columns[4].HeaderText = "Year";
-            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[5].HeaderText = "Event Title";
-            dataGridView1.Columns[6].Visible = false;
-            dataGridView1.Columns[7].Visible = false;
-            dataGridView1.Columns[8].Visible = false;
-            dataGridView1.Columns[9].HeaderText = "Sold (€)";
-            dataGridView1.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[10].HeaderText = "Spent (€)";
-            dataGridView1.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[11].HeaderText = "Balance";
-            dataGridView1.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ConfigureEventsGrid(dataGridView1, EventsGridType.Basic);
 
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
 
             decimal overallSales = bll.SelectOverallSales();
             decimal overallExpenditures = bll.SelectOverallExpenditures();
@@ -143,21 +127,9 @@ namespace APC
         EventsDetailDTO detail = new EventsDetailDTO();
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            detail = new EventsDetailDTO();
-            detail.EventID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-            detail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-            detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-            detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            detail.Year = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-            detail.EventTitle = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            detail.Summary = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-            detail.CoverImagePath = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-            detail.EventDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
-            detail.AmountSold = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
-            detail.AmountSpent = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[10].Value);
-            detail.Balance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
+            detail = GeneralHelper.MapFromGrid<EventsDetailDTO>(dataGridView1, e.RowIndex);
 
-            string imagePath = Application.StartupPath + "\\images\\" + detail.CoverImagePath;
+            string imagePath = Path.Combine(Application.StartupPath, "images", detail.CoverImagePath);
             picViewEventCoverImage.ImageLocation = imagePath;
 
             label3.Text = detail.EventTitle + " " + detail.Year;

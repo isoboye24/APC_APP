@@ -84,6 +84,7 @@ namespace APC.DAL.DAO
                     }
                     decimal totalAmountSold = eventSales.Sum();
                     dto.AmountSold = totalAmountSold;
+                    dto.AmountSoldWithCurrency = totalAmountSold + " €";
 
                     var spentAmount = db.EVENT_EXPENDITURE.Where(x => x.eventID == item.eventID && x.isDeleted == false).ToList();
                     List<decimal> eventExpenditures = new List<decimal>();
@@ -93,8 +94,9 @@ namespace APC.DAL.DAO
                     }
                     decimal totalAmountSpent = eventExpenditures.Sum();
                     dto.AmountSpent = totalAmountSpent;
+                    dto.AmountSpentWithCurrency = totalAmountSpent + " €";
 
-                    dto.Balance = totalAmountSold - totalAmountSpent;
+                    dto.Balance = totalAmountSold - totalAmountSpent + " €";
 
                     events.Add(dto);
                 }

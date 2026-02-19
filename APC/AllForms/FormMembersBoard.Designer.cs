@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.activeMembersPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -83,11 +83,15 @@
             this.label42 = new System.Windows.Forms.Label();
             this.txtNameCommittment = new System.Windows.Forms.TextBox();
             this.txtSurnameCommittment = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel46 = new System.Windows.Forms.TableLayoutPanel();
-            this.label44 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel48 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSearchCommittment = new System.Windows.Forms.Button();
+            this.btnClearCommittment = new System.Windows.Forms.Button();
+            this.tableLayoutPanel47 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbYearCommittment = new System.Windows.Forms.ComboBox();
-            this.label37 = new System.Windows.Forms.Label();
             this.cmbStatusCommittment = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
             this.dataGridViewCommitments = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel42 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalRowsCommittment = new System.Windows.Forms.Label();
@@ -230,10 +234,6 @@
             this.btnSearchDeadMembers = new System.Windows.Forms.Button();
             this.btnClearDeadMembers = new System.Windows.Forms.Button();
             this.dataGridViewDeadMembers = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel48 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSearchCommittment = new System.Windows.Forms.Button();
-            this.btnClearCommittment = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.activeMembersPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -254,7 +254,9 @@
             this.tableLayoutPanel50.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCommittment)).BeginInit();
             this.tableLayoutPanel45.SuspendLayout();
-            this.tableLayoutPanel46.SuspendLayout();
+            this.tableLayoutPanel48.SuspendLayout();
+            this.tableLayoutPanel49.SuspendLayout();
+            this.tableLayoutPanel47.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCommitments)).BeginInit();
             this.tableLayoutPanel42.SuspendLayout();
             this.membersBirthdayPage.SuspendLayout();
@@ -309,8 +311,6 @@
             this.tableLayoutPanel39.SuspendLayout();
             this.tableLayoutPanel40.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDeadMembers)).BeginInit();
-            this.tableLayoutPanel48.SuspendLayout();
-            this.tableLayoutPanel49.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -879,8 +879,8 @@
             this.dataGridViewRegisteredMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewRegisteredMembers.Name = "dataGridViewRegisteredMembers";
             this.dataGridViewRegisteredMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle37.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewRegisteredMembers.RowsDefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewRegisteredMembers.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewRegisteredMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewRegisteredMembers.RowTemplate.Height = 40;
             this.dataGridViewRegisteredMembers.Size = new System.Drawing.Size(1201, 392);
@@ -932,8 +932,8 @@
             this.tableLayoutPanel44.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.00411F));
             this.tableLayoutPanel44.Controls.Add(this.tableLayoutPanel50, 8, 0);
             this.tableLayoutPanel44.Controls.Add(this.tableLayoutPanel45, 0, 0);
-            this.tableLayoutPanel44.Controls.Add(this.tableLayoutPanel46, 2, 0);
             this.tableLayoutPanel44.Controls.Add(this.tableLayoutPanel48, 4, 0);
+            this.tableLayoutPanel44.Controls.Add(this.tableLayoutPanel47, 2, 0);
             this.tableLayoutPanel44.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel44.Location = new System.Drawing.Point(29, 17);
             this.tableLayoutPanel44.Margin = new System.Windows.Forms.Padding(4);
@@ -1035,71 +1035,136 @@
             this.txtSurnameCommittment.TabIndex = 2;
             this.txtSurnameCommittment.TextChanged += new System.EventHandler(this.txtSurnameCommittment_TextChanged);
             // 
-            // tableLayoutPanel46
+            // tableLayoutPanel48
             // 
-            this.tableLayoutPanel46.ColumnCount = 1;
-            this.tableLayoutPanel46.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel46.Controls.Add(this.label44, 0, 0);
-            this.tableLayoutPanel46.Controls.Add(this.cmbYearCommittment, 0, 1);
-            this.tableLayoutPanel46.Controls.Add(this.label37, 0, 2);
-            this.tableLayoutPanel46.Controls.Add(this.cmbStatusCommittment, 0, 3);
-            this.tableLayoutPanel46.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel46.Location = new System.Drawing.Point(248, 4);
-            this.tableLayoutPanel46.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel46.Name = "tableLayoutPanel46";
-            this.tableLayoutPanel46.RowCount = 4;
-            this.tableLayoutPanel46.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel46.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel46.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel46.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel46.Size = new System.Drawing.Size(224, 156);
-            this.tableLayoutPanel46.TabIndex = 0;
+            this.tableLayoutPanel48.ColumnCount = 1;
+            this.tableLayoutPanel48.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel48.Controls.Add(this.tableLayoutPanel49, 0, 1);
+            this.tableLayoutPanel48.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel48.Location = new System.Drawing.Point(492, 4);
+            this.tableLayoutPanel48.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel48.Name = "tableLayoutPanel48";
+            this.tableLayoutPanel48.RowCount = 2;
+            this.tableLayoutPanel48.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel48.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel48.Size = new System.Drawing.Size(224, 156);
+            this.tableLayoutPanel48.TabIndex = 5;
             // 
-            // label44
+            // tableLayoutPanel49
             // 
-            this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.Location = new System.Drawing.Point(4, 4);
-            this.label44.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(52, 27);
-            this.label44.TabIndex = 0;
-            this.label44.Text = "Year";
+            this.tableLayoutPanel49.ColumnCount = 2;
+            this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel49.Controls.Add(this.btnSearchCommittment, 0, 0);
+            this.tableLayoutPanel49.Controls.Add(this.btnClearCommittment, 1, 0);
+            this.tableLayoutPanel49.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel49.Location = new System.Drawing.Point(4, 97);
+            this.tableLayoutPanel49.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel49.Name = "tableLayoutPanel49";
+            this.tableLayoutPanel49.RowCount = 1;
+            this.tableLayoutPanel49.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel49.Size = new System.Drawing.Size(216, 55);
+            this.tableLayoutPanel49.TabIndex = 3;
+            // 
+            // btnSearchCommittment
+            // 
+            this.btnSearchCommittment.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnSearchCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSearchCommittment.FlatAppearance.BorderSize = 0;
+            this.btnSearchCommittment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearchCommittment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchCommittment.ForeColor = System.Drawing.Color.White;
+            this.btnSearchCommittment.Location = new System.Drawing.Point(4, 4);
+            this.btnSearchCommittment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearchCommittment.Name = "btnSearchCommittment";
+            this.btnSearchCommittment.Size = new System.Drawing.Size(100, 47);
+            this.btnSearchCommittment.TabIndex = 0;
+            this.btnSearchCommittment.Text = "Search";
+            this.btnSearchCommittment.UseVisualStyleBackColor = false;
+            this.btnSearchCommittment.Click += new System.EventHandler(this.btnSearchCommittment_Click_1);
+            // 
+            // btnClearCommittment
+            // 
+            this.btnClearCommittment.BackColor = System.Drawing.Color.SaddleBrown;
+            this.btnClearCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearCommittment.FlatAppearance.BorderSize = 0;
+            this.btnClearCommittment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearCommittment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearCommittment.ForeColor = System.Drawing.Color.White;
+            this.btnClearCommittment.Location = new System.Drawing.Point(112, 4);
+            this.btnClearCommittment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClearCommittment.Name = "btnClearCommittment";
+            this.btnClearCommittment.Size = new System.Drawing.Size(100, 47);
+            this.btnClearCommittment.TabIndex = 0;
+            this.btnClearCommittment.Text = "Clear";
+            this.btnClearCommittment.UseVisualStyleBackColor = false;
+            this.btnClearCommittment.Click += new System.EventHandler(this.btnClearCommittment_Click_1);
+            // 
+            // tableLayoutPanel47
+            // 
+            this.tableLayoutPanel47.ColumnCount = 1;
+            this.tableLayoutPanel47.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel47.Controls.Add(this.cmbYearCommittment, 0, 1);
+            this.tableLayoutPanel47.Controls.Add(this.cmbStatusCommittment, 0, 3);
+            this.tableLayoutPanel47.Controls.Add(this.label11, 0, 2);
+            this.tableLayoutPanel47.Controls.Add(this.label38, 0, 0);
+            this.tableLayoutPanel47.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel47.Location = new System.Drawing.Point(248, 4);
+            this.tableLayoutPanel47.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel47.Name = "tableLayoutPanel47";
+            this.tableLayoutPanel47.RowCount = 4;
+            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel47.Size = new System.Drawing.Size(224, 156);
+            this.tableLayoutPanel47.TabIndex = 6;
             // 
             // cmbYearCommittment
             // 
             this.cmbYearCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbYearCommittment.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbYearCommittment.FormattingEnabled = true;
-            this.cmbYearCommittment.Location = new System.Drawing.Point(4, 35);
+            this.cmbYearCommittment.Location = new System.Drawing.Point(4, 41);
             this.cmbYearCommittment.Margin = new System.Windows.Forms.Padding(4);
             this.cmbYearCommittment.Name = "cmbYearCommittment";
             this.cmbYearCommittment.Size = new System.Drawing.Size(216, 33);
             this.cmbYearCommittment.TabIndex = 1;
-            // 
-            // label37
-            // 
-            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(4, 81);
-            this.label37.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(124, 27);
-            this.label37.TabIndex = 0;
-            this.label37.Text = "Dues Status";
             // 
             // cmbStatusCommittment
             // 
             this.cmbStatusCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbStatusCommittment.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStatusCommittment.FormattingEnabled = true;
-            this.cmbStatusCommittment.Location = new System.Drawing.Point(4, 112);
+            this.cmbStatusCommittment.Location = new System.Drawing.Point(4, 119);
             this.cmbStatusCommittment.Margin = new System.Windows.Forms.Padding(4);
             this.cmbStatusCommittment.Name = "cmbStatusCommittment";
             this.cmbStatusCommittment.Size = new System.Drawing.Size(216, 33);
             this.cmbStatusCommittment.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(4, 87);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(124, 28);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Dues Status";
+            // 
+            // label38
+            // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(4, 9);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(52, 28);
+            this.label38.TabIndex = 0;
+            this.label38.Text = "Year";
             // 
             // dataGridViewCommitments
             // 
@@ -1110,8 +1175,8 @@
             this.dataGridViewCommitments.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewCommitments.Name = "dataGridViewCommitments";
             this.dataGridViewCommitments.RowHeadersWidth = 51;
-            dataGridViewCellStyle36.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewCommitments.RowsDefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCommitments.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewCommitments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewCommitments.RowTemplate.Height = 40;
             this.dataGridViewCommitments.Size = new System.Drawing.Size(1209, 439);
@@ -1593,8 +1658,8 @@
             this.dataGridViewBirthday.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewBirthday.Name = "dataGridViewBirthday";
             this.dataGridViewBirthday.RowHeadersWidth = 51;
-            dataGridViewCellStyle38.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewBirthday.RowsDefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewBirthday.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewBirthday.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewBirthday.RowTemplate.Height = 40;
             this.dataGridViewBirthday.Size = new System.Drawing.Size(1201, 359);
@@ -1642,8 +1707,8 @@
             this.dataGridViewContacts.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewContacts.Name = "dataGridViewContacts";
             this.dataGridViewContacts.RowHeadersWidth = 51;
-            dataGridViewCellStyle39.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewContacts.RowsDefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewContacts.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewContacts.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewContacts.RowTemplate.Height = 40;
             this.dataGridViewContacts.Size = new System.Drawing.Size(1209, 485);
@@ -2239,8 +2304,8 @@
             this.dataGridViewInactiveMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewInactiveMembers.Name = "dataGridViewInactiveMembers";
             this.dataGridViewInactiveMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle40.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewInactiveMembers.RowsDefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewInactiveMembers.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewInactiveMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewInactiveMembers.RowTemplate.Height = 40;
             this.dataGridViewInactiveMembers.Size = new System.Drawing.Size(1209, 397);
@@ -2727,8 +2792,8 @@
             this.dataGridViewFormerMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewFormerMembers.Name = "dataGridViewFormerMembers";
             this.dataGridViewFormerMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle41.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewFormerMembers.RowsDefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewFormerMembers.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewFormerMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewFormerMembers.RowTemplate.Height = 40;
             this.dataGridViewFormerMembers.Size = new System.Drawing.Size(1209, 397);
@@ -3221,78 +3286,13 @@
             this.dataGridViewDeadMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewDeadMembers.Name = "dataGridViewDeadMembers";
             this.dataGridViewDeadMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle42.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewDeadMembers.RowsDefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewDeadMembers.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewDeadMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewDeadMembers.RowTemplate.Height = 40;
             this.dataGridViewDeadMembers.Size = new System.Drawing.Size(1209, 397);
             this.dataGridViewDeadMembers.TabIndex = 4;
             this.dataGridViewDeadMembers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDeadMembers_RowEnter);
-            // 
-            // tableLayoutPanel48
-            // 
-            this.tableLayoutPanel48.ColumnCount = 1;
-            this.tableLayoutPanel48.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel48.Controls.Add(this.tableLayoutPanel49, 0, 1);
-            this.tableLayoutPanel48.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel48.Location = new System.Drawing.Point(492, 4);
-            this.tableLayoutPanel48.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel48.Name = "tableLayoutPanel48";
-            this.tableLayoutPanel48.RowCount = 2;
-            this.tableLayoutPanel48.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel48.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel48.Size = new System.Drawing.Size(224, 156);
-            this.tableLayoutPanel48.TabIndex = 5;
-            // 
-            // tableLayoutPanel49
-            // 
-            this.tableLayoutPanel49.ColumnCount = 2;
-            this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel49.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel49.Controls.Add(this.btnSearchCommittment, 0, 0);
-            this.tableLayoutPanel49.Controls.Add(this.btnClearCommittment, 1, 0);
-            this.tableLayoutPanel49.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel49.Location = new System.Drawing.Point(4, 97);
-            this.tableLayoutPanel49.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel49.Name = "tableLayoutPanel49";
-            this.tableLayoutPanel49.RowCount = 1;
-            this.tableLayoutPanel49.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel49.Size = new System.Drawing.Size(216, 55);
-            this.tableLayoutPanel49.TabIndex = 3;
-            // 
-            // btnSearchCommittment
-            // 
-            this.btnSearchCommittment.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnSearchCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearchCommittment.FlatAppearance.BorderSize = 0;
-            this.btnSearchCommittment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchCommittment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchCommittment.ForeColor = System.Drawing.Color.White;
-            this.btnSearchCommittment.Location = new System.Drawing.Point(4, 4);
-            this.btnSearchCommittment.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSearchCommittment.Name = "btnSearchCommittment";
-            this.btnSearchCommittment.Size = new System.Drawing.Size(100, 47);
-            this.btnSearchCommittment.TabIndex = 0;
-            this.btnSearchCommittment.Text = "Search";
-            this.btnSearchCommittment.UseVisualStyleBackColor = false;
-            this.btnSearchCommittment.Click += new System.EventHandler(this.btnSearchCommittment_Click_1);
-            // 
-            // btnClearCommittment
-            // 
-            this.btnClearCommittment.BackColor = System.Drawing.Color.SaddleBrown;
-            this.btnClearCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearCommittment.FlatAppearance.BorderSize = 0;
-            this.btnClearCommittment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearCommittment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearCommittment.ForeColor = System.Drawing.Color.White;
-            this.btnClearCommittment.Location = new System.Drawing.Point(112, 4);
-            this.btnClearCommittment.Margin = new System.Windows.Forms.Padding(4);
-            this.btnClearCommittment.Name = "btnClearCommittment";
-            this.btnClearCommittment.Size = new System.Drawing.Size(100, 47);
-            this.btnClearCommittment.TabIndex = 0;
-            this.btnClearCommittment.Text = "Clear";
-            this.btnClearCommittment.UseVisualStyleBackColor = false;
-            this.btnClearCommittment.Click += new System.EventHandler(this.btnClearCommittment_Click_1);
             // 
             // FormMembersBoard
             // 
@@ -3329,8 +3329,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picCommittment)).EndInit();
             this.tableLayoutPanel45.ResumeLayout(false);
             this.tableLayoutPanel45.PerformLayout();
-            this.tableLayoutPanel46.ResumeLayout(false);
-            this.tableLayoutPanel46.PerformLayout();
+            this.tableLayoutPanel48.ResumeLayout(false);
+            this.tableLayoutPanel49.ResumeLayout(false);
+            this.tableLayoutPanel47.ResumeLayout(false);
+            this.tableLayoutPanel47.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCommitments)).EndInit();
             this.tableLayoutPanel42.ResumeLayout(false);
             this.tableLayoutPanel42.PerformLayout();
@@ -3405,8 +3407,6 @@
             this.tableLayoutPanel39.ResumeLayout(false);
             this.tableLayoutPanel40.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDeadMembers)).EndInit();
-            this.tableLayoutPanel48.ResumeLayout(false);
-            this.tableLayoutPanel49.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3556,8 +3556,6 @@
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.TextBox txtNameCommittment;
         private System.Windows.Forms.TextBox txtSurnameCommittment;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel46;
-        private System.Windows.Forms.Label label44;
         private System.Windows.Forms.ComboBox cmbYearCommittment;
         private System.Windows.Forms.DataGridView dataGridViewCommitments;
         private System.Windows.Forms.PictureBox picRegisteredMember;
@@ -3566,7 +3564,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel50;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel42;
         private System.Windows.Forms.Label labelTotalRowsCommittment;
-        private System.Windows.Forms.Label label37;
         private System.Windows.Forms.ComboBox cmbStatusCommittment;
         private System.Windows.Forms.Button btnViewCommittment;
         private System.Windows.Forms.TabPage inactiveMembersPage;
@@ -3612,5 +3609,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel49;
         private System.Windows.Forms.Button btnSearchCommittment;
         private System.Windows.Forms.Button btnClearCommittment;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel47;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label38;
     }
 }

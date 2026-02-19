@@ -155,9 +155,9 @@ namespace APC.AllForms
 
             GeneralHelper.ApplyBoldFont11(label24, label25, label26);
 
-            GeneralHelper.ApplyBoldFont14(label1, label2, label3, label5, label6, label9, label10, label12,
+            GeneralHelper.ApplyBoldFont14(label1, label2, label3, label5, label6, label9, label10, label11, label12,
                 label13, label14, label15, label16, label17, label18, label22, label23, label27, label32,
-                label33, label34, label35, label36, btnAddRegisteredMembers,
+                label33, label34, label35, label36, label38, label41, label42, btnAddRegisteredMembers,
                 btnUpdateRegisteredMembers, btnViewRegisteredMembers, btnDeleteRegisteredMembers,
                 btnSearchRegisteredMembers, btnClearRegisteredMembers, btnViewBirthday, btnSearchBirthday,
                 btnClearBirthday, btnUpdateContacts, btnUpdateFormerMembers, btnViewFormerMembers,

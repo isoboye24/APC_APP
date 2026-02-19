@@ -91,6 +91,56 @@ namespace APC.DAL.DAO
                     dto.ImagePath = item.imagePath;
                     dto.ImageCaption = item.imageCaption;
                     dto.AmountSpent = item.amountSpent;
+                    dto.AmountSpentWithCurrency = item.amountSpent + " €";
+                    dto.Day = item.day;
+                    dto.MonthID = item.monthID;
+                    dto.MonthName = item.monthName;
+                    dto.Year = item.year;
+                    dto.ReceiptDate = item.receiptDate;
+                    dto.Counter = ++counter;
+
+                    eventreceipts.Add(dto);
+                }
+                return eventreceipts;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<EventReceiptsDetailDTO> Select(bool isDeleted)
+        {
+            try
+            {
+                List<EventReceiptsDetailDTO> eventreceipts = new List<EventReceiptsDetailDTO>();
+                int counter = 0;
+                var list = (from er in db.EVENT_RECEIPTS.Where(x => x.isDeleted == isDeleted)
+                            join m in db.MONTH on er.monthID equals m.monthID
+                            select new
+                            {
+                                eventReceiptID = er.eventReceiptID,
+                                eventID = er.eventID,
+                                summary = er.summary,
+                                imagePath = er.imagePath,
+                                imageCaption = er.caption,
+                                amountSpent = er.amountSpent,
+                                day = er.day,
+                                monthID = er.monthID,
+                                monthName = m.monthName,
+                                year = er.year,
+                                receiptDate = er.receiptDate,
+                            }).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID).ThenByDescending(x => x.day).ThenBy(x => x.imageCaption).ToList();
+                foreach (var item in list)
+                {
+                    EventReceiptsDetailDTO dto = new EventReceiptsDetailDTO();
+                    dto.EventReceiptID = item.eventReceiptID;
+                    dto.EventID = item.eventID;
+                    dto.Summary = item.summary;
+                    dto.ImagePath = item.imagePath;
+                    dto.ImageCaption = item.imageCaption;
+                    dto.AmountSpent = item.amountSpent;
+                    dto.AmountSpentWithCurrency = item.amountSpent + " €";
                     dto.Day = item.day;
                     dto.MonthID = item.monthID;
                     dto.MonthName = item.monthName;

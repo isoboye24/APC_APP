@@ -15,6 +15,7 @@ namespace APC.DAL.DTO
         public int Counter { get; set; }
         public string ImageCaption { get; set; }
         public decimal AmountSpent { get; set; }
+        public string AmountSpentWithCurrency { get; set; }
         public int Day { get; set; }
         public int MonthID { get; set; }
         public string MonthName { get; set; }

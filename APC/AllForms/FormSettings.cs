@@ -14,6 +14,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static APC.HelperServices.CommentHelperService;
+using static APC.HelperServices.DocumentHelperService;
+using static APC.HelperServices.EventsHelperService;
+using static APC.HelperServices.GeneralAttendanceHelperService;
 using static APC.HelperServices.MemberHelperService;
 using static APC.HelperServices.SingleColumnHelperService;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
@@ -26,108 +30,103 @@ namespace APC.AllForms
         {
             InitializeComponent();
         }
-        MemberBLL memberBLL = new MemberBLL();        
+        MemberBLL memberBLL = new MemberBLL();     
+        
         EventsBLL eventBLL = new EventsBLL();
+
         PaymentStatusBLL paymentStatusBLL = new PaymentStatusBLL();
         PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
         PaymentStatusDetailDTO paymentStatusDetail = new PaymentStatusDetailDTO();
+
+        CountryBLL countryBLL = new CountryBLL();
+        CountryDTO countryDTO = new CountryDTO();
+        CountryDetailDTO countryDetail = new CountryDetailDTO();
+
+        EmploymentStatusBLL empStatusBLL = new EmploymentStatusBLL();
+        EmploymentStatusDTO empStatusDTO = new EmploymentStatusDTO();
+        EmploymentStatusDetailDTO empStatusDetail = new EmploymentStatusDetailDTO();
+
+        MaritalStatusBLL marStatusBLL = new MaritalStatusBLL();
+        MaritalStatusDTO marStatusDTO = new MaritalStatusDTO();
+        MaritalStatusDetailDTO marStatusDetail = new MaritalStatusDetailDTO();
+
+        NationalityBLL nationalityBLL = new NationalityBLL();
+        NationalityDTO nationalityDTO = new NationalityDTO();
+        NationalityDetailDTO nationalityDetail = new NationalityDetailDTO();
+
+        PermissionBLL permissionBLL = new PermissionBLL();
+        PermissionDTO permissionDTO = new PermissionDTO();
+        MemberDetailDTO permissionDetail = new MemberDetailDTO();
+        MemberBLL permissionMemberBLL = new MemberBLL();
+
+        CommentDTO commentDTO = new CommentDTO();
+        DocumentDTO documentDTO = new DocumentDTO();
+        EventImageDTO eventImageDTO = new EventImageDTO();
+        EventsDTO eventsDTO = new EventsDTO();
+        EventSalesDTO eventSalesDTO = new EventSalesDTO();
+        EventExpenditureDTO eventExpenditureDTO = new EventExpenditureDTO();
+        EventReceiptsDTO eventReceiptsDTO = new EventReceiptsDTO();
+        GeneralAttendanceDTO generalAttendanceDTO = new GeneralAttendanceDTO();
+
+
+        private void resizeControls() 
+        {
+            GeneralHelper.ApplyBoldFont14(
+                label1, label2, label3, label4, label5, label6, label7, label8,
+                label9, label10, label11, label12, label13, label14, label15, label16, label17, label19,
+                btnAddCountry, btnUpdateCountry, btnDeleteCountry, btnAddEmpStatus, btnUpdateEmpStatus,
+                btnDeleteEmpStatus, btnAddMarStatus, btnUpdateMarStatus, btnDeleteMarStatus, btnAddNationality,
+                btnUpdateNationality, btnDeleteNationality, btnDeletePermissions, btnSearchPermissions,
+                btnClearPermissions, btnAddPositions, btnUpdatePositions, btnDeletePositions, btnAddProfessions,
+                btnUpdateProfessions, btnDeleteProfessions, labelName, labelSurname, labelAccessLevel,
+                labelPosition, cmbDeletedData, btnRetrieve
+                );
+
+            GeneralHelper.ApplyRegularFont11(
+                labelTotalCountry, labelTotalEmpStatus, labelTotalMarStatus, labelTotalNationality,
+                labelTotalPermissions, labelTotalPositions, labelTotalProfessions
+                );
+            
+            GeneralHelper.ApplyRegularFont14(
+                txtCountry, txtMaritalStatus, txtEmpStatus, txtNationality, cmbPermission, txtPosition,
+                txtProfession
+                );
+        }
         private void FormSettings_Load(object sender, EventArgs e)
-        {            
-            //Button label
-            #region
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label10.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label12.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label16.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalCountry.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtCountry.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnAddCountry.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateCountry.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteCountry.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalEmpStatus.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtEmpStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnAddEmpStatus.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateEmpStatus.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteEmpStatus.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalMarStatus.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtMaritalStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnAddMarStatus.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateMarStatus.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteMarStatus.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalNationality.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtNationality.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnAddNationality.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateNationality.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteNationality.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label7.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalPermissions.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            cmbPermission.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnDeletePermissions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearchPermissions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearPermissions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label8.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalPositions.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtPosition.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnAddPositions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdatePositions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeletePositions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalProfessions.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtProfession.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnAddProfessions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateProfessions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteProfessions.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            labelName.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelSurname.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelAccessLevel.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelPosition.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label13.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label15.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label14.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label17.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            #endregion
+        {
+            // Controls sizes
+            resizeControls();
 
             paymentStatusDTO = paymentStatusBLL.Select();
-            loadPaymentStatuses();
-
             countryDTO = countryBLL.Select();
-            loadCountries();
-
             empStatusDTO = empStatusBLL.Select();
-            loadEmploymentStatuses();
-
             marStatusDTO = marStatusBLL.Select();
-            loadMaritalStatuses();
-
             nationalityDTO = nationalityBLL.Select();
-            loadNationalities();
-
             positionDTO = positionBLL.Select();
-            loadPositions();
-
             professionDTO = professionBLL.Select();
-            loadProfessions();
+            permissionDTO = permissionBLL.Select();
+            memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
+
+            loadMembers(dataGridView1);
+
+            loadPaymentStatuses(dataGridViewPaymentStatus);
+
+            loadCountries(dataGridViewCountry);
+            
+            loadEmploymentStatuses(dataGridViewEmpStatus);
+            
+            loadMaritalStatuses(dataGridViewMarStatus);
+
+            loadNationalities(dataGridViewNationality);
+
+            loadPositions(dataGridViewPositions);
+
+            loadProfessions(dataGridViewProfessions);
+
+            loadPermissions(dataGridViewPermissions);
+            FillPermissionComboBoxes();
 
             #region
-
-            permissionDTO = permissionBLL.Select();
-            cmbPermission.DataSource = permissionDTO.Permissions;
-            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
-
-            loadPermissions();
 
             picProfilePic.SizeMode = PictureBoxSizeMode.StretchImage;
             picProfilePic.BorderStyle = BorderStyle.None;
@@ -146,9 +145,7 @@ namespace APC.AllForms
 
             // Deleted Data
             #region
-            label11.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            cmbDeletedData.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnRetrieve.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+
             cmbDeletedData.Items.Add("Registered Members");
             cmbDeletedData.Items.Add("Countries");
             cmbDeletedData.Items.Add("Nationalities");
@@ -167,9 +164,6 @@ namespace APC.AllForms
             cmbDeletedData.Items.Add("Constitution");
             cmbDeletedData.Items.Add("Fined Member");
 
-            memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-            loadMembers();
-
             #endregion
 
             if (LoginInfo.AccessLevel != 4)
@@ -187,52 +181,105 @@ namespace APC.AllForms
             Counts();
         }
 
-        private void loadPaymentStatuses()
+        private void loadPaymentStatuses(DataGridView grid)
         {
-            dataGridViewPaymentStatus.DataSource = paymentStatusDTO.PaymentStatuses;
-            ConfigureSingleColumnGrid(dataGridViewPaymentStatus, SingleColumnGridType.Basic, "PaymentStatusName", "Payment Status");
+            grid.DataSource = paymentStatusDTO.PaymentStatuses;
+            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "PaymentStatusName", "Payment Status");
         }
 
-        private void loadPositions()
+        private void loadPositions(DataGridView grid)
         {
-            dataGridViewPositions.DataSource = positionDTO.Positions;
-            ConfigureSingleColumnGrid(dataGridViewPositions, SingleColumnGridType.Basic, "PositionName", "Positions");
+            grid.DataSource = positionDTO.Positions;
+            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "PositionName", "Positions");
         }
-        private void loadEmploymentStatuses()
+        private void loadEmploymentStatuses(DataGridView grid)
         {
-            dataGridViewEmpStatus.DataSource = empStatusDTO.EmploymentStatuses;
-            ConfigureSingleColumnGrid(dataGridViewEmpStatus, SingleColumnGridType.Basic, "EmploymentStatus", "Employment Statuses");
+            grid.DataSource = empStatusDTO.EmploymentStatuses;
+            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "EmploymentStatus", "Employment Statuses");
         }
-        private void loadMaritalStatuses()
+        private void loadMaritalStatuses(DataGridView grid)
         {
-            dataGridViewMarStatus.DataSource = marStatusDTO.MaritalStatuses;
-            ConfigureSingleColumnGrid(dataGridViewMarStatus, SingleColumnGridType.Basic, "MaritalStatus", "Marital Statuses");
+            grid.DataSource = marStatusDTO.MaritalStatuses;
+            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "MaritalStatus", "Marital Statuses");
         }
-        private void loadCountries()
+        private void loadCountries(DataGridView grid)
         {
-            dataGridViewCountry.DataSource = countryDTO.Countries;
-            ConfigureSingleColumnGrid(dataGridViewCountry, SingleColumnGridType.Basic, "CountryName", "Countries");
+            grid.DataSource = countryDTO.Countries;
+            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "CountryName", "Countries");
         }
-        private void loadNationalities()
+        private void loadNationalities(DataGridView grid)
         {
-            dataGridViewNationality.DataSource = nationalityDTO.Nationalities;
-            ConfigureSingleColumnGrid(dataGridViewNationality, SingleColumnGridType.Basic, "Nationality", "Nationalities");
+            grid.DataSource = nationalityDTO.Nationalities;
+            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "Nationality", "Nationalities");
         }
-        private void loadProfessions()
+        
+        private void loadProfessions(DataGridView grid)
         {
-            dataGridViewProfessions.DataSource = professionDTO.Professions;
-            ConfigureSingleColumnGrid(dataGridViewProfessions, SingleColumnGridType.Basic, "Profession", "Professions");
+            grid.DataSource = professionDTO.Professions;
+            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "Profession", "Professions");
+        }
+        private void FillPermissionComboBoxes()
+        {            
+            cmbPermission.DataSource = permissionDTO.Permissions;
+            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
         }
 
-        private void loadPermissions()
+        private void loadPermissions(DataGridView grid)
         {
-            dataGridViewPermissions.DataSource = permissionDTO.Members;
-            ConfigureMemberGrid(dataGridViewPermissions, MemberGridType.Permission);
+            grid.DataSource = permissionDTO.Members;
+            ConfigureMemberGrid(grid, MemberGridType.Permission);
         }
-        private void loadMembers()
+        private void loadMembers(DataGridView grid)
         {
-            dataGridView1.DataSource = memberDeletedDataDTO.Members;
-            ConfigureMemberGrid(dataGridView1, MemberGridType.Basic);
+            grid.DataSource = memberDeletedDataDTO.Members;
+            ConfigureMemberGrid(grid, MemberGridType.Basic);
+        }
+
+        private void loadComments(DataGridView grid)
+        {
+            grid.DataSource = commentDTO.Comments;
+            ConfigureCommentGrid(grid, CommentGridType.Basic);
+        }
+
+        private void loadDocument(DataGridView grid)
+        {
+            grid.DataSource = documentDTO.Documents;
+            ConfigureDocumentGrid(grid, DocumentGridType.Basic);
+        }
+        private void loadEventImages(DataGridView grid)
+        {
+            grid.DataSource = eventImageDTO.EventImages;
+            ConfigureEventsGrid(grid, EventsGridType.Images);
+        }
+
+        private void loadEvents(DataGridView grid)
+        {
+            grid.DataSource = eventsDTO.Events;
+            ConfigureEventsGrid(grid, EventsGridType.Basic);
+        }
+
+        private void loadEventSales(DataGridView grid)
+        {
+            grid.DataSource = eventSalesDTO.EventSales;
+            ConfigureEventsGrid(grid, EventsGridType.Sales);
+        }
+
+        private void loadEventExpenditure(DataGridView grid)
+        {
+            grid.DataSource = eventExpenditureDTO.EventExpenditures;
+            ConfigureEventsGrid(grid, EventsGridType.Expenditure);
+        }
+
+        private void loadEventReceipt(DataGridView grid)
+        {
+            grid.DataSource = eventReceiptsDTO.EventReceipts;
+            ConfigureEventsGrid(grid, EventsGridType.Receipt);
+        }
+
+        private void loadGeneralAttendance(DataGridView grid)
+        {
+            grid.DataSource = generalAttendanceDTO.GeneralAttendance;
+            ConfigureGeneralAttendanceGrid(grid, GeneralAttendanceGridType.Basic);
         }
 
         private void picProfilePic_Paint(object sender, PaintEventArgs e)
@@ -243,9 +290,7 @@ namespace APC.AllForms
             picProfilePic.Region = rg;
         }
 
-        CountryBLL countryBLL = new CountryBLL();
-        CountryDTO countryDTO = new CountryDTO();
-        CountryDetailDTO countryDetail = new CountryDetailDTO();
+        
 
         private void btnAddCountry_Click(object sender, EventArgs e)
         {
@@ -345,9 +390,8 @@ namespace APC.AllForms
 
         private void dataGridViewCountry_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            countryDetail = new CountryDetailDTO();
-            countryDetail.CountryID = Convert.ToInt32(dataGridViewCountry.Rows[e.RowIndex].Cells[0].Value);
-            countryDetail.CountryName = dataGridViewCountry.Rows[e.RowIndex].Cells[1].Value.ToString();
+            if (e.RowIndex < 0) return;
+            countryDetail = GeneralHelper.MapFromGrid<CountryDetailDTO>(dataGridViewCountry, e.RowIndex);
         }
 
         private void btnDeleteCountry_Click(object sender, EventArgs e)
@@ -370,10 +414,7 @@ namespace APC.AllForms
             }
         }
 
-        EmploymentStatusBLL empStatusBLL = new EmploymentStatusBLL();
-        EmploymentStatusDTO empStatusDTO = new EmploymentStatusDTO();
-        EmploymentStatusDetailDTO empStatusDetail = new EmploymentStatusDetailDTO();
-
+        
         private void btnAddEmpStatus_Click(object sender, EventArgs e)
         {
             FormEmploymentStatus open = new FormEmploymentStatus();
@@ -403,9 +444,8 @@ namespace APC.AllForms
 
         private void dataGridViewEmpStatus_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            empStatusDetail = new EmploymentStatusDetailDTO();
-            empStatusDetail.EmploymentStatusID = Convert.ToInt32(dataGridViewEmpStatus.Rows[e.RowIndex].Cells[0].Value);
-            empStatusDetail.EmploymentStatus = dataGridViewEmpStatus.Rows[e.RowIndex].Cells[1].Value.ToString();
+            if (e.RowIndex < 0) return;
+            empStatusDetail = GeneralHelper.MapFromGrid<EmploymentStatusDetailDTO>(dataGridViewEmpStatus, e.RowIndex);
         }
 
         private void btnDeleteEmpStatus_Click(object sender, EventArgs e)
@@ -427,10 +467,6 @@ namespace APC.AllForms
                 }
             }
         }
-
-        MaritalStatusBLL marStatusBLL = new MaritalStatusBLL();
-        MaritalStatusDTO marStatusDTO = new MaritalStatusDTO();
-        MaritalStatusDetailDTO marStatusDetail = new MaritalStatusDetailDTO();
 
         private void btnAddMarStatus_Click(object sender, EventArgs e)
         {
@@ -468,9 +504,8 @@ namespace APC.AllForms
 
         private void dataGridViewMarStatus_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            marStatusDetail = new MaritalStatusDetailDTO();
-            marStatusDetail.MaritalStatusID = Convert.ToInt32(dataGridViewMarStatus.Rows[e.RowIndex].Cells[0].Value);
-            marStatusDetail.MaritalStatus = dataGridViewMarStatus.Rows[e.RowIndex].Cells[1].Value.ToString();
+            if (e.RowIndex < 0) return;
+            marStatusDetail = GeneralHelper.MapFromGrid<MaritalStatusDetailDTO>(dataGridViewMarStatus, e.RowIndex);            
         }
 
         private void btnDeleteMarStatus_Click(object sender, EventArgs e)
@@ -493,9 +528,6 @@ namespace APC.AllForms
             }
         }
 
-        NationalityBLL nationalityBLL = new NationalityBLL();
-        NationalityDTO nationalityDTO = new NationalityDTO();
-        NationalityDetailDTO nationalityDetail = new NationalityDetailDTO();
 
         private void btnAddNationality_Click(object sender, EventArgs e)
         {
@@ -533,9 +565,8 @@ namespace APC.AllForms
 
         private void dataGridViewNationality_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            nationalityDetail = new NationalityDetailDTO();
-            nationalityDetail.NationalityID = Convert.ToInt32(dataGridViewNationality.Rows[e.RowIndex].Cells[0].Value);
-            nationalityDetail.Nationality = dataGridViewNationality.Rows[e.RowIndex].Cells[1].Value.ToString();
+            if (e.RowIndex < 0) return;
+            nationalityDetail = GeneralHelper.MapFromGrid<NationalityDetailDTO>(dataGridViewNationality, e.RowIndex);            
         }
 
         private void btnDeleteNationality_Click(object sender, EventArgs e)
@@ -558,10 +589,7 @@ namespace APC.AllForms
             }
         }
 
-        PermissionBLL permissionBLL = new PermissionBLL();
-        PermissionDTO permissionDTO = new PermissionDTO();
-        MemberDetailDTO permissionDetail = new MemberDetailDTO();
-        MemberBLL permissionMemberBLL = new MemberBLL();
+
 
         private void btnSearchPermissions_Click(object sender, EventArgs e)
         {
@@ -588,36 +616,8 @@ namespace APC.AllForms
 
         private void dataGridViewPermissions_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            permissionDetail = new MemberDetailDTO();
-            permissionDetail.MemberID = Convert.ToInt32(dataGridViewPermissions.Rows[e.RowIndex].Cells[0].Value);
-            permissionDetail.Username = dataGridViewPermissions.Rows[e.RowIndex].Cells[1].Value.ToString();
-            permissionDetail.Password = dataGridViewPermissions.Rows[e.RowIndex].Cells[2].Value.ToString();
-            permissionDetail.Surname = dataGridViewPermissions.Rows[e.RowIndex].Cells[3].Value.ToString();
-            permissionDetail.Name = dataGridViewPermissions.Rows[e.RowIndex].Cells[4].Value.ToString();
-            permissionDetail.Birthday = Convert.ToDateTime(dataGridViewPermissions.Rows[e.RowIndex].Cells[5].Value);
-            permissionDetail.ImagePath = dataGridViewPermissions.Rows[e.RowIndex].Cells[6].Value.ToString();
-            permissionDetail.EmailAddress = dataGridViewPermissions.Rows[e.RowIndex].Cells[7].Value.ToString();
-            permissionDetail.HouseAddress = dataGridViewPermissions.Rows[e.RowIndex].Cells[8].Value.ToString();
-            permissionDetail.MembershipDate = Convert.ToDateTime(dataGridViewPermissions.Rows[e.RowIndex].Cells[9].Value);
-            permissionDetail.CountryID = Convert.ToInt32(dataGridViewPermissions.Rows[e.RowIndex].Cells[10].Value);
-            permissionDetail.CountryName = dataGridViewPermissions.Rows[e.RowIndex].Cells[11].Value.ToString();
-            permissionDetail.NationalityID = Convert.ToInt32(dataGridViewPermissions.Rows[e.RowIndex].Cells[12].Value);
-            permissionDetail.NationalityName = dataGridViewPermissions.Rows[e.RowIndex].Cells[13].Value.ToString();
-            permissionDetail.ProfessionID = Convert.ToInt32(dataGridViewPermissions.Rows[e.RowIndex].Cells[14].Value);
-            permissionDetail.ProfessionName = dataGridViewPermissions.Rows[e.RowIndex].Cells[15].Value.ToString();
-            permissionDetail.PositionID = Convert.ToInt32(dataGridViewPermissions.Rows[e.RowIndex].Cells[16].Value);
-            permissionDetail.PositionName = dataGridViewPermissions.Rows[e.RowIndex].Cells[17].Value.ToString();
-            permissionDetail.GenderID = Convert.ToInt32(dataGridViewPermissions.Rows[e.RowIndex].Cells[18].Value);
-            permissionDetail.GenderName = dataGridViewPermissions.Rows[e.RowIndex].Cells[19].Value.ToString();
-            permissionDetail.EmploymentStatusID = Convert.ToInt32(dataGridViewPermissions.Rows[e.RowIndex].Cells[20].Value);
-            permissionDetail.EmploymentStatusName = dataGridViewPermissions.Rows[e.RowIndex].Cells[21].Value.ToString();
-            permissionDetail.MaritalStatusID = Convert.ToInt32(dataGridViewPermissions.Rows[e.RowIndex].Cells[22].Value);
-            permissionDetail.MaritalStatusName = dataGridViewPermissions.Rows[e.RowIndex].Cells[23].Value.ToString();
-            permissionDetail.PermissionID = Convert.ToInt32(dataGridViewPermissions.Rows[e.RowIndex].Cells[24].Value);
-            permissionDetail.PermissionName = dataGridViewPermissions.Rows[e.RowIndex].Cells[25].Value.ToString();
-            permissionDetail.PhoneNumber = dataGridViewPermissions.Rows[e.RowIndex].Cells[26].Value.ToString();
-            permissionDetail.PhoneNumber2 = dataGridViewPermissions.Rows[e.RowIndex].Cells[27].Value.ToString();
-            permissionDetail.PhoneNumber3 = dataGridViewPermissions.Rows[e.RowIndex].Cells[28].Value.ToString();
+            if (e.RowIndex < 0) return;
+            permissionDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewPermissions, e.RowIndex);
         }
 
         private void btnClearPermissions_Click(object sender, EventArgs e)
@@ -647,9 +647,8 @@ namespace APC.AllForms
 
         private void dataGridViewPositions_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            positionDetail = new PositionDetailDTO();
-            positionDetail.PositionID = Convert.ToInt32(dataGridViewPositions.Rows[e.RowIndex].Cells[0].Value);
-            positionDetail.PositionName = dataGridViewPositions.Rows[e.RowIndex].Cells[1].Value.ToString();
+            if (e.RowIndex < 0) return;
+            positionDetail = GeneralHelper.MapFromGrid<PositionDetailDTO>(dataGridViewPositions, e.RowIndex);
         }
 
         private void btnUpdatePositions_Click(object sender, EventArgs e)
@@ -730,9 +729,8 @@ namespace APC.AllForms
 
         private void dataGridViewProfessions_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            professionDetail = new ProfessionDetailDTO();
-            professionDetail.ProfessionID = Convert.ToInt32(dataGridViewProfessions.Rows[e.RowIndex].Cells[0].Value);
-            professionDetail.Profession = dataGridViewProfessions.Rows[e.RowIndex].Cells[1].Value.ToString();
+            if (e.RowIndex < 0) return;
+            professionDetail = GeneralHelper.MapFromGrid<ProfessionDetailDTO>(dataGridViewProfessions, e.RowIndex);
         }
 
         private void btnDeleteProfessions_Click(object sender, EventArgs e)
@@ -793,213 +791,51 @@ namespace APC.AllForms
         {
             if (cmbDeletedData.SelectedIndex == 0)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Members;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].HeaderText = "Surname";
-                dataGridView1.Columns[4].HeaderText = "Name";
-                dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].Visible = false;
-                dataGridView1.Columns[11].Visible = false;
-                dataGridView1.Columns[12].Visible = false;
-                dataGridView1.Columns[13].HeaderText = "Nationality";
-                dataGridView1.Columns[14].Visible = false;
-                dataGridView1.Columns[15].HeaderText = "Profession";
-                dataGridView1.Columns[16].Visible = false;
-                dataGridView1.Columns[17].HeaderText = "Position";
-                dataGridView1.Columns[18].Visible = false;
-                dataGridView1.Columns[19].HeaderText = "Gender";
-                dataGridView1.Columns[20].Visible = false;
-                dataGridView1.Columns[21].Visible = false;
-                dataGridView1.Columns[22].Visible = false;
-                dataGridView1.Columns[23].Visible = false;
-                dataGridView1.Columns[24].Visible = false;
-                dataGridView1.Columns[25].Visible = false;
-                dataGridView1.Columns[26].Visible = false;
-                dataGridView1.Columns[27].Visible = false;
-                dataGridView1.Columns[28].Visible = false;
-                dataGridView1.Columns[29].Visible = false;
-                dataGridView1.Columns[30].Visible = false;
-                dataGridView1.Columns[31].Visible = false;
-                dataGridView1.Columns[32].Visible = false;
-                dataGridView1.Columns[33].Visible = false;
-                dataGridView1.Columns[34].Visible = false;
-                dataGridView1.Columns[35].Visible = false;
-                dataGridView1.Columns[36].Visible = false;
-                dataGridView1.Columns[37].Visible = false;
-                dataGridView1.Columns[38].Visible = false;
-                dataGridView1.Columns[39].Visible = false;
-                dataGridView1.Columns[40].Visible = false;
-                dataGridView1.Columns[41].Visible = false;
-                dataGridView1.Columns[42].Visible = false;
-                dataGridView1.Columns[43].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadMembers(dataGridView1);                
             }
             else if (cmbDeletedData.SelectedIndex == 1)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Countries;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Country Name";
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadCountries(dataGridView1);
             }
             else if (cmbDeletedData.SelectedIndex == 2)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Nationalities;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Nationality Name";
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadNationalities(dataGridView1);
             }
             else if (cmbDeletedData.SelectedIndex == 3)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Professions;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Profession Name";
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadProfessions(dataGridView1);
             }
             else if (cmbDeletedData.SelectedIndex == 4)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Positions;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Prosition Name";
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadPositions(dataGridView1);
             }
             else if (cmbDeletedData.SelectedIndex == 5)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.EmploymentStatuses;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Employment Status";
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadEmploymentStatuses(dataGridView1);
             }
             else if (cmbDeletedData.SelectedIndex == 6)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.MaritalStatuses;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Marital Status";
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadMaritalStatuses(dataGridView1);                
             }
             else if (cmbDeletedData.SelectedIndex == 8)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Comments;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Comment";
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].HeaderText = "Surname";
-                dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[4].HeaderText = "Name";
-                dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].HeaderText = "Gender";
-                dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].HeaderText = "Month";
-                dataGridView1.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[11].HeaderText = "Year";
-                dataGridView1.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[12].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadComments(dataGridView1);                
             }
             else if (cmbDeletedData.SelectedIndex == 9)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Documents;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Document Name";
-                dataGridView1.Columns[2].HeaderText = "Document Type";
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].HeaderText = "Date";
-                dataGridView1.Columns[8].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadDocument(dataGridView1);                
             }
             else if (cmbDeletedData.SelectedIndex == 10)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.EventImages;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].HeaderText = "No.";
-                dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[5].HeaderText = "Picture Caption";
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadEventImages(dataGridView1);                
             }
             else if (cmbDeletedData.SelectedIndex == 11)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Events;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].HeaderText = "Year";
-                dataGridView1.Columns[5].HeaderText = "Event Title";
-                dataGridView1.Columns[6].HeaderText = "Summary";
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].HeaderText = "Sold (€)";
-                dataGridView1.Columns[10].HeaderText = "Spent (€)";
-                dataGridView1.Columns[11].HeaderText = "Balance";
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadEvents(dataGridView1);                
             }
             else if (cmbDeletedData.SelectedIndex == 12)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.GeneralAttendance;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].HeaderText = "Month";
-                dataGridView1.Columns[4].HeaderText = "Year";
-                dataGridView1.Columns[5].HeaderText = "Members Present";
-                dataGridView1.Columns[6].HeaderText = "Members Absent";
-                dataGridView1.Columns[7].HeaderText = "Dues Paid";
-                dataGridView1.Columns[8].HeaderText = "Dues Expected";
-                dataGridView1.Columns[9].HeaderText = "Balance";
-                dataGridView1.Columns[10].Visible = false;
-                dataGridView1.Columns[11].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                loadGeneralAttendance(dataGridView1);                
             }
             else if (cmbDeletedData.SelectedIndex == 13)
             {
@@ -1221,19 +1057,8 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 11)
             {
-                eventDeletedDataDetail = new EventsDetailDTO();
-                eventDeletedDataDetail.EventID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                eventDeletedDataDetail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-                eventDeletedDataDetail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-                eventDeletedDataDetail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                eventDeletedDataDetail.Year = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                eventDeletedDataDetail.EventTitle = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                eventDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                eventDeletedDataDetail.CoverImagePath = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-                eventDeletedDataDetail.EventDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
-                eventDeletedDataDetail.AmountSold = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
-                eventDeletedDataDetail.AmountSpent = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[10].Value);
-                eventDeletedDataDetail.Balance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
+                if (e.RowIndex < 0) return;
+                eventDeletedDataDetail = GeneralHelper.MapFromGrid<EventsDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 12)
             {
