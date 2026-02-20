@@ -1,4 +1,5 @@
 ﻿using APC.BLL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
 using APC.HelperServices;
 using System;
@@ -71,7 +72,7 @@ namespace APC.AllForms
             contactsDTO = contactsBLL.Select();
             committmentDTO = committmentBLL.Select(DateTime.Now.Year);
 
-            LoadRegisteredMembers();
+            LoadDataGridView.loadMembers(dataGridViewRegisteredMembers, registeredMembersDTO);
             FillRegisteredMemberComboBoxes();
 
             LoadBirthDayMembers();
@@ -106,12 +107,6 @@ namespace APC.AllForms
         {
             dataGridViewBirthday.DataSource = birthdayDTO.Members;
             ConfigureMemberGrid(dataGridViewBirthday, MemberGridType.Birthday);
-        }
-
-        private void LoadRegisteredMembers()
-        {
-            dataGridViewRegisteredMembers.DataSource = registeredMembersDTO.Members;
-            ConfigureMemberGrid(dataGridViewRegisteredMembers, MemberGridType.Basic);
         }
 
         private void LoadMembersContact()

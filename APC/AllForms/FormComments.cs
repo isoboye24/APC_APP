@@ -1,6 +1,8 @@
 ﻿using APC.BLL;
 using APC.DAL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
+using APC.HelperServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,8 +47,12 @@ namespace APC
         }
         CommentDTO dto = new CommentDTO();
         CommentBLL bll = new CommentBLL();
-        MemberDetailDTO memberDetail = new MemberDetailDTO();
         public CommentDetailDTO detail = new CommentDetailDTO();
+
+        MemberDetailDTO memberDetail = new MemberDetailDTO();
+        MemberBLL memberBLL = new MemberBLL();
+        MemberDTO memberDTO = new MemberDTO();
+
         public bool isUpdate = false;
         private void FormComments_Load(object sender, EventArgs e)
         {
@@ -67,57 +73,9 @@ namespace APC
             btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
 
-            dto = bll.Select();
-            #region
-            dataGridView1.DataSource = dto.Members;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].Visible = false;
-            dataGridView1.Columns[3].HeaderText = "Surname";
-            dataGridView1.Columns[4].HeaderText = "Name";
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].Visible = false;
-            dataGridView1.Columns[7].Visible = false;
-            dataGridView1.Columns[8].Visible = false;
-            dataGridView1.Columns[9].Visible = false;
-            dataGridView1.Columns[10].Visible = false;
-            dataGridView1.Columns[11].Visible = false;
-            dataGridView1.Columns[12].Visible = false;
-            dataGridView1.Columns[13].Visible = false;
-            dataGridView1.Columns[14].Visible = false;
-            dataGridView1.Columns[15].Visible = false;
-            dataGridView1.Columns[16].Visible = false;
-            dataGridView1.Columns[17].Visible = false;
-            dataGridView1.Columns[18].Visible = false;
-            dataGridView1.Columns[19].HeaderText = "Gender";
-            dataGridView1.Columns[20].Visible = false;
-            dataGridView1.Columns[21].Visible = false;
-            dataGridView1.Columns[22].Visible = false;
-            dataGridView1.Columns[23].Visible = false;
-            dataGridView1.Columns[24].Visible = false;
-            dataGridView1.Columns[25].Visible = false;
-            dataGridView1.Columns[26].Visible = false;
-            dataGridView1.Columns[27].Visible = false;
-            dataGridView1.Columns[28].Visible = false;
-            dataGridView1.Columns[29].Visible = false;
-            dataGridView1.Columns[30].Visible = false;
-            dataGridView1.Columns[31].Visible = false;
-            dataGridView1.Columns[32].Visible = false;
-            dataGridView1.Columns[33].Visible = false;
-            dataGridView1.Columns[34].Visible = false;
-            dataGridView1.Columns[35].Visible = false;
-            dataGridView1.Columns[36].Visible = false;
-            dataGridView1.Columns[37].Visible = false;
-            dataGridView1.Columns[38].Visible = false;
-            dataGridView1.Columns[39].Visible = false;
-            dataGridView1.Columns[40].Visible = false;
-            dataGridView1.Columns[41].Visible = false;
-            dataGridView1.Columns[42].Visible = false;
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
-            #endregion
+            memberDTO = memberBLL.Select();
+            LoadDataGridView.loadMembersShrinked(dataGridView1, memberDTO);
+            
             labelCommentDate.Hide();
             labelCommentTime.Hide();
 
@@ -206,10 +164,11 @@ namespace APC
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             memberDetail = new MemberDetailDTO();
-            memberDetail.MemberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-            txtName.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-            txtSurnameReadOnly.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            memberDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+            memberDetail.MemberID = dataGridView1.Rows[e.RowIndex].Cells["MemberID"].Value is int id ? id : 0;
+            txtName.Text = dataGridView1.Rows[e.RowIndex].Cells["Name"].Value?.ToString() ?? string.Empty;
+            txtSurnameReadOnly.Text = dataGridView1.Rows[e.RowIndex].Cells["Surname"].Value?.ToString() ?? string.Empty;
+            memberDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells["ImagePath"].Value?.ToString() ?? string.Empty;
+            
             string imagePath = Application.StartupPath + "\\images\\" + memberDetail.ImagePath;
             picProfilePic.ImageLocation = imagePath;
         }

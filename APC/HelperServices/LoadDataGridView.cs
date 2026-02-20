@@ -71,6 +71,30 @@ namespace APC.HelperServices
             ConfigureMemberGrid(grid, MemberGridType.Basic);
         }
 
+        public static void loadBirthdayMembers(DataGridView grid, MemberDTO dto)
+        {
+            grid.DataSource = dto.Members;
+            ConfigureMemberGrid(grid, MemberGridType.Birthday);
+        }
+
+        public static void loadDeadMembers(DataGridView grid, MemberDTO dto)
+        {
+            grid.DataSource = dto.Members;
+            ConfigureMemberGrid(grid, MemberGridType.Dead);
+        }
+
+        public static void loadMembersContacts(DataGridView grid, MemberDTO dto)
+        {
+            grid.DataSource = dto.Members;
+            ConfigureMemberGrid(grid, MemberGridType.Contact);
+        }
+
+        public static void loadMembersShrinked(DataGridView grid, MemberDTO dto)
+        {
+            grid.DataSource = dto.Members;
+            ConfigureMemberGrid(grid, MemberGridType.Shrinked);
+        }
+
         public static void loadComments(DataGridView grid, CommentDTO dto)
         {
             grid.DataSource = dto.Comments;

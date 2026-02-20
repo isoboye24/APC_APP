@@ -14,6 +14,7 @@ namespace APC.HelperServices
         public enum MemberGridType
         {
             Basic,
+            Shrinked,
             Contact,
             Birthday,
             Dead,
@@ -31,6 +32,13 @@ namespace APC.HelperServices
                                     { "NationalityName", "Nationality" },
                                     { "PositionName", "Position" },
                                     { "GenderName", "Gender" },                                    
+                                });
+                    break;
+                case MemberGridType.Shrinked:
+                    GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "GenderName");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "GenderName", "Gender" },
                                 });
                     break;
 
