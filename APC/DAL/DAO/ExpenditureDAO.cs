@@ -140,6 +140,7 @@ namespace APC.DAL.DAO
                     dto.ExpenditureID = item.expenditureID;
                     dto.Summary = item.summary;
                     dto.AmountSpent = item.amountSpent;
+                    dto.AmountSpentWithCurrency = item.amountSpent + " €";
                     dto.Day = item.day;
                     dto.MonthID = item.monthID;
                     dto.Month = item.monthName;
@@ -178,6 +179,7 @@ namespace APC.DAL.DAO
                     dto.ExpenditureID = item.expenditureID;
                     dto.Summary = item.summary;
                     dto.AmountSpent = item.amountSpent;
+                    dto.AmountSpentWithCurrency = item.amountSpent + " €";
                     dto.Day = item.day;
                     dto.MonthID = item.monthID;
                     dto.Month = item.monthName;

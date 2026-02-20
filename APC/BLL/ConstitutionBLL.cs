@@ -48,6 +48,13 @@ namespace APC.BLL
             return dto;
         }
 
+        public ConstitutionDTO Select(bool isDeleted)
+        {
+            ConstitutionDTO dto = new ConstitutionDTO();
+            dto.Constitutions = dao.Select(isDeleted);
+            return dto;
+        }
+
         public List<CONSTITUTION> GetSingleConstitution(int ID)
         {
             return dao.GetSingleConstitution(ID);

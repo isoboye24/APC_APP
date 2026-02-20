@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using static APC.HelperServices.CommentHelperService;
 using static APC.HelperServices.DocumentHelperService;
 using static APC.HelperServices.EventsHelperService;
+using static APC.HelperServices.ExpenditureHelperService;
 using static APC.HelperServices.GeneralAttendanceHelperService;
 using static APC.HelperServices.MemberHelperService;
 using static APC.HelperServices.SingleColumnHelperService;
@@ -30,6 +31,7 @@ namespace APC.AllForms
         {
             InitializeComponent();
         }
+        MemberDTO memberDTO = new MemberDTO();
         MemberBLL memberBLL = new MemberBLL();     
         
         EventsBLL eventBLL = new EventsBLL();
@@ -54,19 +56,54 @@ namespace APC.AllForms
         NationalityDTO nationalityDTO = new NationalityDTO();
         NationalityDetailDTO nationalityDetail = new NationalityDetailDTO();
 
+        PositionDTO positionDTO = new PositionDTO();
+        PositionBLL positionBLL = new PositionBLL();
+        PositionDetailDTO positionDetail = new PositionDetailDTO();
+
         PermissionBLL permissionBLL = new PermissionBLL();
         PermissionDTO permissionDTO = new PermissionDTO();
         MemberDetailDTO permissionDetail = new MemberDetailDTO();
         MemberBLL permissionMemberBLL = new MemberBLL();
 
+        ProfessionBLL professionBLL = new ProfessionBLL();
+        ProfessionDTO professionDTO = new ProfessionDTO();
+        ProfessionDetailDTO professionDetail = new ProfessionDetailDTO();
+
         CommentDTO commentDTO = new CommentDTO();
+        CommentBLL commentBLL = new CommentBLL();
+
         DocumentDTO documentDTO = new DocumentDTO();
+        DocumentBLL documentBLL = new DocumentBLL();
+
         EventImageDTO eventImageDTO = new EventImageDTO();
+        EventImageBLL eventImageBLL = new EventImageBLL();
+
         EventsDTO eventsDTO = new EventsDTO();
+        EventsBLL eventsBLL = new EventsBLL();
+
         EventSalesDTO eventSalesDTO = new EventSalesDTO();
+        EventSalesBLL eventSalesBLL = new EventSalesBLL();
+
         EventExpenditureDTO eventExpenditureDTO = new EventExpenditureDTO();
+        EventExpenditureBLL eventExpenditureBLL = new EventExpenditureBLL();
+
         EventReceiptsDTO eventReceiptsDTO = new EventReceiptsDTO();
+        EventReceiptsBLL eventReceiptsBLL = new EventReceiptsBLL();
+
         GeneralAttendanceDTO generalAttendanceDTO = new GeneralAttendanceDTO();
+        GeneralAttendanceBLL generalAttendanceBLL = new GeneralAttendanceBLL();
+
+        ExpenditureDTO expenditureDTO = new ExpenditureDTO();
+        ExpenditureBLL expenditureBLL = new ExpenditureBLL();
+
+        FinancialReportDTO financialReportDTO = new FinancialReportDTO();
+        FinancialReportBLL financialReportBLL = new FinancialReportBLL();
+
+        ConstitutionDTO constitutionDTO = new ConstitutionDTO();
+        ConstitutionBLL constitutionBLL = new ConstitutionBLL();
+
+        FinedMemberDTO finedMemberDTO = new FinedMemberDTO();
+        FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
 
 
         private void resizeControls() 
@@ -105,25 +142,25 @@ namespace APC.AllForms
             positionDTO = positionBLL.Select();
             professionDTO = professionBLL.Select();
             permissionDTO = permissionBLL.Select();
-            memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
+            deletedDataDTO = deletedDataBLL.Select(true);
 
-            loadMembers(dataGridView1);
+            LoadDataGridView.loadMembers(dataGridView1, memberDTO);
 
-            loadPaymentStatuses(dataGridViewPaymentStatus);
+            LoadDataGridView.loadPaymentStatuses(dataGridViewPaymentStatus, paymentStatusDTO);
 
-            loadCountries(dataGridViewCountry);
-            
-            loadEmploymentStatuses(dataGridViewEmpStatus);
-            
-            loadMaritalStatuses(dataGridViewMarStatus);
+            LoadDataGridView.loadCountries(dataGridViewCountry, countryDTO);
 
-            loadNationalities(dataGridViewNationality);
+            LoadDataGridView.loadEmploymentStatuses(dataGridViewEmpStatus, empStatusDTO);
 
-            loadPositions(dataGridViewPositions);
+            LoadDataGridView.loadMaritalStatuses(dataGridViewMarStatus, marStatusDTO);
 
-            loadProfessions(dataGridViewProfessions);
+            LoadDataGridView.loadNationalities(dataGridViewNationality, nationalityDTO);
 
-            loadPermissions(dataGridViewPermissions);
+            LoadDataGridView.loadPositions(dataGridViewPositions, positionDTO);
+
+            LoadDataGridView.loadProfessions(dataGridViewProfessions, professionDTO);
+
+            LoadDataGridView.loadPermissions(dataGridViewPermissions, memberDTO);
             FillPermissionComboBoxes();
 
             #region
@@ -133,7 +170,7 @@ namespace APC.AllForms
             picProfilePic.Width = picProfilePic.Height = 40;
             picProfilePic.Paint += new PaintEventHandler(picProfilePic_Paint);
 
-            MemberDTO memberDTO = memberBLL.Select();
+            memberDTO = memberBLL.Select();
             MemberDetailDTO detail = memberDTO.Members.First(x => x.MemberID == LoginInfo.MemberID);
             string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
             picProfilePic.ImageLocation = imagePath;
@@ -180,106 +217,10 @@ namespace APC.AllForms
 
             Counts();
         }
-
-        private void loadPaymentStatuses(DataGridView grid)
-        {
-            grid.DataSource = paymentStatusDTO.PaymentStatuses;
-            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "PaymentStatusName", "Payment Status");
-        }
-
-        private void loadPositions(DataGridView grid)
-        {
-            grid.DataSource = positionDTO.Positions;
-            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "PositionName", "Positions");
-        }
-        private void loadEmploymentStatuses(DataGridView grid)
-        {
-            grid.DataSource = empStatusDTO.EmploymentStatuses;
-            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "EmploymentStatus", "Employment Statuses");
-        }
-        private void loadMaritalStatuses(DataGridView grid)
-        {
-            grid.DataSource = marStatusDTO.MaritalStatuses;
-            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "MaritalStatus", "Marital Statuses");
-        }
-        private void loadCountries(DataGridView grid)
-        {
-            grid.DataSource = countryDTO.Countries;
-            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "CountryName", "Countries");
-        }
-        private void loadNationalities(DataGridView grid)
-        {
-            grid.DataSource = nationalityDTO.Nationalities;
-            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "Nationality", "Nationalities");
-        }
-        
-        private void loadProfessions(DataGridView grid)
-        {
-            grid.DataSource = professionDTO.Professions;
-            ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "Profession", "Professions");
-        }
         private void FillPermissionComboBoxes()
-        {            
+        {
             cmbPermission.DataSource = permissionDTO.Permissions;
             GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
-        }
-
-        private void loadPermissions(DataGridView grid)
-        {
-            grid.DataSource = permissionDTO.Members;
-            ConfigureMemberGrid(grid, MemberGridType.Permission);
-        }
-        private void loadMembers(DataGridView grid)
-        {
-            grid.DataSource = memberDeletedDataDTO.Members;
-            ConfigureMemberGrid(grid, MemberGridType.Basic);
-        }
-
-        private void loadComments(DataGridView grid)
-        {
-            grid.DataSource = commentDTO.Comments;
-            ConfigureCommentGrid(grid, CommentGridType.Basic);
-        }
-
-        private void loadDocument(DataGridView grid)
-        {
-            grid.DataSource = documentDTO.Documents;
-            ConfigureDocumentGrid(grid, DocumentGridType.Basic);
-        }
-        private void loadEventImages(DataGridView grid)
-        {
-            grid.DataSource = eventImageDTO.EventImages;
-            ConfigureEventsGrid(grid, EventsGridType.Images);
-        }
-
-        private void loadEvents(DataGridView grid)
-        {
-            grid.DataSource = eventsDTO.Events;
-            ConfigureEventsGrid(grid, EventsGridType.Basic);
-        }
-
-        private void loadEventSales(DataGridView grid)
-        {
-            grid.DataSource = eventSalesDTO.EventSales;
-            ConfigureEventsGrid(grid, EventsGridType.Sales);
-        }
-
-        private void loadEventExpenditure(DataGridView grid)
-        {
-            grid.DataSource = eventExpenditureDTO.EventExpenditures;
-            ConfigureEventsGrid(grid, EventsGridType.Expenditure);
-        }
-
-        private void loadEventReceipt(DataGridView grid)
-        {
-            grid.DataSource = eventReceiptsDTO.EventReceipts;
-            ConfigureEventsGrid(grid, EventsGridType.Receipt);
-        }
-
-        private void loadGeneralAttendance(DataGridView grid)
-        {
-            grid.DataSource = generalAttendanceDTO.GeneralAttendance;
-            ConfigureGeneralAttendanceGrid(grid, GeneralAttendanceGridType.Basic);
         }
 
         private void picProfilePic_Paint(object sender, PaintEventArgs e)
@@ -589,8 +530,6 @@ namespace APC.AllForms
             }
         }
 
-
-
         private void btnSearchPermissions_Click(object sender, EventArgs e)
         {
             List<MemberDetailDTO> list = permissionDTO.Members;
@@ -624,10 +563,6 @@ namespace APC.AllForms
         {
             ClearFilters();
         }
-
-        PositionDTO positionDTO = new PositionDTO();
-        PositionBLL positionBLL = new PositionBLL();
-        PositionDetailDTO positionDetail = new PositionDetailDTO();
 
         private void btnAddPositions_Click(object sender, EventArgs e)
         {
@@ -689,10 +624,6 @@ namespace APC.AllForms
             }
         }
 
-        ProfessionBLL professionBLL = new ProfessionBLL();
-        ProfessionDTO professionDTO = new ProfessionDTO();
-        ProfessionDetailDTO professionDetail = new ProfessionDetailDTO();
-
         private void btnAddProfessions_Click(object sender, EventArgs e)
         {
             FormProfession open = new FormProfession();
@@ -753,9 +684,9 @@ namespace APC.AllForms
             }
         }
 
-        MemberBLL memberDeletedDataBLL = new MemberBLL();
-        DeletedDataDTO memberDeletedDataDTO = new DeletedDataDTO();
-        MemberDetailDTO memberDeletedDataDetail = new MemberDetailDTO();
+        DeletedDataDTO deletedDataDTO = new DeletedDataDTO();
+        DeletedDataBLL deletedDataBLL = new DeletedDataBLL();
+        MemberDetailDTO deletedDataDetail = new MemberDetailDTO();
         CountryBLL countryDeletedDataBLL = new CountryBLL();
         CountryDetailDTO countryDeletedDataDetail = new CountryDetailDTO();
         NationalityBLL nationalityDeletedDataBLL = new NationalityBLL();
@@ -784,144 +715,90 @@ namespace APC.AllForms
         FinancialReportDetailDTO financialRepDeletedDataDetail = new FinancialReportDetailDTO();
         ConstitutionBLL constitutionDeletedDataBLL = new ConstitutionBLL();
         ConstitutionDetailDTO constitutionDeletedDataDetail = new ConstitutionDetailDTO();
-        FinedMemberBLL finedMemberDeletedDataBLL = new FinedMemberBLL();
-        FinedMemberDetailDTO finedMemberDeletedDataDetail = new FinedMemberDetailDTO();
+        FinedMemberBLL fineddeletedDataBLL = new FinedMemberBLL();
+        FinedMemberDetailDTO fineddeletedDataDetail = new FinedMemberDetailDTO();
 
         private void cmbDeletedData_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbDeletedData.SelectedIndex == 0)
             {
-                loadMembers(dataGridView1);                
+                memberDTO = memberBLL.Select(true);
+                LoadDataGridView.loadMembers(dataGridView1, memberDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 1)
             {
-                loadCountries(dataGridView1);
+                countryDTO = countryBLL.Select(true);
+                LoadDataGridView.loadCountries(dataGridView1, countryDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 2)
             {
-                loadNationalities(dataGridView1);
+                nationalityDTO = nationalityBLL.Select(true);
+                LoadDataGridView.loadNationalities(dataGridView1, nationalityDTO);                
             }
             else if (cmbDeletedData.SelectedIndex == 3)
             {
-                loadProfessions(dataGridView1);
+                professionDTO = professionBLL.Select(true);
+                LoadDataGridView.loadProfessions(dataGridView1, professionDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 4)
             {
-                loadPositions(dataGridView1);
+                positionDTO = positionBLL.Select(true);
+                LoadDataGridView.loadPositions(dataGridView1, positionDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 5)
             {
-                loadEmploymentStatuses(dataGridView1);
+                empStatusDTO = empStatusBLL.Select(true);
+                LoadDataGridView.loadEmploymentStatuses(dataGridView1, empStatusDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 6)
             {
-                loadMaritalStatuses(dataGridView1);                
+                marStatusDTO = marStatusBLL.Select(true);
+                LoadDataGridView.loadMaritalStatuses(dataGridView1, marStatusDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 8)
             {
-                loadComments(dataGridView1);                
+                commentDTO = commentBLL.Select(true);
+                LoadDataGridView.loadComments(dataGridView1, commentDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 9)
             {
-                loadDocument(dataGridView1);                
+                documentDTO = documentBLL.Select(true);
+                LoadDataGridView.loadDocuments(dataGridView1, documentDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 10)
             {
-                loadEventImages(dataGridView1);                
+                eventImageDTO = eventImageBLL.Select(true);
+                LoadDataGridView.loadEventImages(dataGridView1, eventImageDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 11)
             {
-                loadEvents(dataGridView1);                
+                eventsDTO = eventsBLL.Select(true);
+                LoadDataGridView.loadEvents(dataGridView1, eventsDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 12)
             {
-                loadGeneralAttendance(dataGridView1);                
+                generalAttendanceDTO = generalAttendanceBLL.Select(true);
+                LoadDataGridView.loadGeneralAttendances(dataGridView1, generalAttendanceDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 13)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Expenditures;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Summary";
-                dataGridView1.Columns[2].HeaderText = "Amount Spent (€)";
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].HeaderText = "Month";
-                dataGridView1.Columns[6].HeaderText = "Year";
-                dataGridView1.Columns[7].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                expenditureDTO = expenditureBLL.Select(true);
+                LoadDataGridView.loadExpenditure(dataGridView1, expenditureDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 14)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.FinancialReports;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Year";
-                dataGridView1.Columns[2].HeaderText = "Total Amount Raised";
-                dataGridView1.Columns[3].HeaderText = "Total Amount Spent";
-                dataGridView1.Columns[4].HeaderText = "Total Balance";
-                dataGridView1.Columns[5].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                financialReportDTO = financialReportBLL.Select(true);
+                LoadDataGridView.loadFinancialReport(dataGridView1, financialReportDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 15)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.Constitutions;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Constitution";
-                dataGridView1.Columns[2].HeaderText = "Short Description";
-                dataGridView1.Columns[3].HeaderText = "Section";
-                dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].HeaderText = "Fine";
-                dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                constitutionDTO = constitutionBLL.Select(true);
+                LoadDataGridView.loadConstitution(dataGridView1, constitutionDTO);
             }
             else if (cmbDeletedData.SelectedIndex == 16)
             {
-                dataGridView1.DataSource = memberDeletedDataDTO.FinedMembers;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Name";
-                dataGridView1.Columns[2].HeaderText = "Surname";
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].HeaderText = "Violated";
-                dataGridView1.Columns[5].Visible = false;
-                dataGridView1.Columns[6].HeaderText = "Fine";
-                dataGridView1.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].HeaderText = "Paid";
-                dataGridView1.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].Visible = false;
-                dataGridView1.Columns[11].HeaderText = "Status";
-                dataGridView1.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[12].Visible = false;
-                dataGridView1.Columns[13].Visible = false;
-                dataGridView1.Columns[14].Visible = false;
-                dataGridView1.Columns[15].Visible = false;
-                dataGridView1.Columns[16].Visible = false;
-                dataGridView1.Columns[17].Visible = false;
-                dataGridView1.Columns[18].Visible = false;
-                dataGridView1.Columns[19].Visible = false;
-                dataGridView1.Columns[20].HeaderText = "Day";
-                dataGridView1.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[21].Visible = false;
-                dataGridView1.Columns[22].HeaderText = "Month";
-                dataGridView1.Columns[22].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[23].HeaderText = "Year";
-                dataGridView1.Columns[23].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[24].Visible = false;
-                dataGridView1.Columns[25].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-                }
+                finedMemberDTO = finedMemberBLL.Select(true);
+                LoadDataGridView.loadFinedMembers(dataGridView1, finedMemberDTO);
             }
             else
             {
@@ -933,127 +810,53 @@ namespace APC.AllForms
         {
             if (cmbDeletedData.SelectedIndex == 0 || cmbDeletedData.SelectedIndex == -1)
             {
-                memberDeletedDataDetail = new MemberDetailDTO();
-                memberDeletedDataDetail.MemberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                memberDeletedDataDetail.Username = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                memberDeletedDataDetail.Password = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                memberDeletedDataDetail.Surname = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                memberDeletedDataDetail.Name = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                memberDeletedDataDetail.Birthday = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
-                memberDeletedDataDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                memberDeletedDataDetail.EmailAddress = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-                memberDeletedDataDetail.HouseAddress = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
-                memberDeletedDataDetail.MembershipDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
-                memberDeletedDataDetail.CountryID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[10].Value);
-                memberDeletedDataDetail.CountryName = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-                memberDeletedDataDetail.NationalityID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[12].Value);
-                memberDeletedDataDetail.NationalityName = dataGridView1.Rows[e.RowIndex].Cells[13].Value.ToString();
-                memberDeletedDataDetail.ProfessionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[14].Value);
-                memberDeletedDataDetail.ProfessionName = dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString();
-                memberDeletedDataDetail.PositionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[16].Value);
-                memberDeletedDataDetail.PositionName = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
-                memberDeletedDataDetail.GenderID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[18].Value);
-                memberDeletedDataDetail.GenderName = dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString();
-                memberDeletedDataDetail.EmploymentStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[20].Value);
-                memberDeletedDataDetail.EmploymentStatusName = dataGridView1.Rows[e.RowIndex].Cells[21].Value.ToString();
-                memberDeletedDataDetail.MaritalStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[22].Value);
-                memberDeletedDataDetail.MaritalStatusName = dataGridView1.Rows[e.RowIndex].Cells[23].Value.ToString();
-                memberDeletedDataDetail.PermissionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[24].Value);
-                memberDeletedDataDetail.PermissionName = dataGridView1.Rows[e.RowIndex].Cells[25].Value.ToString();
-                memberDeletedDataDetail.PhoneNumber = dataGridView1.Rows[e.RowIndex].Cells[26].Value.ToString();
-                memberDeletedDataDetail.PhoneNumber2 = dataGridView1.Rows[e.RowIndex].Cells[27].Value.ToString();
-                memberDeletedDataDetail.PhoneNumber3 = dataGridView1.Rows[e.RowIndex].Cells[28].Value.ToString();
-                memberDeletedDataDetail.isCountryDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[29].Value);
-                memberDeletedDataDetail.isNationalityDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[30].Value);
-                memberDeletedDataDetail.isProfessionDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[31].Value);
-                memberDeletedDataDetail.isPositionDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[32].Value);
-                memberDeletedDataDetail.isEmpStatusDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[33].Value);
-                memberDeletedDataDetail.isMarStatusDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[34].Value);
-                memberDeletedDataDetail.MembershipStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[35].Value);
-                memberDeletedDataDetail.MembershipStatus = dataGridView1.Rows[e.RowIndex].Cells[36].Value.ToString();
-                memberDeletedDataDetail.DeadDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[37].Value);
-                memberDeletedDataDetail.DeadAge = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[38].Value);
-                memberDeletedDataDetail.LGA = dataGridView1.Rows[e.RowIndex].Cells[39].Value.ToString();
-                memberDeletedDataDetail.NameOfNextOfKin = dataGridView1.Rows[e.RowIndex].Cells[40].Value.ToString();
-                memberDeletedDataDetail.RelationshipToKinID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[41].Value);
-                memberDeletedDataDetail.RelationshipToKin = dataGridView1.Rows[e.RowIndex].Cells[42].Value.ToString();
-                memberDeletedDataDetail.BirthdayDate = dataGridView1.Rows[e.RowIndex].Cells[43].Value.ToString();
+                if (e.RowIndex < 0) return;
+                deletedDataDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 1)
             {
-                countryDeletedDataDetail = new CountryDetailDTO();
-                countryDeletedDataDetail.CountryID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                countryDeletedDataDetail.CountryName = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (e.RowIndex < 0) return;
+                countryDeletedDataDetail = GeneralHelper.MapFromGrid<CountryDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 2)
             {
-                nationalityDeletedDataDetail = new NationalityDetailDTO();
-                nationalityDeletedDataDetail.NationalityID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                nationalityDeletedDataDetail.Nationality = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (e.RowIndex < 0) return;
+                nationalityDeletedDataDetail = GeneralHelper.MapFromGrid<NationalityDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 3)
             {
-                professionDeletedDataDetail = new ProfessionDetailDTO();
-                professionDeletedDataDetail.ProfessionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                professionDeletedDataDetail.Profession = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (e.RowIndex < 0) return;
+                professionDeletedDataDetail = GeneralHelper.MapFromGrid<ProfessionDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 4)
             {
-                positionDeletedDataDetail = new PositionDetailDTO();
-                positionDeletedDataDetail.PositionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                positionDeletedDataDetail.PositionName = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (e.RowIndex < 0) return;
+                positionDeletedDataDetail = GeneralHelper.MapFromGrid<PositionDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 5)
             {
-                empStatusDeletedDataDetail = new EmploymentStatusDetailDTO();
-                empStatusDeletedDataDetail.EmploymentStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                empStatusDeletedDataDetail.EmploymentStatus = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (e.RowIndex < 0) return;
+                empStatusDeletedDataDetail = GeneralHelper.MapFromGrid<EmploymentStatusDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 6)
             {
-                marStatusDeletedDataDetail = new MaritalStatusDetailDTO();
-                marStatusDeletedDataDetail.MaritalStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                marStatusDeletedDataDetail.MaritalStatus = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (e.RowIndex < 0) return;
+                marStatusDeletedDataDetail = GeneralHelper.MapFromGrid<MaritalStatusDetailDTO>(dataGridView1, e.RowIndex);
             }            
             else if (cmbDeletedData.SelectedIndex == 8)
             {
-                commentDeletedDataDetail = new CommentDetailDTO();
-                commentDeletedDataDetail.CommentID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                commentDeletedDataDetail.CommentName = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                commentDeletedDataDetail.MemberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-                commentDeletedDataDetail.Surname = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                commentDeletedDataDetail.Name = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                commentDeletedDataDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                commentDeletedDataDetail.GenderID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
-                commentDeletedDataDetail.GenderName = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-                commentDeletedDataDetail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
-                commentDeletedDataDetail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
-                commentDeletedDataDetail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
-                commentDeletedDataDetail.Year = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-                commentDeletedDataDetail.isMemberDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[12].Value);
+                if (e.RowIndex < 0) return;
+                commentDeletedDataDetail = GeneralHelper.MapFromGrid<CommentDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 9)
             {
-                documentDeletedDataDetail = new DocumentDetailDTO();
-                documentDeletedDataDetail.DocumentID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                documentDeletedDataDetail.DocumentName = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                documentDeletedDataDetail.DocumentType = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                documentDeletedDataDetail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-                documentDeletedDataDetail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-                documentDeletedDataDetail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                documentDeletedDataDetail.Year = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                documentDeletedDataDetail.Date = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-                documentDeletedDataDetail.DocumentPath = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
+                if (e.RowIndex < 0) return;
+                documentDeletedDataDetail = GeneralHelper.MapFromGrid<DocumentDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 10)
             {
-                eventImageDeletedDataDetail = new EventImageDetailDTO();
-                eventImageDeletedDataDetail.EventImageID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                eventImageDeletedDataDetail.EventID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-                eventImageDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                eventImageDeletedDataDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                eventImageDeletedDataDetail.Counter = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-                eventImageDeletedDataDetail.ImageCaption = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                if (e.RowIndex < 0) return;
+                eventImageDeletedDataDetail = GeneralHelper.MapFromGrid<EventImageDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 11)
             {
@@ -1062,81 +865,28 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 12)
             {
-                genAttendDeletedDataDetail = new GeneralAttendanceDetailDTO();
-                genAttendDeletedDataDetail.GeneralAttendanceID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                genAttendDeletedDataDetail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-                genAttendDeletedDataDetail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-                genAttendDeletedDataDetail.Month = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                genAttendDeletedDataDetail.Year = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                genAttendDeletedDataDetail.TotalMembersPresent = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
-                genAttendDeletedDataDetail.TotalMembersAbsent = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
-                genAttendDeletedDataDetail.TotalDuesPaid = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
-                genAttendDeletedDataDetail.TotalDuesExpected = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
-                genAttendDeletedDataDetail.TotalDuesBalance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
-                genAttendDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
-                genAttendDeletedDataDetail.AttendanceDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
+                if (e.RowIndex < 0) return;
+                genAttendDeletedDataDetail = GeneralHelper.MapFromGrid<GeneralAttendanceDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 13)
             {
-                expenditureDeletedDataDetail = new ExpenditureDetailDTO();
-                expenditureDeletedDataDetail.ExpenditureID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                expenditureDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                expenditureDeletedDataDetail.AmountSpent = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-                expenditureDeletedDataDetail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-                expenditureDeletedDataDetail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-                expenditureDeletedDataDetail.Month = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                expenditureDeletedDataDetail.Year = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                expenditureDeletedDataDetail.ExpenditureDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
+                if (e.RowIndex < 0) return;
+                expenditureDeletedDataDetail = GeneralHelper.MapFromGrid<ExpenditureDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 14)
             {
-                financialRepDeletedDataDetail = new FinancialReportDetailDTO();
-                financialRepDeletedDataDetail.FinancialReportID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                financialRepDeletedDataDetail.Year = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                financialRepDeletedDataDetail.TotalAmountRaised = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-                financialRepDeletedDataDetail.TotalAmountSpent = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-                financialRepDeletedDataDetail.Balance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-                financialRepDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                if (e.RowIndex < 0) return;
+                financialRepDeletedDataDetail = GeneralHelper.MapFromGrid<FinancialReportDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 15)
             {
-                constitutionDeletedDataDetail = new ConstitutionDetailDTO();
-                constitutionDeletedDataDetail.ConstitutionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                constitutionDeletedDataDetail.ConstitutionText = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                constitutionDeletedDataDetail.ShortDescription = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                constitutionDeletedDataDetail.Section = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                constitutionDeletedDataDetail.Fine = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-                constitutionDeletedDataDetail.FineWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                if (e.RowIndex < 0) return;
+                constitutionDeletedDataDetail = GeneralHelper.MapFromGrid<ConstitutionDetailDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 16)
             {
-                finedMemberDeletedDataDetail = new FinedMemberDetailDTO();
-                finedMemberDeletedDataDetail.FinedMemberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                finedMemberDeletedDataDetail.Name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                finedMemberDeletedDataDetail.Surname = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                finedMemberDeletedDataDetail.ConstitutionSection = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                finedMemberDeletedDataDetail.ConstitutionShortDescription = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                finedMemberDeletedDataDetail.ExpectedAmount = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
-                finedMemberDeletedDataDetail.ExpectedAmountWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                finedMemberDeletedDataDetail.AmountPaid = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
-                finedMemberDeletedDataDetail.AmountPaidWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
-                finedMemberDeletedDataDetail.Balance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
-                finedMemberDeletedDataDetail.BalanceWithCurrency = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
-                finedMemberDeletedDataDetail.FineStatus = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-                finedMemberDeletedDataDetail.Gender = dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString();
-                finedMemberDeletedDataDetail.Summary = dataGridView1.Rows[e.RowIndex].Cells[13].Value.ToString();
-                finedMemberDeletedDataDetail.ConstitutionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[14].Value);
-                finedMemberDeletedDataDetail.Constitution = dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString();
-                finedMemberDeletedDataDetail.MemberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[16].Value);
-                finedMemberDeletedDataDetail.PositionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[17].Value);
-                finedMemberDeletedDataDetail.Position = dataGridView1.Rows[e.RowIndex].Cells[18].Value.ToString();
-                finedMemberDeletedDataDetail.GenderID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[19].Value);
-                finedMemberDeletedDataDetail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[20].Value);
-                finedMemberDeletedDataDetail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[21].Value);
-                finedMemberDeletedDataDetail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[22].Value.ToString();
-                finedMemberDeletedDataDetail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[23].Value);
-                finedMemberDeletedDataDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[24].Value.ToString();
-                finedMemberDeletedDataDetail.FineDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[25].Value);
+                if (e.RowIndex < 0) return;
+                fineddeletedDataDetail = GeneralHelper.MapFromGrid<FinedMemberDetailDTO>(dataGridView1, e.RowIndex);
             }
         }
 
@@ -1144,43 +894,43 @@ namespace APC.AllForms
         {
             if (cmbDeletedData.SelectedIndex == 0 || cmbDeletedData.SelectedIndex == -1)
             {
-                if (memberDeletedDataDetail.MemberID == 0)
+                if (deletedDataDetail.MemberID == 0)
                 {
                     MessageBox.Show("Please choose member from the table");
                 }
                 else
                 {
-                    if (memberDeletedDataDetail.isCountryDeleted)
+                    if (deletedDataDetail.isCountryDeleted)
                     {
                         MessageBox.Show("Country was deleted. Get back the country first.");
                     }
-                    else if (memberDeletedDataDetail.isNationalityDeleted)
+                    else if (deletedDataDetail.isNationalityDeleted)
                     {
                         MessageBox.Show("Nationality was deleted. Get back the nationality first.");
                     }
-                    else if (memberDeletedDataDetail.isProfessionDeleted)
+                    else if (deletedDataDetail.isProfessionDeleted)
                     {
                         MessageBox.Show("Profession was deleted. Get back the profession first.");
                     }
-                    else if (memberDeletedDataDetail.isPositionDeleted)
+                    else if (deletedDataDetail.isPositionDeleted)
                     {
                         MessageBox.Show("Position was deleted. Get back the position first.");
                     }
-                    else if (memberDeletedDataDetail.isEmpStatusDeleted)
+                    else if (deletedDataDetail.isEmpStatusDeleted)
                     {
                         MessageBox.Show("Employment status was deleted. Get back the employment status first.");
                     }
-                    else if (memberDeletedDataDetail.isMarStatusDeleted)
+                    else if (deletedDataDetail.isMarStatusDeleted)
                     {
                         MessageBox.Show("marital status was deleted. Get back the marital status first.");
                     }
                     else
                     {
-                        if (memberDeletedDataBLL.GetBack(memberDeletedDataDetail))
+                        if (memberBLL.GetBack(deletedDataDetail))
                         {
                             MessageBox.Show("Member was retrieved");
-                            memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                            dataGridView1.DataSource = memberDeletedDataDTO.Members;
+                            deletedDataDTO = deletedDataBLL.Select(true);
+                            dataGridView1.DataSource = deletedDataDTO.Members;
                         }
                     }
                 }
@@ -1196,8 +946,8 @@ namespace APC.AllForms
                     if (countryDeletedDataBLL.GetBack(countryDeletedDataDetail))
                     {
                         MessageBox.Show("Country was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Countries;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.Countries;
                     }
                 }
             }
@@ -1212,8 +962,8 @@ namespace APC.AllForms
                     if (nationalityDeletedDataBLL.GetBack(nationalityDeletedDataDetail))
                     {
                         MessageBox.Show("Nationality was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Nationalities;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.Nationalities;
                     }
                 }
             }
@@ -1228,8 +978,8 @@ namespace APC.AllForms
                     if (professionDeletedDataBLL.GetBack(professionDeletedDataDetail))
                     {
                         MessageBox.Show("Profession was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Professions;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.Professions;
                     }
                 }
             }
@@ -1244,8 +994,8 @@ namespace APC.AllForms
                     if (positionDeletedDataBLL.GetBack(positionDeletedDataDetail))
                     {
                         MessageBox.Show("Position was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Positions;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.Positions;
                     }
                 }
             }
@@ -1260,8 +1010,8 @@ namespace APC.AllForms
                     if (empStatusDeletedDataBLL.GetBack(empStatusDeletedDataDetail))
                     {
                         MessageBox.Show("Employment status was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.EmploymentStatuses;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.EmploymentStatuses;
                     }
                 }
             }
@@ -1276,8 +1026,8 @@ namespace APC.AllForms
                     if (marStatusDeletedDataBLL.GetBack(marStatusDeletedDataDetail))
                     {
                         MessageBox.Show("Marital status was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.MaritalStatuses;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.MaritalStatuses;
                     }
                 }
             }
@@ -1296,8 +1046,8 @@ namespace APC.AllForms
                     else if (commentDeletedDataBLL.GetBack(commentDeletedDataDetail))
                     {
                         MessageBox.Show("Comment was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Comments;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.Comments;
                     }
                 }
             }
@@ -1312,8 +1062,8 @@ namespace APC.AllForms
                     if (documentDeletedDataBLL.GetBack(documentDeletedDataDetail))
                     {
                         MessageBox.Show("Document was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Documents;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.Documents;
                     }
                 }
             }
@@ -1328,8 +1078,8 @@ namespace APC.AllForms
                     if (eventImageDeletedDataBLL.GetBack(eventImageDeletedDataDetail))
                     {
                         MessageBox.Show("Picture was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.EventImages;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.EventImages;
                     }
                 }
             }
@@ -1344,8 +1094,8 @@ namespace APC.AllForms
                     if (eventDeletedDataBLL.GetBack(eventDeletedDataDetail))
                     {
                         MessageBox.Show("Event was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Events;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.Events;
                     }
                 }
             }
@@ -1360,8 +1110,8 @@ namespace APC.AllForms
                     if (genAttendDeletedDataBLL.GetBack(genAttendDeletedDataDetail))
                     {
                         MessageBox.Show("Attendance was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.GeneralAttendance;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.GeneralAttendance;
                     }
                 }
             }
@@ -1376,8 +1126,8 @@ namespace APC.AllForms
                     if (expendutureDeletedDataBLL.GetBack(expenditureDeletedDataDetail))
                     {
                         MessageBox.Show("Expenditure was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Expenditures;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.Expenditures;
                     }
                 }
             }
@@ -1392,8 +1142,8 @@ namespace APC.AllForms
                     if (financialRepDeletedDataBLL.GetBack(financialRepDeletedDataDetail))
                     {
                         MessageBox.Show("Financial report was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.FinancialReports;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.FinancialReports;
                     }
                 }
             }
@@ -1408,24 +1158,24 @@ namespace APC.AllForms
                     if (constitutionDeletedDataBLL.GetBack(constitutionDeletedDataDetail))
                     {
                         MessageBox.Show("Constitution was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.Constitutions;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.Constitutions;
                     }
                 }
             }
             else if (cmbDeletedData.SelectedIndex == 16)
             {
-                if (finedMemberDeletedDataDetail.FinedMemberID == 0)
+                if (fineddeletedDataDetail.FinedMemberID == 0)
                 {
                     MessageBox.Show("Please choose a fined member from the table");
                 }
                 else
                 {
-                    if (finedMemberDeletedDataBLL.GetBack(finedMemberDeletedDataDetail))
+                    if (fineddeletedDataBLL.GetBack(fineddeletedDataDetail))
                     {
                         MessageBox.Show("Fined member was retrieved");
-                        memberDeletedDataDTO = memberDeletedDataBLL.Select(true);
-                        dataGridView1.DataSource = memberDeletedDataDTO.FinedMembers;
+                        deletedDataDTO = deletedDataBLL.Select(true);
+                        dataGridView1.DataSource = deletedDataDTO.FinedMembers;
                     }
                 }
             }

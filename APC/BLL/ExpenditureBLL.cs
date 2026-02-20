@@ -50,6 +50,13 @@ namespace APC.BLL
             dto.Years = dao.SelectOnlyExpYears();
             return dto;
         }
+        
+        public ExpenditureDTO Select(bool isDeleted)
+        {
+            ExpenditureDTO dto = new ExpenditureDTO();
+            dto.Expenditures = dao.Select(isDeleted);
+            return dto;
+        }
 
         public bool Update(ExpenditureDetailDTO entity)
         {

@@ -38,6 +38,13 @@ namespace APC.BLL
             return dto;
         }
 
+        public CountryDTO Select(bool isDeleted)
+        {
+            CountryDTO dto = new CountryDTO();
+            dto.Countries = dao.Select(isDeleted);
+            return dto;
+        }
+
         public bool Update(CountryDetailDTO entity)
         {
             COUNTRY country = new COUNTRY();

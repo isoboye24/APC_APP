@@ -284,6 +284,7 @@
       <DependentUpon>FormViewSpecialContributor.cs</DependentUpon>
     </Compile>
     <Compile Include="BLL\ConstitutionBLL.cs" />
+    <Compile Include="BLL\DeletedDataBLL.cs" />
     <Compile Include="BLL\DocumentBLL.cs" />
     <Compile Include="BLL\EventExpenditureBLL.cs" />
     <Compile Include="BLL\EventReceiptsBLL.cs" />
@@ -635,9 +636,14 @@
     <Compile Include="FormProperties.cs" />
     <Compile Include="HelperServices\CommentHelperService.cs" />
     <Compile Include="HelperServices\CommittmentHelperService.cs" />
+    <Compile Include="HelperServices\ConstitutionHelperService.cs" />
     <Compile Include="HelperServices\DocumentHelperService.cs" />
     <Compile Include="HelperServices\EventsHelperService.cs" />
+    <Compile Include="HelperServices\ExpenditureHelperService.cs" />
+    <Compile Include="HelperServices\FinancialReportHelperService.cs" />
+    <Compile Include="HelperServices\FinedMemberHelperService.cs" />
     <Compile Include="HelperServices\GeneralAttendanceHelperService.cs" />
+    <Compile Include="HelperServices\LoadDataGridView.cs" />
     <Compile Include="HelperServices\MemberHelperService.cs" />
     <Compile Include="HelperServices\SingleColumnHelperService.cs" />
     <Compile Include="LoginInfo.cs" />

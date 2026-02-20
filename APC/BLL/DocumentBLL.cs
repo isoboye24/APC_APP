@@ -44,6 +44,13 @@ namespace APC.BLL
             dto.Months = monthDAO.Select();
             return dto;
         }
+
+        public DocumentDTO Select(bool isDeleted)
+        {
+            DocumentDTO dto = new DocumentDTO();
+            dto.Documents = dao.Select(isDeleted);
+            return dto;
+        }
         public int SelectDocCount()
         {
             return dao.SelectDocCount();

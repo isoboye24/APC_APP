@@ -75,6 +75,13 @@ namespace APC.BLL
             dto.FineMembers = dao.Select();
             return dto;
         }
+        
+        public FinedMemberDTO Select(bool isDeleted)
+        {
+            FinedMemberDTO dto = new FinedMemberDTO();
+            dto.FineMembers = dao.Select(isDeleted);
+            return dto;
+        }
 
         public bool Update(FinedMemberDetailDTO entity)
         {

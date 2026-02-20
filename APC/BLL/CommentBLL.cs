@@ -47,6 +47,13 @@ namespace APC.BLL
             dto.Comments = commentDAO.Select();
             return dto;
         }
+        
+        public CommentDTO Select(bool isDeleted)
+        {
+            CommentDTO dto = new CommentDTO();
+            dto.Comments = commentDAO.Select(isDeleted);
+            return dto;
+        }
         public CommentDTO SelectMembersCommentList(int ID)
         {
             CommentDTO dto = new CommentDTO();            

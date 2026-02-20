@@ -45,6 +45,13 @@ namespace APC.BLL
             dto.EventImages = dao.Select(eventID);
             return dto;
         }
+        
+        public EventImageDTO Select(bool isDeleted)
+        {
+            EventImageDTO dto = new EventImageDTO();
+            dto.EventImages = dao.Select(isDeleted);
+            return dto;
+        }
 
         public bool Update(EventImageDetailDTO entity)
         {

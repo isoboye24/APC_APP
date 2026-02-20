@@ -11,8 +11,10 @@ namespace APC.DAL.DTO
         public int FinancialReportID { get; set; }
         public string Year { get; set; }
         public decimal TotalAmountRaised { get; set; }
+        public string TotalAmountRaisedWithCurrency { get; set; }
         public decimal TotalAmountSpent { get; set; }
-        public decimal Balance { get; set; }
+        public string TotalAmountSpentWithCurrency { get; set; }
+        public string Balance { get; set; }
         public string Summary { get; set; }
     }
 }

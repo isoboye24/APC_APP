@@ -25,17 +25,7 @@ namespace APC.BLL
         RelationshipToNextOfKinDAO kinsDAO = new RelationshipToNextOfKinDAO();
         FinedMemberDAO finedMemberDAO = new FinedMemberDAO();
         MonthDAO monthDAO = new MonthDAO();
-
-        // These classes are here for the sake of deletedData form
-        GeneralAttendanceDAO genAttendDAO = new GeneralAttendanceDAO();
-        PersonalAttendanceDAO perAttendDAO = new PersonalAttendanceDAO();
-        FinancialReportDAO finRepDAO = new FinancialReportDAO();
-        ExpenditureDAO expenditureDAO = new ExpenditureDAO();
-        CommentDAO commenntDAO = new CommentDAO();
-        DocumentDAO documentDAO = new DocumentDAO();
-        EventsDAO eventDAO = new EventsDAO();
-        EventImageDAO eventImageDAO = new EventImageDAO();
-        ConstitutionDAO constitutionDAO = new ConstitutionDAO();
+       
 
         public bool Delete(MemberDetailDTO entity)
         {
@@ -102,6 +92,13 @@ namespace APC.BLL
             dto.MembershipStatuses = memStatus.Select();
             dto.Absentees = memberDAO.Select3MonthsAbsentes();
             dto.RelationshipsToNextOfKin = kinsDAO.Select();
+            return dto;
+        }
+
+        public MemberDTO Select(bool isDeleted)
+        {
+            MemberDTO dto = new MemberDTO();
+            dto.Members = memberDAO.Select(isDeleted);            
             return dto;
         }
 
@@ -172,27 +169,7 @@ namespace APC.BLL
         {
             return memberDAO.CheckMember(password, username);
         }
-        public DeletedDataDTO Select(bool isDeleted)
-        {
-            DeletedDataDTO dto = new DeletedDataDTO();
-            dto.Members = memberDAO.Select(isDeleted);
-            dto.Professions = professionDAO.Select(isDeleted);
-            dto.Countries = countryDAO.Select(isDeleted);
-            dto.Nationalities = nationalityDAO.Select(isDeleted);
-            dto.EmploymentStatuses = empStatusDAO.Select(isDeleted);
-            dto.Positions = positionDAO.Select(isDeleted);
-            dto.MaritalStatuses = marStatusDAO.Select(isDeleted);
-            dto.Comments = commenntDAO.Select(isDeleted);
-            dto.Documents = documentDAO.Select(isDeleted);
-            dto.EventImages = eventImageDAO.Select(isDeleted);
-            dto.Events = eventDAO.Select(isDeleted);
-            dto.Expenditures = expenditureDAO.Select(isDeleted);
-            dto.FinancialReports = finRepDAO.Select(isDeleted);
-            dto.GeneralAttendance = genAttendDAO.Select(isDeleted);
-            dto.Constitutions = constitutionDAO.Select(isDeleted);
-            dto.FinedMembers = finedMemberDAO.Select(isDeleted);
-            return dto;
-        }
+        
         public int SelectAllMembersCount()
         {
             return memberDAO.SelectAllMembersCount();

@@ -63,6 +63,13 @@ namespace APC.BLL
             dto.Years = dao.SelectOnlyMeetingYears();
             return dto;
         }
+        
+        public GeneralAttendanceDTO Select(bool isDeleted)
+        {
+            GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
+            dto.GeneralAttendance = dao.Select(isDeleted);
+            return dto;
+        }
 
         public decimal SelectMonthlyDues(int month)
         {

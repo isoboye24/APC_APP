@@ -38,6 +38,13 @@ namespace APC.BLL
             return employmentStatuses;
         }
 
+        public EmploymentStatusDTO Select(bool isDeleted)
+        {
+            EmploymentStatusDTO employmentStatuses = new EmploymentStatusDTO();
+            employmentStatuses.EmploymentStatuses = dao.Select(isDeleted);
+            return employmentStatuses;
+        }
+
         public bool Update(EmploymentStatusDetailDTO entity)
         {
             EMPLOYMENT_STATUS employmentStatus = new EMPLOYMENT_STATUS();

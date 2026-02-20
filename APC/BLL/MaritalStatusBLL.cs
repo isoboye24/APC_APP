@@ -37,6 +37,13 @@ namespace APC.BLL
             dto.MaritalStatuses = dao.Select();
             return dto;
         }
+        
+        public MaritalStatusDTO Select(bool isDeleted)
+        {
+            MaritalStatusDTO dto = new MaritalStatusDTO();
+            dto.MaritalStatuses = dao.Select(isDeleted);
+            return dto;
+        }
 
         public bool Update(MaritalStatusDetailDTO entity)
         {

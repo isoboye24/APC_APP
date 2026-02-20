@@ -39,6 +39,13 @@ namespace APC.BLL
             return dto;
         }
 
+        public NationalityDTO Select(bool isDeleted)
+        {
+            NationalityDTO dto = new NationalityDTO();
+            dto.Nationalities = dao.Select(isDeleted);
+            return dto;
+        }
+
         public bool Update(NationalityDetailDTO entity)
         {
             NATIONALITY nationality = new NATIONALITY();

@@ -39,6 +39,13 @@ namespace APC.BLL
             return profession;
         }
 
+        public ProfessionDTO Select(bool isDeleted)
+        {
+            ProfessionDTO profession = new ProfessionDTO();
+            profession.Professions = dao.Select(isDeleted);
+            return profession;
+        }
+
         public int SelectUniqueProfessionCount()
         {
             return memberDAO.SelectUniqueProfessionCount();

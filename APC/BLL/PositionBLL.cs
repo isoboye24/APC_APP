@@ -38,6 +38,13 @@ namespace APC.BLL
             dto.Positions = dao.Select();
             return dto;
         }
+        
+        public PositionDTO Select(bool isDeleted)
+        {
+            PositionDTO dto = new PositionDTO();
+            dto.Positions = dao.Select(isDeleted);
+            return dto;
+        }
         public int SelectUniquePositionCount()
         {
             return memberDAO.SelectUniquePositionCount();

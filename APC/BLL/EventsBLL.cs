@@ -41,6 +41,13 @@ namespace APC.BLL
             dto.Events = dao.Select();
             return dto;
         }
+        
+        public EventsDTO Select(bool isDeleted)
+        {
+            EventsDTO dto = new EventsDTO();
+            dto.Events = dao.Select(isDeleted);
+            return dto;
+        }
 
         public string SelectRecentEvent()
         {            

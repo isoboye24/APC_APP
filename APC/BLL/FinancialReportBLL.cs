@@ -42,6 +42,13 @@ namespace APC.BLL
             dto.FinancialReports = dao.Select();
             return dto;
         }
+        
+        public FinancialReportDTO Select(bool isDeleted)
+        {
+            FinancialReportDTO dto = new FinancialReportDTO();
+            dto.FinancialReports = dao.Select(isDeleted);
+            return dto;
+        }
         public bool CheckTotalRaisedAmountAndTotalSpentAmount(int year)
         {
             return dao.CheckTotalRaisedAmountAndTotalSpentAmount(year);
