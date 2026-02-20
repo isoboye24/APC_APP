@@ -20,12 +20,12 @@ namespace APC.HelperServices
             {
                 case GeneralAttendanceGridType.Basic:
                     GeneralHelper.SetVisibleColumns(grid, "Month", "Year", "TotalMembersPresent", "TotalMembersAbsent",
-                        "TotalDuesPaid");
+                        "TotalDuesPaidWithCurrency");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "TotalMembersPresent", "Present" },
                                     { "TotalMembersAbsent", "Absent" },
-                                    { "TotalDuesPaid", "Dues Paid" },
+                                    { "TotalDuesPaidWithCurrency", "Dues Paid" },
                                 });
                     break;
             }

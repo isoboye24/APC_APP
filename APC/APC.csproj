@@ -284,7 +284,6 @@
       <DependentUpon>FormViewSpecialContributor.cs</DependentUpon>
     </Compile>
     <Compile Include="BLL\ConstitutionBLL.cs" />
-    <Compile Include="BLL\DeletedDataBLL.cs" />
     <Compile Include="BLL\DocumentBLL.cs" />
     <Compile Include="BLL\EventExpenditureBLL.cs" />
     <Compile Include="BLL\EventReceiptsBLL.cs" />
@@ -352,7 +351,6 @@
     <Compile Include="DAL\DTO\ConstitutionDTO.cs" />
     <Compile Include="DAL\DTO\ConstitutionSectionDetailDTO.cs" />
     <Compile Include="DAL\DTO\ConstitutionSectionDTO.cs" />
-    <Compile Include="DAL\DTO\DeletedDataDTO.cs" />
     <Compile Include="DAL\DTO\DocumentDetailDTO.cs" />
     <Compile Include="AllForms\FormDocumentList.cs">
       <SubType>Form</SubType>
@@ -646,6 +644,7 @@
     <Compile Include="HelperServices\LoadDataGridView.cs" />
     <Compile Include="HelperServices\MemberHelperService.cs" />
     <Compile Include="HelperServices\SingleColumnHelperService.cs" />
+    <Compile Include="HelperServices\SpecialContributionHelperService.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="ReadFiles.cs" />
     <Compile Include="FillComboBox.cs" />

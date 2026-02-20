@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.meetingsPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -61,8 +61,9 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtYear = new System.Windows.Forms.TextBox();
+            this.cmbYearMeeting = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.txtYear = new System.Windows.Forms.TextBox();
             this.specialContributionsPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
@@ -170,7 +171,6 @@
             this.txtSection = new System.Windows.Forms.TextBox();
             this.txtFine = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.cmbYearMeeting = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.meetingsPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -644,16 +644,16 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Year";
             // 
-            // txtYear
+            // cmbYearMeeting
             // 
-            this.txtYear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYear.Location = new System.Drawing.Point(1238, 17);
-            this.txtYear.Margin = new System.Windows.Forms.Padding(4);
-            this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(18, 34);
-            this.txtYear.TabIndex = 1;
-            this.txtYear.TextChanged += new System.EventHandler(this.txtYear_TextChanged);
-            this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYear_KeyPress);
+            this.cmbYearMeeting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbYearMeeting.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbYearMeeting.FormattingEnabled = true;
+            this.cmbYearMeeting.Location = new System.Drawing.Point(808, 51);
+            this.cmbYearMeeting.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbYearMeeting.Name = "cmbYearMeeting";
+            this.cmbYearMeeting.Size = new System.Drawing.Size(244, 36);
+            this.cmbYearMeeting.TabIndex = 5;
             // 
             // dataGridView1
             // 
@@ -664,13 +664,24 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.RowTemplate.Height = 40;
             this.dataGridView1.Size = new System.Drawing.Size(1201, 454);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
+            // 
+            // txtYear
+            // 
+            this.txtYear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtYear.Location = new System.Drawing.Point(1238, 17);
+            this.txtYear.Margin = new System.Windows.Forms.Padding(4);
+            this.txtYear.Name = "txtYear";
+            this.txtYear.Size = new System.Drawing.Size(18, 34);
+            this.txtYear.TabIndex = 1;
+            this.txtYear.TextChanged += new System.EventHandler(this.txtYear_TextChanged);
+            this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYear_KeyPress);
             // 
             // specialContributionsPage
             // 
@@ -1103,8 +1114,8 @@
             this.dataGridViewSpecialContributions.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewSpecialContributions.Name = "dataGridViewSpecialContributions";
             this.dataGridViewSpecialContributions.RowHeadersWidth = 51;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewSpecialContributions.RowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewSpecialContributions.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewSpecialContributions.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewSpecialContributions.RowTemplate.Height = 40;
             this.dataGridViewSpecialContributions.Size = new System.Drawing.Size(1209, 459);
@@ -1473,8 +1484,8 @@
             this.dataGridViewComments.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewComments.Name = "dataGridViewComments";
             this.dataGridViewComments.RowHeadersWidth = 51;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewComments.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewComments.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewComments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewComments.RowTemplate.Height = 40;
             this.dataGridViewComments.Size = new System.Drawing.Size(1201, 463);
@@ -1649,8 +1660,8 @@
             this.dataGridViewFinedMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewFinedMembers.Name = "dataGridViewFinedMembers";
             this.dataGridViewFinedMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewFinedMembers.RowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewFinedMembers.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewFinedMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewFinedMembers.RowTemplate.Height = 40;
             this.dataGridViewFinedMembers.Size = new System.Drawing.Size(1209, 401);
@@ -2128,8 +2139,8 @@
             this.dataGridViewConstitution.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewConstitution.Name = "dataGridViewConstitution";
             this.dataGridViewConstitution.RowHeadersWidth = 51;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewConstitution.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewConstitution.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewConstitution.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewConstitution.RowTemplate.Height = 40;
             this.dataGridViewConstitution.Size = new System.Drawing.Size(1209, 469);
@@ -2274,17 +2285,6 @@
             this.label21.Size = new System.Drawing.Size(51, 28);
             this.label21.TabIndex = 0;
             this.label21.Text = "Fine";
-            // 
-            // cmbYearMeeting
-            // 
-            this.cmbYearMeeting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbYearMeeting.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbYearMeeting.FormattingEnabled = true;
-            this.cmbYearMeeting.Location = new System.Drawing.Point(808, 51);
-            this.cmbYearMeeting.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbYearMeeting.Name = "cmbYearMeeting";
-            this.cmbYearMeeting.Size = new System.Drawing.Size(244, 36);
-            this.cmbYearMeeting.TabIndex = 5;
             // 
             // FormMeetingBoard
             // 

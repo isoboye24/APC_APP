@@ -1,5 +1,7 @@
 ﻿using APC.BLL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
+using APC.HelperServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,40 +60,16 @@ namespace APC.AllForms
 
             #region
             finReportDTO = finReportBLL.Select();
-            dataGridViewFinReport.DataSource = finReportDTO.FinancialReports;
-            dataGridViewFinReport.Columns[0].Visible = false;
-            dataGridViewFinReport.Columns[1].HeaderText = "Year";
-            dataGridViewFinReport.Columns[2].HeaderText = "Amount Raised";
-            dataGridViewFinReport.Columns[3].HeaderText = "Amount Spent";
-            dataGridViewFinReport.Columns[4].HeaderText = "Balance";
-            dataGridViewFinReport.Columns[5].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewFinReport.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
+            LoadDataGridView.loadFinancialReport(dataGridViewFinReport, finReportDTO);
 
             expReportDTO = expReportBLL.Select(DateTime.Now.Year);
+            LoadDataGridView.loadExpenditure(dataGridViewExpReport, expReportDTO);
+
             cmbMonthExpReport.DataSource = expReportDTO.Months;
             GeneralHelper.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
             cmbYearExpenditure.DataSource = expReportDTO.Years;
             cmbYearExpenditure.SelectedIndex = -1;
 
-            dataGridViewExpReport.DataSource = expReportDTO.Expenditures;
-            dataGridViewExpReport.Columns[0].Visible = false;
-            dataGridViewExpReport.Columns[1].HeaderText = "Summary";
-            dataGridViewExpReport.Columns[2].HeaderText = "Amount Spent (€)";
-            dataGridViewExpReport.Columns[3].HeaderText = "Day";
-            dataGridViewExpReport.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewExpReport.Columns[4].Visible = false;
-            dataGridViewExpReport.Columns[5].HeaderText = "Month";
-            dataGridViewExpReport.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewExpReport.Columns[6].HeaderText = "Year";
-            dataGridViewExpReport.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewExpReport.Columns[7].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewExpReport.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
             #endregion
 
             if (LoginInfo.AccessLevel != 4)
@@ -157,13 +135,8 @@ namespace APC.AllForms
 
         private void dataGridViewFinReport_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            finReportDetail = new FinancialReportDetailDTO();
-            finReportDetail.FinancialReportID = Convert.ToInt32(dataGridViewFinReport.Rows[e.RowIndex].Cells[0].Value);
-            finReportDetail.Year = dataGridViewFinReport.Rows[e.RowIndex].Cells[1].Value.ToString();
-            finReportDetail.TotalAmountRaised = Convert.ToDecimal(dataGridViewFinReport.Rows[e.RowIndex].Cells[2].Value);
-            finReportDetail.TotalAmountSpent = Convert.ToDecimal(dataGridViewFinReport.Rows[e.RowIndex].Cells[3].Value);
-            finReportDetail.Balance = Convert.ToDecimal(dataGridViewFinReport.Rows[e.RowIndex].Cells[4].Value);
-            finReportDetail.Summary = dataGridViewFinReport.Rows[e.RowIndex].Cells[5].Value.ToString();
+            if (e.RowIndex < 0) return;
+            finReportDetail = GeneralHelper.MapFromGrid<FinancialReportDetailDTO>(dataGridViewFinReport, e.RowIndex);
         }
 
         private void btnUpdateFinReport_Click(object sender, EventArgs e)
@@ -307,15 +280,8 @@ namespace APC.AllForms
 
         private void dataGridViewExpReport_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            expReportDetail = new ExpenditureDetailDTO();
-            expReportDetail.ExpenditureID = Convert.ToInt32(dataGridViewExpReport.Rows[e.RowIndex].Cells[0].Value);
-            expReportDetail.Summary = dataGridViewExpReport.Rows[e.RowIndex].Cells[1].Value.ToString();
-            expReportDetail.AmountSpent = Convert.ToDecimal(dataGridViewExpReport.Rows[e.RowIndex].Cells[2].Value);
-            expReportDetail.Day = Convert.ToInt32(dataGridViewExpReport.Rows[e.RowIndex].Cells[3].Value);
-            expReportDetail.MonthID = Convert.ToInt32(dataGridViewExpReport.Rows[e.RowIndex].Cells[4].Value);
-            expReportDetail.Month = dataGridViewExpReport.Rows[e.RowIndex].Cells[5].Value.ToString();
-            expReportDetail.Year = dataGridViewExpReport.Rows[e.RowIndex].Cells[6].Value.ToString();
-            expReportDetail.ExpenditureDate = Convert.ToDateTime(dataGridViewExpReport.Rows[e.RowIndex].Cells[7].Value);
+            if (e.RowIndex < 0) return;
+            expReportDetail = GeneralHelper.MapFromGrid<ExpenditureDetailDTO>(dataGridViewExpReport, e.RowIndex);
         }
 
         private void btnDeleteExpReport_Click(object sender, EventArgs e)

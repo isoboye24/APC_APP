@@ -23,7 +23,7 @@ namespace APC.DAL.DTO
         public int SupervisorID { get; set; }
         public string SupervisorName { get; set; }
         public string SupervisorSurname { get; set; }
-        public int Members { get; set; }
+        public int TotalMembers { get; set; }
         public  DateTime ContributionStartDate { get; set; }
         public string StartDate { get; set; }
         public  DateTime ContributionEndDate { get; set; }

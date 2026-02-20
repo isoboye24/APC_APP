@@ -117,9 +117,9 @@ namespace APC.DAL.DAO
                     dto.ContributionTitle = item.title;
                     dto.Summary = item.summary;
                     dto.AmountToContribute = item.amountEach;
-                    dto.AmountToContributeWithCurrency = item.amountEach + " €";
+                    dto.AmountToContributeWithCurrency = "€ " + item.amountEach;
                     dto.AmountExpected = item.amountExpected;
-                    dto.AmountExpectedWithCurrency = item.amountExpected + " €";
+                    dto.AmountExpectedWithCurrency = "€ " +  item.amountExpected;
 
                     int contributorsCount = db.SPECIAL_CONTRIBUTORS.Count(x => x.isDeleted == false && x.specialContributionID == item.specialContributionID);
                     var contributors = db.SPECIAL_CONTRIBUTORS.Where(x => x.isDeleted == false && x.specialContributionID == item.specialContributionID).ToList();
@@ -137,9 +137,9 @@ namespace APC.DAL.DAO
                     int totalContributors = contributorsCount;
                     decimal totalAmountContributed = amountsContributed.Sum();
 
-                    dto.Members = totalContributors;
+                    dto.TotalMembers = totalContributors;
                     dto.AmountContributed = totalAmountContributed;
-                    dto.AmountContributedWithCurrency = totalAmountContributed + " €";
+                    dto.AmountContributedWithCurrency = "€ " + totalAmountContributed;
                     if (totalAmountContributed < item.amountExpected)
                     {
                         dto.Status = "Incomplete";
@@ -229,7 +229,7 @@ namespace APC.DAL.DAO
                     int totalContributors = contributorsCount;
                     decimal totalAmountContributed = amountsContributed.Sum();
 
-                    dto.Members = totalContributors;
+                    dto.TotalMembers = totalContributors;
                     dto.AmountContributed = totalAmountContributed;
                     dto.AmountContributedWithCurrency = totalAmountContributed + " €";
                     if (totalAmountContributed < item.amountExpected)

@@ -16,6 +16,7 @@ using static APC.HelperServices.FinedMemberHelperService;
 using static APC.HelperServices.GeneralAttendanceHelperService;
 using static APC.HelperServices.MemberHelperService;
 using static APC.HelperServices.SingleColumnHelperService;
+using static APC.HelperServices.SpecialContributionHelperService;
 
 namespace APC.HelperServices
 {
@@ -138,6 +139,12 @@ namespace APC.HelperServices
         {
             grid.DataSource = dto.FineMembers;
             ConfigureFinedMemberGrid(grid, FinedMemberGridType.Basic);
+        }
+        
+        public static void loadSpecialContributions(DataGridView grid, SpecialContributionDTO dto)
+        {
+            grid.DataSource = dto.SpecialContributions;
+            ConfigureSpecialContributionGrid(grid, SpecialContributionGridType.Basic);
         }
 
     }

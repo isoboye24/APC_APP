@@ -120,6 +120,8 @@ namespace APC.DAL.DAO
                             totalDuesCollection.Add((decimal)due.monthlyDues);
                             totalExpectedDues.Add((decimal)due.expectedMonthlyDue);
                         }
+                        decimal totalDue = totalDuesCollection.Sum();
+                        decimal totalExpenses = totalExpectedDues.Sum();
                         var meeting = db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false && x.monthID == monthItem && x.year == year).FirstOrDefault();
                         dto.GeneralAttendanceID = meeting.generalAttendanceID;
                         dto.Day = meeting.day;
@@ -127,9 +129,12 @@ namespace APC.DAL.DAO
                         dto.AttendanceDate = meeting.attendanceDate;
                         dto.MonthID = monthItem;
                         dto.Year = year.ToString();
-                        dto.TotalDuesPaid = totalDuesCollection.Sum();                
-                        dto.TotalDuesExpected = totalExpectedDues.Sum();
+                        dto.TotalDuesPaid = totalDue;                
+                        dto.TotalDuesPaidWithCurrency = "€ " + totalDue;                
+                        dto.TotalDuesExpected = totalExpenses;
+                        dto.TotalDuesExpectedWithCurrency = "€ " + totalExpenses;
                         dto.TotalDuesBalance = dto.TotalDuesExpected - dto.TotalDuesPaid;
+                        dto.TotalDuesBalanceWithCurrency = "€ " + (dto.TotalDuesExpected - dto.TotalDuesPaid);
                         if (dto.TotalDuesBalance > 0)
                         {
                             dto.FinancialStatus = "Extra";

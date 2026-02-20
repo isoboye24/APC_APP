@@ -117,10 +117,10 @@ namespace APC.DAL.DAO
                     dto.Summary = report.summary;
                     dto.Year = report.year.ToString();
                     dto.TotalAmountRaised = totalAmountSold;
-                    dto.TotalAmountRaisedWithCurrency = totalAmountSold + " €";
+                    dto.TotalAmountRaisedWithCurrency = "€ " + totalAmountSold;
                     dto.TotalAmountSpent = totalAmountSpent;
-                    dto.TotalAmountSpentWithCurrency = totalAmountSpent + " €";
-                    dto.Balance = dto.TotalAmountRaised - totalAmountSpent + " €";
+                    dto.TotalAmountSpentWithCurrency = "€ " + totalAmountSpent;
+                    dto.Balance = "€ " + (dto.TotalAmountRaised - totalAmountSpent);
                     financialReport.Add(dto);
                     totalDuesCollection.Clear();
                     totalExpenditures.Clear();

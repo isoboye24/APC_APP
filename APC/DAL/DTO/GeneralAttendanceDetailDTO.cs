@@ -16,8 +16,11 @@ namespace APC.DAL.DTO
         public int TotalMembersPresent { get; set; }
         public int TotalMembersAbsent { get; set; }
         public decimal TotalDuesPaid { get; set; }
+        public string TotalDuesPaidWithCurrency { get; set; }
         public decimal TotalDuesExpected { get; set; }
+        public string TotalDuesExpectedWithCurrency { get; set; }
         public decimal TotalDuesBalance { get; set; }
+        public string TotalDuesBalanceWithCurrency { get; set; }
         public string Summary { get; set; }
         public DateTime AttendanceDate { get; set; }
         public string FinancialStatus { get; set; }

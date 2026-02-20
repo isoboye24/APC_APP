@@ -142,7 +142,7 @@ namespace APC.AllForms
             positionDTO = positionBLL.Select();
             professionDTO = professionBLL.Select();
             permissionDTO = permissionBLL.Select();
-            deletedDataDTO = deletedDataBLL.Select(true);
+            //deletedDataDTO = deletedDataBLL.Select(true);
 
             LoadDataGridView.loadMembers(dataGridView1, memberDTO);
 
@@ -684,8 +684,6 @@ namespace APC.AllForms
             }
         }
 
-        DeletedDataDTO deletedDataDTO = new DeletedDataDTO();
-        DeletedDataBLL deletedDataBLL = new DeletedDataBLL();
         MemberDetailDTO deletedDataDetail = new MemberDetailDTO();
         CountryBLL countryDeletedDataBLL = new CountryBLL();
         CountryDetailDTO countryDeletedDataDetail = new CountryDetailDTO();
@@ -929,8 +927,8 @@ namespace APC.AllForms
                         if (memberBLL.GetBack(deletedDataDetail))
                         {
                             MessageBox.Show("Member was retrieved");
-                            deletedDataDTO = deletedDataBLL.Select(true);
-                            dataGridView1.DataSource = deletedDataDTO.Members;
+                            memberDTO = memberBLL.Select(true);
+                            dataGridView1.DataSource = memberDTO.Members;
                         }
                     }
                 }
@@ -946,8 +944,8 @@ namespace APC.AllForms
                     if (countryDeletedDataBLL.GetBack(countryDeletedDataDetail))
                     {
                         MessageBox.Show("Country was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.Countries;
+                        countryDTO = countryBLL.Select(true);
+                        dataGridView1.DataSource = countryDTO.Countries;
                     }
                 }
             }
@@ -962,8 +960,8 @@ namespace APC.AllForms
                     if (nationalityDeletedDataBLL.GetBack(nationalityDeletedDataDetail))
                     {
                         MessageBox.Show("Nationality was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.Nationalities;
+                        nationalityDTO = nationalityBLL.Select(true);
+                        dataGridView1.DataSource = nationalityDTO.Nationalities;
                     }
                 }
             }
@@ -978,8 +976,8 @@ namespace APC.AllForms
                     if (professionDeletedDataBLL.GetBack(professionDeletedDataDetail))
                     {
                         MessageBox.Show("Profession was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.Professions;
+                        professionDTO = professionBLL.Select(true);
+                        dataGridView1.DataSource = professionDTO.Professions;
                     }
                 }
             }
@@ -994,8 +992,8 @@ namespace APC.AllForms
                     if (positionDeletedDataBLL.GetBack(positionDeletedDataDetail))
                     {
                         MessageBox.Show("Position was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.Positions;
+                        positionDTO = positionBLL.Select(true);
+                        dataGridView1.DataSource = positionDTO.Positions;
                     }
                 }
             }
@@ -1010,8 +1008,8 @@ namespace APC.AllForms
                     if (empStatusDeletedDataBLL.GetBack(empStatusDeletedDataDetail))
                     {
                         MessageBox.Show("Employment status was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.EmploymentStatuses;
+                        empStatusDTO = empStatusBLL.Select(true);
+                        dataGridView1.DataSource = empStatusDTO.EmploymentStatuses;
                     }
                 }
             }
@@ -1026,8 +1024,8 @@ namespace APC.AllForms
                     if (marStatusDeletedDataBLL.GetBack(marStatusDeletedDataDetail))
                     {
                         MessageBox.Show("Marital status was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.MaritalStatuses;
+                        marStatusDTO = marStatusBLL.Select(true);
+                        dataGridView1.DataSource = marStatusDTO.MaritalStatuses;
                     }
                 }
             }
@@ -1046,8 +1044,8 @@ namespace APC.AllForms
                     else if (commentDeletedDataBLL.GetBack(commentDeletedDataDetail))
                     {
                         MessageBox.Show("Comment was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.Comments;
+                        commentDTO = commentBLL.Select(true);
+                        dataGridView1.DataSource = commentDTO.Comments;
                     }
                 }
             }
@@ -1062,8 +1060,8 @@ namespace APC.AllForms
                     if (documentDeletedDataBLL.GetBack(documentDeletedDataDetail))
                     {
                         MessageBox.Show("Document was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.Documents;
+                        documentDTO = documentBLL.Select(true);
+                        dataGridView1.DataSource = documentDTO.Documents;
                     }
                 }
             }
@@ -1078,8 +1076,8 @@ namespace APC.AllForms
                     if (eventImageDeletedDataBLL.GetBack(eventImageDeletedDataDetail))
                     {
                         MessageBox.Show("Picture was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.EventImages;
+                        eventImageDTO = eventImageBLL.Select(true);
+                        dataGridView1.DataSource = eventImageDTO.EventImages;
                     }
                 }
             }
@@ -1094,8 +1092,8 @@ namespace APC.AllForms
                     if (eventDeletedDataBLL.GetBack(eventDeletedDataDetail))
                     {
                         MessageBox.Show("Event was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.Events;
+                        eventsDTO = eventsBLL.Select(true);
+                        dataGridView1.DataSource = eventsDTO.Events;
                     }
                 }
             }
@@ -1110,8 +1108,8 @@ namespace APC.AllForms
                     if (genAttendDeletedDataBLL.GetBack(genAttendDeletedDataDetail))
                     {
                         MessageBox.Show("Attendance was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.GeneralAttendance;
+                        generalAttendanceDTO = generalAttendanceBLL.Select(true);
+                        dataGridView1.DataSource = generalAttendanceDTO.GeneralAttendance;
                     }
                 }
             }
@@ -1126,8 +1124,8 @@ namespace APC.AllForms
                     if (expendutureDeletedDataBLL.GetBack(expenditureDeletedDataDetail))
                     {
                         MessageBox.Show("Expenditure was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.Expenditures;
+                        expenditureDTO = expenditureBLL.Select(true);
+                        dataGridView1.DataSource = expenditureDTO.Expenditures;
                     }
                 }
             }
@@ -1142,8 +1140,8 @@ namespace APC.AllForms
                     if (financialRepDeletedDataBLL.GetBack(financialRepDeletedDataDetail))
                     {
                         MessageBox.Show("Financial report was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.FinancialReports;
+                        financialReportDTO = financialReportBLL.Select(true);
+                        dataGridView1.DataSource = financialReportDTO.FinancialReports;
                     }
                 }
             }
@@ -1158,8 +1156,8 @@ namespace APC.AllForms
                     if (constitutionDeletedDataBLL.GetBack(constitutionDeletedDataDetail))
                     {
                         MessageBox.Show("Constitution was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.Constitutions;
+                        constitutionDTO = constitutionBLL.Select(true);
+                        dataGridView1.DataSource = constitutionDTO.Constitutions;
                     }
                 }
             }
@@ -1174,8 +1172,8 @@ namespace APC.AllForms
                     if (fineddeletedDataBLL.GetBack(fineddeletedDataDetail))
                     {
                         MessageBox.Show("Fined member was retrieved");
-                        deletedDataDTO = deletedDataBLL.Select(true);
-                        dataGridView1.DataSource = deletedDataDTO.FinedMembers;
+                        finedMemberDTO = finedMemberBLL.Select(true);
+                        dataGridView1.DataSource = finedMemberDTO.FineMembers;
                     }
                 }
             }
