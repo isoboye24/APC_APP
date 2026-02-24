@@ -21,11 +21,10 @@ namespace APC.HelperServices
             {
                 case ExpenditureGridType.Basic:
                     GeneralHelper.SetVisibleColumns(grid, "Summary", "AmountSpentWithCurrency", "Day",
-                        "MonthName", "Year");
+                        "Month", "Year");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "AmountSpentWithCurrency", "Spent" },
-                                    { "MonthName", "Month" }
                                 });
                     break;
             }

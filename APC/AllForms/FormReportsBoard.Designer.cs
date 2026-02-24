@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.financialReportPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -56,13 +56,8 @@
             this.dataGridViewFinReport = new System.Windows.Forms.DataGridView();
             this.expenditurePage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAddExpReport = new System.Windows.Forms.Button();
-            this.btnUpdateExpReport = new System.Windows.Forms.Button();
-            this.btnDeleteExpReport = new System.Windows.Forms.Button();
-            this.btnViewExpReport = new System.Windows.Forms.Button();
-            this.labelTotalExpReport = new System.Windows.Forms.Label();
-            this.labelTotalRowsExpReport = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbYearExpenditure = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSearchExpReport = new System.Windows.Forms.Button();
@@ -72,10 +67,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtSummaryExpReport = new System.Windows.Forms.TextBox();
             this.dataGridViewExpReport = new System.Windows.Forms.DataGridView();
-            this.cmbYearExpenditure = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelTotalRowsExpReport = new System.Windows.Forms.Label();
+            this.btnDeleteExpReport = new System.Windows.Forms.Button();
+            this.btnViewExpReport = new System.Windows.Forms.Button();
+            this.btnUpdateExpReport = new System.Windows.Forms.Button();
+            this.btnAddExpReport = new System.Windows.Forms.Button();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelTotalExpReport = new System.Windows.Forms.Label();
             this.labelTotalExpReportYearly = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.financialReportPage.SuspendLayout();
@@ -472,8 +472,8 @@
             this.dataGridViewFinReport.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewFinReport.Name = "dataGridViewFinReport";
             this.dataGridViewFinReport.RowHeadersWidth = 51;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewFinReport.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewFinReport.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewFinReport.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewFinReport.RowTemplate.Height = 40;
             this.dataGridViewFinReport.Size = new System.Drawing.Size(850, 495);
@@ -513,99 +513,6 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(1260, 680);
             this.tableLayoutPanel5.TabIndex = 6;
             // 
-            // btnAddExpReport
-            // 
-            this.btnAddExpReport.BackColor = System.Drawing.Color.Indigo;
-            this.btnAddExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddExpReport.FlatAppearance.BorderSize = 0;
-            this.btnAddExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddExpReport.ForeColor = System.Drawing.Color.White;
-            this.btnAddExpReport.Location = new System.Drawing.Point(254, 4);
-            this.btnAddExpReport.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddExpReport.Name = "btnAddExpReport";
-            this.btnAddExpReport.Size = new System.Drawing.Size(147, 39);
-            this.btnAddExpReport.TabIndex = 0;
-            this.btnAddExpReport.Text = "Add";
-            this.btnAddExpReport.UseVisualStyleBackColor = false;
-            this.btnAddExpReport.Click += new System.EventHandler(this.btnAddExpReport_Click);
-            // 
-            // btnUpdateExpReport
-            // 
-            this.btnUpdateExpReport.BackColor = System.Drawing.Color.Indigo;
-            this.btnUpdateExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnUpdateExpReport.FlatAppearance.BorderSize = 0;
-            this.btnUpdateExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateExpReport.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateExpReport.Location = new System.Drawing.Point(432, 4);
-            this.btnUpdateExpReport.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUpdateExpReport.Name = "btnUpdateExpReport";
-            this.btnUpdateExpReport.Size = new System.Drawing.Size(147, 39);
-            this.btnUpdateExpReport.TabIndex = 1;
-            this.btnUpdateExpReport.Text = "Edit";
-            this.btnUpdateExpReport.UseVisualStyleBackColor = false;
-            this.btnUpdateExpReport.Click += new System.EventHandler(this.btnUpdateExpReport_Click);
-            // 
-            // btnDeleteExpReport
-            // 
-            this.btnDeleteExpReport.BackColor = System.Drawing.Color.Indigo;
-            this.btnDeleteExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeleteExpReport.FlatAppearance.BorderSize = 0;
-            this.btnDeleteExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteExpReport.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteExpReport.Location = new System.Drawing.Point(788, 4);
-            this.btnDeleteExpReport.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDeleteExpReport.Name = "btnDeleteExpReport";
-            this.btnDeleteExpReport.Size = new System.Drawing.Size(147, 39);
-            this.btnDeleteExpReport.TabIndex = 2;
-            this.btnDeleteExpReport.Text = "Delete";
-            this.btnDeleteExpReport.UseVisualStyleBackColor = false;
-            this.btnDeleteExpReport.Click += new System.EventHandler(this.btnDeleteExpReport_Click);
-            // 
-            // btnViewExpReport
-            // 
-            this.btnViewExpReport.BackColor = System.Drawing.Color.Indigo;
-            this.btnViewExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnViewExpReport.FlatAppearance.BorderSize = 0;
-            this.btnViewExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewExpReport.ForeColor = System.Drawing.Color.White;
-            this.btnViewExpReport.Location = new System.Drawing.Point(610, 4);
-            this.btnViewExpReport.Margin = new System.Windows.Forms.Padding(4);
-            this.btnViewExpReport.Name = "btnViewExpReport";
-            this.btnViewExpReport.Size = new System.Drawing.Size(147, 39);
-            this.btnViewExpReport.TabIndex = 3;
-            this.btnViewExpReport.Text = "View";
-            this.btnViewExpReport.UseVisualStyleBackColor = false;
-            this.btnViewExpReport.Click += new System.EventHandler(this.btnViewExpReport_Click);
-            // 
-            // labelTotalExpReport
-            // 
-            this.labelTotalExpReport.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelTotalExpReport.AutoSize = true;
-            this.labelTotalExpReport.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalExpReport.Location = new System.Drawing.Point(303, 11);
-            this.labelTotalExpReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalExpReport.Name = "labelTotalExpReport";
-            this.labelTotalExpReport.Size = new System.Drawing.Size(109, 23);
-            this.labelTotalExpReport.TabIndex = 4;
-            this.labelTotalExpReport.Text = "Overall Total:";
-            this.labelTotalExpReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelTotalRowsExpReport
-            // 
-            this.labelTotalRowsExpReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalRowsExpReport.AutoSize = true;
-            this.labelTotalRowsExpReport.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRowsExpReport.Location = new System.Drawing.Point(1136, 0);
-            this.labelTotalRowsExpReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalRowsExpReport.Name = "labelTotalRowsExpReport";
-            this.labelTotalRowsExpReport.Size = new System.Drawing.Size(55, 23);
-            this.labelTotalRowsExpReport.TabIndex = 4;
-            this.labelTotalRowsExpReport.Text = "Rows:";
-            // 
             // tableLayoutPanel8
             // 
             this.tableLayoutPanel8.ColumnCount = 9;
@@ -633,6 +540,17 @@
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(1201, 46);
             this.tableLayoutPanel8.TabIndex = 3;
+            // 
+            // cmbYearExpenditure
+            // 
+            this.cmbYearExpenditure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbYearExpenditure.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbYearExpenditure.FormattingEnabled = true;
+            this.cmbYearExpenditure.Location = new System.Drawing.Point(568, 4);
+            this.cmbYearExpenditure.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbYearExpenditure.Name = "cmbYearExpenditure";
+            this.cmbYearExpenditure.Size = new System.Drawing.Size(100, 36);
+            this.cmbYearExpenditure.TabIndex = 5;
             // 
             // label1
             // 
@@ -751,24 +669,13 @@
             this.dataGridViewExpReport.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewExpReport.Name = "dataGridViewExpReport";
             this.dataGridViewExpReport.RowHeadersWidth = 51;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewExpReport.RowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewExpReport.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewExpReport.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewExpReport.RowTemplate.Height = 40;
             this.dataGridViewExpReport.Size = new System.Drawing.Size(1201, 488);
             this.dataGridViewExpReport.TabIndex = 4;
             this.dataGridViewExpReport.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewExpReport_RowEnter);
-            // 
-            // cmbYearExpenditure
-            // 
-            this.cmbYearExpenditure.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbYearExpenditure.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbYearExpenditure.FormattingEnabled = true;
-            this.cmbYearExpenditure.Location = new System.Drawing.Point(568, 4);
-            this.cmbYearExpenditure.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbYearExpenditure.Name = "cmbYearExpenditure";
-            this.cmbYearExpenditure.Size = new System.Drawing.Size(100, 36);
-            this.cmbYearExpenditure.TabIndex = 5;
             // 
             // tableLayoutPanel6
             // 
@@ -809,10 +716,90 @@
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
             this.tableLayoutPanel11.RowCount = 1;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(1195, 47);
             this.tableLayoutPanel11.TabIndex = 3;
+            // 
+            // labelTotalRowsExpReport
+            // 
+            this.labelTotalRowsExpReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalRowsExpReport.AutoSize = true;
+            this.labelTotalRowsExpReport.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalRowsExpReport.Location = new System.Drawing.Point(1136, 0);
+            this.labelTotalRowsExpReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTotalRowsExpReport.Name = "labelTotalRowsExpReport";
+            this.labelTotalRowsExpReport.Size = new System.Drawing.Size(55, 23);
+            this.labelTotalRowsExpReport.TabIndex = 4;
+            this.labelTotalRowsExpReport.Text = "Rows:";
+            // 
+            // btnDeleteExpReport
+            // 
+            this.btnDeleteExpReport.BackColor = System.Drawing.Color.Indigo;
+            this.btnDeleteExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteExpReport.FlatAppearance.BorderSize = 0;
+            this.btnDeleteExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteExpReport.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteExpReport.Location = new System.Drawing.Point(788, 4);
+            this.btnDeleteExpReport.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteExpReport.Name = "btnDeleteExpReport";
+            this.btnDeleteExpReport.Size = new System.Drawing.Size(147, 39);
+            this.btnDeleteExpReport.TabIndex = 2;
+            this.btnDeleteExpReport.Text = "Delete";
+            this.btnDeleteExpReport.UseVisualStyleBackColor = false;
+            this.btnDeleteExpReport.Click += new System.EventHandler(this.btnDeleteExpReport_Click);
+            // 
+            // btnViewExpReport
+            // 
+            this.btnViewExpReport.BackColor = System.Drawing.Color.Indigo;
+            this.btnViewExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnViewExpReport.FlatAppearance.BorderSize = 0;
+            this.btnViewExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewExpReport.ForeColor = System.Drawing.Color.White;
+            this.btnViewExpReport.Location = new System.Drawing.Point(610, 4);
+            this.btnViewExpReport.Margin = new System.Windows.Forms.Padding(4);
+            this.btnViewExpReport.Name = "btnViewExpReport";
+            this.btnViewExpReport.Size = new System.Drawing.Size(147, 39);
+            this.btnViewExpReport.TabIndex = 3;
+            this.btnViewExpReport.Text = "View";
+            this.btnViewExpReport.UseVisualStyleBackColor = false;
+            this.btnViewExpReport.Click += new System.EventHandler(this.btnViewExpReport_Click);
+            // 
+            // btnUpdateExpReport
+            // 
+            this.btnUpdateExpReport.BackColor = System.Drawing.Color.Indigo;
+            this.btnUpdateExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnUpdateExpReport.FlatAppearance.BorderSize = 0;
+            this.btnUpdateExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateExpReport.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateExpReport.Location = new System.Drawing.Point(432, 4);
+            this.btnUpdateExpReport.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdateExpReport.Name = "btnUpdateExpReport";
+            this.btnUpdateExpReport.Size = new System.Drawing.Size(147, 39);
+            this.btnUpdateExpReport.TabIndex = 1;
+            this.btnUpdateExpReport.Text = "Edit";
+            this.btnUpdateExpReport.UseVisualStyleBackColor = false;
+            this.btnUpdateExpReport.Click += new System.EventHandler(this.btnUpdateExpReport_Click);
+            // 
+            // btnAddExpReport
+            // 
+            this.btnAddExpReport.BackColor = System.Drawing.Color.Indigo;
+            this.btnAddExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddExpReport.FlatAppearance.BorderSize = 0;
+            this.btnAddExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddExpReport.ForeColor = System.Drawing.Color.White;
+            this.btnAddExpReport.Location = new System.Drawing.Point(254, 4);
+            this.btnAddExpReport.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddExpReport.Name = "btnAddExpReport";
+            this.btnAddExpReport.Size = new System.Drawing.Size(147, 39);
+            this.btnAddExpReport.TabIndex = 0;
+            this.btnAddExpReport.Text = "Add";
+            this.btnAddExpReport.UseVisualStyleBackColor = false;
+            this.btnAddExpReport.Click += new System.EventHandler(this.btnAddExpReport_Click);
             // 
             // tableLayoutPanel12
             // 
@@ -830,6 +817,19 @@
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel12.Size = new System.Drawing.Size(1197, 45);
             this.tableLayoutPanel12.TabIndex = 4;
+            // 
+            // labelTotalExpReport
+            // 
+            this.labelTotalExpReport.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelTotalExpReport.AutoSize = true;
+            this.labelTotalExpReport.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalExpReport.Location = new System.Drawing.Point(303, 11);
+            this.labelTotalExpReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTotalExpReport.Name = "labelTotalExpReport";
+            this.labelTotalExpReport.Size = new System.Drawing.Size(109, 23);
+            this.labelTotalExpReport.TabIndex = 4;
+            this.labelTotalExpReport.Text = "Overall Total:";
+            this.labelTotalExpReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTotalExpReportYearly
             // 
