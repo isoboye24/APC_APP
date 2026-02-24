@@ -993,6 +993,10 @@
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
+    <Content Include="images\image1.PNG" />
+    <Content Include="images\image2.PNG" />
+    <Content Include="images\image3.PNG" />
+    <Content Include="images\image4.PNG" />
     <Content Include="logoAPC.ico" />
     <Content Include="Wallpaperfx-3d-Bluefx-Desktop-Documents.256.ico" />
   </ItemGroup>
@@ -1008,8 +1012,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
