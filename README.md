@@ -19,7 +19,7 @@ It is built using:
 
 The application follows a structured enterprise architecture:
 
-
+````
 APC
 │
 ├── UI Layer (WinForms)
@@ -37,7 +37,7 @@ APC
     ├── DAO Classes
     ├── LINQ Queries
     └── Database Operations
-
+````
 
 ### Design Patterns Used
 
@@ -150,6 +150,7 @@ The system includes advanced logic such as:
 
 #### 📁 Folder Structure
 
+````
 APC
 │
 ├── APC (UI)
@@ -160,6 +161,7 @@ APC
 │   └── Context
 ├── images
 └── Database
+````
 
 ### 🧰 Setup Instructions
 
