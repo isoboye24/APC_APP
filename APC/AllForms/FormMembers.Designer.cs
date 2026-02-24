@@ -257,7 +257,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel10, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel15, 1, 0);
@@ -277,13 +277,13 @@
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.groupBox1, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(962, 4);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(961, 4);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(375, 583);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(374, 583);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // tableLayoutPanel4
@@ -300,7 +300,7 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(367, 283);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(366, 283);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // pictureBox1
@@ -325,7 +325,7 @@
             this.tableLayoutPanel8.RowCount = 2;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(285, 275);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(284, 275);
             this.tableLayoutPanel8.TabIndex = 1;
             // 
             // tableLayoutPanel9
@@ -342,7 +342,7 @@
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(277, 47);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(276, 47);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
             // btnBrowse
@@ -376,7 +376,7 @@
             this.picProfilePic.Location = new System.Drawing.Point(4, 4);
             this.picProfilePic.Margin = new System.Windows.Forms.Padding(4);
             this.picProfilePic.Name = "picProfilePic";
-            this.picProfilePic.Size = new System.Drawing.Size(277, 212);
+            this.picProfilePic.Size = new System.Drawing.Size(276, 212);
             this.picProfilePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picProfilePic.TabIndex = 1;
             this.picProfilePic.TabStop = false;
@@ -390,7 +390,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(367, 284);
+            this.groupBox1.Size = new System.Drawing.Size(366, 284);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "APC INFO";
@@ -428,7 +428,7 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.88785F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0.9345794F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.88785F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(359, 256);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(358, 256);
             this.tableLayoutPanel7.TabIndex = 2;
             // 
             // cmbMaritalStatus
@@ -439,7 +439,7 @@
             this.cmbMaritalStatus.Location = new System.Drawing.Point(165, 172);
             this.cmbMaritalStatus.Margin = new System.Windows.Forms.Padding(4);
             this.cmbMaritalStatus.Name = "cmbMaritalStatus";
-            this.cmbMaritalStatus.Size = new System.Drawing.Size(190, 36);
+            this.cmbMaritalStatus.Size = new System.Drawing.Size(189, 36);
             this.cmbMaritalStatus.TabIndex = 3;
             // 
             // label11
@@ -460,7 +460,7 @@
             this.txtName.Location = new System.Drawing.Point(165, 4);
             this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(190, 34);
+            this.txtName.Size = new System.Drawing.Size(189, 34);
             this.txtName.TabIndex = 0;
             // 
             // label14
@@ -525,7 +525,7 @@
             this.txtSurname.Location = new System.Drawing.Point(165, 46);
             this.txtSurname.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurname.Name = "txtSurname";
-            this.txtSurname.Size = new System.Drawing.Size(190, 34);
+            this.txtSurname.Size = new System.Drawing.Size(189, 34);
             this.txtSurname.TabIndex = 0;
             // 
             // cmbPosition
@@ -536,7 +536,7 @@
             this.cmbPosition.Location = new System.Drawing.Point(165, 88);
             this.cmbPosition.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPosition.Name = "cmbPosition";
-            this.cmbPosition.Size = new System.Drawing.Size(190, 36);
+            this.cmbPosition.Size = new System.Drawing.Size(189, 36);
             this.cmbPosition.TabIndex = 3;
             // 
             // dateTimePickerMemSince
@@ -548,7 +548,7 @@
             this.dateTimePickerMemSince.Location = new System.Drawing.Point(165, 130);
             this.dateTimePickerMemSince.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerMemSince.Name = "dateTimePickerMemSince";
-            this.dateTimePickerMemSince.Size = new System.Drawing.Size(190, 34);
+            this.dateTimePickerMemSince.Size = new System.Drawing.Size(189, 34);
             this.dateTimePickerMemSince.TabIndex = 2;
             // 
             // cmbMembershipStatus
@@ -559,7 +559,7 @@
             this.cmbMembershipStatus.Location = new System.Drawing.Point(165, 214);
             this.cmbMembershipStatus.Margin = new System.Windows.Forms.Padding(4);
             this.cmbMembershipStatus.Name = "cmbMembershipStatus";
-            this.cmbMembershipStatus.Size = new System.Drawing.Size(190, 36);
+            this.cmbMembershipStatus.Size = new System.Drawing.Size(189, 36);
             this.cmbMembershipStatus.TabIndex = 3;
             // 
             // tableLayoutPanel10
@@ -568,7 +568,7 @@
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel6, 0, 0);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(467, 4);
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(466, 4);
             this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 1;
@@ -799,7 +799,7 @@
             this.tableLayoutPanel15.RowCount = 2;
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(441, 583);
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(440, 583);
             this.tableLayoutPanel15.TabIndex = 4;
             // 
             // tableLayoutPanel5
@@ -837,7 +837,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.89362F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(433, 312);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(432, 312);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // label5
@@ -860,7 +860,7 @@
             this.dateTimePickerBirthday.Location = new System.Drawing.Point(227, 4);
             this.dateTimePickerBirthday.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerBirthday.Name = "dateTimePickerBirthday";
-            this.dateTimePickerBirthday.Size = new System.Drawing.Size(202, 34);
+            this.dateTimePickerBirthday.Size = new System.Drawing.Size(201, 34);
             this.dateTimePickerBirthday.TabIndex = 2;
             // 
             // label7
@@ -882,7 +882,7 @@
             this.cmbCountry.Location = new System.Drawing.Point(227, 56);
             this.cmbCountry.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCountry.Name = "cmbCountry";
-            this.cmbCountry.Size = new System.Drawing.Size(202, 36);
+            this.cmbCountry.Size = new System.Drawing.Size(201, 36);
             this.cmbCountry.TabIndex = 3;
             // 
             // label8
@@ -904,7 +904,7 @@
             this.cmbProfession.Location = new System.Drawing.Point(227, 108);
             this.cmbProfession.Margin = new System.Windows.Forms.Padding(4);
             this.cmbProfession.Name = "cmbProfession";
-            this.cmbProfession.Size = new System.Drawing.Size(202, 36);
+            this.cmbProfession.Size = new System.Drawing.Size(201, 36);
             this.cmbProfession.TabIndex = 3;
             // 
             // label9
@@ -926,7 +926,7 @@
             this.cmbGender.Location = new System.Drawing.Point(227, 160);
             this.cmbGender.Margin = new System.Windows.Forms.Padding(4);
             this.cmbGender.Name = "cmbGender";
-            this.cmbGender.Size = new System.Drawing.Size(202, 36);
+            this.cmbGender.Size = new System.Drawing.Size(201, 36);
             this.cmbGender.TabIndex = 3;
             // 
             // label10
@@ -948,7 +948,7 @@
             this.cmbEmpStatus.Location = new System.Drawing.Point(227, 212);
             this.cmbEmpStatus.Margin = new System.Windows.Forms.Padding(4);
             this.cmbEmpStatus.Name = "cmbEmpStatus";
-            this.cmbEmpStatus.Size = new System.Drawing.Size(202, 36);
+            this.cmbEmpStatus.Size = new System.Drawing.Size(201, 36);
             this.cmbEmpStatus.TabIndex = 3;
             // 
             // label15
@@ -970,7 +970,7 @@
             this.cmbNationality.Location = new System.Drawing.Point(227, 264);
             this.cmbNationality.Margin = new System.Windows.Forms.Padding(4);
             this.cmbNationality.Name = "cmbNationality";
-            this.cmbNationality.Size = new System.Drawing.Size(202, 36);
+            this.cmbNationality.Size = new System.Drawing.Size(201, 36);
             this.cmbNationality.TabIndex = 3;
             // 
             // tableLayoutPanel16
@@ -990,7 +990,7 @@
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(433, 255);
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(432, 255);
             this.tableLayoutPanel16.TabIndex = 4;
             // 
             // txtEmail
@@ -1001,7 +1001,7 @@
             this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.Multiline = true;
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(425, 82);
+            this.txtEmail.Size = new System.Drawing.Size(424, 82);
             this.txtEmail.TabIndex = 0;
             // 
             // label6
@@ -1024,7 +1024,7 @@
             this.txtAddress.Margin = new System.Windows.Forms.Padding(4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(425, 81);
+            this.txtAddress.Size = new System.Drawing.Size(424, 81);
             this.txtAddress.TabIndex = 0;
             // 
             // label27

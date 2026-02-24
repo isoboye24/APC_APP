@@ -75,19 +75,19 @@ namespace APC.AllForms
             LoadDataGridView.loadMembers(dataGridViewRegisteredMembers, registeredMembersDTO);
             FillRegisteredMemberComboBoxes();
 
-            LoadBirthDayMembers();
+            LoadDataGridView.loadBirthdayMembers(dataGridViewBirthday, birthdayDTO);
             FillBirthdayMemberComboBoxes();
 
-            LoadFormerMembers();
+            LoadDataGridView.loadMembers(dataGridViewFormerMembers, formerMembersDTO);
             FillFormerMemberComboBoxes();
 
-            LoadDeadMembers();
+            LoadDataGridView.loadDeadMembers(dataGridViewDeadMembers, deadMembersDTO);
             FillDeadMemberComboBoxes();
 
-            LoadInactiveMembers();
+            LoadDataGridView.loadMembers(dataGridViewInactiveMembers, inactiveMembersDTO);
             FillInactiveMemberComboBoxes();
 
-            LoadMembersContact();
+            LoadDataGridView.loadMembersContacts(dataGridViewContacts, contactsDTO);
 
             LoadMemberCommittments();
             FillMemberCommittmentComboBoxes();
@@ -101,36 +101,6 @@ namespace APC.AllForms
             #endregion
 
             GetCounts();
-        }
-
-        private void LoadBirthDayMembers()
-        {
-            dataGridViewBirthday.DataSource = birthdayDTO.Members;
-            ConfigureMemberGrid(dataGridViewBirthday, MemberGridType.Birthday);
-        }
-
-        private void LoadMembersContact()
-        {
-            dataGridViewContacts.DataSource = contactsDTO.Members;
-            ConfigureMemberGrid(dataGridViewContacts, MemberGridType.Contact);
-        }
-
-        private void LoadInactiveMembers()
-        {
-            dataGridViewInactiveMembers.DataSource = inactiveMembersDTO.Members;
-            ConfigureMemberGrid(dataGridViewInactiveMembers, MemberGridType.Basic);
-        }
-
-        private void LoadDeadMembers()
-        {
-            dataGridViewDeadMembers.DataSource = deadMembersDTO.Members;
-            ConfigureMemberGrid(dataGridViewDeadMembers, MemberGridType.Dead);
-        }
-
-        private void LoadFormerMembers()
-        {
-            dataGridViewFormerMembers.DataSource = formerMembersDTO.Members;
-            ConfigureMemberGrid(dataGridViewFormerMembers, MemberGridType.Basic);
         }
 
         private void LoadMemberCommittments()
