@@ -41,13 +41,13 @@ Form Attendance Record shows detailed attendance history for each member. Mainta
 
 Form Setting Module manages system reference data. Keeps system data dynamic and configurable without modifying code.
 
-![APC_APP](Images/image1.png)
+![Login](Images/image1.png)
 
-![APC_APP](Images/image2.png)
+![Login](Images/image2.png)
 
-![APC_APP](Images/image3.png)
+![Login](Images/image3.png)
 
-![APC_APP](Images/image4.png)
+![Login](Images/image4.png)
 
 ### Architecture
 
