@@ -21,33 +21,30 @@ The Login page provides secure access to the system for authorized members of th
 The Dashboard provides a real-time overview of the organization’s financial and membership statistics. Acts as the executive control center for 
 decision-making.
 
-The Members module manages the full lifecycle of all registered members. Centralized member management with financial and attendance integration.
-
-Form used to register new members into the system. Provides structured onboarding for new members.
-
 Form Meeting & Contributions manages monthly meetings, attendance, and dues tracking. Tracks member participation and financial obligations per meeting.
-
-Form Financial Reports displays comprehensive financial reports of the organization. Ensures financial transparency and accountability.
-
-Form Events Module manages organizational events and related financial data. Tracks profitability and financial impact of events.
-
-Form Events Picture allows uploading and managing images related to events. Maintains event documentation and media archive.
-
-Form Member Profile (Personal Info) detailed view of individual member information. Provides a complete personal overview of each member.
-
-Member Committment Overview displays financial and attendance summary for individual members. Provides accountability tracking per member.
-
-Form Attendance Record shows detailed attendance history for each member. Maintains accurate historical participation records.
-
-Form Setting Module manages system reference data. Keeps system data dynamic and configurable without modifying code.
 
 ![Login](Images/image1.PNG)
 
+The Members module manages the full lifecycle of all registered members. Centralized member management with financial and attendance integration.
+
+Form Member Profile (Personal Info) detailed view of individual member information. Provides a complete personal overview of each member.
+
 ![Login](Images/image2.PNG)
+
+Form Attendance Record shows detailed attendance history for each member. Maintains accurate historical participation records.
+
+Form used to register new members into the system. Provides structured onboarding for new members.
 
 ![Login](Images/image3.PNG)
 
+Form Setting Module manages system reference data. Keeps system data dynamic and configurable without modifying code.
+
+Member Committment Overview displays financial and attendance summary for individual members. Provides accountability tracking per member.
+
 ![Login](Images/image4.PNG)
+
+
+
 
 
 ### Architecture
