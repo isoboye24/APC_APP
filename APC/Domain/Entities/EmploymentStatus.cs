@@ -32,7 +32,7 @@ namespace APC.Domain.Entities
         public void UpdateName(string newName)
         {
             if (string.IsNullOrWhiteSpace(newName))
-                throw new ArgumentException("Position name cannot be empty");
+                throw new ArgumentException("Employment status name cannot be empty");
 
             EmploymentStatusName = newName.Trim();
         }
