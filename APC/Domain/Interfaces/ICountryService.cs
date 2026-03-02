@@ -1,5 +1,4 @@
-﻿using APC.AllForms.ViewModels;
-using APC.Domain.Entities;
+﻿using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +7,14 @@ using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
-    public interface ICountryRepository
+    public interface ICountryService
     {
         List<Country> GetAll();
-        Country GetById(int id);
-        bool Insert(Country country);
+        bool Create(Country country);
         bool Update(Country country);
         bool Delete(int id);
         bool GetBack(int id);
         bool PermanentDelete(int id);
-        bool Exists(string name);
         int Count();
     }
 }

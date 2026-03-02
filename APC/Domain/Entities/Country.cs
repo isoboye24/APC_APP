@@ -1,6 +1,4 @@
-﻿using APC.Domain.DTOs;
-using APC.Domain.Entities.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,28 +11,28 @@ namespace APC.Domain.Entities
         public int CountryId { get; private set; }
         public string CountryName { get; private set; }
 
-        public Country(CountryCreateState state)
+        public Country(string name)
         {
-            if (string.IsNullOrWhiteSpace(state.CountryName))
+            if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Country name cannot be empty");
 
-            CountryName = state.CountryName.Trim();
+            CountryName = name.Trim();
         }
 
-        public static Country Rehydrate(int id, CountryCreateState state)
+        public static Country Rehydrate(int id, string name)
         {
-            return new Country(state)
+            return new Country(name)
             {
                 CountryId = id,
             };
         }
 
-        public void UpdateName(CountryUpdateState updateState)
+        public void UpdateName(string newName)
         {
-            if (string.IsNullOrWhiteSpace(updateState.CountryName))
+            if (string.IsNullOrWhiteSpace(newName))
                 throw new ArgumentException("Country name cannot be empty");
 
-            CountryName = updateState.CountryName.Trim();
+            CountryName = newName.Trim();
         }
 
         public void SetId(int id)
