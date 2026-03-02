@@ -242,7 +242,7 @@ namespace APC.DAL.DAO
                                 nameOfNextOfKin = m.nextOfKin,
                                 relationshipToKinID = m.relationshipToKinID,
                                 relationshipToKin = kin.RelationshipToKin,
-                            }).OrderBy(x=>x.surname).ToList();
+                            }).OrderBy(x=>x.birthday.Day).ToList();
                 foreach (var item in list)
                 {
                     MemberDetailDTO dto = new MemberDetailDTO();

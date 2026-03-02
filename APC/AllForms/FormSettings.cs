@@ -42,7 +42,7 @@ namespace APC.AllForms
 
         CountryBLL countryBLL = new CountryBLL();
         CountryDTO countryDTO = new CountryDTO();
-        CountryDetailDTO countryDetail = new CountryDetailDTO();
+        CountryDTO countryDetail = new CountryDTO();
 
         EmploymentStatusBLL empStatusBLL = new EmploymentStatusBLL();
         EmploymentStatusDTO empStatusDTO = new EmploymentStatusDTO();
@@ -324,7 +324,7 @@ namespace APC.AllForms
 
         private void txtCountry_TextChanged(object sender, EventArgs e)
         {
-            List<CountryDetailDTO> list = countryDTO.Countries;
+            List<CountryDTO> list = countryDTO.Countries;
             list = list.Where(x => x.CountryName.Contains(txtCountry.Text)).ToList();
             dataGridViewCountry.DataSource = list;
         }
@@ -332,7 +332,7 @@ namespace APC.AllForms
         private void dataGridViewCountry_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            countryDetail = GeneralHelper.MapFromGrid<CountryDetailDTO>(dataGridViewCountry, e.RowIndex);
+            countryDetail = GeneralHelper.MapFromGrid<CountryDTO>(dataGridViewCountry, e.RowIndex);
         }
 
         private void btnDeleteCountry_Click(object sender, EventArgs e)
@@ -686,7 +686,7 @@ namespace APC.AllForms
 
         MemberDetailDTO deletedDataDetail = new MemberDetailDTO();
         CountryBLL countryDeletedDataBLL = new CountryBLL();
-        CountryDetailDTO countryDeletedDataDetail = new CountryDetailDTO();
+        CountryDTO countryDeletedDataDetail = new CountryDTO();
         NationalityBLL nationalityDeletedDataBLL = new NationalityBLL();
         NationalityDetailDTO nationalityDeletedDataDetail = new NationalityDetailDTO();
         ProfessionBLL professionDeletedDataBLL = new ProfessionBLL();
@@ -814,7 +814,7 @@ namespace APC.AllForms
             else if (cmbDeletedData.SelectedIndex == 1)
             {
                 if (e.RowIndex < 0) return;
-                countryDeletedDataDetail = GeneralHelper.MapFromGrid<CountryDetailDTO>(dataGridView1, e.RowIndex);
+                countryDeletedDataDetail = GeneralHelper.MapFromGrid<CountryDTO>(dataGridView1, e.RowIndex);
             }
             else if (cmbDeletedData.SelectedIndex == 2)
             {

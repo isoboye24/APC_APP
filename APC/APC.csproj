@@ -283,6 +283,7 @@
     <Compile Include="AllForms\FormViewSpecialContributor.Designer.cs">
       <DependentUpon>FormViewSpecialContributor.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\ViewModels\CountryViewModel.cs" />
     <Compile Include="BLL\ConstitutionBLL.cs" />
     <Compile Include="BLL\DocumentBLL.cs" />
     <Compile Include="BLL\EventExpenditureBLL.cs" />
@@ -631,6 +632,10 @@
     <Compile Include="DAL\SPECIAL_CONTRIBUTORS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\DTOs\CountryUpdateState.cs" />
+    <Compile Include="Domain\Entities\Country.cs" />
+    <Compile Include="Domain\DTOs\CountryCreateState.cs" />
+    <Compile Include="Domain\Interfaces\ICountryRepository.cs" />
     <Compile Include="FormProperties.cs" />
     <Compile Include="HelperServices\CommentHelperService.cs" />
     <Compile Include="HelperServices\CommittmentHelperService.cs" />
@@ -1012,6 +1017,10 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Applications\Services\" />
+    <Folder Include="Infrastructure\Data\" />
+    <Folder Include="Infrastructure\Repositories\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

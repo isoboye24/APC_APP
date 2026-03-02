@@ -48,7 +48,7 @@ namespace APC
             this.Close();
         }
         CountryBLL bll = new CountryBLL();
-        public CountryDetailDTO detail = new CountryDetailDTO();
+        public CountryDTO detail = new CountryDTO();
         public bool isUpdate = false;
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -60,7 +60,7 @@ namespace APC
             {
                 if (!isUpdate)
                 {
-                    CountryDetailDTO country = new CountryDetailDTO();
+                    CountryDTO country = new CountryDTO();
                     country.CountryName = txtCountry.Text;
                     if (bll.Insert(country))
                     {
