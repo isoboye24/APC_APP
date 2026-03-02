@@ -649,8 +649,10 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\Entities\Country.cs" />
+    <Compile Include="Domain\Entities\Position.cs" />
     <Compile Include="Domain\Interfaces\ICountryRepository.cs" />
     <Compile Include="Domain\Interfaces\ICountryService.cs" />
+    <Compile Include="Domain\Interfaces\IPositionRepository.cs" />
     <Compile Include="FormProperties.cs" />
     <Compile Include="HelperServices\CommentHelperService.cs" />
     <Compile Include="HelperServices\CommittmentHelperService.cs" />
@@ -666,6 +668,7 @@
     <Compile Include="HelperServices\SingleColumnHelperService.cs" />
     <Compile Include="HelperServices\SpecialContributionHelperService.cs" />
     <Compile Include="Infrastructure\Repositories\CountryRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\PositionRepository.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="ReadFiles.cs" />
     <Compile Include="FillComboBox.cs" />
