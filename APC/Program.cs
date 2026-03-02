@@ -31,13 +31,16 @@ namespace APC
 
             // Repositories
             services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IPositionRepository, PositionRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
+            services.AddScoped<IPositionService, PositionService>();
 
             // Forms
             services.AddTransient<FormLogin>();
             services.AddTransient<FormCountry>();
+            services.AddTransient<FormPosition>();
 
             services.AddTransient<FormSettings>();
 

@@ -650,6 +650,7 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\Entities\Country.cs" />
+    <Compile Include="Domain\Entities\EmploymentStatus.cs" />
     <Compile Include="Domain\Entities\Position.cs" />
     <Compile Include="Domain\Interfaces\ICountryRepository.cs" />
     <Compile Include="Domain\Interfaces\ICountryService.cs" />
