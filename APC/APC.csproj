@@ -300,6 +300,7 @@
     </Compile>
     <Compile Include="AllForms\ViewModels\CountryViewModel.cs" />
     <Compile Include="Applications\Services\CountryService.cs" />
+    <Compile Include="Applications\Services\PositionService.cs" />
     <Compile Include="BLL\ConstitutionBLL.cs" />
     <Compile Include="BLL\DocumentBLL.cs" />
     <Compile Include="BLL\EventExpenditureBLL.cs" />
@@ -653,6 +654,7 @@
     <Compile Include="Domain\Interfaces\ICountryRepository.cs" />
     <Compile Include="Domain\Interfaces\ICountryService.cs" />
     <Compile Include="Domain\Interfaces\IPositionRepository.cs" />
+    <Compile Include="Domain\Interfaces\IPositionService.cs" />
     <Compile Include="FormProperties.cs" />
     <Compile Include="HelperServices\CommentHelperService.cs" />
     <Compile Include="HelperServices\CommittmentHelperService.cs" />
