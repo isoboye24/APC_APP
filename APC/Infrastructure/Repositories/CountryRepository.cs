@@ -24,9 +24,9 @@ namespace APC.Infrastructure.Repositories
 
         public bool GetBack(int ID)
         {
-            COUNTRY country = _db.COUNTRY.First(x => x.countryID == ID);
-            country.isDeleted = false;
-            country.deletedDate = null;
+            var entity = _db.COUNTRY.First(x => x.countryID == ID);
+            entity.isDeleted = false;
+            entity.deletedDate = null;
             _db.SaveChanges();
             return true;
         }
