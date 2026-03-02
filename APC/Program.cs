@@ -32,15 +32,18 @@ namespace APC
             // Repositories
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IPositionRepository, PositionRepository>();
+            services.AddScoped<IEmploymentStatusRepository, EmploymentStatusRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IPositionService, PositionService>();
+            services.AddScoped<IEmploymentStatusService, EmploymentStatusService>();
 
             // Forms
             services.AddTransient<FormLogin>();
             services.AddTransient<FormCountry>();
             services.AddTransient<FormPosition>();
+            services.AddTransient<FormEmploymentStatus>();
 
             services.AddTransient<FormSettings>();
 
