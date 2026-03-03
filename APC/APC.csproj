@@ -308,6 +308,7 @@
     <Compile Include="Applications\Services\CountryService.cs" />
     <Compile Include="Applications\Services\EmploymentStatusService.cs" />
     <Compile Include="Applications\Services\MaritalStatusService.cs" />
+    <Compile Include="Applications\Services\MonthService.cs" />
     <Compile Include="Applications\Services\NationalityService.cs" />
     <Compile Include="Applications\Services\PermissionService.cs" />
     <Compile Include="Applications\Services\PositionService.cs" />
@@ -675,6 +676,7 @@
     <Compile Include="Domain\Interfaces\IMaritalStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IMaritalStatusService.cs" />
     <Compile Include="Domain\Interfaces\IMonthRepository.cs" />
+    <Compile Include="Domain\Interfaces\IMonthService.cs" />
     <Compile Include="Domain\Interfaces\INationalityRepository.cs" />
     <Compile Include="Domain\Interfaces\INationalityService.cs" />
     <Compile Include="Domain\Interfaces\IPermissionRepository.cs" />
