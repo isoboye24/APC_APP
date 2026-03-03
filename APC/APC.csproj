@@ -663,6 +663,7 @@
     <Compile Include="Domain\Entities\Country.cs" />
     <Compile Include="Domain\Entities\EmploymentStatus.cs" />
     <Compile Include="Domain\Entities\MaritalStatus.cs" />
+    <Compile Include="Domain\Entities\Month.cs" />
     <Compile Include="Domain\Entities\Nationality.cs" />
     <Compile Include="Domain\Entities\Permission.cs" />
     <Compile Include="Domain\Entities\Position.cs" />
