@@ -668,6 +668,7 @@
     <Compile Include="Domain\Interfaces\IMaritalStatusService.cs" />
     <Compile Include="Domain\Interfaces\INationalityRepository.cs" />
     <Compile Include="Domain\Interfaces\INationalityService.cs" />
+    <Compile Include="Domain\Interfaces\IPermissionRepository.cs" />
     <Compile Include="Domain\Interfaces\IPositionRepository.cs" />
     <Compile Include="Domain\Interfaces\IPositionService.cs" />
     <Compile Include="Domain\Interfaces\IProfessionRepository.cs" />
@@ -690,6 +691,7 @@
     <Compile Include="Infrastructure\Repositories\EmploymentStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MaritalStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\NationalityRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\PermissionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PositionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ProfessionRepository.cs" />
     <Compile Include="LoginInfo.cs" />
