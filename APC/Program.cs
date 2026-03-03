@@ -33,17 +33,20 @@ namespace APC
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IPositionRepository, PositionRepository>();
             services.AddScoped<IEmploymentStatusRepository, EmploymentStatusRepository>();
+            services.AddScoped<IMaritalStatusRepository, MaritalStatusRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IPositionService, PositionService>();
             services.AddScoped<IEmploymentStatusService, EmploymentStatusService>();
+            services.AddScoped<IMaritalStatusService, MaritalStatusService>();
 
             // Forms
             services.AddTransient<FormLogin>();
             services.AddTransient<FormCountry>();
             services.AddTransient<FormPosition>();
             services.AddTransient<FormEmploymentStatus>();
+            services.AddTransient<FormMaritalStatus>();
 
             services.AddTransient<FormSettings>();
 
