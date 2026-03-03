@@ -36,6 +36,7 @@ namespace APC
             services.AddScoped<IMaritalStatusRepository, MaritalStatusRepository>();
             services.AddScoped<INationalityRepository, NationalityRepository>();
             services.AddScoped<IProfessionRepository, ProfessionRepository>();
+            services.AddScoped<IPermissionRepository, PermissionRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -44,6 +45,7 @@ namespace APC
             services.AddScoped<IMaritalStatusService, MaritalStatusService>();
             services.AddScoped<INationalityService, NationalityService>();
             services.AddScoped<IProfessionService, ProfessionService>();
+            services.AddScoped<IPermissionService, PermissionService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -53,6 +55,7 @@ namespace APC
             services.AddTransient<FormMaritalStatus>();
             services.AddTransient<FormNationality>();
             services.AddTransient<FormProfession>();
+            services.AddTransient<FormPermission>();
 
             services.AddTransient<FormSettings>();
 

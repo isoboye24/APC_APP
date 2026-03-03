@@ -202,6 +202,12 @@
     <Compile Include="AllForms\FormPaymentStatus.Designer.cs">
       <DependentUpon>FormPaymentStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormPermission.Designer.cs">
+      <DependentUpon>FormPermission.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormReportsBoard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -303,6 +309,7 @@
     <Compile Include="Applications\Services\EmploymentStatusService.cs" />
     <Compile Include="Applications\Services\MaritalStatusService.cs" />
     <Compile Include="Applications\Services\NationalityService.cs" />
+    <Compile Include="Applications\Services\PermissionService.cs" />
     <Compile Include="Applications\Services\PositionService.cs" />
     <Compile Include="Applications\Services\ProfessionService.cs" />
     <Compile Include="BLL\ConstitutionBLL.cs" />
@@ -669,6 +676,7 @@
     <Compile Include="Domain\Interfaces\INationalityRepository.cs" />
     <Compile Include="Domain\Interfaces\INationalityService.cs" />
     <Compile Include="Domain\Interfaces\IPermissionRepository.cs" />
+    <Compile Include="Domain\Interfaces\IPermissionService.cs" />
     <Compile Include="Domain\Interfaces\IPositionRepository.cs" />
     <Compile Include="Domain\Interfaces\IPositionService.cs" />
     <Compile Include="Domain\Interfaces\IProfessionRepository.cs" />
@@ -796,6 +804,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormPaymentStatus.resx">
       <DependentUpon>FormPaymentStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormPermission.resx">
+      <DependentUpon>FormPermission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormPersonalAttendance.resx">
       <DependentUpon>FormPersonalAttendance.cs</DependentUpon>
