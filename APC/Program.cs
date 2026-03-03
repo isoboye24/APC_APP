@@ -39,6 +39,7 @@ namespace APC
             services.AddScoped<IPermissionRepository, PermissionRepository>();
             services.AddScoped<IMonthRepository, MonthRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>();
+            services.AddScoped<IAttendanceStatusRepository, AttendanceStatusRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -50,6 +51,7 @@ namespace APC
             services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<IMonthService, MonthService>();
             services.AddScoped<IGenderService, GenderService>();
+            services.AddScoped<IAttendanceStatusService, AttendanceStatusService>();
 
             // Forms
             services.AddTransient<FormLogin>();
