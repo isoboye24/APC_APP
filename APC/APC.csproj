@@ -668,6 +668,7 @@
     <Compile Include="Domain\Entities\EmploymentStatus.cs" />
     <Compile Include="Domain\Entities\Gender.cs" />
     <Compile Include="Domain\Entities\MaritalStatus.cs" />
+    <Compile Include="Domain\Entities\MembershipStatus.cs" />
     <Compile Include="Domain\Entities\Month.cs" />
     <Compile Include="Domain\Entities\Nationality.cs" />
     <Compile Include="Domain\Entities\Permission.cs" />
