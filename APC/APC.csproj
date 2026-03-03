@@ -302,6 +302,7 @@
     <Compile Include="Applications\Services\CountryService.cs" />
     <Compile Include="Applications\Services\EmploymentStatusService.cs" />
     <Compile Include="Applications\Services\MaritalStatusService.cs" />
+    <Compile Include="Applications\Services\NationalityService.cs" />
     <Compile Include="Applications\Services\PositionService.cs" />
     <Compile Include="BLL\ConstitutionBLL.cs" />
     <Compile Include="BLL\DocumentBLL.cs" />
@@ -663,6 +664,7 @@
     <Compile Include="Domain\Interfaces\IMaritalStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IMaritalStatusService.cs" />
     <Compile Include="Domain\Interfaces\INationalityRepository.cs" />
+    <Compile Include="Domain\Interfaces\INationalityService.cs" />
     <Compile Include="Domain\Interfaces\IPositionRepository.cs" />
     <Compile Include="Domain\Interfaces\IPositionService.cs" />
     <Compile Include="FormProperties.cs" />
