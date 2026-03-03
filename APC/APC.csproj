@@ -662,6 +662,7 @@
     <Compile Include="DAL\SPECIAL_CONTRIBUTORS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Entities\AttendanceStatus.cs" />
     <Compile Include="Domain\Entities\Country.cs" />
     <Compile Include="Domain\Entities\EmploymentStatus.cs" />
     <Compile Include="Domain\Entities\Gender.cs" />
