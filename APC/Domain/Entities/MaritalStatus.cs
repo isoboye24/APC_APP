@@ -15,7 +15,7 @@ namespace APC.Domain.Entities
         public MaritalStatus(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Employment status name cannot be empty");
+                throw new ArgumentException("Marital status name cannot be empty");
 
             MaritalStatusName = name.Trim();
         }
