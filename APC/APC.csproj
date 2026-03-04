@@ -674,6 +674,7 @@
     <Compile Include="Domain\Entities\MembershipStatus.cs" />
     <Compile Include="Domain\Entities\Month.cs" />
     <Compile Include="Domain\Entities\Nationality.cs" />
+    <Compile Include="Domain\Entities\NextOfKin.cs" />
     <Compile Include="Domain\Entities\PaymentStatus.cs" />
     <Compile Include="Domain\Entities\Permission.cs" />
     <Compile Include="Domain\Entities\Position.cs" />
