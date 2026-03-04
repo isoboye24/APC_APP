@@ -683,6 +683,7 @@
     <Compile Include="Domain\Entities\Profession.cs" />
     <Compile Include="Domain\Interfaces\IAttendanceStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IAttendanceStatusService.cs" />
+    <Compile Include="Domain\Interfaces\ICommentRepository.cs" />
     <Compile Include="Domain\Interfaces\ICountryRepository.cs" />
     <Compile Include="Domain\Interfaces\ICountryService.cs" />
     <Compile Include="Domain\Interfaces\IEmploymentStatusRepository.cs" />
@@ -721,6 +722,7 @@
     <Compile Include="HelperServices\SingleColumnHelperService.cs" />
     <Compile Include="HelperServices\SpecialContributionHelperService.cs" />
     <Compile Include="Infrastructure\Repositories\AttendanceStatusRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\CommentRepository.cs" />
     <Compile Include="Infrastructure\Repositories\CountryRepository.cs" />
     <Compile Include="Infrastructure\Repositories\EmploymentStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\GenderRepository.cs" />
