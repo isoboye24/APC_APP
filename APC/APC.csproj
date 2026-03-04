@@ -313,6 +313,7 @@
     <Compile Include="Applications\Services\MembershipStatusService.cs" />
     <Compile Include="Applications\Services\MonthService.cs" />
     <Compile Include="Applications\Services\NationalityService.cs" />
+    <Compile Include="Applications\Services\NextOfKinService.cs" />
     <Compile Include="Applications\Services\PaymentStatusService.cs" />
     <Compile Include="Applications\Services\PermissionService.cs" />
     <Compile Include="Applications\Services\PositionService.cs" />
@@ -695,6 +696,7 @@
     <Compile Include="Domain\Interfaces\INationalityRepository.cs" />
     <Compile Include="Domain\Interfaces\INationalityService.cs" />
     <Compile Include="Domain\Interfaces\INextOfKinRepository.cs" />
+    <Compile Include="Domain\Interfaces\INextOfKinService.cs" />
     <Compile Include="Domain\Interfaces\IPaymentStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IPaymentStatusService.cs" />
     <Compile Include="Domain\Interfaces\IPermissionRepository.cs" />
