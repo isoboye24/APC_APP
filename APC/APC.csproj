@@ -684,6 +684,7 @@
     <Compile Include="Domain\Interfaces\IGenderService.cs" />
     <Compile Include="Domain\Interfaces\IMaritalStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IMaritalStatusService.cs" />
+    <Compile Include="Domain\Interfaces\IMembershipStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IMonthRepository.cs" />
     <Compile Include="Domain\Interfaces\IMonthService.cs" />
     <Compile Include="Domain\Interfaces\INationalityRepository.cs" />
@@ -713,6 +714,7 @@
     <Compile Include="Infrastructure\Repositories\EmploymentStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\GenderRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MaritalStatusRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\MembershipStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MonthRepository.cs" />
     <Compile Include="Infrastructure\Repositories\NationalityRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PermissionRepository.cs" />
