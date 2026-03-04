@@ -1,6 +1,7 @@
 ﻿using APC.AllForms;
 using APC.Applications.Services;
 using APC.DAL;
+using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using APC.Infrastructure.Repositories;
 using APC.Utility;
@@ -40,6 +41,7 @@ namespace APC
             services.AddScoped<IMonthRepository, MonthRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>();
             services.AddScoped<IAttendanceStatusRepository, AttendanceStatusRepository>();
+            services.AddScoped<IMembershipStatusRepository, MembershipStatusRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -52,6 +54,7 @@ namespace APC
             services.AddScoped<IMonthService, MonthService>();
             services.AddScoped<IGenderService, GenderService>();
             services.AddScoped<IAttendanceStatusService, AttendanceStatusService>();
+            services.AddScoped<IMembershipStatusService, MembershipStatusService>();
 
             // Forms
             services.AddTransient<FormLogin>();
