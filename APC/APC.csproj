@@ -692,6 +692,7 @@
     <Compile Include="Domain\Interfaces\IMonthService.cs" />
     <Compile Include="Domain\Interfaces\INationalityRepository.cs" />
     <Compile Include="Domain\Interfaces\INationalityService.cs" />
+    <Compile Include="Domain\Interfaces\IPaymentStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IPermissionRepository.cs" />
     <Compile Include="Domain\Interfaces\IPermissionService.cs" />
     <Compile Include="Domain\Interfaces\IPositionRepository.cs" />
@@ -720,6 +721,7 @@
     <Compile Include="Infrastructure\Repositories\MembershipStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MonthRepository.cs" />
     <Compile Include="Infrastructure\Repositories\NationalityRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\PaymentStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PermissionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PositionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ProfessionRepository.cs" />
