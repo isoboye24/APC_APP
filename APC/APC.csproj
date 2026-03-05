@@ -693,6 +693,7 @@
     <Compile Include="Domain\Interfaces\IConstitutionService.cs" />
     <Compile Include="Domain\Interfaces\ICountryRepository.cs" />
     <Compile Include="Domain\Interfaces\ICountryService.cs" />
+    <Compile Include="Domain\Interfaces\IDocumentRepository.cs" />
     <Compile Include="Domain\Interfaces\IEmploymentStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IEmploymentStatusService.cs" />
     <Compile Include="Domain\Interfaces\IGenderRepository.cs" />
@@ -732,6 +733,7 @@
     <Compile Include="Infrastructure\Repositories\CommentRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ConstitutionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\CountryRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\DocumentRepository.cs" />
     <Compile Include="Infrastructure\Repositories\EmploymentStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\GenderRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MaritalStatusRepository.cs" />
