@@ -313,6 +313,7 @@
     <Compile Include="Applications\Services\EmploymentStatusService.cs" />
     <Compile Include="Applications\Services\EventExpenditureService.cs" />
     <Compile Include="Applications\Services\EventImagesService.cs" />
+    <Compile Include="Applications\Services\EventReceiptService.cs" />
     <Compile Include="Applications\Services\GenderService.cs" />
     <Compile Include="Applications\Services\MaritalStatusService.cs" />
     <Compile Include="Applications\Services\MembershipStatusService.cs" />
@@ -682,6 +683,7 @@
     <Compile Include="Domain\Entities\EventReceipt.cs" />
     <Compile Include="Domain\Entities\Gender.cs" />
     <Compile Include="Domain\Interfaces\IEventReceiptRepository.cs" />
+    <Compile Include="Domain\Interfaces\IEventReceiptService.cs" />
     <Compile Include="Domain\Interfaces\IMembershipStatusService.cs" />
     <Compile Include="Domain\Entities\MaritalStatus.cs" />
     <Compile Include="Domain\Entities\MembershipStatus.cs" />

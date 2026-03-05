@@ -44,11 +44,13 @@ namespace APC
             services.AddScoped<IMembershipStatusRepository, MembershipStatusRepository>();
             services.AddScoped<IPaymentStatusRepository, PaymentStatusRepository>();
             services.AddScoped<INextOfKinRepository, NextOfKinRepository>();
+
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IConstitutionRepository, ConstitutionRepository>();
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IEventExpenditureRepository, EventExpenditureRepository>();
             services.AddScoped<IEventImagesRepository, EventImagesRepository>();
+            services.AddScoped<IEventReceiptRepository, EventReceiptRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -63,11 +65,13 @@ namespace APC
             services.AddScoped<IAttendanceStatusService, AttendanceStatusService>();
             services.AddScoped<IMembershipStatusService, MembershipStatusService>();
             services.AddScoped<INextOfKinService, NextOfKinService>();
+
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IConstitutionService, ConstitutionService>();
             services.AddScoped<IDocumentService, DocumentService>();
             services.AddScoped<IEventExpenditureService, EventExpenditureService>();
-            services.AddScoped<EventImagesService, EventImagesService>();
+            services.AddScoped<IEventImagesService, EventImagesService>();
+            services.AddScoped<IEventReceiptService, EventReceiptService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -95,7 +99,10 @@ namespace APC
             services.AddTransient<FormViewEventExpenditure>();
             services.AddTransient<FormEventSingleImage>();
             services.AddTransient<FormViewSingleImage>();
+            services.AddTransient<FormEventReceipt>();
+            services.AddTransient<FormViewEventReceipt>();
 
+            services.AddTransient<FormEventDetailsBoard>();
             services.AddTransient<FormEventsList>();
 
 
