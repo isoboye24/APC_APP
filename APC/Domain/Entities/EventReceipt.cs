@@ -76,7 +76,10 @@ namespace APC.Domain.Entities
 
         private void SetCaption(string caption)
         {
-            Caption = string.IsNullOrWhiteSpace(caption) ? null : caption.Trim();
+            if (string.IsNullOrWhiteSpace(caption))
+                throw new ArgumentException("Image caption cannot be empty");
+
+            Caption = caption.Trim();
         }
 
         public void UpdateImageCaption(string newCaption)
