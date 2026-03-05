@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
-    public interface ICommentRepository
+    public interface ICommentService
     {
         List<Comment> GetAll();
-        Comment GetById(int id);
-        bool Insert(Comment comment);
-        bool Update(Comment comment);
+        bool Create(Comment content);
+        bool Update(Comment content);
         bool Delete(int id);
         bool GetBack(int id);
         bool PermanentDelete(int id);
-        bool Exists(string content, int memberId);
         int Count();
     }
 }

@@ -44,6 +44,7 @@ namespace APC
             services.AddScoped<IMembershipStatusRepository, MembershipStatusRepository>();
             services.AddScoped<IPaymentStatusRepository, PaymentStatusRepository>();
             services.AddScoped<INextOfKinRepository, NextOfKinRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -58,6 +59,7 @@ namespace APC
             services.AddScoped<IAttendanceStatusService, AttendanceStatusService>();
             services.AddScoped<IMembershipStatusService, MembershipStatusService>();
             services.AddScoped<INextOfKinService, NextOfKinService>();
+            services.AddScoped<ICommentService, CommentService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -69,8 +71,12 @@ namespace APC
             services.AddTransient<FormProfession>();
             services.AddTransient<FormPermission>();
             services.AddTransient<FormPaymentStatus>();
-
             services.AddTransient<FormSettings>();
+
+            services.AddTransient<FormComments>();
+            services.AddTransient<FormSingleCommentList>();
+            services.AddTransient<FormViewComment>();
+
 
             var initializedForms = new HashSet<Form>();
 

@@ -33,9 +33,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public bool Exists(string content)
+        public bool Exists(string content, int memberId)
         {
-            return _db.COMMENT.Any(x => !x.isDeleted && x.comment1 == content);
+            return _db.COMMENT.Any(x => !x.isDeleted && x.comment1 == content && x.memberID == memberId);
         }
 
         public List<Comment> GetAll()

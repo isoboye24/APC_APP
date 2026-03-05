@@ -35,16 +35,6 @@ namespace APC.Domain.Entities
             return comment;
         }
 
-        public void UpdateContent(string newContent)
-        {
-            SetContent(newContent);
-        }
-
-        public void ChangeMember(int newMemberId)
-        {
-            SetMember(newMemberId);
-        }
-
         private void SetContent(string content)
         {
             if (string.IsNullOrWhiteSpace(content))
@@ -53,12 +43,22 @@ namespace APC.Domain.Entities
             Content = content.Trim();
         }
 
+        public void UpdateContent(string newContent)
+        {
+            SetContent(newContent);
+        }
+
         private void SetMember(int memberId)
         {
             if (memberId <= 0)
                 throw new ArgumentException("Invalid member");
 
             MemberId = memberId;
+        }
+
+        public void ChangeMember(int newMemberId)
+        {
+            SetMember(newMemberId);
         }
 
         private void SetDate(int day, int monthId, int year)
@@ -75,6 +75,11 @@ namespace APC.Domain.Entities
             Day = day;
             MonthId = monthId;
             Year = year;
+        }
+
+        public void ChangeDate(int day, int monthId, int year)
+        {
+            SetDate(day, monthId, year);
         }
     }
 }

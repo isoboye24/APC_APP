@@ -306,6 +306,7 @@
     </Compile>
     <Compile Include="AllForms\ViewModels\CountryViewModel.cs" />
     <Compile Include="Applications\Services\AttendanceStatusService.cs" />
+    <Compile Include="Applications\Services\CommentService.cs" />
     <Compile Include="Applications\Services\CountryService.cs" />
     <Compile Include="Applications\Services\EmploymentStatusService.cs" />
     <Compile Include="Applications\Services\GenderService.cs" />
@@ -684,6 +685,7 @@
     <Compile Include="Domain\Interfaces\IAttendanceStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IAttendanceStatusService.cs" />
     <Compile Include="Domain\Interfaces\ICommentRepository.cs" />
+    <Compile Include="Domain\Interfaces\ICommentService.cs" />
     <Compile Include="Domain\Interfaces\ICountryRepository.cs" />
     <Compile Include="Domain\Interfaces\ICountryService.cs" />
     <Compile Include="Domain\Interfaces\IEmploymentStatusRepository.cs" />
