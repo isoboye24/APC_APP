@@ -59,7 +59,7 @@ namespace APC.Domain.Entities
             DocumentPath = documentPath.Trim();
         }
 
-        public void UpdateSection(string newDocumentPath)
+        public void UpdateDocumentPath(string newDocumentPath)
         {
             SetDocumentPath(newDocumentPath);
         }
