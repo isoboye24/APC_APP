@@ -702,6 +702,7 @@
     <Compile Include="Domain\Interfaces\IEmploymentStatusRepository.cs" />
     <Compile Include="Domain\Interfaces\IEmploymentStatusService.cs" />
     <Compile Include="Domain\Interfaces\IEventExpenditureRepository.cs" />
+    <Compile Include="Domain\Interfaces\IEventImagesRepository.cs" />
     <Compile Include="Domain\Interfaces\IGenderRepository.cs" />
     <Compile Include="Domain\Interfaces\IGenderService.cs" />
     <Compile Include="Domain\Interfaces\IMaritalStatusRepository.cs" />
@@ -742,6 +743,7 @@
     <Compile Include="Infrastructure\Repositories\DocumentRepository.cs" />
     <Compile Include="Infrastructure\Repositories\EmploymentStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\EventExpenditureRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\EventImagesRepository.cs" />
     <Compile Include="Infrastructure\Repositories\GenderRepository.cs" />
     <Compile Include="Infrastructure\Repositories\IEventExpenditureService.cs" />
     <Compile Include="Infrastructure\Repositories\MaritalStatusRepository.cs" />
