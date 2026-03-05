@@ -47,6 +47,7 @@ namespace APC
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IConstitutionRepository, ConstitutionRepository>();
             services.AddScoped<IDocumentRepository, DocumentRepository>();
+            services.AddScoped<IEventExpenditureRepository, EventExpenditureRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -64,6 +65,7 @@ namespace APC
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IConstitutionService, ConstitutionService>();
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<IEventExpenditureService, EventExpenditureService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -80,15 +82,17 @@ namespace APC
             services.AddTransient<FormComments>();
             services.AddTransient<FormSingleCommentList>();
             services.AddTransient<FormViewComment>();
-
             services.AddTransient<FormConstitution>();
             services.AddTransient<FormViewConstitution>();
-
             services.AddTransient<FormMeetingBoard>();
 
             services.AddTransient<FormDocument>();
             services.AddTransient<FormDocumentList>();
             services.AddTransient<FormViewDocument>();
+            services.AddTransient<FormEventExpenditure>();
+            services.AddTransient<FormViewEventExpenditure>();
+
+            services.AddTransient<FormEventsList>();
 
 
 
