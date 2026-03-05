@@ -56,7 +56,7 @@ namespace APC.Domain.Entities
             Fine = fine;
         }
 
-        public void ChangeMember(int newFine)
+        public void UpdateFine(decimal newFine)
         {
             SetFine(newFine);
         }
