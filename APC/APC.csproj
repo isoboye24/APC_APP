@@ -679,8 +679,9 @@
     <Compile Include="Domain\Entities\EmploymentStatus.cs" />
     <Compile Include="Domain\Entities\EventExpenditure.cs" />
     <Compile Include="Domain\Entities\EventImages.cs" />
+    <Compile Include="Domain\Entities\EventReceipt.cs" />
     <Compile Include="Domain\Entities\Gender.cs" />
-    <Compile Include="Domain\Entities\IMembershipStatusService.cs" />
+    <Compile Include="Domain\Interfaces\IMembershipStatusService.cs" />
     <Compile Include="Domain\Entities\MaritalStatus.cs" />
     <Compile Include="Domain\Entities\MembershipStatus.cs" />
     <Compile Include="Domain\Entities\Month.cs" />
