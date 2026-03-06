@@ -89,7 +89,7 @@ namespace APC.Domain.Entities
             AmountSold = amountSold;
         }
 
-        public void UpdateSpentAmount(decimal newAmountSold)
+        public void UpdateAmountSold(decimal newAmountSold)
         {
             SetAmountSold(newAmountSold);
         }
