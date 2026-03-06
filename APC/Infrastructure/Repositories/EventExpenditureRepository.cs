@@ -44,9 +44,9 @@ namespace APC.Infrastructure.Repositories
             var data = _db.EVENT_EXPENDITURE
                 .Where(x => !x.isDeleted)
                 .OrderByDescending(x => x.year)
-                .OrderByDescending(x => x.monthID)
-                .OrderByDescending(x => x.day)
-                .OrderByDescending(x => x.amountSpent)
+                .ThenByDescending(x => x.monthID)
+                .ThenByDescending(x => x.day)
+                .ThenByDescending(x => x.amountSpent)
                 .ThenBy(x => x.summary)
                 .ToList();
 

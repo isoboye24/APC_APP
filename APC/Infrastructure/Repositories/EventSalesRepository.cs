@@ -9,116 +9,110 @@ using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
-    public class EventReceiptRepository : IEventReceiptRepository
+    public class EventSalesRepository : IEventSalesRepository
     {
         private readonly APCEntities _db;
-        public EventReceiptRepository(APCEntities db)
+        public EventSalesRepository(APCEntities db)
         {
             _db = db;
         }
+
         public int Count()
         {
-            return _db.EVENT_RECEIPTS.Count(x => !x.isDeleted);
+            return _db.EVENT_SALES.Count(x => !x.isDeleted);
         }
 
         public bool Delete(int id)
         {
-            var entity = _db.EVENT_RECEIPTS.First(x => x.eventReceiptID == id);
+            var entity = _db.EVENT_SALES.First(x => x.eventSalesID == id);
             entity.isDeleted = true;
             entity.deletedDate = DateTime.Today;
             _db.SaveChanges();
             return true;
         }
 
-        public bool Exists(int eventId, string imagePath)
+        public bool Exists(int eventId, decimal amountSold, string summary, int day, int monthId, int year)
         {
-            return _db.EVENT_RECEIPTS.Any(x => !x.isDeleted && x.eventID == eventId && x.imagePath == imagePath);
+            return _db.EVENT_SALES.Any(x => !x.isDeleted && x.eventID == eventId && x.amountSold == amountSold 
+            && x.summary == summary && x.salesDate.Day == day && x.salesDate.Month == monthId && x.salesDate.Year == year);
         }
 
-        public List<EventReceipt> GetAll()
+        public List<EventSales> GetAll()
         {
-            var data = _db.EVENT_RECEIPTS
+            var data = _db.EVENT_SALES
                 .Where(x => !x.isDeleted)
                 .OrderByDescending(x => x.year)
                 .ThenByDescending(x => x.monthID)
                 .ThenByDescending(x => x.day)
-                .ThenBy(x => x.caption)
+                .ThenByDescending(x => x.amountSold)
                 .ToList();
 
             return data
-                .Select(x => EventReceipt.Rehydrate(
-                    x.eventReceiptID,
+                .Select(x => EventSales.Rehydrate(
+                    x.eventSalesID,
                     x.eventID,
-                    x.imagePath,
+                    x.amountSold,
                     x.summary,
-                    x.caption,
                     x.day,
                     x.monthID,
                     x.year,
-                    x.receiptDate,
-                    x.amountSpent
+                    x.salesDate
                 ))
                 .ToList();
         }
 
         public bool GetBack(int id)
         {
-            var entity = _db.EVENT_RECEIPTS.First(x => x.eventReceiptID == id);
+            var entity = _db.EVENT_SALES.First(x => x.eventSalesID == id);
             entity.isDeleted = false;
             entity.deletedDate = null;
             _db.SaveChanges();
             return true;
         }
 
-        public EventReceipt GetById(int id)
+        public EventSales GetById(int id)
         {
-            var entity = _db.EVENT_RECEIPTS
-                .Where(x => x.eventReceiptID == id && !x.isDeleted)
+            var entity = _db.EVENT_SALES
+                .Where(x => x.eventSalesID == id && !x.isDeleted)
                 .Select(x => new
                 {
-                    x.eventReceiptID,
+                    x.eventSalesID,
                     x.eventID,
-                    x.imagePath,
+                    x.amountSold,
                     x.summary,
-                    x.caption,
                     x.day,
                     x.monthID,
                     x.year,
-                    x.receiptDate,
-                    x.amountSpent
+                    x.salesDate
                 })
                 .FirstOrDefault();
 
             if (entity == null)
                 return null;
 
-            return EventReceipt.Rehydrate(
-                    entity.eventReceiptID,
+            return EventSales.Rehydrate(
+                    entity.eventSalesID,
                     entity.eventID,
-                    entity.imagePath,
+                    entity.amountSold,
                     entity.summary,
-                    entity.caption,
                     entity.day,
                     entity.monthID,
                     entity.year,
-                    entity.receiptDate,
-                    entity.amountSpent
+                    entity.salesDate
             );
         }
 
-        public bool Insert(EventReceipt data)
+        public bool Insert(EventSales data)
         {
-            _db.EVENT_RECEIPTS.Add(new EVENT_RECEIPTS
+            _db.EVENT_SALES.Add(new EVENT_SALES
             {
                 eventID = data.EventId,
-                imagePath = data.ImagePath,
+                amountSold = data.AmountSold,
                 summary = data.Summary,
-                caption = data.Caption,
                 day = data.Day,
                 monthID = data.MonthId,
                 year = data.Year,
-                receiptDate = data.ReceiptDate,
-                amountSpent = data.AmountSpent,
+                salesDate = data.SalesDate,
             });
 
             _db.SaveChanges();
@@ -127,29 +121,27 @@ namespace APC.Infrastructure.Repositories
 
         public bool PermanentDelete(int id)
         {
-            var entity = _db.EVENT_RECEIPTS.FirstOrDefault(x => x.eventReceiptID == id);
+            var entity = _db.EVENT_SALES.FirstOrDefault(x => x.eventSalesID == id);
 
             if (entity == null)
                 return false;
 
-            _db.EVENT_RECEIPTS.Remove(entity);
+            _db.EVENT_SALES.Remove(entity);
             _db.SaveChanges();
 
             return true;
         }
 
-        public bool Update(EventReceipt data)
+        public bool Update(EventSales data)
         {
-            var entity = _db.EVENT_RECEIPTS.First(x => x.eventReceiptID == data.EventReceiptId);
+            var entity = _db.EVENT_SALES.First(x => x.eventSalesID == data.EventSalesId);
             entity.eventID = data.EventId;
+            entity.amountSold = data.AmountSold;
             entity.summary = data.Summary;
-            entity.imagePath = data.ImagePath;
-            entity.caption = data.Caption;
             entity.day = data.Day;
             entity.monthID = data.MonthId;
             entity.year = data.Year;
-            entity.receiptDate = data.ReceiptDate;
-            entity.amountSpent = data.AmountSpent;
+            entity.salesDate = data.SalesDate;
 
             _db.SaveChanges();
             return true;
