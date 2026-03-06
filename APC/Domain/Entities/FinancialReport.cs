@@ -82,7 +82,7 @@ namespace APC.Domain.Entities
             Year = year;
         }
 
-        public void UpdateDate(int newYear)
+        public void UpdateYear(int newYear)
         {
             SetYear(newYear);
         }
