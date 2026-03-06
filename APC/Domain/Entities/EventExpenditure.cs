@@ -13,11 +13,8 @@ namespace APC.Domain.Entities
         public decimal SpentAmount { get; private set; }
         public DateTime ExpenditureDate { get; private set; }
         public string Summary { get; private set; }
-        public int Day { get; private set; }
-        public int MonthId { get; private set; }
-        public int Year { get; private set; }
 
-        public EventExpenditure(int eventId, decimal spentAmount, DateTime expenditureDate, string summary, int day, int monthId, int year)
+        public EventExpenditure(int eventId, decimal spentAmount, DateTime expenditureDate, string summary)
         {
             SetEvent(eventId);
             SetSpentAmount(spentAmount);
@@ -30,13 +27,10 @@ namespace APC.Domain.Entities
             int eventId, 
             decimal spentAmount, 
             DateTime expenditureDate, 
-            string summary, 
-            int day, 
-            int monthId, 
-            int year
+            string summary
             )
         {
-            var expenditure = new EventExpenditure(eventId, spentAmount, expenditureDate, summary, day, monthId, year);
+            var expenditure = new EventExpenditure(eventId, spentAmount, expenditureDate, summary);
             expenditure.EventExpenditureId = id;
             return expenditure;
         }
@@ -69,19 +63,10 @@ namespace APC.Domain.Entities
 
         private void SetDate(DateTime date)
         {
-            if (date.Day < 1 || date.Day > 31)
-                throw new ArgumentException("Invalid day");
-
-            if (date.Month < 1 || date.Month > 12)
-                throw new ArgumentException("Invalid month");
-
             if (date.Year < 2000 || date.Year > DateTime.Now.Year + 1)
                 throw new ArgumentException("Invalid year");
 
             ExpenditureDate = date;
-            Day = date.Day;
-            MonthId = date.Month;
-            Year = date.Year;
         }
 
         public void UpdateDate(DateTime newDate)

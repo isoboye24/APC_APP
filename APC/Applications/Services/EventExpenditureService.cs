@@ -23,7 +23,7 @@ namespace APC.Applications.Services
 
         public bool Create(EventExpenditure data)
         {
-            if (_repository.Exists(data.EventId, data.SpentAmount, data.Summary, data.Day, data.MonthId, data.Year))
+            if (_repository.Exists(data.EventId, data.SpentAmount, data.Summary, data.ExpenditureDate))
                 throw new Exception("Event expenditure already exists");
 
             return _repository.Insert(data);

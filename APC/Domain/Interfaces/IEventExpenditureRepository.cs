@@ -16,7 +16,7 @@ namespace APC.Domain.Interfaces
         bool Delete(int id);
         bool GetBack(int id);
         bool PermanentDelete(int id);
-        bool Exists(int eventId, decimal spentAmount, string summary, int day, int monthId, int year);
+        bool Exists(int eventId, decimal spentAmount, string summary, DateTime date);
         int Count();
     }
 }

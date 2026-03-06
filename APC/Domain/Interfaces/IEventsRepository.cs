@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
-    public interface IEventSalesRepository
+    public interface IEventsRepository
     {
-        List<EventSales> GetAll();
-        EventSales GetById(int id);
-        bool Insert(EventSales data);
-        bool Update(EventSales data);
+        List<TheEvents> GetAll();
+        TheEvents GetById(int id);
+        bool Insert(TheEvents data);
+        bool Update(TheEvents data);
         bool Delete(int id);
         bool GetBack(int id);
         bool PermanentDelete(int id);
-        bool Exists(int eventId, decimal amountSold, string summary, DateTime salesDate);
+        bool Exists(string title, DateTime eventsDate);
         int Count();
     }
 }

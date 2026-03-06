@@ -39,9 +39,9 @@ namespace APC.Infrastructure.Repositories
         {
             var data = _db.EVENT_RECEIPTS
                 .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.year)
-                .ThenByDescending(x => x.monthID)
-                .ThenByDescending(x => x.day)
+                .OrderByDescending(x => x.receiptDate.Year)
+                .ThenByDescending(x => x.receiptDate.Month)
+                .ThenByDescending(x => x.receiptDate.Day)
                 .ThenBy(x => x.caption)
                 .ToList();
 
@@ -52,9 +52,6 @@ namespace APC.Infrastructure.Repositories
                     x.imagePath,
                     x.summary,
                     x.caption,
-                    x.day,
-                    x.monthID,
-                    x.year,
                     x.receiptDate,
                     x.amountSpent
                 ))
@@ -81,9 +78,6 @@ namespace APC.Infrastructure.Repositories
                     x.imagePath,
                     x.summary,
                     x.caption,
-                    x.day,
-                    x.monthID,
-                    x.year,
                     x.receiptDate,
                     x.amountSpent
                 })
@@ -98,9 +92,6 @@ namespace APC.Infrastructure.Repositories
                     entity.imagePath,
                     entity.summary,
                     entity.caption,
-                    entity.day,
-                    entity.monthID,
-                    entity.year,
                     entity.receiptDate,
                     entity.amountSpent
             );
@@ -114,9 +105,6 @@ namespace APC.Infrastructure.Repositories
                 imagePath = data.ImagePath,
                 summary = data.Summary,
                 caption = data.Caption,
-                day = data.Day,
-                monthID = data.MonthId,
-                year = data.Year,
                 receiptDate = data.ReceiptDate,
                 amountSpent = data.AmountSpent,
             });
@@ -145,9 +133,6 @@ namespace APC.Infrastructure.Repositories
             entity.summary = data.Summary;
             entity.imagePath = data.ImagePath;
             entity.caption = data.Caption;
-            entity.day = data.Day;
-            entity.monthID = data.MonthId;
-            entity.year = data.Year;
             entity.receiptDate = data.ReceiptDate;
             entity.amountSpent = data.AmountSpent;
 

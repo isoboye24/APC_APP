@@ -31,10 +31,11 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public bool Exists(int eventId, decimal amountSold, string summary, int day, int monthId, int year)
+        public bool Exists(int eventId, decimal amountSold, string summary, DateTime salesDate)
         {
             return _db.EVENT_SALES.Any(x => !x.isDeleted && x.eventID == eventId && x.amountSold == amountSold 
-            && x.summary == summary && x.salesDate.Day == day && x.salesDate.Month == monthId && x.salesDate.Year == year);
+            && x.summary == summary && x.salesDate.Day == salesDate.Day && x.salesDate.Month == salesDate.Month 
+            && x.salesDate.Year == salesDate.Year);
         }
 
         public List<EventSales> GetAll()

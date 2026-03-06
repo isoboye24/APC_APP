@@ -32,11 +32,11 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public bool Exists(int eventId, decimal spentAmount, string summary, int day, int monthId, int year)
+        public bool Exists(int eventId, decimal spentAmount, string summary, DateTime date)
         {
             return _db.EVENT_EXPENDITURE.Any(x => !x.isDeleted && x.eventID == eventId && x.amountSpent == spentAmount 
-                                        && x.summary == summary && x.expenditureDate.Day == day && x.expenditureDate.Month == monthId
-                                        && x.expenditureDate.Year == year);
+                                        && x.summary == summary && x.expenditureDate.Day == date.Day && x.expenditureDate.Month == date.Month
+                                        && x.expenditureDate.Year == date.Year);
         }
 
         public List<EventExpenditure> GetAll()
@@ -56,10 +56,7 @@ namespace APC.Infrastructure.Repositories
                     x.eventID,
                     x.amountSpent,
                     x.expenditureDate,
-                    x.summary,
-                    x.day,
-                    x.monthID,
-                    x.year
+                    x.summary
                 ))
                 .ToList();
         }
@@ -84,9 +81,6 @@ namespace APC.Infrastructure.Repositories
                     x.amountSpent,
                     x.expenditureDate,
                     x.summary,
-                    x.day,
-                    x.monthID,
-                    x.year
                 })
                 .FirstOrDefault();
 
@@ -98,10 +92,7 @@ namespace APC.Infrastructure.Repositories
                     entity.eventID,
                     entity.amountSpent,
                     entity.expenditureDate,
-                    entity.summary,
-                    entity.day,
-                    entity.monthID,
-                    entity.year
+                    entity.summary
             );
         }
 
@@ -112,10 +103,7 @@ namespace APC.Infrastructure.Repositories
                 eventID = data.EventId,
                 amountSpent = data.SpentAmount,
                 summary = data.Summary,
-                expenditureDate = data.ExpenditureDate,                
-                day = data.Day,
-                monthID = data.MonthId,
-                year = data.Year,
+                expenditureDate = data.ExpenditureDate,
             });
 
             _db.SaveChanges();
@@ -141,9 +129,6 @@ namespace APC.Infrastructure.Repositories
             entity.eventID = data.EventId;
             entity.amountSpent = data.SpentAmount;
             entity.summary = data.Summary;
-            entity.day = data.Day;
-            entity.monthID = data.MonthId;
-            entity.year = data.Year;
 
             _db.SaveChanges();
             return true;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APC.Domain.Entities
 {
-    public class Events
+    public class TheEvents
     {
         public int EventsId { get; private set; }
         public string Title { get; private set; }
@@ -14,7 +14,7 @@ namespace APC.Domain.Entities
         public string CoverImagePath { get; private set; }
         public DateTime EventsDate { get; private set; }
 
-        public Events(string title, string summary, string coverImagePath, DateTime eventsDate)
+        public TheEvents(string title, string summary, string coverImagePath, DateTime eventsDate)
         {
             SetTitle(title);
             SetSummary(summary);
@@ -22,7 +22,7 @@ namespace APC.Domain.Entities
             SetDate(eventsDate);
         }
 
-        public static Events Rehydrate(
+        public static TheEvents Rehydrate(
             int id,
             string title,
             string summary,
@@ -30,7 +30,7 @@ namespace APC.Domain.Entities
             DateTime eventsDate
             )
         {
-            var events = new Events(title, summary, coverImagePath, eventsDate);
+            var events = new TheEvents(title, summary, coverImagePath, eventsDate);
             events.EventsId = id;
             return events;
         }

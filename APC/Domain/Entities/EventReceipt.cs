@@ -15,13 +15,10 @@ namespace APC.Domain.Entities
         public string ImagePath { get; private set; }
         public string Summary { get; private set; }
         public string Caption { get; private set; }
-        public int Day { get; private set; }
-        public int MonthId { get; private set; }
-        public int Year { get; private set; }
         public DateTime ReceiptDate { get; private set; }
         public decimal AmountSpent { get; private set; }
 
-        public EventReceipt(int eventId, string imagePath, string summary, string caption, int day, int monthId, int year, DateTime date,
+        public EventReceipt(int eventId, string imagePath, string summary, string caption, DateTime date,
             decimal amountSpent)
         {
             SetEvent(eventId);
@@ -37,15 +34,12 @@ namespace APC.Domain.Entities
             int eventId,
             string imagePath,
             string summary,
-            string imageCaption,
-            int day, 
-            int monthId, 
-            int year, 
+            string imageCaption, 
             DateTime date,
             decimal amountSpent
             )
         {
-            var eventReceipt = new EventReceipt(eventId, summary, imagePath, imageCaption, day, monthId, year, date,
+            var eventReceipt = new EventReceipt(eventId, summary, imagePath, imageCaption, date,
             amountSpent);
             eventReceipt.EventReceiptId = id;
             return eventReceipt;
@@ -97,19 +91,10 @@ namespace APC.Domain.Entities
 
         private void SetDate(DateTime date)
         {
-            if (date.Day < 1 || date.Day > 31)
-                throw new ArgumentException("Invalid day");
-
-            if (date.Month < 1 || date.Month > 12)
-                throw new ArgumentException("Invalid month");
-
             if (date.Year < 2000 || date.Year > DateTime.Now.Year + 1)
                 throw new ArgumentException("Invalid year");
 
             ReceiptDate = date;
-            Day = date.Day;
-            MonthId = date.Month;
-            Year = date.Year;
         }
 
         public void UpdateDate(DateTime newDate)
