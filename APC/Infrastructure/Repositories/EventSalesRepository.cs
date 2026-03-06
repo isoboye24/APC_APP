@@ -41,9 +41,9 @@ namespace APC.Infrastructure.Repositories
         {
             var data = _db.EVENT_SALES
                 .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.year)
-                .ThenByDescending(x => x.monthID)
-                .ThenByDescending(x => x.day)
+                .OrderByDescending(x => x.salesDate.Year)
+                .ThenByDescending(x => x.salesDate.Month)
+                .ThenByDescending(x => x.salesDate.Day)
                 .ThenByDescending(x => x.amountSold)
                 .ToList();
 
@@ -53,9 +53,6 @@ namespace APC.Infrastructure.Repositories
                     x.eventID,
                     x.amountSold,
                     x.summary,
-                    x.day,
-                    x.monthID,
-                    x.year,
                     x.salesDate
                 ))
                 .ToList();
@@ -80,9 +77,6 @@ namespace APC.Infrastructure.Repositories
                     x.eventID,
                     x.amountSold,
                     x.summary,
-                    x.day,
-                    x.monthID,
-                    x.year,
                     x.salesDate
                 })
                 .FirstOrDefault();
@@ -95,9 +89,6 @@ namespace APC.Infrastructure.Repositories
                     entity.eventID,
                     entity.amountSold,
                     entity.summary,
-                    entity.day,
-                    entity.monthID,
-                    entity.year,
                     entity.salesDate
             );
         }
@@ -109,9 +100,6 @@ namespace APC.Infrastructure.Repositories
                 eventID = data.EventId,
                 amountSold = data.AmountSold,
                 summary = data.Summary,
-                day = data.Day,
-                monthID = data.MonthId,
-                year = data.Year,
                 salesDate = data.SalesDate,
             });
 
@@ -138,9 +126,6 @@ namespace APC.Infrastructure.Repositories
             entity.eventID = data.EventId;
             entity.amountSold = data.AmountSold;
             entity.summary = data.Summary;
-            entity.day = data.Day;
-            entity.monthID = data.MonthId;
-            entity.year = data.Year;
             entity.salesDate = data.SalesDate;
 
             _db.SaveChanges();
