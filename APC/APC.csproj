@@ -693,6 +693,7 @@
     <Compile Include="Domain\Interfaces\IEventSalesService.cs" />
     <Compile Include="Domain\Interfaces\IEventsRepository.cs" />
     <Compile Include="Domain\Interfaces\IEventsService.cs" />
+    <Compile Include="Domain\Interfaces\IExpenditureRepository.cs" />
     <Compile Include="Domain\Interfaces\IMembershipStatusService.cs" />
     <Compile Include="Domain\Entities\MaritalStatus.cs" />
     <Compile Include="Domain\Entities\MembershipStatus.cs" />
@@ -762,6 +763,7 @@
     <Compile Include="Infrastructure\Repositories\EventReceiptRepository.cs" />
     <Compile Include="Infrastructure\Repositories\EventSalesRepository.cs" />
     <Compile Include="Infrastructure\Repositories\EventsRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\ExpenditureRepository.cs" />
     <Compile Include="Infrastructure\Repositories\GenderRepository.cs" />
     <Compile Include="Infrastructure\Repositories\IEventExpenditureService.cs" />
     <Compile Include="Infrastructure\Repositories\MaritalStatusRepository.cs" />
