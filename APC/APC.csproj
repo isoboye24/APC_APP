@@ -316,6 +316,7 @@
     <Compile Include="Applications\Services\EventReceiptService.cs" />
     <Compile Include="Applications\Services\EventSalesService.cs" />
     <Compile Include="Applications\Services\EventsService.cs" />
+    <Compile Include="Applications\Services\ExpenditureService.cs" />
     <Compile Include="Applications\Services\GenderService.cs" />
     <Compile Include="Applications\Services\MaritalStatusService.cs" />
     <Compile Include="Applications\Services\MembershipStatusService.cs" />
@@ -694,6 +695,7 @@
     <Compile Include="Domain\Interfaces\IEventsRepository.cs" />
     <Compile Include="Domain\Interfaces\IEventsService.cs" />
     <Compile Include="Domain\Interfaces\IExpenditureRepository.cs" />
+    <Compile Include="Domain\Interfaces\IExpenditureService.cs" />
     <Compile Include="Domain\Interfaces\IMembershipStatusService.cs" />
     <Compile Include="Domain\Entities\MaritalStatus.cs" />
     <Compile Include="Domain\Entities\MembershipStatus.cs" />
@@ -765,7 +767,7 @@
     <Compile Include="Infrastructure\Repositories\EventsRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ExpenditureRepository.cs" />
     <Compile Include="Infrastructure\Repositories\GenderRepository.cs" />
-    <Compile Include="Infrastructure\Repositories\IEventExpenditureService.cs" />
+    <Compile Include="Domain\Interfaces\IEventExpenditureService.cs" />
     <Compile Include="Infrastructure\Repositories\MaritalStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MembershipStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MonthRepository.cs" />
