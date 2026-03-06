@@ -52,6 +52,7 @@ namespace APC
             services.AddScoped<IEventImagesRepository, EventImagesRepository>();
             services.AddScoped<IEventReceiptRepository, EventReceiptRepository>();
             services.AddScoped<IEventSalesRepository, EventSalesRepository>();
+            services.AddScoped<IEventsRepository, EventsRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -74,6 +75,7 @@ namespace APC
             services.AddScoped<IEventImagesService, EventImagesService>();
             services.AddScoped<IEventReceiptService, EventReceiptService>();
             services.AddScoped<IEventSalesService, EventSalesService>();
+            services.AddScoped<IEventsService, EventsService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -105,6 +107,7 @@ namespace APC
             services.AddTransient<FormViewEventReceipt>();
             services.AddTransient<FormEventSales>();
             services.AddTransient<FormViewEventSales>();
+            services.AddTransient<FormEvent>();
 
             services.AddTransient<FormEventDetailsBoard>();
             services.AddTransient<FormEventsList>();
