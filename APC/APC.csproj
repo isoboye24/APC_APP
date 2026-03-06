@@ -683,6 +683,7 @@
     <Compile Include="Domain\Entities\EventExpenditure.cs" />
     <Compile Include="Domain\Entities\EventImages.cs" />
     <Compile Include="Domain\Entities\EventReceipt.cs" />
+    <Compile Include="Domain\Entities\Expenditure.cs" />
     <Compile Include="Domain\Entities\TheEvents.cs" />
     <Compile Include="Domain\Entities\EventSales.cs" />
     <Compile Include="Domain\Entities\Gender.cs" />
