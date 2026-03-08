@@ -55,6 +55,7 @@ namespace APC
             services.AddScoped<IEventsRepository, EventsRepository>();
             services.AddScoped<IExpenditureRepository, ExpenditureRepository>();
             services.AddScoped<IFinancialReportRepository, FinancialReportRepository>();
+            services.AddScoped<IFinedMemberRepository, FinedMemberRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -80,6 +81,7 @@ namespace APC
             services.AddScoped<IEventsService, EventsService>();
             services.AddScoped<IExpenditureService, ExpenditureService>();
             services.AddScoped<IFinancialReportService, FinancialReportService>();
+            services.AddScoped<IFinedMemberService, FinedMemberService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -119,6 +121,11 @@ namespace APC
             services.AddTransient<FormViewExpenditure>();
             services.AddTransient<FormFinancialReport>();
             services.AddTransient<FormViewFinancialReport>();
+            services.AddTransient<FormReportsBoard>();
+
+            services.AddTransient<FormFinedMember>();
+            services.AddTransient<FormViewFinedMember>();
+
             services.AddTransient<FormReportsBoard>();
 
 
