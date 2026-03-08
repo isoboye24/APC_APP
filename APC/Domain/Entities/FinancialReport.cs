@@ -63,10 +63,7 @@ namespace APC.Domain.Entities
 
         private void SetSummary(string summary)
         {
-            if (string.IsNullOrWhiteSpace(summary))
-                throw new ArgumentException("Summary cannot be empty");
-
-            Summary = summary.Trim();
+            Summary = string.IsNullOrWhiteSpace(summary) ? null : summary.Trim();
         }
 
         public void UpdateSummary(string newSummary)
