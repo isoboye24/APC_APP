@@ -15,7 +15,7 @@ namespace APC.Domain.Entities
         public int MemberId { get; private set; }
         public DateTime FineDate { get; private set; }
 
-        public FinedMember(decimal amountPaid, string summary,  int constitutionId, int memberId, DateTime fineDate)
+        public FinedMember(decimal? amountPaid, string summary,  int constitutionId, int memberId, DateTime fineDate)
         {
             SetAmountPaid(amountPaid);
             SetSummary(summary);
@@ -26,7 +26,7 @@ namespace APC.Domain.Entities
 
         public static FinedMember Rehydrate(
                 int id,
-               decimal amountPaid, 
+               decimal? amountPaid, 
                string summary, 
                int constitutionId, 
                int memberId, 
@@ -38,9 +38,10 @@ namespace APC.Domain.Entities
             return finedMember;
         }
 
-        private void SetAmountPaid(decimal amountPaid)
+        private void SetAmountPaid(decimal? amountPaid)
         {
-            AmountPaid = amountPaid < 0 ? 0 : amountPaid;
+            var value = amountPaid ?? 0;
+            AmountPaid = value < 0 ? 0 : value;
         }
 
         public void UpdateAmountPaid(decimal newAmountPaid)
