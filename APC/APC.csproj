@@ -320,6 +320,7 @@
     <Compile Include="Applications\Services\FinancialReportService.cs" />
     <Compile Include="Applications\Services\FinedMemberService.cs" />
     <Compile Include="Applications\Services\GenderService.cs" />
+    <Compile Include="Applications\Services\GeneralMeetingService.cs" />
     <Compile Include="Applications\Services\MaritalStatusService.cs" />
     <Compile Include="Applications\Services\MembershipStatusService.cs" />
     <Compile Include="Applications\Services\MonthService.cs" />
@@ -706,6 +707,7 @@
     <Compile Include="Domain\Interfaces\IFinedMemberRepository.cs" />
     <Compile Include="Domain\Interfaces\IFinedMemberService.cs" />
     <Compile Include="Domain\Interfaces\IGeneralMeetingRepository.cs" />
+    <Compile Include="Domain\Interfaces\IGeneralMeetingService.cs" />
     <Compile Include="Domain\Interfaces\IMembershipStatusService.cs" />
     <Compile Include="Domain\Entities\MaritalStatus.cs" />
     <Compile Include="Domain\Entities\MembershipStatus.cs" />
