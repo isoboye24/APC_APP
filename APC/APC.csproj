@@ -689,6 +689,7 @@
     <Compile Include="Domain\Entities\Expenditure.cs" />
     <Compile Include="Domain\Entities\FinancialReport.cs" />
     <Compile Include="Domain\Entities\FinedMember.cs" />
+    <Compile Include="Domain\Entities\GeneralMeeting.cs" />
     <Compile Include="Domain\Entities\TheEvents.cs" />
     <Compile Include="Domain\Entities\EventSales.cs" />
     <Compile Include="Domain\Entities\Gender.cs" />
