@@ -74,6 +74,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.1.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.1.0\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -107,12 +110,22 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -681,8 +694,11 @@
     <Compile Include="Domain\Entities\AttendanceStatus.cs" />
     <Compile Include="Domain\Entities\Comment.cs" />
     <Compile Include="Domain\Entities\Constitution.cs" />
+    <Compile Include="Domain\Entities\ContactInfo.cs" />
     <Compile Include="Domain\Entities\Country.cs" />
+    <Compile Include="Domain\Entities\DemographicInfo.cs" />
     <Compile Include="Domain\Entities\Document.cs" />
+    <Compile Include="Domain\Entities\EmergencyContact.cs" />
     <Compile Include="Domain\Entities\EmploymentStatus.cs" />
     <Compile Include="Domain\Entities\EventExpenditure.cs" />
     <Compile Include="Domain\Entities\EventImages.cs" />
@@ -691,6 +707,11 @@
     <Compile Include="Domain\Entities\FinancialReport.cs" />
     <Compile Include="Domain\Entities\FinedMember.cs" />
     <Compile Include="Domain\Entities\GeneralMeeting.cs" />
+    <Compile Include="Domain\Entities\LifeStatus.cs" />
+    <Compile Include="Domain\Entities\Member.cs" />
+    <Compile Include="Domain\Entities\MemberAuthentication.cs" />
+    <Compile Include="Domain\Entities\MembershipInfo.cs" />
+    <Compile Include="Domain\Entities\PersonalInfo.cs" />
     <Compile Include="Domain\Entities\TheEvents.cs" />
     <Compile Include="Domain\Entities\EventSales.cs" />
     <Compile Include="Domain\Entities\Gender.cs" />
