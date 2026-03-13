@@ -18,5 +18,6 @@ namespace APC.Domain.Interfaces
         bool PermanentDelete(int id);
         bool Exists(int month, int year);
         int Count();
+        List<GeneralMeeting> GetAllDeleted();
     }
 }

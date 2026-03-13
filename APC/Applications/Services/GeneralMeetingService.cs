@@ -33,6 +33,9 @@ namespace APC.Applications.Services
         public List<GeneralMeeting> GetAll()
             => _repository.GetAll();
 
+        public List<GeneralMeeting> GetAllDeleted()
+            => _repository.GetAllDeleted();
+
         public bool GetBack(int id)
             => _repository.GetBack(id);
 
