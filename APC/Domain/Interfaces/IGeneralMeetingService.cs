@@ -16,5 +16,7 @@ namespace APC.Domain.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
+
+        List<GeneralMeeting> GetAllDeleted();
     }
 }

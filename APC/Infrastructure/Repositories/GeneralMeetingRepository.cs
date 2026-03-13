@@ -56,6 +56,26 @@ namespace APC.Infrastructure.Repositories
                 .ToList();
         }
 
+        public List<GeneralMeeting> GetAllDeleted()
+        {
+            var data = _db.GENERAL_ATTENDANCE
+                .Where(x => x.isDeleted)
+                .ToList();
+
+            return data
+                .Select(x => GeneralMeeting.Rehydrate(
+                    x.generalAttendanceID,
+                    x.totalMembersPresent,
+                    x.totalMembersAbsent,
+                    x.totalDuesPaid,
+                    x.totalDuesExpected,
+                    x.totalDuesBalance,
+                    x.summary,
+                    x.attendanceDate
+                ))
+                .ToList();
+        }
+
         public bool GetBack(int id)
         {
             var entity = _db.GENERAL_ATTENDANCE.First(x => x.generalAttendanceID == id);

@@ -318,6 +318,7 @@
       <DependentUpon>FormViewSpecialContributor.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\ViewModels\CountryViewModel.cs" />
+    <Compile Include="Applications\DTO\MemberFullDetailsDTO.cs" />
     <Compile Include="Applications\Services\AttendanceStatusService.cs" />
     <Compile Include="Applications\Services\CommentService.cs" />
     <Compile Include="Applications\Services\ConstitutionService.cs" />
@@ -729,6 +730,7 @@
     <Compile Include="Domain\Interfaces\IFinedMemberService.cs" />
     <Compile Include="Domain\Interfaces\IGeneralMeetingRepository.cs" />
     <Compile Include="Domain\Interfaces\IGeneralMeetingService.cs" />
+    <Compile Include="Domain\Interfaces\IMemberRepository.cs" />
     <Compile Include="Domain\Interfaces\IMembershipStatusService.cs" />
     <Compile Include="Domain\Entities\MaritalStatus.cs" />
     <Compile Include="Domain\Entities\MembershipStatus.cs" />
@@ -805,6 +807,7 @@
     <Compile Include="Domain\Interfaces\IEventExpenditureService.cs" />
     <Compile Include="Infrastructure\Repositories\GeneralMeetingRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MaritalStatusRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\MemberRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MembershipStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MonthRepository.cs" />
     <Compile Include="Infrastructure\Repositories\NationalityRepository.cs" />

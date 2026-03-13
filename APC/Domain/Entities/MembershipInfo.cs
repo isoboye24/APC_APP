@@ -4,12 +4,12 @@ namespace APC.Domain.Entities
 {
     public class MembershipInfo
     {
-        public DateTime MembershipDate { get; private set; }
+        public DateTime? MembershipDate { get; private set; }
         public int MembershipStatusId { get; private set; }
         public int PositionId { get; private set; }
         public int PermissionId { get; private set; }
 
-        public MembershipInfo(DateTime membershipDate, int membershipStatusId, int positionId, int permissionId)
+        public MembershipInfo(DateTime? membershipDate, int membershipStatusId, int positionId, int permissionId)
         {
             SetMembershipDate(membershipDate);
             SetMembershipStatus(membershipStatusId);
@@ -17,10 +17,13 @@ namespace APC.Domain.Entities
             SetPermission(permissionId);
         }
 
-        private void SetMembershipDate(DateTime date)
+        private void SetMembershipDate(DateTime? date)
         {
-            if (date.Year < 1999 || date.Year > DateTime.Now.Year + 1)
-                throw new ArgumentException("Invalid year. Choose from 1930 to " + DateTime.Now.Year);
+            if (date.HasValue)
+            {
+                if (date.Value.Year < 1999 || date.Value.Year > DateTime.Now.Year + 1)
+                    throw new ArgumentException("Invalid year. Choose from 1999 to " + DateTime.Now.Year);
+            }
 
             MembershipDate = date;
         }
