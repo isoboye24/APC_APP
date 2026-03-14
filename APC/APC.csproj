@@ -713,6 +713,7 @@
     <Compile Include="Domain\Entities\Member.cs" />
     <Compile Include="Domain\Entities\MemberAuthentication.cs" />
     <Compile Include="Domain\Entities\MembershipInfo.cs" />
+    <Compile Include="Domain\Entities\PersonalAttendance.cs" />
     <Compile Include="Domain\Entities\PersonalInfo.cs" />
     <Compile Include="Domain\Entities\TheEvents.cs" />
     <Compile Include="Domain\Entities\EventSales.cs" />

@@ -57,6 +57,7 @@ namespace APC
             services.AddScoped<IFinancialReportRepository, FinancialReportRepository>();
             services.AddScoped<IFinedMemberRepository, FinedMemberRepository>();
             services.AddScoped<IGeneralMeetingRepository, GeneralMeetingRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -84,6 +85,7 @@ namespace APC
             services.AddScoped<IFinancialReportService, FinancialReportService>();
             services.AddScoped<IFinedMemberService, FinedMemberService>();
             services.AddScoped<IGeneralMeetingService, GeneralMeetingService>();
+            services.AddScoped<IMemberService, MemberService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -129,8 +131,14 @@ namespace APC
             services.AddTransient<FormViewFinedMember>();
             services.AddTransient<FormGeneralAttendance>();
             services.AddTransient<FormViewGeneralAttendance>();
-
             services.AddTransient<FormMeetingBoard>();
+
+            services.AddTransient<FormMembers>();
+            services.AddTransient<FormViewMember>();
+            services.AddTransient<FormViewDeadMember>();
+
+            services.AddTransient<FormMembersBoard>();
+
 
 
             var initializedForms = new HashSet<Form>();
