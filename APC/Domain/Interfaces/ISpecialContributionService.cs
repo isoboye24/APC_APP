@@ -5,17 +5,16 @@ using System.Collections.Generic;
 
 namespace APC.Domain.Interfaces
 {
-    public interface ISpecialContributionRepository
+    public interface ISpecialContributionService
     {
         List<SpecialContribution> GetAll();
-        SpecialContribution GetById(int id);
-        bool Insert(SpecialContribution data);
+        bool Create(SpecialContribution data);
         bool Update(SpecialContribution data);
         bool Delete(int id);
         bool GetBack(int id);
         bool PermanentDelete(int id);
-        bool Exists(string title);
         int Count();
+
         List<SpecialContribution> GetAllDeleted();
         List<SpecialContributionFullDetails> GetFullSpecialContributionDetails();
     }

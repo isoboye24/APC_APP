@@ -348,6 +348,7 @@
     <Compile Include="Applications\Services\PersonalAttendanceService.cs" />
     <Compile Include="Applications\Services\PositionService.cs" />
     <Compile Include="Applications\Services\ProfessionService.cs" />
+    <Compile Include="Applications\Services\SpecialContributionService.cs" />
     <Compile Include="BLL\ConstitutionBLL.cs" />
     <Compile Include="BLL\DocumentBLL.cs" />
     <Compile Include="BLL\EventExpenditureBLL.cs" />
@@ -785,6 +786,7 @@
     <Compile Include="Domain\Interfaces\IProfessionRepository.cs" />
     <Compile Include="Domain\Interfaces\IProfessionService.cs" />
     <Compile Include="Domain\Interfaces\ISpecialContributionRepository.cs" />
+    <Compile Include="Domain\Interfaces\ISpecialContributionService.cs" />
     <Compile Include="FormProperties.cs" />
     <Compile Include="HelperServices\CommentHelperService.cs" />
     <Compile Include="HelperServices\CommittmentHelperService.cs" />

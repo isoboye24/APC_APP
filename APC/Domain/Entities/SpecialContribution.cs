@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Entities
 {
@@ -80,7 +75,7 @@ namespace APC.Domain.Entities
             AmountToContribute = amount;
         }
 
-        public void UpdateAmountToContribute(int newAmount)
+        public void UpdateAmountToContribute(decimal newAmount)
         {
             SetAmountToContribute(newAmount);
         }
@@ -132,7 +127,7 @@ namespace APC.Domain.Entities
             AmountExpected = amount;
         }
 
-        public void UpdateAmountExpected(int newAmount)
+        public void UpdateAmountExpected(decimal newAmount)
         {
             SetAmountExpected(newAmount);
         }

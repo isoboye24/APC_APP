@@ -8,8 +8,6 @@ using APC.Utility;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC
@@ -59,6 +57,7 @@ namespace APC
             services.AddScoped<IGeneralMeetingRepository, GeneralMeetingRepository>();
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IPersonalAttendanceRepository, PersonalAttendanceRepository>();
+            services.AddScoped<ISpecialContributionRepository, SpecialContributionRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -88,6 +87,7 @@ namespace APC
             services.AddScoped<IGeneralMeetingService, GeneralMeetingService>();
             services.AddScoped<IMemberService, MemberService>();
             services.AddScoped<IPersonalAttendanceService, PersonalAttendanceService>();
+            services.AddScoped<ISpecialContributionService, SpecialContributionService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -112,6 +112,8 @@ namespace APC
             services.AddTransient<FormViewGeneralAttendance>();
             services.AddTransient<FormPersonalAttendance>();
             services.AddTransient<FormViewPersonalAttendances>();
+            services.AddTransient<FormSpecialContribution>();
+            services.AddTransient<FormViewSpecialContribution>();
             services.AddTransient<FormMeetingBoard>();
 
             services.AddTransient<FormDocument>();
