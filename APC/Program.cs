@@ -58,6 +58,7 @@ namespace APC
             services.AddScoped<IFinedMemberRepository, FinedMemberRepository>();
             services.AddScoped<IGeneralMeetingRepository, GeneralMeetingRepository>();
             services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<IPersonalAttendanceRepository, PersonalAttendanceRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -86,6 +87,7 @@ namespace APC
             services.AddScoped<IFinedMemberService, FinedMemberService>();
             services.AddScoped<IGeneralMeetingService, GeneralMeetingService>();
             services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<IPersonalAttendanceService, PersonalAttendanceService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -104,6 +106,12 @@ namespace APC
             services.AddTransient<FormViewComment>();
             services.AddTransient<FormConstitution>();
             services.AddTransient<FormViewConstitution>();
+            services.AddTransient<FormFinedMember>();
+            services.AddTransient<FormViewFinedMember>();
+            services.AddTransient<FormGeneralAttendance>();
+            services.AddTransient<FormViewGeneralAttendance>();
+            services.AddTransient<FormPersonalAttendance>();
+            services.AddTransient<FormViewPersonalAttendances>();
             services.AddTransient<FormMeetingBoard>();
 
             services.AddTransient<FormDocument>();
@@ -127,16 +135,9 @@ namespace APC
             services.AddTransient<FormViewFinancialReport>();
             services.AddTransient<FormReportsBoard>();
 
-            services.AddTransient<FormFinedMember>();
-            services.AddTransient<FormViewFinedMember>();
-            services.AddTransient<FormGeneralAttendance>();
-            services.AddTransient<FormViewGeneralAttendance>();
-            services.AddTransient<FormMeetingBoard>();
-
             services.AddTransient<FormMembers>();
             services.AddTransient<FormViewMember>();
             services.AddTransient<FormViewDeadMember>();
-
             services.AddTransient<FormMembersBoard>();
 
 

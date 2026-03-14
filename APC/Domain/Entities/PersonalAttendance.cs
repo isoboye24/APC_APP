@@ -78,7 +78,7 @@ namespace APC.Domain.Entities
             MonthlyDues = value < 0 ? 0 : value;
         }
 
-        public void UpdateMonthlyDues(int newMonthlyDues)
+        public void UpdateMonthlyDues(decimal newMonthlyDues)
         {
             SetMonthlyDues(newMonthlyDues);
         }
