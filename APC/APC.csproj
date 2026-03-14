@@ -319,6 +319,7 @@
     </Compile>
     <Compile Include="AllForms\ViewModels\CountryViewModel.cs" />
     <Compile Include="Applications\DTO\MemberFullDetailsDTO.cs" />
+    <Compile Include="Applications\DTO\PersonalAttendanceFullDetails.cs" />
     <Compile Include="Applications\Services\AttendanceStatusService.cs" />
     <Compile Include="Applications\Services\CommentService.cs" />
     <Compile Include="Applications\Services\ConstitutionService.cs" />
@@ -774,6 +775,7 @@
     <Compile Include="Domain\Interfaces\IPaymentStatusService.cs" />
     <Compile Include="Domain\Interfaces\IPermissionRepository.cs" />
     <Compile Include="Domain\Interfaces\IPermissionService.cs" />
+    <Compile Include="Domain\Interfaces\IPersonalRepository.cs" />
     <Compile Include="Domain\Interfaces\IPositionRepository.cs" />
     <Compile Include="Domain\Interfaces\IPositionService.cs" />
     <Compile Include="Domain\Interfaces\IProfessionRepository.cs" />
@@ -817,6 +819,7 @@
     <Compile Include="Infrastructure\Repositories\NextOfKinRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PaymentStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PermissionRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\PersonalAttendanceRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PositionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ProfessionRepository.cs" />
     <Compile Include="LoginInfo.cs" />

@@ -121,7 +121,6 @@ namespace APC.Infrastructure.Repositories
         {
             _db.GENERAL_ATTENDANCE.Add(new GENERAL_ATTENDANCE
             {
-                generalAttendanceID = data.GeneralMeetingId,
                 totalMembersPresent = data.TotalMembersPresent,
                 totalMembersAbsent = data.TotalMembersAbsent,
                 totalDuesPaid = data.TotalDuesPaid,
