@@ -18,7 +18,6 @@ namespace APC.Domain.Entities
             SetAmountContributed(amountContributed);
             SetContributedDate(contributedDate);
             SetSummary(summary);
-            SetSpecialContribution(specialContributionId);
         }
 
         public static SpecialContributor Rehydrate(
@@ -32,6 +31,7 @@ namespace APC.Domain.Entities
         {
             var contributor = new SpecialContributor(memberId, amountContributed, contributedDate, summary, specialContributionId);
             contributor.SpecialContributorId = id;
+            contributor.SpecialContributionId = specialContributionId;
 
             return contributor;
         }
@@ -85,17 +85,5 @@ namespace APC.Domain.Entities
             SetSummary(newSummary);
         }
 
-        private void SetSpecialContribution(int specialContributionId)
-        {
-            if (specialContributionId < 0)
-                throw new ArgumentException("Invalid Special Contribution");
-
-            SpecialContributionId = specialContributionId;
-        }
-
-        public void UpdateAmountExpected(int newSpecialContributionId)
-        {
-            SetSpecialContribution(newSpecialContributionId);
-        }
     }
 }

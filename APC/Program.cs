@@ -58,6 +58,7 @@ namespace APC
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IPersonalAttendanceRepository, PersonalAttendanceRepository>();
             services.AddScoped<ISpecialContributionRepository, SpecialContributionRepository>();
+            services.AddScoped<ISpecialContributorRepository, SpecialContributorRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -88,6 +89,7 @@ namespace APC
             services.AddScoped<IMemberService, MemberService>();
             services.AddScoped<IPersonalAttendanceService, PersonalAttendanceService>();
             services.AddScoped<ISpecialContributionService, SpecialContributionService>();
+            services.AddScoped<ISpecialContributorService, SpecialContributorService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -114,6 +116,8 @@ namespace APC
             services.AddTransient<FormViewPersonalAttendances>();
             services.AddTransient<FormSpecialContribution>();
             services.AddTransient<FormViewSpecialContribution>();
+            services.AddTransient<FormSpecialContributor>();
+            services.AddTransient<FormViewSpecialContributor>();
             services.AddTransient<FormMeetingBoard>();
 
             services.AddTransient<FormDocument>();
@@ -141,7 +145,6 @@ namespace APC
             services.AddTransient<FormViewMember>();
             services.AddTransient<FormViewDeadMember>();
             services.AddTransient<FormMembersBoard>();
-
 
 
             var initializedForms = new HashSet<Form>();
