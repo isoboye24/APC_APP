@@ -127,7 +127,8 @@ namespace APC.Infrastructure.Repositories
                                     AmountExpected = scn.amountExpected,
                                     Balance = scn.amountExpected - sc.amountContributed,
                                     ContributedDate = sc.contributedDate,
-                                    PaymentStatus = sc.amountContributed == scn.amountExpected ? "Completed" : sc.amountContributed < scn.amountExpected ? "Incomplete" : "Extra " + (sc.amountContributed - scn.amountExpected).ToString(),
+                                    PaymentStatus = sc.amountContributed == scn.amountExpected ? "Completed" : sc.amountContributed < scn.amountExpected ? 
+                                                    "Incomplete" : "Extra " + (sc.amountContributed - scn.amountExpected).ToString() + " €",
                                     Summary = sc.summary,
                                     SpecialContributionId = sc.specialContributionID,
                                 });

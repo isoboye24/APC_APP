@@ -59,6 +59,7 @@ namespace APC
             services.AddScoped<IPersonalAttendanceRepository, PersonalAttendanceRepository>();
             services.AddScoped<ISpecialContributionRepository, SpecialContributionRepository>();
             services.AddScoped<ISpecialContributorRepository, SpecialContributorRepository>();
+            services.AddScoped<IMemberCommittmentRepository, MemberCommittmentRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -90,6 +91,7 @@ namespace APC
             services.AddScoped<IPersonalAttendanceService, PersonalAttendanceService>();
             services.AddScoped<ISpecialContributionService, SpecialContributionService>();
             services.AddScoped<ISpecialContributorService, SpecialContributorService>();
+            services.AddScoped<IMemberCommittmentService, MemberCommittmentService>();
 
             // Forms
             services.AddTransient<FormLogin>();

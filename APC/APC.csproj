@@ -339,6 +339,7 @@
     <Compile Include="Applications\Services\GenderService.cs" />
     <Compile Include="Applications\Services\GeneralMeetingService.cs" />
     <Compile Include="Applications\Services\MaritalStatusService.cs" />
+    <Compile Include="Applications\Services\MemberCommittmentService.cs" />
     <Compile Include="Applications\Services\MemberService.cs" />
     <Compile Include="Applications\Services\MembershipStatusService.cs" />
     <Compile Include="Applications\Services\MonthService.cs" />
@@ -718,6 +719,7 @@
     <Compile Include="Domain\Entities\LifeStatus.cs" />
     <Compile Include="Domain\Entities\Member.cs" />
     <Compile Include="Domain\Entities\MemberAuthentication.cs" />
+    <Compile Include="Applications\DTO\MemberCommittment.cs" />
     <Compile Include="Domain\Entities\MembershipInfo.cs" />
     <Compile Include="Domain\Entities\PersonalAttendance.cs" />
     <Compile Include="Domain\Entities\PersonalInfo.cs" />
@@ -740,6 +742,8 @@
     <Compile Include="Domain\Interfaces\IFinedMemberService.cs" />
     <Compile Include="Domain\Interfaces\IGeneralMeetingRepository.cs" />
     <Compile Include="Domain\Interfaces\IGeneralMeetingService.cs" />
+    <Compile Include="Domain\Interfaces\IMemberCommittmentRepository.cs" />
+    <Compile Include="Domain\Interfaces\IMemberCommittmentService.cs" />
     <Compile Include="Domain\Interfaces\IMemberRepository.cs" />
     <Compile Include="Domain\Interfaces\IMemberService.cs" />
     <Compile Include="Domain\Interfaces\IMembershipStatusService.cs" />
@@ -824,6 +828,7 @@
     <Compile Include="Domain\Interfaces\IEventExpenditureService.cs" />
     <Compile Include="Infrastructure\Repositories\GeneralMeetingRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MaritalStatusRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\MemberCommittmentRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MemberRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MembershipStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MonthRepository.cs" />
