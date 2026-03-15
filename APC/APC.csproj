@@ -720,6 +720,7 @@
     <Compile Include="Domain\Entities\PersonalAttendance.cs" />
     <Compile Include="Domain\Entities\PersonalInfo.cs" />
     <Compile Include="Domain\Entities\SpecialContribution.cs" />
+    <Compile Include="Domain\Entities\SpecialContributor.cs" />
     <Compile Include="Domain\Entities\TheEvents.cs" />
     <Compile Include="Domain\Entities\EventSales.cs" />
     <Compile Include="Domain\Entities\Gender.cs" />
