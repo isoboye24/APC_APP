@@ -1,6 +1,5 @@
 ﻿using APC.Applications.DTO;
 using APC.Domain.Entities;
-using System;
 using System.Collections.Generic;
 
 namespace APC.Domain.Interfaces
