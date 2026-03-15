@@ -3,7 +3,7 @@
 namespace APC.Applications.DTO
 {
     
-    public class MemberCommittment
+    public class MemberCommittmentDTO
     {
         public int MemberId { get; set; }
         public decimal Rank { get; set; }

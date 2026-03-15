@@ -21,5 +21,6 @@ namespace APC.Domain.Interfaces
         int Count();
         List<Member> GetAllDeleted();
         List<MemberFullDetailsDTO> GetFullMemberDetails();
+        List<BirthdayMembersDTO> GetBirthdayMembers(int month, int year);
     }
 }

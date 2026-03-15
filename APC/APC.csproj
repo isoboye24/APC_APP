@@ -318,6 +318,7 @@
       <DependentUpon>FormViewSpecialContributor.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\ViewModels\CountryViewModel.cs" />
+    <Compile Include="Applications\DTO\BirthdayMembersDTO.cs" />
     <Compile Include="Applications\DTO\MemberFullDetailsDTO.cs" />
     <Compile Include="Applications\DTO\PersonalAttendanceFullDetails.cs" />
     <Compile Include="Applications\DTO\SpecialContributionFullDetails.cs" />
@@ -719,7 +720,7 @@
     <Compile Include="Domain\Entities\LifeStatus.cs" />
     <Compile Include="Domain\Entities\Member.cs" />
     <Compile Include="Domain\Entities\MemberAuthentication.cs" />
-    <Compile Include="Applications\DTO\MemberCommittment.cs" />
+    <Compile Include="Applications\DTO\MemberCommittmentDTO.cs" />
     <Compile Include="Domain\Entities\MembershipInfo.cs" />
     <Compile Include="Domain\Entities\PersonalAttendance.cs" />
     <Compile Include="Domain\Entities\PersonalInfo.cs" />

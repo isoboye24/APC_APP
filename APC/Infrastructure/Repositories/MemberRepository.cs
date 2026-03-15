@@ -5,11 +5,6 @@ using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -288,6 +283,25 @@ namespace APC.Infrastructure.Repositories
                               NextOfKin = m.nextOfKin,
                               RelationshipToNextOfKin = kin.RelationshipToKin,
                               LGA = m.LGAOfCountryOrigin,
+                          });
+
+            return member.ToList();
+        }
+
+        public List<BirthdayMembersDTO> GetBirthdayMembers(int month, int year)
+        {
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          join pos in _db.POSITION on m.positionID equals pos.positionID
+                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
+                          select new BirthdayMembersDTO
+                          {
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Birthday = (m.birthday.Day + "." + m.birthday.Month).ToString(),
+                              ImagePath = m.imagePath,
+                              Position = pos.positionName,
+                              Gender = g.genderName,
                           });
 
             return member.ToList();

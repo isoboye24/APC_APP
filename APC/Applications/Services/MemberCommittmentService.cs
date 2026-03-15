@@ -16,7 +16,7 @@ namespace APC.Applications.Services
             _repository = repository;
         }
 
-        public List<MemberCommittment> GetMembersCommittment(int year)
+        public List<MemberCommittmentDTO> GetMembersCommittment(int year)
             => _repository.GetMembersCommittment(year);
     }
 }

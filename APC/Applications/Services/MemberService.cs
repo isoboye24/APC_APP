@@ -39,6 +39,9 @@ namespace APC.Applications.Services
         public bool GetBack(int id)
             => _repository.GetBack(id);
 
+        public List<BirthdayMembersDTO> GetBirthdayMembers(int month, int year)
+            => _repository.GetBirthdayMembers(month, year);
+
         public List<MemberFullDetailsDTO> GetFullMemberDetails()
             => _repository.GetFullMemberDetails();
 

@@ -20,5 +20,6 @@ namespace APC.Domain.Interfaces
 
         List<Member> GetAllDeleted();
         List<MemberFullDetailsDTO> GetFullMemberDetails();
+        List<BirthdayMembersDTO> GetBirthdayMembers(int month, int year);
     }
 }

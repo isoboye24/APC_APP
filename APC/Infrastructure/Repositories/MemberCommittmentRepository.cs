@@ -18,7 +18,7 @@ namespace APC.Infrastructure.Repositories
             _db = db;
         }
 
-        public List<MemberCommittment> GetMembersCommittment(int year)
+        public List<MemberCommittmentDTO> GetMembersCommittment(int year)
         {
             int endMonth = 10;
 
@@ -36,7 +36,7 @@ namespace APC.Infrastructure.Repositories
                 })
                 .ToList();
 
-            var result = new List<MemberCommittment>();
+            var result = new List<MemberCommittmentDTO>();
 
             foreach (var member in members)
             {
@@ -143,7 +143,7 @@ namespace APC.Infrastructure.Repositories
 
                 decimal rank = duesRatio + attendanceRatio + behaviorRatio;
 
-                result.Add(new MemberCommittment
+                result.Add(new MemberCommittmentDTO
                 {
                     MemberId = member.memberID,
                     FirstName = member.name,

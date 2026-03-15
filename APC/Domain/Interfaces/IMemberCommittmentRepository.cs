@@ -9,6 +9,6 @@ namespace APC.Domain.Interfaces
 {
     public interface IMemberCommittmentRepository
     {
-        List<MemberCommittment> GetMembersCommittment(int year);
+        List<MemberCommittmentDTO> GetMembersCommittment(int year);
     }
 }
