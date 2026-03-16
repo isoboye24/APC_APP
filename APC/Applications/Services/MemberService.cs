@@ -42,8 +42,17 @@ namespace APC.Applications.Services
         public List<BirthdayMembersDTO> GetBirthdayMembers(int month)
             => _repository.GetBirthdayMembers(month);
 
+        public List<DeadMemberShortDetailDTO> GetDeceasedMembers()
+            => _repository.GetDeceasedMembers();
+
+        public List<MembersBasicDetailDTO> GetFormerMembers()
+            => _repository.GetFormerMembers();
+
         public List<MemberFullDetailsDTO> GetFullMemberDetails()
             => _repository.GetFullMemberDetails();
+
+        public List<MembersBasicDetailDTO> GetInactiveMembers()
+            => _repository.GetInactiveMembers();
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
