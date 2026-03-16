@@ -288,20 +288,85 @@ namespace APC.Infrastructure.Repositories
             return member.ToList();
         }
 
-        public List<BirthdayMembersDTO> GetBirthdayMembers(int month, int year)
+        public List<BirthdayMembersDTO> GetBirthdayMembers(int month)
         {
-            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false && x.birthday.Month == month)
                           join g in _db.GENDER on m.genderID equals g.genderID
                           join pos in _db.POSITION on m.positionID equals pos.positionID
                           join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
                           select new BirthdayMembersDTO
                           {
+                              MemberId = m.memberID,
                               FirstName = m.name,
                               LastName = m.surname,
-                              Birthday = (m.birthday.Day + "." + m.birthday.Month).ToString(),
+                              Birthday = (m.birthday.Day.ToString("00") + "." + m.birthday.Month.ToString("00")).ToString(),
                               ImagePath = m.imagePath,
                               Position = pos.positionName,
                               Gender = g.genderName,
+                          });
+
+            return member.ToList();
+        }
+        
+        public List<MembersBasicDetailDTO> GetInactiveMembers()
+        {
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          join p in _db.POSITION on m.positionID equals p.positionID
+                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
+                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Inactive") on m.membershipStatusID equals ms.membershipStatusID
+                          select new MembersBasicDetailDTO
+                          {
+                              MemberId = m.memberID,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Nationality = n.nationality1,
+                              Position = p.positionName,
+                              Gender = g.genderName,
+                              ImagePath = m.imagePath,
+                          });
+
+            return member.ToList();
+        }
+
+        public List<MembersBasicDetailDTO> GetFormerMembers()
+        {
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          join p in _db.POSITION on m.positionID equals p.positionID
+                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
+                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Former") on m.membershipStatusID equals ms.membershipStatusID
+                          select new MembersBasicDetailDTO
+                          {
+                              MemberId = m.memberID,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Position = p.positionName,
+                              Nationality = n.nationality1,
+                              Gender = g.genderName,
+                              ImagePath = m.imagePath,
+                          });
+
+            return member.ToList();
+        }
+
+        public List<DeadMemberShortDetailDTO> GetDeceasedMembers()
+        {
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          join p in _db.POSITION on m.positionID equals p.positionID
+                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
+                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Deceased") on m.membershipStatusID equals ms.membershipStatusID
+                          select new DeadMemberShortDetailDTO
+                          {
+                              MemberId = m.memberID,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Birthdate = m.birthday.ToString("dd.MM.yyyy"),
+                              Position = p.positionName,
+                              Gender = g.genderName,
+                              DeadDate = m.deadDate.ToString("dd.MM.yyyy"),
+                              Age = (m.deadDate.Year - m.birthday.Year - (m.deadDate < m.birthday.AddYears(m.deadDate.Year - m.birthday.Year) ? 1 : 0)).ToString()
                           });
 
             return member.ToList();

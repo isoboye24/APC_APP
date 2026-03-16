@@ -319,6 +319,8 @@
     </Compile>
     <Compile Include="AllForms\ViewModels\CountryViewModel.cs" />
     <Compile Include="Applications\DTO\BirthdayMembersDTO.cs" />
+    <Compile Include="Applications\DTO\DeadMemberShortDetailDTO.cs" />
+    <Compile Include="Applications\DTO\MembersBasicDetailDTO.cs" />
     <Compile Include="Applications\DTO\MemberFullDetailsDTO.cs" />
     <Compile Include="Applications\DTO\PersonalAttendanceFullDetails.cs" />
     <Compile Include="Applications\DTO\SpecialContributionFullDetails.cs" />
