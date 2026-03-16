@@ -1,6 +1,7 @@
 ﻿using APC.BLL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
+using APC.Domain.Interfaces;
 using APC.HelperServices;
 using FontAwesome.Sharp;
 using System;
@@ -14,22 +15,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static APC.HelperServices.CommentHelperService;
-using static APC.HelperServices.DocumentHelperService;
-using static APC.HelperServices.EventsHelperService;
-using static APC.HelperServices.ExpenditureHelperService;
-using static APC.HelperServices.GeneralAttendanceHelperService;
-using static APC.HelperServices.MemberHelperService;
-using static APC.HelperServices.SingleColumnHelperService;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+
 
 namespace APC.AllForms
 {
     public partial class FormSettings : Form
     {
-        public FormSettings()
+        private readonly ICountryService _countryService;
+        public FormSettings(ICountryService countryService)
         {
             InitializeComponent();
+            _countryService = countryService;
         }
         MemberDTO memberDTO = new MemberDTO();
         MemberBLL memberBLL = new MemberBLL();     
@@ -217,21 +213,7 @@ namespace APC.AllForms
 
             Counts();
         }
-        private void FillPermissionComboBoxes()
-        {
-            cmbPermission.DataSource = permissionDTO.Permissions;
-            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
-        }
 
-        private void picProfilePic_Paint(object sender, PaintEventArgs e)
-        {
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddEllipse(0, 0, picProfilePic.Width - 1, picProfilePic.Height - 1);
-            Region rg = new Region(gp);
-            picProfilePic.Region = rg;
-        }
-
-        
 
         private void btnAddCountry_Click(object sender, EventArgs e)
         {
@@ -354,6 +336,22 @@ namespace APC.AllForms
                 }
             }
         }
+
+        private void FillPermissionComboBoxes()
+        {
+            cmbPermission.DataSource = permissionDTO.Permissions;
+            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
+        }
+
+        private void picProfilePic_Paint(object sender, PaintEventArgs e)
+        {
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddEllipse(0, 0, picProfilePic.Width - 1, picProfilePic.Height - 1);
+            Region rg = new Region(gp);
+            picProfilePic.Region = rg;
+        }
+
+        
 
         
         private void btnAddEmpStatus_Click(object sender, EventArgs e)
