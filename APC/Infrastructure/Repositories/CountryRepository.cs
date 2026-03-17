@@ -45,19 +45,11 @@ namespace APC.Infrastructure.Repositories
             return _db.COUNTRY.Any(x => !x.isDeleted && x.countryName == name);
         }
 
-        public List<Country> GetAll()
+        public IQueryable<COUNTRY> GetAll()
         {
-            var data = _db.COUNTRY
+            return _db.COUNTRY
                 .Where(x => !x.isDeleted)
-                .OrderBy(x => x.countryName)
-                .ToList();
-
-            return data
-                .Select(x => Country.Rehydrate(
-                    x.countryID,
-                    x.countryName
-                ))
-                .ToList();
+                .OrderBy(x => x.countryName);
         }
 
         public Country GetById(int id)

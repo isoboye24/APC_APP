@@ -1,5 +1,6 @@
 ﻿using APC.BLL;
 using APC.DAL.DTO;
+using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,10 +17,16 @@ namespace APC
 {
     public partial class FormCountry : Form
     {
-        public FormCountry()
+        private readonly ICountryService _countryService;
+
+        private int _countryId = 0;
+
+        public FormCountry(ICountryService countryService)
         {
             InitializeComponent();
+            _countryService = countryService;
         }
+
         /// <summary>
         ///  Drag
         /// </summary>
@@ -47,6 +54,13 @@ namespace APC
         {
             this.Close();
         }
+
+        public void LoadForEdit(int id, string name)
+        {
+            _countryId = id;
+            txtCountry.Text = name;
+        }
+
         CountryBLL bll = new CountryBLL();
         public CountryDTO detail = new CountryDTO();
         public bool isUpdate = false;

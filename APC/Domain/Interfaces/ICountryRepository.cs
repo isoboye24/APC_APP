@@ -1,4 +1,5 @@
 ﻿using APC.AllForms.ViewModels;
+using APC.DAL;
 using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace APC.Domain.Interfaces
 {
     public interface ICountryRepository
     {
-        List<Country> GetAll();
+        IQueryable<COUNTRY> GetAll();
         Country GetById(int id);
         bool Insert(Country country);
         bool Update(Country country);

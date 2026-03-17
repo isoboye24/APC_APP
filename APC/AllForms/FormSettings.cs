@@ -1,8 +1,9 @@
-﻿using APC.BLL;
+﻿using APC.AllForms.ViewModels;
+using APC.BLL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
 using APC.Domain.Interfaces;
-using APC.HelperServices;
+using APC.Helper;
 using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
@@ -15,17 +16,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static APC.Helper.CountryHelper;
 
 
 namespace APC.AllForms
 {
     public partial class FormSettings : Form
     {
+        private readonly ICurrentUserService _currentUserService;
         private readonly ICountryService _countryService;
-        public FormSettings(ICountryService countryService)
+
+        private List<CountryViewModel> _countryVM;
+
+        public FormSettings(ICountryService countryService, ICurrentUserService currentUserService)
         {
             InitializeComponent();
             _countryService = countryService;
+            _currentUserService = currentUserService;
         }
         MemberDTO memberDTO = new MemberDTO();
         MemberBLL memberBLL = new MemberBLL();     
@@ -35,10 +42,6 @@ namespace APC.AllForms
         PaymentStatusBLL paymentStatusBLL = new PaymentStatusBLL();
         PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
         PaymentStatusDetailDTO paymentStatusDetail = new PaymentStatusDetailDTO();
-
-        CountryBLL countryBLL = new CountryBLL();
-        CountryDTO countryDTO = new CountryDTO();
-        CountryDTO countryDetail = new CountryDTO();
 
         EmploymentStatusBLL empStatusBLL = new EmploymentStatusBLL();
         EmploymentStatusDTO empStatusDTO = new EmploymentStatusDTO();
@@ -101,6 +104,12 @@ namespace APC.AllForms
         FinedMemberDTO finedMemberDTO = new FinedMemberDTO();
         FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
 
+        private void loadCountries()
+        {
+            dataGridViewCountry.DataSource = _countryService.GetAll();
+            ConfigureCountryGrid(dataGridViewCountry, CountryGridType.Basic);
+        }
+
 
         private void resizeControls() 
         {
@@ -144,7 +153,7 @@ namespace APC.AllForms
 
             LoadDataGridView.loadPaymentStatuses(dataGridViewPaymentStatus, paymentStatusDTO);
 
-            LoadDataGridView.loadCountries(dataGridViewCountry, countryDTO);
+            loadCountries();
 
             LoadDataGridView.loadEmploymentStatuses(dataGridViewEmpStatus, empStatusDTO);
 
@@ -199,7 +208,7 @@ namespace APC.AllForms
 
             #endregion
 
-            if (AuthenticationDTO.AccessLevel != 4)
+            if (_currentUserService.AccessLevel != 4)
             {
                 btnDeleteCountry.Hide();
                 btnDeleteEmpStatus.Hide();
@@ -214,16 +223,6 @@ namespace APC.AllForms
             Counts();
         }
 
-
-        private void btnAddCountry_Click(object sender, EventArgs e)
-        {
-            FormCountry open = new FormCountry();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            ClearFilters();
-        }
-
         private void ClearFilters()
         {
             txtPaymentStatus.Clear();
@@ -232,9 +231,7 @@ namespace APC.AllForms
             dataGridViewPaymentStatus.DataSource = paymentStatusDTO.PaymentStatuses;
 
             txtCountry.Clear();
-            countryBLL = new CountryBLL();
-            countryDTO = countryBLL.Select();
-            dataGridViewCountry.DataSource = countryDTO.Countries;
+            loadCountries();
 
             txtEmpStatus.Clear();
             empStatusBLL = new EmploymentStatusBLL();
@@ -286,56 +283,66 @@ namespace APC.AllForms
             labelTotalEventSettingsDashboard.Text = eventBLL.SelectEventCount().ToString();
         }
 
+
+
+        private void btnAddCountry_Click(object sender, EventArgs e)
+        {
+            var form = new FormCountry(_countryService);
+            form.ShowDialog();
+            ClearFilters();
+        }
+
+        private CountryViewModel GetSelected()
+        {
+            if (dataGridView1.CurrentRow == null)
+                return null;
+
+            return dataGridView1.CurrentRow.DataBoundItem as CountryViewModel;
+        }
+
         private void btnUpdateCountry_Click(object sender, EventArgs e)
         {
-            if (countryDetail.CountryID == 0)
+            var selected = GetSelected();
+            if (selected == null)
             {
                 MessageBox.Show("Please select a country from the table");
+                return;
             }
-            else
-            {
-                FormCountry open = new FormCountry();
-                open.detail = countryDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormCountry(_countryService);
+            form.LoadForEdit(selected.CountryId, selected.CountryName);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void txtCountry_TextChanged(object sender, EventArgs e)
         {
-            List<CountryDTO> list = countryDTO.Countries;
-            list = list.Where(x => x.CountryName.Contains(txtCountry.Text)).ToList();
-            dataGridViewCountry.DataSource = list;
-        }
-
-        private void dataGridViewCountry_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            countryDetail = GeneralHelper.MapFromGrid<CountryDTO>(dataGridViewCountry, e.RowIndex);
+            string search = txtCountry.Text.Trim().ToLower();
+            var filtered = _countryVM.Where(x => x.CountryName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewCountry.DataSource = filtered;
         }
 
         private void btnDeleteCountry_Click(object sender, EventArgs e)
         {
-            if (countryDetail.CountryID == 0)
+            var selected = GetSelected();
+            if (selected == null)
             {
-                MessageBox.Show("Please select a country from the table");
+                MessageBox.Show("Please select a country from the table.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (countryBLL.Delete(countryDetail))
-                    {
-                        MessageBox.Show("Country was deleted");
-                        ClearFilters();
-                    }
-                }
+                _countryService.Delete(selected.CountryId);
+                ClearFilters();
             }
         }
+
+
+
 
         private void FillPermissionComboBoxes()
         {
@@ -351,9 +358,6 @@ namespace APC.AllForms
             picProfilePic.Region = rg;
         }
 
-        
-
-        
         private void btnAddEmpStatus_Click(object sender, EventArgs e)
         {
             FormEmploymentStatus open = new FormEmploymentStatus();

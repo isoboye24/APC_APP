@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.AllForms.ViewModels;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace APC.Domain.Interfaces
 {
     public interface ICountryService
     {
-        List<Country> GetAll();
+        List<CountryViewModel> GetAll();
         bool Create(Country country);
         bool Update(Country country);
         bool Delete(int id);

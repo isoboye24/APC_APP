@@ -8,7 +8,7 @@ namespace APC.AllForms.ViewModels
 {
     public class CountryViewModel
     {
-        public int CountryId { get; private set; }
-        public string CountryName { get; private set; }
+        public int CountryId { get; set; }
+        public string CountryName { get; set; }
     }
 }

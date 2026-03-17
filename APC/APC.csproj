@@ -806,6 +806,7 @@
     <Compile Include="Helper\CommentHelperService.cs" />
     <Compile Include="Helper\CommittmentHelperService.cs" />
     <Compile Include="Helper\ConstitutionHelperService.cs" />
+    <Compile Include="Helper\CountryHelper.cs" />
     <Compile Include="Helper\DocumentHelperService.cs" />
     <Compile Include="Helper\EventsHelperService.cs" />
     <Compile Include="Helper\ExpenditureHelperService.cs" />
