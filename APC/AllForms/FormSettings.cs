@@ -23,6 +23,7 @@ namespace APC.AllForms
         private readonly IEmploymentStatusService _employmentStatusService;
 
         private List<CountryDTO> _countryDTO;
+        private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
 
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService)
         {
@@ -40,10 +41,6 @@ namespace APC.AllForms
         PaymentStatusBLL paymentStatusBLL = new PaymentStatusBLL();
         PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
         PaymentStatusDetailDTO paymentStatusDetail = new PaymentStatusDetailDTO();
-
-        EmploymentStatusBLL empStatusBLL = new EmploymentStatusBLL();
-        EmploymentStatusDTO empStatusDTO = new EmploymentStatusDTO();
-        EmploymentStatusDetailDTO empStatusDetail = new EmploymentStatusDetailDTO();
 
         MaritalStatusBLL marStatusBLL = new MaritalStatusBLL();
         MaritalStatusDTO marStatusDTO = new MaritalStatusDTO();
@@ -292,7 +289,7 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private CountryDTO GetSelected()
+        private CountryDTO GetSelectedCountry()
         {
             if (dataGridViewCountry.CurrentRow == null)
                 return null;
@@ -302,7 +299,7 @@ namespace APC.AllForms
 
         private void btnUpdateCountry_Click(object sender, EventArgs e)
         {
-            var selected = GetSelected();
+            var selected = GetSelectedCountry();
             if (selected == null)
             {
                 MessageBox.Show("Please select a country from the table");
@@ -325,7 +322,7 @@ namespace APC.AllForms
 
         private void btnDeleteCountry_Click(object sender, EventArgs e)
         {
-            var selected = GetSelected();
+            var selected = GetSelectedCountry();
             if (selected == null)
             {
                 MessageBox.Show("Please select a country from the table.");
@@ -341,6 +338,7 @@ namespace APC.AllForms
             }
         }
 
+
         private void btnAddEmpStatus_Click(object sender, EventArgs e)
         {
             var form = new FormEmploymentStatus(_employmentStatusService);
@@ -348,41 +346,51 @@ namespace APC.AllForms
             ClearFilters();
         }
 
+        private Applications.DTO.EmploymentStatusDTO GetSelectedEmploymentStatus()
+        {
+            if (dataGridViewEmpStatus.CurrentRow == null)
+                return null;
+
+            return dataGridViewEmpStatus.CurrentRow.DataBoundItem as Applications.DTO.EmploymentStatusDTO;
+        }
+
         private void btnUpdateEmpStatus_Click(object sender, EventArgs e)
         {
-            FormEmploymentStatus open = new FormEmploymentStatus();
-            open.detail = empStatusDetail;
-            open.isUpdate = true;
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var selected = GetSelectedEmploymentStatus();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select an employment status from the table");
+                return;
+            }
+
+            var form = new FormEmploymentStatus(_employmentStatusService);
+            form.LoadForEdit(selected.EmploymentStatusId, selected.EmploymentStatusName, true);
+            form.ShowDialog();
             ClearFilters();
         }
 
         private void txtEmpStatus_TextChanged(object sender, EventArgs e)
         {
-            List<EmploymentStatusDetailDTO> list = empStatusDTO.EmploymentStatuses;
-            list = list.Where(x => x.EmploymentStatus.Contains(txtEmpStatus.Text)).ToList();
-            dataGridViewEmpStatus.DataSource = list;
+            string search = txtEmpStatus.Text.Trim().ToLower();
+            var filtered = _employmentStatusDTO.Where(x => x.EmploymentStatusName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewEmpStatus.DataSource = filtered;
         }
 
         private void btnDeleteEmpStatus_Click(object sender, EventArgs e)
         {
-            if (empStatusDetail.EmploymentStatusID == 0)
+            var selected = GetSelectedEmploymentStatus();
+            if (selected == null)
             {
-                MessageBox.Show("Please select an employment status from the table");
+                MessageBox.Show("Please select an employment status from the table.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (empStatusBLL.Delete(empStatusDetail))
-                    {
-                        MessageBox.Show("Employment status was deleted");
-                        ClearFilters();
-                    }
-                }
+                _employmentStatusService.Delete(selected.EmploymentStatusId);
+                ClearFilters();
             }
         }
 

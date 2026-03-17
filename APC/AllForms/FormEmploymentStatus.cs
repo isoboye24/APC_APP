@@ -1,15 +1,8 @@
-﻿using APC.BLL;
-using APC.DAL.DTO;
+﻿using APC.Domain.Entities;
 using APC.Domain.Interfaces;
+using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC
@@ -18,7 +11,8 @@ namespace APC
     {
         private readonly IEmploymentStatusService _employmentStatusService;
 
-        private int _countryId = 0;
+        private int _statusId = 0;
+        private bool _isUpdate = false;
         public FormEmploymentStatus(IEmploymentStatusService employmentStatusService)
         {
             InitializeComponent();
@@ -44,56 +38,59 @@ namespace APC
         {
             this.Close();
         }
-        EmploymentStatusBLL bll = new EmploymentStatusBLL();
-        public EmploymentStatusDetailDTO detail = new EmploymentStatusDetailDTO();
-        public bool isUpdate = false;
+        public void LoadForEdit(int id, string name, bool isUpdate)
+        {
+            _statusId = id;
+            txtEmpStatus.Text = name;
+            _isUpdate = isUpdate;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtEmpStatus.Text.Trim()=="")
+            try
             {
-                MessageBox.Show("Employment status is empty");
+                var name = txtEmpStatus.Text.Trim();
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    MessageBox.Show("Please enter employment status");
+                    return;
+                }
+
+                if (_statusId == 0)
+                {
+                    var employmentStatus = new EmploymentStatus(name);
+                    _employmentStatusService.Create(employmentStatus);
+                    MessageBox.Show("Employment status created successfully!");
+                }
+                else
+                {
+                    var employmentStatus = new EmploymentStatus(name);
+                    employmentStatus.SetId(_statusId);
+
+                    _employmentStatusService.Update(employmentStatus);
+                    MessageBox.Show("Employment status updated successfully!");
+                    this.Close();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                if (!isUpdate)
-                {
-                    EmploymentStatusDetailDTO employmentStatus = new EmploymentStatusDetailDTO();
-                    employmentStatus.EmploymentStatus = txtEmpStatus.Text;
-                    if (bll.Insert(employmentStatus))
-                    {
-                        MessageBox.Show("Employment status was added");
-                        txtEmpStatus.Clear();
-                    }
-                }
-                else if (isUpdate)
-                {
-                    if (detail.EmploymentStatus==txtEmpStatus.Text.Trim())
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        detail.EmploymentStatus = txtEmpStatus.Text;
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Employment status was updated");
-                            this.Close();
-                        }
-                    }
-                }
+                MessageBox.Show(ex.Message);
             }
         }
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(14, txtEmpStatus);
+        }
+
         private void FormEmploymentStatus_Load(object sender, EventArgs e)
         {
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            txtEmpStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            resizeControls();
 
-            if (isUpdate)
+            if (_isUpdate)
             {
-                txtEmpStatus.Text = detail.EmploymentStatus;
                 labelTitle.Text = "Edit Employement Status";
             }
             else
