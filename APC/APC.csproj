@@ -329,6 +329,7 @@
     <Compile Include="Applications\Services\CommentService.cs" />
     <Compile Include="Applications\Services\ConstitutionService.cs" />
     <Compile Include="Applications\Services\CountryService.cs" />
+    <Compile Include="Applications\Services\CurrentUserService.cs" />
     <Compile Include="Applications\Services\DocumentService.cs" />
     <Compile Include="Applications\Services\EmploymentStatusService.cs" />
     <Compile Include="Applications\Services\EventExpenditureService.cs" />
@@ -731,6 +732,7 @@
     <Compile Include="Domain\Entities\TheEvents.cs" />
     <Compile Include="Domain\Entities\EventSales.cs" />
     <Compile Include="Domain\Entities\Gender.cs" />
+    <Compile Include="Domain\Interfaces\ICurrentUserService.cs" />
     <Compile Include="Domain\Interfaces\IEventReceiptRepository.cs" />
     <Compile Include="Domain\Interfaces\IEventReceiptService.cs" />
     <Compile Include="Domain\Interfaces\IEventSalesRepository.cs" />
@@ -800,19 +802,19 @@
     <Compile Include="Domain\Interfaces\ISpecialContributorRepository.cs" />
     <Compile Include="Domain\Interfaces\ISpecialContributorService.cs" />
     <Compile Include="FormProperties.cs" />
-    <Compile Include="HelperServices\CommentHelperService.cs" />
-    <Compile Include="HelperServices\CommittmentHelperService.cs" />
-    <Compile Include="HelperServices\ConstitutionHelperService.cs" />
-    <Compile Include="HelperServices\DocumentHelperService.cs" />
-    <Compile Include="HelperServices\EventsHelperService.cs" />
-    <Compile Include="HelperServices\ExpenditureHelperService.cs" />
-    <Compile Include="HelperServices\FinancialReportHelperService.cs" />
-    <Compile Include="HelperServices\FinedMemberHelperService.cs" />
-    <Compile Include="HelperServices\GeneralAttendanceHelperService.cs" />
-    <Compile Include="HelperServices\LoadDataGridView.cs" />
-    <Compile Include="HelperServices\MemberHelperService.cs" />
-    <Compile Include="HelperServices\SingleColumnHelperService.cs" />
-    <Compile Include="HelperServices\SpecialContributionHelperService.cs" />
+    <Compile Include="Helper\CommentHelperService.cs" />
+    <Compile Include="Helper\CommittmentHelperService.cs" />
+    <Compile Include="Helper\ConstitutionHelperService.cs" />
+    <Compile Include="Helper\DocumentHelperService.cs" />
+    <Compile Include="Helper\EventsHelperService.cs" />
+    <Compile Include="Helper\ExpenditureHelperService.cs" />
+    <Compile Include="Helper\FinancialReportHelperService.cs" />
+    <Compile Include="Helper\FinedMemberHelperService.cs" />
+    <Compile Include="Helper\GeneralAttendanceHelperService.cs" />
+    <Compile Include="Helper\LoadDataGridView.cs" />
+    <Compile Include="Helper\MemberHelperService.cs" />
+    <Compile Include="Helper\SingleColumnHelperService.cs" />
+    <Compile Include="Helper\SpecialContributionHelperService.cs" />
     <Compile Include="Infrastructure\Repositories\AttendanceStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\CommentRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ConstitutionRepository.cs" />
@@ -844,7 +846,7 @@
     <Compile Include="Infrastructure\Repositories\ProfessionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\SpecialContributionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\SpecialContributorRepository.cs" />
-    <Compile Include="LoginInfo.cs" />
+    <Compile Include="Applications\DTO\AuthenticationDTO.cs" />
     <Compile Include="ReadFiles.cs" />
     <Compile Include="FillComboBox.cs" />
     <Compile Include="FormDashboard.cs">
@@ -901,7 +903,7 @@
     <Compile Include="AllForms\FormProfession.Designer.cs">
       <DependentUpon>FormProfession.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperServices\GeneralHelper.cs" />
+    <Compile Include="Helper\GeneralHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\AppZoomState.cs" />

@@ -56,7 +56,7 @@ namespace APC.AllForms
 
         private void FormMembersBoard_Load(object sender, EventArgs e)
         {
-            if (LoginInfo.AccessLevel != 4)
+            if (AuthenticationDTO.AccessLevel != 4)
             {
                 btnDeleteRegisteredMembers.Hide();
             }

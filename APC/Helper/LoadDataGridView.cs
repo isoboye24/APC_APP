@@ -1,24 +1,19 @@
 ﻿using APC.DAL.DTO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static APC.HelperServices.CommentHelperService;
-using static APC.HelperServices.ConstitutionHelperService;
-using static APC.HelperServices.DocumentHelperService;
-using static APC.HelperServices.EventsHelperService;
-using static APC.HelperServices.ExpenditureHelperService;
-using static APC.HelperServices.FinancialReportHelperService;
-using static APC.HelperServices.FinedMemberHelperService;
-using static APC.HelperServices.GeneralAttendanceHelperService;
-using static APC.HelperServices.MemberHelperService;
-using static APC.HelperServices.SingleColumnHelperService;
-using static APC.HelperServices.SpecialContributionHelperService;
+using static APC.Helper.CommentHelperService;
+using static APC.Helper.ConstitutionHelperService;
+using static APC.Helper.DocumentHelperService;
+using static APC.Helper.EventsHelperService;
+using static APC.Helper.ExpenditureHelperService;
+using static APC.Helper.FinancialReportHelperService;
+using static APC.Helper.FinedMemberHelperService;
+using static APC.Helper.GeneralAttendanceHelperService;
+using static APC.Helper.MemberHelperService;
+using static APC.Helper.SingleColumnHelperService;
+using static APC.Helper.SpecialContributionHelperService;
 
-namespace APC.HelperServices
+namespace APC.Helper
 {
     public class LoadDataGridView
     {

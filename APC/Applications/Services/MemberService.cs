@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
+using APC.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,30 @@ namespace APC.Applications.Services
     public class MemberService : IMemberService
     {
         private readonly IMemberRepository _repository;
-        public MemberService(IMemberRepository repository)
+        private readonly ICurrentUserService _currentUserService;
+        public MemberService(IMemberRepository repository, ICurrentUserService currentUserService)
         {
             _repository = repository;
+            _currentUserService = currentUserService;
         }
+
+        public AuthenticationDTO Authenticate(string username, string password)
+        {
+            var member = _repository.GetByUsername(username);
+
+            if (member == null || member.password != password)
+                return null;
+
+            _currentUserService.SetUser(member.memberID, member.username, member.permissionID);
+
+            return new AuthenticationDTO
+            {
+                MemberId = member.memberID,
+                Username = member.username,
+                AccessLevel = member.permissionID
+            };
+        }
+
         public int Count()
             => _repository.Count();
 

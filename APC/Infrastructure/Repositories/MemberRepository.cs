@@ -466,5 +466,10 @@ namespace APC.Infrastructure.Repositories
             _db.SaveChanges();
             return true;
         }
+
+        public MEMBER GetByUsername(string username)
+        {
+            return _db.MEMBER.FirstOrDefault(x => !x.isDeleted && x.username == username);
+        }
     }
 }

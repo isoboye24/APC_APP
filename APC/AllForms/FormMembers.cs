@@ -181,7 +181,7 @@ namespace APC
                 cmbMaritalStatus.SelectedValue = detail.MaritalStatusID;
                 cmbMembershipStatus.SelectedValue = detail.MembershipStatusID;
                 cmbRelationshipToNextOfKin.SelectedValue = detail.RelationshipToKinID;
-                if (LoginInfo.AccessLevel != 4)
+                if (AuthenticationDTO.AccessLevel != 4)
                 {
                     labelAccessLevel.Hide();
                     cmbPermission.Hide();
@@ -268,7 +268,7 @@ namespace APC
             {
                 MessageBox.Show("Please select a relationship to next of kin");
             }
-            else if (LoginInfo.AccessLevel == 4 && cmbPermission.SelectedIndex == -1)
+            else if (AuthenticationDTO.AccessLevel == 4 && cmbPermission.SelectedIndex == -1)
             {                
                 MessageBox.Show("Please select an access level");
             }                 
@@ -331,7 +331,7 @@ namespace APC
                     member.MaritalStatusID = Convert.ToInt32(cmbMaritalStatus.SelectedValue);
                     member.NameOfNextOfKin = txtNameOfNextOfKin.Text;
                     member.RelationshipToKinID = Convert.ToInt32(cmbRelationshipToNextOfKin.SelectedValue);
-                    if (LoginInfo.AccessLevel != 4)
+                    if (AuthenticationDTO.AccessLevel != 4)
                     {
                         member.PermissionID = 2;
                     }

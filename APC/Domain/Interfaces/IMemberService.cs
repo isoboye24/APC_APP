@@ -1,4 +1,5 @@
 ﻿using APC.Applications.DTO;
+using APC.DAL;
 using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace APC.Domain.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
+        AuthenticationDTO Authenticate(string username, string password);
 
         List<Member> GetAllDeleted();
         List<MemberFullDetailsDTO> GetFullMemberDetails();

@@ -104,7 +104,7 @@ namespace APC.AllForms
 
         private void resizeControls() 
         {
-            GeneralHelper.ApplyBoldFont14(
+            GeneralHelper.ApplyBoldFont(14,
                 label1, label2, label3, label4, label5, label6, label7, label8,
                 label9, label10, label11, label12, label13, label14, label15, label16, label17, label19,
                 btnAddCountry, btnUpdateCountry, btnDeleteCountry, btnAddEmpStatus, btnUpdateEmpStatus,
@@ -115,12 +115,12 @@ namespace APC.AllForms
                 labelPosition, cmbDeletedData, btnRetrieve
                 );
 
-            GeneralHelper.ApplyRegularFont11(
+            GeneralHelper.ApplyRegularFont(11,
                 labelTotalCountry, labelTotalEmpStatus, labelTotalMarStatus, labelTotalNationality,
                 labelTotalPermissions, labelTotalPositions, labelTotalProfessions
                 );
             
-            GeneralHelper.ApplyRegularFont14(
+            GeneralHelper.ApplyRegularFont(14,
                 txtCountry, txtMaritalStatus, txtEmpStatus, txtNationality, cmbPermission, txtPosition,
                 txtProfession
                 );
@@ -167,7 +167,7 @@ namespace APC.AllForms
             picProfilePic.Paint += new PaintEventHandler(picProfilePic_Paint);
 
             memberDTO = memberBLL.Select();
-            MemberDetailDTO detail = memberDTO.Members.First(x => x.MemberID == LoginInfo.MemberID);
+            MemberDetailDTO detail = memberDTO.Members.First(x => x.MemberID == AuthenticationDTO.MemberID);
             string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
             picProfilePic.ImageLocation = imagePath;
             labelName.Text = detail.Name;
@@ -199,7 +199,7 @@ namespace APC.AllForms
 
             #endregion
 
-            if (LoginInfo.AccessLevel != 4)
+            if (AuthenticationDTO.AccessLevel != 4)
             {
                 btnDeleteCountry.Hide();
                 btnDeleteEmpStatus.Hide();

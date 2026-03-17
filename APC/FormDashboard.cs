@@ -3,18 +3,11 @@ using APC.BLL;
 using APC.DAL.DTO;
 using APC.Utility;
 using FontAwesome.Sharp;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -28,7 +21,10 @@ namespace APC
 
         private float globalFontSize = 14.0f;
         private float resizeFactor = 16.0f;
-        public FormDashboard()
+
+        private readonly IServiceProvider _serviceProvider;
+
+        public FormDashboard(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             leftBorderBtn = new Panel();
@@ -38,6 +34,8 @@ namespace APC
             this.Text = string.Empty;
             this.ControlBox = false;
             this.DoubleBuffered = true;
+
+            _serviceProvider = serviceProvider;
         }
         private struct RBGColors
         {
@@ -392,7 +390,7 @@ namespace APC
                 if (!isAdmin && !isEditor)
                 {
                     MemberDTO dto = memberBLL.Select();
-                    MemberDetailDTO detail = dto.Members.First(x => x.MemberID == LoginInfo.MemberID);
+                    MemberDetailDTO detail = dto.Members.First(x => x.MemberID == AuthenticationDTO.MemberID);
                     FormViewMember open = new FormViewMember();
                     open.detail = detail;
                     open.isView = true;
@@ -421,7 +419,8 @@ namespace APC
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormSettings());            
+            var form = _serviceProvider.GetRequiredService<FormSettings>();
+            OpenChildForm(form);
         }
 
         private void labelLogo_Click(object sender, EventArgs e)

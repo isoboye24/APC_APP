@@ -118,7 +118,7 @@ namespace APC.AllForms
             }
 
             labelDocCount.Text = bll.SelectDocCount().ToString();
-            if (LoginInfo.AccessLevel != 4)
+            if (AuthenticationDTO.AccessLevel != 4)
             {
                 btnDelete.Hide();
             }

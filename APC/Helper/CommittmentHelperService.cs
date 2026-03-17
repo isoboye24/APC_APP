@@ -1,13 +1,8 @@
-﻿using APC.DAL;
-using APC.DAL.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace APC.HelperServices
+namespace APC.Helper
 {
     public class CommittmentHelperService
     {        

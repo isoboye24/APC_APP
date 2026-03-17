@@ -92,6 +92,7 @@ namespace APC
             services.AddScoped<ISpecialContributionService, SpecialContributionService>();
             services.AddScoped<ISpecialContributorService, SpecialContributorService>();
             services.AddScoped<IMemberCommittmentService, MemberCommittmentService>();
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -166,9 +167,9 @@ namespace APC
                 }
             };
 
-            var provider = services.BuildServiceProvider();
+            var serviceProvider = services.BuildServiceProvider();
 
-            Application.Run(provider.GetRequiredService<FormLogin>());
+            Application.Run(serviceProvider.GetRequiredService<FormLogin>());
         }
     }
 }

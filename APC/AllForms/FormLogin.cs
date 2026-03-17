@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using FontAwesome.Sharp;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using APC.BLL;
 using APC.DAL;
-using APC.BLL;
-using APC.DAL.DTO;
-using OfficeOpenXml.Drawing.Chart;
+using APC.Domain.Interfaces;
+using APC.Helper;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace APC.AllForms
 {
     public partial class FormLogin : Form
     {
-        public FormLogin()
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IMemberService _memberService;
+        private readonly ICurrentUserService _currentUserService;
+        public FormLogin(IServiceProvider serviceProvider, IMemberService memberService, ICurrentUserService currentUserService)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
+            _memberService = memberService;
+            _currentUserService = currentUserService;
         }
+
         // Drag From
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -52,78 +52,72 @@ namespace APC.AllForms
             }
             else
             {
-                List<MEMBER> memberList = memberBLL.CheckMember(txtPassword.Text, txtUsername.Text);
-                if (memberList.Count == 0)
+                var auth = _memberService.Authenticate(txtUsername.Text, txtPassword.Text);
+
+                if (auth == null)
                 {
-                    MessageBox.Show("Member does not exist");
+                    MessageBox.Show("Invalid username or password");
+                    return;
                 }
                 else
                 {
-                    MEMBER member = new MEMBER();
-                    member = memberList.First();
-                    LoginInfo.MemberID = member.memberID;
-                    LoginInfo.Username = member.username;
-                    LoginInfo.Password = member.password;
-                    LoginInfo.AccessLevel = member.permissionID;
                     int absenteesCount = memberBLL.Select3MonthsAbsentesCount();
-                    if (LoginInfo.AccessLevel == 4)
+                    if (_currentUserService.AccessLevel == 4)
                     {
                         if (absenteesCount > 0)
                         {
-                            FormNotifications open = new FormNotifications();
-                            open.isAdmin = true;
-                            open.isLogin = true;
-                            open.numbers = absenteesCount;
+                            var form = _serviceProvider.GetRequiredService<FormNotifications>();
+                            form.isAdmin = true;
+                            form.isLogin = true;
+                            form.numbers = absenteesCount;
                             this.Hide();
-                            open.ShowDialog();
+                            form.ShowDialog();
                         }
                         else
                         {
-                            FormDashboard open = new FormDashboard();
+                            var form = _serviceProvider.GetRequiredService<FormDashboard>();
                             this.Hide();
-                            open.isAdmin = true;
-                            open.ShowDialog();
+                            form.isAdmin = true;
+                            form.ShowDialog();
                         }
                     }
-                    else if (LoginInfo.AccessLevel == 3)
+                    else if (_currentUserService.AccessLevel == 3)
                     {
                         if (absenteesCount > 0)
                         {
-                            FormNotifications open = new FormNotifications();
-                            open.isEditor = true;
-                            open.isLogin = true;
+                            var form = _serviceProvider.GetRequiredService<FormNotifications>();
+                            form.isEditor = true;
+                            form.isLogin = true;
                             this.Hide();
-                            open.ShowDialog();
+                            form.ShowDialog();
                         }
                         else
                         {
-                            FormDashboard open = new FormDashboard();
+                            var form = _serviceProvider.GetRequiredService<FormDashboard>();
                             this.Hide();
-                            open.isEditor = true;
-                            open.ShowDialog();
-                        }                        
+                            form.isEditor = true;
+                            form.ShowDialog();
+                        }
                     }
                     else
                     {
-                        FormDashboard open = new FormDashboard();
+                        var form = _serviceProvider.GetRequiredService<FormDashboard>();
                         this.Hide();
-                        open.ShowDialog();
-                    }                    
+                        form.ShowDialog();
+                    }
                 }
-            }            
+            }
+        }
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, btnClose, btnEnter);
+            GeneralHelper.ApplyRegularFont(14, txtPassword, txtUsername);
         }
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            txtPassword.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtUsername.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnEnter.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            resizeControls();
         }
 
         private void picClose_Click(object sender, EventArgs e)

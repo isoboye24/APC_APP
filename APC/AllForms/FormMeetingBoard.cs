@@ -154,7 +154,7 @@ namespace APC.AllForms
             LoadDataGridView.loadSpecialContributions(dataGridViewSpecialContributions, specialContributionDTO);
             #endregion
 
-            if (LoginInfo.AccessLevel != 4)
+            if (AuthenticationDTO.AccessLevel != 4)
             {
                 btnDelete.Hide();
                 btnDeleteComments.Hide();

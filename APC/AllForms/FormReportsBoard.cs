@@ -72,7 +72,7 @@ namespace APC.AllForms
 
             #endregion
 
-            if (LoginInfo.AccessLevel != 4)
+            if (AuthenticationDTO.AccessLevel != 4)
             {
                 btnDeleteFinReport.Hide();
                 btnDeleteExpReport.Hide();

@@ -213,7 +213,7 @@ namespace APC.AllForms
 
         private void FormEventDetailsBoard_Load(object sender, EventArgs e)
         {
-            if (LoginInfo.AccessLevel != 4)
+            if (AuthenticationDTO.AccessLevel != 4)
             {
                 btnDeleteExpReport.Hide();
             }
@@ -688,7 +688,7 @@ namespace APC.AllForms
 
         private void btnDeleteEventImages_Click(object sender, EventArgs e)
         {
-            if (LoginInfo.AccessLevel != 4)
+            if (AuthenticationDTO.AccessLevel != 4)
             {
                 this.Close();
             }
@@ -867,7 +867,7 @@ namespace APC.AllForms
 
         private void btnDeleteEventReceipt_Click(object sender, EventArgs e)
         {
-            if (LoginInfo.AccessLevel != 4)
+            if (AuthenticationDTO.AccessLevel != 4)
             {
                 this.Close();
             }
