@@ -1,13 +1,9 @@
-﻿using APC.AllForms.ViewModels;
-using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace APC.Applications.Services
 {
@@ -19,10 +15,10 @@ namespace APC.Applications.Services
             _repository = repository;
         }
 
-        public List<CountryViewModel> GetAll()
+        public List<CountryDTO> GetAll()
         {
             return _repository.GetAll()
-                .Select(x => new CountryViewModel
+                .Select(x => new CountryDTO
                 {
                     CountryId = x.countryID,
                     CountryName = x.countryName

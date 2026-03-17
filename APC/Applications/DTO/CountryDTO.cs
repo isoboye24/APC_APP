@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APC.DAL.DTO
+namespace APC.Applications.DTO
 {
     public class CountryDTO
     {
-        public List<CountryDetailDTO> Countries { get; set; }
+        public int CountryId { get; set; }
+        public string CountryName { get; set; }
     }
 }

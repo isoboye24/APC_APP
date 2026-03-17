@@ -10,7 +10,7 @@ using static APC.Helper.FinancialReportHelperService;
 using static APC.Helper.FinedMemberHelperService;
 using static APC.Helper.GeneralAttendanceHelperService;
 using static APC.Helper.MemberHelperService;
-using static APC.Helper.SingleColumnHelperService;
+using static APC.Helper.SingleColumnHelper;
 using static APC.Helper.SpecialContributionHelperService;
 
 namespace APC.Helper

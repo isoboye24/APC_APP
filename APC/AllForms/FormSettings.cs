@@ -1,22 +1,17 @@
-﻿using APC.AllForms.ViewModels;
+﻿using APC.Applications.DTO;
 using APC.BLL;
-using APC.DAL.DAO;
 using APC.DAL.DTO;
 using APC.Domain.Interfaces;
 using APC.Helper;
-using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static APC.Helper.CountryHelper;
+using static APC.Helper.SingleColumnHelper;
 
 
 namespace APC.AllForms
@@ -25,15 +20,18 @@ namespace APC.AllForms
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly ICountryService _countryService;
+        private readonly IEmploymentStatusService _employmentStatusService;
 
-        private List<CountryViewModel> _countryVM;
+        private List<CountryDTO> _countryDTO;
 
-        public FormSettings(ICountryService countryService, ICurrentUserService currentUserService)
+        public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService)
         {
             InitializeComponent();
             _countryService = countryService;
             _currentUserService = currentUserService;
+            _employmentStatusService = employmentStatusService;
         }
+
         MemberDTO memberDTO = new MemberDTO();
         MemberBLL memberBLL = new MemberBLL();     
         
@@ -107,7 +105,13 @@ namespace APC.AllForms
         private void loadCountries()
         {
             dataGridViewCountry.DataSource = _countryService.GetAll();
-            ConfigureCountryGrid(dataGridViewCountry, CountryGridType.Basic);
+            ConfigureSingleColumnGrid(dataGridViewCountry, SingleColumnGridType.Basic, "CountryName", "Countries");
+        }
+
+        private void loadEmploymentStatus()
+        {
+            dataGridViewEmpStatus.DataSource = _employmentStatusService.GetAll();
+            ConfigureSingleColumnGrid(dataGridViewEmpStatus, SingleColumnGridType.Basic, "EmploymentStatusName", "Employment Statuses");
         }
 
 
@@ -140,7 +144,6 @@ namespace APC.AllForms
             resizeControls();
 
             paymentStatusDTO = paymentStatusBLL.Select();
-            countryDTO = countryBLL.Select();
             empStatusDTO = empStatusBLL.Select();
             marStatusDTO = marStatusBLL.Select();
             nationalityDTO = nationalityBLL.Select();
@@ -154,8 +157,7 @@ namespace APC.AllForms
             LoadDataGridView.loadPaymentStatuses(dataGridViewPaymentStatus, paymentStatusDTO);
 
             loadCountries();
-
-            LoadDataGridView.loadEmploymentStatuses(dataGridViewEmpStatus, empStatusDTO);
+            loadEmploymentStatus();
 
             LoadDataGridView.loadMaritalStatuses(dataGridViewMarStatus, marStatusDTO);
 
@@ -234,9 +236,7 @@ namespace APC.AllForms
             loadCountries();
 
             txtEmpStatus.Clear();
-            empStatusBLL = new EmploymentStatusBLL();
-            empStatusDTO = empStatusBLL.Select();
-            dataGridViewEmpStatus.DataSource = empStatusDTO.EmploymentStatuses;
+            loadEmploymentStatus();
 
             txtMaritalStatus.Clear();
             marStatusBLL = new MaritalStatusBLL();
@@ -292,12 +292,12 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private CountryViewModel GetSelected()
+        private CountryDTO GetSelected()
         {
-            if (dataGridView1.CurrentRow == null)
+            if (dataGridViewCountry.CurrentRow == null)
                 return null;
 
-            return dataGridView1.CurrentRow.DataBoundItem as CountryViewModel;
+            return dataGridViewCountry.CurrentRow.DataBoundItem as CountryDTO;
         }
 
         private void btnUpdateCountry_Click(object sender, EventArgs e)
@@ -310,7 +310,7 @@ namespace APC.AllForms
             }
 
             var form = new FormCountry(_countryService);
-            form.LoadForEdit(selected.CountryId, selected.CountryName);
+            form.LoadForEdit(selected.CountryId, selected.CountryName, true);
             form.ShowDialog();
 
             ClearFilters();
@@ -319,7 +319,7 @@ namespace APC.AllForms
         private void txtCountry_TextChanged(object sender, EventArgs e)
         {
             string search = txtCountry.Text.Trim().ToLower();
-            var filtered = _countryVM.Where(x => x.CountryName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            var filtered = _countryDTO.Where(x => x.CountryName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             dataGridViewCountry.DataSource = filtered;
         }
 
@@ -341,29 +341,10 @@ namespace APC.AllForms
             }
         }
 
-
-
-
-        private void FillPermissionComboBoxes()
-        {
-            cmbPermission.DataSource = permissionDTO.Permissions;
-            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
-        }
-
-        private void picProfilePic_Paint(object sender, PaintEventArgs e)
-        {
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddEllipse(0, 0, picProfilePic.Width - 1, picProfilePic.Height - 1);
-            Region rg = new Region(gp);
-            picProfilePic.Region = rg;
-        }
-
         private void btnAddEmpStatus_Click(object sender, EventArgs e)
         {
-            FormEmploymentStatus open = new FormEmploymentStatus();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormEmploymentStatus(_employmentStatusService);
+            form.ShowDialog();
             ClearFilters();
         }
 
@@ -385,12 +366,6 @@ namespace APC.AllForms
             dataGridViewEmpStatus.DataSource = list;
         }
 
-        private void dataGridViewEmpStatus_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            empStatusDetail = GeneralHelper.MapFromGrid<EmploymentStatusDetailDTO>(dataGridViewEmpStatus, e.RowIndex);
-        }
-
         private void btnDeleteEmpStatus_Click(object sender, EventArgs e)
         {
             if (empStatusDetail.EmploymentStatusID == 0)
@@ -409,6 +384,24 @@ namespace APC.AllForms
                     }
                 }
             }
+        }
+
+
+
+
+
+        private void FillPermissionComboBoxes()
+        {
+            cmbPermission.DataSource = permissionDTO.Permissions;
+            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
+        }
+
+        private void picProfilePic_Paint(object sender, PaintEventArgs e)
+        {
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddEllipse(0, 0, picProfilePic.Width - 1, picProfilePic.Height - 1);
+            Region rg = new Region(gp);
+            picProfilePic.Region = rg;
         }
 
         private void btnAddMarStatus_Click(object sender, EventArgs e)

@@ -1,17 +1,10 @@
-﻿using APC.BLL;
-using APC.DAL.DTO;
+﻿using APC.Domain.Entities;
 using APC.Domain.Interfaces;
+using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace APC
 {
@@ -20,6 +13,7 @@ namespace APC
         private readonly ICountryService _countryService;
 
         private int _countryId = 0;
+        private bool _isUpdate = false;
 
         public FormCountry(ICountryService countryService)
         {
@@ -55,63 +49,60 @@ namespace APC
             this.Close();
         }
 
-        public void LoadForEdit(int id, string name)
+        public void LoadForEdit(int id, string name, bool isUpdate)
         {
             _countryId = id;
             txtCountry.Text = name;
+            _isUpdate = isUpdate;
         }
 
-        CountryBLL bll = new CountryBLL();
-        public CountryDTO detail = new CountryDTO();
-        public bool isUpdate = false;
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtCountry.Text.Trim()=="")
+            try
             {
-                MessageBox.Show("Country is empty");
-            }
-            else
-            {
-                if (!isUpdate)
+                var name = txtCountry.Text.Trim();
+
+                if (string.IsNullOrEmpty(name))
                 {
-                    CountryDTO country = new CountryDTO();
-                    country.CountryName = txtCountry.Text;
-                    if (bll.Insert(country))
-                    {
-                        MessageBox.Show("Country was added");
-                        txtCountry.Clear();
-                    }
+                    MessageBox.Show("Please enter country");
+                    return;
+                }
+
+                if (_countryId == 0)
+                {
+                    var country = new Country(name);
+                    _countryService.Create(country);
+                    MessageBox.Show("Country created successfully!");
                 }
                 else
                 {
-                    if (detail.CountryName == txtCountry.Text.Trim())
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else if(isUpdate)
-                    {
-                        detail.CountryName = txtCountry.Text;
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Country was updated");
-                            this.Close();
-                        }
-                    }
+                    var country = new Country(name);
+                    country.SetId(_countryId);
+
+                    _countryService.Update(country);
+                    MessageBox.Show("Country updated successfully!");
+                    this.Close();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(14, txtCountry);
         }
 
         private void FormCountry_Load(object sender, EventArgs e)
         {
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            txtCountry.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
 
-            if (isUpdate)
+            resizeControls();
+
+            if (_isUpdate)
             {
-                txtCountry.Text = detail.CountryName;
                 labelTitle.Text = "Edit Country";
             }
             else

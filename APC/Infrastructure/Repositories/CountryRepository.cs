@@ -2,10 +2,7 @@
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {

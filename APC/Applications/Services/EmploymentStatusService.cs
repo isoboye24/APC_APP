@@ -1,4 +1,5 @@
-﻿using APC.DAL;
+﻿using APC.Applications.DTO;
+using APC.DAL;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
@@ -31,8 +32,16 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<EmploymentStatus> GetAll()
-            => _repository.GetAll();
+        public List<EmploymentStatusDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .Select(x => new EmploymentStatusDTO
+                {
+                    EmploymentStatusId = x.employmentStatusID,
+                    EmploymentStatusName = x.employmentStatus
+                })
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

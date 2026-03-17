@@ -1,5 +1,6 @@
 ﻿using APC.BLL;
 using APC.DAL.DTO;
+using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +16,13 @@ namespace APC
 {
     public partial class FormEmploymentStatus : Form
     {
-        public FormEmploymentStatus()
+        private readonly IEmploymentStatusService _employmentStatusService;
+
+        private int _countryId = 0;
+        public FormEmploymentStatus(IEmploymentStatusService employmentStatusService)
         {
             InitializeComponent();
+            _employmentStatusService = employmentStatusService;
         }
         
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

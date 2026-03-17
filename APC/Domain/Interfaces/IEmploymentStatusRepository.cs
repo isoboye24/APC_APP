@@ -1,15 +1,12 @@
-﻿using APC.Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using APC.DAL;
+using APC.Domain.Entities;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
     public interface IEmploymentStatusRepository
     {
-        List<EmploymentStatus> GetAll();
+        IQueryable<EMPLOYMENT_STATUS> GetAll()
         EmploymentStatus GetById(int id);
         bool Insert(EmploymentStatus status);
         bool Update(EmploymentStatus status);

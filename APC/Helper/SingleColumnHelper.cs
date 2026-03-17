@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class SingleColumnHelperService
+    public class SingleColumnHelper
     {
         public enum SingleColumnGridType
         {

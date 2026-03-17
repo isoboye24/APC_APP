@@ -36,19 +36,11 @@ namespace APC.Infrastructure.Repositories
             return _db.EMPLOYMENT_STATUS.Any(x => !x.isDeleted && x.employmentStatus == name);
         }
 
-        public List<EmploymentStatus> GetAll()
+        public IQueryable<EMPLOYMENT_STATUS> GetAll()
         {
-            var data = _db.EMPLOYMENT_STATUS
+            return _db.EMPLOYMENT_STATUS
                 .Where(x => !x.isDeleted)
-                .OrderBy(x => x.employmentStatus)
-                .ToList();
-
-            return data
-                .Select(x => EmploymentStatus.Rehydrate(
-                    x.employmentStatusID,
-                    x.employmentStatus
-                ))
-                .ToList();
+                .OrderBy(x => x.employmentStatus);
         }
 
         public bool GetBack(int id)

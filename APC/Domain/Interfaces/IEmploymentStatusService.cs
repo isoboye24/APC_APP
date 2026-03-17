@@ -1,15 +1,13 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
     public interface IEmploymentStatusService
     {
-        List<EmploymentStatus> GetAll();
+        List<EmploymentStatusDTO> GetAll();
         bool Create(EmploymentStatus employmentStatus);
         bool Update(EmploymentStatus employmentStatus);
         bool Delete(int id);

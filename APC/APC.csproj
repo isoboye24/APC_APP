@@ -317,10 +317,11 @@
     <Compile Include="AllForms\FormViewSpecialContributor.Designer.cs">
       <DependentUpon>FormViewSpecialContributor.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\ViewModels\CountryViewModel.cs" />
     <Compile Include="Applications\DTO\AbsenteesDTO.cs" />
     <Compile Include="Applications\DTO\BirthdayMembersDTO.cs" />
+    <Compile Include="Applications\DTO\CountryDTO.cs" />
     <Compile Include="Applications\DTO\DeadMemberShortDetailDTO.cs" />
+    <Compile Include="Applications\DTO\EmploymentStatusDTO.cs" />
     <Compile Include="Applications\DTO\MembersBasicDetailDTO.cs" />
     <Compile Include="Applications\DTO\MemberFullDetailsDTO.cs" />
     <Compile Include="Applications\DTO\PersonalAttendanceFullDetails.cs" />
@@ -593,8 +594,6 @@
     <Compile Include="DAL\DTO\AttendanceStatusDTO.cs" />
     <Compile Include="DAL\DTO\CommentDetailDTO.cs" />
     <Compile Include="DAL\DTO\CommentDTO.cs" />
-    <Compile Include="DAL\DTO\CountryDetailDTO.cs" />
-    <Compile Include="DAL\DTO\CountryDTO.cs" />
     <Compile Include="DAL\DTO\DualNationalityDetailDTO.cs" />
     <Compile Include="DAL\DTO\DualNationalityDTO.cs" />
     <Compile Include="DAL\DTO\EmploymentStatusDetailDTO.cs" />
@@ -806,7 +805,6 @@
     <Compile Include="Helper\CommentHelperService.cs" />
     <Compile Include="Helper\CommittmentHelperService.cs" />
     <Compile Include="Helper\ConstitutionHelperService.cs" />
-    <Compile Include="Helper\CountryHelper.cs" />
     <Compile Include="Helper\DocumentHelperService.cs" />
     <Compile Include="Helper\EventsHelperService.cs" />
     <Compile Include="Helper\ExpenditureHelperService.cs" />
@@ -815,7 +813,7 @@
     <Compile Include="Helper\GeneralAttendanceHelperService.cs" />
     <Compile Include="Helper\LoadDataGridView.cs" />
     <Compile Include="Helper\MemberHelperService.cs" />
-    <Compile Include="Helper\SingleColumnHelperService.cs" />
+    <Compile Include="Helper\SingleColumnHelper.cs" />
     <Compile Include="Helper\SpecialContributionHelperService.cs" />
     <Compile Include="Infrastructure\Repositories\AttendanceStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\CommentRepository.cs" />
@@ -1219,6 +1217,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AllForms\ViewModels\" />
     <Folder Include="Infrastructure\Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
