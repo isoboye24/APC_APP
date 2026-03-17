@@ -78,6 +78,9 @@ namespace APC.Applications.Services
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
 
+        public int Get3MonthsAbsentesCount()
+            => _repository.Get3MonthsAbsentesCount();
+
         public bool Update(Member data)
         {
             var member = _repository.GetById(data.MemberId);

@@ -1,12 +1,8 @@
 ﻿using APC.DAL.DTO;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace APC.DAL.DAO
 {
@@ -1364,22 +1360,8 @@ namespace APC.DAL.DAO
             {
                 return 0;
             }
-
-            //var Absentees = (from p in db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false)
-            //                 join mem in db.MEMBERs.Where(x => x.isDeleted == false) on p.memberID equals mem.memberID
-            //                 join ats in db.ATTENDANCE_STATUS.Where(x => x.attendanceStatus == "Absent") on p.attendanceStatusID equals ats.attendanceStatusID
-            //                 join gen in db.GENERAL_ATTENDANCE.Where(x => x.isDeleted == false).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID).ThenByDescending(x => x.day).Take(3) on p.generalAttendanceID equals gen.generalAttendanceID
-            //                 select new
-            //                 {
-            //                     attendanceID = p.attendanceID,
-            //                     memberID = mem.memberID,
-            //                 }).ToList();
-            //foreach (var item in Absentees)
-            //{
-            //    members.Add(item.memberID);
-            //}
-
         }
+
         public int GetNoOfMembersPresentAttendance(int ID)
         {
             try

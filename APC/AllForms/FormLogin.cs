@@ -42,7 +42,6 @@ namespace APC.AllForms
         {
             Application.Exit();
         }
-        MemberBLL memberBLL = new MemberBLL();
         
         private void btnEnter_Click(object sender, EventArgs e)
         {
@@ -61,7 +60,7 @@ namespace APC.AllForms
                 }
                 else
                 {
-                    int absenteesCount = memberBLL.Select3MonthsAbsentesCount();
+                    int absenteesCount = _memberService.Get3MonthsAbsentesCount();
                     if (_currentUserService.AccessLevel == 4)
                     {
                         if (absenteesCount > 0)

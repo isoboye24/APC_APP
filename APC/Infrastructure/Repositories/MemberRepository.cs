@@ -1,7 +1,9 @@
 ﻿using APC.Applications.DTO;
 using APC.DAL;
+using APC.DAL.DTO;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -470,6 +472,25 @@ namespace APC.Infrastructure.Repositories
         public MEMBER GetByUsername(string username)
         {
             return _db.MEMBER.FirstOrDefault(x => !x.isDeleted && x.username == username);
+        }
+
+        public int Get3MonthsAbsentesCount()
+        {
+            var last3MeetingIds = _db.GENERAL_ATTENDANCE
+                .Where(x => !x.isDeleted)
+                .OrderByDescending(x => x.year)
+                .ThenByDescending(x => x.monthID)
+                .ThenByDescending(x => x.day)
+                .Select(x => x.generalAttendanceID)
+                .Take(3);
+
+            var count = _db.PERSONAL_ATTENDANCE
+                .Where(x => !x.isDeleted && last3MeetingIds.Contains(x.generalAttendanceID))
+                .GroupBy(x => x.memberID)
+                .Where(g => g.Count() == 3)
+                .Count();
+
+            return count;
         }
     }
 }
