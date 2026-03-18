@@ -7,6 +7,7 @@ namespace APC.Domain.Interfaces
     public interface IPaymentStatusRepository
     {
         IQueryable<PAYMENT_STATUS> GetAll();
+        IQueryable<PAYMENT_STATUS> GetAllDeletedPaymentStatuses();
         PaymentStatus GetById(int id);
         bool Insert(PaymentStatus status);
         bool Update(PaymentStatus status);

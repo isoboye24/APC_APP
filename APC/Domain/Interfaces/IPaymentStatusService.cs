@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IPaymentStatusService
     {
         List<PaymentStatusDTO> GetAll();
+        List<PaymentStatusDTO> GetAllDeletedPaymentStatuses();
         bool Create(PaymentStatus status);
         bool Update(PaymentStatus status);
         bool Delete(int id);

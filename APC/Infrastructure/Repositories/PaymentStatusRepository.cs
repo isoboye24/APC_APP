@@ -38,6 +38,11 @@ namespace APC.Infrastructure.Repositories
             return _db.PAYMENT_STATUS.Where(x => !x.isDeleted);
         }
 
+        public IQueryable<PAYMENT_STATUS> GetAllDeletedPaymentStatuses()
+        {
+            return _db.PAYMENT_STATUS.Where(x => x.isDeleted);
+        }
+
         public bool GetBack(int id)
         {
             var entity = _db.PAYMENT_STATUS.First(x => x.paymentStatusID == id);

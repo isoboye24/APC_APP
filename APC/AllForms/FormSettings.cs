@@ -102,6 +102,11 @@ namespace APC.AllForms
             dataGridViewPaymentStatus.DataSource = _paymentStatusService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewPaymentStatus, SingleColumnGridType.Basic, "PaymentStatusName", "Payment Statuses");
         }
+        private void loadDeletedPaymentStatuses()
+        {
+            dataGridView1.DataSource = _paymentStatusService.GetAllDeletedPaymentStatuses();
+            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "PaymentStatusName", "Payment Statuses");
+        }
 
         private void loadCountries()
         {
@@ -159,9 +164,8 @@ namespace APC.AllForms
                 label9, label10, label11, label12, label13, label14, label15, label16, label17, label19,
                 btnAddCountry, btnUpdateCountry, btnDeleteCountry, btnAddEmpStatus, btnUpdateEmpStatus,
                 btnDeleteEmpStatus, btnAddMarStatus, btnUpdateMarStatus, btnDeleteMarStatus, btnAddNationality,
-                btnUpdateNationality, btnDeleteNationality, btnDeletePermissions, btnSearchPermissions,
-                btnClearPermissions, btnAddPositions, btnUpdatePositions, btnDeletePositions, btnAddProfessions,
-                btnUpdateProfessions, btnDeleteProfessions, labelName, labelSurname, labelAccessLevel,
+                btnUpdateNationality, btnDeleteNationality, btnDeletePermissions, btnAddPositions, btnUpdatePositions, btnDeletePositions,
+                btnAddProfessions, btnUpdateProfessions, btnDeleteProfessions, labelName, labelSurname, labelAccessLevel,
                 labelPosition, cmbDeletedData, btnRetrieve
                 );
 
@@ -171,7 +175,7 @@ namespace APC.AllForms
                 );
             
             GeneralHelper.ApplyRegularFont(14,
-                txtCountry, txtMaritalStatus, txtEmpStatus, txtNationality, cmbPermission, txtPosition,
+                txtCountry, txtMaritalStatus, txtEmpStatus, txtNationality, txtPosition,
                 txtProfession
                 );
         }
@@ -228,6 +232,7 @@ namespace APC.AllForms
             cmbDeletedData.Items.Add("Financial Report");
             cmbDeletedData.Items.Add("Constitution");
             cmbDeletedData.Items.Add("Fined Member");
+            cmbDeletedData.Items.Add("Payment Status");
 
             #endregion
 
@@ -834,6 +839,10 @@ namespace APC.AllForms
             {
                 finedMemberDTO = finedMemberBLL.Select(true);
                 LoadDataGridView.loadFinedMembers(dataGridView1, finedMemberDTO);
+            }
+            else if (cmbDeletedData.SelectedIndex == 17)
+            {
+                loadDeletedPaymentStatuses();
             }
             else
             {

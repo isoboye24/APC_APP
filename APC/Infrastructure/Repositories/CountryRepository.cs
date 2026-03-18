@@ -44,16 +44,12 @@ namespace APC.Infrastructure.Repositories
 
         public IQueryable<COUNTRY> GetAll()
         {
-            return _db.COUNTRY
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.countryName);
+            return _db.COUNTRY.Where(x => !x.isDeleted);
         }
 
         public IQueryable<COUNTRY> GetAllDeletedCountries()
         {
-            return _db.COUNTRY
-                .Where(x => x.isDeleted)
-                .OrderBy(x => x.countryName);
+            return _db.COUNTRY.Where(x => x.isDeleted);
         }
 
         public Country GetById(int id)

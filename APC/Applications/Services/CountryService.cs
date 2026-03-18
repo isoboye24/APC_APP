@@ -23,6 +23,7 @@ namespace APC.Applications.Services
                     CountryId = x.countryID,
                     CountryName = x.countryName
                 })
+                .OrderBy(x => x.CountryName)
                 .ToList();
         }
 
@@ -34,6 +35,7 @@ namespace APC.Applications.Services
                     CountryId = x.countryID,
                     CountryName = x.countryName
                 })
+                .OrderBy(x => x.CountryName)
                 .ToList();
         }
 

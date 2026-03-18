@@ -41,6 +41,17 @@ namespace APC.Applications.Services
                 }).OrderBy(x => x.PaymentStatusName)
                 .ToList();
         }
+        
+        public List<PaymentStatusDTO> GetAllDeletedPaymentStatuses()
+        {
+            return _repository.GetAllDeletedPaymentStatuses()
+                .Select(x => new PaymentStatusDTO
+                {
+                    PaymentStatusId = x.paymentStatusID,
+                    PaymentStatusName = x.paymentStatusName
+                }).OrderBy(x => x.PaymentStatusName)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);
