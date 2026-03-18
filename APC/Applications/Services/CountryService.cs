@@ -26,6 +26,17 @@ namespace APC.Applications.Services
                 .ToList();
         }
 
+        public List<CountryDTO> GetAllDeletedCountries()
+        {
+            return _repository.GetAllDeletedCountries()
+                .Select(x => new CountryDTO
+                {
+                    CountryId = x.countryID,
+                    CountryName = x.countryName
+                })
+                .ToList();
+        }
+
         public int Count()
             => _repository.Count();
 

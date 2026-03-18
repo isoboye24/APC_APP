@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface ICountryService
     {
         List<CountryDTO> GetAll();
+        List<CountryDTO> GetAllDeletedCountries();
         bool Create(Country country);
         bool Update(Country country);
         bool Delete(int id);

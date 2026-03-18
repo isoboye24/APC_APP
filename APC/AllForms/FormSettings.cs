@@ -109,6 +109,12 @@ namespace APC.AllForms
             ConfigureSingleColumnGrid(dataGridViewCountry, SingleColumnGridType.Basic, "CountryName", "Countries");
         }
 
+        private void loadDeletedCountries()
+        {
+            dataGridView1.DataSource = _countryService.GetAllDeletedCountries();
+            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "CountryName", "Countries");
+        }
+
         private void loadEmploymentStatus()
         {
             dataGridViewEmpStatus.DataSource = _employmentStatusService.GetAll();
@@ -716,8 +722,6 @@ namespace APC.AllForms
         }
 
 
-
-
         MemberDetailDTO deletedDataDetail = new MemberDetailDTO();
         CountryBLL countryDeletedDataBLL = new CountryBLL();
         CountryDTO countryDeletedDataDetail = new CountryDTO();
@@ -759,8 +763,7 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 1)
             {
-                countryDTO = countryBLL.Select(true);
-                LoadDataGridView.loadCountries(dataGridView1, countryDTO);
+                loadDeletedCountries();
             }
             else if (cmbDeletedData.SelectedIndex == 2)
             {

@@ -49,6 +49,13 @@ namespace APC.Infrastructure.Repositories
                 .OrderBy(x => x.countryName);
         }
 
+        public IQueryable<COUNTRY> GetAllDeletedCountries()
+        {
+            return _db.COUNTRY
+                .Where(x => x.isDeleted)
+                .OrderBy(x => x.countryName);
+        }
+
         public Country GetById(int id)
         {
             var entity = _db.COUNTRY.FirstOrDefault(x => x.countryID == id && !x.isDeleted);

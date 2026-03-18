@@ -1,17 +1,14 @@
-﻿using APC.AllForms.ViewModels;
-using APC.DAL;
+﻿using APC.DAL;
 using APC.Domain.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
     public interface ICountryRepository
     {
         IQueryable<COUNTRY> GetAll();
+        IQueryable<COUNTRY> GetAllDeletedCountries();
         Country GetById(int id);
         bool Insert(Country country);
         bool Update(Country country);
