@@ -1,7 +1,7 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Domain.Entities;
 using APC.Domain.Interfaces;
+using APC.Helper;
 using System;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -48,55 +48,47 @@ namespace APC.AllForms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtNationality.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Nationality is empty");
-            }
-            else
-            {
-                if (!isUpdate)
+                var name = txtNationality.Text.Trim();
+
+                if (string.IsNullOrEmpty(name))
                 {
-                    NationalityDetailDTO nationality = new NationalityDetailDTO();
-                    nationality.Nationality = txtNationality.Text;
-                    DualNationalityDetailDTO dualNationality = new DualNationalityDetailDTO();
-                    dualNationality.DualNationalityName = txtNationality.Text;
-                    if (bll.Insert(nationality) && dualNationalityBLL.Insert(dualNationality))
-                    {
-                        MessageBox.Show("Nationality was added");
-                        txtNationality.Clear();
-                    }
-                }
-                else if (isUpdate)
-                {
-                    if (detail.NationalityID == 0)
-                    {
-                        MessageBox.Show("Please select a nationality from the table");
-                    }
-                    else
-                    {
-                        detail.Nationality = txtNationality.Text;
-                        dualNatDetail.DualNationalityID = detail.NationalityID;
-                        dualNatDetail.DualNationalityName = txtNationality.Text;
-                        if (bll.Update(detail) && dualNationalityBLL.Update(dualNatDetail))
-                        {
-                            MessageBox.Show("Nationality was update");
-                            this.Close();
-                        }
-                    }
+                    MessageBox.Show("Please enter nationality");
+                    return;
                 }
 
+                if (_nationalityId == 0)
+                {
+                    var nationality = new Nationality(name);
+                    _nationalityService.Create(nationality);
+                    MessageBox.Show("Nationality created successfully!");
+                }
+                else
+                {
+                    var nationality = new Nationality(name);
+                    nationality.SetId(_nationalityId);
+
+                    _nationalityService.Update(nationality);
+                    MessageBox.Show("Nationality updated successfully!");
+                    this.Close();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(14, txtNationality);
         }
 
         private void FormNationality_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            txtNationality.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            #endregion
+            resizeControls();
 
             if (_isUpdate)
             {
