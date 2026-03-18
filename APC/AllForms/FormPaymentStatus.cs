@@ -1,5 +1,7 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Services;
+using APC.BLL;
 using APC.DAL.DTO;
+using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -75,31 +77,35 @@ namespace APC.AllForms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtPaymentStatus.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Please enter payment status");
-            }
-            else
-            {
-                if (!isUpdate)
+                var name = txtPaymentStatus.Text.Trim();
+
+                if (string.IsNullOrEmpty(name))
                 {
-                    PaymentStatusDetailDTO status = new PaymentStatusDetailDTO();
-                    status.PaymentStatusName = txtPaymentStatus.Text.Trim();
-                    if (bll.Insert(status))
-                    {
-                        MessageBox.Show("Payment status added successfully");
-                        txtPaymentStatus.Clear();
-                    }
+                    MessageBox.Show("Please enter payment status");
+                    return;
                 }
-                else if(isUpdate)
-                {                    
-                    detail.PaymentStatusName = txtPaymentStatus.Text.Trim();
-                    if (bll.Update(detail))
-                    {
-                        MessageBox.Show("Payment status updated successfully");
-                        this.Close();
-                    }
+
+                if (_paymentStatusId == 0)
+                {
+                    var paymentStatus = new PaymentStatus(name);
+                    _paymentStatusService.Create(paymentStatus);
+                    MessageBox.Show("Payment status created successfully!");
                 }
+                else
+                {
+                    var paymentStatus = new PaymentStatus(name);
+                    paymentStatus.SetId(_paymentStatusId);
+
+                    _paymentStatusService.Update(paymentStatus);
+                    MessageBox.Show("Payment status updated successfully!");
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
