@@ -2,10 +2,7 @@
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -36,19 +33,9 @@ namespace APC.Infrastructure.Repositories
             return _db.PROFESSION.Any(x => !x.isDeleted && x.profession1 == name);
         }
 
-        public List<Profession> GetAll()
+        public IQueryable<PROFESSION> GetAll()
         {
-            var data = _db.PROFESSION
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.profession1)
-                .ToList();
-
-            return data
-                .Select(x => Profession.Rehydrate(
-                    x.professionID,
-                    x.profession1
-                ))
-                .ToList();
+            return _db.PROFESSION.Where(x => !x.isDeleted);
         }
 
         public bool GetBack(int id)

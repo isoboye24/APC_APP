@@ -25,16 +25,19 @@ namespace APC.AllForms
         private readonly INationalityService _nationalityService;
         private readonly IPermissionService _permissionService;
         private readonly IPositionService _positionService;
+        private readonly IProfessionService _professionService;
 
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
         private List<Applications.DTO.MaritalStatusDTO> _maritalStatusDTO;
         private List<Applications.DTO.NationalityDTO> _nationalityDTO;
         private List<Applications.DTO.PermissionDTO> _permissionDTO;
+        private List<Applications.DTO.PositionDTO> _positionDTO;
+        private List<Applications.DTO.ProfessionDTO> _professionDTO;
 
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
             IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService, 
-            IPositionService positionService)
+            IPositionService positionService, IProfessionService professionService)
         {
             InitializeComponent();
             _countryService = countryService;
@@ -44,6 +47,7 @@ namespace APC.AllForms
             _nationalityService = nationalityService;
             _permissionService = permissionService;
             _positionService = positionService;
+            _professionService = professionService;
         }
 
         MemberDTO memberDTO = new MemberDTO();
@@ -57,10 +61,6 @@ namespace APC.AllForms
 
         MemberDetailDTO permissionDetail = new MemberDetailDTO();
         MemberBLL permissionMemberBLL = new MemberBLL();
-
-        ProfessionBLL professionBLL = new ProfessionBLL();
-        ProfessionDTO professionDTO = new ProfessionDTO();
-        ProfessionDetailDTO professionDetail = new ProfessionDetailDTO();
 
         CommentDTO commentDTO = new CommentDTO();
         CommentBLL commentBLL = new CommentBLL();
@@ -132,6 +132,12 @@ namespace APC.AllForms
         {
             dataGridViewPositions.DataSource = _positionService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewPositions, SingleColumnGridType.Basic, "PositionName", "Positions");
+        }
+
+        private void loadProfession()
+        {
+            dataGridViewProfessions.DataSource = _professionService.GetAll();
+            ConfigureSingleColumnGrid(dataGridViewProfessions, SingleColumnGridType.Basic, "ProfessionName", "Professions");
         }
 
 
@@ -267,9 +273,7 @@ namespace APC.AllForms
             loadPosition();
 
             txtProfession.Clear();
-            professionBLL = new ProfessionBLL();
-            professionDTO = professionBLL.Select();
-            dataGridViewProfessions.DataSource = professionDTO.Professions;
+            loadProfession();
 
             Counts();
         }
@@ -570,9 +574,9 @@ namespace APC.AllForms
 
         private void txtPosition_TextChanged(object sender, EventArgs e)
         {
-            List<PositionDetailDTO> list = positionDTO.Positions;
-            list = list.Where(x => x.PositionName.Contains(txtPosition.Text)).ToList();
-            dataGridViewPositions.DataSource = list;
+            string search = txtPosition.Text.Trim().ToLower();
+            var filtered = _positionDTO.Where(x => x.PositionName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewPositions.DataSource = filtered;
         }
 
         private void btnUpdatePositions_Click(object sender, EventArgs e)
@@ -608,65 +612,59 @@ namespace APC.AllForms
             }
         }
 
-
-
+        // Profession
         private void btnAddProfessions_Click(object sender, EventArgs e)
         {
-            FormProfession open = new FormProfession();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormProfession(_professionService);
+            form.ShowDialog();
             ClearFilters();
+        }
+
+        private Applications.DTO.ProfessionDTO GetSelectedProfession()
+        {
+            if (dataGridViewProfessions.CurrentRow == null)
+                return null;
+
+            return dataGridViewProfessions.CurrentRow.DataBoundItem as Applications.DTO.ProfessionDTO;
         }
 
         private void btnUpdateProfessions_Click(object sender, EventArgs e)
         {
-            if (professionDetail.ProfessionID == 0)
+            var selected = GetSelectedProfession();
+            if (selected == null)
             {
                 MessageBox.Show("Please select a profession from the table");
+                return;
             }
-            else
-            {
-                FormProfession open = new FormProfession();
-                open.detail = professionDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;                
-                ClearFilters();
-            }            
+
+            var form = new FormProfession(_professionService);
+            form.LoadForEdit(selected.ProfessionId, selected.ProfessionName, true);
+            form.ShowDialog();
+            ClearFilters();
         }
 
         private void txtProfession_TextChanged(object sender, EventArgs e)
         {
-            List<ProfessionDetailDTO> list = professionDTO.Professions;
-            list = list.Where(x => x.Profession.Contains(txtProfession.Text)).ToList();
-            dataGridViewProfessions.DataSource = list;
-        }
-
-        private void dataGridViewProfessions_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            professionDetail = GeneralHelper.MapFromGrid<ProfessionDetailDTO>(dataGridViewProfessions, e.RowIndex);
+            string search = txtProfession.Text.Trim().ToLower();
+            var filtered = _professionDTO.Where(x => x.ProfessionName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewProfessions.DataSource = filtered;
         }
 
         private void btnDeleteProfessions_Click(object sender, EventArgs e)
         {
-            if (professionDetail.ProfessionID == 0)
+            var selected = GetSelectedProfession();
+            if (selected == null)
             {
-                MessageBox.Show("Please select a profession from the table");
+                MessageBox.Show("Please select a profession from the table.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (professionBLL.Delete(professionDetail))
-                    {
-                        MessageBox.Show("Profession was deleted");
-                        ClearFilters();
-                    }
-                }
+                _professionService.Delete(selected.ProfessionId);
+                ClearFilters();
             }
         }
 

@@ -329,6 +329,7 @@
     <Compile Include="Applications\DTO\PermissionDTO.cs" />
     <Compile Include="Applications\DTO\PersonalAttendanceFullDetails.cs" />
     <Compile Include="Applications\DTO\PositionDTO.cs" />
+    <Compile Include="Applications\DTO\ProfessionDTO.cs" />
     <Compile Include="Applications\DTO\SpecialContributionFullDetails.cs" />
     <Compile Include="Applications\DTO\SpecialContributorFullDetails.cs" />
     <Compile Include="Applications\Services\AttendanceStatusService.cs" />

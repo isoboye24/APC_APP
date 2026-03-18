@@ -1,5 +1,6 @@
 ﻿using APC.BLL;
 using APC.DAL.DTO;
+using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,10 +18,16 @@ namespace APC
 {
     public partial class FormProfession : Form
     {
-        public FormProfession()
+        private readonly IProfessionService _professionService;
+
+        private int _professionId = 0;
+        private bool _isUpdate = false;
+        public FormProfession(IProfessionService professionService)
         {
             InitializeComponent();
+            _professionService = professionService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -40,9 +47,13 @@ namespace APC
         {
             this.Close();
         }
-        ProfessionBLL bll = new ProfessionBLL();
-        public ProfessionDetailDTO detail = new ProfessionDetailDTO();
-        public bool isUpdate = false;
+        public void LoadForEdit(int id, string name, bool isUpdate)
+        {
+            _professionId = id;
+            txtProfession.Text = name;
+            _isUpdate = isUpdate;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (txtProfession.Text.Trim()=="")
