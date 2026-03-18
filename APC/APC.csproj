@@ -322,6 +322,7 @@
     <Compile Include="Applications\DTO\CountryDTO.cs" />
     <Compile Include="Applications\DTO\DeadMemberShortDetailDTO.cs" />
     <Compile Include="Applications\DTO\EmploymentStatusDTO.cs" />
+    <Compile Include="Applications\DTO\MaritalStatusDTO.cs" />
     <Compile Include="Applications\DTO\MembersBasicDetailDTO.cs" />
     <Compile Include="Applications\DTO\MemberFullDetailsDTO.cs" />
     <Compile Include="Applications\DTO\PersonalAttendanceFullDetails.cs" />

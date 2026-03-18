@@ -4,8 +4,6 @@ using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -36,19 +34,9 @@ namespace APC.Infrastructure.Repositories
             return _db.MARITAL_STATUS.Any(x => !x.isDeleted && x.maritalStatus == name);
         }
 
-        public List<MaritalStatus> GetAll()
+        public IQueryable<MARITAL_STATUS> GetAll()
         {
-            var data = _db.MARITAL_STATUS
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.maritalStatus)
-                .ToList();
-
-            return data
-                .Select(x => MaritalStatus.Rehydrate(
-                    x.maritalStatusID,
-                    x.maritalStatus
-                ))
-                .ToList();
+            return _db.MARITAL_STATUS.Where(x => !x.isDeleted);
         }
 
         public bool GetBack(int id)

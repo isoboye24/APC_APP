@@ -21,16 +21,20 @@ namespace APC.AllForms
         private readonly ICurrentUserService _currentUserService;
         private readonly ICountryService _countryService;
         private readonly IEmploymentStatusService _employmentStatusService;
+        private readonly IMaritalStatusService _maritalStatusService;
 
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
+        private List<Applications.DTO.MaritalStatusDTO> _maritalStatusDTO;
 
-        public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService)
+        public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
+            IMaritalStatusService maritalStatusService)
         {
             InitializeComponent();
             _countryService = countryService;
             _currentUserService = currentUserService;
             _employmentStatusService = employmentStatusService;
+            _maritalStatusService = maritalStatusService;
         }
 
         MemberDTO memberDTO = new MemberDTO();
@@ -41,10 +45,6 @@ namespace APC.AllForms
         PaymentStatusBLL paymentStatusBLL = new PaymentStatusBLL();
         PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
         PaymentStatusDetailDTO paymentStatusDetail = new PaymentStatusDetailDTO();
-
-        MaritalStatusBLL marStatusBLL = new MaritalStatusBLL();
-        MaritalStatusDTO marStatusDTO = new MaritalStatusDTO();
-        MaritalStatusDetailDTO marStatusDetail = new MaritalStatusDetailDTO();
 
         NationalityBLL nationalityBLL = new NationalityBLL();
         NationalityDTO nationalityDTO = new NationalityDTO();
@@ -110,6 +110,12 @@ namespace APC.AllForms
             dataGridViewEmpStatus.DataSource = _employmentStatusService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewEmpStatus, SingleColumnGridType.Basic, "EmploymentStatusName", "Employment Statuses");
         }
+        
+        private void loadMaritalStatus()
+        {
+            dataGridViewMarStatus.DataSource = _maritalStatusService.GetAll();
+            ConfigureSingleColumnGrid(dataGridViewMarStatus, SingleColumnGridType.Basic, "MaritalStatusName", "Marital Statuses");
+        }
 
 
         private void resizeControls() 
@@ -141,8 +147,6 @@ namespace APC.AllForms
             resizeControls();
 
             paymentStatusDTO = paymentStatusBLL.Select();
-            empStatusDTO = empStatusBLL.Select();
-            marStatusDTO = marStatusBLL.Select();
             nationalityDTO = nationalityBLL.Select();
             positionDTO = positionBLL.Select();
             professionDTO = professionBLL.Select();
@@ -155,8 +159,7 @@ namespace APC.AllForms
 
             loadCountries();
             loadEmploymentStatus();
-
-            LoadDataGridView.loadMaritalStatuses(dataGridViewMarStatus, marStatusDTO);
+            loadMaritalStatus();
 
             LoadDataGridView.loadNationalities(dataGridViewNationality, nationalityDTO);
 
@@ -395,6 +398,60 @@ namespace APC.AllForms
         }
 
 
+        private void btnAddMarStatus_Click(object sender, EventArgs e)
+        {
+            var form = new FormMaritalStatus(_maritalStatusService);
+            form.ShowDialog();
+            ClearFilters();
+        }
+
+        private Applications.DTO.MaritalStatusDTO GetSelectedMaritalStatus()
+        {
+            if (dataGridViewMarStatus.CurrentRow == null)
+                return null;
+
+            return dataGridViewMarStatus.CurrentRow.DataBoundItem as Applications.DTO.MaritalStatusDTO;
+        }
+
+        private void btnUpdateMarStatus_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedMaritalStatus();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a marital status from the table");
+                return;
+            }
+
+            var form = new FormMaritalStatus(_maritalStatusService);
+            form.LoadForEdit(selected.MaritalStatusId, selected.MaritalStatusName, true);
+            form.ShowDialog();
+            ClearFilters();
+        }
+
+        private void txtMaritalStatus_TextChanged(object sender, EventArgs e)
+        {
+            string search = txtMaritalStatus.Text.Trim().ToLower();
+            var filtered = _maritalStatusDTO.Where(x => x.MaritalStatusName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewMarStatus.DataSource = filtered;
+        }
+
+        private void btnDeleteMarStatus_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedMaritalStatus();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a marital status from the table.");
+                return;
+            }
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                _maritalStatusService.Delete(selected.MaritalStatusId);
+                ClearFilters();
+            }
+        }
 
 
 
@@ -412,65 +469,7 @@ namespace APC.AllForms
             picProfilePic.Region = rg;
         }
 
-        private void btnAddMarStatus_Click(object sender, EventArgs e)
-        {
-            FormMaritalStatus open = new FormMaritalStatus();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            ClearFilters();
-        }
-
-        private void btnUpdateMarStatus_Click(object sender, EventArgs e)
-        {
-            if (marStatusDetail.MaritalStatusID == 0)
-            {
-                MessageBox.Show("Please select a marital status from the table");
-            }
-            else
-            {
-                FormMaritalStatus open = new FormMaritalStatus();
-                open.detail = marStatusDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
-
-        private void txtMaritalStatus_TextChanged(object sender, EventArgs e)
-        {
-            List<MaritalStatusDetailDTO> list = marStatusDTO.MaritalStatuses;
-            list = list.Where(x => x.MaritalStatus.Contains(txtMaritalStatus.Text)).ToList();
-            dataGridViewMarStatus.DataSource = list;
-        }
-
-        private void dataGridViewMarStatus_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            marStatusDetail = GeneralHelper.MapFromGrid<MaritalStatusDetailDTO>(dataGridViewMarStatus, e.RowIndex);            
-        }
-
-        private void btnDeleteMarStatus_Click(object sender, EventArgs e)
-        {
-            if (marStatusDetail.MaritalStatusID == 0)
-            {
-                MessageBox.Show("Please select a marital status from the table");
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (marStatusBLL.Delete(marStatusDetail))
-                    {
-                        MessageBox.Show("Marital status was deleted");
-                        ClearFilters();
-                    }
-                }
-            }
-        }
+        
 
 
         private void btnAddNationality_Click(object sender, EventArgs e)

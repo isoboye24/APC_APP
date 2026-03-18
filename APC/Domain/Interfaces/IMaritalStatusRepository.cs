@@ -1,15 +1,13 @@
-﻿using APC.Domain.Entities;
+﻿using APC.DAL;
+using APC.Domain.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
     public interface IMaritalStatusRepository
     {
-        List<MaritalStatus> GetAll();
+        IQueryable<MARITAL_STATUS> GetAll();
         MaritalStatus GetById(int id);
         bool Insert(MaritalStatus status);
         bool Update(MaritalStatus status);

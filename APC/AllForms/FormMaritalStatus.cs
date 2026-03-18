@@ -1,25 +1,26 @@
 ﻿using APC.BLL;
 using APC.DAL.DTO;
-using OfficeOpenXml.Drawing.Chart;
+using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC
 {
     public partial class FormMaritalStatus : Form
     {
-        public FormMaritalStatus()
+        private readonly IMaritalStatusService _maritalStatusService;
+
+        private int _statusId;
+        private bool _isUpdate = false;
+
+        public FormMaritalStatus(IMaritalStatusService maritalStatusService)
         {
             InitializeComponent();
+            _maritalStatusService = maritalStatusService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -39,9 +40,14 @@ namespace APC
         {
             this.Close();
         }
-        MaritalStatusBLL bll = new MaritalStatusBLL();
-        public bool isUpdate = false;
-        public MaritalStatusDetailDTO detail = new MaritalStatusDetailDTO();
+
+        public void LoadForEdit(int id, string name, bool isUpdate)
+        {
+            _statusId = id;
+            txtMaritalStatus.Text = name;
+            _isUpdate = isUpdate;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (txtMaritalStatus.Text.Trim()=="")

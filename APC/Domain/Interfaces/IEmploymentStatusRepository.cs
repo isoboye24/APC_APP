@@ -6,7 +6,7 @@ namespace APC.Domain.Interfaces
 {
     public interface IEmploymentStatusRepository
     {
-        IQueryable<EMPLOYMENT_STATUS> GetAll()
+        IQueryable<EMPLOYMENT_STATUS> GetAll();
         EmploymentStatus GetById(int id);
         bool Insert(EmploymentStatus status);
         bool Update(EmploymentStatus status);
