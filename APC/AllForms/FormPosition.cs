@@ -1,5 +1,4 @@
-﻿using APC.Applications.Services;
-using APC.Domain.Entities;
+﻿using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using APC.Helper;
 using System;
@@ -104,6 +103,11 @@ namespace APC
             {
                 labelTitle.Text = "Add Position";
             }
-        }        
+        }
+
+        private void picClose_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

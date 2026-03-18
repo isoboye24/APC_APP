@@ -2,10 +2,7 @@
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -36,19 +33,9 @@ namespace APC.Infrastructure.Repositories
             return _db.PAYMENT_STATUS.Any(x => !x.isDeleted && x.paymentStatusName == name);
         }
 
-        public List<PaymentStatus> GetAll()
+        public IQueryable<PAYMENT_STATUS> GetAll()
         {
-            var data = _db.PAYMENT_STATUS
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.paymentStatusName)
-                .ToList();
-
-            return data
-                .Select(x => PaymentStatus.Rehydrate(
-                    x.paymentStatusID,
-                    x.paymentStatusName
-                ))
-                .ToList();
+            return _db.PAYMENT_STATUS.Where(x => !x.isDeleted);
         }
 
         public bool GetBack(int id)

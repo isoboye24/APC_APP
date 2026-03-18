@@ -120,6 +120,7 @@
             this.labelTotalPermissions = new System.Windows.Forms.Label();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtPermission = new System.Windows.Forms.TextBox();
             this.positionPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewPositions = new System.Windows.Forms.DataGridView();
@@ -173,7 +174,6 @@
             this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbDeletedData = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtPermission = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.dashboardPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -1501,7 +1501,6 @@
             this.dataGridViewPermissions.RowTemplate.Height = 40;
             this.dataGridViewPermissions.Size = new System.Drawing.Size(1234, 513);
             this.dataGridViewPermissions.TabIndex = 7;
-            this.dataGridViewPermissions.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPermissions_RowEnter);
             // 
             // tableLayoutPanel21
             // 
@@ -1584,6 +1583,16 @@
             this.label7.TabIndex = 1;
             this.label7.Text = "Permission";
             // 
+            // txtPermission
+            // 
+            this.txtPermission.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPermission.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPermission.Location = new System.Drawing.Point(411, 10);
+            this.txtPermission.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPermission.Name = "txtPermission";
+            this.txtPermission.Size = new System.Drawing.Size(300, 34);
+            this.txtPermission.TabIndex = 2;
+            // 
             // positionPage
             // 
             this.positionPage.Controls.Add(this.tableLayoutPanel23);
@@ -1633,7 +1642,6 @@
             this.dataGridViewPositions.RowTemplate.Height = 40;
             this.dataGridViewPositions.Size = new System.Drawing.Size(1209, 524);
             this.dataGridViewPositions.TabIndex = 0;
-            this.dataGridViewPositions.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPositions_RowEnter);
             // 
             // tableLayoutPanel24
             // 
@@ -1813,7 +1821,6 @@
             this.dataGridViewProfessions.RowTemplate.Height = 40;
             this.dataGridViewProfessions.Size = new System.Drawing.Size(1209, 432);
             this.dataGridViewProfessions.TabIndex = 0;
-            this.dataGridViewProfessions.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProfessions_RowEnter);
             // 
             // tableLayoutPanel28
             // 
@@ -1993,7 +2000,6 @@
             this.dataGridViewPaymentStatus.RowTemplate.Height = 40;
             this.dataGridViewPaymentStatus.Size = new System.Drawing.Size(1209, 524);
             this.dataGridViewPaymentStatus.TabIndex = 0;
-            this.dataGridViewPaymentStatus.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPaymentStatus_RowEnter);
             // 
             // tableLayoutPanel36
             // 
@@ -2109,6 +2115,7 @@
             this.txtPaymentStatus.Name = "txtPaymentStatus";
             this.txtPaymentStatus.Size = new System.Drawing.Size(354, 34);
             this.txtPaymentStatus.TabIndex = 0;
+            this.txtPaymentStatus.TextChanged += new System.EventHandler(this.txtPaymentStatus_TextChanged);
             // 
             // label19
             // 
@@ -2432,16 +2439,6 @@
             this.label11.Size = new System.Drawing.Size(137, 25);
             this.label11.TabIndex = 1;
             this.label11.Text = "Deleted Data";
-            // 
-            // txtPermission
-            // 
-            this.txtPermission.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPermission.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPermission.Location = new System.Drawing.Point(411, 10);
-            this.txtPermission.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPermission.Name = "txtPermission";
-            this.txtPermission.Size = new System.Drawing.Size(300, 34);
-            this.txtPermission.TabIndex = 2;
             // 
             // FormSettings
             // 

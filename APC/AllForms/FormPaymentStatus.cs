@@ -1,5 +1,6 @@
 ﻿using APC.BLL;
 using APC.DAL.DTO;
+using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +16,17 @@ namespace APC.AllForms
 {
     public partial class FormPaymentStatus : Form
     {
-        public FormPaymentStatus()
+        private readonly IPaymentStatusService _paymentStatusService;
+
+        private int _paymentStatusId = 0;
+        private bool _isUpdate = false;
+
+        public FormPaymentStatus(IPaymentStatusService paymentStatusService)
         {
             InitializeComponent();
+            _paymentStatusService = paymentStatusService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -36,17 +44,18 @@ namespace APC.AllForms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        PaymentStatusBLL bll = new PaymentStatusBLL();
-        PaymentStatusDetailDTO dto = new PaymentStatusDetailDTO();
-        public PaymentStatusDetailDTO detail = new PaymentStatusDetailDTO();
-        public bool isUpdate = false;
+        public void LoadForEdit(int id, string name, bool isUpdate)
+        {
+            _paymentStatusId = id;
+            txtPaymentStatus.Text = name;
+            _isUpdate = isUpdate;
+        }
 
         private void FormPaymentStatus_Load(object sender, EventArgs e)
         {            
-            if (isUpdate)
+            if (_isUpdate)
             {
-                txtPaymentStatus.Text = detail.PaymentStatusName;
-                labelTitle.Text = "Edit " + detail.PaymentStatusName;
+                labelTitle.Text = "Edit Payment Status";
             }
             else
             {

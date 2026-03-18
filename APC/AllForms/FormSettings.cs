@@ -26,6 +26,7 @@ namespace APC.AllForms
         private readonly IPermissionService _permissionService;
         private readonly IPositionService _positionService;
         private readonly IProfessionService _professionService;
+        private readonly IPaymentStatusService _paymentStatusService;
 
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
@@ -34,10 +35,11 @@ namespace APC.AllForms
         private List<Applications.DTO.PermissionDTO> _permissionDTO;
         private List<Applications.DTO.PositionDTO> _positionDTO;
         private List<Applications.DTO.ProfessionDTO> _professionDTO;
+        private List<Applications.DTO.PaymentStatusDTO> _paymentStatusDTO;
 
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
             IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService, 
-            IPositionService positionService, IProfessionService professionService)
+            IPositionService positionService, IProfessionService professionService, IPaymentStatusService paymentStatusService)
         {
             InitializeComponent();
             _countryService = countryService;
@@ -48,16 +50,13 @@ namespace APC.AllForms
             _permissionService = permissionService;
             _positionService = positionService;
             _professionService = professionService;
+            _paymentStatusService = paymentStatusService;
         }
 
         MemberDTO memberDTO = new MemberDTO();
         MemberBLL memberBLL = new MemberBLL();     
         
         EventsBLL eventBLL = new EventsBLL();
-
-        PaymentStatusBLL paymentStatusBLL = new PaymentStatusBLL();
-        PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
-        PaymentStatusDetailDTO paymentStatusDetail = new PaymentStatusDetailDTO();
 
         MemberDetailDTO permissionDetail = new MemberDetailDTO();
         MemberBLL permissionMemberBLL = new MemberBLL();
@@ -97,6 +96,12 @@ namespace APC.AllForms
 
         FinedMemberDTO finedMemberDTO = new FinedMemberDTO();
         FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
+
+        private void loadPaymentStatus()
+        {
+            dataGridViewPaymentStatus.DataSource = _paymentStatusService.GetAll();
+            ConfigureSingleColumnGrid(dataGridViewPaymentStatus, SingleColumnGridType.Basic, "PaymentStatusName", "Payment Statuses");
+        }
 
         private void loadCountries()
         {
@@ -169,28 +174,16 @@ namespace APC.AllForms
             // Controls sizes
             resizeControls();
 
-            paymentStatusDTO = paymentStatusBLL.Select();
-            positionDTO = positionBLL.Select();
-            professionDTO = professionBLL.Select();
-            permissionDTO = permissionBLL.Select();
-
             LoadDataGridView.loadMembers(dataGridView1, memberDTO);
 
-            LoadDataGridView.loadPaymentStatuses(dataGridViewPaymentStatus, paymentStatusDTO);
-
+            loadPaymentStatus();
             loadCountries();
             loadEmploymentStatus();
             loadMaritalStatus();
             loadNationality();
-
-            LoadDataGridView.loadNationalities(dataGridViewNationality, nationalityDTO);
-
-            LoadDataGridView.loadPositions(dataGridViewPositions, positionDTO);
-
-            LoadDataGridView.loadProfessions(dataGridViewProfessions, professionDTO);
-
-            LoadDataGridView.loadPermissions(dataGridViewPermissions, memberDTO);
-            FillPermissionComboBoxes();
+            loadPosition();
+            loadProfession();
+            loadPermission();
 
             #region
 
@@ -250,9 +243,7 @@ namespace APC.AllForms
         private void ClearFilters()
         {
             txtPaymentStatus.Clear();
-            paymentStatusBLL = new PaymentStatusBLL();
-            paymentStatusDTO = paymentStatusBLL.Select();
-            dataGridViewPaymentStatus.DataSource = paymentStatusDTO.PaymentStatuses;
+            loadPaymentStatus();
 
             txtCountry.Clear();
             loadCountries();
@@ -303,6 +294,62 @@ namespace APC.AllForms
             picProfilePic.Region = rg;
         }
 
+
+        // Payment Status
+        private void btnAddPaymentStatus_Click(object sender, EventArgs e)
+        {
+            var form = new FormPaymentStatus(_paymentStatusService);
+            form.ShowDialog();
+            ClearFilters();
+        }
+
+        private Applications.DTO.PaymentStatusDTO GetSelectedPaymentStatus()
+        {
+            if (dataGridViewPaymentStatus.CurrentRow == null)
+                return null;
+
+            return dataGridViewPaymentStatus.CurrentRow.DataBoundItem as Applications.DTO.PaymentStatusDTO;
+        }
+
+        private void btnUpdatePaymentStatus_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedPaymentStatus();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a payment status from the table");
+                return;
+            }
+
+            var form = new FormPaymentStatus(_paymentStatusService);
+            form.LoadForEdit(selected.PaymentStatusId, selected.PaymentStatusName, true);
+            form.ShowDialog();
+            ClearFilters();
+        }
+
+        private void txtPaymentStatus_TextChanged(object sender, EventArgs e)
+        {
+            string search = txtPaymentStatus.Text.Trim().ToLower();
+            var filtered = _paymentStatusDTO.Where(x => x.PaymentStatusName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewPaymentStatus.DataSource = filtered;
+        }
+
+        private void btnDeletePaymentStatus_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedPaymentStatus();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a payment status from the table.");
+                return;
+            }
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                _paymentStatusService.Delete(selected.PaymentStatusId);
+                ClearFilters();
+            }
+        }
 
         // Country
         private void btnAddCountry_Click(object sender, EventArgs e)
@@ -1183,59 +1230,6 @@ namespace APC.AllForms
             {
                 MessageBox.Show("Unable to open the website: " + ex.Message);
             }
-        }
-
-        private void btnAddPaymentStatus_Click(object sender, EventArgs e)
-        {
-            FormPaymentStatus open = new FormPaymentStatus();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            ClearFilters();
-        }
-
-        private void btnUpdatePaymentStatus_Click(object sender, EventArgs e)
-        {
-            if (paymentStatusDetail.PaymentStatusID == 0)
-            {
-                MessageBox.Show("Please select a payment status from the table");
-            }
-            else
-            {
-                FormPaymentStatus open = new FormPaymentStatus();
-                open.detail = paymentStatusDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
-
-        private void btnDeletePaymentStatus_Click(object sender, EventArgs e)
-        {
-            if (paymentStatusDetail.PaymentStatusID == 0)
-            {
-                MessageBox.Show("Please select a payment status from the table");
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (paymentStatusBLL.Delete(paymentStatusDetail))
-                    {
-                        MessageBox.Show("Payment status was deleted successfully");
-                        ClearFilters();
-                    }
-                }
-            }
-        }
-
-        private void dataGridViewPaymentStatus_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            paymentStatusDetail = GeneralHelper.MapFromGrid<PaymentStatusDetailDTO>(dataGridViewPaymentStatus, e.RowIndex);
         }
     }
 }

@@ -1,15 +1,13 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
     public interface IPaymentStatusService
     {
-        List<PaymentStatus> GetAll();
+        List<PaymentStatusDTO> GetAll();
         bool Create(PaymentStatus status);
         bool Update(PaymentStatus status);
         bool Delete(int id);
