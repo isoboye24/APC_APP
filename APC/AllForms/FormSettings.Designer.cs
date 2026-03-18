@@ -119,10 +119,7 @@
             this.btnDeletePermissions = new System.Windows.Forms.Button();
             this.labelTotalPermissions = new System.Windows.Forms.Label();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSearchPermissions = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.cmbPermission = new System.Windows.Forms.ComboBox();
-            this.btnClearPermissions = new System.Windows.Forms.Button();
             this.positionPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewPositions = new System.Windows.Forms.DataGridView();
@@ -176,6 +173,7 @@
             this.tableLayoutPanel30 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbDeletedData = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.txtPermission = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.dashboardPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -783,7 +781,6 @@
             this.dataGridViewCountry.RowTemplate.Height = 40;
             this.dataGridViewCountry.Size = new System.Drawing.Size(1201, 427);
             this.dataGridViewCountry.TabIndex = 0;
-            this.dataGridViewCountry.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCountry_RowEnter);
             // 
             // tableLayoutPanel4
             // 
@@ -965,7 +962,6 @@
             this.dataGridViewEmpStatus.RowTemplate.Height = 40;
             this.dataGridViewEmpStatus.Size = new System.Drawing.Size(1209, 432);
             this.dataGridViewEmpStatus.TabIndex = 0;
-            this.dataGridViewEmpStatus.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmpStatus_RowEnter);
             // 
             // tableLayoutPanel13
             // 
@@ -1146,7 +1142,6 @@
             this.dataGridViewMarStatus.RowTemplate.Height = 40;
             this.dataGridViewMarStatus.Size = new System.Drawing.Size(1209, 432);
             this.dataGridViewMarStatus.TabIndex = 0;
-            this.dataGridViewMarStatus.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMarStatus_RowEnter);
             // 
             // tableLayoutPanel16
             // 
@@ -1415,7 +1410,6 @@
             this.dataGridViewNationality.RowTemplate.Height = 40;
             this.dataGridViewNationality.Size = new System.Drawing.Size(1209, 432);
             this.dataGridViewNationality.TabIndex = 3;
-            this.dataGridViewNationality.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewNationality_RowEnter);
             // 
             // tableLayoutPanel18
             // 
@@ -1567,10 +1561,8 @@
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18F));
-            this.tableLayoutPanel22.Controls.Add(this.btnSearchPermissions, 3, 0);
             this.tableLayoutPanel22.Controls.Add(this.label7, 1, 0);
-            this.tableLayoutPanel22.Controls.Add(this.cmbPermission, 2, 0);
-            this.tableLayoutPanel22.Controls.Add(this.btnClearPermissions, 4, 0);
+            this.tableLayoutPanel22.Controls.Add(this.txtPermission, 2, 0);
             this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel22.Location = new System.Drawing.Point(17, 16);
             this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(4);
@@ -1579,22 +1571,6 @@
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel22.Size = new System.Drawing.Size(1234, 54);
             this.tableLayoutPanel22.TabIndex = 6;
-            // 
-            // btnSearchPermissions
-            // 
-            this.btnSearchPermissions.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnSearchPermissions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearchPermissions.FlatAppearance.BorderSize = 0;
-            this.btnSearchPermissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchPermissions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchPermissions.Location = new System.Drawing.Point(719, 4);
-            this.btnSearchPermissions.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSearchPermissions.Name = "btnSearchPermissions";
-            this.btnSearchPermissions.Size = new System.Drawing.Size(140, 46);
-            this.btnSearchPermissions.TabIndex = 1;
-            this.btnSearchPermissions.Text = "Search";
-            this.btnSearchPermissions.UseVisualStyleBackColor = false;
-            this.btnSearchPermissions.Click += new System.EventHandler(this.btnSearchPermissions_Click);
             // 
             // label7
             // 
@@ -1607,33 +1583,6 @@
             this.label7.Size = new System.Drawing.Size(116, 27);
             this.label7.TabIndex = 1;
             this.label7.Text = "Permission";
-            // 
-            // cmbPermission
-            // 
-            this.cmbPermission.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbPermission.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbPermission.FormattingEnabled = true;
-            this.cmbPermission.Location = new System.Drawing.Point(411, 9);
-            this.cmbPermission.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbPermission.Name = "cmbPermission";
-            this.cmbPermission.Size = new System.Drawing.Size(300, 36);
-            this.cmbPermission.TabIndex = 2;
-            // 
-            // btnClearPermissions
-            // 
-            this.btnClearPermissions.BackColor = System.Drawing.Color.Silver;
-            this.btnClearPermissions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearPermissions.FlatAppearance.BorderSize = 0;
-            this.btnClearPermissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearPermissions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearPermissions.Location = new System.Drawing.Point(867, 4);
-            this.btnClearPermissions.Margin = new System.Windows.Forms.Padding(4);
-            this.btnClearPermissions.Name = "btnClearPermissions";
-            this.btnClearPermissions.Size = new System.Drawing.Size(140, 46);
-            this.btnClearPermissions.TabIndex = 3;
-            this.btnClearPermissions.Text = "Clear";
-            this.btnClearPermissions.UseVisualStyleBackColor = false;
-            this.btnClearPermissions.Click += new System.EventHandler(this.btnClearPermissions_Click);
             // 
             // positionPage
             // 
@@ -2484,6 +2433,16 @@
             this.label11.TabIndex = 1;
             this.label11.Text = "Deleted Data";
             // 
+            // txtPermission
+            // 
+            this.txtPermission.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPermission.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPermission.Location = new System.Drawing.Point(411, 10);
+            this.txtPermission.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPermission.Name = "txtPermission";
+            this.txtPermission.Size = new System.Drawing.Size(300, 34);
+            this.txtPermission.TabIndex = 2;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2646,10 +2605,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel21;
         private System.Windows.Forms.Button btnDeletePermissions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel22;
-        private System.Windows.Forms.Button btnSearchPermissions;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cmbPermission;
-        private System.Windows.Forms.Button btnClearPermissions;
         private System.Windows.Forms.Label labelTotalPermissions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel23;
         private System.Windows.Forms.DataGridView dataGridViewPositions;
@@ -2736,5 +2692,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel37;
         private System.Windows.Forms.TextBox txtPaymentStatus;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtPermission;
     }
 }

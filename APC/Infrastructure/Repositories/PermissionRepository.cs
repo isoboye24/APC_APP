@@ -1,12 +1,8 @@
 ﻿using APC.DAL;
-using APC.DAL.DAO;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -37,19 +33,9 @@ namespace APC.Infrastructure.Repositories
             return _db.PERMISSION.Any(x => !x.isDeleted && x.permission1 == name);
         }
 
-        public List<Permission> GetAll()
+        public IQueryable<PERMISSION> GetAll()
         {
-            var data = _db.PERMISSION
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.permission1)
-                .ToList();
-
-            return data
-                .Select(x => Permission.Rehydrate(
-                    x.permissionID,
-                    x.permission1
-                ))
-                .ToList();
+            return _db.PERMISSION.Where(x => !x.isDeleted);
         }
 
         public bool GetBack(int id)

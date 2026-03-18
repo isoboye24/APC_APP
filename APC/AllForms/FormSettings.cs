@@ -23,14 +23,16 @@ namespace APC.AllForms
         private readonly IEmploymentStatusService _employmentStatusService;
         private readonly IMaritalStatusService _maritalStatusService;
         private readonly INationalityService _nationalityService;
+        private readonly IPermissionService _permissionService;
 
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
         private List<Applications.DTO.MaritalStatusDTO> _maritalStatusDTO;
         private List<Applications.DTO.NationalityDTO> _nationalityDTO;
+        private List<Applications.DTO.PermissionDTO> _permissionDTO;
 
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
-            IMaritalStatusService maritalStatusService, INationalityService nationalityService)
+            IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService)
         {
             InitializeComponent();
             _countryService = countryService;
@@ -38,6 +40,7 @@ namespace APC.AllForms
             _employmentStatusService = employmentStatusService;
             _maritalStatusService = maritalStatusService;
             _nationalityService = nationalityService;
+            _permissionService = permissionService;
         }
 
         MemberDTO memberDTO = new MemberDTO();
@@ -53,8 +56,6 @@ namespace APC.AllForms
         PositionBLL positionBLL = new PositionBLL();
         PositionDetailDTO positionDetail = new PositionDetailDTO();
 
-        PermissionBLL permissionBLL = new PermissionBLL();
-        PermissionDTO permissionDTO = new PermissionDTO();
         MemberDetailDTO permissionDetail = new MemberDetailDTO();
         MemberBLL permissionMemberBLL = new MemberBLL();
 
@@ -120,6 +121,12 @@ namespace APC.AllForms
         {
             dataGridViewNationality.DataSource = _nationalityService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewNationality, SingleColumnGridType.Basic, "NationalityName", "Nationalities");
+        }
+        
+        private void loadPermission()
+        {
+            dataGridViewPermissions.DataSource = _permissionService.GetAll();
+            ConfigureSingleColumnGrid(dataGridViewPermissions, SingleColumnGridType.Basic, "PermissionName", "Permissions");
         }
 
 
@@ -248,10 +255,8 @@ namespace APC.AllForms
             txtNationality.Clear();
             loadNationality();
 
-            cmbPermission.SelectedIndex = -1;
-            permissionBLL = new PermissionBLL();
-            permissionDTO = permissionBLL.Select();
-            dataGridViewPermissions.DataSource = permissionDTO.Members;
+            txtPermission.Clear();
+            loadPermission();
 
             txtPosition.Clear();
             positionBLL = new PositionBLL();
@@ -509,15 +514,33 @@ namespace APC.AllForms
             }
         }
 
-
-
-
-
-        private void FillPermissionComboBoxes()
+        // Permission
+        private Applications.DTO.PermissionDTO GetSelectedPermission()
         {
-            cmbPermission.DataSource = permissionDTO.Permissions;
-            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
+            if (dataGridViewPermissions.CurrentRow == null)
+                return null;
+
+            return dataGridViewPermissions.CurrentRow.DataBoundItem as Applications.DTO.PermissionDTO;
         }
+
+        private void btnDeletePermissions_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedPermission();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a permission from the table.");
+                return;
+            }
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                _permissionService.Delete(selected.PermissionId);
+                ClearFilters();
+            }
+        }
+
 
         private void picProfilePic_Paint(object sender, PaintEventArgs e)
         {
@@ -527,43 +550,7 @@ namespace APC.AllForms
             picProfilePic.Region = rg;
         }
 
-        
 
-
-        
-        private void btnSearchPermissions_Click(object sender, EventArgs e)
-        {
-            List<MemberDetailDTO> list = permissionDTO.Members;
-            if (cmbPermission.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.PermissionID == Convert.ToInt32(cmbPermission.SelectedValue)).ToList();
-            }
-            dataGridViewPermissions.DataSource = list;
-        }
-
-        private void btnDeletePermissions_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
-            {
-                if (permissionMemberBLL.DeletePermission(permissionDetail))
-                {
-                    MessageBox.Show("Member was deleted");
-                    ClearFilters();
-                }                
-            }
-        }
-
-        private void dataGridViewPermissions_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            permissionDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewPermissions, e.RowIndex);
-        }
-
-        private void btnClearPermissions_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
-        }
 
         private void btnAddPositions_Click(object sender, EventArgs e)
         {
@@ -684,6 +671,9 @@ namespace APC.AllForms
                 }
             }
         }
+
+
+
 
         MemberDetailDTO deletedDataDetail = new MemberDetailDTO();
         CountryBLL countryDeletedDataBLL = new CountryBLL();
