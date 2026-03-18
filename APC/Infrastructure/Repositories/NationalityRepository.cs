@@ -2,11 +2,7 @@
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -37,19 +33,9 @@ namespace APC.Infrastructure.Repositories
             return _db.NATIONALITY.Any(x => !x.isDeleted && x.nationality1 == name);
         }
 
-        public List<Nationality> GetAll()
+        public IQueryable<NATIONALITY> GetAll()
         {
-            var data = _db.NATIONALITY
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.nationality1)
-                .ToList();
-
-            return data
-                .Select(x => Nationality.Rehydrate(
-                    x.nationalityID,
-                    x.nationality1
-                ))
-                .ToList();
+            return _db.NATIONALITY.Where(x => !x.isDeleted);
         }
 
         public bool GetBack(int id)

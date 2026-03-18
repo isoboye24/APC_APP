@@ -1,26 +1,25 @@
-﻿using APC.BLL;
-using APC.DAL.DTO;
+﻿using APC.DAL.DTO;
+using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace APC.AllForms
 {
     public partial class FormNationality : Form
     {
-        public FormNationality()
+        private readonly INationalityService _nationalityService;
+
+        private int _nationalityId;
+        private bool _isUpdate = false;
+
+        public FormNationality(INationalityService nationalityService)
         {
             InitializeComponent();
+            _nationalityService = nationalityService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -40,11 +39,13 @@ namespace APC.AllForms
         {
             this.Close();
         }
-        NationalityBLL bll = new NationalityBLL();
-        DualNationalityBLL dualNationalityBLL = new DualNationalityBLL();
-        public NationalityDetailDTO detail = new NationalityDetailDTO();
-        public bool isUpdate = false;
-        DualNationalityDetailDTO dualNatDetail = new DualNationalityDetailDTO();
+        public void LoadForEdit(int id, string name, bool isUpdate)
+        {
+            _nationalityId = id;
+            txtNationality.Text = name;
+            _isUpdate = isUpdate;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (txtNationality.Text.Trim() == "")
@@ -97,9 +98,8 @@ namespace APC.AllForms
             btnSave.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             #endregion
 
-            if (isUpdate)
+            if (_isUpdate)
             {
-                txtNationality.Text = detail.Nationality;
                 labelTitle.Text = "Edit Nationality";
             }
             else

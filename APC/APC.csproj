@@ -325,6 +325,7 @@
     <Compile Include="Applications\DTO\MaritalStatusDTO.cs" />
     <Compile Include="Applications\DTO\MembersBasicDetailDTO.cs" />
     <Compile Include="Applications\DTO\MemberFullDetailsDTO.cs" />
+    <Compile Include="Applications\DTO\NationalityDTO.cs" />
     <Compile Include="Applications\DTO\PersonalAttendanceFullDetails.cs" />
     <Compile Include="Applications\DTO\SpecialContributionFullDetails.cs" />
     <Compile Include="Applications\DTO\SpecialContributorFullDetails.cs" />

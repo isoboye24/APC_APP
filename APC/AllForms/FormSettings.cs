@@ -22,19 +22,22 @@ namespace APC.AllForms
         private readonly ICountryService _countryService;
         private readonly IEmploymentStatusService _employmentStatusService;
         private readonly IMaritalStatusService _maritalStatusService;
+        private readonly INationalityService _nationalityService;
 
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
         private List<Applications.DTO.MaritalStatusDTO> _maritalStatusDTO;
+        private List<Applications.DTO.NationalityDTO> _nationalityDTO;
 
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
-            IMaritalStatusService maritalStatusService)
+            IMaritalStatusService maritalStatusService, INationalityService nationalityService)
         {
             InitializeComponent();
             _countryService = countryService;
             _currentUserService = currentUserService;
             _employmentStatusService = employmentStatusService;
             _maritalStatusService = maritalStatusService;
+            _nationalityService = nationalityService;
         }
 
         MemberDTO memberDTO = new MemberDTO();
@@ -45,10 +48,6 @@ namespace APC.AllForms
         PaymentStatusBLL paymentStatusBLL = new PaymentStatusBLL();
         PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
         PaymentStatusDetailDTO paymentStatusDetail = new PaymentStatusDetailDTO();
-
-        NationalityBLL nationalityBLL = new NationalityBLL();
-        NationalityDTO nationalityDTO = new NationalityDTO();
-        NationalityDetailDTO nationalityDetail = new NationalityDetailDTO();
 
         PositionDTO positionDTO = new PositionDTO();
         PositionBLL positionBLL = new PositionBLL();
@@ -116,6 +115,12 @@ namespace APC.AllForms
             dataGridViewMarStatus.DataSource = _maritalStatusService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewMarStatus, SingleColumnGridType.Basic, "MaritalStatusName", "Marital Statuses");
         }
+        
+        private void loadNationality()
+        {
+            dataGridViewNationality.DataSource = _nationalityService.GetAll();
+            ConfigureSingleColumnGrid(dataGridViewNationality, SingleColumnGridType.Basic, "NationalityName", "Nationalities");
+        }
 
 
         private void resizeControls() 
@@ -147,11 +152,9 @@ namespace APC.AllForms
             resizeControls();
 
             paymentStatusDTO = paymentStatusBLL.Select();
-            nationalityDTO = nationalityBLL.Select();
             positionDTO = positionBLL.Select();
             professionDTO = professionBLL.Select();
             permissionDTO = permissionBLL.Select();
-            //deletedDataDTO = deletedDataBLL.Select(true);
 
             LoadDataGridView.loadMembers(dataGridView1, memberDTO);
 
@@ -160,6 +163,7 @@ namespace APC.AllForms
             loadCountries();
             loadEmploymentStatus();
             loadMaritalStatus();
+            loadNationality();
 
             LoadDataGridView.loadNationalities(dataGridViewNationality, nationalityDTO);
 
@@ -239,14 +243,10 @@ namespace APC.AllForms
             loadEmploymentStatus();
 
             txtMaritalStatus.Clear();
-            marStatusBLL = new MaritalStatusBLL();
-            marStatusDTO = marStatusBLL.Select();
-            dataGridViewMarStatus.DataSource = marStatusDTO.MaritalStatuses;
+            loadMaritalStatus();
 
             txtNationality.Clear();
-            nationalityBLL = new NationalityBLL();
-            nationalityDTO = nationalityBLL.Select();
-            dataGridViewNationality.DataSource = nationalityDTO.Nationalities;
+            loadNationality();
 
             cmbPermission.SelectedIndex = -1;
             permissionBLL = new PermissionBLL();
@@ -284,7 +284,7 @@ namespace APC.AllForms
         }
 
 
-
+        // Country
         private void btnAddCountry_Click(object sender, EventArgs e)
         {
             var form = new FormCountry(_countryService);
@@ -341,7 +341,7 @@ namespace APC.AllForms
             }
         }
 
-
+        // Employment status
         private void btnAddEmpStatus_Click(object sender, EventArgs e)
         {
             var form = new FormEmploymentStatus(_employmentStatusService);
@@ -397,7 +397,7 @@ namespace APC.AllForms
             }
         }
 
-
+        // Marital status
         private void btnAddMarStatus_Click(object sender, EventArgs e)
         {
             var form = new FormMaritalStatus(_maritalStatusService);
@@ -453,6 +453,64 @@ namespace APC.AllForms
             }
         }
 
+        // Nationality
+        private void btnAddNationality_Click(object sender, EventArgs e)
+        {
+            var form = new FormNationality(_nationalityService);
+            form.ShowDialog();
+            ClearFilters();
+        }
+
+        private Applications.DTO.NationalityDTO GetSelectedNationality()
+        {
+            if (dataGridViewNationality.CurrentRow == null)
+                return null;
+
+            return dataGridViewNationality.CurrentRow.DataBoundItem as Applications.DTO.NationalityDTO;
+        }
+
+        private void btnUpdateNationality_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedNationality();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a nationality from the table");
+                return;
+            }
+
+            var form = new FormNationality(_nationalityService);
+            form.LoadForEdit(selected.NationalityId, selected.NationalityName, true);
+            form.ShowDialog();
+            ClearFilters();
+        }
+
+        private void txtNationality_TextChanged(object sender, EventArgs e)
+        {
+            string search = txtNationality.Text.Trim().ToLower();
+            var filtered = _nationalityDTO.Where(x => x.NationalityName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewNationality.DataSource = filtered;
+        }
+
+        private void btnDeleteNationality_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedNationality();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a nationality from the table.");
+                return;
+            }
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                _nationalityService.Delete(selected.NationalityId);
+                ClearFilters();
+            }
+        }
+
+
+
 
 
         private void FillPermissionComboBoxes()
@@ -472,66 +530,7 @@ namespace APC.AllForms
         
 
 
-        private void btnAddNationality_Click(object sender, EventArgs e)
-        {
-            FormNationality open = new FormNationality();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            ClearFilters();
-        }
-
-        private void btnUpdateNationality_Click(object sender, EventArgs e)
-        {
-            if (nationalityDetail.NationalityID == 0)
-            {
-                MessageBox.Show("Please choose a nationality from the table");
-            }
-            else
-            {
-                FormNationality open = new FormNationality();
-                open.detail = nationalityDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
-
-        private void txtNationality_TextChanged(object sender, EventArgs e)
-        {
-            List<NationalityDetailDTO> list = nationalityDTO.Nationalities;
-            list = list.Where(x => x.Nationality.Contains(txtNationality.Text)).ToList();
-            dataGridViewNationality.DataSource = list;
-        }
-
-        private void dataGridViewNationality_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            nationalityDetail = GeneralHelper.MapFromGrid<NationalityDetailDTO>(dataGridViewNationality, e.RowIndex);            
-        }
-
-        private void btnDeleteNationality_Click(object sender, EventArgs e)
-        {
-            if (nationalityDetail.NationalityID == 0)
-            {
-                MessageBox.Show("Please choose a nationality from the table");
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (nationalityBLL.Delete(nationalityDetail))
-                    {
-                        MessageBox.Show("Nationality was deleted");
-                        ClearFilters();
-                    }
-                }
-            }
-        }
-
+        
         private void btnSearchPermissions_Click(object sender, EventArgs e)
         {
             List<MemberDetailDTO> list = permissionDTO.Members;
