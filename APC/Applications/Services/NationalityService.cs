@@ -42,6 +42,16 @@ namespace APC.Applications.Services
                 }).OrderBy(x => x.NationalityName)
                 .ToList();
         }
+        public List<NationalityDTO> GetAllDeletedNationalities()
+        {
+            return _repository.GetAllDeletedNationalities()
+                .Select(x => new NationalityDTO
+                {
+                    NationalityId = x.nationalityID,
+                    NationalityName = x.nationality1
+                }).OrderBy(x => x.NationalityName)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

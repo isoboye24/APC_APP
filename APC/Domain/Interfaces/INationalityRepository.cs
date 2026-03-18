@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface INationalityRepository
     {
         IQueryable<NATIONALITY>GetAll();
+        IQueryable<NATIONALITY>GetAllDeletedNationalities();
         Nationality GetById(int id);
         bool Insert(Nationality nationality);
         bool Update(Nationality nationality);

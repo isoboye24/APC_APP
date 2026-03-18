@@ -138,6 +138,12 @@ namespace APC.AllForms
             ConfigureSingleColumnGrid(dataGridViewNationality, SingleColumnGridType.Basic, "NationalityName", "Nationalities");
         }
         
+        private void loadDeletedNationalities()
+        {
+            dataGridView1.DataSource = _nationalityService.GetAllDeletedNationalities();
+            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "NationalityName", "Nationalities");
+        }
+        
         private void loadPermission()
         {
             dataGridViewPermissions.DataSource = _permissionService.GetAll();
@@ -772,8 +778,7 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 2)
             {
-                nationalityDTO = nationalityBLL.Select(true);
-                LoadDataGridView.loadNationalities(dataGridView1, nationalityDTO);                
+                loadDeletedNationalities();                
             }
             else if (cmbDeletedData.SelectedIndex == 3)
             {

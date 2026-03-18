@@ -38,6 +38,11 @@ namespace APC.Infrastructure.Repositories
             return _db.NATIONALITY.Where(x => !x.isDeleted);
         }
 
+        public IQueryable<NATIONALITY> GetAllDeletedNationalities()
+        {
+            return _db.NATIONALITY.Where(x => x.isDeleted);
+        }
+
         public bool GetBack(int id)
         {
             var entity = _db.NATIONALITY.First(x => x.nationalityID == id);
