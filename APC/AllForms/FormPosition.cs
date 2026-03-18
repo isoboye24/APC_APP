@@ -1,6 +1,7 @@
 ﻿using APC.Applications.Services;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
+using APC.Helper;
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -77,6 +78,12 @@ namespace APC
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(14, txtPosition);
         }
 
         private void FormPosition_Load(object sender, EventArgs e)

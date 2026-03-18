@@ -1,6 +1,9 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Services;
+using APC.BLL;
 using APC.DAL.DTO;
+using APC.Domain.Entities;
 using APC.Domain.Interfaces;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,53 +59,48 @@ namespace APC
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtProfession.Text.Trim()=="")
+            try
             {
-                MessageBox.Show("Profession is empty");
-            }
-            else
-            {
-                if (!isUpdate)
+                var name = txtProfession.Text.Trim();
+
+                if (string.IsNullOrEmpty(name))
                 {
-                    ProfessionDetailDTO profession = new ProfessionDetailDTO();
-                    profession.Profession = txtProfession.Text;
-                    if (bll.Insert(profession))
-                    {
-                        MessageBox.Show("Profession was added");
-                        txtProfession.Clear();
-                    }
+                    MessageBox.Show("Please enter profession");
+                    return;
                 }
-                else if (isUpdate)
+
+                if (_professionId == 0)
                 {
-                    if (detail.Profession==txtProfession.Text.Trim())
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        detail.Profession = txtProfession.Text;
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Profession was updated");
-                            this.Close();
-                        }
-                    }
+                    var profession = new Profession(name);
+                    _professionService.Create(profession);
+                    MessageBox.Show("Profession created successfully!");
+                }
+                else
+                {
+                    var profession = new Profession(name);
+                    profession.SetId(_professionId);
+
+                    _professionService.Update(profession);
+                    MessageBox.Show("Profession updated successfully!");
+                    this.Close();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(14, txtProfession);
         }
 
         private void FormProfession_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            txtProfession.Font = new Font("Segoe UI", 14, FontStyle.Regular);            
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
-            if (isUpdate)
+            if (_isUpdate)
             {
-                txtProfession.Text = detail.Profession;
                 labelTitle.Text = "Edit Profession";
             }
             else
