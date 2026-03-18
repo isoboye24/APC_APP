@@ -11,7 +11,7 @@ namespace APC
     {
         private readonly IMaritalStatusService _maritalStatusService;
 
-        private int _statusId;
+        private int _statusId = 0;
         private bool _isUpdate = false;
 
         public FormMaritalStatus(IMaritalStatusService maritalStatusService)

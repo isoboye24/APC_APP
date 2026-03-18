@@ -24,6 +24,7 @@ namespace APC.AllForms
         private readonly IMaritalStatusService _maritalStatusService;
         private readonly INationalityService _nationalityService;
         private readonly IPermissionService _permissionService;
+        private readonly IPositionService _positionService;
 
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
@@ -32,7 +33,8 @@ namespace APC.AllForms
         private List<Applications.DTO.PermissionDTO> _permissionDTO;
 
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
-            IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService)
+            IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService, 
+            IPositionService positionService)
         {
             InitializeComponent();
             _countryService = countryService;
@@ -41,6 +43,7 @@ namespace APC.AllForms
             _maritalStatusService = maritalStatusService;
             _nationalityService = nationalityService;
             _permissionService = permissionService;
+            _positionService = positionService;
         }
 
         MemberDTO memberDTO = new MemberDTO();
@@ -51,10 +54,6 @@ namespace APC.AllForms
         PaymentStatusBLL paymentStatusBLL = new PaymentStatusBLL();
         PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
         PaymentStatusDetailDTO paymentStatusDetail = new PaymentStatusDetailDTO();
-
-        PositionDTO positionDTO = new PositionDTO();
-        PositionBLL positionBLL = new PositionBLL();
-        PositionDetailDTO positionDetail = new PositionDetailDTO();
 
         MemberDetailDTO permissionDetail = new MemberDetailDTO();
         MemberBLL permissionMemberBLL = new MemberBLL();
@@ -127,6 +126,12 @@ namespace APC.AllForms
         {
             dataGridViewPermissions.DataSource = _permissionService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewPermissions, SingleColumnGridType.Basic, "PermissionName", "Permissions");
+        }
+        
+        private void loadPosition()
+        {
+            dataGridViewPositions.DataSource = _positionService.GetAll();
+            ConfigureSingleColumnGrid(dataGridViewPositions, SingleColumnGridType.Basic, "PositionName", "Positions");
         }
 
 
@@ -259,9 +264,7 @@ namespace APC.AllForms
             loadPermission();
 
             txtPosition.Clear();
-            positionBLL = new PositionBLL();
-            positionDTO = positionBLL.Select();
-            dataGridViewPositions.DataSource = positionDTO.Positions;
+            loadPosition();
 
             txtProfession.Clear();
             professionBLL = new ProfessionBLL();
@@ -286,6 +289,14 @@ namespace APC.AllForms
             labelTotalNationalitySettingsDashboard.Text = memberBLL.SelectCountUniqueNationality().ToString();
             labelTotalPermissionSettingsDashboard.Text = permissionBLL.SelectPermittedMembersCount().ToString();
             labelTotalEventSettingsDashboard.Text = eventBLL.SelectEventCount().ToString();
+        }
+
+        private void picProfilePic_Paint(object sender, PaintEventArgs e)
+        {
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddEllipse(0, 0, picProfilePic.Width - 1, picProfilePic.Height - 1);
+            Region rg = new Region(gp);
+            picProfilePic.Region = rg;
         }
 
 
@@ -541,24 +552,20 @@ namespace APC.AllForms
             }
         }
 
-
-        private void picProfilePic_Paint(object sender, PaintEventArgs e)
-        {
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddEllipse(0, 0, picProfilePic.Width - 1, picProfilePic.Height - 1);
-            Region rg = new Region(gp);
-            picProfilePic.Region = rg;
-        }
-
-
-
+        // Position
         private void btnAddPositions_Click(object sender, EventArgs e)
         {
-            FormPosition open = new FormPosition();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormPosition(_positionService);
+            form.ShowDialog();
             ClearFilters();
+        }
+
+        private Applications.DTO.PositionDTO GetSelectedPosition()
+        {
+            if (dataGridViewPositions.CurrentRow == null)
+                return null;
+
+            return dataGridViewPositions.CurrentRow.DataBoundItem as Applications.DTO.PositionDTO;
         }
 
         private void txtPosition_TextChanged(object sender, EventArgs e)
@@ -568,49 +575,40 @@ namespace APC.AllForms
             dataGridViewPositions.DataSource = list;
         }
 
-        private void dataGridViewPositions_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            positionDetail = GeneralHelper.MapFromGrid<PositionDetailDTO>(dataGridViewPositions, e.RowIndex);
-        }
-
         private void btnUpdatePositions_Click(object sender, EventArgs e)
         {
-            if (positionDetail.PositionID == 0)
+            var selected = GetSelectedPosition();
+            if (selected == null)
             {
                 MessageBox.Show("Please select a position from the table");
+                return;
             }
-            else
-            {
-                FormPosition open = new FormPosition();
-                open.detail = positionDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormPosition(_positionService);
+            form.LoadForEdit(selected.PositionId, selected.PositionName, true);
+            form.ShowDialog();
+            ClearFilters();
         }
 
         private void btnDeletePositions_Click(object sender, EventArgs e)
         {
-            if (positionDetail.PositionID == 0)
+            var selected = GetSelectedPosition();
+            if (selected == null)
             {
-                MessageBox.Show("Please select a position from the table");
+                MessageBox.Show("Please select a position from the table.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (positionBLL.Delete(positionDetail))
-                    {
-                        MessageBox.Show("Position was deleted");
-                        ClearFilters();
-                    }
-                }
+                _positionService.Delete(selected.PositionId);
+                ClearFilters();
             }
         }
+
+
 
         private void btnAddProfessions_Click(object sender, EventArgs e)
         {

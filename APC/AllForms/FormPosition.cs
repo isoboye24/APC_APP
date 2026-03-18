@@ -1,5 +1,6 @@
 ﻿using APC.BLL;
 using APC.DAL.DTO;
+using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,18 +9,21 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace APC
 {
     public partial class FormPosition : Form
     {
-        public FormPosition()
+        private readonly IPositionService _positionService;
+
+        private int _positionId = 0;
+        private bool _isUpdate = false;
+
+        public FormPosition(IPositionService positionService)
         {
             InitializeComponent();
+            _positionService = positionService;
         }
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -40,9 +44,12 @@ namespace APC
         {
             this.Close();
         }
-        PositionBLL bll = new PositionBLL();
-        public PositionDetailDTO detail = new PositionDetailDTO();
-        public bool isUpdate = false;
+        public void LoadForEdit(int id, string name, bool isUpdate)
+        {
+            _positionId = id;
+            txtPosition.Text = name;
+            _isUpdate = isUpdate;
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (txtPosition.Text.Trim()=="")

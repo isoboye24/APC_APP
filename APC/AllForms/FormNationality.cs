@@ -11,7 +11,7 @@ namespace APC.AllForms
     {
         private readonly INationalityService _nationalityService;
 
-        private int _nationalityId;
+        private int _nationalityId = 0;
         private bool _isUpdate = false;
 
         public FormNationality(INationalityService nationalityService)

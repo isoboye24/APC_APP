@@ -2,10 +2,7 @@
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -45,19 +42,9 @@ namespace APC.Infrastructure.Repositories
             return _db.POSITION.Any(x => !x.isDeleted && x.positionName == name);
         }
 
-        public List<Position> GetAll()
+        public IQueryable<POSITION> GetAll()
         {
-            var data = _db.POSITION
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.positionName)
-                .ToList();
-
-            return data
-                .Select(x => Position.Rehydrate(
-                    x.positionID,
-                    x.positionName
-                ))
-                .ToList();
+            return _db.POSITION.Where(x => !x.isDeleted);
         }
 
         public Position GetById(int id)

@@ -12,7 +12,7 @@ namespace APC.AllForms
     {
         private readonly IPermissionService _permissionService;
 
-        private int _permissionId;
+        private int _permissionId = 0;
         private bool _isUpdate = false;
 
         public FormPermission(IPermissionService permissionService)
