@@ -1,4 +1,5 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Applications.Services;
+using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
 using System.Drawing;
@@ -46,38 +47,35 @@ namespace APC
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtPosition.Text.Trim()=="")
+            try
             {
-                MessageBox.Show("Position is empty");
+                var name = txtPosition.Text.Trim();
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    MessageBox.Show("Please enter position");
+                    return;
+                }
+
+                if (_positionId == 0)
+                {
+                    var position = new Position(name);
+                    _positionService.Create(position);
+                    MessageBox.Show("Position created successfully!");
+                }
+                else
+                {
+                    var position = new Position(name);
+                    position.SetId(_positionId);
+
+                    _positionService.Update(position);
+                    MessageBox.Show("Position updated successfully!");
+                    this.Close();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                if (!isUpdate)
-                {
-                    PositionDetailDTO position = new PositionDetailDTO();
-                    position.PositionName = txtPosition.Text;
-                    if (bll.Insert(position))
-                    {
-                        MessageBox.Show("Position was added");
-                        txtPosition.Clear();
-                    }
-                }
-                else if(isUpdate)
-                {
-                    if (detail.PositionName == txtPosition.Text.Trim())
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        detail.PositionName = txtPosition.Text;
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Position was updated");
-                            this.Close();
-                        }
-                    }
-                }
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -91,10 +89,9 @@ namespace APC
             btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             #endregion
 
-            if (isUpdate)
+            if (_isUpdate)
             {
                 labelTitle.Text = "Edit Position";
-                txtPosition.Text = detail.PositionName;
             }
             else
             {
