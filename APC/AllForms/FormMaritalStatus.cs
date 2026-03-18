@@ -1,8 +1,7 @@
-﻿using APC.BLL;
-using APC.DAL.DTO;
+﻿using APC.Domain.Entities;
 using APC.Domain.Interfaces;
+using APC.Helper;
 using System;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -50,38 +49,35 @@ namespace APC
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtMaritalStatus.Text.Trim()=="")
+            try
             {
-                MessageBox.Show("Marital status is empty");
+                var name = txtMaritalStatus.Text.Trim();
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    MessageBox.Show("Please enter marital status");
+                    return;
+                }
+
+                if (_statusId == 0)
+                {
+                    var maritalStatus = new MaritalStatus(name);
+                    _maritalStatusService.Create(maritalStatus);
+                    MessageBox.Show("Marital status created successfully!");
+                }
+                else
+                {
+                    var maritalStatus = new MaritalStatus(name);
+                    maritalStatus.SetId(_statusId);
+
+                    _maritalStatusService.Update(maritalStatus);
+                    MessageBox.Show("Marital status updated successfully!");
+                    this.Close();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                if (!isUpdate)
-                {
-                    MaritalStatusDetailDTO maritalStatus = new MaritalStatusDetailDTO();
-                    maritalStatus.MaritalStatus = txtMaritalStatus.Text;
-                    if (bll.Insert(maritalStatus))
-                    {
-                        MessageBox.Show("Marital status was added");
-                        txtMaritalStatus.Clear();
-                    }
-                }
-                else if(isUpdate)
-                {
-                    if (detail.MaritalStatus == txtMaritalStatus.Text.Trim())
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        detail.MaritalStatus = txtMaritalStatus.Text;
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Marital status was updated");
-                            this.Close();
-                        }
-                    }
-                }
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -90,26 +86,24 @@ namespace APC
             this.Close();
         }
 
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(14, txtMaritalStatus);
+        }
+
         private void FormMaritalStatus_Load(object sender, EventArgs e)
         {
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            resizeControls();
 
-            txtMaritalStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            if (isUpdate)
+            if (_isUpdate)
             {
-                txtMaritalStatus.Text = detail.MaritalStatus;
                 labelTitle.Text = "Edit Marital Status";
             }
             else
             {
                 labelTitle.Text = "Add Marital Status";
             }
-            
         }        
     }
 }
