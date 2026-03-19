@@ -157,6 +157,11 @@ namespace APC.AllForms
             dataGridViewPermissions.DataSource = _permissionService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewPermissions, SingleColumnGridType.Basic, "PermissionName", "Permissions");
         }
+        private void loadDeletedPermissions()
+        {
+            dataGridView1.DataSource = _permissionService.GetAllDeletedPermissions();
+            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "PermissionName", "Permissions");
+        }
 
         private void loadPosition()
         {
@@ -258,6 +263,7 @@ namespace APC.AllForms
             cmbDeletedData.Items.Add("Constitution");
             cmbDeletedData.Items.Add("Fined Member");
             cmbDeletedData.Items.Add("Payment Status");
+            cmbDeletedData.Items.Add("Permissions");
 
             #endregion
 
@@ -863,6 +869,10 @@ namespace APC.AllForms
             else if (cmbDeletedData.SelectedIndex == 17)
             {
                 loadDeletedPaymentStatuses();
+            }
+            else if (cmbDeletedData.SelectedIndex == 18)
+            {
+                loadDeletedPermissions();
             }
             else
             {

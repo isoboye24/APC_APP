@@ -41,6 +41,17 @@ namespace APC.Applications.Services
                 }).OrderBy(x => x.PermissionName)
                 .ToList();
         }
+        
+        public List<PermissionDTO> GetAllDeletedPermissions()
+        {
+            return _repository.GetAllDeletedPermissions()
+                .Select(x => new PermissionDTO
+                {
+                    PermissionId = x.permissionID,
+                    PermissionName = x.permission1
+                }).OrderBy(x => x.PermissionName)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

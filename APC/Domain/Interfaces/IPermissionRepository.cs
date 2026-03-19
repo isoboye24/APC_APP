@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IPermissionRepository
     {
         IQueryable<PERMISSION> GetAll();
+        IQueryable<PERMISSION> GetAllDeletedPermissions();
         Permission GetById(int id);
         bool Insert(Permission permission);
         bool Update(Permission permission);

@@ -38,6 +38,11 @@ namespace APC.Infrastructure.Repositories
             return _db.PERMISSION.Where(x => !x.isDeleted);
         }
 
+        public IQueryable<PERMISSION> GetAllDeletedPermissions()
+        {
+            return _db.PERMISSION.Where(x => x.isDeleted);
+        }
+
         public bool GetBack(int id)
         {
             var entity = _db.PERMISSION.First(x => x.permissionID == id);

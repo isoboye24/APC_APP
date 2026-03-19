@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IPermissionService
     {
         List<PermissionDTO> GetAll();
+        List<PermissionDTO> GetAllDeletedPermissions();
         bool Create(Permission permission);
         bool Update(Permission permission);
         bool Delete(int id);
