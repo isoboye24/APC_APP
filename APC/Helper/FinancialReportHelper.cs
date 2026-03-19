@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class FinancialReportHelperService
+    public class FinancialReportHelper
     {
         public enum FinancialReportGridType
         {

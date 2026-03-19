@@ -1,10 +1,9 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Services
 {
@@ -29,8 +28,43 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<Document> GetAll()
-            => _repository.GetAll();
+        public List<DocumentDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .Select(x => new DocumentDTO
+                {
+                    DocumentId = x.documentID,
+                    DocumentName = x.documentName,
+                    DocumentPath = x.documentPath,
+                    DocumentType = x.documentType,
+                    Date = new DateTime(x.year, x.monthID, x.day),
+                    FormattedDate = new DateTime(x.year, x.monthID, x.day).ToString("dd.MM.yyyy"),
+                })
+                .OrderByDescending(x => x.Date.Year)
+                .ThenByDescending(x => x.Date.Month)
+                .ThenByDescending(x => x.Date.Day)
+                .ThenBy(x => x.DocumentName)
+                .ToList();
+        }
+        
+        public List<DocumentDTO> GetAllDeletedDocuments()
+        {
+            return _repository.GetAllDeletedDocuments()
+                .Select(x => new DocumentDTO
+                {
+                    DocumentId = x.documentID,
+                    DocumentName = x.documentName,
+                    DocumentPath = x.documentPath,
+                    DocumentType = x.documentType,
+                    Date = new DateTime(x.year, x.monthID, x.day),
+                    FormattedDate = new DateTime(x.year, x.monthID, x.day).ToString("dd.MM.yyyy"),
+                })
+                .OrderByDescending(x => x.Date.Year)
+                .ThenByDescending(x => x.Date.Month)
+                .ThenByDescending(x => x.Date.Day)
+                .ThenBy(x => x.DocumentName)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

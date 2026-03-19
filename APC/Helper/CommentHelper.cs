@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class CommentHelperService
+    public class CommentHelper
     {
         public enum CommentGridType
         {

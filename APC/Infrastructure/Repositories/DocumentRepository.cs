@@ -2,13 +2,7 @@
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
-using System.Windows.Forms;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -39,27 +33,14 @@ namespace APC.Infrastructure.Repositories
             return _db.DOCUMENT.Any(x => !x.isDeleted && x.documentPath == documentPath);
         }
 
-        public List<Document> GetAll()
+        public IQueryable<DOCUMENT> GetAll()
         {
-            var data = _db.DOCUMENT
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.year)
-                .OrderByDescending(x => x.monthID)
-                .OrderByDescending(x => x.day)
-                .ThenBy(x => x.documentName)
-                .ToList();
+            return _db.DOCUMENT.Where(x => !x.isDeleted);
+        }
 
-            return data
-                .Select(x => Document.Rehydrate(
-                    x.documentID,
-                    x.documentName,
-                    x.documentPath,
-                    x.documentType,
-                    x.day,
-                    x.monthID,
-                    x.year
-                ))
-                .ToList();
+        public IQueryable<DOCUMENT> GetAllDeletedDocuments()
+        {
+            return _db.DOCUMENT.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)

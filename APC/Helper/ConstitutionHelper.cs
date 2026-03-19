@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class ConstitutionHelperService
+    public class ConstitutionHelper
     {
         public enum ConstitutionGridType
         {

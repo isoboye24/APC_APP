@@ -15,8 +15,7 @@ namespace APC.Applications.DTO
         public string Gender { get; set; }
         public string Content { get; set; }
         public string ImagePath { get; set; }
-        public int Day { get; set; }
-        public int MonthId { get; set; }
-        public int Year { get; set; }
+        public DateTime Date { get; set; }
+        public string FormattedDate { get; set; }
     }
 }

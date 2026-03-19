@@ -10,8 +10,8 @@ namespace APC.Domain.Interfaces
 {
     public interface ICommentService
     {
-        List<CommentDetailDTO> GetAll();
-        List<CommentDetailDTO> GetAllDeletedComments();
+        List<CommentDTO> GetAll();
+        List<CommentDTO> GetAllDeletedComments();
         bool Create(Comment content);
         bool Update(Comment content);
         bool Delete(int id);

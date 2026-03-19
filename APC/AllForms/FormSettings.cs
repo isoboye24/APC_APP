@@ -30,6 +30,7 @@ namespace APC.AllForms
 
         private readonly IMemberService _memberService;
         private readonly ICommentService _commentService;
+        private readonly IDocumentService _documentService;
 
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
@@ -44,7 +45,7 @@ namespace APC.AllForms
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
             IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService, 
             IPositionService positionService, IProfessionService professionService, IPaymentStatusService paymentStatusService, 
-            IMemberService memberService, ICommentService commentService)
+            IMemberService memberService, ICommentService commentService, IDocumentService documentService)
         {
             InitializeComponent();
             _countryService = countryService;
@@ -58,15 +59,13 @@ namespace APC.AllForms
             _paymentStatusService = paymentStatusService;
             _memberService = memberService;
             _commentService = commentService;
+            _documentService = documentService;
         }   
         
         EventsBLL eventBLL = new EventsBLL();
 
         MemberDetailDTO permissionDetail = new MemberDetailDTO();
         MemberBLL permissionMemberBLL = new MemberBLL();
-
-        DocumentDTO documentDTO = new DocumentDTO();
-        DocumentBLL documentBLL = new DocumentBLL();
 
         EventImageDTO eventImageDTO = new EventImageDTO();
         EventImageBLL eventImageBLL = new EventImageBLL();
@@ -189,12 +188,17 @@ namespace APC.AllForms
         private void loadDeletedMembers()
         {
             dataGridView1.DataSource = _memberService.GetAllDeletedMembers();
-            MemberHelperService.ConfigureMemberGrid(dataGridView1, MemberHelperService.MemberGridType.Basic);
+            MemberHelper.ConfigureMemberGrid(dataGridView1, MemberHelper.MemberGridType.Basic);
         }
         private void loadDeletedComments()
         {
             dataGridView1.DataSource = _commentService.GetAllDeletedComments();
-            CommentHelperService.ConfigureCommentGrid(dataGridView1, CommentHelperService.CommentGridType.Basic);
+            CommentHelper.ConfigureCommentGrid(dataGridView1, CommentHelper.CommentGridType.Basic);
+        }
+        private void loadDeletedDocuments()
+        {
+            dataGridView1.DataSource = _documentService.GetAllDeletedDocuments();
+            DocumentHelper.ConfigureDocumentGrid(dataGridView1, DocumentHelper.DocumentGridType.Basic);
         }
 
 
@@ -808,8 +812,7 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 9)
             {
-                documentDTO = documentBLL.Select(true);
-                LoadDataGridView.loadDocuments(dataGridView1, documentDTO);
+                loadDeletedDocuments();
             }
             else if (cmbDeletedData.SelectedIndex == 10)
             {

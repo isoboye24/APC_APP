@@ -1,17 +1,17 @@
 ﻿using APC.DAL.DTO;
 using System;
 using System.Windows.Forms;
-using static APC.Helper.CommentHelperService;
-using static APC.Helper.ConstitutionHelperService;
-using static APC.Helper.DocumentHelperService;
-using static APC.Helper.EventsHelperService;
-using static APC.Helper.ExpenditureHelperService;
-using static APC.Helper.FinancialReportHelperService;
-using static APC.Helper.FinedMemberHelperService;
-using static APC.Helper.GeneralAttendanceHelperService;
-using static APC.Helper.MemberHelperService;
+using static APC.Helper.CommentHelper;
+using static APC.Helper.ConstitutionHelper;
+using static APC.Helper.DocumentHelper;
+using static APC.Helper.EventsHelper;
+using static APC.Helper.ExpenditureHelper;
+using static APC.Helper.FinancialReportHelper;
+using static APC.Helper.FinedMemberHelper;
+using static APC.Helper.GeneralAttendanceHelper;
+using static APC.Helper.MemberHelper;
 using static APC.Helper.SingleColumnHelper;
-using static APC.Helper.SpecialContributionHelperService;
+using static APC.Helper.SpecialContributionHelper;
 
 namespace APC.Helper
 {

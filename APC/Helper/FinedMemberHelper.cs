@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class FinedMemberHelperService
+    public class FinedMemberHelper
     {
         public enum FinedMemberGridType
         {

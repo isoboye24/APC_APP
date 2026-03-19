@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class EventsHelperService
+    public class EventsHelper
     {
         public enum EventsGridType
         {

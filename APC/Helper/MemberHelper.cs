@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class MemberHelperService
+    public class MemberHelper
     {
         public enum MemberGridType
         {

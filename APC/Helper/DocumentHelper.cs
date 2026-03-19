@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class DocumentHelperService
+    public class DocumentHelper
     {
         public enum DocumentGridType
         {
@@ -16,11 +16,12 @@ namespace APC.Helper
             switch (type)
             {
                 case DocumentGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "DocumentName", "DocumentType", "Date");
+                    GeneralHelper.SetVisibleColumns(grid, "DocumentName", "DocumentType", "FormattedDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "DocumentName", "Document Name" },
-                                    { "DocumentType", "Document Type" }
+                                    { "DocumentType", "Document Type" },
+                                    { "FormattedDate", "Date" }
                                 });
                     break;
                 default:

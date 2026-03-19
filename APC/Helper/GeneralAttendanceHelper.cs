@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class GeneralAttendanceHelperService
+    public class GeneralAttendanceHelper
     {
         public enum GeneralAttendanceGridType
         {

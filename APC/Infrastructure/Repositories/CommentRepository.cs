@@ -5,9 +5,6 @@ using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace APC.Infrastructure.Repositories
@@ -53,12 +50,11 @@ namespace APC.Infrastructure.Repositories
                               LastName = m.surname,
                               Gender = g.genderName,
                               ImagePath = m.imagePath,
-                              Day = c.day,
-                              MonthId = c.monthID,
-                              Year = c.year,
+                              Date = new DateTime(c.year, c.monthID, c.day),
+                              FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
                           });
-
-            return member.ToList();
+            
+            return member.OrderByDescending(x => x.Date.Year).ThenByDescending(x => x.Date.Month).ThenByDescending(x => x.Date.Day).ThenBy(x => x.FirstName).ToList();
         }
         
         public List<CommentDTO> GetAllDeletedComments()
@@ -75,12 +71,11 @@ namespace APC.Infrastructure.Repositories
                               LastName = m.surname,
                               Gender = g.genderName,
                               ImagePath = m.imagePath,
-                              Day = c.day,
-                              MonthId = c.monthID,
-                              Year = c.year,
+                              Date = new DateTime(c.year, c.monthID, c.day),
+                              FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
                           });
 
-            return member.ToList();
+            return member.OrderByDescending(x => x.Date.Year).ThenByDescending(x => x.Date.Month).ThenByDescending(x => x.Date.Day).ThenBy(x => x.FirstName).ToList();
         }
 
         public bool GetBack(int id)
