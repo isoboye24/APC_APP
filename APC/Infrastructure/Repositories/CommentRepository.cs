@@ -1,4 +1,5 @@
-﻿using APC.DAL;
+﻿using APC.Applications.DTO;
+using APC.DAL;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
@@ -38,26 +39,48 @@ namespace APC.Infrastructure.Repositories
             return _db.COMMENT.Any(x => !x.isDeleted && x.comment1 == content && x.memberID == memberId);
         }
 
-        public List<Comment> GetAll()
+        public List<CommentDTO> GetAll()
         {
-            var data = _db.COMMENT
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.year)
-                .ThenByDescending(x => x.monthID)
-                .ThenByDescending(x => x.day)
-                .ThenBy(x => x.memberID)
-                .ToList();
+            var member = (from c in _db.COMMENT.Where(x => x.isDeleted == false)
+                          join m in _db.MEMBER on c.memberID equals m.memberID
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          select new CommentDTO
+                          {
+                              CommentId = c.commentID,
+                              MemberId = c.memberID,
+                              Content = c.comment1,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Gender = g.genderName,
+                              ImagePath = m.imagePath,
+                              Day = c.day,
+                              MonthId = c.monthID,
+                              Year = c.year,
+                          });
 
-            return data
-                .Select(x => Comment.Rehydrate(
-                    x.commentID,
-                    x.comment1,
-                    x.memberID,
-                    x.day,
-                    x.monthID,
-                    x.year
-                ))
-                .ToList();
+            return member.ToList();
+        }
+        
+        public List<CommentDTO> GetAllDeletedComments()
+        {
+            var member = (from c in _db.COMMENT.Where(x => x.isDeleted)
+                          join m in _db.MEMBER on c.memberID equals m.memberID
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          select new CommentDTO
+                          {
+                              CommentId = c.commentID,
+                              MemberId = c.memberID,
+                              Content = c.comment1,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Gender = g.genderName,
+                              ImagePath = m.imagePath,
+                              Day = c.day,
+                              MonthId = c.monthID,
+                              Year = c.year,
+                          });
+
+            return member.ToList();
         }
 
         public bool GetBack(int id)

@@ -319,6 +319,8 @@
     </Compile>
     <Compile Include="Applications\DTO\AbsenteesDTO.cs" />
     <Compile Include="Applications\DTO\BirthdayMembersDTO.cs" />
+    <Compile Include="Applications\DTO\CommentDetailDTO.cs" />
+    <Compile Include="Applications\DTO\CommentDTO.cs" />
     <Compile Include="Applications\DTO\CountryDTO.cs" />
     <Compile Include="Applications\DTO\DeadMemberShortDetailDTO.cs" />
     <Compile Include="Applications\DTO\EmploymentStatusDTO.cs" />

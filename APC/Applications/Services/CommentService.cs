@@ -1,4 +1,5 @@
-﻿using APC.DAL;
+﻿using APC.Applications.DTO;
+using APC.DAL;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
@@ -32,8 +33,49 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<Comment> GetAll()
-            => _repository.GetAll();
+        public List<CommentDetailDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .Select(x => new CommentDetailDTO
+                {
+                    CommentId = x.CommentId,
+                    MemberId = x.MemberId,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    ImagePath = x.ImagePath,
+                    Content = x.Content,
+                    Gender = x.Gender,
+                    Date = new DateTime(x.Year, x.MonthId, x.Day),
+                    FormattedDate = new DateTime(x.Year, x.MonthId, x.Day).ToString("dd.MM.yyyy"),
+                })
+                .OrderByDescending(x => x.Date.Year)
+                .ThenByDescending(x => x.Date.Month)
+                .ThenByDescending(x => x.Date.Day)
+                .ThenBy(x => x.FirstName)
+                .ToList();
+        }
+        
+        public List<CommentDetailDTO> GetAllDeletedComments()
+        {
+            return _repository.GetAllDeletedComments()
+                .Select(x => new CommentDetailDTO
+                {
+                    CommentId = x.CommentId,
+                    MemberId = x.MemberId,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    ImagePath = x.ImagePath,
+                    Content = x.Content,
+                    Gender = x.Gender,
+                    Date = new DateTime(x.Year, x.MonthId, x.Day),
+                    FormattedDate = new DateTime(x.Year, x.MonthId, x.Day).ToString("dd.MM.yyyy"),
+                })
+                .OrderByDescending(x => x.Date.Year)
+                .ThenByDescending(x => x.Date.Month)
+                .ThenByDescending(x => x.Date.Day)
+                .ThenBy(x => x.FirstName)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

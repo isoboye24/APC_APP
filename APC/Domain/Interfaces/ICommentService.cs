@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace APC.Domain.Interfaces
 {
     public interface ICommentService
     {
-        List<Comment> GetAll();
+        List<CommentDetailDTO> GetAll();
+        List<CommentDetailDTO> GetAllDeletedComments();
         bool Create(Comment content);
         bool Update(Comment content);
         bool Delete(int id);

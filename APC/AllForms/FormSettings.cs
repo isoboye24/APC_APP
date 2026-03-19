@@ -29,6 +29,7 @@ namespace APC.AllForms
         private readonly IPaymentStatusService _paymentStatusService;
 
         private readonly IMemberService _memberService;
+        private readonly ICommentService _commentService;
 
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
@@ -42,7 +43,8 @@ namespace APC.AllForms
 
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
             IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService, 
-            IPositionService positionService, IProfessionService professionService, IPaymentStatusService paymentStatusService, IMemberService memberService)
+            IPositionService positionService, IProfessionService professionService, IPaymentStatusService paymentStatusService, 
+            IMemberService memberService, ICommentService commentService)
         {
             InitializeComponent();
             _countryService = countryService;
@@ -55,15 +57,13 @@ namespace APC.AllForms
             _professionService = professionService;
             _paymentStatusService = paymentStatusService;
             _memberService = memberService;
+            _commentService = commentService;
         }   
         
         EventsBLL eventBLL = new EventsBLL();
 
         MemberDetailDTO permissionDetail = new MemberDetailDTO();
         MemberBLL permissionMemberBLL = new MemberBLL();
-
-        CommentDTO commentDTO = new CommentDTO();
-        CommentBLL commentBLL = new CommentBLL();
 
         DocumentDTO documentDTO = new DocumentDTO();
         DocumentBLL documentBLL = new DocumentBLL();
@@ -191,6 +191,11 @@ namespace APC.AllForms
             dataGridView1.DataSource = _memberService.GetAllDeletedMembers();
             MemberHelperService.ConfigureMemberGrid(dataGridView1, MemberHelperService.MemberGridType.Basic);
         }
+        private void loadDeletedComments()
+        {
+            dataGridView1.DataSource = _commentService.GetAllDeletedComments();
+            CommentHelperService.ConfigureCommentGrid(dataGridView1, CommentHelperService.CommentGridType.Basic);
+        }
 
 
 
@@ -313,15 +318,6 @@ namespace APC.AllForms
             labelTotalPermissionSettingsDashboard.Text = _memberService.GetUniquePermissionCount().ToString();
             labelTotalEventSettingsDashboard.Text = eventBLL.SelectEventCount().ToString();
         }
-
-        private void picProfilePic_Paint(object sender, PaintEventArgs e)
-        {
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddEllipse(0, 0, picProfilePic.Width - 1, picProfilePic.Height - 1);
-            Region rg = new Region(gp);
-            picProfilePic.Region = rg;
-        }
-
 
         // Payment Status
         private void btnAddPaymentStatus_Click(object sender, EventArgs e)
@@ -808,8 +804,7 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 8)
             {
-                commentDTO = commentBLL.Select(true);
-                LoadDataGridView.loadComments(dataGridView1, commentDTO);
+                loadDeletedComments();
             }
             else if (cmbDeletedData.SelectedIndex == 9)
             {
