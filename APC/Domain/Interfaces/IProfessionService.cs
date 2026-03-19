@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IProfessionService
     {
         List<ProfessionDTO> GetAll();
+        List<ProfessionDTO> GetAllDeletedProfessions();
         bool Create(Profession profession);
         bool Update(Profession profession);
         bool Delete(int id);

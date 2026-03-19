@@ -42,6 +42,17 @@ namespace APC.Applications.Services
                 }).OrderBy(x => x.ProfessionName)
                 .ToList();
         }
+        
+        public List<ProfessionDTO> GetAllDeletedProfessions()
+        {
+            return _repository.GetAllDeletedProfessions()
+                .Select(x => new ProfessionDTO
+                {
+                    ProfessionId = x.professionID,
+                    ProfessionName = x.profession1
+                }).OrderBy(x => x.ProfessionName)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

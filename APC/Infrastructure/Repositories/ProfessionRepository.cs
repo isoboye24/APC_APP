@@ -37,6 +37,11 @@ namespace APC.Infrastructure.Repositories
         {
             return _db.PROFESSION.Where(x => !x.isDeleted);
         }
+        
+        public IQueryable<PROFESSION> GetAllDeletedProfessions()
+        {
+            return _db.PROFESSION.Where(x => x.isDeleted);
+        }
 
         public bool GetBack(int id)
         {

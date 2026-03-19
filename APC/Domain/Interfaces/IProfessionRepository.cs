@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IProfessionRepository
     {
         IQueryable<PROFESSION> GetAll();
+        IQueryable<PROFESSION> GetAllDeletedProfessions();
         Profession GetById(int id);
         bool Insert(Profession profession);
         bool Update(Profession profession);

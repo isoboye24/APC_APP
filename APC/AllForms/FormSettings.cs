@@ -149,7 +149,13 @@ namespace APC.AllForms
             dataGridViewPermissions.DataSource = _permissionService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewPermissions, SingleColumnGridType.Basic, "PermissionName", "Permissions");
         }
-        
+
+        private void loadDeletedProfessions()
+        {
+            dataGridView1.DataSource = _professionService.GetAllDeletedProfessions();
+            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "ProfessionName", "Professions");
+        }
+
         private void loadPosition()
         {
             dataGridViewPositions.DataSource = _positionService.GetAll();
@@ -782,8 +788,7 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 3)
             {
-                professionDTO = professionBLL.Select(true);
-                LoadDataGridView.loadProfessions(dataGridView1, professionDTO);
+                loadDeletedProfessions();
             }
             else if (cmbDeletedData.SelectedIndex == 4)
             {
