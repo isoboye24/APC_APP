@@ -28,5 +28,9 @@ namespace APC.Domain.Interfaces
         List<DeadMemberShortDetailDTO> GetDeceasedMembers();
 
         int Get3MonthsAbsentesCount();
+        int GetUniqueProfessionCount();
+        int GetUniquePositionCount();
+        int GetUniqueNationalityCount();
+        int GetUniquePermissionCount();
     }
 }

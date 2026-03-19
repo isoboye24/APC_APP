@@ -307,10 +307,10 @@ namespace APC.AllForms
             labelTotalPositions.Text = "Total: " + dataGridViewPositions.RowCount.ToString();
             labelTotalProfessions.Text = "Total: " + dataGridViewProfessions.RowCount.ToString();
 
-            labelTotalProfessionSettingsDashboard.Text = professionBLL.SelectUniqueProfessionCount().ToString();
-            labelTotalPositionSettingsDashboard.Text = positionBLL.SelectUniquePositionCount().ToString();
-            labelTotalNationalitySettingsDashboard.Text = memberBLL.SelectCountUniqueNationality().ToString();
-            labelTotalPermissionSettingsDashboard.Text = permissionBLL.SelectPermittedMembersCount().ToString();
+            labelTotalProfessionSettingsDashboard.Text = _memberService.GetUniqueProfessionCount().ToString();
+            labelTotalPositionSettingsDashboard.Text = _memberService.GetUniquePositionCount().ToString();
+            labelTotalNationalitySettingsDashboard.Text = _memberService.GetUniqueNationalityCount().ToString();
+            labelTotalPermissionSettingsDashboard.Text = _memberService.GetUniquePermissionCount().ToString();
             labelTotalEventSettingsDashboard.Text = eventBLL.SelectEventCount().ToString();
         }
 

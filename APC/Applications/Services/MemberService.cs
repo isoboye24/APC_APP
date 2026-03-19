@@ -121,5 +121,16 @@ namespace APC.Applications.Services
 
             return _repository.Update(member);
         }
+        public int GetUniqueProfessionCount()
+            => _repository.GetUniqueProfessionCount();
+
+        public int GetUniquePositionCount()
+            => _repository.GetUniquePositionCount();
+        
+        public int GetUniqueNationalityCount()
+            => _repository.GetUniqueNationalityCount();
+        
+        public int GetUniquePermissionCount()
+            => _repository.GetUniquePermissionCount();
     }
 }

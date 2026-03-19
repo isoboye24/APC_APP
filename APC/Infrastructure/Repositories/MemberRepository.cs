@@ -210,7 +210,7 @@ namespace APC.Infrastructure.Repositories
                           join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
                           join perm in _db.PERMISSION on m.permissionID equals perm.permissionID
                           join kin in _db.NEXT_OF_KIN_RELATIONSHIP on m.relationshipToKinID equals kin.RelationshipToKinID
-                          join ms in _db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
+                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
                           select new MemberFullDetailsDTO
                           {
                               FirstName = m.name,
@@ -441,6 +441,58 @@ namespace APC.Infrastructure.Repositories
                 .Count();
 
             return count;
+        }
+
+        public int GetUniqueProfessionCount()
+        {
+            return (from m in _db.MEMBER
+                    join ms in _db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
+                    join p in _db.PROFESSION on m.professionID equals p.professionID
+                    where !m.isDeleted
+                          && ms.membershipStatus == "Current"
+                          && !p.isDeleted
+                    select p.profession1)
+                    .Distinct()
+                    .Count();
+        }
+
+        public int GetUniquePositionCount()
+        {
+            return (from m in _db.MEMBER
+                    join ms in _db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
+                    join p in _db.POSITION on m.positionID equals p.positionID
+                    where !m.isDeleted
+                          && ms.membershipStatus == "Current"
+                          && !p.isDeleted
+                    select p.positionName)
+                    .Distinct()
+                    .Count();
+        }
+        
+        public int GetUniqueNationalityCount()
+        {
+            return (from m in _db.MEMBER
+                    join ms in _db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
+                    join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
+                    where !m.isDeleted
+                          && ms.membershipStatus == "Current"
+                          && !n.isDeleted
+                    select n.nationality1)
+                    .Distinct()
+                    .Count();
+        }
+        
+        public int GetUniquePermissionCount()
+        {
+            return (from m in _db.MEMBER
+                    join ms in _db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
+                    join p in _db.PERMISSION on m.permissionID equals p.permissionID
+                    where !m.isDeleted
+                          && ms.membershipStatus == "Current"
+                          && !p.isDeleted
+                    select p.permission1)
+                    .Distinct()
+                    .Count();
         }
     }
 }
