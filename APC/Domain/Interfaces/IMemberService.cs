@@ -20,7 +20,7 @@ namespace APC.Domain.Interfaces
         int Count();
         AuthenticationDTO Authenticate(string username, string password);
 
-        List<Member> GetAllDeleted();
+        List<MembersBasicDetailDTO> GetAllDeletedMembers();
         List<MemberFullDetailsDTO> GetFullMemberDetails();
         List<BirthdayMembersDTO> GetBirthdayMembers(int month);
         List<MembersBasicDetailDTO> GetInactiveMembers();

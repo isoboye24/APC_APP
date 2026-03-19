@@ -18,7 +18,7 @@ namespace APC.Domain.Interfaces
         bool Exists(string firstName, string lastName);
         MEMBER GetByUsername(string username);
         int Count();
-        List<Member> GetAllDeleted();
+        List<MembersBasicDetailDTO> GetAllDeletedMembers();
         List<MemberFullDetailsDTO> GetFullMemberDetails();
         List<BirthdayMembersDTO> GetBirthdayMembers(int month);
         List<MembersBasicDetailDTO> GetInactiveMembers();

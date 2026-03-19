@@ -54,8 +54,8 @@ namespace APC.Applications.Services
         public List<Member> GetAll()
             => _repository.GetAll();
 
-        public List<Member> GetAllDeleted()
-            => _repository.GetAllDeleted();
+        public List<MembersBasicDetailDTO> GetAllDeletedMembers()
+            => _repository.GetAllDeletedMembers();
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

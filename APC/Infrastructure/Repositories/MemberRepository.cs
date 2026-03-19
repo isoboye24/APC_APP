@@ -1,9 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.DAL;
-using APC.DAL.DTO;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
-using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,72 +103,24 @@ namespace APC.Infrastructure.Repositories
             }).ToList();
         }
 
-        public List<Member> GetAllDeleted()
+        public List<MembersBasicDetailDTO> GetAllDeletedMembers()
         {
-            var data = _db.MEMBER
-                .Where(x => x.isDeleted)
-                .ToList();
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted)
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          join p in _db.POSITION on m.positionID equals p.positionID
+                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
+                          select new MembersBasicDetailDTO
+                          {
+                              MemberId = m.memberID,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Nationality = n.nationality1,
+                              Position = p.positionName,
+                              Gender = g.genderName,
+                              ImagePath = m.imagePath,
+                          });
 
-            return data.Select(x =>
-            {
-                var authentication = new MemberAuthentication(
-                    x.username,
-                    x.password
-                );
-
-                var personalInfo = new PersonalInfo(
-                    x.name,
-                    x.surname,
-                    x.birthday,
-                    x.imagePath,
-                    x.genderID
-                );
-
-                var contactInfo = new ContactInfo(
-                    x.emailAddress,
-                    x.houseAddress,
-                    x.phoneNumber,
-                    x.phoneNumber2,
-                    x.phoneNumber3
-                );
-
-                var membershipInfo = new MembershipInfo(
-                    x.membershipDate,
-                    x.membershipStatusID,
-                    x.positionID,
-                    x.permissionID
-                );
-
-                var demographicInfo = new DemographicInfo(
-                    x.countryID,
-                    x.nationalityID,
-                    x.professionID,
-                    x.employmentStatusID,
-                    x.maritalStatusID,
-                    x.LGAOfCountryOrigin
-                );
-
-                var emergencyContact = new EmergencyContact(
-                    x.nextOfKin,
-                    x.relationshipToKinID
-                );
-
-                var lifeStatus = new LifeStatus(
-                    x.deadDate
-                );
-
-                return Member.Rehydrate(
-                    x.memberID,
-                    authentication,
-                    personalInfo,
-                    contactInfo,
-                    membershipInfo,
-                    demographicInfo,
-                    emergencyContact,
-                    lifeStatus
-                );
-
-            }).ToList();
+            return member.ToList();
         }
 
         public bool GetBack(int id)

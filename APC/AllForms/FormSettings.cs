@@ -28,6 +28,8 @@ namespace APC.AllForms
         private readonly IProfessionService _professionService;
         private readonly IPaymentStatusService _paymentStatusService;
 
+        private readonly IMemberService _memberService;
+
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
         private List<Applications.DTO.MaritalStatusDTO> _maritalStatusDTO;
@@ -36,10 +38,11 @@ namespace APC.AllForms
         private List<Applications.DTO.PositionDTO> _positionDTO;
         private List<Applications.DTO.ProfessionDTO> _professionDTO;
         private List<Applications.DTO.PaymentStatusDTO> _paymentStatusDTO;
+        private List<Applications.DTO.MembersBasicDetailDTO> _memberBasicDTO;
 
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
             IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService, 
-            IPositionService positionService, IProfessionService professionService, IPaymentStatusService paymentStatusService)
+            IPositionService positionService, IProfessionService professionService, IPaymentStatusService paymentStatusService, IMemberService memberService)
         {
             InitializeComponent();
             _countryService = countryService;
@@ -51,10 +54,8 @@ namespace APC.AllForms
             _positionService = positionService;
             _professionService = professionService;
             _paymentStatusService = paymentStatusService;
-        }
-
-        MemberDTO memberDTO = new MemberDTO();
-        MemberBLL memberBLL = new MemberBLL();     
+            _memberService = memberService;
+        }   
         
         EventsBLL eventBLL = new EventsBLL();
 
@@ -185,18 +186,22 @@ namespace APC.AllForms
             ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "ProfessionName", "Professions");
         }
 
+        private void loadDeletedMembers()
+        {
+            dataGridView1.DataSource = _memberService.GetAllDeletedMembers();
+            MemberHelperService.ConfigureMemberGrid(dataGridView1, MemberHelperService.MemberGridType.Basic);
+        }
+
 
 
         private void resizeControls() 
         {
             GeneralHelper.ApplyBoldFont(14,
                 label1, label2, label3, label4, label5, label6, label7, label8,
-                label9, label10, label11, label12, label13, label14, label15, label16, label17, label19,
-                btnAddCountry, btnUpdateCountry, btnDeleteCountry, btnAddEmpStatus, btnUpdateEmpStatus,
-                btnDeleteEmpStatus, btnAddMarStatus, btnUpdateMarStatus, btnDeleteMarStatus, btnAddNationality,
-                btnUpdateNationality, btnDeleteNationality, btnDeletePermissions, btnAddPositions, btnUpdatePositions, btnDeletePositions,
-                btnAddProfessions, btnUpdateProfessions, btnDeleteProfessions, labelName, labelSurname, labelAccessLevel,
-                labelPosition, cmbDeletedData, btnRetrieve
+                label9, label10, label11, label12, label16, label19, btnAddCountry, btnUpdateCountry, btnDeleteCountry,
+                 btnAddEmpStatus, btnUpdateEmpStatus, btnDeleteEmpStatus, btnAddMarStatus, btnUpdateMarStatus, btnDeleteMarStatus, 
+                 btnAddNationality, btnAddProfessions, btnUpdateProfessions, btnDeleteProfessions, cmbDeletedData, btnRetrieve
+                btnUpdateNationality, btnDeleteNationality, btnDeletePermissions, btnAddPositions, btnUpdatePositions, btnDeletePositions
                 );
 
             GeneralHelper.ApplyRegularFont(11,
@@ -214,8 +219,6 @@ namespace APC.AllForms
             // Controls sizes
             resizeControls();
 
-            LoadDataGridView.loadMembers(dataGridView1, memberDTO);
-
             loadPaymentStatus();
             loadCountries();
             loadEmploymentStatus();
@@ -224,23 +227,6 @@ namespace APC.AllForms
             loadPosition();
             loadProfession();
             loadPermission();
-
-            #region
-
-            picProfilePic.SizeMode = PictureBoxSizeMode.StretchImage;
-            picProfilePic.BorderStyle = BorderStyle.None;
-            picProfilePic.Width = picProfilePic.Height = 40;
-            picProfilePic.Paint += new PaintEventHandler(picProfilePic_Paint);
-
-            memberDTO = memberBLL.Select();
-            MemberDetailDTO detail = memberDTO.Members.First(x => x.MemberID == AuthenticationDTO.MemberID);
-            string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-            picProfilePic.ImageLocation = imagePath;
-            labelName.Text = detail.Name;
-            labelSurname.Text = detail.Surname;
-            labelAccessLevel.Text = detail.PermissionName;
-            labelPosition.Text = detail.PositionName;
-            #endregion
 
             // Deleted Data
             #region
@@ -794,8 +780,7 @@ namespace APC.AllForms
         {
             if (cmbDeletedData.SelectedIndex == 0)
             {
-                memberDTO = memberBLL.Select(true);
-                LoadDataGridView.loadMembers(dataGridView1, memberDTO);
+                loadDeletedMembers();
             }
             else if (cmbDeletedData.SelectedIndex == 1)
             {
