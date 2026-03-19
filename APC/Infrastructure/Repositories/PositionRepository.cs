@@ -46,6 +46,11 @@ namespace APC.Infrastructure.Repositories
         {
             return _db.POSITION.Where(x => !x.isDeleted);
         }
+        
+        public IQueryable<POSITION> GetAllDeletedPositions()
+        {
+            return _db.POSITION.Where(x => x.isDeleted);
+        }
 
         public Position GetById(int id)
         {

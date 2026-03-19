@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IPositionService
     {
         List<PositionDTO> GetAll();
+        List<PositionDTO> GetAllDeletedPositions();
         bool Create(Position position);
         bool Update(Position position);
         bool Delete(int id);

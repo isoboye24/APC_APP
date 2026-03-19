@@ -41,6 +41,17 @@ namespace APC.Applications.Services
                 }).OrderBy(x => x.PositionName)
                 .ToList();
         }
+        
+        public List<PositionDTO> GetAllDeletedPositions()
+        {
+            return _repository.GetAllDeletedPositions()
+                .Select(x => new PositionDTO
+                {
+                    PositionId = x.positionID,
+                    PositionName = x.positionName
+                }).OrderBy(x => x.PositionName)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

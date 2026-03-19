@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IPositionRepository
     {
         IQueryable<POSITION> GetAll();
+        IQueryable<POSITION> GetAllDeletedPositions();
         Position GetById(int id);
         bool Insert(Position position);
         bool Update(Position position);

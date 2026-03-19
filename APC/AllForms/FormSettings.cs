@@ -155,11 +155,17 @@ namespace APC.AllForms
             dataGridView1.DataSource = _professionService.GetAllDeletedProfessions();
             ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "ProfessionName", "Professions");
         }
+        
 
         private void loadPosition()
         {
             dataGridViewPositions.DataSource = _positionService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewPositions, SingleColumnGridType.Basic, "PositionName", "Positions");
+        }
+        private void loadDeletedPositions()
+        {
+            dataGridView1.DataSource = _positionService.GetAllDeletedPositions();
+            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "PositionName", "Positions");
         }
 
         private void loadProfession()
@@ -792,8 +798,7 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 4)
             {
-                positionDTO = positionBLL.Select(true);
-                LoadDataGridView.loadPositions(dataGridView1, positionDTO);
+                loadDeletedPositions();
             }
             else if (cmbDeletedData.SelectedIndex == 5)
             {
