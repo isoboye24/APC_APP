@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IEmploymentStatusService
     {
         List<EmploymentStatusDTO> GetAll();
+        List<EmploymentStatusDTO> GetAllEmploymentStatuses();
         bool Create(EmploymentStatus employmentStatus);
         bool Update(EmploymentStatus employmentStatus);
         bool Delete(int id);

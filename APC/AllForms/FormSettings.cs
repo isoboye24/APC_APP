@@ -125,7 +125,13 @@ namespace APC.AllForms
             dataGridViewEmpStatus.DataSource = _employmentStatusService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewEmpStatus, SingleColumnGridType.Basic, "EmploymentStatusName", "Employment Statuses");
         }
-        
+
+        private void loadDeletedEmploymentStatuses()
+        {
+            dataGridView1.DataSource = _employmentStatusService.GetAllEmploymentStatuses();
+            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "EmploymentStatusName", "Employment Statuses");
+        }
+
         private void loadMaritalStatus()
         {
             dataGridViewMarStatus.DataSource = _maritalStatusService.GetAll();
@@ -150,13 +156,7 @@ namespace APC.AllForms
             ConfigureSingleColumnGrid(dataGridViewPermissions, SingleColumnGridType.Basic, "PermissionName", "Permissions");
         }
 
-        private void loadDeletedProfessions()
-        {
-            dataGridView1.DataSource = _professionService.GetAllDeletedProfessions();
-            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "ProfessionName", "Professions");
-        }
         
-
         private void loadPosition()
         {
             dataGridViewPositions.DataSource = _positionService.GetAll();
@@ -173,6 +173,12 @@ namespace APC.AllForms
             dataGridViewProfessions.DataSource = _professionService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewProfessions, SingleColumnGridType.Basic, "ProfessionName", "Professions");
         }
+        private void loadDeletedProfessions()
+        {
+            dataGridView1.DataSource = _professionService.GetAllDeletedProfessions();
+            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "ProfessionName", "Professions");
+        }
+
 
 
         private void resizeControls() 
@@ -802,8 +808,7 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 5)
             {
-                empStatusDTO = empStatusBLL.Select(true);
-                LoadDataGridView.loadEmploymentStatuses(dataGridView1, empStatusDTO);
+                loadDeletedEmploymentStatuses();
             }
             else if (cmbDeletedData.SelectedIndex == 6)
             {

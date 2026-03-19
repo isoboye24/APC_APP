@@ -38,9 +38,12 @@ namespace APC.Infrastructure.Repositories
 
         public IQueryable<EMPLOYMENT_STATUS> GetAll()
         {
-            return _db.EMPLOYMENT_STATUS
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.employmentStatus);
+            return _db.EMPLOYMENT_STATUS.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<EMPLOYMENT_STATUS> GetAllEmploymentStatuses()
+        {
+            return _db.EMPLOYMENT_STATUS.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)

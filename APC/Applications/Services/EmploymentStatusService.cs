@@ -39,7 +39,18 @@ namespace APC.Applications.Services
                 {
                     EmploymentStatusId = x.employmentStatusID,
                     EmploymentStatusName = x.employmentStatus
-                })
+                }).OrderBy(x => x.EmploymentStatusName)
+                .ToList();
+        }
+
+        public List<EmploymentStatusDTO> GetAllEmploymentStatuses()
+        {
+            return _repository.GetAllEmploymentStatuses()
+                .Select(x => new EmploymentStatusDTO
+                {
+                    EmploymentStatusId = x.employmentStatusID,
+                    EmploymentStatusName = x.employmentStatus
+                }).OrderBy(x => x.EmploymentStatusName)
                 .ToList();
         }
 
