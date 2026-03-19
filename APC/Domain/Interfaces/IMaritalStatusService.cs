@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IMaritalStatusService
     {
         List<MaritalStatusDTO> GetAll();
+        List<MaritalStatusDTO> GetAllMaritalStatuses();
         bool Create(MaritalStatus maritalStatus);
         bool Update(MaritalStatus maritalStatus);
         bool Delete(int id);

@@ -8,6 +8,7 @@ namespace APC.Domain.Interfaces
     public interface IMaritalStatusRepository
     {
         IQueryable<MARITAL_STATUS> GetAll();
+        IQueryable<MARITAL_STATUS> GetAllMaritalStatuses();
         MaritalStatus GetById(int id);
         bool Insert(MaritalStatus status);
         bool Update(MaritalStatus status);

@@ -39,6 +39,11 @@ namespace APC.Infrastructure.Repositories
             return _db.MARITAL_STATUS.Where(x => !x.isDeleted);
         }
 
+        public IQueryable<MARITAL_STATUS> GetAllMaritalStatuses()
+        {
+            return _db.MARITAL_STATUS.Where(x => x.isDeleted);
+        }
+
         public bool GetBack(int id)
         {
             var entity = _db.MARITAL_STATUS.First(x => x.maritalStatusID == id);

@@ -38,6 +38,17 @@ namespace APC.Applications.Services
                 }).OrderBy(x => x.MaritalStatusName)
                 .ToList();
         }
+        
+        public List<MaritalStatusDTO> GetAllMaritalStatuses()
+        {
+            return _repository.GetAllMaritalStatuses()
+                .Select(x => new MaritalStatusDTO
+                {
+                    MaritalStatusId = x.maritalStatusID,
+                    MaritalStatusName = x.maritalStatus
+                }).OrderBy(x => x.MaritalStatusName)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

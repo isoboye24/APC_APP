@@ -113,7 +113,6 @@ namespace APC.AllForms
             dataGridViewCountry.DataSource = _countryService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewCountry, SingleColumnGridType.Basic, "CountryName", "Countries");
         }
-
         private void loadDeletedCountries()
         {
             dataGridView1.DataSource = _countryService.GetAllDeletedCountries();
@@ -125,7 +124,6 @@ namespace APC.AllForms
             dataGridViewEmpStatus.DataSource = _employmentStatusService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewEmpStatus, SingleColumnGridType.Basic, "EmploymentStatusName", "Employment Statuses");
         }
-
         private void loadDeletedEmploymentStatuses()
         {
             dataGridView1.DataSource = _employmentStatusService.GetAllEmploymentStatuses();
@@ -137,13 +135,17 @@ namespace APC.AllForms
             dataGridViewMarStatus.DataSource = _maritalStatusService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewMarStatus, SingleColumnGridType.Basic, "MaritalStatusName", "Marital Statuses");
         }
-        
+        private void loadDeletedMaritalStatuses()
+        {
+            dataGridView1.DataSource = _maritalStatusService.GetAllMaritalStatuses();
+            ConfigureSingleColumnGrid(dataGridView1, SingleColumnGridType.Basic, "MaritalStatusName", "Marital Statuses");
+        }
+
         private void loadNationality()
         {
             dataGridViewNationality.DataSource = _nationalityService.GetAll();
             ConfigureSingleColumnGrid(dataGridViewNationality, SingleColumnGridType.Basic, "NationalityName", "Nationalities");
         }
-        
         private void loadDeletedNationalities()
         {
             dataGridView1.DataSource = _nationalityService.GetAllDeletedNationalities();
@@ -156,7 +158,6 @@ namespace APC.AllForms
             ConfigureSingleColumnGrid(dataGridViewPermissions, SingleColumnGridType.Basic, "PermissionName", "Permissions");
         }
 
-        
         private void loadPosition()
         {
             dataGridViewPositions.DataSource = _positionService.GetAll();
@@ -808,12 +809,11 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 5)
             {
-                loadDeletedEmploymentStatuses();
+                loadDeletedEmploymentStatuses();                
             }
             else if (cmbDeletedData.SelectedIndex == 6)
             {
-                marStatusDTO = marStatusBLL.Select(true);
-                LoadDataGridView.loadMaritalStatuses(dataGridView1, marStatusDTO);
+                loadDeletedMaritalStatuses();
             }
             else if (cmbDeletedData.SelectedIndex == 8)
             {
