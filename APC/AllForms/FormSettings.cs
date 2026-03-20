@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using static APC.Helper.SingleColumnHelper;
@@ -31,6 +29,7 @@ namespace APC.AllForms
         private readonly IMemberService _memberService;
         private readonly ICommentService _commentService;
         private readonly IDocumentService _documentService;
+        private readonly IEventImagesRepository _eventImagesService;
 
         private List<CountryDTO> _countryDTO;
         private List<Applications.DTO.EmploymentStatusDTO> _employmentStatusDTO;
@@ -41,11 +40,12 @@ namespace APC.AllForms
         private List<Applications.DTO.ProfessionDTO> _professionDTO;
         private List<Applications.DTO.PaymentStatusDTO> _paymentStatusDTO;
         private List<Applications.DTO.MembersBasicDetailDTO> _memberBasicDTO;
+        private List<Applications.DTO.EventImageDTO> _eventImagesDTO;
 
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
             IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService, 
             IPositionService positionService, IProfessionService professionService, IPaymentStatusService paymentStatusService, 
-            IMemberService memberService, ICommentService commentService, IDocumentService documentService)
+            IMemberService memberService, ICommentService commentService, IDocumentService documentService, IEventImagesRepository eventImagesService)
         {
             InitializeComponent();
             _countryService = countryService;
@@ -60,15 +60,13 @@ namespace APC.AllForms
             _memberService = memberService;
             _commentService = commentService;
             _documentService = documentService;
+            _eventImagesService = eventImagesService;
         }   
         
         EventsBLL eventBLL = new EventsBLL();
 
         MemberDetailDTO permissionDetail = new MemberDetailDTO();
         MemberBLL permissionMemberBLL = new MemberBLL();
-
-        EventImageDTO eventImageDTO = new EventImageDTO();
-        EventImageBLL eventImageBLL = new EventImageBLL();
 
         EventsDTO eventsDTO = new EventsDTO();
         EventsBLL eventsBLL = new EventsBLL();
@@ -199,6 +197,11 @@ namespace APC.AllForms
         {
             dataGridView1.DataSource = _documentService.GetAllDeletedDocuments();
             DocumentHelper.ConfigureDocumentGrid(dataGridView1, DocumentHelper.DocumentGridType.Basic);
+        }
+        private void loadDeletedEventImages()
+        {
+            dataGridView1.DataSource = _eventImagesService.GetAllDeletedEventImages();
+            EventsHelper.ConfigureEventsGrid(dataGridView1, EventsHelper.EventsGridType.Images);
         }
 
 
@@ -812,12 +815,11 @@ namespace APC.AllForms
             }
             else if (cmbDeletedData.SelectedIndex == 9)
             {
-                loadDeletedDocuments();
+                loadDeletedDocuments();                
             }
             else if (cmbDeletedData.SelectedIndex == 10)
             {
-                eventImageDTO = eventImageBLL.Select(true);
-                LoadDataGridView.loadEventImages(dataGridView1, eventImageDTO);
+                loadDeletedEventImages();
             }
             else if (cmbDeletedData.SelectedIndex == 11)
             {
@@ -986,8 +988,7 @@ namespace APC.AllForms
                         if (memberBLL.GetBack(deletedDataDetail))
                         {
                             MessageBox.Show("Member was retrieved");
-                            memberDTO = memberBLL.Select(true);
-                            dataGridView1.DataSource = memberDTO.Members;
+                            loadDeletedMembers();
                         }
                     }
                 }
@@ -1003,8 +1004,7 @@ namespace APC.AllForms
                     if (countryDeletedDataBLL.GetBack(countryDeletedDataDetail))
                     {
                         MessageBox.Show("Country was retrieved");
-                        countryDTO = countryBLL.Select(true);
-                        dataGridView1.DataSource = countryDTO.Countries;
+                        loadDeletedCountries();
                     }
                 }
             }
@@ -1019,8 +1019,7 @@ namespace APC.AllForms
                     if (nationalityDeletedDataBLL.GetBack(nationalityDeletedDataDetail))
                     {
                         MessageBox.Show("Nationality was retrieved");
-                        nationalityDTO = nationalityBLL.Select(true);
-                        dataGridView1.DataSource = nationalityDTO.Nationalities;
+                        loadDeletedNationalities();
                     }
                 }
             }
@@ -1035,8 +1034,7 @@ namespace APC.AllForms
                     if (professionDeletedDataBLL.GetBack(professionDeletedDataDetail))
                     {
                         MessageBox.Show("Profession was retrieved");
-                        professionDTO = professionBLL.Select(true);
-                        dataGridView1.DataSource = professionDTO.Professions;
+                        loadDeletedProfessions();
                     }
                 }
             }
@@ -1051,8 +1049,7 @@ namespace APC.AllForms
                     if (positionDeletedDataBLL.GetBack(positionDeletedDataDetail))
                     {
                         MessageBox.Show("Position was retrieved");
-                        positionDTO = positionBLL.Select(true);
-                        dataGridView1.DataSource = positionDTO.Positions;
+                        loadDeletedPositions();
                     }
                 }
             }
@@ -1067,8 +1064,7 @@ namespace APC.AllForms
                     if (empStatusDeletedDataBLL.GetBack(empStatusDeletedDataDetail))
                     {
                         MessageBox.Show("Employment status was retrieved");
-                        empStatusDTO = empStatusBLL.Select(true);
-                        dataGridView1.DataSource = empStatusDTO.EmploymentStatuses;
+                        loadDeletedEmploymentStatuses();
                     }
                 }
             }
@@ -1083,8 +1079,7 @@ namespace APC.AllForms
                     if (marStatusDeletedDataBLL.GetBack(marStatusDeletedDataDetail))
                     {
                         MessageBox.Show("Marital status was retrieved");
-                        marStatusDTO = marStatusBLL.Select(true);
-                        dataGridView1.DataSource = marStatusDTO.MaritalStatuses;
+                        loadDeletedMaritalStatuses();
                     }
                 }
             }
@@ -1103,8 +1098,7 @@ namespace APC.AllForms
                     else if (commentDeletedDataBLL.GetBack(commentDeletedDataDetail))
                     {
                         MessageBox.Show("Comment was retrieved");
-                        commentDTO = commentBLL.Select(true);
-                        dataGridView1.DataSource = commentDTO.Comments;
+                        loadDeletedComments();
                     }
                 }
             }
@@ -1119,8 +1113,7 @@ namespace APC.AllForms
                     if (documentDeletedDataBLL.GetBack(documentDeletedDataDetail))
                     {
                         MessageBox.Show("Document was retrieved");
-                        documentDTO = documentBLL.Select(true);
-                        dataGridView1.DataSource = documentDTO.Documents;
+                        loadDeletedDocuments();
                     }
                 }
             }

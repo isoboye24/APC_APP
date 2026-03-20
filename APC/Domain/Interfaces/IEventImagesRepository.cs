@@ -1,15 +1,13 @@
-﻿using APC.Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using APC.DAL;
+using APC.Domain.Entities;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
     public interface IEventImagesRepository
     {
-        List<EventImages> GetAll();
+        IQueryable<EVENT_IMAGE> GetAll();
+        IQueryable<EVENT_IMAGE> GetAllDeletedEventImages();
         EventImages GetById(int id);
         bool Insert(EventImages data);
         bool Update(EventImages data);

@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -30,8 +31,38 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<EventImages> GetAll()
-            => _repository.GetAll();
+        public List<EventImageDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .OrderBy(x => x.imageCaption)
+                .Select((x, index) => new EventImageDTO
+                {
+                    Counter = index + 1,
+                    EventImageId = x.eventImageID,
+                    EventId = x.eventID,
+                    Summary = x.summary,
+                    ImagePath = x.imagePath,
+                    ImageCaption = x.imageCaption,
+                })
+                .ToList();
+        }
+
+        public List<EventImageDTO> GetAllDeletedEventImages()
+        {
+            return _repository.GetAllDeletedEventImages()
+                .OrderBy(x => x.imageCaption)
+                .Select((x, index) => new EventImageDTO
+                {
+                    Counter = index + 1,
+                    EventImageId = x.eventImageID,
+                    EventId = x.eventID,
+                    Summary = x.summary,
+                    ImagePath = x.imagePath,
+                    ImageCaption = x.imageCaption,
+                })
+                .ToList();
+        }
+
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

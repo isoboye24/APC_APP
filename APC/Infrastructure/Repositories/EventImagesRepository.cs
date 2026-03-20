@@ -4,9 +4,6 @@ using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -37,22 +34,14 @@ namespace APC.Infrastructure.Repositories
             return _db.EVENT_IMAGE.Any(x => !x.isDeleted && x.eventID == eventId && x.imagePath == imagePath);
         }
 
-        public List<EventImages> GetAll()
+        public IQueryable<EVENT_IMAGE> GetAll()
         {
-            var data = _db.EVENT_IMAGE
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.imageCaption)
-                .ToList();
-
-            return data
-                .Select(x => EventImages.Rehydrate(
-                    x.eventImageID,
-                    x.eventID,
-                    x.summary,
-                    x.imagePath,
-                    x.imageCaption
-                ))
-                .ToList();
+            return _db.EVENT_IMAGE.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<EVENT_IMAGE> GetAllDeletedEventImages()
+        {
+            return _db.EVENT_IMAGE.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)

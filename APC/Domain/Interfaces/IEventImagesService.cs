@@ -1,15 +1,13 @@
-﻿using APC.Domain.Entities;
-using System;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
     public interface IEventImagesService
     {
-        List<EventImages> GetAll();
+        List<EventImageDTO> GetAll();
+        List<EventImageDTO> GetAllDeletedEventImages();
         bool Create(EventImages data);
         bool Update(EventImages data);
         bool Delete(int id);
