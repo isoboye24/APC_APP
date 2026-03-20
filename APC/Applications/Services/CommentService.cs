@@ -49,7 +49,7 @@ namespace APC.Applications.Services
 
             comment.UpdateContent(comment.Content);
             comment.ChangeMember(comment.MemberId);
-            comment.ChangeDate(comment.Day, comment.MonthId, comment.Year);
+            comment.ChangeDate(comment.Date);
 
             return _repository.Update(comment);
         }

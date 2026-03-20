@@ -1,23 +1,30 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
+using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
     public partial class FormViewComment : Form
     {
-        public FormViewComment()
+        private string _firstName;
+        private string _lastName;
+        private string _imagePath;
+        private string _content;
+        private string _formattedDate;
+
+        public FormViewComment(CommentDTO dto)
         {
             InitializeComponent();
+
+            _firstName = dto.FirstName;
+            _lastName = dto.LastName;
+            _imagePath = dto.ImagePath;
+            _content = dto.Content;
+            _formattedDate = dto.FormattedDate;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -37,30 +44,24 @@ namespace APC.AllForms
         {
             this.Close();
         }
-        public CommentDetailDTO detail = new CommentDetailDTO();
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label3, label5, labelTitle, btnClose);
+            GeneralHelper.ApplyBoldFont(21, label6, labelDate, txtComment, txtName, txtSurname);
+        }
+        
         private void FormViewComment_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 21, FontStyle.Bold);
-            labelDate.Font = new Font("Segoe UI", 21, FontStyle.Bold);
+            resizeControls();
 
-            txtComment.Font = new Font("Segoe UI", 21, FontStyle.Bold);
-            txtName.Font = new Font("Segoe UI", 21, FontStyle.Bold);
-            txtSurname.Font = new Font("Segoe UI", 21, FontStyle.Bold);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
-
-            txtName.Text = detail.Name;
-            txtSurname.Text = detail.Surname;
-            txtComment.Text = detail.CommentName;
-            string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+            txtName.Text = _firstName;
+            txtSurname.Text = _lastName;
+            txtComment.Text = _content;
+            string imagePath = Application.StartupPath + "\\images\\" + _imagePath;
             picProfilePic.ImageLocation = imagePath;
-            labelDate.Text = detail.Day.ToString() + "/" + detail.MonthID.ToString() + "/" + detail.Year;
-            labelTitle.Text = detail.Surname + " " + detail.Name + "'s comment";
+            labelDate.Text = _formattedDate;
+            labelTitle.Text = _firstName + " " + _lastName + "'s comment";
         }        
     }
 }

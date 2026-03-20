@@ -11,26 +11,22 @@ namespace APC.Domain.Entities
         public int CommentId { get; private set; }
         public string Content { get; private set; }
         public int MemberId { get; private set; }
-        public int Day { get; private set; }
-        public int MonthId { get; private set; }
-        public int Year { get; private set; }
+        public DateTime Date { get; private set; }
 
-        public Comment(string content, int memberId, int day, int monthId, int year)
+        public Comment(string content, int memberId, DateTime date)
         {
             SetContent(content);
             SetMember(memberId);
-            SetDate(day, monthId, year);
+            SetDate(date);
         }
 
         public static Comment Rehydrate(
             int id,
             string content,
             int memberId,
-            int day,
-            int monthId,
-            int year)
+            DateTime date)
         {
-            var comment = new Comment(content, memberId, day, monthId, year);
+            var comment = new Comment(content, memberId, date);
             comment.CommentId = id;
             return comment;
         }
@@ -61,25 +57,18 @@ namespace APC.Domain.Entities
             SetMember(newMemberId);
         }
 
-        private void SetDate(int day, int monthId, int year)
+        private void SetDate(DateTime date)
         {
-            if (day < 1 || day > 31)
-                throw new ArgumentException("Invalid day");
-
-            if (monthId < 1 || monthId > 12)
-                throw new ArgumentException("Invalid month");
-
-            if (year < 2000 || year > DateTime.Now.Year + 1)
+            
+            if (date.Year < 2000 || date.Year > DateTime.Now.Year + 1)
                 throw new ArgumentException("Invalid year");
 
-            Day = day;
-            MonthId = monthId;
-            Year = year;
+            Date = date;
         }
 
-        public void ChangeDate(int day, int monthId, int year)
+        public void ChangeDate(DateTime newDate)
         {
-            SetDate(day, monthId, year);
+            SetDate(newDate);
         }
     }
 }

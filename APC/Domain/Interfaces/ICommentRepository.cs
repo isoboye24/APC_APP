@@ -9,7 +9,7 @@ namespace APC.Domain.Interfaces
     {
         List<CommentDTO> GetAll();
         List<CommentDTO> GetAllDeletedComments();
-        Comment GetById(int id);
+        CommentDTO GetById(int id);
         bool Insert(Comment comment);
         bool Update(Comment comment);
         bool Delete(int id);

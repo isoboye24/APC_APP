@@ -5,7 +5,6 @@ using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -48,6 +47,7 @@ namespace APC.Infrastructure.Repositories
                               Content = c.comment1,
                               FirstName = m.name,
                               LastName = m.surname,
+                              GenderId = m.genderID,
                               Gender = g.genderName,
                               ImagePath = m.imagePath,
                               Date = new DateTime(c.year, c.monthID, c.day),
@@ -70,6 +70,7 @@ namespace APC.Infrastructure.Repositories
                               FirstName = m.name,
                               LastName = m.surname,
                               Gender = g.genderName,
+                              GenderId = m.genderID,
                               ImagePath = m.imagePath,
                               Date = new DateTime(c.year, c.monthID, c.day),
                               FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
@@ -87,32 +88,24 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public Comment GetById(int id)
+        public CommentDTO GetById(int id)
         {
-            var entity = _db.COMMENT
-                .Where(x => x.commentID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.commentID,
-                    x.comment1,
-                    x.memberID,
-                    x.day,
-                    x.monthID,
-                    x.year
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return Comment.Rehydrate(
-                entity.commentID,
-                entity.comment1,
-                entity.memberID,
-                entity.day,
-                entity.monthID,
-                entity.year
-            );
+           return (from c in _db.COMMENT.Where(x => !x.isDeleted && x.commentID == id)
+             join m in _db.MEMBER on c.memberID equals m.memberID
+             join g in _db.GENDER on m.genderID equals g.genderID
+             select new CommentDTO
+             {
+                 CommentId = c.commentID,
+                 MemberId = c.memberID,
+                 Content = c.comment1,
+                 FirstName = m.name,
+                 LastName = m.surname,
+                 GenderId = m.genderID,
+                 Gender = g.genderName,
+                 ImagePath = m.imagePath,
+                 Date = new DateTime(c.year, c.monthID, c.day),
+                 FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
+             }).FirstOrDefault();
         }
         
 
@@ -122,9 +115,9 @@ namespace APC.Infrastructure.Repositories
             {
                 comment1 = comment.Content,
                 memberID = comment.MemberId,
-                day = comment.Day,
-                monthID = comment.MonthId,
-                year = comment.Year
+                day = comment.Date.Day,
+                monthID = comment.Date.Month,
+                year = comment.Date.Year
             });
 
             _db.SaveChanges();
@@ -149,9 +142,9 @@ namespace APC.Infrastructure.Repositories
             var entity = _db.COMMENT.First(x => x.commentID == comment.CommentId);
             entity.comment1 = comment.Content;
             entity.memberID = comment.MemberId;
-            entity.day = comment.Day;
-            entity.monthID = comment.MonthId;
-            entity.year = comment.Year;
+            entity.day = comment.Date.Day;
+            entity.monthID = comment.Date.Month;
+            entity.year = comment.Date.Year;
             _db.SaveChanges();
             return true;
         }

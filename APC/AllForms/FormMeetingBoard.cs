@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Services;
 using APC.BLL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
 using APC.Domain.Interfaces;
 using APC.Helper;
@@ -20,6 +21,9 @@ namespace APC.AllForms
         private readonly ICommentService _commentService;
         private readonly IGenderService _genderService;
         private readonly IMonthService _monthService;
+
+        private List<Applications.DTO.CommentDTO> _commentDTO;
+
         public FormMeetingBoard(ICommentService commentService, IGenderService genderService, IMemberService memberService, 
             IMonthService monthService)
         {
@@ -412,9 +416,7 @@ namespace APC.AllForms
             txtYearComments.Clear();
             cmbGenderComments.SelectedIndex = -1;
             cmbMonthComments.SelectedIndex = -1;
-            commentBLL = new CommentBLL();
-            commentDTO = commentBLL.Select();
-            dataGridViewComments.DataSource = commentDTO.Comments;
+            loadComments();
 
             txtConstitution.Clear();
             txtSection.Clear();
@@ -508,15 +510,15 @@ namespace APC.AllForms
 
         private void btnUpdateComments_Click(object sender, EventArgs e)
         {
-            var selected = GetSelectedCountry();
+            var selected = GetSelectedComment();
             if (selected == null)
             {
                 MessageBox.Show("Please select a country from the table");
                 return;
             }
 
-            var form = new FormCountry(_countryService);
-            form.LoadForEdit(selected.CountryId, selected.CountryName, true);
+            var form = new FormComments(_commentService, _memberService);
+            form.LoadForEdit(selected.CommentId, selected.Content, selected.MemberId, selected.Date, true);
             form.ShowDialog();
 
             ClearFilters();
@@ -524,66 +526,92 @@ namespace APC.AllForms
 
         private void btnViewComments_Click(object sender, EventArgs e)
         {
-            if (commentDetail.CommentID == 0)
+            var selected = GetSelectedComment();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a comment from the table.");
+                MessageBox.Show("Please select a country from the table");
+                return;
             }
-            else
-            {
-                FormViewComment open = new FormViewComment();
-                open.detail = commentDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormViewComment(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void txtSurnameComments_TextChanged(object sender, EventArgs e)
         {
-            List<CommentDetailDTO> list = commentDTO.Comments;
-            list = list.Where(x => x.Surname.Contains(txtSurnameComments.Text.Trim())).ToList();
-            dataGridViewComments.DataSource = list;
+            string search = txtSurnameComments.Text.Trim().ToLower();
+            var filtered = _commentDTO.Where(x => x.LastName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewComments.DataSource = filtered;
         }
 
         private void txtNameComments_TextChanged(object sender, EventArgs e)
         {
-            List<CommentDetailDTO> list = commentDTO.Comments;
-            list = list.Where(x => x.Name.Contains(txtNameComments.Text.Trim())).ToList();
-            dataGridViewComments.DataSource = list;
-        }
-
-        private void txtYearComments_TextChanged(object sender, EventArgs e)
-        {
-            List<CommentDetailDTO> list = commentDTO.Comments;
-            list = list.Where(x => x.Year.Contains(txtYearComments.Text.Trim())).ToList();
-            dataGridViewComments.DataSource = list;            
+            string search = txtNameComments.Text.Trim().ToLower();
+            var filtered = _commentDTO.Where(x => x.FirstName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewComments.DataSource = filtered;
         }
 
         private void txtComment_TextChanged(object sender, EventArgs e)
         {
-            List<CommentDetailDTO> list = commentDTO.Comments;
-            list = list.Where(x => x.CommentName.Contains(txtComment.Text.Trim())).ToList();
-            dataGridViewComments.DataSource = list;
+            string search = txtComment.Text.Trim().ToLower();
+            var filtered = _commentDTO.Where(x => x.Content.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewComments.DataSource = filtered;
         }
 
         private void btnSearchComments_Click(object sender, EventArgs e)
         {
-            List<CommentDetailDTO> list = commentDTO.Comments;
+            var filtered = _commentDTO.AsQueryable();
+
             if (cmbGenderComments.SelectedIndex != -1)
             {
-                list = list.Where(x => x.GenderID == Convert.ToInt32(cmbGenderComments.SelectedValue)).ToList();
+                int searchedGender = Convert.ToInt32(cmbGenderComments.SelectedValue);
+                filtered = filtered.Where(x => x.GenderId == searchedGender);
             }
+
+            if (cmbYearComments.SelectedIndex == -1 && cmbMonthComments.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a year or month");
+                return;
+            }
+
+            if (cmbYearComments.SelectedIndex != -1)
+            {
+                int searchedYear = Convert.ToInt32(cmbYearComments.SelectedValue);
+                filtered = filtered.Where(x => x.Date.Year == searchedYear);
+            }
+
             if (cmbMonthComments.SelectedIndex != -1)
             {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthComments.SelectedValue)).ToList();
+                int searchedMonth = Convert.ToInt32(cmbMonthComments.SelectedValue);
+                filtered = filtered.Where(x => x.Date.Month == searchedMonth);
             }
-            dataGridViewComments.DataSource = list;
+
+            dataGridViewComments.DataSource = filtered.ToList();
         }
 
         private void btnClearComments_Click(object sender, EventArgs e)
         {
             ClearFilters();
+        }
+
+        private void btnDeleteComments_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedComment();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a task.");
+                return;
+            }
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                _commentService.Delete(selected.CommentId);
+                ClearFilters();
+            }
         }
 
         // -------------------------------------------------------------------------
@@ -927,5 +955,6 @@ namespace APC.AllForms
                 }
             }
         }
+
     }
 }

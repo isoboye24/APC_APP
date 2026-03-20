@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.meetingsPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -108,7 +108,6 @@
             this.txtSurnameComments = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtYearComments = new System.Windows.Forms.TextBox();
             this.cmbMonthComments = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddComments = new System.Windows.Forms.Button();
@@ -171,6 +170,7 @@
             this.txtSection = new System.Windows.Forms.TextBox();
             this.txtFine = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
+            this.cmbYearComments = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.meetingsPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -664,8 +664,8 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.RowTemplate.Height = 40;
             this.dataGridView1.Size = new System.Drawing.Size(1201, 454);
@@ -1114,8 +1114,8 @@
             this.dataGridViewSpecialContributions.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewSpecialContributions.Name = "dataGridViewSpecialContributions";
             this.dataGridViewSpecialContributions.RowHeadersWidth = 51;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewSpecialContributions.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewSpecialContributions.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewSpecialContributions.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewSpecialContributions.RowTemplate.Height = 40;
             this.dataGridViewSpecialContributions.Size = new System.Drawing.Size(1209, 459);
@@ -1177,8 +1177,8 @@
             this.tableLayoutPanel7.Controls.Add(this.txtSurnameComments, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.label9, 4, 0);
             this.tableLayoutPanel7.Controls.Add(this.label10, 4, 2);
-            this.tableLayoutPanel7.Controls.Add(this.txtYearComments, 5, 2);
             this.tableLayoutPanel7.Controls.Add(this.cmbMonthComments, 5, 0);
+            this.tableLayoutPanel7.Controls.Add(this.cmbYearComments, 5, 2);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(29, 10);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4);
@@ -1339,17 +1339,6 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "Year";
             // 
-            // txtYearComments
-            // 
-            this.txtYearComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtYearComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYearComments.Location = new System.Drawing.Point(868, 50);
-            this.txtYearComments.Margin = new System.Windows.Forms.Padding(4);
-            this.txtYearComments.Name = "txtYearComments";
-            this.txtYearComments.Size = new System.Drawing.Size(184, 34);
-            this.txtYearComments.TabIndex = 1;
-            this.txtYearComments.TextChanged += new System.EventHandler(this.txtYearComments_TextChanged);
-            // 
             // cmbMonthComments
             // 
             this.cmbMonthComments.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1435,6 +1424,7 @@
             this.btnDeleteComments.TabIndex = 2;
             this.btnDeleteComments.Text = "Delete";
             this.btnDeleteComments.UseVisualStyleBackColor = false;
+            this.btnDeleteComments.Click += new System.EventHandler(this.btnDeleteComments_Click);
             // 
             // btnViewComments
             // 
@@ -1484,13 +1474,12 @@
             this.dataGridViewComments.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewComments.Name = "dataGridViewComments";
             this.dataGridViewComments.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewComments.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewComments.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewComments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewComments.RowTemplate.Height = 40;
             this.dataGridViewComments.Size = new System.Drawing.Size(1201, 463);
             this.dataGridViewComments.TabIndex = 0;
-            this.dataGridViewComments.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewComments_RowEnter);
             // 
             // finedMemberPage
             // 
@@ -1660,8 +1649,8 @@
             this.dataGridViewFinedMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewFinedMembers.Name = "dataGridViewFinedMembers";
             this.dataGridViewFinedMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewFinedMembers.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewFinedMembers.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewFinedMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewFinedMembers.RowTemplate.Height = 40;
             this.dataGridViewFinedMembers.Size = new System.Drawing.Size(1209, 401);
@@ -2139,8 +2128,8 @@
             this.dataGridViewConstitution.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewConstitution.Name = "dataGridViewConstitution";
             this.dataGridViewConstitution.RowHeadersWidth = 51;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewConstitution.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewConstitution.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewConstitution.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewConstitution.RowTemplate.Height = 40;
             this.dataGridViewConstitution.Size = new System.Drawing.Size(1209, 469);
@@ -2286,6 +2275,17 @@
             this.label21.TabIndex = 0;
             this.label21.Text = "Fine";
             // 
+            // cmbYearComments
+            // 
+            this.cmbYearComments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbYearComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbYearComments.FormattingEnabled = true;
+            this.cmbYearComments.Location = new System.Drawing.Point(868, 50);
+            this.cmbYearComments.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbYearComments.Name = "cmbYearComments";
+            this.cmbYearComments.Size = new System.Drawing.Size(184, 36);
+            this.cmbYearComments.TabIndex = 4;
+            // 
             // FormMeetingBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2405,7 +2405,6 @@
         private System.Windows.Forms.TextBox txtSurnameComments;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtYearComments;
         private System.Windows.Forms.ComboBox cmbMonthComments;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.Button btnAddComments;
@@ -2499,5 +2498,6 @@
         private System.Windows.Forms.Label labelOverallTotalContributions;
         private System.Windows.Forms.ComboBox txtYearContribution;
         private System.Windows.Forms.ComboBox cmbYearMeeting;
+        private System.Windows.Forms.ComboBox cmbYearComments;
     }
 }

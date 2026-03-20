@@ -3,7 +3,7 @@ using APC.DAL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
 using APC.Domain.Interfaces;
-using APC.HelperServices;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +24,8 @@ namespace APC
         private readonly IMemberService _memberService;
 
         private int _commentId = 0;
+        private int _memberId = 0;
+        private DateTime _date = DateTime.Today;
         private bool _isUpdate = false;
 
         public FormComments(ICommentService commentService, IMemberService memberService)
@@ -54,9 +56,14 @@ namespace APC
         {
 
         }
-        CommentDTO dto = new CommentDTO();
-        CommentBLL bll = new CommentBLL();
-        public CommentDetailDTO detail = new CommentDetailDTO();
+        public void LoadForEdit(int commentId, string content, int memberId, DateTime date, bool isUpdate)
+        {
+            _commentId = commentId;
+            txtComment.Text = content;
+            _memberId = memberId;
+            _date = date;
+            _isUpdate = isUpdate;
+        }
 
         MemberDetailDTO memberDetail = new MemberDetailDTO();
         MemberBLL memberBLL = new MemberBLL();
