@@ -1,15 +1,12 @@
-﻿using APC.Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using APC.DAL;
+using APC.Domain.Entities;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
     public interface IGenderRepository
     {
-        List<Gender> GetAll();
+        IQueryable<GENDER> GetAll();
         Gender GetById(int id);
     }
 }

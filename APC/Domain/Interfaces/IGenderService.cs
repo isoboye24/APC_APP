@@ -1,14 +1,10 @@
-﻿using APC.Domain.Entities;
-using System;
+﻿using APC.Applications.DTO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Interfaces
 {
     public interface IGenderService
     {
-        List<Gender> GetAll();
+        List<GenderDTO> GetAll();
     }
 }

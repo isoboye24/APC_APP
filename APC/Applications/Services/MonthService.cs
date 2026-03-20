@@ -1,22 +1,28 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
 using APC.Domain.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Services
 {
     public class MonthService : IMonthService
     {
-        private readonly IMonthService _repository;
-        public MonthService(IMonthService repository)
+        private readonly IMonthRepository _repository;
+        public MonthService(IMonthRepository repository)
         {
             _repository = repository;
         }
 
-        public List<Month> GetAll()
-            => _repository.GetAll();
+        public List<MonthDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .Select(x => new MonthDTO
+                {
+                    MonthId = x.monthID,
+                    MonthName = x.monthName
+                })
+                .OrderBy(x => x.MonthName)
+                .ToList();
+        }
     }
 }

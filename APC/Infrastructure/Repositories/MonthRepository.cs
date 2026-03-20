@@ -1,11 +1,7 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -16,18 +12,9 @@ namespace APC.Infrastructure.Repositories
         {
             _db = db;
         }
-        public List<Month> GetAll()
+        public IQueryable<MONTH> GetAll()
         {
-            var data = _db.MONTH
-                .OrderBy(x => x.monthID)
-                .ToList();
-
-            return data
-                .Select(x => Month.Rehydrate(
-                    x.monthID,
-                    x.monthName
-                ))
-                .ToList();
+            return _db.MONTH;
         }
 
         public Month GetById(int id)

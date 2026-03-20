@@ -2,6 +2,7 @@
 using APC.DAL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
+using APC.Domain.Interfaces;
 using APC.HelperServices;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,17 @@ namespace APC
 {
     public partial class FormComments : Form
     {
-        public FormComments()
+        private readonly ICommentService _commentService;
+        private readonly IMemberService _memberService;
+
+        private int _commentId = 0;
+        private bool _isUpdate = false;
+
+        public FormComments(ICommentService commentService, IMemberService memberService)
         {
             InitializeComponent();
+            _commentService = commentService;
+            _memberService = memberService;
         }
         /// <summary>
         ///  Drag

@@ -1,11 +1,7 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
 using APC.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -17,18 +13,9 @@ namespace APC.Infrastructure.Repositories
             _db = db;
         }
 
-        public List<Gender> GetAll()
+        public IQueryable<GENDER> GetAll()
         {
-            var data = _db.GENDER
-                .OrderBy(x => x.genderID)
-                .ToList();
-
-            return data
-                .Select(x => Gender.Rehydrate(
-                    x.genderID,
-                    x.genderName
-                ))
-                .ToList();
+            return _db.GENDER;
         }
 
         public Gender GetById(int id)

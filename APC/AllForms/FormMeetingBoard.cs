@@ -1,35 +1,37 @@
-﻿using APC.AllForms;
+﻿using APC.Applications.DTO;
+using APC.Applications.Services;
 using APC.BLL;
 using APC.DAL.DTO;
-using APC.HelperServices;
-using APC.Utility;
+using APC.Domain.Interfaces;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
+using static APC.Helper.SingleColumnHelper;
 
 namespace APC.AllForms
 {
     public partial class FormMeetingBoard : Form
     {
-        public FormMeetingBoard()
+        private readonly IMemberService _memberService;
+        private readonly ICommentService _commentService;
+        private readonly IGenderService _genderService;
+        private readonly IMonthService _monthService;
+        public FormMeetingBoard(ICommentService commentService, IGenderService genderService, IMemberService memberService, 
+            IMonthService monthService)
         {
             InitializeComponent();
+            _commentService = commentService;
+            _genderService = genderService;
+            _memberService = memberService;
+            _monthService = monthService;
         }
         GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
         GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
         GeneralAttendanceDetailDTO detail = new GeneralAttendanceDetailDTO();
-
-        CommentDTO commentDTO = new CommentDTO();
-        CommentBLL commentBLL = new CommentBLL();
-        CommentDetailDTO commentDetail = new CommentDetailDTO();
 
         SpecialContributionDetailDTO specialContributionDetail = new SpecialContributionDetailDTO();
         SpecialContributionsBLL specialContributionsBLL = new SpecialContributionsBLL();
@@ -43,105 +45,60 @@ namespace APC.AllForms
         ConstitutionDTO constitutionDTO = new ConstitutionDTO();
         ConstitutionDetailDTO constitutionDetail = new ConstitutionDetailDTO();
 
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, rbEqualAttend, rbEqualMonDues, rbLessAttend, rbLessMonDues,
+                rbMoreAttend, rbMoreMonDues, btnUpdate, btnView, btnAdd, btnAbsentees, btnDelete, btnSearch, btnClear, label5, label6,
+                label7, label8, label9, label10, btnAddComments, btnDeleteComments, btnUpdateComments, btnViewComments, btnSearchComments,
+                btnClearComments, label18, label19, label21, btnAddConstitution, btnDeleteConstitution, btnUpdateConstitution,
+                btnViewConstitution, btnClearConstitution, label12, label20, label22, label23, label24, label25, label26, btnSearchFinedMember,
+                btnClearFinedMember);
+
+            GeneralHelper.ApplyRegularFont(11, labelTotalMeetings, labelTotalPaidFines, labelTotalComments, labelTotalConstitutions);
+
+            GeneralHelper.ApplyRegularFont(14, labelTotalFineMembers);
+
+            GeneralHelper.ApplyRegularFont(16, txtMonthlyDues, txtNoOfAttend, txtYear, cmbMonth, txtYearComments, txtNameComments,
+                txtComment, txtSurnameComments, cmbGenderComments, cmbMonthComments, txtNameFinedMember, txtSurnameFinedMember,
+                txtConstitutionSection, cmbGenderFinedMember, cmbMonthFinedMember, cmbFineStatus, cmbYearMeeting);
+        }
+
+        private void loadComments()
+        {
+            dataGridView1.DataSource = _commentService.GetAll();
+            CommentHelper.ConfigureCommentGrid(dataGridView1, CommentHelper.CommentGridType.Basic);
+        }
+
         private void FormMeetingBoard_Load(object sender, EventArgs e)
         {
-            #region
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalMeetings.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelTotalPaidFines.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            rbEqualAttend.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            rbEqualMonDues.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            rbLessAttend.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            rbLessMonDues.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            rbMoreAttend.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            rbMoreMonDues.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            txtMonthlyDues.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtNoOfAttend.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtYear.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbMonth.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnUpdate.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnView.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnAdd.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnAbsentees.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDelete.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearch.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClear.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label7.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label8.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label10.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalComments.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            txtYearComments.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtNameComments.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtComment.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtSurnameComments.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbGenderComments.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbMonthComments.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnAddComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearchComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label18.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label19.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label21.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalConstitutions.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            btnAddConstitution.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteConstitution.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateConstitution.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewConstitution.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearConstitution.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            label12.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label20.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label22.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label23.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label24.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label25.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label26.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalFineMembers.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnSearchFinedMember.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearFinedMember.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            txtNameFinedMember.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtSurnameFinedMember.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            txtConstitutionSection.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbGenderFinedMember.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbMonthFinedMember.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbFineStatus.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbYearMeeting.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            #endregion
+            resizeControls();
+            loadComments();
 
             dto = bll.Select(DateTime.Now.Year);
-            cmbMonth.DataSource = dto.Months;
+            cmbMonth.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+
             cmbYearMeeting.DataSource = dto.Years;
             cmbYearMeeting.SelectedIndex = -1;
 
-            commentDTO = commentBLL.Select();
-            cmbGenderComments.DataSource = commentDTO.Genders;
-            GeneralHelper.ComboBoxProps(cmbGenderComments, "GenderName", "GenderID");
-            cmbMonthComments.DataSource = commentDTO.Months;
-            GeneralHelper.ComboBoxProps(cmbMonthComments, "MonthName", "MonthID");
+            cmbGenderComments.DataSource = _genderService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbGenderComments, "GenderName", "GenderId");
+            cmbMonthComments.DataSource = _monthService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbMonthComments, "MonthName", "MonthId");
 
             finedMemberDTO = finedMemberBLL.Select();
-            cmbMonthFinedMember.DataSource = finedMemberDTO.Months;
+            cmbMonthFinedMember.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthFinedMember, "MonthName", "MonthID");
-            cmbGenderFinedMember.DataSource = finedMemberDTO.Genders;
+            cmbGenderFinedMember.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderFinedMember, "GenderName", "GenderID");
+
             cmbFineStatus.Items.Add("Completed");
             cmbFineStatus.Items.Add("NOT Completed");
             cmbFineStatus.Items.Add("NOT Paid");
 
             specialContributionDTO = specialContributionsBLL.Select();
-            cmbMonthContribution.DataSource = specialContributionDTO.Months;
+
+            cmbMonthContribution.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthContribution, "MonthName", "MonthID");
 
             constitutionDTO = constitutionBLL.Select();
@@ -536,35 +493,33 @@ namespace APC.AllForms
         // -------------------------------------------------------------------------
         private void btnAddComments_Click(object sender, EventArgs e)
         {
-            FormComments open = new FormComments();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormComments(_commentService, _memberService);
+            form.ShowDialog();
             ClearFilters();
+        }
+
+        private Applications.DTO.CommentDTO GetSelectedComment()
+        {
+            if (dataGridViewComments.CurrentRow == null)
+                return null;
+
+            return dataGridViewComments.CurrentRow.DataBoundItem as Applications.DTO.CommentDTO;
         }
 
         private void btnUpdateComments_Click(object sender, EventArgs e)
         {
-            if (commentDetail.CommentID == 0)
+            var selected = GetSelectedCountry();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a comment from the table.");
+                MessageBox.Show("Please select a country from the table");
+                return;
             }
-            else
-            {
-                FormComments open = new FormComments();
-                open.detail = commentDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
 
-        private void dataGridViewComments_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            commentDetail = GeneralHelper.MapFromGrid<CommentDetailDTO>(dataGridViewComments, e.RowIndex);
+            var form = new FormCountry(_countryService);
+            form.LoadForEdit(selected.CountryId, selected.CountryName, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnViewComments_Click(object sender, EventArgs e)

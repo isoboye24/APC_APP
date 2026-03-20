@@ -1,10 +1,7 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
 using APC.Domain.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Services
 {
@@ -16,7 +13,16 @@ namespace APC.Applications.Services
             _repository = repository;
         }
 
-        public List<Gender> GetAll()
-            => _repository.GetAll();
+        public List<GenderDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .Select(x => new GenderDTO
+                {
+                    GenderId = x.genderID,
+                    GenderName = x.genderName
+                })
+                .OrderBy(x => x.GenderName)
+                .ToList();
+        }
     }
 }
