@@ -1,9 +1,7 @@
-﻿using APC.Applications.DTO;
-using APC.DAL;
+﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace APC.Infrastructure.Repositories
@@ -35,48 +33,14 @@ namespace APC.Infrastructure.Repositories
             return _db.COMMENT.Any(x => !x.isDeleted && x.comment1 == content && x.memberID == memberId);
         }
 
-        public List<CommentDTO> GetAll()
+        public IQueryable<COMMENT> GetAll()
         {
-            var member = (from c in _db.COMMENT.Where(x => x.isDeleted == false)
-                          join m in _db.MEMBER on c.memberID equals m.memberID
-                          join g in _db.GENDER on m.genderID equals g.genderID
-                          select new CommentDTO
-                          {
-                              CommentId = c.commentID,
-                              MemberId = c.memberID,
-                              Content = c.comment1,
-                              FirstName = m.name,
-                              LastName = m.surname,
-                              GenderId = m.genderID,
-                              Gender = g.genderName,
-                              ImagePath = m.imagePath,
-                              Date = new DateTime(c.year, c.monthID, c.day),
-                              FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
-                          });
-            
-            return member.OrderByDescending(x => x.Date.Year).ThenByDescending(x => x.Date.Month).ThenByDescending(x => x.Date.Day).ThenBy(x => x.FirstName).ToList();
+            return _db.COMMENT.Where(x => !x.isDeleted);
         }
-        
-        public List<CommentDTO> GetAllDeletedComments()
-        {
-            var member = (from c in _db.COMMENT.Where(x => x.isDeleted)
-                          join m in _db.MEMBER on c.memberID equals m.memberID
-                          join g in _db.GENDER on m.genderID equals g.genderID
-                          select new CommentDTO
-                          {
-                              CommentId = c.commentID,
-                              MemberId = c.memberID,
-                              Content = c.comment1,
-                              FirstName = m.name,
-                              LastName = m.surname,
-                              Gender = g.genderName,
-                              GenderId = m.genderID,
-                              ImagePath = m.imagePath,
-                              Date = new DateTime(c.year, c.monthID, c.day),
-                              FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
-                          });
 
-            return member.OrderByDescending(x => x.Date.Year).ThenByDescending(x => x.Date.Month).ThenByDescending(x => x.Date.Day).ThenBy(x => x.FirstName).ToList();
+        public IQueryable<COMMENT> GetAllDeletedComments()
+        {
+            return _db.COMMENT.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -88,26 +52,10 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public CommentDTO GetById(int id)
+        public IQueryable<COMMENT> GetById(int id)
         {
-           return (from c in _db.COMMENT.Where(x => !x.isDeleted && x.commentID == id)
-             join m in _db.MEMBER on c.memberID equals m.memberID
-             join g in _db.GENDER on m.genderID equals g.genderID
-             select new CommentDTO
-             {
-                 CommentId = c.commentID,
-                 MemberId = c.memberID,
-                 Content = c.comment1,
-                 FirstName = m.name,
-                 LastName = m.surname,
-                 GenderId = m.genderID,
-                 Gender = g.genderName,
-                 ImagePath = m.imagePath,
-                 Date = new DateTime(c.year, c.monthID, c.day),
-                 FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
-             }).FirstOrDefault();
+            return _db.COMMENT.Where(x => !x.isDeleted && x.commentID == id);
         }
-        
 
         public bool Insert(Comment comment)
         {
