@@ -48,7 +48,7 @@ namespace APC.Applications.Services
                               ImagePath = m.PersonalInfo.ImagePath,
                               Date = new DateTime(c.year, c.monthID, c.day),
                               FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
-                          }).ToList();
+                          }).OrderByDescending(x => x.Date.Year).ThenByDescending(x => x.Date.Month).ThenByDescending(x => x.Date.Day).ThenBy(x => x.FirstName).ToList();
 
             return data;
         }

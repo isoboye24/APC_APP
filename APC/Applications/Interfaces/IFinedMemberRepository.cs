@@ -1,16 +1,15 @@
-﻿using APC.Domain.Entities;
+﻿using APC.DAL;
+using APC.Domain.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Interfaces
 {
     public interface IFinedMemberRepository
     {
-        List<FinedMember> GetAll();
-        FinedMember GetById(int id);
+        IQueryable<FINED_MEMBER> GetAll();
+        IQueryable<FINED_MEMBER> GetAllDeletedFinedMembers();
+        IQueryable<FINED_MEMBER> GetById(int id);
         bool Insert(FinedMember data);
         bool Update(FinedMember data);
         bool Delete(int id);

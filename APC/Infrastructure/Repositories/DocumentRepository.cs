@@ -1,6 +1,6 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
 using System.Linq;
 
@@ -52,34 +52,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public Document GetById(int id)
+        public IQueryable<DOCUMENT> GetById(int id)
         {
-            var entity = _db.DOCUMENT
-                .Where(x => x.documentID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.documentID,
-                    x.documentName,
-                    x.documentPath,
-                    x.documentType,
-                    x.day,
-                    x.monthID,
-                    x.year
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return Document.Rehydrate(
-                    entity.documentID,
-                    entity.documentName,
-                    entity.documentPath,
-                    entity.documentType,
-                    entity.day,
-                    entity.monthID,
-                    entity.year
-            );
+            return _db.DOCUMENT.Where(x => !x.isDeleted && x.documentID == id);
         }
 
         public bool Insert(Document data)

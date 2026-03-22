@@ -1,11 +1,8 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -38,23 +35,17 @@ namespace APC.Infrastructure.Repositories
                                         && x.fineDate.Year == fineDate.Year);
         }
 
-        public List<FinedMember> GetAll()
+        public IQueryable<FINED_MEMBER> GetAll()
         {
-            var data = _db.FINED_MEMBER
-                .Where(x => !x.isdeleted)
-                .ToList();
-
-            return data
-                .Select(x => FinedMember.Rehydrate(
-                    x.finedMemberID,
-                    x.amountPaid,
-                    x.summary,
-                    x.constitutionID,
-                    x.memberID,
-                    x.fineDate
-                ))
-                .ToList();
+            return _db.FINED_MEMBER.Where(x => !x.isdeleted);
         }
+
+        public IQueryable<FINED_MEMBER> GetAllDeletedFinedMembers()
+        {
+            return _db.FINED_MEMBER.Where(x => x.isdeleted);
+        }
+
+        
 
         public bool GetBack(int id)
         {
@@ -65,32 +56,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public FinedMember GetById(int id)
+        public IQueryable<FINED_MEMBER> GetById(int id)
         {
-            var entity = _db.FINED_MEMBER
-                .Where(x => x.finedMemberID == id && !x.isdeleted)
-                .Select(x => new
-                {
-                    x.finedMemberID,
-                    x.amountPaid,
-                    x.summary,
-                    x.constitutionID,
-                    x.memberID,
-                    x.fineDate
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return FinedMember.Rehydrate(
-                    entity.finedMemberID,
-                    entity.amountPaid,
-                    entity.summary,
-                    entity.constitutionID,
-                    entity.memberID,
-                    entity.fineDate
-            );
+            return _db.FINED_MEMBER.Where(x => !x.isdeleted && x.finedMemberID == id);
         }
 
         public bool Insert(FinedMember data)

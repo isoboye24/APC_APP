@@ -8,7 +8,7 @@ namespace APC.Applications.Interfaces
     {
         IQueryable<DOCUMENT> GetAll();
         IQueryable<DOCUMENT> GetAllDeletedDocuments();
-        Document GetById(int id);
+        IQueryable<DOCUMENT> GetById(int id);
         bool Insert(Document data);
         bool Update(Document data);
         bool Delete(int id);

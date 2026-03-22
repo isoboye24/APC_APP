@@ -1,13 +1,19 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace APC.Applications.Services
 {
     public class FinedMemberService : IFinedMemberService
     {
         private readonly IFinedMemberRepository _repository;
+        private readonly IMemberRepository _memberRepository;
+        private readonly IGenderRepository _genderRepository;
+        private readonly IPositionRepository _positionRepository;
+        private readonly IConstitutionRepository _constitutionRepository;
         public FinedMemberService(IFinedMemberRepository repository)
         {
             _repository = repository;
@@ -27,8 +33,65 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<FinedMember> GetAll()
-            => _repository.GetAll();
+        public List<FinedMemberDTO> GetAll()
+        {
+            var data = (from f in _repository.GetAll()
+                        join m in _memberRepository.GetAll() on f.memberID equals m.MemberId
+                        join p in _positionRepository.GetAll() on m.MembershipInfo.PositionId equals p.positionID
+                        join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
+                        select new FinedMemberDTO
+                        {
+
+                            FinedMemberId = f.finedMemberID,
+                            AmountPaid = (decimal)f.amountPaid,
+                            Summary = f.summary,
+                            ConstitutionId = f.constitutionID,
+                            Section = c.section,
+                            ShortDescription = c.ShortDescription,
+                            AmountExpected = (c.fine + " €").ToString(),
+                            MemberId = f.memberID,
+                            FirstName = m.PersonalInfo.FirstName,
+                            LastName = m.PersonalInfo.LastName,
+                            ImagePath = m.PersonalInfo.ImagePath,
+                            PositionId = m.MembershipInfo.PositionId,
+                            PositionName = p.positionName,
+                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine)  ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
+                            FineDate = f.fineDate,
+                            FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
+                        }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
+
+            return data;
+        }
+
+        public List<FinedMemberDTO> GetAllDeletedFinedMembers()
+        {
+            var data = (from f in _repository.GetAllDeletedFinedMembers()
+                        join m in _memberRepository.GetAll() on f.memberID equals m.MemberId
+                        join p in _positionRepository.GetAll() on m.MembershipInfo.PositionId equals p.positionID
+                        join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
+                        select new FinedMemberDTO
+                        {
+
+                            FinedMemberId = f.finedMemberID,
+                            AmountPaid = (decimal)f.amountPaid,
+                            Summary = f.summary,
+                            ConstitutionId = f.constitutionID,
+                            Section = c.section,
+                            ShortDescription = c.ShortDescription,
+                            AmountExpected = (c.fine + " €").ToString(),
+                            MemberId = f.memberID,
+                            FirstName = m.PersonalInfo.FirstName,
+                            LastName = m.PersonalInfo.LastName,
+                            ImagePath = m.PersonalInfo.ImagePath,
+                            PositionId = m.MembershipInfo.PositionId,
+                            PositionName = p.positionName,
+                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine)  ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
+                            FineDate = f.fineDate,
+                            FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
+                        }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
+
+            return data;
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

@@ -1,15 +1,13 @@
-﻿using APC.Domain.Entities;
-using System;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Interfaces
 {
     public interface IFinedMemberService
     {
-        List<FinedMember> GetAll();
+        List<FinedMemberDTO> GetAll();
+        List<FinedMemberDTO> GetAllDeletedFinedMembers();
         bool Create(FinedMember data);
         bool Update(FinedMember data);
         bool Delete(int id);
