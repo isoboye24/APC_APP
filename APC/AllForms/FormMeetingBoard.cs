@@ -21,17 +21,20 @@ namespace APC.AllForms
         private readonly ICommentService _commentService;
         private readonly IGenderService _genderService;
         private readonly IMonthService _monthService;
+        private readonly IConstitutionService _constitutionService;
 
         private List<Applications.DTO.CommentDTO> _commentDTO;
+        private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
 
         public FormMeetingBoard(ICommentService commentService, IGenderService genderService, IMemberService memberService, 
-            IMonthService monthService)
+            IMonthService monthService, IConstitutionService constitutionService)
         {
             InitializeComponent();
             _commentService = commentService;
             _genderService = genderService;
             _memberService = memberService;
             _monthService = monthService;
+            _constitutionService = constitutionService;
         }
         GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
         GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
@@ -44,10 +47,6 @@ namespace APC.AllForms
         FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
         FinedMemberDTO finedMemberDTO = new FinedMemberDTO();
         FinedMemberDetailDTO finedMemberDetail = new FinedMemberDetailDTO();
-
-        ConstitutionBLL constitutionBLL = new ConstitutionBLL();
-        ConstitutionDTO constitutionDTO = new ConstitutionDTO();
-        ConstitutionDetailDTO constitutionDetail = new ConstitutionDetailDTO();
 
         private void resizeControls()
         {
@@ -69,14 +68,21 @@ namespace APC.AllForms
 
         private void loadComments()
         {
-            dataGridView1.DataSource = _commentService.GetAll();
-            CommentHelper.ConfigureCommentGrid(dataGridView1, CommentHelper.CommentGridType.Basic);
+            dataGridViewComments.DataSource = _commentService.GetAll();
+            CommentHelper.ConfigureCommentGrid(dataGridViewComments, CommentHelper.CommentGridType.Basic);
+        }
+
+        private void loadConstitutions()
+        {
+            dataGridViewConstitution.DataSource = _constitutionService.GetAll();
+            ConstitutionHelper.ConfigureConstitutionGrid(dataGridViewConstitution, ConstitutionHelper.ConstitutionGridType.Basic);
         }
 
         private void FormMeetingBoard_Load(object sender, EventArgs e)
         {
             resizeControls();
             loadComments();
+            loadConstitutions();
 
             dto = bll.Select(DateTime.Now.Year);
             cmbMonth.DataSource = _monthService.GetAll();
@@ -105,12 +111,8 @@ namespace APC.AllForms
             cmbMonthContribution.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthContribution, "MonthName", "MonthID");
 
-            constitutionDTO = constitutionBLL.Select();
-
             #region
             LoadDataGridView.loadGeneralAttendances(dataGridView1, dto);
-            LoadDataGridView.loadComments(dataGridViewComments, commentDTO);
-            LoadDataGridView.loadConstitution(dataGridViewConstitution, constitutionDTO);
             LoadDataGridView.loadFinedMembers(dataGridViewFinedMembers, finedMemberDTO);
             LoadDataGridView.loadSpecialContributions(dataGridViewSpecialContributions, specialContributionDTO);
             #endregion
@@ -516,7 +518,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormComments(_commentService, _memberService, selected, true);
+            var form = new FormComments(_commentService, _memberService);
+            form.LoadForEdit(selected, true);
             form.ShowDialog();
 
             ClearFilters();
@@ -599,7 +602,7 @@ namespace APC.AllForms
             var selected = GetSelectedComment();
             if (selected == null)
             {
-                MessageBox.Show("Please select a task.");
+                MessageBox.Show("Please select a constitution.");
                 return;
             }
 
@@ -711,6 +714,13 @@ namespace APC.AllForms
             dataGridViewFinedMembers.DataSource = list;
         }
 
+        private void txtConstitutionSection_TextChanged(object sender, EventArgs e)
+        {
+            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
+            list = list.Where(x => x.ConstitutionSection.Contains(txtConstitutionSection.Text.Trim())).ToList();
+            dataGridViewFinedMembers.DataSource = list;
+        }
+
         private void btnSearchFinedMember_Click(object sender, EventArgs e)
         {
             List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
@@ -749,86 +759,81 @@ namespace APC.AllForms
 
         private void btnAddConstitution_Click(object sender, EventArgs e)
         {
-            FormConstitution open = new FormConstitution();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormConstitution(_constitutionService);
+            form.ShowDialog();
             ClearFilters();
         }
 
-        private void dataGridViewConstitution_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private Applications.DTO.ConstitutionDTO GetSelectedConstitution()
         {
-            if (e.RowIndex < 0) return;
-            constitutionDetail = GeneralHelper.MapFromGrid<ConstitutionDetailDTO>(dataGridViewConstitution, e.RowIndex);
+            if (dataGridViewConstitution.CurrentRow == null)
+                return null;
+
+            return dataGridViewConstitution.CurrentRow.DataBoundItem as Applications.DTO.ConstitutionDTO;
         }
+
 
         private void btnViewConstitution_Click(object sender, EventArgs e)
         {
-            if (constitutionDetail.ConstitutionID == 0)
+            var selected = GetSelectedConstitution();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a constitution from the table.");
+                MessageBox.Show("Please select a country from the table");
+                return;
             }
-            else
-            {
-                FormViewConstitution open = new FormViewConstitution();
-                open.detail = constitutionDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormViewConstitution(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnDeleteConstitution_Click(object sender, EventArgs e)
         {
-            if (constitutionDetail.ConstitutionID == 0)
+            var selected = GetSelectedConstitution();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table.");
+                MessageBox.Show("Please select a constitution.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (constitutionBLL.Delete(constitutionDetail))
-                    {
-                        MessageBox.Show("Constitution was deleted!");
-                        ClearFilters();
-                    }
-                }
+                _constitutionService.Delete(selected.ConstitutionId);
+                ClearFilters();
             }
         }
 
         private void btnUpdateConstitution_Click(object sender, EventArgs e)
         {
-            if (constitutionDetail.ConstitutionID == 0)
+            var selected = GetSelectedConstitution();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table.");
+                MessageBox.Show("Please select a constitution from the table");
+                return;
             }
-            else
-            {
-                FormConstitution open = new FormConstitution();
-                open.detail = constitutionDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormConstitution(_constitutionService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void txtConstitution_TextChanged(object sender, EventArgs e)
         {
-            List<ConstitutionDetailDTO> list = constitutionDTO.Constitutions;
-            list = list.Where(x => x.ConstitutionText.Contains(txtConstitution.Text.Trim())).ToList();
-            dataGridViewConstitution.DataSource = list;
+            string search = txtConstitution.Text.Trim().ToLower();
+            var filtered = _constitutionDTO.Where(x => x.ShortDescription.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewConstitution.DataSource = filtered;
         }
 
         private void txtSection_TextChanged(object sender, EventArgs e)
         {
-            List<ConstitutionDetailDTO> list = constitutionDTO.Constitutions;
-            list = list.Where(x => x.Section.Contains(txtSection.Text.Trim())).ToList();
-            dataGridViewConstitution.DataSource = list;
+            string search = txtSection.Text.Trim().ToLower();
+            var filtered = _constitutionDTO.Where(x => x.Section.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewConstitution.DataSource = filtered;
         }
 
         private void btnClearConstitution_Click(object sender, EventArgs e)
@@ -836,18 +841,11 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private void txtConstitutionSection_TextChanged(object sender, EventArgs e)
-        {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
-            list = list.Where(x => x.ConstitutionSection.Contains(txtConstitutionSection.Text.Trim())).ToList();
-            dataGridViewFinedMembers.DataSource = list;
-        }
-
         private void txtFine_TextChanged(object sender, EventArgs e)
         {
-            List<ConstitutionDetailDTO> list = constitutionDTO.Constitutions;
-            list = list.Where(x => x.Fine.ToString().Contains(txtFine.Text.Trim())).ToList();
-            dataGridViewConstitution.DataSource = list;
+            string search = txtFine.Text.Trim().ToLower();
+            var filtered = _constitutionDTO.Where(x => x.FineWithCurrency.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewConstitution.DataSource = filtered;
         }
 
 

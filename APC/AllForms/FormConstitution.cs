@@ -1,4 +1,5 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,14 @@ namespace APC.AllForms
 {
     public partial class FormConstitution : Form
     {
-        public FormConstitution()
+        private readonly IConstitutionService _constitutionService;
+        private Applications.DTO.ConstitutionDTO _constitutionDTO;
+        private bool _isUpdate = false;
+
+        public FormConstitution(IConstitutionService constitutionService)
         {
             InitializeComponent();
+            _constitutionService = constitutionService;
         }
 
         // Drag From
@@ -32,6 +38,12 @@ namespace APC.AllForms
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public void loadForEdit(Applications.DTO.ConstitutionDTO dto, bool isUpdate)
+        {
+            _constitutionDTO = dto;
+            _isUpdate = isUpdate;
         }
 
         private void FormConstitution_Load(object sender, EventArgs e)

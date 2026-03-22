@@ -8,21 +8,12 @@ namespace APC.AllForms
 {
     public partial class FormViewComment : Form
     {
-        private string _firstName;
-        private string _lastName;
-        private string _imagePath;
-        private string _content;
-        private string _formattedDate;
+        private CommentDTO _commentDTO;
 
         public FormViewComment(CommentDTO dto)
         {
             InitializeComponent();
-
-            _firstName = dto.FirstName;
-            _lastName = dto.LastName;
-            _imagePath = dto.ImagePath;
-            _content = dto.Content;
-            _formattedDate = dto.FormattedDate;
+            _commentDTO = dto;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -55,13 +46,13 @@ namespace APC.AllForms
         {
             resizeControls();
 
-            txtName.Text = _firstName;
-            txtSurname.Text = _lastName;
-            txtComment.Text = _content;
-            string imagePath = Application.StartupPath + "\\images\\" + _imagePath;
+            txtName.Text = _commentDTO.FirstName;
+            txtSurname.Text = _commentDTO.LastName;
+            txtComment.Text = _commentDTO.Content;
+            string imagePath = Application.StartupPath + "\\images\\" + _commentDTO.ImagePath;
             picProfilePic.ImageLocation = imagePath;
-            labelDate.Text = _formattedDate;
-            labelTitle.Text = _firstName + " " + _lastName + "'s comment";
+            labelDate.Text = _commentDTO.FormattedDate;
+            labelTitle.Text = _commentDTO.FirstName + " " + _commentDTO.LastName + "'s comment";
         }        
     }
 }

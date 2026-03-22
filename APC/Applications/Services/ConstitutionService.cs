@@ -37,6 +37,7 @@ namespace APC.Applications.Services
                     ConstitutionId = x.constitutionID,
                     ConstitutionText = x.constitution1,
                     Fine = x.fine,
+                    FineWithCurrency = (x.fine + " €").ToString(),
                     Section = x.section,
                     ShortDescription = x.ShortDescription,
                 })
@@ -46,12 +47,13 @@ namespace APC.Applications.Services
         
         public List<ConstitutionDTO> GetAllDeletedConstitutions()
         {
-            return _repository.GetAllDeletedConstitution()
+            return _repository.GetAllDeletedConstitutions()
                 .Select(x => new ConstitutionDTO
                 {
                     ConstitutionId = x.constitutionID,
                     ConstitutionText = x.constitution1,
                     Fine = x.fine,
+                    FineWithCurrency = (x.fine + " €").ToString(),
                     Section = x.section,
                     ShortDescription = x.ShortDescription,
                 })

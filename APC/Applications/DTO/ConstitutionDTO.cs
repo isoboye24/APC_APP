@@ -11,6 +11,7 @@ namespace APC.Applications.DTO
         public int ConstitutionId { get; set; }
         public string ConstitutionText { get; set; }
         public decimal Fine { get; set; }
+        public string FineWithCurrency { get; set; }
         public string Section { get; set; }
         public string ShortDescription { get; set; }
     }

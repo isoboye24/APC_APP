@@ -1,24 +1,21 @@
 ﻿using APC.BLL;
 using APC.DAL;
 using APC.DAL.DTO;
+using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
     public partial class FormViewConstitution : Form
     {
-        public FormViewConstitution()
+        private Applications.DTO.ConstitutionDTO _constitutionDTO;
+        public FormViewConstitution(Applications.DTO.ConstitutionDTO constitutionDTO)
         {
             InitializeComponent();
+            _constitutionDTO = constitutionDTO;
         }
         // Drag From
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -31,13 +28,14 @@ namespace APC.AllForms
         public bool isFinedMemberView = false;
         public int ID;
 
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, labelFine, labelTitle, btnClose, labelSection);
+        }
+
         private void FormViewConstitution_Load(object sender, EventArgs e)
         {
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelFine.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelSection.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            resizeControls();
 
             txtConstitution.Text = detail.ConstitutionText;
             labelFine.Text = "€ " + detail.Fine;

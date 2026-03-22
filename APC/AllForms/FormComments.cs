@@ -23,13 +23,11 @@ namespace APC
 
         private List<Applications.DTO.MembersBasicDetailDTO> _memberDTO;
 
-        public FormComments(ICommentService commentService, IMemberService memberService, Applications.DTO.CommentDTO dto, bool isUpdate)
+        public FormComments(ICommentService commentService, IMemberService memberService)
         {
             InitializeComponent();
             _commentService = commentService;
             _memberService = memberService;
-            _commentDTO = dto;
-            _isUpdate = isUpdate;
         }
         /// <summary>
         ///  Drag
@@ -75,6 +73,13 @@ namespace APC
         {
             dataGridView1.DataSource = _memberService.GetAll();
             MemberHelper.ConfigureMemberGrid(dataGridView1, MemberHelper.MemberGridType.Basic);
+        }
+
+        public void LoadForEdit(Applications.DTO.CommentDTO dto, bool isUpdate)
+        {
+            _commentDTO = dto;
+            _selectedMemberId = _commentDTO.MemberId;
+            _isUpdate = isUpdate;
         }
 
         private void FormComments_Load(object sender, EventArgs e)
