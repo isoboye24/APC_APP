@@ -1,12 +1,13 @@
-﻿using APC.Domain.Entities;
-using System;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System.Collections.Generic;
 
 namespace APC.Applications.Interfaces
 {
     public interface IConstitutionService
     {
-        List<Constitution> GetAll();
+        List<ConstitutionDTO> GetAll();
+        List<ConstitutionDTO> GetAllDeletedConstitutions();
         bool Create(Constitution data);
         bool Update(Constitution data);
         bool Delete(int id);

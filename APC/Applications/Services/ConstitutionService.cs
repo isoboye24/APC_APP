@@ -1,11 +1,9 @@
-﻿using APC.DAL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Services
 {
@@ -31,8 +29,35 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<Constitution> GetAll()
-            => _repository.GetAll();
+        public List<ConstitutionDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .Select(x => new ConstitutionDTO
+                {
+                    ConstitutionId = x.constitutionID,
+                    ConstitutionText = x.constitution1,
+                    Fine = x.fine,
+                    Section = x.section,
+                    ShortDescription = x.ShortDescription,
+                })
+                .OrderBy(x => x.ShortDescription)
+                .ToList();
+        }
+        
+        public List<ConstitutionDTO> GetAllDeletedConstitutions()
+        {
+            return _repository.GetAllDeletedConstitution()
+                .Select(x => new ConstitutionDTO
+                {
+                    ConstitutionId = x.constitutionID,
+                    ConstitutionText = x.constitution1,
+                    Fine = x.fine,
+                    Section = x.section,
+                    ShortDescription = x.ShortDescription,
+                })
+                .OrderBy(x => x.ShortDescription)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

@@ -1,12 +1,8 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace APC.Infrastructure.Repositories
 {    
@@ -37,23 +33,14 @@ namespace APC.Infrastructure.Repositories
             return _db.CONSTITUTION.Any(x => !x.isDeleted && x.constitution1 == constitutionText && x.fine == fine);
         }
 
-        public List<Constitution> GetAll()
+        public IQueryable<CONSTITUTION> GetAll()
         {
-            var data = _db.CONSTITUTION
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.fine)
-                .ThenBy(x => x.ShortDescription)
-                .ToList();
-
-            return data
-                .Select(x => Constitution.Rehydrate(
-                    x.constitutionID,
-                    x.constitution1,
-                    x.fine,
-                    x.section,
-                    x.ShortDescription
-                ))
-                .ToList();
+            return _db.CONSTITUTION.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<CONSTITUTION> GetAllDeletedConstitutions()
+        {
+            return _db.CONSTITUTION.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -65,30 +52,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public Constitution GetById(int id)
+        public IQueryable<CONSTITUTION> GetById(int id)
         {
-            var entity = _db.CONSTITUTION
-                .Where(x => x.constitutionID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.constitutionID,
-                    x.constitution1,
-                    x.fine,
-                    x.section,
-                    x.ShortDescription
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return Constitution.Rehydrate(
-                entity.constitutionID,
-                entity.constitution1,
-                entity.fine,
-                entity.section,
-                entity.ShortDescription
-            );
+            return _db.CONSTITUTION.Where(x => x.isDeleted && x.constitutionID == id);
         }
 
         public bool Insert(Constitution data)

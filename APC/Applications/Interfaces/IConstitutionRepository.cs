@@ -1,14 +1,15 @@
-﻿using APC.Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using APC.DAL;
+using APC.Domain.Entities;
+using System.Linq;
 
 
 namespace APC.Applications.Interfaces
 {
     public interface IConstitutionRepository
     {
-        List<Constitution> GetAll();
-        Constitution GetById(int id);
+        IQueryable<CONSTITUTION> GetAll();
+        IQueryable<CONSTITUTION> GetAllDeletedConstitutions();
+        IQueryable<CONSTITUTION> GetById(int id);
         bool Insert(Constitution data);
         bool Update(Constitution data);
         bool Delete(int id);
