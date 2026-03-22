@@ -1,9 +1,12 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Applications.Services;
 using APC.BLL;
 using APC.DAL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
+using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,30 +18,41 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace APC.AllForms
 {
     public partial class FormFinedMember : Form
     {
         private readonly IFinedMemberService _finedMemberService;
-        public FormFinedMember(IFinedMemberService finedMemberService)
+        private readonly IMemberService _memberService;
+        private readonly IConstitutionService _constitutionService;
+
+        private Applications.DTO.FinedMemberDTO _finedMemberDTO;
+        private List<Applications.DTO.MembersBasicDetailDTO> _memberDTO;
+        private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
+
+        private bool _isUpdate = false;
+        private int _memberId = 0;
+        private int _constitutionId = 0;
+
+        private bool isChangeMember = false;
+        private bool isChangeConstitution = false;
+
+        public FormFinedMember(IFinedMemberService finedMemberService, IMemberService memberService, IConstitutionService constitutionService)
         {
             InitializeComponent();
             _finedMemberService = finedMemberService;
+            _memberService = memberService;
+            _constitutionService = constitutionService;
         }
+
         // Drag From
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        FinedMemberBLL bll = new FinedMemberBLL();
-        FinedMemberDTO dto = new FinedMemberDTO();
-        public FinedMemberDetailDTO detail = new FinedMemberDetailDTO();
-
-        public MemberDetailDTO memberDetail = new MemberDetailDTO();
-        public ConstitutionDetailDTO constitutionDetail = new ConstitutionDetailDTO();
-        public bool isUpdate = false;
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -67,8 +81,6 @@ namespace APC.AllForms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private bool isChangeMember = false;
-        private bool isChangeConstitution = false;
         private void btnChangeMember_Click(object sender, EventArgs e)
         {
             isChangeMember = !isChangeMember;
@@ -97,260 +109,136 @@ namespace APC.AllForms
 
         public void loadForEdit(Applications.DTO.FinedMemberDTO dto, bool isUpdate)
         {
-            _commentDTO = dto;
-            _selectedMemberId = _commentDTO.MemberId;
+            _finedMemberDTO = dto;
             _isUpdate = isUpdate;
         }
 
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10,
+                labelTitle, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(14, labelName, labelSurname, labelPosition, labelConstitutionSection, labelFine, txtAmount, txtSummary,
+                txtSearchSurname, txtSection);
+        }
+
+        private void loadMembers()
+        {
+            dataGridViewMembers.DataSource = _memberService.GetAll();
+            MemberHelper.ConfigureMemberGrid(dataGridViewMembers, MemberHelper.MemberGridType.Basic);
+        }
+
+        private Applications.DTO.MembersBasicDetailDTO GetSelectedMember()
+        {
+            if (dataGridViewMembers.CurrentRow == null)
+                return null;
+
+            return dataGridViewMembers.CurrentRow.DataBoundItem as Applications.DTO.MembersBasicDetailDTO;
+        }
+
+        private void loadConstitutions()
+        {
+            dataGridViewConstitutions.DataSource = _constitutionService.GetAll();
+            ConstitutionHelper.ConfigureConstitutionGrid(dataGridViewConstitutions, ConstitutionHelper.ConstitutionGridType.Basic);
+        }
+
+        private Applications.DTO.ConstitutionDTO GetSelectedConstitution()
+        {
+            if (dataGridViewConstitutions.CurrentRow == null)
+                return null;
+
+            return dataGridViewConstitutions.CurrentRow.DataBoundItem as Applications.DTO.ConstitutionDTO;
+        }
+
+       
         private void FormFinedMember_Load(object sender, EventArgs e)
         {
             btnChangeMember.Hide();
             btnChangeConstitution.Hide();
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label7.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label8.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label10.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            labelSurname.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            labelPosition.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            labelConstitutionSection.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            labelFine.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            resizeControls();
 
-            txtAmount.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSummary.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSearchSurname.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSection.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            loadMembers();
 
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
+            loadConstitutions();
 
-            dto = bll.Select();
-            #region
-            dataGridViewMembers.DataSource = dto.Members;
-            dataGridViewMembers.Columns[0].Visible = false;
-            dataGridViewMembers.Columns[1].Visible = false;
-            dataGridViewMembers.Columns[2].Visible = false;
-            dataGridViewMembers.Columns[3].HeaderText = "Surname";
-            dataGridViewMembers.Columns[4].HeaderText = "Name";
-            dataGridViewMembers.Columns[5].Visible = false;
-            dataGridViewMembers.Columns[6].Visible = false;
-            dataGridViewMembers.Columns[7].Visible = false;
-            dataGridViewMembers.Columns[8].Visible = false;
-            dataGridViewMembers.Columns[9].Visible = false;
-            dataGridViewMembers.Columns[10].Visible = false;
-            dataGridViewMembers.Columns[11].Visible = false;
-            dataGridViewMembers.Columns[12].Visible = false;
-            dataGridViewMembers.Columns[13].Visible = false;
-            dataGridViewMembers.Columns[14].Visible = false;
-            dataGridViewMembers.Columns[15].Visible = false;
-            dataGridViewMembers.Columns[16].Visible = false;
-            dataGridViewMembers.Columns[17].Visible = false;
-            dataGridViewMembers.Columns[18].Visible = false;
-            dataGridViewMembers.Columns[19].HeaderText = "Gender";
-            dataGridViewMembers.Columns[20].Visible = false;
-            dataGridViewMembers.Columns[21].Visible = false;
-            dataGridViewMembers.Columns[22].Visible = false;
-            dataGridViewMembers.Columns[23].Visible = false;
-            dataGridViewMembers.Columns[24].Visible = false;
-            dataGridViewMembers.Columns[25].Visible = false;
-            dataGridViewMembers.Columns[26].Visible = false;
-            dataGridViewMembers.Columns[27].Visible = false;
-            dataGridViewMembers.Columns[28].Visible = false;
-            dataGridViewMembers.Columns[29].Visible = false;
-            dataGridViewMembers.Columns[30].Visible = false;
-            dataGridViewMembers.Columns[31].Visible = false;
-            dataGridViewMembers.Columns[32].Visible = false;
-            dataGridViewMembers.Columns[33].Visible = false;
-            dataGridViewMembers.Columns[34].Visible = false;
-            dataGridViewMembers.Columns[35].Visible = false;
-            dataGridViewMembers.Columns[36].Visible = false;
-            dataGridViewMembers.Columns[37].Visible = false;
-            dataGridViewMembers.Columns[38].Visible = false;
-            dataGridViewMembers.Columns[39].Visible = false;
-            dataGridViewMembers.Columns[40].Visible = false;
-            dataGridViewMembers.Columns[41].Visible = false;
-            dataGridViewMembers.Columns[42].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewMembers.Columns)
+            var selectMember = GetSelectedMember();
+            var selectConstitution = GetSelectedConstitution();
+
+            if (_isUpdate)
             {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
-            #endregion
+                txtSummary.Text = _finedMemberDTO.Summary;
+                txtAmount.Text = _finedMemberDTO.AmountPaid.ToString();
+                dateTimePickerFineDate.Value = _finedMemberDTO.FineDate;
 
-            #region
-            dataGridViewConstitutions.DataSource = dto.Constitutions;
-            dataGridViewConstitutions.Columns[0].Visible = false;
-            dataGridViewConstitutions.Columns[1].Visible = false;
-            dataGridViewConstitutions.Columns[2].HeaderText = "Section Des.";
-            dataGridViewConstitutions.Columns[3].Visible = false;
-            dataGridViewConstitutions.Columns[4].Visible = false;
-            dataGridViewConstitutions.Columns[5].HeaderText = "Fine";
-            dataGridViewConstitutions.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            foreach (DataGridViewColumn column in dataGridViewConstitutions.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
-            #endregion
+                if (!isChangeConstitution)
+                {
+                    labelFine.Text = _finedMemberDTO.AmountExpected;
+                    labelConstitutionSection.Text = _finedMemberDTO.Section;
+                    _constitutionId = selectConstitution.ConstitutionId;
+                }
 
-            if (isUpdate)
-            {
-                txtSummary.Text = detail.Summary;
-                txtAmount.Text = detail.AmountPaid.ToString();
-                dateTimePickerFineDate.Value = detail.FineDate;
-                labelFine.Text = detail.ExpectedAmountWithCurrency;
-                labelConstitutionSection.Text = detail.ConstitutionSection;
-                labelPosition.Text = detail.Position;
-                labelSurname.Text = detail.Surname;
-                labelName.Text = detail.Name;
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-                picProfilePic.ImageLocation = imagePath;
+                if (!isChangeMember)
+                {
+                    labelPosition.Text = _finedMemberDTO.PositionName;
+                    labelSurname.Text = _finedMemberDTO.LastName;
+                    labelName.Text = _finedMemberDTO.FirstName;
+                    string imagePath = Application.StartupPath + "\\images\\" + _finedMemberDTO.ImagePath;
+                    picProfilePic.ImageLocation = imagePath;
+
+                    _memberId = selectMember.MemberId;
+                }
+
                 labelTitle.Text = "Edit Fined Member";
                 btnChangeMember.Visible = true;
                 btnChangeConstitution.Visible = true;
-            }            
+            }
+            else
+            {
+                labelTitle.Text = "Add Fined Member";
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!isUpdate)
+            try
             {
-                FinedMemberDetailDTO finedMember = new FinedMemberDetailDTO();
-                finedMember.Summary = txtSearchSurname.Text.Trim();
-                if (txtAmount.Text.Trim() == "")
+                decimal amountPaid = Convert.ToDecimal(txtSummary.Text.Trim());
+                string summary = txtSummary.Text.Trim();
+
+                if (_finedMemberDTO.FinedMemberId == 0)
                 {
-                    finedMember.AmountPaid = 0;
+                    var finedMember = new FinedMember(amountPaid, summary, _constitutionId, _memberId, DateTime.Today);
+                    _finedMemberService.Create(finedMember);
+                    MessageBox.Show("Fined member created successfully!");
                 }
                 else
                 {
-                    finedMember.AmountPaid = Convert.ToDecimal(txtAmount.Text.Trim());
-                }
-                finedMember.ConstitutionID = constitutionDetail.ConstitutionID;
-                finedMember.MemberID = memberDetail.MemberID;
-                finedMember.Day = dateTimePickerFineDate.Value.Day;
-                finedMember.MonthID = dateTimePickerFineDate.Value.Month;
-                finedMember.Year = dateTimePickerFineDate.Value.Year;
-                finedMember.FineDate = dateTimePickerFineDate.Value;
-                if (bll.Insert(finedMember))
-                {
-                    MessageBox.Show("Member was fined successfully!");
-                    txtAmount.Clear();
-                    txtSearchSurname.Clear();
-                    txtSummary.Clear();
-                    txtSection.Clear();
+                    var finedMember = new FinedMember(amountPaid, summary, _constitutionId, _memberId, _finedMemberDTO.FineDate);
+
+                    _finedMemberService.Update(finedMember);
+                    MessageBox.Show("Fined member updated successfully!");
+                    this.Close();
                 }
             }
-            else if (isUpdate)
+            catch (Exception ex)
             {
-                if (txtAmount.Text.Trim() == detail.AmountPaid.ToString()
-                    && txtSummary.Text.Trim() == detail.Summary
-                    && detail.MemberID == memberDetail.MemberID
-                    && detail.ConstitutionID == constitutionDetail.ConstitutionID
-                    && detail.FineDate == dateTimePickerFineDate.Value
-                    )
-                {
-                    MessageBox.Show("There is no change!");
-                }
-                else
-                {
-                    detail.Summary = txtSummary.Text.Trim();
-                    if (txtAmount.Text.Trim() == "")
-                    {
-                        detail.AmountPaid = 0;
-                    }
-                    else
-                    {
-                        detail.AmountPaid = Convert.ToDecimal(txtAmount.Text.Trim());
-                    }
-                    if (isChangeConstitution)
-                    {
-                        detail.ConstitutionID = constitutionDetail.ConstitutionID;
-                    }
-                    else
-                    {
-                        detail.ConstitutionID = detail.ConstitutionID;
-                    }
-                    if (isChangeMember)
-                    {
-                        detail.MemberID = memberDetail.MemberID;
-                    }
-                    else
-                    {
-                        detail.MemberID = detail.MemberID;
-                    }
-                    detail.FineDate = dateTimePickerFineDate.Value;
-                    detail.Day = dateTimePickerFineDate.Value.Day;
-                    detail.MonthID = dateTimePickerFineDate.Value.Month;
-                    detail.Year = dateTimePickerFineDate.Value.Year;
-                    if (bll.Update(detail))
-                    {
-                        MessageBox.Show("Fined member was updated!");
-                        this.Close();
-                    }
-                }
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            memberDetail = new MemberDetailDTO();
-            memberDetail.MemberID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[0].Value);
-            memberDetail.Username = dataGridViewMembers.Rows[e.RowIndex].Cells[1].Value.ToString();
-            memberDetail.Password = dataGridViewMembers.Rows[e.RowIndex].Cells[2].Value.ToString();
-            memberDetail.Surname = dataGridViewMembers.Rows[e.RowIndex].Cells[3].Value.ToString();
-            memberDetail.Name = dataGridViewMembers.Rows[e.RowIndex].Cells[4].Value.ToString();
-            memberDetail.Birthday = Convert.ToDateTime(dataGridViewMembers.Rows[e.RowIndex].Cells[5].Value);
-            memberDetail.ImagePath = dataGridViewMembers.Rows[e.RowIndex].Cells[6].Value.ToString();
-            memberDetail.EmailAddress = dataGridViewMembers.Rows[e.RowIndex].Cells[7].Value.ToString();
-            memberDetail.HouseAddress = dataGridViewMembers.Rows[e.RowIndex].Cells[8].Value.ToString();
-            memberDetail.MembershipDate = Convert.ToDateTime(dataGridViewMembers.Rows[e.RowIndex].Cells[9].Value);
-            memberDetail.CountryID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[10].Value);
-            memberDetail.CountryName = dataGridViewMembers.Rows[e.RowIndex].Cells[11].Value.ToString();
-            memberDetail.NationalityID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[12].Value);
-            memberDetail.NationalityName = dataGridViewMembers.Rows[e.RowIndex].Cells[13].Value.ToString();
-            memberDetail.ProfessionID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[14].Value);
-            memberDetail.ProfessionName = dataGridViewMembers.Rows[e.RowIndex].Cells[15].Value.ToString();
-            memberDetail.PositionID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[16].Value);
-            memberDetail.PositionName = dataGridViewMembers.Rows[e.RowIndex].Cells[17].Value.ToString();
-            memberDetail.GenderID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[18].Value);
-            memberDetail.GenderName = dataGridViewMembers.Rows[e.RowIndex].Cells[19].Value.ToString();
-            memberDetail.EmploymentStatusID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[20].Value);
-            memberDetail.EmploymentStatusName = dataGridViewMembers.Rows[e.RowIndex].Cells[21].Value.ToString();
-            memberDetail.MaritalStatusID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[22].Value);
-            memberDetail.MaritalStatusName = dataGridViewMembers.Rows[e.RowIndex].Cells[23].Value.ToString();
-            memberDetail.PermissionID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[24].Value);
-            memberDetail.PermissionName = dataGridViewMembers.Rows[e.RowIndex].Cells[25].Value.ToString();
-            memberDetail.PhoneNumber = dataGridViewMembers.Rows[e.RowIndex].Cells[26].Value.ToString();
-            memberDetail.PhoneNumber2 = dataGridViewMembers.Rows[e.RowIndex].Cells[27].Value.ToString();
-            memberDetail.PhoneNumber3 = dataGridViewMembers.Rows[e.RowIndex].Cells[28].Value.ToString();
-            memberDetail.isCountryDeleted = Convert.ToBoolean(dataGridViewMembers.Rows[e.RowIndex].Cells[29].Value);
-            memberDetail.isNationalityDeleted = Convert.ToBoolean(dataGridViewMembers.Rows[e.RowIndex].Cells[30].Value);
-            memberDetail.isProfessionDeleted = Convert.ToBoolean(dataGridViewMembers.Rows[e.RowIndex].Cells[31].Value);
-            memberDetail.isPositionDeleted = Convert.ToBoolean(dataGridViewMembers.Rows[e.RowIndex].Cells[32].Value);
-            memberDetail.isEmpStatusDeleted = Convert.ToBoolean(dataGridViewMembers.Rows[e.RowIndex].Cells[33].Value);
-            memberDetail.isMarStatusDeleted = Convert.ToBoolean(dataGridViewMembers.Rows[e.RowIndex].Cells[34].Value);
-            memberDetail.MembershipStatusID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[35].Value);
-            memberDetail.MembershipStatus = dataGridViewMembers.Rows[e.RowIndex].Cells[36].Value.ToString();
-            memberDetail.DeadDate = Convert.ToDateTime(dataGridViewMembers.Rows[e.RowIndex].Cells[37].Value);
-            memberDetail.DeadAge = Convert.ToDouble(dataGridViewMembers.Rows[e.RowIndex].Cells[38].Value);
-            memberDetail.LGA = dataGridViewMembers.Rows[e.RowIndex].Cells[39].Value.ToString();
-            memberDetail.NameOfNextOfKin = dataGridViewMembers.Rows[e.RowIndex].Cells[40].Value.ToString();
-            memberDetail.RelationshipToKinID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[41].Value);
-            memberDetail.RelationshipToKin = dataGridViewMembers.Rows[e.RowIndex].Cells[42].Value.ToString();
+            if (isChangeMember)
+            {
+                var selectMember = GetSelectedMember();
 
-            string imagePath = Application.StartupPath + "\\images\\" + memberDetail.ImagePath;
-            picProfilePic.ImageLocation = imagePath;
+                string imagePath = Application.StartupPath + "\\images\\" + selectMember.ImagePath;
+                picProfilePic.ImageLocation = imagePath;
 
-            labelName.Text = memberDetail.Name;
-            labelSurname.Text = memberDetail.Surname;
-            labelPosition.Text = memberDetail.PositionName;
+                labelName.Text = selectMember.FirstName;
+                labelSurname.Text = selectMember.LastName;
+                labelPosition.Text = selectMember.Position;
+                _memberId = selectMember.MemberId;
+            }            
         }
 
         private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
@@ -360,30 +248,28 @@ namespace APC.AllForms
 
         private void dataGridViewConstitutions_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            constitutionDetail = new ConstitutionDetailDTO();
-            constitutionDetail.ConstitutionID = Convert.ToInt32(dataGridViewConstitutions.Rows[e.RowIndex].Cells[0].Value);
-            constitutionDetail.ConstitutionText = dataGridViewConstitutions.Rows[e.RowIndex].Cells[1].Value.ToString();
-            constitutionDetail.Section = dataGridViewConstitutions.Rows[e.RowIndex].Cells[2].Value.ToString();
-            constitutionDetail.ShortDescription = dataGridViewConstitutions.Rows[e.RowIndex].Cells[3].Value.ToString();
-            constitutionDetail.Fine = Convert.ToDecimal(dataGridViewConstitutions.Rows[e.RowIndex].Cells[4].Value);
-            constitutionDetail.FineWithCurrency = dataGridViewConstitutions.Rows[e.RowIndex].Cells[5].Value.ToString();
+            if (isChangeConstitution)
+            {
+                var selectConstitution = GetSelectedConstitution();
 
-            labelFine.Text = constitutionDetail.FineWithCurrency;
-            labelConstitutionSection.Text = constitutionDetail.Section;
+                labelFine.Text = selectConstitution.FineWithCurrency;
+                labelConstitutionSection.Text = selectConstitution.Section;
+                _constitutionId = selectConstitution.ConstitutionId;
+            }            
         }
 
         private void txtSearchSurname_TextChanged(object sender, EventArgs e)
         {
-            List<MemberDetailDTO> list = dto.Members;
-            list = list.Where(x => x.Surname.Contains(txtSearchSurname.Text.Trim())).ToList();
-            dataGridViewMembers.DataSource = list;
+            string search = txtSearchSurname.Text.Trim().ToLower();
+            var filtered = _memberDTO.Where(x => x.LastName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewMembers.DataSource = filtered;
         }
 
         private void txtSection_TextChanged(object sender, EventArgs e)
         {
-            List<ConstitutionDetailDTO> list = dto.Constitutions;
-            list = list.Where(x => x.Section.Contains(txtSection.Text.Trim())).ToList();
-            dataGridViewConstitutions.DataSource = list;
+            string search = txtSection.Text.Trim().ToLower();
+            var filtered = _constitutionDTO.Where(x => x.Section.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewConstitutions.DataSource = filtered;
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)

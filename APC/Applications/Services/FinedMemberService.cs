@@ -44,7 +44,8 @@ namespace APC.Applications.Services
                         {
 
                             FinedMemberId = f.finedMemberID,
-                            AmountPaid = (f.amountPaid + " €").ToString(),
+                            AmountPaid = (decimal)f.amountPaid,
+                            FormattedAmountPaid = (f.amountPaid + " €").ToString(),
                             Summary = f.summary,
                             ConstitutionId = f.constitutionID,
                             Section = c.section,
@@ -77,7 +78,8 @@ namespace APC.Applications.Services
                         {
 
                             FinedMemberId = f.finedMemberID,
-                            AmountPaid = (f.amountPaid + " €").ToString(),
+                            AmountPaid = (decimal)f.amountPaid,
+                            FormattedAmountPaid = (f.amountPaid + " €").ToString(),
                             Summary = f.summary,
                             ConstitutionId = f.constitutionID,
                             Section = c.section,

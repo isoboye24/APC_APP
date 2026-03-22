@@ -1,17 +1,14 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Services;
 using APC.BLL;
-using APC.DAL.DAO;
 using APC.DAL.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using static APC.Helper.SingleColumnHelper;
 
 namespace APC.AllForms
 {
@@ -60,7 +57,7 @@ namespace APC.AllForms
 
             GeneralHelper.ApplyRegularFont(14, labelTotalFineMembers);
 
-            GeneralHelper.ApplyRegularFont(16, txtMonthlyDues, txtNoOfAttend, txtYear, cmbMonth, txtYearComments, txtNameComments,
+            GeneralHelper.ApplyRegularFont(16, txtMonthlyDues, txtNoOfAttend, txtYear, cmbMonth, cmbYearComments, txtNameComments,
                 txtComment, txtSurnameComments, cmbGenderComments, cmbMonthComments, txtNameFinedMember, txtSurnameFinedMember,
                 txtConstitutionSection, cmbGenderFinedMember, cmbMonthFinedMember, cmbFineStatus, cmbYearMeeting);
         }
@@ -74,7 +71,7 @@ namespace APC.AllForms
         private void loadConstitutions()
         {
             dataGridViewConstitution.DataSource = _constitutionService.GetAll();
-            ConstitutionHelper.ConfigureConstitutionGrid(dataGridViewConstitution, ConstitutionHelper.ConstitutionGridType.Basic);
+            ConstitutionHelper.ConfigureConstitutionGrid(dataGridViewConstitution, ConstitutionHelper.ConstitutionGridType.Normal);
         }
         
         private void loadFinedMembers()
@@ -234,7 +231,6 @@ namespace APC.AllForms
             txtSurnameComments.Tag = "resizable";
             txtSurnameFinedMember.Tag = "resizable";
             txtYear.Tag = "resizable";
-            txtYearComments.Tag = "resizable";
             txtYearContribution.Tag = "resizable";
             txtYearFinedMember.Tag = "resizable";
             #endregion
@@ -247,6 +243,7 @@ namespace APC.AllForms
             cmbMonthComments.Tag = "resizable";
             cmbMonthContribution.Tag = "resizable";
             cmbMonthFinedMember.Tag = "resizable";
+            cmbYearComments.Tag = "resizable";
             #endregion
 
             #region
@@ -623,7 +620,7 @@ namespace APC.AllForms
        
         private void btnAddFinedMember_Click(object sender, EventArgs e)
         {
-            var form = new FormFinedMember(_finedMemberService);
+            var form = new FormFinedMember(_finedMemberService, _memberService, _constitutionService);
             form.ShowDialog();
             ClearFilters();
         }
@@ -645,7 +642,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormFinedMember(_finedMemberService);
+            var form = new FormFinedMember(_finedMemberService, _memberService, _constitutionService);
             form.loadForEdit(selected, true);
             form.ShowDialog();
             ClearFilters();

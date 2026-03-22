@@ -9,7 +9,8 @@ namespace APC.Applications.DTO
     public class FinedMemberDTO
     {
         public int FinedMemberId { get; set; }
-        public string AmountPaid { get; set; }
+        public decimal AmountPaid { get; set; }
+        public string FormattedAmountPaid { get; set; }
         public string Summary { get; set; }
         public int ConstitutionId { get; set; }
         public string Section { get; set; }

@@ -8,7 +8,8 @@ namespace APC.Helper
     {
         public enum ConstitutionGridType
         {
-            Basic
+            Basic,
+            Normal
         }
 
         public static void ConfigureConstitutionGrid(DataGridView grid, ConstitutionGridType type)
@@ -16,6 +17,15 @@ namespace APC.Helper
             switch (type)
             {
                 case ConstitutionGridType.Basic:
+                    GeneralHelper.SetVisibleColumns(grid, "ShortDescription", "FineWithCurrency");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "ShortDescription", "Summary" },
+                                    { "FineWithCurrency", "Fine" }
+                                });
+                    break;
+
+                case ConstitutionGridType.Normal:
                     GeneralHelper.SetVisibleColumns(grid, "ShortDescription", "Section", "FineWithCurrency");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
