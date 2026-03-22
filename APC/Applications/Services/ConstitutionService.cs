@@ -60,6 +60,22 @@ namespace APC.Applications.Services
                 .OrderBy(x => x.ShortDescription)
                 .ToList();
         }
+        
+        public ConstitutionDTO GetById(int id)
+        {
+            return _repository.GetById(id)
+                .Select(x => new ConstitutionDTO
+                {
+                    ConstitutionId = x.constitutionID,
+                    ConstitutionText = x.constitution1,
+                    Fine = x.fine,
+                    FineWithCurrency = (x.fine + " €").ToString(),
+                    Section = x.section,
+                    ShortDescription = x.ShortDescription,
+                })
+                .OrderBy(x => x.ShortDescription)
+                .FirstOrDefault();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

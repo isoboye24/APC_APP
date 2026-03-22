@@ -782,7 +782,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewConstitution(selected);
+            var form = new FormViewConstitution(selected, _constitutionService);
             form.ShowDialog();
 
             ClearFilters();

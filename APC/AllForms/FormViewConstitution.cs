@@ -1,21 +1,21 @@
-﻿using APC.BLL;
-using APC.DAL;
-using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
 using APC.Helper;
 using System;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using APC.Applications.Interfaces;
 
 namespace APC.AllForms
 {
     public partial class FormViewConstitution : Form
     {
-        private Applications.DTO.ConstitutionDTO _constitutionDTO;
-        public FormViewConstitution(Applications.DTO.ConstitutionDTO constitutionDTO)
+        private readonly IConstitutionService _constitutionService;
+        private ConstitutionDTO _constitutionDTO;
+        public FormViewConstitution(ConstitutionDTO constitutionDTO, IConstitutionService constitutionService)
         {
             InitializeComponent();
             _constitutionDTO = constitutionDTO;
+            _constitutionService = constitutionService;
         }
         // Drag From
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -23,8 +23,7 @@ namespace APC.AllForms
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        public ConstitutionDetailDTO detail = new ConstitutionDetailDTO();
-        ConstitutionBLL bll = new ConstitutionBLL();
+
         public bool isFinedMemberView = false;
         public int ID;
 
@@ -37,24 +36,23 @@ namespace APC.AllForms
         {
             resizeControls();
 
-            txtConstitution.Text = detail.ConstitutionText;
-            labelFine.Text = "€ " + detail.Fine;
-            labelSection.Text = detail.Section;
+            txtConstitution.Text = _constitutionDTO.ConstitutionText;
+            labelFine.Text = "€ " + _constitutionDTO.FineWithCurrency;
+            labelSection.Text = _constitutionDTO.Section;
+
             if (isFinedMemberView)
             {
 
-                List<CONSTITUTION> singleConstitution = bll.GetSingleConstitution(ID);
-                if (singleConstitution.Count == 0)
+                var constitution = _constitutionService.GetById(ID);
+                if (constitution.ConstitutionId == 0)
                 {
                     MessageBox.Show("This constitution does not exist.");
                 }
-                else if (singleConstitution.Count > 0)
+                else if (constitution.ConstitutionId != 0)
                 {
-                    CONSTITUTION constit = new CONSTITUTION();
-                    constit = singleConstitution.First();
-                    txtConstitution.Text = constit.constitution1;
-                    labelFine.Text = "€ " + constit.fine;
-                    labelSection.Text = constit.section;
+                    txtConstitution.Text = constitution.ConstitutionText;
+                    labelFine.Text = constitution.FineWithCurrency;
+                    labelSection.Text = constitution.Section;
                 }
             }
         }

@@ -8,6 +8,7 @@ namespace APC.Applications.Interfaces
     {
         List<ConstitutionDTO> GetAll();
         List<ConstitutionDTO> GetAllDeletedConstitutions();
+        ConstitutionDTO GetById(int id);
         bool Create(Constitution data);
         bool Update(Constitution data);
         bool Delete(int id);
