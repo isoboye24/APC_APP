@@ -1,7 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.BLL;
 using APC.DAL.DTO;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using APC.Helper;
 using System;
 using System.Collections.Generic;

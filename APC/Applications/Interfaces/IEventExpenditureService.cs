@@ -1,11 +1,9 @@
 ﻿using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace APC.Applications.Repositories
+
+namespace APC.Applications.Interfaces
 {
     public interface IEventExpenditureService
     {

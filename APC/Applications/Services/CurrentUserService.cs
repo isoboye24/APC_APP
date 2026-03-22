@@ -1,5 +1,4 @@
-﻿using APC.Domain.Interfaces;
-using System;
+﻿using APC.Applications.Interfaces;
 
 namespace APC.Applications.Services
 {

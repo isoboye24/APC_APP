@@ -1,5 +1,5 @@
 ﻿using APC.Applications.DTO;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -3,7 +3,7 @@ using APC.Applications.Services;
 using APC.BLL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using APC.Helper;
 using System;
 using System.Collections.Generic;
@@ -413,7 +413,6 @@ namespace APC.AllForms
             txtNameComments.Clear();
             txtComment.Clear();
             txtSurnameComments.Clear();
-            txtYearComments.Clear();
             cmbGenderComments.SelectedIndex = -1;
             cmbMonthComments.SelectedIndex = -1;
             loadComments();
@@ -517,8 +516,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormComments(_commentService, _memberService);
-            form.LoadForEdit(selected.CommentId, selected.Content, selected.MemberId, selected.Date, true);
+            var form = new FormComments(_commentService, _memberService, selected, true);
             form.ShowDialog();
 
             ClearFilters();

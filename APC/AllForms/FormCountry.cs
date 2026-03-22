@@ -1,5 +1,5 @@
 ﻿using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using APC.Helper;
 using System;
 using System.Runtime.InteropServices;
@@ -60,12 +60,6 @@ namespace APC
             try
             {
                 var name = txtCountry.Text.Trim();
-
-                if (string.IsNullOrEmpty(name))
-                {
-                    MessageBox.Show("Please enter country");
-                    return;
-                }
 
                 if (_countryId == 0)
                 {

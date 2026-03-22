@@ -1,7 +1,6 @@
 ﻿using APC.Applications.DTO;
-using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

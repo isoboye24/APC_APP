@@ -63,7 +63,7 @@ namespace APC.Helper
         public static void loadMembers(DataGridView grid, MemberDTO dto)
         {
             grid.DataSource = dto.Members;
-            ConfigureMemberGrid(grid, MemberGridType.Basic);
+            ConfigureMemberGrid(grid, MemberGridType.SemiComplete);
         }
 
         public static void loadBirthdayMembers(DataGridView grid, MemberDTO dto)
@@ -87,7 +87,7 @@ namespace APC.Helper
         public static void loadMembersShrinked(DataGridView grid, MemberDTO dto)
         {
             grid.DataSource = dto.Members;
-            ConfigureMemberGrid(grid, MemberGridType.Shrinked);
+            ConfigureMemberGrid(grid, MemberGridType.Basic);
         }
 
         public static void loadComments(DataGridView grid, CommentDTO dto)
