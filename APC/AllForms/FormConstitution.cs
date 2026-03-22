@@ -1,15 +1,8 @@
 ﻿using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL.DTO;
+using APC.Domain.Entities;
+using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -32,9 +25,6 @@ namespace APC.AllForms
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        public ConstitutionDetailDTO detail = new ConstitutionDetailDTO();
-        ConstitutionBLL bll = new ConstitutionBLL();
-        public bool isUpdate = false;
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -46,31 +36,25 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, labelTitle, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(14, txtConstitution, txtAmount, txtSection, txtShortDescription);
+        }
+
         private void FormConstitution_Load(object sender, EventArgs e)
         {
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            resizeControls();
 
-            txtConstitution.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtAmount.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSection.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtShortDescription.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            if (isUpdate)
+            if (_isUpdate)
             {
-                labelTitle.Text = "Edit Constitution";
-                txtAmount.Text = detail.Fine.ToString();
-                txtSection.Text = detail.Section;
-                txtConstitution.Text = detail.ConstitutionText;
-                txtShortDescription.Text = detail.ShortDescription;
+                labelTitle.Text = "Edit " + _constitutionDTO.ShortDescription;
+                txtAmount.Text = _constitutionDTO.Fine.ToString();
+                txtSection.Text = _constitutionDTO.Section;
+                txtConstitution.Text = _constitutionDTO.ConstitutionText;
+                txtShortDescription.Text = _constitutionDTO.ShortDescription;
             }
-            else if (!isUpdate)
+            else
             {
                 labelTitle.Text = "Add Constitution";
             }
@@ -78,61 +62,31 @@ namespace APC.AllForms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtAmount.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Amount is empty.");
-            }
-            else if (txtSection.Text.Trim() == "")
-            {
-                MessageBox.Show("Title is empty.");
-            }
-            else if (txtConstitution.Text.Trim() == "")
-            {
-                MessageBox.Show("Constitution is empty.");
-            }
-            else if (txtShortDescription.Text.Trim() == "")
-            {
-                MessageBox.Show("Short description is empty.");
-            }
-            else
-            {
-                if (!isUpdate)
+                string constitutionText = txtConstitution.Text.Trim();
+                decimal fine = Convert.ToDecimal(txtAmount.Text.Trim());
+                string section = txtSection.Text.Trim();
+                string description = txtShortDescription.Text.Trim();
+
+                if (_constitutionDTO.ConstitutionId == 0)
                 {
-                    ConstitutionDetailDTO constitution = new ConstitutionDetailDTO();
-                    constitution.ConstitutionText = txtConstitution.Text.Trim();
-                    constitution.Fine = Convert.ToInt32(txtAmount.Text.Trim());
-                    constitution.Section = txtSection.Text.Trim();
-                    constitution.ShortDescription = txtShortDescription.Text.Trim();
-                    if (bll.Insert(constitution))
-                    {
-                        MessageBox.Show("Constitution is added.");
-                        txtAmount.Clear();
-                        txtConstitution.Clear();
-                        txtSection.Clear();
-                    }
+                    var constitution = new Constitution(constitutionText, fine, section, description);
+                    _constitutionService.Create(constitution);
+                    MessageBox.Show("Constitution created successfully!");
                 }
-                else if (isUpdate)
+                else
                 {
-                    if (detail.ConstitutionText == txtConstitution.Text.Trim() 
-                        && detail.Section == txtSection.Text.Trim()
-                        && detail.Fine == Convert.ToDecimal(txtAmount.Text.Trim()) 
-                        && detail.ShortDescription == txtShortDescription.Text.Trim())
-                    {
-                        MessageBox.Show("There is no change!");
-                    }
-                    else
-                    {
-                        detail.ConstitutionText = txtConstitution.Text.Trim();
-                        detail.Fine = Convert.ToDecimal(txtAmount.Text.Trim());
-                        detail.Section = txtSection.Text.Trim();
-                        detail.ShortDescription = txtShortDescription.Text.Trim();
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Constitution is updated!");
-                            this.Close();
-                        }
-                    }
+                    var constitution = new Constitution(constitutionText, fine, section, description);
+
+                    _constitutionService.Update(constitution);
+                    MessageBox.Show("Constitution updated successfully!");
+                    this.Close();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
