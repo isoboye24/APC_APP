@@ -1,5 +1,7 @@
 ﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
 using APC.DAL.DTO;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +18,9 @@ namespace APC.AllForms
 {
     public partial class FormViewFinedMember : Form
     {
+        private readonly IConstitutionService _constitutionService;
         private readonly Applications.DTO.FinedMemberDTO _finedMemberDTO;
+        private readonly Applications.DTO.ConstitutionDTO _constitutionDTO;
         public FormViewFinedMember(Applications.DTO.FinedMemberDTO finedMemberDTO)
         {
             InitializeComponent();
@@ -42,40 +46,28 @@ namespace APC.AllForms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, label2, label3, label4, label5, labelSectionBtn, label8, label9, label10, label11,
+                labelTitle, btnClose);
+            GeneralHelper.ApplyRegularFont(14, labelName, labelSurname, labelPosition, labelBalance, labelPaidAmount, labelExpectedAmount);
+        }
+
         private void FormViewFinedMember_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label8.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label10.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label11.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelSectionBtn.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelPaidAmount.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            labelBalance.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            labelExpectedAmount.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            labelName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            labelPosition.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            labelSurname.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            resizeControls();
 
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
-
-            labelName.Text = detail.Name;
-            labelSurname.Text = detail.Surname;
-            labelPosition.Text = detail.Position;
-            labelExpectedAmount.Text = detail.ExpectedAmountWithCurrency;
-            labelPaidAmount.Text = detail.AmountPaidWithCurrency;
-            labelBalance.Text = detail.BalanceWithCurrency;            
-            labelPaymentStatus.Text = "Payment " + detail.FineStatus;
-            labelSectionBtn.Text = detail.ConstitutionSection;
-            txtSurmary.Text = detail.Summary;
-            labelTitle.Text = "Fined on " + detail.Day + "." + detail.MonthID + "." + detail.Year;
-            string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+            labelName.Text = _finedMemberDTO.FirstName;
+            labelSurname.Text = _finedMemberDTO.LastName;
+            labelPosition.Text = _finedMemberDTO.PositionName;
+            labelExpectedAmount.Text = _finedMemberDTO.AmountExpected;
+            labelPaidAmount.Text = _finedMemberDTO.FormattedAmountPaid;
+            labelBalance.Text = _finedMemberDTO.Balance;            
+            labelPaymentStatus.Text = "Payment " + _finedMemberDTO.Status;
+            labelSectionBtn.Text = _finedMemberDTO.Section;
+            txtSurmary.Text = _finedMemberDTO.Summary;
+            labelTitle.Text = _finedMemberDTO.FirstName + " " + _finedMemberDTO.LastName + "'s fine on " + _finedMemberDTO.FormattedFineDate;
+            string imagePath = Application.StartupPath + "\\images\\" + _finedMemberDTO.ImagePath;
             picProfilePic.ImageLocation = imagePath;
         }
 
@@ -98,12 +90,11 @@ namespace APC.AllForms
 
         private void labelSectionBtn_Click(object sender, EventArgs e)
         {
-            FormViewConstitution open = new FormViewConstitution();
-            open.isFinedMemberView = true;
-            open.ID = constID;
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            string section = _finedMemberDTO.Section;
+            
+            var form = new FormViewConstitution(_constitutionDTO, _constitutionService);
+            form.loadFromFinedMember(section, true);
+            form.ShowDialog();
         }
     }
 }

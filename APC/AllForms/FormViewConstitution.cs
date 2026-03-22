@@ -11,25 +11,32 @@ namespace APC.AllForms
     {
         private readonly IConstitutionService _constitutionService;
         private ConstitutionDTO _constitutionDTO;
+
+        private bool _isFinedMemberView = false;
+        private string _section;
+
         public FormViewConstitution(ConstitutionDTO constitutionDTO, IConstitutionService constitutionService)
         {
             InitializeComponent();
             _constitutionDTO = constitutionDTO;
             _constitutionService = constitutionService;
         }
+
         // Drag From
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-
-        public bool isFinedMemberView = false;
-        public int ID;
-
         private void resizeControls()
         {
             GeneralHelper.ApplyBoldFont(14, labelTitle, label1, labelFine, labelTitle, btnClose, labelSection);
+        }
+
+        public void loadFromFinedMember(string section, bool isFinedMemberView)
+        {
+            _section = section;
+            _isFinedMemberView = isFinedMemberView;
         }
 
         private void FormViewConstitution_Load(object sender, EventArgs e)
@@ -40,10 +47,9 @@ namespace APC.AllForms
             labelFine.Text = "€ " + _constitutionDTO.FineWithCurrency;
             labelSection.Text = _constitutionDTO.Section;
 
-            if (isFinedMemberView)
+            if (_isFinedMemberView)
             {
-
-                var constitution = _constitutionService.GetById(ID);
+                var constitution = _constitutionService.GetBySection(_section);
                 if (constitution.ConstitutionId == 0)
                 {
                     MessageBox.Show("This constitution does not exist.");

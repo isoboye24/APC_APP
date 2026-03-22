@@ -56,6 +56,11 @@ namespace APC.Infrastructure.Repositories
         {
             return _db.CONSTITUTION.Where(x => x.isDeleted && x.constitutionID == id);
         }
+        
+        public IQueryable<CONSTITUTION> GetBySection(string section)
+        {
+            return _db.CONSTITUTION.Where(x => x.isDeleted && x.section == section);
+        }
 
         public bool Insert(Constitution data)
         {

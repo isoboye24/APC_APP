@@ -10,6 +10,8 @@ namespace APC.Applications.Interfaces
         IQueryable<CONSTITUTION> GetAll();
         IQueryable<CONSTITUTION> GetAllDeletedConstitutions();
         IQueryable<CONSTITUTION> GetById(int id);
+        IQueryable<CONSTITUTION> GetBySection(string section);
+
         bool Insert(Constitution data);
         bool Update(Constitution data);
         bool Delete(int id);

@@ -613,11 +613,11 @@ namespace APC.AllForms
             }
         }
 
+
         // -------------------------------------------------------------------------
         // -------------------- FINED MEMBERS ----------------------
         // -------------------------------------------------------------------------
 
-       
         private void btnAddFinedMember_Click(object sender, EventArgs e)
         {
             var form = new FormFinedMember(_finedMemberService, _memberService, _constitutionService);

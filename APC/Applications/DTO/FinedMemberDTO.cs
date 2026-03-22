@@ -16,6 +16,7 @@ namespace APC.Applications.DTO
         public string Section { get; set; }
         public string ShortDescription { get; set; }
         public string AmountExpected { get; set; }
+        public string Balance { get; set; }
         public int MemberId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
