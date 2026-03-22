@@ -16,16 +16,16 @@ namespace APC.Helper
             switch (type)
             {
                 case FinedMemberGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "Name", "Surname", "ConstitutionShortDescription",
-                        "ExpectedAmountWithCurrency", "AmountPaidWithCurrency", "FineStatus", "Day",
-                        "MonthName", "Year");
+                    GeneralHelper.SetVisibleColumns(grid, "FirstName", "LastName", "ShortDescription",
+                        "AmountExpected", "AmountPaid", "Status", "FormattedFineDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
-                                    { "ConstitutionShortDescription", "Violated" },
-                                    { "ExpectedAmountWithCurrency", "Fine" },
-                                    { "AmountPaidWithCurrency", "Paid" },
-                                    { "FineStatus", "Status" },
-                                    { "MonthName", "Month" }
+                                    { "FirstName", "First Name" },
+                                    { "LastName", "Last Name" },
+                                    { "ShortDescription", "Violated" },
+                                    { "AmountExpected", "Fine" },
+                                    { "AmountPaid", "Paid" },
+                                    { "FormattedFineDate", "Date" }
                                 });
                     break;
             }

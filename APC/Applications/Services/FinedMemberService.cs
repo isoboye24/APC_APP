@@ -37,13 +37,14 @@ namespace APC.Applications.Services
         {
             var data = (from f in _repository.GetAll()
                         join m in _memberRepository.GetAll() on f.memberID equals m.MemberId
+                        join g in _genderRepository.GetAll() on m.PersonalInfo.GenderId equals g.genderID
                         join p in _positionRepository.GetAll() on m.MembershipInfo.PositionId equals p.positionID
                         join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
                         select new FinedMemberDTO
                         {
 
                             FinedMemberId = f.finedMemberID,
-                            AmountPaid = (decimal)f.amountPaid,
+                            AmountPaid = (f.amountPaid + " €").ToString(),
                             Summary = f.summary,
                             ConstitutionId = f.constitutionID,
                             Section = c.section,
@@ -53,6 +54,8 @@ namespace APC.Applications.Services
                             FirstName = m.PersonalInfo.FirstName,
                             LastName = m.PersonalInfo.LastName,
                             ImagePath = m.PersonalInfo.ImagePath,
+                            GenderId = m.PersonalInfo.GenderId,
+                            GenderName = g.genderName,
                             PositionId = m.MembershipInfo.PositionId,
                             PositionName = p.positionName,
                             Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine)  ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
@@ -67,13 +70,14 @@ namespace APC.Applications.Services
         {
             var data = (from f in _repository.GetAllDeletedFinedMembers()
                         join m in _memberRepository.GetAll() on f.memberID equals m.MemberId
+                        join g in _genderRepository.GetAll() on m.PersonalInfo.GenderId equals g.genderID
                         join p in _positionRepository.GetAll() on m.MembershipInfo.PositionId equals p.positionID
                         join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
                         select new FinedMemberDTO
                         {
 
                             FinedMemberId = f.finedMemberID,
-                            AmountPaid = (decimal)f.amountPaid,
+                            AmountPaid = (f.amountPaid + " €").ToString(),
                             Summary = f.summary,
                             ConstitutionId = f.constitutionID,
                             Section = c.section,
@@ -83,6 +87,8 @@ namespace APC.Applications.Services
                             FirstName = m.PersonalInfo.FirstName,
                             LastName = m.PersonalInfo.LastName,
                             ImagePath = m.PersonalInfo.ImagePath,
+                            GenderId = m.PersonalInfo.GenderId,
+                            GenderName = g.genderName,
                             PositionId = m.MembershipInfo.PositionId,
                             PositionName = p.positionName,
                             Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine)  ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),

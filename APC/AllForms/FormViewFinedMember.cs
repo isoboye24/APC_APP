@@ -1,4 +1,5 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
+using APC.DAL.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +16,11 @@ namespace APC.AllForms
 {
     public partial class FormViewFinedMember : Form
     {
-        public FormViewFinedMember()
+        private readonly Applications.DTO.FinedMemberDTO _finedMemberDTO;
+        public FormViewFinedMember(Applications.DTO.FinedMemberDTO finedMemberDTO)
         {
             InitializeComponent();
+            _finedMemberDTO = finedMemberDTO;
         }
         // Drag From
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

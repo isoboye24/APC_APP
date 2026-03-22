@@ -22,12 +22,14 @@ namespace APC.AllForms
         private readonly IGenderService _genderService;
         private readonly IMonthService _monthService;
         private readonly IConstitutionService _constitutionService;
+        private readonly IFinedMemberService _finedMemberService;
 
         private List<Applications.DTO.CommentDTO> _commentDTO;
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
+        private List<Applications.DTO.FinedMemberDTO> _finedMemberDTO;
 
         public FormMeetingBoard(ICommentService commentService, IGenderService genderService, IMemberService memberService, 
-            IMonthService monthService, IConstitutionService constitutionService)
+            IMonthService monthService, IConstitutionService constitutionService, IFinedMemberService finedMemberService)
         {
             InitializeComponent();
             _commentService = commentService;
@@ -35,6 +37,7 @@ namespace APC.AllForms
             _memberService = memberService;
             _monthService = monthService;
             _constitutionService = constitutionService;
+            _finedMemberService = finedMemberService;
         }
         GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
         GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
@@ -43,10 +46,6 @@ namespace APC.AllForms
         SpecialContributionDetailDTO specialContributionDetail = new SpecialContributionDetailDTO();
         SpecialContributionsBLL specialContributionsBLL = new SpecialContributionsBLL();
         SpecialContributionDTO specialContributionDTO = new SpecialContributionDTO();
-
-        FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
-        FinedMemberDTO finedMemberDTO = new FinedMemberDTO();
-        FinedMemberDetailDTO finedMemberDetail = new FinedMemberDetailDTO();
 
         private void resizeControls()
         {
@@ -77,11 +76,17 @@ namespace APC.AllForms
             dataGridViewConstitution.DataSource = _constitutionService.GetAll();
             ConstitutionHelper.ConfigureConstitutionGrid(dataGridViewConstitution, ConstitutionHelper.ConstitutionGridType.Basic);
         }
+        
+        private void loadFinedMembers()
+        {
+            dataGridViewFinedMembers.DataSource = _finedMemberService.GetAll();
+            FinedMemberHelper.ConfigureFinedMemberGrid(dataGridViewFinedMembers, FinedMemberHelper.FinedMemberGridType.Basic);
+        }
 
         private void FormMeetingBoard_Load(object sender, EventArgs e)
         {
             resizeControls();
-            loadComments();
+            
             loadConstitutions();
 
             dto = bll.Select(DateTime.Now.Year);
@@ -91,12 +96,13 @@ namespace APC.AllForms
             cmbYearMeeting.DataSource = dto.Years;
             cmbYearMeeting.SelectedIndex = -1;
 
+            loadComments();
             cmbGenderComments.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderComments, "GenderName", "GenderId");
             cmbMonthComments.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthComments, "MonthName", "MonthId");
 
-            finedMemberDTO = finedMemberBLL.Select();
+            loadFinedMembers();
             cmbMonthFinedMember.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthFinedMember, "MonthName", "MonthID");
             cmbGenderFinedMember.DataSource = _genderService.GetAll();
@@ -113,7 +119,6 @@ namespace APC.AllForms
 
             #region
             LoadDataGridView.loadGeneralAttendances(dataGridView1, dto);
-            LoadDataGridView.loadFinedMembers(dataGridViewFinedMembers, finedMemberDTO);
             LoadDataGridView.loadSpecialContributions(dataGridViewSpecialContributions, specialContributionDTO);
             #endregion
 
@@ -422,9 +427,7 @@ namespace APC.AllForms
             txtConstitution.Clear();
             txtSection.Clear();
             txtFine.Clear();
-            constitutionBLL = new ConstitutionBLL();
-            constitutionDTO = constitutionBLL.Select();
-            dataGridViewConstitution.DataSource = constitutionDTO.Constitutions;
+            loadConstitutions();
 
             txtNameFinedMember.Clear();
             txtSurnameFinedMember.Clear();
@@ -433,9 +436,7 @@ namespace APC.AllForms
             cmbFineStatus.SelectedIndex = -1;
             cmbMonthFinedMember.SelectedIndex = -1;
             cmbGenderFinedMember.SelectedIndex = -1;
-            finedMemberBLL = new FinedMemberBLL();
-            finedMemberDTO = finedMemberBLL.Select();
-            dataGridViewFinedMembers.DataSource = finedMemberDTO.FineMembers;
+            loadFinedMembers();
 
             txtAmountSContributions.Clear();
             txtNoOfContributors.Clear();
@@ -514,12 +515,12 @@ namespace APC.AllForms
             var selected = GetSelectedComment();
             if (selected == null)
             {
-                MessageBox.Show("Please select a country from the table");
+                MessageBox.Show("Please select a comment from the table");
                 return;
             }
 
             var form = new FormComments(_commentService, _memberService);
-            form.LoadForEdit(selected, true);
+            form.loadForEdit(selected, true);
             form.ShowDialog();
 
             ClearFilters();
@@ -619,80 +620,74 @@ namespace APC.AllForms
         // -------------------- FINED MEMBERS ----------------------
         // -------------------------------------------------------------------------
 
-        private void dataGridViewFinedMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            finedMemberDetail = GeneralHelper.MapFromGrid<FinedMemberDetailDTO>(dataGridViewFinedMembers, e.RowIndex);
-        }
+       
         private void btnAddFinedMember_Click(object sender, EventArgs e)
         {
-            FormFinedMember open = new FormFinedMember();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormFinedMember(_finedMemberService);
+            form.ShowDialog();
             ClearFilters();
+        }
+
+        private Applications.DTO.FinedMemberDTO GetSelectedFinedMember()
+        {
+            if (dataGridViewFinedMembers.CurrentRow == null)
+                return null;
+
+            return dataGridViewFinedMembers.CurrentRow.DataBoundItem as Applications.DTO.FinedMemberDTO;
         }
 
         private void btnUpdateFinedMember_Click(object sender, EventArgs e)
         {
-            if (finedMemberDetail.FinedMemberID == 0)
+            var selected = GetSelectedFinedMember();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table.");
+                MessageBox.Show("Please select a fined member from the table");
+                return;
             }
-            else
-            {
-                FormFinedMember open = new FormFinedMember();
-                open.detail = finedMemberDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormFinedMember(_finedMemberService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+            ClearFilters();
         }
 
         private void btnViewFinedMember_Click(object sender, EventArgs e)
         {
-            if (finedMemberDetail.FinedMemberID == 0)
+            var selected = GetSelectedFinedMember();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table.");
+                MessageBox.Show("Please select a fined member from the table");
+                return;
             }
-            else
-            {
-                FormViewFinedMember open = new FormViewFinedMember();
-                open.detail = finedMemberDetail;
-                open.constID = finedMemberDetail.ConstitutionID;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormViewFinedMember(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
         private void btnDeleteFinedMember_Click(object sender, EventArgs e)
         {
-            if (finedMemberDetail.FinedMemberID == 0)
+            var selected = GetSelectedFinedMember();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table.");
+                MessageBox.Show("Please select a fined member.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (finedMemberBLL.Delete(finedMemberDetail))
-                    {
-                        MessageBox.Show("Fined member was deleted!");
-                        ClearFilters();
-                    }
-                }
+                _finedMemberService.Delete(selected.FinedMemberId);
+                ClearFilters();
             }
         }
 
         private void txtYearFinedMember_TextChanged(object sender, EventArgs e)
         {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
-            list = list.Where(x => x.Year.ToString().Contains(txtYearFinedMember.Text.Trim())).ToList();
-            dataGridViewFinedMembers.DataSource = list;
+            string search = txtYearFinedMember.Text.Trim().ToLower();
+            var filtered = _finedMemberDTO.Where(x => x.FineDate.Year.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewFinedMembers.DataSource = filtered;
         }
 
         private void txtYearFinedMember_KeyPress(object sender, KeyPressEventArgs e)
@@ -702,49 +697,55 @@ namespace APC.AllForms
 
         private void txtNameFinedMember_TextChanged(object sender, EventArgs e)
         {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
-            list = list.Where(x => x.Name.Contains(txtNameFinedMember.Text.Trim())).ToList();
-            dataGridViewFinedMembers.DataSource = list;
+            string search = txtNameFinedMember.Text.Trim().ToLower();
+            var filtered = _finedMemberDTO.Where(x => x.FirstName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewFinedMembers.DataSource = filtered;
         }
 
         private void txtSurnameFinedMember_TextChanged(object sender, EventArgs e)
         {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
-            list = list.Where(x => x.Surname.Contains(txtSurnameFinedMember.Text.Trim())).ToList();
-            dataGridViewFinedMembers.DataSource = list;
+            string search = txtSurnameFinedMember.Text.Trim().ToLower();
+            var filtered = _finedMemberDTO.Where(x => x.LastName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewFinedMembers.DataSource = filtered;
         }
 
         private void txtConstitutionSection_TextChanged(object sender, EventArgs e)
         {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
-            list = list.Where(x => x.ConstitutionSection.Contains(txtConstitutionSection.Text.Trim())).ToList();
-            dataGridViewFinedMembers.DataSource = list;
+            string search = txtConstitutionSection.Text.Trim().ToLower();
+            var filtered = _finedMemberDTO.Where(x => x.Section.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewFinedMembers.DataSource = filtered;
         }
 
         private void btnSearchFinedMember_Click(object sender, EventArgs e)
         {
-            List<FinedMemberDetailDTO> list = finedMemberDTO.FineMembers;
+
+            var filtered = _finedMemberDTO.AsQueryable();
+
+            if (cmbGenderFinedMember.SelectedIndex == -1 && cmbMonthFinedMember.SelectedIndex == -1 && cmbFineStatus.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a gender or month or a fine status");
+                return;
+            }
+
             if (cmbGenderFinedMember.SelectedIndex != -1)
             {
-                list = list.Where(x => x.GenderID == Convert.ToInt32(cmbGenderFinedMember.SelectedValue)).ToList();
+                int searchedGender = Convert.ToInt32(cmbGenderFinedMember.SelectedValue);
+                filtered = filtered.Where(x => x.GenderId == searchedGender);
             }
+
             if (cmbMonthFinedMember.SelectedIndex != -1)
             {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthFinedMember.SelectedValue)).ToList();
+                int searchedMonth = Convert.ToInt32(cmbMonthFinedMember.SelectedValue);
+                filtered = filtered.Where(x => x.FineDate.Month == searchedMonth);
             }
-            if (cmbFineStatus.SelectedIndex == 0)
+
+            if (cmbFineStatus.SelectedIndex != -1)
             {
-                list = list.Where(x => x.FineStatus == "Completed").ToList();
+                string searchedStatus = cmbFineStatus.SelectedValue?.ToString();
+                filtered = filtered.Where(x => x.Status != null && x.Status.IndexOf(searchedStatus, StringComparison.OrdinalIgnoreCase) >= 0);
             }
-            if (cmbFineStatus.SelectedIndex == 1)
-            {
-                list = list.Where(x => x.FineStatus == "NOT completed").ToList();
-            }
-            if (cmbFineStatus.SelectedIndex == 2)
-            {
-                list = list.Where(x => x.FineStatus == "NOT Paid").ToList();
-            }
-            dataGridViewFinedMembers.DataSource = list;
+
+            dataGridViewFinedMembers.DataSource = filtered.ToList();
         }
 
         private void btnClearFinedMember_Click(object sender, EventArgs e)
@@ -778,7 +779,7 @@ namespace APC.AllForms
             var selected = GetSelectedConstitution();
             if (selected == null)
             {
-                MessageBox.Show("Please select a country from the table");
+                MessageBox.Show("Please select a constitution from the table");
                 return;
             }
 

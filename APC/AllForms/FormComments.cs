@@ -75,7 +75,7 @@ namespace APC
             MemberHelper.ConfigureMemberGrid(dataGridView1, MemberHelper.MemberGridType.Basic);
         }
 
-        public void LoadForEdit(Applications.DTO.CommentDTO dto, bool isUpdate)
+        public void loadForEdit(Applications.DTO.CommentDTO dto, bool isUpdate)
         {
             _commentDTO = dto;
             _selectedMemberId = _commentDTO.MemberId;

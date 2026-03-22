@@ -9,7 +9,7 @@ namespace APC.Applications.DTO
     public class FinedMemberDTO
     {
         public int FinedMemberId { get; set; }
-        public decimal AmountPaid { get; set; }
+        public string AmountPaid { get; set; }
         public string Summary { get; set; }
         public int ConstitutionId { get; set; }
         public string Section { get; set; }
@@ -19,6 +19,8 @@ namespace APC.Applications.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ImagePath { get; set; }
+        public int GenderId { get; set; }
+        public string GenderName { get; set; }
         public int PositionId { get; set; }
         public string PositionName { get; set; }
         public string Status { get; set; }

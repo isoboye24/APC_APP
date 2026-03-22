@@ -1666,7 +1666,6 @@
             this.dataGridViewFinedMembers.RowTemplate.Height = 40;
             this.dataGridViewFinedMembers.Size = new System.Drawing.Size(1209, 401);
             this.dataGridViewFinedMembers.TabIndex = 0;
-            this.dataGridViewFinedMembers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFinedMembers_RowEnter);
             // 
             // tableLayoutPanel17
             // 

@@ -1,4 +1,6 @@
-﻿using APC.BLL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
@@ -18,9 +20,11 @@ namespace APC.AllForms
 {
     public partial class FormFinedMember : Form
     {
-        public FormFinedMember()
+        private readonly IFinedMemberService _finedMemberService;
+        public FormFinedMember(IFinedMemberService finedMemberService)
         {
             InitializeComponent();
+            _finedMemberService = finedMemberService;
         }
         // Drag From
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -89,6 +93,13 @@ namespace APC.AllForms
             {
                 btnChangeConstitution.Text = "Change const.";
             }
+        }
+
+        public void loadForEdit(Applications.DTO.FinedMemberDTO dto, bool isUpdate)
+        {
+            _commentDTO = dto;
+            _selectedMemberId = _commentDTO.MemberId;
+            _isUpdate = isUpdate;
         }
 
         private void FormFinedMember_Load(object sender, EventArgs e)
