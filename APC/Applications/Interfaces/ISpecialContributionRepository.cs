@@ -1,14 +1,14 @@
-﻿using APC.Applications.DTO;
+﻿using APC.DAL;
 using APC.Domain.Entities;
-using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace APC.Applications.Interfaces
 {
     public interface ISpecialContributionRepository
     {
-        List<SpecialContribution> GetAll();
-        SpecialContribution GetById(int id);
+        IQueryable<SPECIAL_CONTRIBUTIONS> GetAll();
+        IQueryable<SPECIAL_CONTRIBUTIONS> GetAllDeletedSpecialContributions();
+        IQueryable<SPECIAL_CONTRIBUTIONS> GetById(int id);
         bool Insert(SpecialContribution data);
         bool Update(SpecialContribution data);
         bool Delete(int id);
@@ -16,7 +16,5 @@ namespace APC.Applications.Interfaces
         bool PermanentDelete(int id);
         bool Exists(string title);
         int Count();
-        List<SpecialContribution> GetAllDeleted();
-        List<SpecialContributionFullDetails> GetFullSpecialContributionDetails();
     }
 }

@@ -1,27 +1,18 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.DAL.DTO;
 using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace APC.AllForms
 {
     public partial class FormViewFinedMember : Form
     {
         private readonly IConstitutionService _constitutionService;
-        private readonly Applications.DTO.FinedMemberDTO _finedMemberDTO;
-        private readonly Applications.DTO.ConstitutionDTO _constitutionDTO;
-        public FormViewFinedMember(Applications.DTO.FinedMemberDTO finedMemberDTO)
+        private readonly FinedMemberDTO _finedMemberDTO;
+        private readonly ConstitutionDTO _constitutionDTO;
+        public FormViewFinedMember(FinedMemberDTO finedMemberDTO)
         {
             InitializeComponent();
             _finedMemberDTO = finedMemberDTO;
@@ -31,9 +22,6 @@ namespace APC.AllForms
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
-
-        public FinedMemberDetailDTO detail = new FinedMemberDetailDTO();
-        public int constID;
 
         private void btnClose_Click(object sender, EventArgs e)
         {

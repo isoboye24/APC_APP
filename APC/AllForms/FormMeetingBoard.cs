@@ -42,7 +42,7 @@ namespace APC.AllForms
 
         SpecialContributionDetailDTO specialContributionDetail = new SpecialContributionDetailDTO();
         SpecialContributionsBLL specialContributionsBLL = new SpecialContributionsBLL();
-        SpecialContributionDTO specialContributionDTO = new SpecialContributionDTO();
+        DAL.DTO.SpecialContributionDTO specialContributionDTO = new DAL.DTO.SpecialContributionDTO();
 
         private void resizeControls()
         {
@@ -853,6 +853,10 @@ namespace APC.AllForms
 
         private void btnAddContribution_Click(object sender, EventArgs e)
         {
+            var form = new FormSpecialContribution(_finedMemberService, _memberService, _constitutionService);
+            form.ShowDialog();
+            ClearFilters();
+
             FormSpecialContribution open = new FormSpecialContribution();
             this.Hide();
             open.ShowDialog();

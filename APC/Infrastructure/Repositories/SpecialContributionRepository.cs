@@ -1,9 +1,7 @@
-﻿using APC.Applications.DTO;
-using APC.DAL;
+﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace APC.Infrastructure.Repositories
@@ -36,46 +34,17 @@ namespace APC.Infrastructure.Repositories
             return _db.SPECIAL_CONTRIBUTIONS.Any(x => !x.isDeleted && x.title == title);
         }
 
-        public List<SpecialContribution> GetAll()
+        public IQueryable<SPECIAL_CONTRIBUTIONS> GetAll()
         {
-            var data = _db.SPECIAL_CONTRIBUTIONS
-                .Where(x => !x.isDeleted)
-                .ToList();
-
-            return data
-                .Select(x => SpecialContribution.Rehydrate(
-                    x.specialContributionID,
-                    x.title,
-                    x.summary,
-                    x.amountToContribute,
-                    x.supervisorID,
-                    x.contributionStartDate,
-                    x.contributionEndDate,
-                    x.amountExpected
-                ))
-                .ToList();
+            return _db.SPECIAL_CONTRIBUTIONS.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<SPECIAL_CONTRIBUTIONS> GetAllDeletedSpecialContributions()
+        {
+            return _db.SPECIAL_CONTRIBUTIONS.Where(x => x.isDeleted);
         }
 
-        public List<SpecialContribution> GetAllDeleted()
-        {
-            var data = _db.SPECIAL_CONTRIBUTIONS
-                .Where(x => x.isDeleted)
-                .ToList();
-
-            return data
-                .Select(x => SpecialContribution.Rehydrate(
-                    x.specialContributionID,
-                    x.title,
-                    x.summary,
-                    x.amountToContribute,
-                    x.supervisorID,
-                    x.contributionStartDate,
-                    x.contributionEndDate,
-                    x.amountExpected
-                ))
-                .ToList();
-        }
-
+        
         public bool GetBack(int id)
         {
             var entity = _db.SPECIAL_CONTRIBUTIONS.First(x => x.specialContributionID == id);
@@ -85,58 +54,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public SpecialContribution GetById(int id)
+        public IQueryable<SPECIAL_CONTRIBUTIONS> GetById(int id)
         {
-            var entity = _db.SPECIAL_CONTRIBUTIONS
-                .Where(x => x.specialContributionID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.specialContributionID,
-                    x.title,
-                    x.summary,
-                    x.amountToContribute,
-                    x.supervisorID,
-                    x.contributionStartDate,
-                    x.contributionEndDate,
-                    x.amountExpected
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return SpecialContribution.Rehydrate(
-                    entity.specialContributionID,
-                    entity.title,
-                    entity.summary,
-                    entity.amountToContribute,
-                    entity.supervisorID,
-                    entity.contributionStartDate,
-                    entity.contributionEndDate,
-                    entity.amountExpected
-            );
-        }
-
-        public List<SpecialContributionFullDetails> GetFullSpecialContributionDetails()
-        {
-            var contribution = (from sc in _db.SPECIAL_CONTRIBUTIONS.Where(x => !x.isDeleted)
-                          join m in _db.MEMBER on sc.supervisorID equals m.memberID
-                          select new SpecialContributionFullDetails
-                          {
-                              SpecialContributionId = sc.specialContributionID,
-                              Title = sc.title,
-                              Summary = sc.summary,
-                              AmountToContribute = sc.amountToContribute,
-                              SupervisorId = sc.supervisorID,
-                              FirstName = m.name,
-                              LastName = m.surname,
-                              ImagePath = m.imagePath,
-                              ContributionStartDate = sc.contributionStartDate,
-                              ContributionEndDate = sc.contributionEndDate,
-                              AmountExpected = sc.amountExpected
-                          });
-
-            return contribution.ToList();
+            return _db.SPECIAL_CONTRIBUTIONS.Where(x => !x.isDeleted && x.specialContributionID == id);
         }
 
         public bool Insert(SpecialContribution data)

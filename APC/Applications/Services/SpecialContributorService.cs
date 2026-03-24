@@ -1,17 +1,23 @@
 ﻿using APC.Applications.DTO;
-using APC.Domain.Entities;
 using APC.Applications.Interfaces;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace APC.Applications.Services
 {
     public class SpecialContributorService : ISpecialContributorService
     {
         private readonly ISpecialContributorRepository _repository;
-        public SpecialContributorService(ISpecialContributorRepository repository)
+        private readonly ISpecialContributionRepository _specialContributionRepository;
+        private readonly IMemberRepository _memberRepository;
+        public SpecialContributorService(ISpecialContributorRepository repository, ISpecialContributionRepository specialContributionRepository,
+            IMemberRepository memberRepository)
         {
             _repository = repository;
+            _specialContributionRepository = specialContributionRepository;
+            _memberRepository = memberRepository;
         }
 
         public int Count()
@@ -28,17 +34,69 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<SpecialContributor> GetAll()
-            => _repository.GetAll();
+        public List<SpecialContributorDTO> GetAll()
+        {
+            var data = (from c in _repository.GetAll()
+                        join m in _memberRepository.GetAll() on c.memberID equals m.MemberId
+                        join sc in _specialContributionRepository.GetAll() on c.specialContributionID equals sc.specialContributionID
+                        select new SpecialContributorDTO
+                        {
+                            SpecialContributorId = c.specialContributorID,
+                            MemberId = c.memberID,
+                            FirstName = m.PersonalInfo.FirstName,
+                            LastName = m.PersonalInfo.LastName,
+                            ImagePath = m.PersonalInfo.ImagePath,
+                            AmountContributed = c.amountContributed,
+                            FormattedContributedDate = c.contributedDate.ToString("dd.MM.yyyy"),
+                            ContributedDate = c.contributedDate,
+                            AmountExpected = sc.amountExpected,
+                            Balance = (sc.amountExpected - c.amountContributed).ToString(),
 
-        public List<SpecialContributor> GetAllDeleted()
-            => _repository.GetAllDeleted();
+                            PaymentStatus = c.amountContributed <= 0 ? "Not Paid" : (c.amountContributed > 0 && 
+                            c.amountContributed < sc.amountExpected) ? "Not Completed" : c.amountContributed == sc.amountExpected ? 
+                            "Completed" : ((c.amountContributed - sc.amountExpected) + " € Extra").ToString(),
+
+                            Summary = sc.summary,
+                            SpecialContributionId = sc.specialContributionID,
+                        }).OrderByDescending(x => x.ContributedDate.Year).ThenByDescending(x => x.ContributedDate.Month).ThenByDescending(x => x.ContributedDate.Day).ThenBy(x => x.FirstName).ToList();
+
+            return data;
+        }
+
+        public List<SpecialContributorDTO> GetAllDeletedSpecialContributors()
+        {
+            var data = (from c in _repository.GetAllDeletedContributors()
+                        join m in _memberRepository.GetAll() on c.memberID equals m.MemberId
+                        join sc in _specialContributionRepository.GetAll() on c.specialContributionID equals sc.specialContributionID
+                        select new SpecialContributorDTO
+                        {
+                            SpecialContributorId = c.specialContributorID,
+                            MemberId = c.memberID,
+                            FirstName = m.PersonalInfo.FirstName,
+                            LastName = m.PersonalInfo.LastName,
+                            ImagePath = m.PersonalInfo.ImagePath,
+                            AmountContributed = c.amountContributed,
+                            FormattedContributedDate = c.contributedDate.ToString("dd.MM.yyyy"),
+                            ContributedDate = c.contributedDate,
+                            AmountExpected = sc.amountExpected,
+                            Balance = (sc.amountExpected - c.amountContributed).ToString(),
+
+                            PaymentStatus = c.amountContributed <= 0 ? "Not Paid" : (c.amountContributed > 0 &&
+                            c.amountContributed < sc.amountExpected) ? "Not Completed" : c.amountContributed == sc.amountExpected ?
+                            "Completed" : ((c.amountContributed - sc.amountExpected) + " € Extra").ToString(),
+
+                            Summary = sc.summary,
+                            SpecialContributionId = sc.specialContributionID,
+                        }).OrderByDescending(x => x.ContributedDate.Year).ThenByDescending(x => x.ContributedDate.Month).ThenByDescending(x => x.ContributedDate.Day).ThenBy(x => x.FirstName).ToList();
+
+            return data;
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);
-
-        public List<SpecialContributorFullDetails> GetFullSpecialContributorFullDetails()
-            => _repository.GetFullSpecialContributorDetails();
+        
+        public decimal GetByContributionId(int id)
+            => _repository.GetByContributionId(id);
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
@@ -50,12 +108,12 @@ namespace APC.Applications.Services
             if (contributor == null)
                 throw new InvalidOperationException("Contributor not found");
 
-            contributor.UpdateMember(data.MemberId);
-            contributor.UpdateAmountContributed(data.AmountContributed);
-            contributor.UpdateContributedDate(data.ContributedDate);
-            contributor.UpdateSummary(data.Summary);
+            data.UpdateMember(data.MemberId);
+            data.UpdateAmountContributed(data.AmountContributed);
+            data.UpdateContributedDate(data.ContributedDate);
+            data.UpdateSummary(data.Summary);
             
-            return _repository.Update(contributor);
+            return _repository.Update(data);
         }
     }
 }

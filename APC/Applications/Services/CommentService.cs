@@ -12,9 +12,11 @@ namespace APC.Applications.Services
         private readonly ICommentRepository _repository;
         private readonly IMemberService _memberRepo;
         private readonly IGenderService _genderRepo;
-        public CommentService(ICommentRepository repository)
+        public CommentService(ICommentRepository repository, IMemberService memberRepo, IGenderService genderRepo)
         {
             _repository = repository;
+            _memberRepo = memberRepo;
+            _genderRepo = genderRepo;
         }
 
         public int Count()

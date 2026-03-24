@@ -1,13 +1,8 @@
-﻿using APC.Applications.DTO;
-using APC.DAL;
+﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -38,40 +33,14 @@ namespace APC.Infrastructure.Repositories
             return _db.SPECIAL_CONTRIBUTORS.Any(x => !x.isDeleted && x.memberID == memberId && x.specialContributionID == specialContributionId);
         }
 
-        public List<SpecialContributor> GetAll()
+        public IQueryable<SPECIAL_CONTRIBUTORS> GetAll()
         {
-            var data = _db.SPECIAL_CONTRIBUTORS
-                .Where(x => !x.isDeleted)
-                .ToList();
-
-            return data
-                .Select(x => SpecialContributor.Rehydrate(
-                    x.specialContributorID,
-                    x.memberID,
-                    x.amountContributed,
-                    x.contributedDate,
-                    x.summary,
-                    x.specialContributionID
-                ))
-                .ToList();
+            return _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted);
         }
-
-        public List<SpecialContributor> GetAllDeleted()
+        
+        public IQueryable<SPECIAL_CONTRIBUTORS> GetAllDeletedContributors()
         {
-            var data = _db.SPECIAL_CONTRIBUTORS
-                .Where(x => x.isDeleted)
-                .ToList();
-
-            return data
-                .Select(x => SpecialContributor.Rehydrate(
-                    x.specialContributorID,
-                    x.memberID,
-                    x.amountContributed,
-                    x.contributedDate,
-                    x.summary,
-                    x.specialContributionID
-                ))
-                .ToList();
+            return _db.SPECIAL_CONTRIBUTORS.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -83,57 +52,15 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public SpecialContributor GetById(int id)
+        public IQueryable<SPECIAL_CONTRIBUTORS> GetById(int id)
         {
-            var entity = _db.SPECIAL_CONTRIBUTORS
-                .Where(x => x.specialContributorID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.specialContributorID,
-                    x.memberID,
-                    x.amountContributed,
-                    x.contributedDate,
-                    x.summary,
-                    x.specialContributionID
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return SpecialContributor.Rehydrate(
-                    entity.specialContributorID,
-                    entity.memberID,
-                    entity.amountContributed,
-                    entity.contributedDate,
-                    entity.summary,
-                    entity.specialContributionID
-            );
+            return _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted && x.specialContributorID == id);
         }
-
-        public List<SpecialContributorFullDetails> GetFullSpecialContributorDetails()
+        
+        public decimal GetByContributionId(int id)
         {
-            var contribution = (from sc in _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted)
-                                join m in _db.MEMBER on sc.memberID equals m.memberID
-                                join scn in _db.SPECIAL_CONTRIBUTIONS on sc.specialContributionID equals scn.specialContributionID
-                                select new SpecialContributorFullDetails
-                                {
-                                    SpecialContributorId = sc.specialContributorID,
-                                    MemberId = sc.memberID,
-                                    FirstName = m.name,
-                                    LastName = m.surname,
-                                    ImagePath = m.imagePath,
-                                    AmountContributed = sc.amountContributed,
-                                    AmountExpected = scn.amountExpected,
-                                    Balance = scn.amountExpected - sc.amountContributed,
-                                    ContributedDate = sc.contributedDate,
-                                    PaymentStatus = sc.amountContributed == scn.amountExpected ? "Completed" : sc.amountContributed < scn.amountExpected ? 
-                                                    "Incomplete" : "Extra " + (sc.amountContributed - scn.amountExpected).ToString() + " €",
-                                    Summary = sc.summary,
-                                    SpecialContributionId = sc.specialContributionID,
-                                });
-
-            return contribution.ToList();
+            decimal totalAmount = _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted && x.specialContributionID == id).Sum(x => x.amountContributed);
+            return totalAmount;
         }
 
         public bool Insert(SpecialContributor data)

@@ -15,6 +15,6 @@ namespace APC.Applications.Interfaces
         int Count();
 
         List<SpecialContribution> GetAllDeleted();
-        List<SpecialContributionFullDetails> GetFullSpecialContributionDetails();
+        List<SpecialContributionDTO> GetFullSpecialContributionDetails();
     }
 }
