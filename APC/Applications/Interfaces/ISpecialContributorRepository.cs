@@ -16,6 +16,6 @@ namespace APC.Applications.Interfaces
         bool PermanentDelete(int id);
         bool Exists(int memberId, int specialContributionId);
         int Count();
-        decimal GetByContributionId(int id);
+        decimal GetByAmountContributedByContributionId(int id);
     }
 }

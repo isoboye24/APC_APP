@@ -6,15 +6,13 @@ namespace APC.Applications.Interfaces
 {
     public interface ISpecialContributionService
     {
-        List<SpecialContribution> GetAll();
+        List<SpecialContributionDTO> GetAll();
+        List<SpecialContributionDTO> GetAllDeletedSpecialContributions();
         bool Create(SpecialContribution data);
         bool Update(SpecialContribution data);
         bool Delete(int id);
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
-
-        List<SpecialContribution> GetAllDeleted();
-        List<SpecialContributionDTO> GetFullSpecialContributionDetails();
     }
 }

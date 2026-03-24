@@ -57,7 +57,7 @@ namespace APC.Infrastructure.Repositories
             return _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted && x.specialContributorID == id);
         }
         
-        public decimal GetByContributionId(int id)
+        public decimal GetByAmountContributedByContributionId(int id)
         {
             decimal totalAmount = _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted && x.specialContributionID == id).Sum(x => x.amountContributed);
             return totalAmount;

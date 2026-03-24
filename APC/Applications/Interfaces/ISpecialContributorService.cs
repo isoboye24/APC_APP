@@ -14,6 +14,6 @@ namespace APC.Applications.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
-        decimal GetByContributionId(int id);
+        decimal GetByAmountContributedByContributionId(int id);
     }
 }

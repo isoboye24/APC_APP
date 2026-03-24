@@ -11,7 +11,11 @@ namespace APC.Applications.DTO
         public int SupervisorId { get; set; }
         public string Supervisor { get; set; }
         public DateTime ContributionStartDate { get; set; }
+        public string FormattedContributionStartDate { get; set; }
         public DateTime ContributionEndDate { get; set; }
+        public string FormattedContributionEndDate { get; set; }
         public decimal AmountExpected { get; set; }
+        public string Status { get; set; }
+        public decimal TotalContributedAmount { get; set; }
     }
 }

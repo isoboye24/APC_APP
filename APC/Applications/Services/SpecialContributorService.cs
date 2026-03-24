@@ -95,8 +95,8 @@ namespace APC.Applications.Services
         public bool GetBack(int id)
             => _repository.GetBack(id);
         
-        public decimal GetByContributionId(int id)
-            => _repository.GetByContributionId(id);
+        public decimal GetByAmountContributedByContributionId(int id)
+            => _repository.GetByAmountContributedByContributionId(id);
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);

@@ -11,6 +11,7 @@ namespace APC.Applications.Services
     {
         private readonly ISpecialContributionRepository _repository;
         private readonly IMemberRepository _memberRepository;
+        private readonly ISpecialContributorRepository _specialContributorRepository;
         public SpecialContributionService(ISpecialContributionRepository repository, IMemberRepository memberRepository)
         {
             _repository = repository;
@@ -35,6 +36,7 @@ namespace APC.Applications.Services
         {
             var data = (from sc in _repository.GetAll()
                         join m in _memberRepository.GetAll() on sc.supervisorID equals m.MemberId
+                        let totalContributedAmount = _specialContributorRepository.GetByAmountContributedByContributionId(sc.specialContributionID)
                         select new SpecialContributionDTO
                         {
                             SpecialContributionId = sc.specialContributionID,
@@ -44,12 +46,40 @@ namespace APC.Applications.Services
                             SupervisorId = sc.supervisorID,
                             Supervisor = m.PersonalInfo.FirstName + " " + m.PersonalInfo.LastName,
                             ContributionStartDate = sc.contributionStartDate,
+                            FormattedContributionStartDate = sc.contributionStartDate.ToString("dd.MM.yyyy"),
                             ContributionEndDate = sc.contributionEndDate,
-                            AmountExpected = sc.amountExpected
-                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine) ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
-                            FineDate = f.fineDate,
-                            FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
-                        }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
+                            FormattedContributionEndDate = sc.contributionEndDate.ToString("dd.MM.yyyy"),
+                            AmountExpected = sc.amountExpected,
+                            Status = totalContributedAmount <= 0 ? "Not Paid" : (totalContributedAmount > 0 && totalContributedAmount < sc.amountExpected) ? "Not Completed" : totalContributedAmount == sc.amountExpected ? "Completed" : ((totalContributedAmount - sc.amountExpected) + " € Extra").ToString(),
+                            TotalContributedAmount = totalContributedAmount,
+
+                        }).OrderByDescending(x => x.ContributionStartDate.Year).ThenByDescending(x => x.ContributionStartDate.Month).ThenByDescending(x => x.ContributionStartDate.Day).ThenBy(x => x.Title).ToList();
+
+            return data;
+        }
+        
+        public List<SpecialContributionDTO> GetAllDeletedSpecialContributions()
+        {
+            var data = (from sc in _repository.GetAllDeletedSpecialContributions()
+                        join m in _memberRepository.GetAll() on sc.supervisorID equals m.MemberId
+                        let totalContributedAmount = _specialContributorRepository.GetByAmountContributedByContributionId(sc.specialContributionID)
+                        select new SpecialContributionDTO
+                        {
+                            SpecialContributionId = sc.specialContributionID,
+                            Title = sc.title,
+                            Summary = sc.summary,
+                            AmountToContribute = sc.amountToContribute,
+                            SupervisorId = sc.supervisorID,
+                            Supervisor = m.PersonalInfo.FirstName + " " + m.PersonalInfo.LastName,
+                            ContributionStartDate = sc.contributionStartDate,
+                            FormattedContributionStartDate = sc.contributionStartDate.ToString("dd.MM.yyyy"),
+                            ContributionEndDate = sc.contributionEndDate,
+                            FormattedContributionEndDate = sc.contributionEndDate.ToString("dd.MM.yyyy"),
+                            AmountExpected = sc.amountExpected,
+                            Status = totalContributedAmount <= 0 ? "Not Paid" : (totalContributedAmount > 0 && totalContributedAmount < sc.amountExpected) ? "Not Completed" : totalContributedAmount == sc.amountExpected ? "Completed" : ((totalContributedAmount - sc.amountExpected) + " € Extra").ToString(),
+                            TotalContributedAmount = totalContributedAmount,
+
+                        }).OrderByDescending(x => x.ContributionStartDate.Year).ThenByDescending(x => x.ContributionStartDate.Month).ThenByDescending(x => x.ContributionStartDate.Day).ThenBy(x => x.Title).ToList();
 
             return data;
         }
@@ -67,15 +97,15 @@ namespace APC.Applications.Services
             if (contribution == null)
                 throw new InvalidOperationException("Contribution not found");
 
-            contribution.UpdateTitle(data.Title);
-            contribution.UpdateSummary(data.Summary);
-            contribution.UpdateAmountToContribute(data.AmountToContribute);
-            contribution.UpdateSupervisor(data.SupervisorId);
-            contribution.UpdateContributionStartDate(data.ContributionStartDate);
-            contribution.UpdateContributionEndDate(data.ContributionEndDate);
-            contribution.UpdateAmountExpected(data.AmountExpected);
+            data.UpdateTitle(data.Title);
+            data.UpdateSummary(data.Summary);
+            data.UpdateAmountToContribute(data.AmountToContribute);
+            data.UpdateSupervisor(data.SupervisorId);
+            data.UpdateContributionStartDate(data.ContributionStartDate);
+            data.UpdateContributionEndDate(data.ContributionEndDate);
+            data.UpdateAmountExpected(data.AmountExpected);
 
-            return _repository.Update(contribution);
+            return _repository.Update(data);
         }
     }
 }
