@@ -20,13 +20,17 @@ namespace APC.AllForms
         private readonly IMonthService _monthService;
         private readonly IConstitutionService _constitutionService;
         private readonly IFinedMemberService _finedMemberService;
+        private readonly ISpecialContributionService _specialContributionService;
+        private readonly ISpecialContributorService _specialContributorService;
 
         private List<Applications.DTO.CommentDTO> _commentDTO;
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
         private List<Applications.DTO.FinedMemberDTO> _finedMemberDTO;
+        private List<Applications.DTO.SpecialContributionDTO> _specialContributionDTO;
 
         public FormMeetingBoard(ICommentService commentService, IGenderService genderService, IMemberService memberService, 
-            IMonthService monthService, IConstitutionService constitutionService, IFinedMemberService finedMemberService)
+            IMonthService monthService, IConstitutionService constitutionService, IFinedMemberService finedMemberService, 
+            ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService)
         {
             InitializeComponent();
             _commentService = commentService;
@@ -35,14 +39,12 @@ namespace APC.AllForms
             _monthService = monthService;
             _constitutionService = constitutionService;
             _finedMemberService = finedMemberService;
+            _specialContributionService = specialContributionService;
+            _specialContributorService = specialContributorService;
         }
         GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
         GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
         GeneralAttendanceDetailDTO detail = new GeneralAttendanceDetailDTO();
-
-        SpecialContributionDetailDTO specialContributionDetail = new SpecialContributionDetailDTO();
-        SpecialContributionsBLL specialContributionsBLL = new SpecialContributionsBLL();
-        DAL.DTO.SpecialContributionDTO specialContributionDTO = new DAL.DTO.SpecialContributionDTO();
 
         private void resizeControls()
         {
@@ -231,7 +233,7 @@ namespace APC.AllForms
             txtSurnameComments.Tag = "resizable";
             txtSurnameFinedMember.Tag = "resizable";
             txtYear.Tag = "resizable";
-            txtYearContribution.Tag = "resizable";
+            cmbYearContribution.Tag = "resizable";
             txtYearFinedMember.Tag = "resizable";
             #endregion
 
@@ -853,39 +855,33 @@ namespace APC.AllForms
 
         private void btnAddContribution_Click(object sender, EventArgs e)
         {
-            var form = new FormSpecialContribution(_finedMemberService, _memberService, _constitutionService);
+            var form = new FormSpecialContribution(_specialContributionService, _memberService);
             form.ShowDialog();
             ClearFilters();
+        }
 
-            FormSpecialContribution open = new FormSpecialContribution();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            ClearFilters();
+        private Applications.DTO.SpecialContributionDTO GetSelectedSpecialContribution()
+        {
+            if (dataGridViewSpecialContributions.CurrentRow == null)
+                return null;
+
+            return dataGridViewSpecialContributions.CurrentRow.DataBoundItem as Applications.DTO.SpecialContributionDTO;
         }
 
         private void btnUpdateContribution_Click(object sender, EventArgs e)
         {
-            if (specialContributionDetail.SpecialContributionID == 0)
+            var selected = GetSelectedSpecialContribution();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a special contribution from the table.");
+                MessageBox.Show("Please select a special contribution from the table");
+                return;
             }
-            else
-            {
-                FormSpecialContribution open = new FormSpecialContribution();
-                open.detail = specialContributionDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
 
-        private void dataGridViewSpecialContributions_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            specialContributionDetail = GeneralHelper.MapFromGrid<SpecialContributionDetailDTO>(dataGridViewSpecialContributions, e.RowIndex);
+            var form = new FormSpecialContribution(_specialContributionService, _memberService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnClearContribution_Click(object sender, EventArgs e)
@@ -895,64 +891,96 @@ namespace APC.AllForms
 
         private void txtAmountSContributions_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
-        }
-
-        private void txtNoOfContributors_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
+            e.Handled = GeneralHelper.isNumber(e, txtAmountSContributions);
         }
 
         private void txtAmountSContributions_TextChanged(object sender, EventArgs e)
         {
-            List<SpecialContributionDetailDTO> list = specialContributionDTO.SpecialContributions;
-            list = list.Where(x => x.AmountToContribute == Convert.ToDecimal(txtAmountSContributions.Text.Trim())).ToList();
-            dataGridViewSpecialContributions.DataSource = list;
+            
         }
 
         private void txtNoOfContributors_TextChanged(object sender, EventArgs e)
         {
-            List<SpecialContributionDetailDTO> list = specialContributionDTO.SpecialContributions;
-            list = list.Where(x => x.TotalMembers == Convert.ToInt32(txtNoOfContributors.Text.Trim())).ToList();
-            dataGridViewSpecialContributions.DataSource = list;
+           
         }
 
         private void btnViewContribution_Click(object sender, EventArgs e)
         {
-            if (specialContributionDetail.SpecialContributionID == 0)
+            var selected = GetSelectedSpecialContribution();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a special contribution from the table.");
+                MessageBox.Show("Please select a special contribution from the table");
+                return;
             }
-            else
-            {
-                FormViewSpecialContribution open = new FormViewSpecialContribution();
-                open.detail = specialContributionDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }            
+
+            var form = new FormViewSpecialContribution(selected, _memberService, _specialContributorService);
+            form.ShowDialog();
+
+            ClearFilters();      
         }
 
         private void btnDeleteContribution_Click(object sender, EventArgs e)
         {
-            if (specialContributionDetail.SpecialContributionID == 0)
+            var selected = GetSelectedSpecialContribution();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a special contribution from the table.");
+                MessageBox.Show("Please select a special contribution.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (specialContributionsBLL.Delete(specialContributionDetail))
-                    {
-                        MessageBox.Show("Special Contribution was deleted successfully!");
-                        ClearFilters();
-                    }
-                }
+                _specialContributionService.Delete(selected.SpecialContributionId);
+                ClearFilters();
             }
         }
 
+        private void btnSearchContribution_Click(object sender, EventArgs e)
+        {
+            var filtered = _specialContributionDTO.AsQueryable();
+
+            if (cmbMonthContribution.SelectedIndex == -1 && cmbYearContribution.SelectedIndex == -1 && txtAmountSContributions.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Please select either a month or year or an amount");
+                return;
+            }
+
+            if (cmbYearContribution.SelectedIndex != -1)
+            {
+                int searchedYear = Convert.ToInt32(cmbYearContribution.SelectedValue);
+                filtered = filtered.Where(x => x.ContributionStartDate.Year == searchedYear || x.ContributionEndDate.Year == searchedYear);
+            }
+
+            if (cmbMonthContribution.SelectedIndex != -1)
+            {
+                int searchedMonth = Convert.ToInt32(cmbMonthContribution.SelectedValue);
+                filtered = filtered.Where(x => x.ContributionStartDate.Month == searchedMonth || x.ContributionEndDate.Month == searchedMonth);
+            }
+
+            if (txtAmountSContributions.Text.Trim().Length != 0)
+            {
+                decimal amount = Convert.ToDecimal(txtAmountSContributions.Text.Trim());
+                if (rbEqualContAmount.Checked)
+                {
+                    filtered = filtered.Where(x => x.TotalContributedAmount == amount);
+                }
+                else if (rbLessContAmount.Checked)
+                {
+                    filtered = filtered.Where(x => x.TotalContributedAmount < amount);
+                }
+                else if (rbMoreContAmount.Checked)
+                {
+                    filtered = filtered.Where(x => x.TotalContributedAmount > amount);
+                }
+                else
+                {
+                    MessageBox.Show("Unknown filter");
+                }
+            }
+
+            dataGridViewFinedMembers.DataSource = filtered.ToList();
+        }
     }
 }

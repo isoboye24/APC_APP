@@ -1,4 +1,5 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using APC.Utility;
 using OfficeOpenXml.Drawing.Chart;
@@ -18,9 +19,17 @@ namespace APC.AllForms
 {
     public partial class FormSpecialContribution : Form
     {
-        public FormSpecialContribution()
+        private readonly ISpecialContributionService _specialContributionService;
+        private readonly IMemberService _memberService;
+
+        private Applications.DTO.SpecialContributionDTO _specialContributionDTO;
+        private bool _isUpdate = false;
+
+        public FormSpecialContribution(ISpecialContributionService specialContributionService, IMemberService memberService)
         {
             InitializeComponent();
+            _specialContributionService = specialContributionService;
+            _memberService = memberService;
         }
 
         /// <summary>
@@ -100,13 +109,6 @@ namespace APC.AllForms
 
         private int buttonSize = 14;
         private float panelSize;
-        public bool isUpdate = false;
-
-        MemberDetailDTO memberDetail = new MemberDetailDTO();
-
-        SpecialContributionsBLL bll = new SpecialContributionsBLL();
-        SpecialContributionDTO dto = new SpecialContributionDTO();
-        public SpecialContributionDetailDTO detail = new SpecialContributionDetailDTO();
 
         private void picClose_Click(object sender, EventArgs e)
         {
@@ -125,6 +127,12 @@ namespace APC.AllForms
             {
                 btnChangeSupervisor.Text = "Change Supervisor";
             }
+        }
+
+        public void loadForEdit(Applications.DTO.SpecialContributionDTO dto, bool isUpdate)
+        {
+            _specialContributionDTO = dto;
+            _isUpdate = isUpdate;
         }
 
         private void FormSpecialContribution_Load(object sender, EventArgs e)

@@ -1,24 +1,12 @@
-﻿using APC.Applications.DTO;
-using APC.Applications.Interfaces;
-using APC.Applications.Services;
-using APC.BLL;
-using APC.DAL;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
+﻿using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace APC.AllForms
 {

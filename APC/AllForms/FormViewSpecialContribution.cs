@@ -1,4 +1,5 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using APC.Utility;
 using System;
@@ -17,9 +18,17 @@ namespace APC.AllForms
 {
     public partial class FormViewSpecialContribution : Form
     {
-        public FormViewSpecialContribution()
+        private readonly ISpecialContributorService _specialContributorService;
+        private readonly IMemberService _memberService;
+
+        private Applications.DTO.SpecialContributionDTO _specialContributionsDTO;
+
+        public FormViewSpecialContribution(Applications.DTO.SpecialContributionDTO dto, IMemberService memberService, ISpecialContributorService specialContributorService)
         {
             InitializeComponent();
+            _specialContributionsDTO = dto;
+            _memberService = memberService;
+            _specialContributorService = specialContributorService;
         }
 
         /// <summary>

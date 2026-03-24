@@ -75,23 +75,16 @@
             this.labelOverallTotalContributions = new System.Windows.Forms.Label();
             this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
             this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.txtAmountSContributions = new System.Windows.Forms.TextBox();
-            this.txtNoOfContributors = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.rbLessContAmount = new System.Windows.Forms.RadioButton();
             this.rbMoreContAmount = new System.Windows.Forms.RadioButton();
             this.rbEqualContAmount = new System.Windows.Forms.RadioButton();
             this.label15 = new System.Windows.Forms.Label();
             this.cmbMonthContribution = new System.Windows.Forms.ComboBox();
-            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
-            this.rbLessContributors = new System.Windows.Forms.RadioButton();
-            this.rbMoreContributors = new System.Windows.Forms.RadioButton();
-            this.rbEqualContributors = new System.Windows.Forms.RadioButton();
             this.btnClearContribution = new System.Windows.Forms.Button();
             this.btnSearchContribution = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtYearContribution = new System.Windows.Forms.ComboBox();
+            this.cmbYearContribution = new System.Windows.Forms.ComboBox();
             this.dataGridViewSpecialContributions = new System.Windows.Forms.DataGridView();
             this.commentPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -171,6 +164,7 @@
             this.txtSection = new System.Windows.Forms.TextBox();
             this.txtFine = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.meetingsPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -184,7 +178,6 @@
             this.tableLayoutPanel23.SuspendLayout();
             this.tableLayoutPanel24.SuspendLayout();
             this.tableLayoutPanel25.SuspendLayout();
-            this.tableLayoutPanel26.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSpecialContributions)).BeginInit();
             this.commentPage.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -846,17 +839,14 @@
             this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel24.Controls.Add(this.label13, 0, 0);
-            this.tableLayoutPanel24.Controls.Add(this.label14, 0, 2);
             this.tableLayoutPanel24.Controls.Add(this.txtAmountSContributions, 1, 0);
-            this.tableLayoutPanel24.Controls.Add(this.txtNoOfContributors, 1, 2);
             this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel25, 2, 0);
             this.tableLayoutPanel24.Controls.Add(this.label15, 3, 0);
             this.tableLayoutPanel24.Controls.Add(this.cmbMonthContribution, 4, 0);
-            this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel26, 2, 2);
             this.tableLayoutPanel24.Controls.Add(this.btnClearContribution, 5, 2);
             this.tableLayoutPanel24.Controls.Add(this.btnSearchContribution, 5, 0);
             this.tableLayoutPanel24.Controls.Add(this.label16, 3, 2);
-            this.tableLayoutPanel24.Controls.Add(this.txtYearContribution, 4, 2);
+            this.tableLayoutPanel24.Controls.Add(this.cmbYearContribution, 4, 2);
             this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel24.Location = new System.Drawing.Point(29, 17);
             this.tableLayoutPanel24.Margin = new System.Windows.Forms.Padding(4);
@@ -879,17 +869,6 @@
             this.label13.TabIndex = 0;
             this.label13.Text = "Amount";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(4, 59);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(196, 28);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "No. of Contributors";
-            // 
             // txtAmountSContributions
             // 
             this.txtAmountSContributions.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -901,18 +880,6 @@
             this.txtAmountSContributions.TabIndex = 1;
             this.txtAmountSContributions.TextChanged += new System.EventHandler(this.txtAmountSContributions_TextChanged);
             this.txtAmountSContributions.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmountSContributions_KeyPress);
-            // 
-            // txtNoOfContributors
-            // 
-            this.txtNoOfContributors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtNoOfContributors.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNoOfContributors.Location = new System.Drawing.Point(269, 51);
-            this.txtNoOfContributors.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNoOfContributors.Name = "txtNoOfContributors";
-            this.txtNoOfContributors.Size = new System.Drawing.Size(137, 34);
-            this.txtNoOfContributors.TabIndex = 1;
-            this.txtNoOfContributors.TextChanged += new System.EventHandler(this.txtNoOfContributors_TextChanged);
-            this.txtNoOfContributors.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNoOfContributors_KeyPress);
             // 
             // tableLayoutPanel25
             // 
@@ -994,63 +961,6 @@
             this.cmbMonthContribution.Size = new System.Drawing.Size(185, 36);
             this.cmbMonthContribution.TabIndex = 4;
             // 
-            // tableLayoutPanel26
-            // 
-            this.tableLayoutPanel26.ColumnCount = 3;
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel26.Controls.Add(this.rbLessContributors, 0, 0);
-            this.tableLayoutPanel26.Controls.Add(this.rbMoreContributors, 1, 0);
-            this.tableLayoutPanel26.Controls.Add(this.rbEqualContributors, 2, 0);
-            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel26.Location = new System.Drawing.Point(414, 51);
-            this.tableLayoutPanel26.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
-            this.tableLayoutPanel26.RowCount = 1;
-            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel26.Size = new System.Drawing.Size(354, 40);
-            this.tableLayoutPanel26.TabIndex = 3;
-            // 
-            // rbLessContributors
-            // 
-            this.rbLessContributors.AutoSize = true;
-            this.rbLessContributors.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbLessContributors.Location = new System.Drawing.Point(4, 4);
-            this.rbLessContributors.Margin = new System.Windows.Forms.Padding(4);
-            this.rbLessContributors.Name = "rbLessContributors";
-            this.rbLessContributors.Size = new System.Drawing.Size(63, 27);
-            this.rbLessContributors.TabIndex = 0;
-            this.rbLessContributors.TabStop = true;
-            this.rbLessContributors.Text = "Less";
-            this.rbLessContributors.UseVisualStyleBackColor = true;
-            // 
-            // rbMoreContributors
-            // 
-            this.rbMoreContributors.AutoSize = true;
-            this.rbMoreContributors.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMoreContributors.Location = new System.Drawing.Point(122, 4);
-            this.rbMoreContributors.Margin = new System.Windows.Forms.Padding(4);
-            this.rbMoreContributors.Name = "rbMoreContributors";
-            this.rbMoreContributors.Size = new System.Drawing.Size(73, 27);
-            this.rbMoreContributors.TabIndex = 0;
-            this.rbMoreContributors.TabStop = true;
-            this.rbMoreContributors.Text = "More";
-            this.rbMoreContributors.UseVisualStyleBackColor = true;
-            // 
-            // rbEqualContributors
-            // 
-            this.rbEqualContributors.AutoSize = true;
-            this.rbEqualContributors.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbEqualContributors.Location = new System.Drawing.Point(240, 4);
-            this.rbEqualContributors.Margin = new System.Windows.Forms.Padding(4);
-            this.rbEqualContributors.Name = "rbEqualContributors";
-            this.rbEqualContributors.Size = new System.Drawing.Size(75, 27);
-            this.rbEqualContributors.TabIndex = 0;
-            this.rbEqualContributors.TabStop = true;
-            this.rbEqualContributors.Text = "Equal";
-            this.rbEqualContributors.UseVisualStyleBackColor = true;
-            // 
             // btnClearContribution
             // 
             this.btnClearContribution.BackColor = System.Drawing.Color.Silver;
@@ -1081,29 +991,18 @@
             this.btnSearchContribution.TabIndex = 0;
             this.btnSearchContribution.Text = "Search";
             this.btnSearchContribution.UseVisualStyleBackColor = false;
+            this.btnSearchContribution.Click += new System.EventHandler(this.btnSearchContribution_Click);
             // 
-            // label16
+            // cmbYearContribution
             // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(812, 59);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(52, 28);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "Year";
-            // 
-            // txtYearContribution
-            // 
-            this.txtYearContribution.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtYearContribution.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYearContribution.FormattingEnabled = true;
-            this.txtYearContribution.Location = new System.Drawing.Point(872, 51);
-            this.txtYearContribution.Margin = new System.Windows.Forms.Padding(4);
-            this.txtYearContribution.Name = "txtYearContribution";
-            this.txtYearContribution.Size = new System.Drawing.Size(185, 36);
-            this.txtYearContribution.TabIndex = 4;
+            this.cmbYearContribution.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbYearContribution.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbYearContribution.FormattingEnabled = true;
+            this.cmbYearContribution.Location = new System.Drawing.Point(872, 51);
+            this.cmbYearContribution.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbYearContribution.Name = "cmbYearContribution";
+            this.cmbYearContribution.Size = new System.Drawing.Size(185, 36);
+            this.cmbYearContribution.TabIndex = 4;
             // 
             // dataGridViewSpecialContributions
             // 
@@ -1120,7 +1019,6 @@
             this.dataGridViewSpecialContributions.RowTemplate.Height = 40;
             this.dataGridViewSpecialContributions.Size = new System.Drawing.Size(1209, 459);
             this.dataGridViewSpecialContributions.TabIndex = 6;
-            this.dataGridViewSpecialContributions.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSpecialContributions_RowEnter);
             // 
             // commentPage
             // 
@@ -2284,6 +2182,18 @@
             this.label21.TabIndex = 0;
             this.label21.Text = "Fine";
             // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(812, 59);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(52, 28);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Year";
+            // 
             // FormMeetingBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2315,8 +2225,6 @@
             this.tableLayoutPanel24.PerformLayout();
             this.tableLayoutPanel25.ResumeLayout(false);
             this.tableLayoutPanel25.PerformLayout();
-            this.tableLayoutPanel26.ResumeLayout(false);
-            this.tableLayoutPanel26.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSpecialContributions)).EndInit();
             this.commentPage.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
@@ -2476,26 +2384,20 @@
         private System.Windows.Forms.Label labelTotalRowsContributions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtAmountSContributions;
-        private System.Windows.Forms.TextBox txtNoOfContributors;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
         private System.Windows.Forms.RadioButton rbLessContAmount;
         private System.Windows.Forms.RadioButton rbMoreContAmount;
         private System.Windows.Forms.RadioButton rbEqualContAmount;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cmbMonthContribution;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
-        private System.Windows.Forms.RadioButton rbLessContributors;
-        private System.Windows.Forms.RadioButton rbMoreContributors;
-        private System.Windows.Forms.RadioButton rbEqualContributors;
         private System.Windows.Forms.Button btnClearContribution;
         private System.Windows.Forms.Button btnSearchContribution;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DataGridView dataGridViewSpecialContributions;
         private System.Windows.Forms.Label labelOverallTotalContributions;
-        private System.Windows.Forms.ComboBox txtYearContribution;
+        private System.Windows.Forms.ComboBox cmbYearContribution;
         private System.Windows.Forms.ComboBox cmbYearMeeting;
         private System.Windows.Forms.ComboBox cmbYearComments;
+        private System.Windows.Forms.Label label16;
     }
 }

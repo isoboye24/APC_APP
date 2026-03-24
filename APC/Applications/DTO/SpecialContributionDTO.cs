@@ -10,6 +10,7 @@ namespace APC.Applications.DTO
         public decimal AmountToContribute { get; set; }
         public int SupervisorId { get; set; }
         public string Supervisor { get; set; }
+        public string ImagePath { get; set; }
         public DateTime ContributionStartDate { get; set; }
         public string FormattedContributionStartDate { get; set; }
         public DateTime ContributionEndDate { get; set; }
