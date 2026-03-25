@@ -16,19 +16,18 @@ namespace APC.Helper
             switch (type)
             {
                 case SpecialContributionGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "Counter", "AmountToContributeWithCurrency",
-                        "AmountExpectedWithCurrency", "AmountContributedWithCurrency", "Status",
-                        "SupervisorName", "StartDate", "EndDate");
+                    GeneralHelper.SetVisibleColumns(grid, "Counter", "FormattedAmountToContribute",
+                        "FormattedAmountExpected", "FormattedTotalContributedAmount", "Status",
+                        "FirstName", "FormattedContributionStartDate", "FormattedContributionEndDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "Counter", "No." },
-                                    { "AmountExpectedWithCurrency", "Amt. Exp." },
-                                    { "AmountContributedWithCurrency", "Amt. Cont." },
-                                    { "AmountToContributeWithCurrency", "Amt. Each" },
-                                    { "SupervisorName", "S. Name" },
-                                    { "SupervisorSurname", "S. Surname" },
-                                    { "StartDate", "Started" },
-                                    { "EndDate", "Ended" }
+                                    { "FormattedAmountExpected", "Amt. Exp." },
+                                    { "FormattedTotalContributedAmount", "Amt. Cont." },
+                                    { "FormattedAmountToContribute", "Amt. Each" },
+                                    { "FirstName", "S. Name" },
+                                    { "FormattedContributionStartDate", "Start Date" },
+                                    { "FormattedContributionEndDate", "End Date" }
                                 });
                     break;
             }

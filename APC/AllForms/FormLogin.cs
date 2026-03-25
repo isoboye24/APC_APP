@@ -1,6 +1,6 @@
 ﻿using APC.BLL;
 using APC.DAL;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using APC.Helper;
 using Microsoft.Extensions.DependencyInjection;
 using System;

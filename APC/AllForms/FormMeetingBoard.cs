@@ -1,6 +1,4 @@
-﻿using APC.Applications.DTO;
-using APC.Applications.Services;
-using APC.BLL;
+﻿using APC.BLL;
 using APC.DAL.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
@@ -22,6 +20,7 @@ namespace APC.AllForms
         private readonly IFinedMemberService _finedMemberService;
         private readonly ISpecialContributionService _specialContributionService;
         private readonly ISpecialContributorService _specialContributorService;
+        private readonly ICurrentUserService _currentUserService;
 
         private List<Applications.DTO.CommentDTO> _commentDTO;
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
@@ -30,7 +29,8 @@ namespace APC.AllForms
 
         public FormMeetingBoard(ICommentService commentService, IGenderService genderService, IMemberService memberService, 
             IMonthService monthService, IConstitutionService constitutionService, IFinedMemberService finedMemberService, 
-            ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService)
+            ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService, 
+            ICurrentUserService currentUserService)
         {
             InitializeComponent();
             _commentService = commentService;
@@ -41,6 +41,7 @@ namespace APC.AllForms
             _finedMemberService = finedMemberService;
             _specialContributionService = specialContributionService;
             _specialContributorService = specialContributorService;
+            _currentUserService = currentUserService;
         }
         GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
         GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
@@ -81,6 +82,12 @@ namespace APC.AllForms
             dataGridViewFinedMembers.DataSource = _finedMemberService.GetAll();
             FinedMemberHelper.ConfigureFinedMemberGrid(dataGridViewFinedMembers, FinedMemberHelper.FinedMemberGridType.Basic);
         }
+        
+        private void loadSpecialContributions()
+        {
+            dataGridViewSpecialContributions.DataSource = _specialContributionService.GetAll();
+            SpecialContributionHelper.ConfigureSpecialContributionGrid(dataGridViewSpecialContributions, SpecialContributionHelper.SpecialContributionGridType.Basic);
+        }
 
         private void FormMeetingBoard_Load(object sender, EventArgs e)
         {
@@ -111,17 +118,17 @@ namespace APC.AllForms
             cmbFineStatus.Items.Add("NOT Completed");
             cmbFineStatus.Items.Add("NOT Paid");
 
-            specialContributionDTO = specialContributionsBLL.Select();
 
+            loadSpecialContributions();
             cmbMonthContribution.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthContribution, "MonthName", "MonthID");
 
             #region
             LoadDataGridView.loadGeneralAttendances(dataGridView1, dto);
-            LoadDataGridView.loadSpecialContributions(dataGridViewSpecialContributions, specialContributionDTO);
+            
             #endregion
 
-            if (AuthenticationDTO.AccessLevel != 4)
+            if (_currentUserService.AccessLevel != 4)
             {
                 btnDelete.Hide();
                 btnDeleteComments.Hide();
@@ -142,7 +149,7 @@ namespace APC.AllForms
             labelTotalFineMembers.Text = "Rows: " + dataGridViewFinedMembers.RowCount.ToString();
             labelTotalPaidFines.Text = "Total Paid: " + bll.TotalPaidFines();
             labelTotalRowsContributions.Text = "Rows: " + dataGridViewSpecialContributions.RowCount.ToString();
-            labelOverallTotalContributions.Text = "Total : " + specialContributionsBLL.OverallTotalContributions();
+            labelOverallTotalContributions.Text = "Total : ";
         }
 
         private void ResizeableControls()
@@ -157,7 +164,6 @@ namespace APC.AllForms
             label10.Tag = "resizable";
             label12.Tag = "resizable";
             label13.Tag = "resizable";
-            label14.Tag = "resizable";
             label15.Tag = "resizable";
             label16.Tag = "resizable";
             label18.Tag = "resizable";
@@ -228,7 +234,6 @@ namespace APC.AllForms
             txtNameComments.Tag = "resizable";
             txtNameFinedMember.Tag = "resizable";
             txtNoOfAttend.Tag = "resizable";
-            txtNoOfContributors.Tag = "resizable";
             txtSection.Tag = "resizable";
             txtSurnameComments.Tag = "resizable";
             txtSurnameFinedMember.Tag = "resizable";
@@ -251,15 +256,12 @@ namespace APC.AllForms
             #region
             rbEqualAttend.Tag = "resizable";
             rbEqualContAmount.Tag = "resizable";
-            rbEqualContributors.Tag = "resizable";
             rbEqualMonDues.Tag = "resizable";
             rbLessAttend.Tag = "resizable";
             rbLessContAmount.Tag = "resizable";
-            rbLessContributors.Tag = "resizable";
             rbLessMonDues.Tag = "resizable";
             rbMoreAttend.Tag = "resizable";
             rbMoreContAmount.Tag = "resizable";
-            rbMoreContributors.Tag = "resizable";
             rbMoreMonDues.Tag = "resizable";
             #endregion
 
@@ -327,7 +329,7 @@ namespace APC.AllForms
 
         private void txtNoOfAttend_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
+            e.Handled = GeneralHelper.isNumber(e, txtNoOfAttend);
         }
 
         private void txtMonthlyDues_KeyPress(object sender, KeyPressEventArgs e)
@@ -438,11 +440,12 @@ namespace APC.AllForms
             loadFinedMembers();
 
             txtAmountSContributions.Clear();
-            txtNoOfContributors.Clear();
             cmbMonthContribution.SelectedIndex = -1;
-            specialContributionsBLL = new SpecialContributionsBLL();
-            specialContributionDTO = specialContributionsBLL.Select();
-            dataGridViewSpecialContributions.DataSource = specialContributionDTO.SpecialContributions;
+            cmbYearContribution.SelectedIndex = -1;
+            rbEqualContAmount.Checked = false;
+            rbLessContAmount.Checked = false;
+            rbMoreContAmount.Checked = false;
+            loadSpecialContributions();
 
             RefreshCounts();
         }

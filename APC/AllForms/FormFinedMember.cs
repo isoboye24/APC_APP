@@ -189,7 +189,7 @@ namespace APC.AllForms
         {
             try
             {
-                decimal amountPaid = Convert.ToDecimal(txtSummary.Text.Trim());
+                decimal amountPaid = Convert.ToDecimal(txtAmount.Text.Trim());
                 string summary = txtSummary.Text.Trim();
 
                 if (_finedMemberDTO.FinedMemberId == 0)

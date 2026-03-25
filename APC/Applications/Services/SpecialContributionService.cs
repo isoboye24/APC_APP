@@ -54,13 +54,20 @@ namespace APC.Applications.Services
                             Status = totalContributedAmount <= 0 ? "Not Paid" : (totalContributedAmount > 0 && totalContributedAmount < sc.amountExpected) ? "Not Completed" : totalContributedAmount == sc.amountExpected ? "Completed" : ((totalContributedAmount - sc.amountExpected) + " € Extra").ToString(),
                             TotalContributedAmount = totalContributedAmount,
 
-                        }).OrderByDescending(x => x.ContributionStartDate.Year).ThenByDescending(x => x.ContributionStartDate.Month).ThenByDescending(x => x.ContributionStartDate.Day).ThenBy(x => x.Title).ToList();
+                        }).ToList();
+
+            data = data.Select((x, index) =>
+            {
+                x.Counter = index + 1;
+                return x;
+            }).OrderByDescending(x => x.ContributionStartDate.Year).ThenByDescending(x => x.ContributionStartDate.Month).ThenByDescending(x => x.ContributionStartDate.Day).ThenBy(x => x.Title).ToList();
 
             return data;
         }
         
         public List<SpecialContributionDTO> GetAllDeletedSpecialContributions()
         {
+
             var data = (from sc in _repository.GetAllDeletedSpecialContributions()
                         join m in _memberRepository.GetAll() on sc.supervisorID equals m.MemberId
                         let totalContributedAmount = _specialContributorRepository.GetByAmountContributedByContributionId(sc.specialContributionID)
@@ -70,18 +77,28 @@ namespace APC.Applications.Services
                             Title = sc.title,
                             Summary = sc.summary,
                             AmountToContribute = sc.amountToContribute,
+                            FormattedAmountToContribute = ("€ " + sc.amountToContribute).ToString(),
                             SupervisorId = sc.supervisorID,
-                            Supervisor = m.PersonalInfo.FirstName + " " + m.PersonalInfo.LastName,
+                            FirstName = m.PersonalInfo.FirstName,
+                            LastName = m.PersonalInfo.LastName,
                             ImagePath = m.PersonalInfo.ImagePath,
                             ContributionStartDate = sc.contributionStartDate,
                             FormattedContributionStartDate = sc.contributionStartDate.ToString("dd.MM.yyyy"),
                             ContributionEndDate = sc.contributionEndDate,
                             FormattedContributionEndDate = sc.contributionEndDate.ToString("dd.MM.yyyy"),
                             AmountExpected = sc.amountExpected,
+                            FormattedAmountExpected = ("€ " + sc.amountExpected).ToString(),
                             Status = totalContributedAmount <= 0 ? "Not Paid" : (totalContributedAmount > 0 && totalContributedAmount < sc.amountExpected) ? "Not Completed" : totalContributedAmount == sc.amountExpected ? "Completed" : ((totalContributedAmount - sc.amountExpected) + " € Extra").ToString(),
                             TotalContributedAmount = totalContributedAmount,
+                            FormattedTotalContributedAmount = ("€ " + totalContributedAmount).ToString(),
 
-                        }).OrderByDescending(x => x.ContributionStartDate.Year).ThenByDescending(x => x.ContributionStartDate.Month).ThenByDescending(x => x.ContributionStartDate.Day).ThenBy(x => x.Title).ToList();
+                        }).ToList();
+
+            data = data.Select((x, index) =>
+            {
+                x.Counter = index + 1;
+                return x;
+            }).OrderByDescending(x => x.ContributionStartDate.Year).ThenByDescending(x => x.ContributionStartDate.Month).ThenByDescending(x => x.ContributionStartDate.Day).ThenBy(x => x.Title).ToList();
 
             return data;
         }
