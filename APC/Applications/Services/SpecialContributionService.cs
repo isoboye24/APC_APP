@@ -36,7 +36,7 @@ namespace APC.Applications.Services
         {
             var data = (from sc in _repository.GetAll()
                         join m in _memberRepository.GetAll() on sc.supervisorID equals m.MemberId
-                        let totalContributedAmount = _specialContributorRepository.GetByAmountContributedByContributionId(sc.specialContributionID)
+                        let totalContributedAmount = _specialContributorRepository.GetAmountContributedByContributionId(sc.specialContributionID)
                         select new SpecialContributionDTO
                         {
                             SpecialContributionId = sc.specialContributionID,
@@ -44,7 +44,8 @@ namespace APC.Applications.Services
                             Summary = sc.summary,
                             AmountToContribute = sc.amountToContribute,
                             SupervisorId = sc.supervisorID,
-                            Supervisor = m.PersonalInfo.FirstName + " " + m.PersonalInfo.LastName,
+                            FirstName = m.PersonalInfo.FirstName,
+                            LastName = m.PersonalInfo.LastName,
                             ImagePath = m.PersonalInfo.ImagePath,
                             ContributionStartDate = sc.contributionStartDate,
                             FormattedContributionStartDate = sc.contributionStartDate.ToString("dd.MM.yyyy"),
@@ -70,7 +71,7 @@ namespace APC.Applications.Services
 
             var data = (from sc in _repository.GetAllDeletedSpecialContributions()
                         join m in _memberRepository.GetAll() on sc.supervisorID equals m.MemberId
-                        let totalContributedAmount = _specialContributorRepository.GetByAmountContributedByContributionId(sc.specialContributionID)
+                        let totalContributedAmount = _specialContributorRepository.GetAmountContributedByContributionId(sc.specialContributionID)
                         select new SpecialContributionDTO
                         {
                             SpecialContributionId = sc.specialContributionID,

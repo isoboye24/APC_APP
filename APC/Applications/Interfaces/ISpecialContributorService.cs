@@ -6,7 +6,7 @@ namespace APC.Applications.Interfaces
 {
     public interface ISpecialContributorService
     {
-        List<SpecialContributorDTO> GetAll();
+        List<SpecialContributorDTO> GetAllByContributionId(int id);
         List<SpecialContributorDTO> GetAllDeletedSpecialContributors();
         bool Create(SpecialContributor data);
         bool Update(SpecialContributor data);
@@ -14,6 +14,6 @@ namespace APC.Applications.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
-        decimal GetByAmountContributedByContributionId(int id);
+        decimal GetAmountContributedByContributionId(int id);
     }
 }

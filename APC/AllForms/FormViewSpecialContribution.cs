@@ -1,17 +1,16 @@
-﻿using APC.Applications.Interfaces;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
 using APC.BLL;
 using APC.DAL.DTO;
+using APC.Helper;
 using APC.Utility;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -22,8 +21,9 @@ namespace APC.AllForms
         private readonly IMemberService _memberService;
 
         private Applications.DTO.SpecialContributionDTO _specialContributionsDTO;
+        private List<Applications.DTO.SpecialContributorDTO> _specialContributorsDTO;
 
-        public FormViewSpecialContribution(Applications.DTO.SpecialContributionDTO dto, IMemberService memberService, ISpecialContributorService specialContributorService)
+        public FormViewSpecialContribution(Applications.DTO.SpecialContributionDTO dto, IMemberService memberService, ISpecialContributorService specialContributorService, List<Applications.DTO.SpecialContributorDTO> specialContributorsDTO)
         {
             InitializeComponent();
             _specialContributionsDTO = dto;
@@ -115,13 +115,15 @@ namespace APC.AllForms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        public SpecialContributionDetailDTO detail = new SpecialContributionDetailDTO();
         private int buttonSize = 14;
         private float panelSize;
 
-        SpecialContributorDetailDTO contributorDetail = new SpecialContributorDetailDTO();
-        SpecialContributorsBLL contributorBLL = new SpecialContributorsBLL();
-        SpecialContributorDTO contributorDTO = new SpecialContributorDTO();
+        private void loadContributors()
+        {
+            dataGridView1.DataSource = _specialContributorService.GetAllByContributionId(_specialContributionsDTO.SpecialContributionId);
+            SpecialContributorHelper.ConfigureSpecialContributorGrid(dataGridView1, SpecialContributorHelper.SpecialContributorGridType.Basic);
+        }
+
         private void FormViewSpecialContribution_Load(object sender, EventArgs e)
         {
             #region
@@ -129,16 +131,16 @@ namespace APC.AllForms
             cmbContributionStatus.Items.Add("Completed");
             cmbContributionStatus.Items.Add("Extra");
 
-            labelName.Text = detail.SupervisorName;
-            labelSurname.Text = detail.SupervisorSurname;
-            labelTitle.Text = detail.ContributionTitle;
-            labelStartDate.Text = detail.StartDate;
-            labelEndDate.Text = detail.EndDate;
-            if (DateTime.Today > detail.ContributionEndDate)
+            labelName.Text = _specialContributionsDTO.FirstName;
+            labelSurname.Text = _specialContributionsDTO.LastName;
+            labelTitle.Text = _specialContributionsDTO.Title;
+            labelStartDate.Text = _specialContributionsDTO.FormattedContributionStartDate;
+            labelEndDate.Text = _specialContributionsDTO.FormattedContributionEndDate;
+            if (DateTime.Today > _specialContributionsDTO.ContributionEndDate)
             {
                 labelEnded.Text = "Ended on";
             }
-            else if (DateTime.Today > detail.ContributionEndDate)
+            else if (DateTime.Today > _specialContributionsDTO.ContributionEndDate)
             {
                 labelEnded.Text = "Ends Today";
             }
@@ -146,47 +148,16 @@ namespace APC.AllForms
             {
                 labelEnded.Text = "Ends on";
             }
-            labelSummary.Text = detail.Summary;
+            labelSummary.Text = _specialContributionsDTO.Summary;
             
 
-            string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+            string imagePath = Application.StartupPath + "\\images\\" + _specialContributionsDTO.ImagePath;
             picSupervisor.ImageLocation = imagePath;
 
             labelTotalContributors.Text = dataGridView1.RowCount.ToString();
             #endregion
 
-            contributorDTO = contributorBLL.Select(detail.SpecialContributionID);
-
-            #region
-            dataGridView1.DataSource = contributorDTO.SpecialContributors;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].HeaderText = "No.";
-            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[3].HeaderText = "Name";
-            dataGridView1.Columns[4].HeaderText = "Surname";
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].Visible = false;
-            dataGridView1.Columns[7].HeaderText = "Expected";
-            dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[8].Visible = false;
-            dataGridView1.Columns[9].HeaderText = "Contributed";
-            dataGridView1.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[10].HeaderText = "Balance";
-            dataGridView1.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[11].HeaderText = "Status";
-            dataGridView1.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[12].Visible = false;
-            dataGridView1.Columns[13].HeaderText = "Date";
-            dataGridView1.Columns[13].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[14].Visible = false;
-            dataGridView1.Columns[15].Visible = false;
-
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-            #endregion
+            loadContributors();
 
             refreshCounts();
         }
@@ -194,9 +165,9 @@ namespace APC.AllForms
         private void refreshCounts()
         {
             labelTotalContributors.Text = "Rows : " + dataGridView1.RowCount.ToString();
-            labelTotalExpectedAmt.Text = "Total Amt. Exp. : " + detail.AmountExpectedWithCurrency;
-            labelTotalContributedAmt.Text = "Total Amt. Cont. : " + detail.AmountContributedWithCurrency;
-            labelTotalBalance.Text = "Bal : " + Math.Abs(detail.AmountExpected - detail.AmountContributed) + " € (" + detail.Status + ")";
+            labelTotalExpectedAmt.Text = "Total Amt. Exp. : " + _specialContributionsDTO.FormattedAmountExpected;
+            labelTotalContributedAmt.Text = "Total Amt. Cont. : " + _specialContributionsDTO.FormattedTotalContributedAmount;
+            labelTotalBalance.Text = "Bal : " + Math.Abs(_specialContributionsDTO.AmountExpected - _specialContributionsDTO.TotalContributedAmount) + " € (" + _specialContributionsDTO.Status + ")";
         }
 
         private void btnClose_Click_1(object sender, EventArgs e)
@@ -211,69 +182,41 @@ namespace APC.AllForms
             txtAmount.Clear();
             cmbContributionStatus.SelectedIndex = -1;
 
-            contributorBLL = new SpecialContributorsBLL();
-            contributorDTO = contributorBLL.Select(detail.SpecialContributionID);
-            dataGridView1.DataSource = contributorDTO.SpecialContributors;
+            loadContributors();
 
             refreshCounts();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormSpecialContributor open = new FormSpecialContributor();
-            open.specialContributionID = detail.SpecialContributionID;
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormSpecialContributor(_specialContributorService, _memberService);
+            form.ShowDialog();
             ClearFilters();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private Applications.DTO.SpecialContributorDTO GetSelectedSpecialContributor()
         {
-            if (contributorDetail.ContributorID == 0)
-            {
-                MessageBox.Show("Please select a contributor from the table.");
-            }
-            else
-            {
-                FormSpecialContributor open = new FormSpecialContributor();
-                open.specialContributionID = detail.SpecialContributionID;
-                open.detail = contributorDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-                
+            if (dataGridView1.CurrentRow == null)
+                return null;
+
+            return dataGridView1.CurrentRow.DataBoundItem as Applications.DTO.SpecialContributorDTO;
         }
 
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= dataGridView1.Rows.Count)
+            var selected = GetSelectedSpecialContributor();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a contributor from the table");
                 return;
+            }
 
-            var row = dataGridView1.Rows[e.RowIndex];
-            if (row == null || row.IsNewRow)
-                return;
+            var form = new FormSpecialContributor(_specialContributorService, _memberService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
 
-            contributorDetail = new SpecialContributorDetailDTO();
-            contributorDetail.ContributorID = Convert.ToInt32(row.Cells[0].Value ?? 0);
-            contributorDetail.MemberID = Convert.ToInt32(row.Cells[1].Value ?? 0);
-            contributorDetail.Counter = Convert.ToInt32(row.Cells[2].Value ?? 0);
-            contributorDetail.Name = row.Cells[3].Value?.ToString() ?? string.Empty;
-            contributorDetail.Surname = row.Cells[4].Value?.ToString() ?? string.Empty;
-            contributorDetail.ImagePath = row.Cells[5].Value?.ToString() ?? string.Empty;
-            contributorDetail.AmountExpected = Convert.ToDecimal(row.Cells[6].Value ?? 0);
-            contributorDetail.AmountExpectedWithCurrency = row.Cells[7].Value?.ToString() ?? string.Empty;
-            contributorDetail.AmountContributed = Convert.ToDecimal(row.Cells[8].Value ?? 0);
-            contributorDetail.AmountContributedWithCurrency = row.Cells[9].Value?.ToString() ?? string.Empty;
-            contributorDetail.Balance = row.Cells[10].Value?.ToString() ?? string.Empty;
-            contributorDetail.AmountContributedStatus = row.Cells[11].Value?.ToString() ?? string.Empty;
-            contributorDetail.ContributedDate = Convert.ToDateTime(row.Cells[12].Value ?? 0);
-            contributorDetail.Date = row.Cells[13].Value?.ToString() ?? string.Empty;
-            contributorDetail.ContributionID = Convert.ToInt32(row.Cells[14].Value ?? 0);
-            contributorDetail.Summary = row.Cells[15].Value?.ToString() ?? string.Empty;
+            ClearFilters();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -293,103 +236,104 @@ namespace APC.AllForms
 
         private void txtName_TextChanged(object sender, EventArgs e)
         {
-            List<SpecialContributorDetailDTO> list = contributorDTO.SpecialContributors;
-            list = list.Where(x => x.Name.Contains(txtName.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
+            string search = txtName.Text.Trim().ToLower();
+            var filtered = _specialContributorsDTO.Where(x => x.FirstName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridView1.DataSource = filtered;
         }
 
         private void txtSurname_TextChanged(object sender, EventArgs e)
         {
-            List<SpecialContributorDetailDTO> list = contributorDTO.SpecialContributors;
-            list = list.Where(x => x.Surname.Contains(txtSurname.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
+            string search = txtSurname.Text.Trim().ToLower();
+            var filtered = _specialContributorsDTO.Where(x => x.LastName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridView1.DataSource = filtered;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            List<SpecialContributorDetailDTO> list = contributorDTO.SpecialContributors;
-            if (txtAmount.Text.Trim() != "")
+            var filtered = _specialContributorsDTO.AsQueryable();
+
+            if (txtAmount.Text.Trim().Length == 0 && cmbContributionStatus.SelectedIndex == -1)
             {
+                MessageBox.Show("Please select either a status or give an amount");
+                return;
+            }
+
+            if (txtAmount.Text.Trim().Length != 0)
+            {
+                decimal amount = Convert.ToDecimal(txtAmount.Text.Trim());
                 if (rbEqual.Checked)
                 {
-                    list = list.Where(x => x.AmountContributed == Convert.ToInt32(txtAmount.Text.Trim())).ToList();
+                    filtered = filtered.Where(x => x.AmountContributed == amount);
                 }
                 else if (rbLess.Checked)
                 {
-                    list = list.Where(x => x.AmountContributed < Convert.ToInt32(txtAmount.Text.Trim())).ToList();
+                    filtered = filtered.Where(x => x.AmountContributed < amount);
                 }
                 else if (rbMore.Checked)
                 {
-                    list = list.Where(x => x.AmountContributed > Convert.ToInt32(txtAmount.Text.Trim())).ToList();
+                    filtered = filtered.Where(x => x.AmountContributed > amount);
                 }
                 else
                 {
-                    MessageBox.Show("Please select a criterion from the monthly dues group");
+                    MessageBox.Show("Please select any of the less or equal or more than buttons");
                 }
-
-                dataGridView1.DataSource = list;
-            }
-            else
-            {
-                dataGridView1.DataSource = list;
             }
 
             if (cmbContributionStatus.SelectedIndex != -1)
             {
                 if (cmbContributionStatus.SelectedIndex == 0)
                 {
-                    list = list.Where(x => x.AmountContributedStatus == "Incomplete").ToList();
+                    filtered = filtered.Where(x => x.PaymentStatus == "Incomplete");
                 }
                 if (cmbContributionStatus.SelectedIndex == 1)
                 {
-                    list = list.Where(x => x.AmountContributedStatus == "Completed").ToList();
+                    filtered = filtered.Where(x => x.PaymentStatus == "Completed");
                 }
                 if (cmbContributionStatus.SelectedIndex == 2)
                 {
-                    list = list.Where(x => x.AmountContributedStatus == "Extra").ToList();
+                    filtered = filtered.Where(x => x.PaymentStatus == "Extra");
                 }
-
-                dataGridView1.DataSource = list;
             }
-            
+
+            dataGridView1.DataSource = filtered.ToList();
         }
 
         private void btnViewSummary_Click(object sender, EventArgs e)
         {
-            if (contributorDetail.ContributorID == 0)
-            {
-                MessageBox.Show("Please select a contributor from the table.");
-            }
-            else
-            {
-                FormViewSpecialContributor open = new FormViewSpecialContributor();
-                open.detail = contributorDetail;
-                open.contributionDetail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (contributorDetail.ContributorID == 0)
+            var selected = GetSelectedSpecialContributor();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a contributor from the table.");
+                MessageBox.Show("Please select a contributor.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (contributorBLL.Delete(contributorDetail))
-                    {
-                        MessageBox.Show("Contributor was deleted successfully!");
-                        ClearFilters();
-                    }
-                }
+                _specialContributorService.Delete(selected.SpecialContributorId);
+                ClearFilters();
             }
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedSpecialContributor();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a contributor from the table");
+                return;
+            }
+
+            var form = new FormViewSpecialContributor(selected, _memberService);
+            form.ShowDialog();
+
+            ClearFilters();
         }
     }
 }

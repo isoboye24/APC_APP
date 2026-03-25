@@ -1,7 +1,8 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
-using APC.Applications.Interfaces;
 using APC.Helper;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,6 +27,7 @@ namespace APC.AllForms
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
         private List<Applications.DTO.FinedMemberDTO> _finedMemberDTO;
         private List<Applications.DTO.SpecialContributionDTO> _specialContributionDTO;
+        private List<Applications.DTO.SpecialContributorDTO> _specialContributorsDTO;
 
         public FormMeetingBoard(ICommentService commentService, IGenderService genderService, IMemberService memberService, 
             IMonthService monthService, IConstitutionService constitutionService, IFinedMemberService finedMemberService, 
@@ -43,6 +45,7 @@ namespace APC.AllForms
             _specialContributorService = specialContributorService;
             _currentUserService = currentUserService;
         }
+
         GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
         GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
         GeneralAttendanceDetailDTO detail = new GeneralAttendanceDetailDTO();
@@ -501,6 +504,7 @@ namespace APC.AllForms
         {
             var form = new FormComments(_commentService, _memberService);
             form.ShowDialog();
+
             ClearFilters();
         }
 
@@ -720,7 +724,6 @@ namespace APC.AllForms
 
         private void btnSearchFinedMember_Click(object sender, EventArgs e)
         {
-
             var filtered = _finedMemberDTO.AsQueryable();
 
             if (cmbGenderFinedMember.SelectedIndex == -1 && cmbMonthFinedMember.SelectedIndex == -1 && cmbFineStatus.SelectedIndex == -1)
@@ -774,7 +777,6 @@ namespace APC.AllForms
 
             return dataGridViewConstitution.CurrentRow.DataBoundItem as Applications.DTO.ConstitutionDTO;
         }
-
 
         private void btnViewConstitution_Click(object sender, EventArgs e)
         {
@@ -916,7 +918,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewSpecialContribution(selected, _memberService, _specialContributorService);
+            var form = new FormViewSpecialContribution(selected, _memberService, _specialContributorService, _specialContributorsDTO);
             form.ShowDialog();
 
             ClearFilters();      

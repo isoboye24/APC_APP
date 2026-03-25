@@ -828,6 +828,7 @@
     <Compile Include="Helper\MemberHelper.cs" />
     <Compile Include="Helper\SingleColumnHelper.cs" />
     <Compile Include="Helper\SpecialContributionHelper.cs" />
+    <Compile Include="Helper\SpecialContributorHelper.cs" />
     <Compile Include="Infrastructure\Repositories\AttendanceStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\CommentRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ConstitutionRepository.cs" />

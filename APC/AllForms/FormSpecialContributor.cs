@@ -1,4 +1,6 @@
-﻿using APC.BLL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using APC.Utility;
 using System;
@@ -16,10 +18,22 @@ namespace APC.AllForms
 {
     public partial class FormSpecialContributor : Form
     {
-        public FormSpecialContributor()
+        private readonly ISpecialContributorService _specialContributorService;
+        private readonly IMemberService _memberService;
+
+        private Applications.DTO.SpecialContributorDTO _specialContributorDTO;
+
+        public FormSpecialContributor(ISpecialContributorService specialContributorService, IMemberService memberService)
         {
             InitializeComponent();
+            _specialContributorService = specialContributorService;
+            _memberService = memberService;
         }
+
+        public int _specialContributionID;
+        public bool _isUpdate = false;
+        private int buttonSize = 14;
+        private float panelSize;
 
         /// <summary>
         ///  Drag
@@ -105,16 +119,11 @@ namespace APC.AllForms
             this.Close();
         }
 
-        private int buttonSize = 14;
-        private float panelSize;
-        MemberBLL memberBLL = new MemberBLL();
-        MemberDTO memberDTO = new MemberDTO();
-        MemberDetailDTO memberDetail = new MemberDetailDTO();
-        public int specialContributionID;
-        public bool isUpdate = false;
-
-        SpecialContributorsBLL bll = new SpecialContributorsBLL();
-        public SpecialContributorDetailDTO detail = new SpecialContributorDetailDTO();
+        public void loadForEdit(Applications.DTO.SpecialContributorDTO dto, bool isUpdate)
+        {
+            _specialContributorDTO = dto;
+            _isUpdate = isUpdate;
+        }
 
         private void FormSpecialContributor_Load(object sender, EventArgs e)
         {

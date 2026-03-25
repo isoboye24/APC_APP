@@ -34,9 +34,9 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<SpecialContributorDTO> GetAll()
+        public List<SpecialContributorDTO> GetAllByContributionId(int id)
         {
-            var data = (from c in _repository.GetAll()
+            var data = (from c in _repository.GetAllByContributionId(id)
                         join m in _memberRepository.GetAll() on c.memberID equals m.MemberId
                         join sc in _specialContributionRepository.GetAll() on c.specialContributionID equals sc.specialContributionID
                         select new SpecialContributorDTO
@@ -47,10 +47,12 @@ namespace APC.Applications.Services
                             LastName = m.PersonalInfo.LastName,
                             ImagePath = m.PersonalInfo.ImagePath,
                             AmountContributed = c.amountContributed,
+                            FormattedAmountContributed = ("€ " + c.amountContributed).ToString(),
                             FormattedContributedDate = c.contributedDate.ToString("dd.MM.yyyy"),
                             ContributedDate = c.contributedDate,
                             AmountExpected = sc.amountExpected,
-                            Balance = (sc.amountExpected - c.amountContributed).ToString(),
+                            FormattedAmountExpected = ("€ " + sc.amountExpected).ToString(),
+                            Balance = ("€ " + (sc.amountExpected - c.amountContributed)).ToString(),
 
                             PaymentStatus = c.amountContributed <= 0 ? "Not Paid" : (c.amountContributed > 0 && 
                             c.amountContributed < sc.amountExpected) ? "Not Completed" : c.amountContributed == sc.amountExpected ? 
@@ -58,7 +60,13 @@ namespace APC.Applications.Services
 
                             Summary = sc.summary,
                             SpecialContributionId = sc.specialContributionID,
-                        }).OrderByDescending(x => x.ContributedDate.Year).ThenByDescending(x => x.ContributedDate.Month).ThenByDescending(x => x.ContributedDate.Day).ThenBy(x => x.FirstName).ToList();
+                        }).ToList();
+
+            data = data.Select((x, index) =>
+            {
+                x.Counter = index + 1;
+                return x;
+            }).OrderByDescending(x => x.ContributedDate.Year).ThenByDescending(x => x.ContributedDate.Month).ThenByDescending(x => x.ContributedDate.Day).ThenBy(x => x.FirstName).ToList();
 
             return data;
         }
@@ -76,9 +84,11 @@ namespace APC.Applications.Services
                             LastName = m.PersonalInfo.LastName,
                             ImagePath = m.PersonalInfo.ImagePath,
                             AmountContributed = c.amountContributed,
+                            FormattedAmountContributed = ("€ " + c.amountContributed).ToString(),
                             FormattedContributedDate = c.contributedDate.ToString("dd.MM.yyyy"),
                             ContributedDate = c.contributedDate,
                             AmountExpected = sc.amountExpected,
+                            FormattedAmountExpected = ("€ " + sc.amountExpected).ToString(),
                             Balance = (sc.amountExpected - c.amountContributed).ToString(),
 
                             PaymentStatus = c.amountContributed <= 0 ? "Not Paid" : (c.amountContributed > 0 &&
@@ -87,7 +97,13 @@ namespace APC.Applications.Services
 
                             Summary = sc.summary,
                             SpecialContributionId = sc.specialContributionID,
-                        }).OrderByDescending(x => x.ContributedDate.Year).ThenByDescending(x => x.ContributedDate.Month).ThenByDescending(x => x.ContributedDate.Day).ThenBy(x => x.FirstName).ToList();
+                        }).ToList();
+
+            data = data.Select((x, index) =>
+            {
+                x.Counter = index + 1;
+                return x;
+            }).OrderByDescending(x => x.ContributedDate.Year).ThenByDescending(x => x.ContributedDate.Month).ThenByDescending(x => x.ContributedDate.Day).ThenBy(x => x.FirstName).ToList();
 
             return data;
         }
@@ -95,8 +111,8 @@ namespace APC.Applications.Services
         public bool GetBack(int id)
             => _repository.GetBack(id);
         
-        public decimal GetByAmountContributedByContributionId(int id)
-            => _repository.GetByAmountContributedByContributionId(id);
+        public decimal GetAmountContributedByContributionId(int id)
+            => _repository.GetAmountContributedByContributionId(id);
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);

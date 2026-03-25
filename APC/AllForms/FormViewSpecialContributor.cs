@@ -1,4 +1,5 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Applications.Interfaces;
+using APC.DAL.DTO;
 using APC.Utility;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,20 @@ namespace APC.AllForms
 {
     public partial class FormViewSpecialContributor : Form
     {
-        public FormViewSpecialContributor()
+        private readonly IMemberService _memberService;
+        private Applications.DTO.SpecialContributorDTO _specialContributorDTO;
+
+        private int buttonSize = 14;
+        private float panelSize;
+        int titleChar = 40;
+
+        public FormViewSpecialContributor(Applications.DTO.SpecialContributorDTO dto, IMemberService memberService)
         {
             InitializeComponent();
+            _specialContributorDTO = dto;
+            _memberService = memberService;
         }
+
         /// <summary>
         ///  Drag
         /// </summary>
@@ -44,10 +55,6 @@ namespace APC.AllForms
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-
-        private int buttonSize = 14;
-        private float panelSize;
-        int titleChar = 40;
 
         private void iconMaximize_Click(object sender, EventArgs e)
         {

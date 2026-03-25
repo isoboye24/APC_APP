@@ -33,9 +33,9 @@ namespace APC.Infrastructure.Repositories
             return _db.SPECIAL_CONTRIBUTORS.Any(x => !x.isDeleted && x.memberID == memberId && x.specialContributionID == specialContributionId);
         }
 
-        public IQueryable<SPECIAL_CONTRIBUTORS> GetAll()
+        public IQueryable<SPECIAL_CONTRIBUTORS> GetAllByContributionId(int id)
         {
-            return _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted);
+            return _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted && x.specialContributionID == id);
         }
         
         public IQueryable<SPECIAL_CONTRIBUTORS> GetAllDeletedContributors()
@@ -57,7 +57,7 @@ namespace APC.Infrastructure.Repositories
             return _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted && x.specialContributorID == id);
         }
         
-        public decimal GetByAmountContributedByContributionId(int id)
+        public decimal GetAmountContributedByContributionId(int id)
         {
             decimal totalAmount = _db.SPECIAL_CONTRIBUTORS.Where(x => !x.isDeleted && x.specialContributionID == id).Sum(x => x.amountContributed);
             return totalAmount;

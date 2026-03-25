@@ -6,7 +6,7 @@ namespace APC.Applications.Interfaces
 {
     public interface ISpecialContributorRepository
     {
-        IQueryable<SPECIAL_CONTRIBUTORS> GetAll();
+        IQueryable<SPECIAL_CONTRIBUTORS> GetAllByContributionId(int id);
         IQueryable<SPECIAL_CONTRIBUTORS> GetAllDeletedContributors();
         IQueryable<SPECIAL_CONTRIBUTORS> GetById(int id);
         bool Insert(SpecialContributor data);
@@ -16,6 +16,6 @@ namespace APC.Applications.Interfaces
         bool PermanentDelete(int id);
         bool Exists(int memberId, int specialContributionId);
         int Count();
-        decimal GetByAmountContributedByContributionId(int id);
+        decimal GetAmountContributedByContributionId(int id);
     }
 }
