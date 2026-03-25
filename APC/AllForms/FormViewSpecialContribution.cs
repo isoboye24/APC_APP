@@ -202,7 +202,6 @@ namespace APC.AllForms
             return dataGridView1.CurrentRow.DataBoundItem as Applications.DTO.SpecialContributorDTO;
         }
 
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             var selected = GetSelectedSpecialContributor();
@@ -330,7 +329,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewSpecialContributor(selected, _memberService);
+            var form = new FormViewSpecialContributor(selected, _specialContributionsDTO);
             form.ShowDialog();
 
             ClearFilters();

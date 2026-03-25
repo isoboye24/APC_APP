@@ -1,35 +1,27 @@
-﻿using APC.Applications.Interfaces;
-using APC.DAL.DTO;
-using APC.Utility;
+﻿using APC.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace APC.AllForms
 {
     public partial class FormViewSpecialContributor : Form
     {
-        private readonly IMemberService _memberService;
         private Applications.DTO.SpecialContributorDTO _specialContributorDTO;
+        private Applications.DTO.SpecialContributionDTO _specialContributionDTO;
 
         private int buttonSize = 14;
         private float panelSize;
         int titleChar = 40;
 
-        public FormViewSpecialContributor(Applications.DTO.SpecialContributorDTO dto, IMemberService memberService)
+        public FormViewSpecialContributor(Applications.DTO.SpecialContributorDTO dto, Applications.DTO.SpecialContributionDTO specialContributionDTO)
         {
             InitializeComponent();
             _specialContributorDTO = dto;
-            _memberService = memberService;
+            _specialContributionDTO = specialContributionDTO;
         }
 
         /// <summary>
@@ -119,25 +111,22 @@ namespace APC.AllForms
             ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
         }
 
-        public SpecialContributorDetailDTO detail = new SpecialContributorDetailDTO();
-        public SpecialContributionDetailDTO contributionDetail = new SpecialContributionDetailDTO();
-        
         private void FormViewSpecialContributor_Load(object sender, EventArgs e)
         {
-            string title = contributionDetail.ContributionTitle;
+            string title = _specialContributionDTO.Title;
             if (title.Length > titleChar)
             {
                 title = title.Substring(0, titleChar) + "...";
             }
 
             labelTitle.Text = title;
-            labelName.Text = detail.Name;
-            labelSurname.Text = detail.Surname;
-            labelSummary.Text = detail.Summary;
-            labelAmountContributed.Text = detail.AmountContributedWithCurrency + " (" + detail.AmountContributedStatus + ")";
-            labelContributedDate.Text = detail.Date;
+            labelName.Text = _specialContributorDTO.FirstName;
+            labelSurname.Text = _specialContributorDTO.LastName;
+            labelSummary.Text = _specialContributorDTO.Summary;
+            labelAmountContributed.Text = _specialContributorDTO.FormattedAmountContributed + " (" + _specialContributorDTO.PaymentStatus + ")";
+            labelContributedDate.Text = _specialContributorDTO.FormattedContributedDate;
 
-            string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+            string imagePath = Path.Combine(Application.StartupPath, "images", _specialContributorDTO.ImagePath);
             picContributor.ImageLocation = imagePath;
         }
     }
