@@ -4,8 +4,10 @@ using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -219,7 +221,7 @@ namespace APC.AllForms
             {
                 var selectMember = GetSelectedMember();
 
-                string imagePath = Application.StartupPath + "\\images\\" + selectMember.ImagePath;
+                string imagePath = Path.Combine(Application.StartupPath, "images", selectMember.ImagePath);
                 picProfilePic.ImageLocation = imagePath;
 
                 labelName.Text = selectMember.FirstName;

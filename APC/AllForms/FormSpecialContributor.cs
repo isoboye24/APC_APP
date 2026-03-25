@@ -1,13 +1,18 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Applications.Services;
 using APC.BLL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
+using APC.Domain.Entities;
+using APC.Helper;
 using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -22,6 +27,14 @@ namespace APC.AllForms
         private readonly IMemberService _memberService;
 
         private Applications.DTO.SpecialContributorDTO _specialContributorDTO;
+        private List<MembersBasicDetailDTO> _memberDTO;
+
+        public int _memberId = 0;
+        public bool _isUpdate = false;
+        private int buttonSize = 14;
+        private float panelSize;
+
+
 
         public FormSpecialContributor(ISpecialContributorService specialContributorService, IMemberService memberService)
         {
@@ -29,11 +42,6 @@ namespace APC.AllForms
             _specialContributorService = specialContributorService;
             _memberService = memberService;
         }
-
-        public int _specialContributionID;
-        public bool _isUpdate = false;
-        private int buttonSize = 14;
-        private float panelSize;
 
         /// <summary>
         ///  Drag
@@ -125,183 +133,85 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
+        private void loadMembers()
+        {
+            dataGridView1.DataSource = _memberService.GetAll();
+            MemberHelper.ConfigureMemberGrid(dataGridView1, MemberHelper.MemberGridType.Basic);
+        }
+
+        private MembersBasicDetailDTO GetSelectedMember()
+        {
+            if (dataGridView1.CurrentRow == null)
+                return null;
+
+            return dataGridView1.CurrentRow.DataBoundItem as MembersBasicDetailDTO;
+        }
+
         private void FormSpecialContributor_Load(object sender, EventArgs e)
         {
-            memberDTO = memberBLL.Select();
+            loadMembers();
 
-            #region
-            dataGridView1.DataSource = memberDTO.Members;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].Visible = false;
-            dataGridView1.Columns[3].HeaderText = "Surname";
-            dataGridView1.Columns[4].HeaderText = "Name";
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].Visible = false;
-            dataGridView1.Columns[7].Visible = false;
-            dataGridView1.Columns[8].Visible = false;
-            dataGridView1.Columns[9].Visible = false;
-            dataGridView1.Columns[10].Visible = false;
-            dataGridView1.Columns[11].Visible = false;
-            dataGridView1.Columns[12].Visible = false;
-            dataGridView1.Columns[13].Visible = false;
-            dataGridView1.Columns[14].Visible = false;
-            dataGridView1.Columns[15].Visible = false;
-            dataGridView1.Columns[16].Visible = false;
-            dataGridView1.Columns[17].Visible = false;
-            dataGridView1.Columns[18].Visible = false;
-            dataGridView1.Columns[19].Visible = false;
-            dataGridView1.Columns[20].Visible = false;
-            dataGridView1.Columns[21].Visible = false;
-            dataGridView1.Columns[22].Visible = false;
-            dataGridView1.Columns[23].Visible = false;
-            dataGridView1.Columns[24].Visible = false;
-            dataGridView1.Columns[25].Visible = false;
-            dataGridView1.Columns[26].Visible = false;
-            dataGridView1.Columns[27].Visible = false;
-            dataGridView1.Columns[28].Visible = false;
-            dataGridView1.Columns[29].Visible = false;
-            dataGridView1.Columns[30].Visible = false;
-            dataGridView1.Columns[31].Visible = false;
-            dataGridView1.Columns[32].Visible = false;
-            dataGridView1.Columns[33].Visible = false;
-            dataGridView1.Columns[34].Visible = false;
-            dataGridView1.Columns[35].Visible = false;
-            dataGridView1.Columns[36].Visible = false;
-            dataGridView1.Columns[37].Visible = false;
-            dataGridView1.Columns[38].Visible = false;
-            dataGridView1.Columns[39].Visible = false;
-            dataGridView1.Columns[40].Visible = false;
-            dataGridView1.Columns[41].Visible = false;
-            dataGridView1.Columns[42].Visible = false;
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            var selectedMember = GetSelectedMember();
+            _memberId = selectedMember.MemberId;
+
+            if (_isUpdate)
             {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-            #endregion
+                labelTitle.Text = "Edit Contributor " + _specialContributorDTO.FirstName + " " + _specialContributorDTO.LastName;
+                txtAmount.Text = _specialContributorDTO.AmountContributed.ToString();
+                txtSummary.Text = _specialContributorDTO.Summary;
+                dateTimePickerContributedDate.Value = _specialContributorDTO.ContributedDate;
 
-            if (isUpdate)
-            {
-                labelTitle.Text = "Edit Contributor ";
-                txtAmount.Text = detail.AmountContributed.ToString();
-                txtSummary.Text = detail.Summary;
-                dateTimePickerContributedDate.Value = detail.ContributedDate;
-
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+                string imagePath = Application.StartupPath + "\\images\\" + _specialContributorDTO.ImagePath;
                 picContributor.ImageLocation = imagePath;
 
-                labelName.Text = detail.Name;
-                labelSurname.Text = detail.Surname;
+                labelName.Text = _specialContributorDTO.FirstName;
+                labelSurname.Text = _specialContributorDTO.LastName;
             }
             else
             {
-                labelTitle.Text = "Add Contributor"; 
+                labelTitle.Text = "Add Contributor";
             }
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            memberDetail = new MemberDetailDTO();
-            memberDetail.MemberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-            memberDetail.Username = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            memberDetail.Password = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            memberDetail.Surname = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            memberDetail.Name = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-            memberDetail.Birthday = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
-            memberDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-            memberDetail.EmailAddress = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-            memberDetail.HouseAddress = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
-            memberDetail.MembershipDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[9].Value);
-            memberDetail.CountryID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[10].Value);
-            memberDetail.CountryName = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-            memberDetail.NationalityID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[12].Value);
-            memberDetail.NationalityName = dataGridView1.Rows[e.RowIndex].Cells[13].Value.ToString();
-            memberDetail.ProfessionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[14].Value);
-            memberDetail.ProfessionName = dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString();
-            memberDetail.PositionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[16].Value);
-            memberDetail.PositionName = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
-            memberDetail.GenderID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[18].Value);
-            memberDetail.GenderName = dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString();
-            memberDetail.EmploymentStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[20].Value);
-            memberDetail.EmploymentStatusName = dataGridView1.Rows[e.RowIndex].Cells[21].Value.ToString();
-            memberDetail.MaritalStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[22].Value);
-            memberDetail.MaritalStatusName = dataGridView1.Rows[e.RowIndex].Cells[23].Value.ToString();
-            memberDetail.PermissionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[24].Value);
-            memberDetail.PermissionName = dataGridView1.Rows[e.RowIndex].Cells[25].Value.ToString();
-            memberDetail.PhoneNumber = dataGridView1.Rows[e.RowIndex].Cells[26].Value.ToString();
-            memberDetail.PhoneNumber2 = dataGridView1.Rows[e.RowIndex].Cells[27].Value.ToString();
-            memberDetail.PhoneNumber3 = dataGridView1.Rows[e.RowIndex].Cells[28].Value.ToString();
-            memberDetail.isCountryDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[29].Value);
-            memberDetail.isNationalityDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[30].Value);
-            memberDetail.isProfessionDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[31].Value);
-            memberDetail.isPositionDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[32].Value);
-            memberDetail.isEmpStatusDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[33].Value);
-            memberDetail.isMarStatusDeleted = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[34].Value);
-            memberDetail.MembershipStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[35].Value);
-            memberDetail.MembershipStatus = dataGridView1.Rows[e.RowIndex].Cells[36].Value.ToString();
-            memberDetail.DeadDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[37].Value);
-            memberDetail.DeadAge = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[38].Value);
-            memberDetail.LGA = dataGridView1.Rows[e.RowIndex].Cells[39].Value.ToString();
-            memberDetail.NameOfNextOfKin = dataGridView1.Rows[e.RowIndex].Cells[40].Value.ToString();
-            memberDetail.RelationshipToKinID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[41].Value);
-            memberDetail.RelationshipToKin = dataGridView1.Rows[e.RowIndex].Cells[42].Value.ToString();
+            var selected = GetSelectedMember();
+            if (selected.MemberId != 0)
+            {
+                string imagePath = Path.Combine(Application.StartupPath, "images", selected.ImagePath);
+                picContributor.ImageLocation = imagePath;
 
-            string imagePath = Application.StartupPath + "\\images\\" + memberDetail.ImagePath;
-            picContributor.ImageLocation = imagePath;
-
-            labelName.Text = memberDetail.Name;
-            labelSurname.Text = memberDetail.Surname;
+                labelName.Text = selected.FirstName;
+                labelSurname.Text = selected.LastName;
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtAmount.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Please enter amount");
+                decimal amountPaid = Convert.ToDecimal(txtAmount.Text.Trim());
+                string summary = txtSummary.Text.Trim();
+                DateTime date = dateTimePickerContributedDate.Value;
+
+                if (_specialContributorDTO.SpecialContributorId == 0)
+                {
+                    var contributor = new SpecialContributor(_memberId, amountPaid, date, summary, _specialContributorDTO.SpecialContributionId);
+                    _specialContributorService.Create(contributor);
+                    MessageBox.Show("Contributor created successfully!");
+                }
+                else
+                {
+                    var contributor = new SpecialContributor(_memberId, amountPaid, _specialContributorDTO.ContributedDate, summary, _specialContributorDTO.SpecialContributionId);
+
+                    _specialContributorService.Update(contributor);
+                    MessageBox.Show("Contributor updated successfully!");
+                    this.Close();
+                }
             }
-            else 
+            catch (Exception ex)
             {
-                if (!isUpdate)
-                {
-                    SpecialContributorDetailDTO contributor = new SpecialContributorDetailDTO();
-                    contributor.ContributionID = specialContributionID;
-                    contributor.MemberID = memberDetail.MemberID;
-                    contributor.AmountContributed = Convert.ToDecimal(txtAmount.Text.Trim());
-                    contributor.Summary = txtSummary.Text.Trim();
-                    contributor.ContributedDate = Convert.ToDateTime(dateTimePickerContributedDate.Value);
-
-                    if (bll.Insert(contributor))
-                    {
-                        MessageBox.Show("Contributor added successfully!");
-                        txtSummary.Clear();
-                        txtAmount.Clear();
-                        dateTimePickerContributedDate.Value = DateTime.Today;
-                    }
-                }
-                else if(isUpdate)
-                {
-                    if (detail.Summary == txtSummary.Text.Trim()
-                        && detail.AmountContributed == Convert.ToDecimal(txtAmount.Text.Trim())
-                        && detail.ContributedDate == dateTimePickerContributedDate.Value
-                        && detail.MemberID == memberDetail.MemberID)
-                    {
-                        MessageBox.Show("Nothing changed");
-                    }
-                    else
-                    {
-                        detail.Summary = txtSummary.Text.Trim();
-                        detail.AmountContributed = Convert.ToInt32(txtAmount.Text.Trim());
-                        detail.ContributedDate = dateTimePickerContributedDate.Value;
-                        detail.MemberID = memberDetail.MemberID;
-                        detail.ContributionID = specialContributionID;
-
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Contributor updated successfully!");
-                            this.Close();
-                        }
-                    }                    
-                }
+                MessageBox.Show(ex.Message);
             }
         }
     }
