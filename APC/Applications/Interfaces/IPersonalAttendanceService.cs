@@ -10,15 +10,13 @@ namespace APC.Applications.Interfaces
 {
     public interface IPersonalAttendanceService
     {
-        List<PersonalAttendance> GetAll();
-        bool Create(PersonalAttendance data);
-        bool Update(PersonalAttendance data);
+        List<PersonalAttendanceDTO> GetAllByGeneralMeetingId(int id);
+        List<PersonalAttendanceDTO> GetAllDeletedPersonalAttendance();
+        bool Create(Domain.Entities.PersonalAttendance data);
+        bool Update(Domain.Entities.PersonalAttendance data);
         bool Delete(int id);
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
-
-        List<PersonalAttendance> GetAllDeleted();
-        List<PersonalAttendanceFullDetails> GetFullMemberDetails();
     }
 }

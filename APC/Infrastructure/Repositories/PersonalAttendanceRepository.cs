@@ -1,12 +1,8 @@
-﻿using APC.Applications.DTO;
-using APC.DAL;
+﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -37,42 +33,14 @@ namespace APC.Infrastructure.Repositories
             return _db.PERSONAL_ATTENDANCE.Any(x => !x.isDeleted && x.memberID == memberId && x.generalAttendanceID == generalMeetingId);
         }
 
-        public List<PersonalAttendance> GetAll()
+        public IQueryable<PERSONAL_ATTENDANCE> GetAllByGeneralMeetingId(int id)
         {
-            var data = _db.PERSONAL_ATTENDANCE
-                .Where(x => !x.isDeleted)
-                .ToList();
-
-            return data
-                .Select(x => PersonalAttendance.Rehydrate(
-                    x.attendanceID,
-                    x.attendanceStatusID,
-                    x.memberID,
-                    x.monthlyDues,
-                    x.expectedMonthlyDue,
-                    x.balance,
-                    x.generalAttendanceID
-                ))
-                .ToList();
+            return _db.PERSONAL_ATTENDANCE.Where(x => !x.isDeleted && x.generalAttendanceID == id);
         }
-
-        public List<PersonalAttendance> GetAllDeleted()
+        
+        public IQueryable<PERSONAL_ATTENDANCE> GetAllDeletedPersonalAttendance()
         {
-            var data = _db.PERSONAL_ATTENDANCE
-                .Where(x => x.isDeleted)
-                .ToList();
-
-            return data
-                .Select(x => PersonalAttendance.Rehydrate(
-                    x.attendanceID,
-                    x.attendanceStatusID,
-                    x.memberID,
-                    x.monthlyDues,
-                    x.expectedMonthlyDue,
-                    x.balance,
-                    x.generalAttendanceID
-                ))
-                .ToList();
+            return _db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -84,54 +52,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public PersonalAttendance GetById(int id)
+        public IQueryable<PERSONAL_ATTENDANCE> GetById(int id)
         {
-            var entity = _db.PERSONAL_ATTENDANCE
-                .Where(x => x.attendanceID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.attendanceID,
-                    x.attendanceStatusID,
-                    x.memberID,
-                    x.monthlyDues,
-                    x.expectedMonthlyDue,
-                    x.balance,
-                    x.generalAttendanceID
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return PersonalAttendance.Rehydrate(
-                    entity.attendanceID,
-                    entity.attendanceStatusID,
-                    entity.memberID,
-                    entity.monthlyDues,
-                    entity.expectedMonthlyDue,
-                    entity.balance,
-                    entity.generalAttendanceID
-            );
-        }
-
-        public List<PersonalAttendanceFullDetails> GetFullPersonalAttendanceDetails()
-        {
-            var member = (from p in _db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted == false)
-                          join m in _db.MEMBER on p.memberID equals m.memberID
-                          join g in _db.GENDER on m.genderID equals g.genderID
-                          join ats in _db.ATTENDANCE_STATUS on p.attendanceStatusID equals ats.attendanceStatusID
-                          select new PersonalAttendanceFullDetails
-                          {
-                              PersonalAttendanceId = p.attendanceID,
-                              FirstName = m.name,
-                              LastName = m.surname,
-                              ImagePath = m.imagePath,
-                              AttendanceStatus = ats.attendanceStatus,
-                              DuesPaid = p.monthlyDues,
-                              Gender = g.genderName,
-                          });
-
-            return member.ToList();
+            return _db.PERSONAL_ATTENDANCE.Where(x => !x.isDeleted && x.attendanceID == id);
         }
 
         public bool Insert(PersonalAttendance data)
