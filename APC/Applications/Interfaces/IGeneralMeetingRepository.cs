@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.DAL;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,9 @@ namespace APC.Applications.Interfaces
 {
     public interface IGeneralMeetingRepository
     {
-        List<GeneralMeeting> GetAll();
-        GeneralMeeting GetById(int id);
+        IQueryable<GENERAL_ATTENDANCE> GetAll();
+        IQueryable<GENERAL_ATTENDANCE> GetAllDeletedGeneralMeetings();
+        IQueryable<GENERAL_ATTENDANCE> GetById(int id);
         bool Insert(GeneralMeeting data);
         bool Update(GeneralMeeting data);
         bool Delete(int id);
@@ -18,6 +20,5 @@ namespace APC.Applications.Interfaces
         bool PermanentDelete(int id);
         bool Exists(int month, int year);
         int Count();
-        List<GeneralMeeting> GetAllDeleted();
     }
 }

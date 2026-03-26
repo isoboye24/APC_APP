@@ -328,6 +328,7 @@
     <Compile Include="Applications\DTO\EventImageDTO.cs" />
     <Compile Include="Applications\DTO\FinedMemberDTO.cs" />
     <Compile Include="Applications\DTO\GenderDTO.cs" />
+    <Compile Include="Applications\DTO\GeneralMeetingDTO.cs" />
     <Compile Include="Applications\DTO\MaritalStatusDTO.cs" />
     <Compile Include="Applications\DTO\MembersBasicDetailDTO.cs" />
     <Compile Include="Applications\DTO\MemberFullDetailsDTO.cs" />

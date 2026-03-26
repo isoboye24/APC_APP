@@ -1,11 +1,8 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -31,49 +28,19 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
+        public IQueryable<GENERAL_ATTENDANCE> GetAll()
+        {
+            return _db.GENERAL_ATTENDANCE.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<GENERAL_ATTENDANCE> GetAllDeletedGeneralMeetings()
+        {
+            return _db.GENERAL_ATTENDANCE.Where(x => x.isDeleted);
+        }
+
         public bool Exists(int month, int year)
         {
             return _db.GENERAL_ATTENDANCE.Any(x => !x.isDeleted && x.attendanceDate.Month == month && x.attendanceDate.Year == year);
-        }
-
-        public List<GeneralMeeting> GetAll()
-        {
-            var data = _db.GENERAL_ATTENDANCE
-                .Where(x => !x.isDeleted)
-                .ToList();
-
-            return data
-                .Select(x => GeneralMeeting.Rehydrate(
-                    x.generalAttendanceID,
-                    x.totalMembersPresent,
-                    x.totalMembersAbsent,
-                    x.totalDuesPaid,
-                    x.totalDuesExpected,
-                    x.totalDuesBalance,
-                    x.summary,
-                    x.attendanceDate
-                ))
-                .ToList();
-        }
-
-        public List<GeneralMeeting> GetAllDeleted()
-        {
-            var data = _db.GENERAL_ATTENDANCE
-                .Where(x => x.isDeleted)
-                .ToList();
-
-            return data
-                .Select(x => GeneralMeeting.Rehydrate(
-                    x.generalAttendanceID,
-                    x.totalMembersPresent,
-                    x.totalMembersAbsent,
-                    x.totalDuesPaid,
-                    x.totalDuesExpected,
-                    x.totalDuesBalance,
-                    x.summary,
-                    x.attendanceDate
-                ))
-                .ToList();
         }
 
         public bool GetBack(int id)
@@ -85,36 +52,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public GeneralMeeting GetById(int id)
+        public IQueryable<GENERAL_ATTENDANCE> GetById(int id)
         {
-            var entity = _db.GENERAL_ATTENDANCE
-                .Where(x => x.generalAttendanceID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.generalAttendanceID,
-                    x.totalMembersPresent,
-                    x.totalMembersAbsent,
-                    x.totalDuesPaid,
-                    x.totalDuesExpected,
-                    x.totalDuesBalance,
-                    x.summary,
-                    x.attendanceDate
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return GeneralMeeting.Rehydrate(
-                    entity.generalAttendanceID,
-                    entity.totalMembersPresent,
-                    entity.totalMembersAbsent,
-                    entity.totalDuesPaid,
-                    entity.totalDuesExpected,
-                    entity.totalDuesBalance,
-                    entity.summary,
-                    entity.attendanceDate
-            );
+            return _db.GENERAL_ATTENDANCE.Where(x => !x.isDeleted && x.generalAttendanceID == id);
         }
 
         public bool Insert(GeneralMeeting data)

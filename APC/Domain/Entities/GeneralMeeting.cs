@@ -11,8 +11,7 @@ namespace APC.Domain.Entities
         public decimal? TotalDuesExpected { get; private set; }
         public decimal? TotalDuesBalance { get; private set; }
         public string Summary { get; private set; }
-        public DateTime GeneralMeetingDate { get; private set;
-        }
+        public DateTime GeneralMeetingDate { get; private set; }
 
         public GeneralMeeting(int? totalMembersPresent, int? totalMembersAbsent, decimal? totalDuesPaid, decimal? totalDuesExpected,
             decimal? totalDuesBalance, string summary, DateTime generalMeetingDate)

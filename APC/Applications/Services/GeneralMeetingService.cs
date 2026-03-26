@@ -47,26 +47,26 @@ namespace APC.Applications.Services
                 throw new InvalidOperationException("Meeting not found");
 
             if (data.TotalMembersPresent.HasValue)
-                meeting.UpdateTotalMembersPresent(data.TotalMembersPresent.Value);
+                data.UpdateTotalMembersPresent(data.TotalMembersPresent.Value);
 
             if (data.TotalMembersAbsent.HasValue)
-                meeting.UpdateTotalMembersAbsent(data.TotalMembersAbsent.Value);
+                data.UpdateTotalMembersAbsent(data.TotalMembersAbsent.Value);
 
             if (data.TotalDuesPaid.HasValue)
-                meeting.UpdateTotalDuesPaid(data.TotalDuesPaid.Value);
+                data.UpdateTotalDuesPaid(data.TotalDuesPaid.Value);
 
             if (data.TotalDuesExpected.HasValue)
-                meeting.UpdateTotalDuesExpected(data.TotalDuesExpected.Value);
+                data.UpdateTotalDuesExpected(data.TotalDuesExpected.Value);
 
             if (data.TotalDuesBalance.HasValue)
-                meeting.UpdateTotalDuesBalance(data.TotalDuesBalance.Value);
+                data.UpdateTotalDuesBalance(data.TotalDuesBalance.Value);
 
             if (!string.IsNullOrWhiteSpace(data.Summary))
-                meeting.UpdateSummary(data.Summary);
+                data.UpdateSummary(data.Summary);
 
-            meeting.UpdateGeneralMeetingDate(data.GeneralMeetingDate);
+            data.UpdateGeneralMeetingDate(data.GeneralMeetingDate);
 
-            return _repository.Update(meeting);
+            return _repository.Update(data);
         }
     }
 }
