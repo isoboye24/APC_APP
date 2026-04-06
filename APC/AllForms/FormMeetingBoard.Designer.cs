@@ -84,6 +84,7 @@
             this.cmbMonthContribution = new System.Windows.Forms.ComboBox();
             this.btnClearContribution = new System.Windows.Forms.Button();
             this.btnSearchContribution = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
             this.cmbYearContribution = new System.Windows.Forms.ComboBox();
             this.dataGridViewSpecialContributions = new System.Windows.Forms.DataGridView();
             this.commentPage = new System.Windows.Forms.TabPage();
@@ -164,7 +165,6 @@
             this.txtSection = new System.Windows.Forms.TextBox();
             this.txtFine = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.meetingsPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -992,6 +992,18 @@
             this.btnSearchContribution.Text = "Search";
             this.btnSearchContribution.UseVisualStyleBackColor = false;
             this.btnSearchContribution.Click += new System.EventHandler(this.btnSearchContribution_Click);
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(812, 59);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(52, 28);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Year";
             // 
             // cmbYearContribution
             // 
@@ -2181,18 +2193,6 @@
             this.label21.Size = new System.Drawing.Size(51, 28);
             this.label21.TabIndex = 0;
             this.label21.Text = "Fine";
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(812, 59);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(52, 28);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "Year";
             // 
             // FormMeetingBoard
             // 

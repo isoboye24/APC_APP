@@ -56,7 +56,7 @@ namespace APC
             services.AddScoped<IFinedMemberRepository, FinedMemberRepository>();
             services.AddScoped<IGeneralMeetingRepository, GeneralMeetingRepository>();
             services.AddScoped<IMemberRepository, MemberRepository>();
-            services.AddScoped<IPersonalAttendanceRepository, PersonalAttendanceRepository>();
+            services.AddScoped<IPersonalAttendanceRepository, GeneralMeetingAttendanceRepository>();
             services.AddScoped<ISpecialContributionRepository, SpecialContributionRepository>();
             services.AddScoped<ISpecialContributorRepository, SpecialContributorRepository>();
             services.AddScoped<IMemberCommittmentRepository, MemberCommittmentRepository>();
@@ -88,7 +88,7 @@ namespace APC
             services.AddScoped<IFinedMemberService, FinedMemberService>();
             services.AddScoped<IGeneralMeetingService, GeneralMeetingService>();
             services.AddScoped<IMemberService, MemberService>();
-            services.AddScoped<IPersonalAttendanceService, PersonalAttendanceService>();
+            services.AddScoped<IPersonalAttendanceService, GeneralMeetingAttendanceService>();
             services.AddScoped<ISpecialContributionService, SpecialContributionService>();
             services.AddScoped<ISpecialContributorService, SpecialContributorService>();
             services.AddScoped<IMemberCommittmentService, MemberCommittmentService>();
@@ -113,9 +113,9 @@ namespace APC
             services.AddTransient<FormViewConstitution>();
             services.AddTransient<FormFinedMember>();
             services.AddTransient<FormViewFinedMember>();
-            services.AddTransient<FormGeneralAttendance>();
+            services.AddTransient<FormGeneralMeeting>();
             services.AddTransient<FormViewGeneralAttendance>();
-            services.AddTransient<FormPersonalAttendance>();
+            services.AddTransient<FormGeneralMeetingAttendance>();
             services.AddTransient<FormViewPersonalAttendances>();
             services.AddTransient<FormSpecialContribution>();
             services.AddTransient<FormViewSpecialContribution>();

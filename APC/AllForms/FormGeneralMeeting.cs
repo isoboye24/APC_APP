@@ -15,9 +15,9 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormGeneralAttendance : Form
+    public partial class FormGeneralMeeting : Form
     {
-        public FormGeneralAttendance()
+        public FormGeneralMeeting()
         {
             InitializeComponent();
         }

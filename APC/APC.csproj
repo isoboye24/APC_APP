@@ -318,6 +318,7 @@
       <DependentUpon>FormViewSpecialContributor.cs</DependentUpon>
     </Compile>
     <Compile Include="Applications\DTO\AbsenteesDTO.cs" />
+    <Compile Include="Applications\DTO\AttendanceStatusDTO.cs" />
     <Compile Include="Applications\DTO\BirthdayMembersDTO.cs" />
     <Compile Include="Applications\DTO\CommentDTO.cs" />
     <Compile Include="Applications\DTO\ConstitutionDTO.cs" />
@@ -335,7 +336,7 @@
     <Compile Include="Applications\DTO\NationalityDTO.cs" />
     <Compile Include="Applications\DTO\PaymentStatusDTO.cs" />
     <Compile Include="Applications\DTO\PermissionDTO.cs" />
-    <Compile Include="Applications\DTO\PersonalAttendanceDTO.cs" />
+    <Compile Include="Applications\DTO\GeneralMeetingAttendanceDTO.cs" />
     <Compile Include="Applications\DTO\PositionDTO.cs" />
     <Compile Include="Applications\DTO\ProfessionDTO.cs" />
     <Compile Include="Applications\DTO\SpecialContributionDTO.cs" />
@@ -367,7 +368,7 @@
     <Compile Include="Applications\Services\NextOfKinService.cs" />
     <Compile Include="Applications\Services\PaymentStatusService.cs" />
     <Compile Include="Applications\Services\PermissionService.cs" />
-    <Compile Include="Applications\Services\PersonalAttendanceService.cs" />
+    <Compile Include="Applications\Services\GeneralMeetingAttendanceService.cs" />
     <Compile Include="Applications\Services\PositionService.cs" />
     <Compile Include="Applications\Services\ProfessionService.cs" />
     <Compile Include="Applications\Services\SpecialContributionService.cs" />
@@ -447,11 +448,11 @@
     <Compile Include="AllForms\FormDocumentList.Designer.cs">
       <DependentUpon>FormDocumentList.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormPersonalAttendance.cs">
+    <Compile Include="AllForms\FormGeneralMeetingAttendance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormPersonalAttendance.Designer.cs">
-      <DependentUpon>FormPersonalAttendance.cs</DependentUpon>
+    <Compile Include="AllForms\FormGeneralMeetingAttendance.Designer.cs">
+      <DependentUpon>FormGeneralMeetingAttendance.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\FormComments.cs">
       <SubType>Form</SubType>
@@ -471,11 +472,11 @@
     <Compile Include="AllForms\FormExpenditure.Designer.cs">
       <DependentUpon>FormExpenditure.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormGeneralAttendance.cs">
+    <Compile Include="AllForms\FormGeneralMeeting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormGeneralAttendance.Designer.cs">
-      <DependentUpon>FormGeneralAttendance.cs</DependentUpon>
+    <Compile Include="AllForms\FormGeneralMeeting.Designer.cs">
+      <DependentUpon>FormGeneralMeeting.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\FormLogin.cs">
       <SubType>Form</SubType>
@@ -805,8 +806,8 @@
     <Compile Include="Applications\Interfaces\IPaymentStatusService.cs" />
     <Compile Include="Applications\Interfaces\IPermissionRepository.cs" />
     <Compile Include="Applications\Interfaces\IPermissionService.cs" />
-    <Compile Include="Applications\Interfaces\IPersonalAttendanceService.cs" />
-    <Compile Include="Applications\Interfaces\IPersonalAttendanceRepository.cs" />
+    <Compile Include="Applications\Interfaces\IGeneralMeetingAttendanceService.cs" />
+    <Compile Include="Applications\Interfaces\IGeneralMeetingAttendanceRepository.cs" />
     <Compile Include="Applications\Interfaces\IPositionRepository.cs" />
     <Compile Include="Applications\Interfaces\IPositionService.cs" />
     <Compile Include="Applications\Interfaces\IProfessionRepository.cs" />
@@ -824,9 +825,10 @@
     <Compile Include="Helper\ExpenditureHelper.cs" />
     <Compile Include="Helper\FinancialReportHelper.cs" />
     <Compile Include="Helper\FinedMemberHelper.cs" />
-    <Compile Include="Helper\GeneralAttendanceHelper.cs" />
+    <Compile Include="Helper\GeneralMeetingHelper.cs" />
     <Compile Include="Helper\LoadDataGridView.cs" />
     <Compile Include="Helper\MemberHelper.cs" />
+    <Compile Include="Helper\PersonalAttendanceHelper.cs" />
     <Compile Include="Helper\SingleColumnHelper.cs" />
     <Compile Include="Helper\SpecialContributionHelper.cs" />
     <Compile Include="Helper\SpecialContributorHelper.cs" />
@@ -856,7 +858,7 @@
     <Compile Include="Infrastructure\Repositories\NextOfKinRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PaymentStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PermissionRepository.cs" />
-    <Compile Include="Infrastructure\Repositories\PersonalAttendanceRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\GeneralMeetingAttendanceRepository.cs" />
     <Compile Include="Infrastructure\Repositories\PositionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ProfessionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\SpecialContributionRepository.cs" />
@@ -952,8 +954,8 @@
     <EmbeddedResource Include="AllForms\FormFinedMember.resx">
       <DependentUpon>FormFinedMember.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormGeneralAttendance.resx">
-      <DependentUpon>FormGeneralAttendance.cs</DependentUpon>
+    <EmbeddedResource Include="AllForms\FormGeneralMeeting.resx">
+      <DependentUpon>FormGeneralMeeting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormMeetingBoard.resx">
       <DependentUpon>FormMeetingBoard.cs</DependentUpon>
@@ -967,8 +969,8 @@
     <EmbeddedResource Include="AllForms\FormPermission.resx">
       <DependentUpon>FormPermission.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormPersonalAttendance.resx">
-      <DependentUpon>FormPersonalAttendance.cs</DependentUpon>
+    <EmbeddedResource Include="AllForms\FormGeneralMeetingAttendance.resx">
+      <DependentUpon>FormGeneralMeetingAttendance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormComments.resx">
       <DependentUpon>FormComments.cs</DependentUpon>

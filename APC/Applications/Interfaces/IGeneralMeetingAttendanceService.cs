@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace APC.Applications.Interfaces
 {
-    public interface IPersonalAttendanceService
+    public interface IGeneralMeetingAttendanceService
     {
-        List<PersonalAttendanceDTO> GetAllByGeneralMeetingId(int id);
-        List<PersonalAttendanceDTO> GetAllDeletedPersonalAttendance();
+        List<GeneralMeetingAttendanceDTO> GetAllByGeneralMeetingId(int id);
+        List<GeneralMeetingAttendanceDTO> GetAllDeletedPersonalAttendance();
         bool Create(Domain.Entities.PersonalAttendance data);
         bool Update(Domain.Entities.PersonalAttendance data);
         bool Delete(int id);

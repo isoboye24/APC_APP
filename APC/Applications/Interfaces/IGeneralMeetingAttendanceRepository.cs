@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace APC.Applications.Interfaces
 {
-    public interface IPersonalAttendanceRepository
+    public interface IGeneralMeetingAttendanceRepository
     {
         IQueryable<PERSONAL_ATTENDANCE> GetAllByGeneralMeetingId(int id);
         IQueryable<PERSONAL_ATTENDANCE> GetAllDeletedPersonalAttendance();

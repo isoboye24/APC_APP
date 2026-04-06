@@ -1,11 +1,11 @@
-﻿using APC.Domain.Entities;
-using System;
+﻿using APC.Applications.DTO;
 using System.Collections.Generic;
 
 namespace APC.Applications.Interfaces
 {
     public interface IAttendanceStatusService
     {
-        List<AttendanceStatus> GetAll();
+        List<AttendanceStatusDTO> GetAll();
+        List<AttendanceStatusDTO> GetById(int id);
     }
 }

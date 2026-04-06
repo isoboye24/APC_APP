@@ -8,7 +8,7 @@ using static APC.Helper.EventsHelper;
 using static APC.Helper.ExpenditureHelper;
 using static APC.Helper.FinancialReportHelper;
 using static APC.Helper.FinedMemberHelper;
-using static APC.Helper.GeneralAttendanceHelper;
+using static APC.Helper.GeneralMeetingHelper;
 using static APC.Helper.MemberHelper;
 using static APC.Helper.SingleColumnHelper;
 using static APC.Helper.SpecialContributionHelper;

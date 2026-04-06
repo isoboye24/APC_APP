@@ -35,6 +35,11 @@ namespace APC.Infrastructure.Repositories
                                         && x.fineDate.Year == fineDate.Year);
         }
 
+        public IQueryable<FINED_MEMBER> GetAllByDate(DateTime date)
+        {
+            return _db.FINED_MEMBER.Where(x => !x.isdeleted && x.fineDate.Day == date.Day && x.fineDate.Month == date.Month && x.fineDate.Year == date.Year);
+        }
+        
         public IQueryable<FINED_MEMBER> GetAll()
         {
             return _db.FINED_MEMBER.Where(x => !x.isdeleted);
@@ -44,8 +49,6 @@ namespace APC.Infrastructure.Repositories
         {
             return _db.FINED_MEMBER.Where(x => x.isdeleted);
         }
-
-        
 
         public bool GetBack(int id)
         {

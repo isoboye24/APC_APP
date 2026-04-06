@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace APC.Infrastructure.Repositories
 {
-    public class PersonalAttendanceRepository : IPersonalAttendanceRepository
+    public class GeneralMeetingAttendanceRepository : IGeneralMeetingAttendanceRepository
     {
         private readonly APCEntities _db;
-        public PersonalAttendanceRepository(APCEntities db)
+        public GeneralMeetingAttendanceRepository(APCEntities db)
         {
             _db = db;
         }

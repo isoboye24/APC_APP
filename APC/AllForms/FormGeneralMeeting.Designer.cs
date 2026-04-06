@@ -1,6 +1,6 @@
 ﻿namespace APC.AllForms
 {
-    partial class FormGeneralAttendance
+    partial class FormGeneralMeeting
     {
         /// <summary>
         /// Required designer variable.

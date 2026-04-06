@@ -1,5 +1,10 @@
-﻿using APC.BLL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.Applications.Services;
+using APC.BLL;
 using APC.DAL.DTO;
+using APC.Helper;
+using OfficeOpenXml.Drawing.Chart;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,15 +15,26 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
 {
     public partial class FormViewGeneralAttendance : Form
     {
-        public FormViewGeneralAttendance()
+        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
+        private readonly IAttendanceStatusService _attendanceStatusService;
+        private readonly IMemberService _memberService;
+
+        private readonly GeneralMeetingDTO _generalMeetingDTO;
+
+        public FormViewGeneralAttendance(GeneralMeetingDTO generalMeetingDTO, IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService)
         {
             InitializeComponent();
+            _generalMeetingDTO = generalMeetingDTO;
+            _generalMeetingAttendanceService = generalMeetingAttendanceService;
+            _memberService = memberService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -47,95 +63,56 @@ namespace APC.AllForms
             rbMore.Checked = false;
             rbEqual.Checked = false;
             cmbAttendanceStatus.SelectedIndex = -1;
+            loadAttendances();
+
+            ShowRecordData();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearFilters();
-            FillDataGrid();
         }
-        PersonalAttendanceBLL bll = new PersonalAttendanceBLL();
-        PersonalAttendanceDTO dto = new PersonalAttendanceDTO();
-        public GeneralAttendanceDetailDTO detail = new GeneralAttendanceDetailDTO();
-        PersonalAttendanceDetailDTO personalDetail = new PersonalAttendanceDetailDTO();
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label7, label9, label10, label11, btnAdd,
+                labelTitle, btnClose, rbEqual, rbLess, rbMore, btnClear, btnSearch, btnUpdate, btnViewSummary);
+
+            GeneralHelper.ApplyRegularFont(14, txtName, txtSurname, txtMonthlyDues, txtSummary, cmbAttendanceStatus);
+
+            GeneralHelper.ApplyBoldFont(24, labelTotalBalanceNew, labelTotalDuesExpected, labelTotalDuesPaid, labelTotalMembersAbsent,
+                labelTotalMembersPresent);
+        }
+
+        private void loadAttendances()
+        {
+            dataGridView1.DataSource = _generalMeetingAttendanceService.GetAllByGeneralMeetingId(_generalMeetingDTO.GeneralMeetingId);
+            PersonalAttendanceHelper.ConfigurePersonalAttendanceGrid(dataGridView1, PersonalAttendanceHelper.PersonalAttendanceGridType.Basic);
+        }
+
         private void FormViewAttendance_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label7.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label10.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label11.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalBalanceNew.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelTotalDuesExpected.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelTotalDuesPaid.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelTotalMembersAbsent.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelTotalMembersPresent.Font = new Font("Segoe UI", 24, FontStyle.Bold);
+            resizeControls();
 
-            rbEqual.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            rbLess.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            rbMore.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            cmbAttendanceStatus.DataSource = _attendanceStatusService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbAttendanceStatus, "AttendanceStatusName", "AttendanceStatusId");
 
-            txtName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSurname.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtMonthlyDues.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSummary.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            loadAttendances();
 
-            cmbAttendanceStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnAdd.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClear.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearch.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdate.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewSummary.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
-
-            dto = bll.Select();
-
-            cmbAttendanceStatus.DataSource = dto.AttendanceStatuses;
-            GeneralHelper.ComboBoxProps(cmbAttendanceStatus, "AttendanceStatusName", "AttendanceStatusID");
-
-            dto = bll.SelectMembersSet(detail.GeneralAttendanceID);
-            dataGridView1.DataSource = dto.PersonalAttendances;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].Visible = false;
-            dataGridView1.Columns[3].Visible = false;
-            dataGridView1.Columns[4].Visible = false;
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].Visible = false;
-            dataGridView1.Columns[7].HeaderText = "Surname";
-            dataGridView1.Columns[8].HeaderText = "Name";
-            dataGridView1.Columns[9].Visible = false;
-            dataGridView1.Columns[10].Visible = false;
-            dataGridView1.Columns[11].HeaderText = "Gender";
-            dataGridView1.Columns[12].HeaderText = "Status";
-            dataGridView1.Columns[13].HeaderText = "Dues Paid";
-            dataGridView1.Columns[14].Visible = false;
-            dataGridView1.Columns[15].Visible = false;
-            dataGridView1.Columns[16].Visible = false;
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            }
-            labelTitle.Text = "Meeting on " + detail.Day + "." + detail.MonthID + "." + detail.Year;
-            txtSummary.Text = detail.Summary;
+            labelTitle.Text = "Meeting on " + _generalMeetingDTO.Day + "." + _generalMeetingDTO.MonthID + "." + _generalMeetingDTO.Year;
+            txtSummary.Text = _generalMeetingDTO.Summary;
             ShowRecordData();
         }
         private void ShowRecordData()
         {
-            GeneralHelper.ValueCount(labelTotalMembersPresent, detail.TotalMembersPresent, 100, 57);
-            GeneralHelper.ValueCount(labelTotalMembersAbsent, detail.TotalMembersAbsent, 100, 57);
+            labelTotalMembersPresent.Text = _generalMeetingDTO.TotalMembersPresent.ToString();
+            labelTotalMembersAbsent.Text = _generalMeetingDTO.TotalMembersAbsent.ToString();
 
-            labelTotalDuesPaid.Text = bll.DuesContributed(detail.GeneralAttendanceID).ToString();
-            labelTotalDuesExpected.Text = bll.TotalDuesExpected(detail.GeneralAttendanceID).ToString();
-            decimal balance = bll.TotalDuesExpected(detail.GeneralAttendanceID) - bll.DuesContributed(detail.GeneralAttendanceID);
+            labelTotalDuesPaid.Text = _generalMeetingDTO.FormattedTotalDuesPaid;
+            labelTotalDuesExpected.Text = _generalMeetingDTO.FormattedTotalDuesExpected;
+            labelTotalMembersAbsent.Text = _generalMeetingDTO.TotalMembersAbsent.ToString();
+
+            decimal balance =_generalMeetingDTO.TotalDuesExpected - _generalMeetingDTO.TotalDuesPaid;
 
             if (balance > 0)
             {
@@ -154,65 +131,38 @@ namespace APC.AllForms
             }
         }
 
-        private void FillDataGrid()
-        {
-            bll = new PersonalAttendanceBLL();
-            dto = bll.SelectMembersSet(detail.GeneralAttendanceID);
-            dataGridView1.DataSource = dto.PersonalAttendances;
-
-            ShowRecordData();
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormPersonalAttendance open = new FormPersonalAttendance();
-            open.generalAttendanceDetail = detail;
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            FillDataGrid();
-            ShowRecordData();
+            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService);
+            form.ShowDialog();
+
+            ClearFilters();
         }
+
+        private Applications.DTO.GeneralMeetingAttendanceDTO GetSelectedMeetingAttendance()
+        {
+            if (dataGridView1.CurrentRow == null)
+                return null;
+
+            return dataGridView1.CurrentRow.DataBoundItem as Applications.DTO.GeneralMeetingAttendanceDTO;
+        }
+
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (personalDetail.AttendanceID == 0)
+            var selected = GetSelectedMeetingAttendance();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table");
+                MessageBox.Show("Please select a member from the table");
+                return;
             }
-            else
-            {
-                FormPersonalAttendance open = new FormPersonalAttendance();
-                open.personalDetail = personalDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                FillDataGrid();
-                ShowRecordData();
-            }
-        }
 
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            personalDetail = new PersonalAttendanceDetailDTO();
-            personalDetail.AttendanceID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-            personalDetail.AttendanceStatusID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-            personalDetail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-            personalDetail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-            personalDetail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-            personalDetail.Year = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            personalDetail.MemberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
-            personalDetail.Surname = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-            personalDetail.Name = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
-            personalDetail.ImagePath = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
-            personalDetail.GenderID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[10].Value);
-            personalDetail.Gender = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-            personalDetail.AttendanceStatusName = dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString();
-            personalDetail.MonthlyDue = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[13].Value);
-            personalDetail.ExpectedDue = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[14].Value);
-            personalDetail.Balance = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[15].Value);
-            personalDetail.GeneralAttendanceID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[16].Value);
+            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
+
         }
 
         private void txtSurname_TextChanged(object sender, EventArgs e)

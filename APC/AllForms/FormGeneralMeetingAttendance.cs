@@ -1,27 +1,35 @@
-﻿using APC.BLL;
-using APC.DAL.DAO;
-using APC.DAL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace APC
 {
-    public partial class FormPersonalAttendance : Form
+    public partial class FormGeneralMeetingAttendance : Form
     {
-        public FormPersonalAttendance()
+        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
+        private readonly IMemberService _memberService;
+        private readonly IAttendanceStatusService _attendanceStatusService;
+
+        private GeneralMeetingAttendanceDTO _generalMeetingAttendanceDTO;
+        private bool _isUpdate = false;
+
+        public FormGeneralMeetingAttendance(IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService, IAttendanceStatusService attendanceStatusService)
         {
             InitializeComponent();
+            _generalMeetingAttendanceService = generalMeetingAttendanceService;
+            _memberService = memberService;
+            _attendanceStatusService = attendanceStatusService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -41,103 +49,37 @@ namespace APC
         {
 
         }
-        PersonalAttendanceBLL bll = new PersonalAttendanceBLL();
-        PersonalAttendanceDTO dto = new PersonalAttendanceDTO();
-        MemberDetailDTO memberDetail = new MemberDetailDTO();
-        AttendanceStatusDetailDTO attStatusDetail = new AttendanceStatusDetailDTO();
-        public GeneralAttendanceDetailDTO generalAttendanceDetail = new GeneralAttendanceDetailDTO();
-        public PersonalAttendanceDetailDTO personalDetail = new PersonalAttendanceDetailDTO();
-        public bool isUpdate = false;
+        public void loadForEdit(GeneralMeetingAttendanceDTO dto, bool isUpdate)
+        {
+            _generalMeetingAttendanceDTO = dto;
+            _isUpdate = isUpdate;
+        }
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label6, labelTitle, btnClose, btnSave);
+
+            GeneralHelper.ApplyRegularFont(14, txtAttendanceStatus, txtGender, txtMonthlyDues, txtName, txtSearchSurname, txtSurname);
+        }
+
+        private void loadMembers()
+        {
+            dataGridViewMembers.DataSource = _memberService.GetAll();
+            MemberHelper.ConfigureMemberGrid(dataGridViewMembers, MemberHelper.MemberGridType.Basic);
+        }
+
         private void FormAttendance_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            loadMembers();
 
-            txtAttendanceStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtGender.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtMonthlyDues.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSearchSurname.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSurname.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
-
-            dto = bll.Select();
-            #region
-            dataGridViewAttendanceStatuses.DataSource = dto.AttendanceStatuses;
-            dataGridViewAttendanceStatuses.Columns[0].Visible = false;
-            dataGridViewAttendanceStatuses.Columns[1].HeaderText = "Status";
-            foreach (DataGridViewColumn column in dataGridViewAttendanceStatuses.Columns)
+            if (_isUpdate)
             {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
-
-            dataGridViewMembers.DataSource = dto.Members;
-            dataGridViewMembers.Columns[0].Visible = false;
-            dataGridViewMembers.Columns[1].Visible = false;
-            dataGridViewMembers.Columns[2].Visible = false;
-            dataGridViewMembers.Columns[3].HeaderText = "Surname";
-            dataGridViewMembers.Columns[4].HeaderText = "Name";
-            dataGridViewMembers.Columns[5].Visible = false;
-            dataGridViewMembers.Columns[6].Visible = false;
-            dataGridViewMembers.Columns[7].Visible = false;
-            dataGridViewMembers.Columns[8].Visible = false;
-            dataGridViewMembers.Columns[9].Visible = false;
-            dataGridViewMembers.Columns[10].Visible = false;
-            dataGridViewMembers.Columns[11].Visible = false;
-            dataGridViewMembers.Columns[12].Visible = false;
-            dataGridViewMembers.Columns[13].Visible = false;
-            dataGridViewMembers.Columns[14].Visible = false;
-            dataGridViewMembers.Columns[15].Visible = false;
-            dataGridViewMembers.Columns[16].Visible = false;
-            dataGridViewMembers.Columns[17].Visible = false;
-            dataGridViewMembers.Columns[18].Visible = false;
-            dataGridViewMembers.Columns[19].HeaderText = "Gender";
-            dataGridViewMembers.Columns[20].Visible = false;
-            dataGridViewMembers.Columns[21].Visible = false;
-            dataGridViewMembers.Columns[22].Visible = false;
-            dataGridViewMembers.Columns[23].Visible = false;
-            dataGridViewMembers.Columns[24].Visible = false;
-            dataGridViewMembers.Columns[25].Visible = false;
-            dataGridViewMembers.Columns[26].Visible = false;
-            dataGridViewMembers.Columns[27].Visible = false;
-            dataGridViewMembers.Columns[28].Visible = false;
-            dataGridViewMembers.Columns[29].Visible = false;
-            dataGridViewMembers.Columns[30].Visible = false;
-            dataGridViewMembers.Columns[31].Visible = false;
-            dataGridViewMembers.Columns[32].Visible = false;
-            dataGridViewMembers.Columns[33].Visible = false;
-            dataGridViewMembers.Columns[34].Visible = false;
-            dataGridViewMembers.Columns[35].Visible = false;
-            dataGridViewMembers.Columns[36].Visible = false;
-            dataGridViewMembers.Columns[37].Visible = false;
-            dataGridViewMembers.Columns[38].Visible = false;
-            dataGridViewMembers.Columns[39].Visible = false;
-            dataGridViewMembers.Columns[40].Visible = false;
-            dataGridViewMembers.Columns[41].Visible = false;
-            dataGridViewMembers.Columns[42].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewMembers.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
-            #endregion
-
-            if (isUpdate)
-            {
-                txtSurname.Text = personalDetail.Surname;
-                txtName.Text = personalDetail.Name;
-                txtGender.Text = personalDetail.Gender;
-                txtAttendanceStatus.Text = personalDetail.AttendanceStatusName;
-                txtMonthlyDues.Text = personalDetail.MonthlyDue.ToString();
-                string imagePath = Application.StartupPath + "\\images\\" + personalDetail.ImagePath;
+                txtSurname.Text = _generalMeetingAttendanceDTO.LastName;
+                txtName.Text = _generalMeetingAttendanceDTO.FirstName;
+                txtGender.Text = _generalMeetingAttendanceDTO.Gender;
+                txtAttendanceStatus.Text = _generalMeetingAttendanceDTO.AttendanceStatus;
+                txtMonthlyDues.Text = _generalMeetingAttendanceDTO.DuesPaid.ToString();
+                string imagePath = Application.StartupPath + "\\images\\" + _generalMeetingAttendanceDTO.ImagePath;
                 picProfilePic.ImageLocation = imagePath;
 
                 tableLayoutPanelMemberList.Hide();

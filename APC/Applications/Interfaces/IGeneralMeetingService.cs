@@ -1,15 +1,12 @@
-﻿using APC.Domain.Entities;
-using System;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Interfaces
 {
     public interface IGeneralMeetingService
     {
-        List<GeneralMeeting> GetAll();
+        List<GeneralMeetingDTO> GetAll();
         bool Create(GeneralMeeting data);
         bool Update(GeneralMeeting data);
         bool Delete(int id);
@@ -17,6 +14,6 @@ namespace APC.Applications.Interfaces
         bool PermanentDelete(int id);
         int Count();
 
-        List<GeneralMeeting> GetAllDeleted();
+        List<GeneralMeetingDTO> GetAllDeleted();
     }
 }

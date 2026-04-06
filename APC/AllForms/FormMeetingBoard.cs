@@ -70,24 +70,28 @@ namespace APC.AllForms
         private void loadComments()
         {
             dataGridViewComments.DataSource = _commentService.GetAll();
+            _commentDTO = _commentService.GetAll();
             CommentHelper.ConfigureCommentGrid(dataGridViewComments, CommentHelper.CommentGridType.Basic);
         }
 
         private void loadConstitutions()
         {
             dataGridViewConstitution.DataSource = _constitutionService.GetAll();
+            _constitutionDTO = _constitutionService.GetAll();
             ConstitutionHelper.ConfigureConstitutionGrid(dataGridViewConstitution, ConstitutionHelper.ConstitutionGridType.Normal);
         }
         
         private void loadFinedMembers()
         {
             dataGridViewFinedMembers.DataSource = _finedMemberService.GetAll();
+            _finedMemberDTO = _finedMemberService.GetAll();
             FinedMemberHelper.ConfigureFinedMemberGrid(dataGridViewFinedMembers, FinedMemberHelper.FinedMemberGridType.Basic);
         }
         
         private void loadSpecialContributions()
         {
             dataGridViewSpecialContributions.DataSource = _specialContributionService.GetAll();
+            _specialContributionDTO = _specialContributionService.GetAll();
             SpecialContributionHelper.ConfigureSpecialContributionGrid(dataGridViewSpecialContributions, SpecialContributionHelper.SpecialContributionGridType.Basic);
         }
 
@@ -276,16 +280,63 @@ namespace APC.AllForms
             #endregion
         }
 
+        private void ClearFilters()
+        {
+            txtYear.Clear();
+            txtNoOfAttend.Clear();
+            txtMonthlyDues.Clear();
+            rbEqualMonDues.Checked = false;
+            rbLessMonDues.Checked = false;
+            rbMoreMonDues.Checked = false;
+            rbEqualAttend.Checked = false;
+            rbLessAttend.Checked = false;
+            rbMoreAttend.Checked = false;
+            cmbMonth.SelectedIndex = -1;
+            cmbYearMeeting.SelectedIndex = -1;
+            bll = new GeneralAttendanceBLL();
+            dto = bll.Select(DateTime.Now.Year);
+            dataGridView1.DataSource = dto.GeneralAttendance;
+
+            txtNameComments.Clear();
+            txtComment.Clear();
+            txtSurnameComments.Clear();
+            cmbGenderComments.SelectedIndex = -1;
+            cmbMonthComments.SelectedIndex = -1;
+            loadComments();
+
+            txtConstitution.Clear();
+            txtSection.Clear();
+            txtFine.Clear();
+            loadConstitutions();
+
+            txtNameFinedMember.Clear();
+            txtSurnameFinedMember.Clear();
+            txtYearFinedMember.Clear();
+            txtConstitutionSection.Clear();
+            cmbFineStatus.SelectedIndex = -1;
+            cmbMonthFinedMember.SelectedIndex = -1;
+            cmbGenderFinedMember.SelectedIndex = -1;
+            loadFinedMembers();
+
+            txtAmountSContributions.Clear();
+            cmbMonthContribution.SelectedIndex = -1;
+            cmbYearContribution.SelectedIndex = -1;
+            rbEqualContAmount.Checked = false;
+            rbLessContAmount.Checked = false;
+            rbMoreContAmount.Checked = false;
+            loadSpecialContributions();
+
+            RefreshCounts();
+        }
+
         // -------------------------------------------------------------------------
         // -------------------- GENERAL ATTENDANCE ----------------------
         // -------------------------------------------------------------------------
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormGeneralAttendance open = new FormGeneralAttendance();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormGeneralMeeting(_dailyService);
+            form.ShowDialog();
             ClearFilters();
         }
 
@@ -314,7 +365,7 @@ namespace APC.AllForms
             }
             else
             {
-                FormGeneralAttendance open = new FormGeneralAttendance();
+                FormGeneralMeeting open = new FormGeneralMeeting();
                 open.isUpdate = true;
                 open.detail = detail;
                 this.Hide();
@@ -403,55 +454,7 @@ namespace APC.AllForms
         {
             ClearFilters();
         }
-        private void ClearFilters()
-        {
-            txtYear.Clear();
-            txtNoOfAttend.Clear();
-            txtMonthlyDues.Clear();
-            rbEqualMonDues.Checked = false;
-            rbLessMonDues.Checked = false;
-            rbMoreMonDues.Checked = false;
-            rbEqualAttend.Checked = false;
-            rbLessAttend.Checked = false;
-            rbMoreAttend.Checked = false;
-            cmbMonth.SelectedIndex = -1;
-            cmbYearMeeting.SelectedIndex = -1;
-            bll = new GeneralAttendanceBLL();
-            dto = bll.Select(DateTime.Now.Year);
-            dataGridView1.DataSource = dto.GeneralAttendance;
-
-            txtNameComments.Clear();
-            txtComment.Clear();
-            txtSurnameComments.Clear();
-            cmbGenderComments.SelectedIndex = -1;
-            cmbMonthComments.SelectedIndex = -1;
-            loadComments();
-
-            txtConstitution.Clear();
-            txtSection.Clear();
-            txtFine.Clear();
-            loadConstitutions();
-
-            txtNameFinedMember.Clear();
-            txtSurnameFinedMember.Clear();
-            txtYearFinedMember.Clear();
-            txtConstitutionSection.Clear();
-            cmbFineStatus.SelectedIndex = -1;
-            cmbMonthFinedMember.SelectedIndex = -1;
-            cmbGenderFinedMember.SelectedIndex = -1;
-            loadFinedMembers();
-
-            txtAmountSContributions.Clear();
-            cmbMonthContribution.SelectedIndex = -1;
-            cmbYearContribution.SelectedIndex = -1;
-            rbEqualContAmount.Checked = false;
-            rbLessContAmount.Checked = false;
-            rbMoreContAmount.Checked = false;
-            loadSpecialContributions();
-
-            RefreshCounts();
-        }
-
+        
         private void txtYear_TextChanged(object sender, EventArgs e)
         {
             List<GeneralAttendanceDetailDTO> list = dto.GeneralAttendance;

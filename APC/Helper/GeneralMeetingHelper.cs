@@ -4,18 +4,18 @@ using System.Windows.Forms;
 
 namespace APC.Helper
 {
-    public class GeneralAttendanceHelper
+    public class GeneralMeetingHelper
     {
-        public enum GeneralAttendanceGridType
+        public enum GeneralMeetingGridType
         {
             Basic
         }
 
-        public static void ConfigureGeneralAttendanceGrid(DataGridView grid, GeneralAttendanceGridType type)
+        public static void ConfigureGeneralMeetingGrid(DataGridView grid, GeneralMeetingGridType type)
         {
             switch (type)
             {
-                case GeneralAttendanceGridType.Basic:
+                case GeneralMeetingGridType.Basic:
                     GeneralHelper.SetVisibleColumns(grid, "Month", "Year", "TotalMembersPresent", "TotalMembersAbsent",
                         "TotalDuesPaidWithCurrency");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>

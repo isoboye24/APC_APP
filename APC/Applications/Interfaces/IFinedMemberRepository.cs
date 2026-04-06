@@ -10,6 +10,7 @@ namespace APC.Applications.Interfaces
         IQueryable<FINED_MEMBER> GetAll();
         IQueryable<FINED_MEMBER> GetAllDeletedFinedMembers();
         IQueryable<FINED_MEMBER> GetById(int id);
+        IQueryable<FINED_MEMBER> GetAllByDate(DateTime date);
         bool Insert(FinedMember data);
         bool Update(FinedMember data);
         bool Delete(int id);

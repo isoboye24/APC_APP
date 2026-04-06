@@ -1,6 +1,6 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,28 +17,14 @@ namespace APC.Infrastructure.Repositories
             _db = db;
         }
 
-        public List<AttendanceStatus> GetAll()
+        public IQueryable<ATTENDANCE_STATUS> GetAll()
         {
-            var data = _db.ATTENDANCE_STATUS
-                .OrderBy(x => x.attendanceStatusID)
-                .ToList();
-
-            return data
-                .Select(x => AttendanceStatus.Rehydrate(
-                    x.attendanceStatusID,
-                    x.attendanceStatus
-                ))
-                .ToList();
+            return _db.ATTENDANCE_STATUS.Where(x => !x.isDeleted);
         }
 
-        public AttendanceStatus GetById(int id)
+        public IQueryable<ATTENDANCE_STATUS> GetById(int id)
         {
-            var entity = _db.ATTENDANCE_STATUS.FirstOrDefault(x => x.attendanceStatusID == id);
-            if (entity == null) return null;
-
-            var status = new AttendanceStatus(entity.attendanceStatus);
-            status.SetId(entity.attendanceStatusID);
-            return status;
+            return _db.ATTENDANCE_STATUS.Where(x => !x.isDeleted && x.attendanceStatusID == id);
         }
     }
 }

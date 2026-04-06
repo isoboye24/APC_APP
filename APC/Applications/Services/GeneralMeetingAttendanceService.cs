@@ -8,13 +8,13 @@ using System.Linq;
 
 namespace APC.Applications.Services
 {
-    public class PersonalAttendanceService : IPersonalAttendanceService
+    public class GeneralMeetingAttendanceService : IGeneralMeetingAttendanceService
     {
-        private readonly IPersonalAttendanceRepository _repository;
+        private readonly IGeneralMeetingAttendanceRepository _repository;
         private readonly IMemberRepository _memberRepository;
         private readonly IAttendanceStatusRepository _statusRepository;
         private readonly IGenderRepository _genderRepository;
-        public PersonalAttendanceService(IPersonalAttendanceRepository repository, IMemberRepository memberRepository, 
+        public GeneralMeetingAttendanceService(IGeneralMeetingAttendanceRepository repository, IMemberRepository memberRepository, 
             IAttendanceStatusRepository statusRepository, IGenderRepository genderRepository)
         {
             _repository = repository;
@@ -37,20 +37,21 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<PersonalAttendanceDTO> GetAllByGeneralMeetingId(int id)
+        public List<GeneralMeetingAttendanceDTO> GetAllByGeneralMeetingId(int id)
         {
             var data = (from p in _repository.GetAllByGeneralMeetingId(id)
                         join m in _memberRepository.GetAll() on p.memberID equals m.MemberId
                         join g in _genderRepository.GetAll() on m.PersonalInfo.GenderId equals g.genderID
-                        join a in _statusRepository.GetAll() on p.attendanceStatusID equals a.AttendanceStatusId
-                        select new PersonalAttendanceDTO
+                        join a in _statusRepository.GetAll() on p.attendanceStatusID equals a.attendanceStatusID
+                        select new GeneralMeetingAttendanceDTO
                         {
                             PersonalAttendanceId = p.attendanceID,
                             MemberId = p.memberID,
                             FirstName = m.PersonalInfo.FirstName,
                             LastName = m.PersonalInfo.LastName,
+                            ImagePath = m.PersonalInfo.ImagePath,
                             AttendanceStatusId = p.attendanceStatusID,
-                            AttendanceStatus = a.AttendanceStatusName,
+                            AttendanceStatus = a.attendanceStatus,
                             DuesPaid = (decimal)p.monthlyDues,
                             Gender = g.genderName,
                             GeneralMeetingId = p.generalAttendanceID,
@@ -65,13 +66,13 @@ namespace APC.Applications.Services
             return data;
         }
 
-        public List<PersonalAttendanceDTO> GetAllDeletedPersonalAttendance()
+        public List<GeneralMeetingAttendanceDTO> GetAllDeletedPersonalAttendance()
         {
             var data = (from p in _repository.GetAllDeletedPersonalAttendance()
                         join m in _memberRepository.GetAll() on p.memberID equals m.MemberId
                         join g in _genderRepository.GetAll() on m.PersonalInfo.GenderId equals g.genderID
                         join a in _statusRepository.GetAll() on p.attendanceStatusID equals a.AttendanceStatusId
-                        select new PersonalAttendanceDTO
+                        select new GeneralMeetingAttendanceDTO
                         {
                             PersonalAttendanceId = p.attendanceID,
                             MemberId = p.memberID,

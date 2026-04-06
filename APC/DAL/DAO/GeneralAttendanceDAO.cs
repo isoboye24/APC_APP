@@ -303,16 +303,6 @@ namespace APC.DAL.DAO
             }
         }
 
-        public string getSinglePartsOfSpeechQuery(int year)
-        {
-            string singlePartsOfSpeechQuery = "SELECT MONTH.monthID, COUNT(WORD) \r\n" +
-            "FROM WORD \r\n" +
-            "JOIN PARTS_OF_SPEECH ON WORD.partOfSpeechID = PARTS_OF_SPEECH.partOfSpeechID \r\n" +
-            "JOIN MONTH ON WORD.monthID = MONTH.monthID \r\n" +
-            "WHERE WORD.year = @year AND WORD.isDeleted = 0 AND PARTS_OF_SPEECH.partsOfSpeechName = @partOfSpeech \r\n" +
-            "GROUP BY MONTH.monthID\r\n" +
-            "ORDER BY MONTH.monthID ASC";
-            return singlePartsOfSpeechQuery.Replace("@year", year.ToString());
-        }
+        
     }
 }
