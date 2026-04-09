@@ -1,7 +1,7 @@
 ﻿using APC.Domain.Entities;
 using APC.Applications.Interfaces;
-using System;
 using System.Collections.Generic;
+using APC.Applications.Entities;
 
 namespace APC.Applications.Services
 {

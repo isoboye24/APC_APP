@@ -8,7 +8,7 @@ namespace APC.Applications.Interfaces
     {
         IQueryable<EMPLOYMENT_STATUS> GetAll();
         IQueryable<EMPLOYMENT_STATUS> GetAllEmploymentStatuses();
-        EmploymentStatus GetById(int id);
+        IQueryable<EMPLOYMENT_STATUS> GetById(int id);
         bool Insert(EmploymentStatus status);
         bool Update(EmploymentStatus status);
         bool Delete(int id);

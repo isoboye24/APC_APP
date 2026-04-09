@@ -1,11 +1,8 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -38,25 +35,14 @@ namespace APC.Infrastructure.Repositories
             && x.salesDate.Year == salesDate.Year);
         }
 
-        public List<EventSales> GetAll()
+        public IQueryable<EVENT_SALES> GetAll(int eventId)
         {
-            var data = _db.EVENT_SALES
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.salesDate.Year)
-                .ThenByDescending(x => x.salesDate.Month)
-                .ThenByDescending(x => x.salesDate.Day)
-                .ThenByDescending(x => x.amountSold)
-                .ToList();
-
-            return data
-                .Select(x => EventSales.Rehydrate(
-                    x.eventSalesID,
-                    x.eventID,
-                    x.amountSold,
-                    x.summary,
-                    x.salesDate
-                ))
-                .ToList();
+            return _db.EVENT_SALES.Where(x => !x.isDeleted && x.eventID == eventId);
+        }
+        
+        public IQueryable<EVENT_SALES> GetAllDeletedEventSales()
+        {
+            return _db.EVENT_SALES.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -68,30 +54,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public EventSales GetById(int id)
+        public IQueryable<EVENT_SALES> GetById(int id)
         {
-            var entity = _db.EVENT_SALES
-                .Where(x => x.eventSalesID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.eventSalesID,
-                    x.eventID,
-                    x.amountSold,
-                    x.summary,
-                    x.salesDate
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return EventSales.Rehydrate(
-                    entity.eventSalesID,
-                    entity.eventID,
-                    entity.amountSold,
-                    entity.summary,
-                    entity.salesDate
-            );
+            return _db.EVENT_SALES.Where(x => !x.isDeleted && x.eventSalesID == id);
         }
 
         public bool Insert(EventSales data)

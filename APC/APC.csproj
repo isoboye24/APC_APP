@@ -850,7 +850,6 @@
     <Compile Include="Applications\Interfaces\IEventExpenditureService.cs" />
     <Compile Include="Infrastructure\Repositories\GeneralMeetingRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MaritalStatusRepository.cs" />
-    <Compile Include="Infrastructure\Repositories\MemberCommittmentRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MemberRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MembershipStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MonthRepository.cs" />

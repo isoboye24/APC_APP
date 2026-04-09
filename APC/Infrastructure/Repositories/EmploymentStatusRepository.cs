@@ -1,11 +1,8 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -55,14 +52,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public EmploymentStatus GetById(int id)
+        public IQueryable<EMPLOYMENT_STATUS> GetById(int id)
         {
-            var entity = _db.EMPLOYMENT_STATUS.FirstOrDefault(x => x.employmentStatusID == id && !x.isDeleted);
-            if (entity == null) return null;
-
-            var employmentStatus = new EmploymentStatus(entity.employmentStatus);
-            employmentStatus.SetId(entity.employmentStatusID);
-            return employmentStatus;
+            return _db.EMPLOYMENT_STATUS.Where(x => !x.isDeleted && x.employmentStatusID == id);
         }
 
         public bool Insert(EmploymentStatus status)

@@ -1,8 +1,7 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace APC.Infrastructure.Repositories
@@ -53,14 +52,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public MaritalStatus GetById(int id)
+        public IQueryable<MARITAL_STATUS> GetById(int id)
         {
-            var entity = _db.MARITAL_STATUS.FirstOrDefault(x => x.maritalStatusID == id && !x.isDeleted);
-            if (entity == null) return null;
-
-            var maritalStatus = new MaritalStatus(entity.maritalStatus);
-            maritalStatus.SetId(entity.maritalStatusID);
-            return maritalStatus;
+            return _db.MARITAL_STATUS.Where(x => !x.isDeleted && x.maritalStatusID == id);
         }
 
         public bool Insert(MaritalStatus status)

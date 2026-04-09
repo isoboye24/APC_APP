@@ -1,6 +1,5 @@
 ﻿using APC.DAL;
-using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System.Linq;
 
 namespace APC.Infrastructure.Repositories
@@ -18,14 +17,9 @@ namespace APC.Infrastructure.Repositories
             return _db.GENDER;
         }
 
-        public Gender GetById(int id)
+        public IQueryable<GENDER> GetById(int id)
         {
-            var entity = _db.GENDER.FirstOrDefault(x => x.genderID == id);
-            if (entity == null) return null;
-
-            var gender = new Gender(entity.genderName);
-            gender.SetId(entity.genderID);
-            return gender;
+            return _db.GENDER.Where(x => x.genderID == id);
         }
     }
 }

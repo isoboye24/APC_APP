@@ -48,7 +48,158 @@ namespace APC.Applications.Services
             => _repository.Delete(id);
 
         public List<Member> GetAll()
-            => _repository.GetAll();
+        {
+            var data = _db.MEMBER
+                .Where(x => !x.isDeleted)
+                .ToList();
+
+            return data.Select(x =>
+            {
+                var authentication = new MemberAuthentication(
+                    x.username,
+                    x.password
+                );
+
+                var personalInfo = new PersonalInfo(
+                    x.name,
+                    x.surname,
+                    x.birthday,
+                    x.imagePath,
+                    x.genderID
+                );
+
+                var contactInfo = new ContactInfo(
+                    x.emailAddress,
+                    x.houseAddress,
+                    x.phoneNumber,
+                    x.phoneNumber2,
+                    x.phoneNumber3
+                );
+
+                var membershipInfo = new MembershipInfo(
+                    x.membershipDate,
+                    x.membershipStatusID,
+                    x.positionID,
+                    x.permissionID
+                );
+
+                var demographicInfo = new DemographicInfo(
+                    x.countryID,
+                    x.nationalityID,
+                    x.professionID,
+                    x.employmentStatusID,
+                    x.maritalStatusID,
+                    x.LGAOfCountryOrigin
+                );
+
+                var emergencyContact = new EmergencyContact(
+                    x.nextOfKin,
+                    x.relationshipToKinID
+                );
+
+                var lifeStatus = new LifeStatus(
+                    x.deadDate
+                );
+
+                return Member.Rehydrate(
+                    x.memberID,
+                    authentication,
+                    personalInfo,
+                    contactInfo,
+                    membershipInfo,
+                    demographicInfo,
+                    emergencyContact,
+                    lifeStatus
+                );
+
+            }).ToList();
+        }
+
+
+        public List<BirthdayMembersDTO> GetBirthdayMembers(int month)
+        {
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false && x.birthday.Month == month)
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          join pos in _db.POSITION on m.positionID equals pos.positionID
+                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
+                          select new BirthdayMembersDTO
+                          {
+                              MemberId = m.memberID,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Birthday = (m.birthday.Day.ToString("00") + "." + m.birthday.Month.ToString("00")).ToString(),
+                              ImagePath = m.imagePath,
+                              Position = pos.positionName,
+                              Gender = g.genderName,
+                          });
+
+            return member.ToList();
+        }
+
+        public List<MembersBasicDetailDTO> GetInactiveMembers()
+        {
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          join p in _db.POSITION on m.positionID equals p.positionID
+                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
+                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Inactive") on m.membershipStatusID equals ms.membershipStatusID
+                          select new MembersBasicDetailDTO
+                          {
+                              MemberId = m.memberID,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Nationality = n.nationality1,
+                              Position = p.positionName,
+                              Gender = g.genderName,
+                              ImagePath = m.imagePath,
+                          });
+
+            return member.ToList();
+        }
+
+        public List<MembersBasicDetailDTO> GetFormerMembers()
+        {
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          join p in _db.POSITION on m.positionID equals p.positionID
+                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
+                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Former") on m.membershipStatusID equals ms.membershipStatusID
+                          select new MembersBasicDetailDTO
+                          {
+                              MemberId = m.memberID,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Position = p.positionName,
+                              Nationality = n.nationality1,
+                              Gender = g.genderName,
+                              ImagePath = m.imagePath,
+                          });
+
+            return member.ToList();
+        }
+
+        public List<DeadMemberShortDetailDTO> GetDeceasedMembers()
+        {
+            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
+                          join g in _db.GENDER on m.genderID equals g.genderID
+                          join p in _db.POSITION on m.positionID equals p.positionID
+                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
+                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Deceased") on m.membershipStatusID equals ms.membershipStatusID
+                          select new DeadMemberShortDetailDTO
+                          {
+                              MemberId = m.memberID,
+                              FirstName = m.name,
+                              LastName = m.surname,
+                              Birthdate = m.birthday.ToString("dd.MM.yyyy"),
+                              Position = p.positionName,
+                              Gender = g.genderName,
+                              DeadDate = m.deadDate.ToString("dd.MM.yyyy"),
+                              Age = (m.deadDate.Year - m.birthday.Year - (m.deadDate < m.birthday.AddYears(m.deadDate.Year - m.birthday.Year) ? 1 : 0)).ToString()
+                          });
+
+            return member.ToList();
+        }
+
 
         public List<MembersBasicDetailDTO> GetAllDeletedMembers()
             => _repository.GetAllDeletedMembers();
@@ -56,20 +207,9 @@ namespace APC.Applications.Services
         public bool GetBack(int id)
             => _repository.GetBack(id);
 
-        public List<BirthdayMembersDTO> GetBirthdayMembers(int month)
-            => _repository.GetBirthdayMembers(month);
-
-        public List<DeadMemberShortDetailDTO> GetDeceasedMembers()
-            => _repository.GetDeceasedMembers();
-
-        public List<MembersBasicDetailDTO> GetFormerMembers()
-            => _repository.GetFormerMembers();
 
         public List<MemberFullDetailsDTO> GetFullMemberDetails()
             => _repository.GetFullMemberDetails();
-
-        public List<MembersBasicDetailDTO> GetInactiveMembers()
-            => _repository.GetInactiveMembers();
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
@@ -128,5 +268,77 @@ namespace APC.Applications.Services
         
         public int GetUniquePermissionCount()
             => _repository.GetUniquePermissionCount();
+
+
+        public int Get3MonthsAbsentesCount()
+        {
+            var last3MeetingIds = _db.GENERAL_ATTENDANCE
+                .Where(x => !x.isDeleted)
+                .OrderByDescending(x => x.year)
+                .ThenByDescending(x => x.monthID)
+                .ThenByDescending(x => x.day)
+                .Select(x => x.generalAttendanceID)
+                .Take(3);
+
+            var count = _db.PERSONAL_ATTENDANCE
+                .Where(x => !x.isDeleted && last3MeetingIds.Contains(x.generalAttendanceID))
+                .GroupBy(x => x.memberID)
+                .Where(g => g.Count() == 3)
+                .Count();
+
+            return count;
+        }
+
+        public int GetUniqueProfessionCount()
+        {
+            return (from m in _db.MEMBER
+                    join ms in _db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
+                    join p in _db.PROFESSION on m.professionID equals p.professionID
+                    where !m.isDeleted
+                          && ms.membershipStatus == "Current"
+                          && !p.isDeleted
+                    select p.profession1)
+                    .Distinct()
+                    .Count();
+        }
+
+        public int GetUniquePositionCount()
+        {
+            return (from m in _db.MEMBER
+                    join ms in _db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
+                    join p in _db.POSITION on m.positionID equals p.positionID
+                    where !m.isDeleted
+                          && ms.membershipStatus == "Current"
+                          && !p.isDeleted
+                    select p.positionName)
+                    .Distinct()
+                    .Count();
+        }
+
+        public int GetUniqueNationalityCount()
+        {
+            return (from m in _db.MEMBER
+                    join ms in _db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
+                    join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
+                    where !m.isDeleted
+                          && ms.membershipStatus == "Current"
+                          && !n.isDeleted
+                    select n.nationality1)
+                    .Distinct()
+                    .Count();
+        }
+
+        public int GetUniquePermissionCount()
+        {
+            return (from m in _db.MEMBER
+                    join ms in _db.MEMBERSHIP_STATUS on m.membershipStatusID equals ms.membershipStatusID
+                    join p in _db.PERMISSION on m.permissionID equals p.permissionID
+                    where !m.isDeleted
+                          && ms.membershipStatus == "Current"
+                          && !p.isDeleted
+                    select p.permission1)
+                    .Distinct()
+                    .Count();
+        }
     }
 }

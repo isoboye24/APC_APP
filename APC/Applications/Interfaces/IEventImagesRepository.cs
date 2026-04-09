@@ -6,9 +6,9 @@ namespace APC.Applications.Interfaces
 {
     public interface IEventImagesRepository
     {
-        IQueryable<EVENT_IMAGE> GetAll();
+        IQueryable<EVENT_IMAGE> GetAll(int id);
         IQueryable<EVENT_IMAGE> GetAllDeletedEventImages();
-        EventImages GetById(int id);
+        IQueryable<EVENT_IMAGE> GetById(int id);
         bool Insert(EventImages data);
         bool Update(EventImages data);
         bool Delete(int id);

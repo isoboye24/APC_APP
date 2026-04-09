@@ -52,14 +52,9 @@ namespace APC.Infrastructure.Repositories
             return _db.COUNTRY.Where(x => x.isDeleted);
         }
 
-        public Country GetById(int id)
+        public IQueryable<COUNTRY> GetById(int id)
         {
-            var entity = _db.COUNTRY.FirstOrDefault(x => x.countryID == id && !x.isDeleted);
-            if (entity == null) return null;
-
-            var country = new Country(entity.countryName);
-            country.SetId(entity.countryID);
-            return country;
+            return _db.COUNTRY.Where(x => !x.isDeleted && x.countryID == id);
         }
 
         public bool Insert(Country country)

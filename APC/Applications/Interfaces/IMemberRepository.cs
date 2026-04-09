@@ -3,13 +3,15 @@ using APC.DAL;
 using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace APC.Applications.Interfaces
 {
     public interface IMemberRepository
     {
-        List<Member> GetAll();
-        Member GetById(int id);
+        IQueryable<MEMBER> GetAll();
+        IQueryable<MEMBER> GetAllDeletedMembers();
+        MEMBER GetById(int id);
         bool Insert(Member data);
         bool Update(Member data);
         bool Delete(int id);
@@ -18,17 +20,5 @@ namespace APC.Applications.Interfaces
         bool Exists(string firstName, string lastName);
         MEMBER GetByUsername(string username);
         int Count();
-        List<MembersBasicDetailDTO> GetAllDeletedMembers();
-        List<MemberFullDetailsDTO> GetFullMemberDetails();
-        List<BirthdayMembersDTO> GetBirthdayMembers(int month);
-        List<MembersBasicDetailDTO> GetInactiveMembers();
-        List<MembersBasicDetailDTO> GetFormerMembers();
-        List<DeadMemberShortDetailDTO> GetDeceasedMembers();
-
-        int Get3MonthsAbsentesCount();
-        int GetUniqueProfessionCount();
-        int GetUniquePositionCount();
-        int GetUniqueNationalityCount();
-        int GetUniquePermissionCount();
     }
 }

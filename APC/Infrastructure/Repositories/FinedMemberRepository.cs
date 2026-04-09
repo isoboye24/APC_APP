@@ -39,6 +39,13 @@ namespace APC.Infrastructure.Repositories
         {
             return _db.FINED_MEMBER.Where(x => !x.isdeleted && x.fineDate.Day == date.Day && x.fineDate.Month == date.Month && x.fineDate.Year == date.Year);
         }
+
+        public IQueryable<FINED_MEMBER> GetAllByDateRange(DateTime startDate, DateTime endDate)
+        {
+            var endOfDay = endDate.Date.AddDays(1);
+
+            return _db.FINED_MEMBER.Where(x => !x.isdeleted && x.fineDate >= startDate.Date && x.fineDate <= endOfDay);
+        }
         
         public IQueryable<FINED_MEMBER> GetAll()
         {

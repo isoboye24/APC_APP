@@ -2,7 +2,7 @@
 using APC.Applications.Services;
 using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using APC.Infrastructure.Repositories;
 using APC.Utility;
 using Microsoft.Extensions.DependencyInjection;
@@ -56,10 +56,9 @@ namespace APC
             services.AddScoped<IFinedMemberRepository, FinedMemberRepository>();
             services.AddScoped<IGeneralMeetingRepository, GeneralMeetingRepository>();
             services.AddScoped<IMemberRepository, MemberRepository>();
-            services.AddScoped<IPersonalAttendanceRepository, GeneralMeetingAttendanceRepository>();
+            services.AddScoped<IGeneralMeetingAttendanceRepository, GeneralMeetingAttendanceRepository>();
             services.AddScoped<ISpecialContributionRepository, SpecialContributionRepository>();
             services.AddScoped<ISpecialContributorRepository, SpecialContributorRepository>();
-            services.AddScoped<IMemberCommittmentRepository, MemberCommittmentRepository>();
 
             // Services
             services.AddScoped<ICountryService, CountryService>();
@@ -88,7 +87,7 @@ namespace APC
             services.AddScoped<IFinedMemberService, FinedMemberService>();
             services.AddScoped<IGeneralMeetingService, GeneralMeetingService>();
             services.AddScoped<IMemberService, MemberService>();
-            services.AddScoped<IPersonalAttendanceService, GeneralMeetingAttendanceService>();
+            services.AddScoped<IGeneralMeetingAttendanceService, GeneralMeetingAttendanceService>();
             services.AddScoped<ISpecialContributionService, SpecialContributionService>();
             services.AddScoped<ISpecialContributorService, SpecialContributorService>();
             services.AddScoped<IMemberCommittmentService, MemberCommittmentService>();

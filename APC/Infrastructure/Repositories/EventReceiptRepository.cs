@@ -1,11 +1,8 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -35,27 +32,14 @@ namespace APC.Infrastructure.Repositories
             return _db.EVENT_RECEIPTS.Any(x => !x.isDeleted && x.eventID == eventId && x.imagePath == imagePath);
         }
 
-        public List<EventReceipt> GetAll()
+        public IQueryable<EVENT_RECEIPTS> GetAll(int eventId)
         {
-            var data = _db.EVENT_RECEIPTS
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.receiptDate.Year)
-                .ThenByDescending(x => x.receiptDate.Month)
-                .ThenByDescending(x => x.receiptDate.Day)
-                .ThenBy(x => x.caption)
-                .ToList();
+            return _db.EVENT_RECEIPTS.Where(x => !x.isDeleted && x.eventID == eventId);
+        }
 
-            return data
-                .Select(x => EventReceipt.Rehydrate(
-                    x.eventReceiptID,
-                    x.eventID,
-                    x.imagePath,
-                    x.summary,
-                    x.caption,
-                    x.receiptDate,
-                    x.amountSpent
-                ))
-                .ToList();
+        public IQueryable<EVENT_RECEIPTS> GetAllDeletedEventReceipts()
+        {
+            return _db.EVENT_RECEIPTS.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -67,34 +51,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public EventReceipt GetById(int id)
+        public IQueryable<EVENT_RECEIPTS> GetById(int id)
         {
-            var entity = _db.EVENT_RECEIPTS
-                .Where(x => x.eventReceiptID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.eventReceiptID,
-                    x.eventID,
-                    x.imagePath,
-                    x.summary,
-                    x.caption,
-                    x.receiptDate,
-                    x.amountSpent
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return EventReceipt.Rehydrate(
-                    entity.eventReceiptID,
-                    entity.eventID,
-                    entity.imagePath,
-                    entity.summary,
-                    entity.caption,
-                    entity.receiptDate,
-                    entity.amountSpent
-            );
+            return _db.EVENT_RECEIPTS.Where(x => !x.isDeleted && x.eventReceiptID == id);
         }
 
         public bool Insert(EventReceipt data)

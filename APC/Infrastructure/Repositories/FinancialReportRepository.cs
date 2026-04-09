@@ -1,11 +1,8 @@
-﻿using APC.DAL;
+﻿using APC.Applications.Interfaces;
+using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -36,22 +33,14 @@ namespace APC.Infrastructure.Repositories
             return _db.FINANCIAL_REPORT.Any(x => !x.isDeleted && x.year == year);
         }
 
-        public List<FinancialReport> GetAll()
+        public IQueryable<FINANCIAL_REPORT> GetAll()
         {
-            var data = _db.FINANCIAL_REPORT
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.year)
-                .ToList();
-
-            return data
-                .Select(x => FinancialReport.Rehydrate(
-                    x.financialReportID,
-                    x.totalAmountRaised,
-                    x.totalAmountSpent,
-                    x.year,
-                    x.summary
-                ))
-                .ToList();
+            return _db.FINANCIAL_REPORT.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<FINANCIAL_REPORT> GetAllDeletedFinancialReports()
+        {
+            return _db.FINANCIAL_REPORT.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -63,30 +52,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public FinancialReport GetById(int id)
+        public IQueryable<FINANCIAL_REPORT> GetById(int id)
         {
-            var entity = _db.FINANCIAL_REPORT
-                .Where(x => x.financialReportID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.financialReportID,
-                    x.totalAmountRaised,
-                    x.totalAmountSpent,
-                    x.year,
-                    x.summary
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return FinancialReport.Rehydrate(
-                    entity.financialReportID,
-                    entity.totalAmountRaised,
-                    entity.totalAmountSpent,
-                    entity.year,
-                    entity.summary
-            );
+            return _db.FINANCIAL_REPORT.Where(x => !x.isDeleted && x.financialReportID == id);
         }
 
         public bool Insert(FinancialReport data)

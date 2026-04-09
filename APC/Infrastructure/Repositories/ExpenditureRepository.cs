@@ -1,12 +1,8 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.IO.RecyclableMemoryStreamManager;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -39,25 +35,14 @@ namespace APC.Infrastructure.Repositories
                                             && x.expenditureDate.Year == date.Year);
         }
 
-        public List<Expenditure> GetAll()
+        public IQueryable<EXPENDITURE> GetAll()
         {
-            var data = _db.EXPENDITURE
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.year)
-                .ThenByDescending(x => x.monthID)
-                .ThenByDescending(x => x.day)
-                .ThenByDescending(x => x.amountSpent)
-                .ThenBy(x => x.summary)
-                .ToList();
-
-            return data
-                .Select(x => Expenditure.Rehydrate(
-                    x.expenditureID,
-                    x.amountSpent,
-                    x.summary,
-                    x.expenditureDate
-                ))
-                .ToList();
+            return _db.EXPENDITURE.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<EXPENDITURE> GetAllDeletedExpenditures()
+        {
+            return _db.EXPENDITURE.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -69,28 +54,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public Expenditure GetById(int id)
+        public IQueryable<EXPENDITURE> GetById(int id)
         {
-            var entity = _db.EXPENDITURE
-                .Where(x => x.expenditureID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.expenditureID,
-                    x.amountSpent,
-                    x.summary,
-                    x.expenditureDate,
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return Expenditure.Rehydrate(
-                    entity.expenditureID,
-                    entity.amountSpent,
-                    entity.summary,
-                    entity.expenditureDate
-            );
+            return _db.EXPENDITURE.Where(x => !x.isDeleted && x.expenditureID == id);
         }
 
         public bool Insert(Expenditure data)

@@ -1,16 +1,14 @@
-﻿using APC.Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using APC.DAL;
+using APC.Domain.Entities;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Interfaces
 {
     public interface IEventReceiptRepository
     {
-        List<EventReceipt> GetAll();
-        EventReceipt GetById(int id);
+        IQueryable<EVENT_RECEIPTS> GetAll(int eventId);
+        IQueryable<EVENT_RECEIPTS> GetAllDeletedEventReceipts();
+        IQueryable<EVENT_RECEIPTS> GetById(int id);
         bool Insert(EventReceipt data);
         bool Update(EventReceipt data);
         bool Delete(int id);

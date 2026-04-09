@@ -1,8 +1,7 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace APC.Infrastructure.Repositories
@@ -34,9 +33,9 @@ namespace APC.Infrastructure.Repositories
             return _db.EVENT_IMAGE.Any(x => !x.isDeleted && x.eventID == eventId && x.imagePath == imagePath);
         }
 
-        public IQueryable<EVENT_IMAGE> GetAll()
+        public IQueryable<EVENT_IMAGE> GetAll(int eventId)
         {
-            return _db.EVENT_IMAGE.Where(x => !x.isDeleted);
+            return _db.EVENT_IMAGE.Where(x => !x.isDeleted && x.eventID == eventId);
         }
         
         public IQueryable<EVENT_IMAGE> GetAllDeletedEventImages()
@@ -53,30 +52,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public EventImages GetById(int id)
+        public IQueryable<EVENT_IMAGE> GetById(int id)
         {
-            var entity = _db.EVENT_IMAGE
-                .Where(x => x.eventImageID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.eventImageID,
-                    x.eventID,
-                    x.summary,
-                    x.imagePath,
-                    x.imageCaption
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return EventImages.Rehydrate(
-                    entity.eventImageID,
-                    entity.eventID,
-                    entity.summary,
-                    entity.imagePath,
-                    entity.imageCaption
-            );
+            return _db.EVENT_IMAGE.Where(x => !x.isDeleted && x.eventImageID == id);
         }
 
         public bool Insert(EventImages data)

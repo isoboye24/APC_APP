@@ -1,13 +1,15 @@
-﻿using APC.Domain.Entities;
+﻿using APC.DAL;
+using APC.Domain.Entities;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace APC.Applications.Interfaces
 {
     public interface IEventExpenditureRepository
     {
-        List<EventExpenditure> GetAll();
-        EventExpenditure GetById(int id);
+        IQueryable<EVENT_EXPENDITURE> GetAll(int eventId);
+        IQueryable<EVENT_EXPENDITURE> GetAllDeletedEventExpenditures();
+        IQueryable<EVENT_EXPENDITURE> GetById(int id);
         bool Insert(EventExpenditure data);
         bool Update(EventExpenditure data);
         bool Delete(int id);

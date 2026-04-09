@@ -2,7 +2,6 @@
 using APC.Domain.Entities;
 using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace APC.Infrastructure.Repositories
@@ -36,26 +35,14 @@ namespace APC.Infrastructure.Repositories
                                         && x.expenditureDate.Year == date.Year);
         }
 
-        public List<EventExpenditure> GetAll()
+        public IQueryable<EVENT_EXPENDITURE> GetAll(int eventId)
         {
-            var data = _db.EVENT_EXPENDITURE
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.year)
-                .ThenByDescending(x => x.monthID)
-                .ThenByDescending(x => x.day)
-                .ThenByDescending(x => x.amountSpent)
-                .ThenBy(x => x.summary)
-                .ToList();
-
-            return data
-                .Select(x => EventExpenditure.Rehydrate(
-                    x.eventExpenditureID,
-                    x.eventID,
-                    x.amountSpent,
-                    x.expenditureDate,
-                    x.summary
-                ))
-                .ToList();
+            return _db.EVENT_EXPENDITURE.Where(x => !x.isDeleted && x.eventID == eventId);
+        }
+        
+        public IQueryable<EVENT_EXPENDITURE> GetAllDeletedEventExpenditures()
+        {
+            return _db.EVENT_EXPENDITURE.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -67,30 +54,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public EventExpenditure GetById(int id)
+        public IQueryable<EVENT_EXPENDITURE> GetById(int id)
         {
-            var entity = _db.EVENT_EXPENDITURE
-                .Where(x => x.eventExpenditureID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.eventExpenditureID,
-                    x.eventID,
-                    x.amountSpent,
-                    x.expenditureDate,
-                    x.summary,
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return EventExpenditure.Rehydrate(
-                    entity.eventExpenditureID,
-                    entity.eventID,
-                    entity.amountSpent,
-                    entity.expenditureDate,
-                    entity.summary
-            );
+            return _db.EVENT_EXPENDITURE.Where(x => !x.isDeleted && x.eventExpenditureID == id);
         }
 
         public bool Insert(EventExpenditure data)

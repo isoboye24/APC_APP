@@ -30,6 +30,38 @@ namespace APC.Applications.Services
 
         public List<EventImageDTO> GetAll()
         {
+            var data = (from t in _repository.GetAll()
+                        join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
+                        where !t.isDeleted
+                        select new
+                        {
+                            t.taskID,
+                            t.categoryID,
+                            c.categoryName,
+                            r.routineDate,
+                            t.dailiyRoutineID,
+                            t.timeSpent,
+                            t.summary
+                        })
+                        .ToList();
+
+            return data.Select(x => new TaskDTO
+            {
+                Id = x.taskID,
+                Category = x.categoryName,
+                CategoryId = x.categoryID,
+                DailyRoutineDate = x.routineDate,
+                DailyRoutineId = x.dailiyRoutineID,
+                TimeSpent = x.timeSpent,
+                Summary = x.summary,
+                Day = x.routineDate.Day,
+                MonthID = x.routineDate.Month,
+                Year = x.routineDate.Year,
+                TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
+            })
+            .OrderByDescending(x => x.TimeSpent).ToList();
+
+
             return _repository.GetAll()
                 .OrderBy(x => x.imageCaption)
                 .Select((x, index) => new EventImageDTO

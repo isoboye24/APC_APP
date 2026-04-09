@@ -1,12 +1,8 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.IO.RecyclableMemoryStreamManager;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -38,25 +34,14 @@ namespace APC.Infrastructure.Repositories
             && x.eventDate.Month == eventsDate.Month && x.eventDate.Year == eventsDate.Year);
         }
 
-        public List<TheEvents> GetAll()
+        public IQueryable<EVENTS> GetAll()
         {
-            var data = _db.EVENTS
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.eventDate.Year)
-                .ThenByDescending(x => x.eventDate.Month)
-                .ThenByDescending(x => x.eventDate.Day)
-                .ThenBy(x => x.title)
-                .ToList();
-
-            return data
-                .Select(x => TheEvents.Rehydrate(
-                    x.eventID,
-                    x.title,
-                    x.summary,
-                    x.coverImagePath,
-                    x.eventDate
-                ))
-                .ToList();
+            return _db.EVENTS.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<EVENTS> GetAllDeletedEvents()
+        {
+            return _db.EVENTS.Where(x => x.isDeleted);
         }
 
         public bool GetBack(int id)
@@ -68,30 +53,9 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public TheEvents GetById(int id)
+        public IQueryable<EVENTS> GetById(int id)
         {
-            var entity = _db.EVENTS
-                .Where(x => x.eventID == id && !x.isDeleted)
-                .Select(x => new
-                {
-                    x.eventID,
-                    x.title,
-                    x.summary,
-                    x.coverImagePath,
-                    x.eventDate
-                })
-                .FirstOrDefault();
-
-            if (entity == null)
-                return null;
-
-            return TheEvents.Rehydrate(
-                    entity.eventID,
-                    entity.title,
-                    entity.summary,
-                    entity.coverImagePath,
-                    entity.eventDate
-            );
+            return _db.EVENTS.Where(x => !x.isDeleted && x.eventID == id);
         }
 
         public bool Insert(TheEvents data)

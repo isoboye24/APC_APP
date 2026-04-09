@@ -1,6 +1,6 @@
 ﻿using APC.DAL;
 using APC.Domain.Entities;
-using APC.Domain.Interfaces;
+using APC.Applications.Interfaces;
 using System.Linq;
 
 namespace APC.Infrastructure.Repositories
