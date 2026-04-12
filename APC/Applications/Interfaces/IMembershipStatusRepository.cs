@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.DAL;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace APC.Applications.Interfaces
 {
     public interface IMembershipStatusRepository
     {
-        List<MembershipStatus> GetAll();
+        IQueryable<MEMBERSHIP_STATUS> GetAll();
+        IQueryable<MEMBERSHIP_STATUS> GetByStatus(string status);
         MembershipStatus GetById(int id);        
     }
 }

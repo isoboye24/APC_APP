@@ -11,6 +11,7 @@ namespace APC.Applications.Interfaces
     {
         IQueryable<MEMBER> GetAll();
         IQueryable<MEMBER> GetAllDeletedMembers();
+        IQueryable<MEMBER> GetAllBirthdayMembers(int month);
         MEMBER GetById(int id);
         bool Insert(Member data);
         bool Update(Member data);

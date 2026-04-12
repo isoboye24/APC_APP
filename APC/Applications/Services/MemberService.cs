@@ -3,6 +3,8 @@ using APC.Domain.Entities;
 using APC.Applications.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using APC.Helper;
 
 namespace APC.Applications.Services
 {
@@ -10,10 +12,42 @@ namespace APC.Applications.Services
     {
         private readonly IMemberRepository _repository;
         private readonly ICurrentUserService _currentUserService;
-        public MemberService(IMemberRepository repository, ICurrentUserService currentUserService)
+        private readonly ICountryRepository _countryRepository;
+        private readonly INationalityRepository _nationalityRepository;
+        private readonly IPositionRepository _positionRepository;
+        private readonly IProfessionRepository _professionRepository;
+        private readonly IPermissionRepository _permissionRepository;
+        private readonly IMaritalStatusRepository _maritalStatusRepository;
+        private readonly IEmploymentStatusRepository _employmentStatusRepository;
+        private readonly IGenderRepository _genderRepository;
+        private readonly IMembershipStatusRepository _membershipStatusRepository;
+        private readonly INextOfKinRepository _nextOfKinRepository;
+        private readonly IGeneralMeetingRepository _generalMeetingRepository;
+        private readonly IGeneralMeetingAttendanceRepository _generalMeetingAttendanceRepository;
+        private readonly IAttendanceStatusRepository _attendanceStatusRepository;
+
+        public MemberService(IMemberRepository repository, ICurrentUserService currentUserService, ICountryRepository countryRepository,
+            INationalityRepository nationalityRepository, IPositionRepository positionRepository, IProfessionRepository professionRepository,
+            IPermissionRepository permissionRepository, IMaritalStatusRepository maritalStatusRepository, IEmploymentStatusRepository employmentStatusRepository,
+            IGenderRepository genderRepository, IMembershipStatusRepository membershipStatusRepository, INextOfKinRepository nextOfKinRepository, 
+            IGeneralMeetingRepository generalMeetingRepository, IGeneralMeetingAttendanceRepository generalMeetingAttendanceRepository,
+            IAttendanceStatusRepository attendanceStatusRepository)
         {
             _repository = repository;
             _currentUserService = currentUserService;
+            _countryRepository = countryRepository;
+            _nationalityRepository = nationalityRepository;
+            _positionRepository = positionRepository;
+            _professionRepository = professionRepository;
+            _permissionRepository = permissionRepository;
+            _maritalStatusRepository = maritalStatusRepository;
+            _genderRepository = genderRepository;
+            _membershipStatusRepository = membershipStatusRepository;
+            _employmentStatusRepository = employmentStatusRepository;
+            _nextOfKinRepository = nextOfKinRepository;
+            _generalMeetingRepository = generalMeetingRepository;
+            _generalMeetingAttendanceRepository = generalMeetingAttendanceRepository;
+            _attendanceStatusRepository = attendanceStatusRepository;
         }
 
         public AuthenticationDTO Authenticate(string username, string password)
@@ -47,175 +81,336 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<Member> GetAll()
+        public List<MemberFullDetailsDTO> GetAll()
         {
-            var data = _db.MEMBER
-                .Where(x => !x.isDeleted)
-                .ToList();
+            string status = "Current";
 
-            return data.Select(x =>
+            var data = (from m in _repository.GetAll()
+                        join c in _countryRepository.GetAll() on m.countryID equals c.countryID
+                        join n in _nationalityRepository.GetAll() on m.nationalityID equals n.nationalityID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
+                        join pro in _professionRepository.GetAll() on m.professionID equals pro.professionID
+                        join per in _permissionRepository.GetAll() on m.permissionID equals per.permissionID
+                        join mar in _maritalStatusRepository.GetAll() on m.maritalStatusID equals mar.maritalStatusID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join mb in _membershipStatusRepository.GetByStatus(status) on m.membershipStatusID equals mb.membershipStatusID
+                        join e in _employmentStatusRepository.GetAll() on m.employmentStatusID equals e.employmentStatusID
+                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.NextOfKinId
+                        select new
+                        {
+                            m.memberID,
+                            m.name,
+                            m.surname,
+                            m.birthday,
+                            m.imagePath,
+                            m.houseAddress,
+                            m.emailAddress,
+                            m.membershipDate,
+                            c.countryName,
+                            n.nationality1,
+                            pro.profession1,
+                            p.positionName,
+                            g.genderName,
+                            e.employmentStatus,
+                            mar.maritalStatus,
+                            per.permission1,
+                            m.phoneNumber,
+                            m.phoneNumber2,
+                            m.phoneNumber3,
+                            mb.membershipStatus,
+                            m.deadDate,
+                            m.nextOfKin,
+                            nk.NextOfKinName,
+                            m.LGAOfCountryOrigin,
+                        })
+                        .ToList();
+
+            return data.Select(x => new MemberFullDetailsDTO
             {
-                var authentication = new MemberAuthentication(
-                    x.username,
-                    x.password
-                );
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                Birthday = x.birthday,
+                ImagePath = x.imagePath,
+                HouseAddress = x.houseAddress,
+                Email = x.emailAddress,
+                MembershipDate = x.membershipDate,
+                Country = x.countryName,
+                Nationality = x.nationality1,
+                Profession = x.profession1,
+                Position = x.positionName,
+                Gender = x.genderName,
+                EmploymentStatus = x.employmentStatus,
+                MaritalStatus = x.maritalStatus,
+                Permission = x.permission1,
+                PhoneNumber = x.phoneNumber,
+                PhoneNumber2 = x.phoneNumber2,
+                PhoneNumber3 = x.phoneNumber3,
+                MembershipStatus = x.membershipStatus,
+                DeadDate = x.deadDate,
+                NextOfKin = x.NextOfKinName,
+                RelationshipToNextOfKin = x.nextOfKin,
+                LGA = x.LGAOfCountryOrigin,
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
+        }
+        
+        public List<MemberFullDetailsDTO> GetAllDeletedMembers()
+        {
+            var data = (from m in _repository.GetAllDeletedMembers()
+                        join c in _countryRepository.GetAll() on m.countryID equals c.countryID
+                        join n in _nationalityRepository.GetAll() on m.nationalityID equals n.nationalityID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
+                        join pro in _professionRepository.GetAll() on m.professionID equals pro.professionID
+                        join per in _permissionRepository.GetAll() on m.permissionID equals per.permissionID
+                        join mar in _maritalStatusRepository.GetAll() on m.maritalStatusID equals mar.maritalStatusID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join mb in _membershipStatusRepository.GetAll() on m.membershipStatusID equals mb.membershipStatusID
+                        join e in _employmentStatusRepository.GetAll() on m.employmentStatusID equals e.employmentStatusID
+                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.NextOfKinId
+                        select new
+                        {
+                            m.memberID,
+                            m.name,
+                            m.surname,
+                            m.birthday,
+                            m.imagePath,
+                            m.houseAddress,
+                            m.emailAddress,
+                            m.membershipDate,
+                            c.countryName,
+                            n.nationality1,
+                            pro.profession1,
+                            p.positionName,
+                            g.genderName,
+                            e.employmentStatus,
+                            mar.maritalStatus,
+                            per.permission1,
+                            m.phoneNumber,
+                            m.phoneNumber2,
+                            m.phoneNumber3,
+                            mb.membershipStatus,
+                            m.deadDate,
+                            m.nextOfKin,
+                            nk.NextOfKinName,
+                            m.LGAOfCountryOrigin,
+                        })
+                        .ToList();
 
-                var personalInfo = new PersonalInfo(
-                    x.name,
-                    x.surname,
-                    x.birthday,
-                    x.imagePath,
-                    x.genderID
-                );
-
-                var contactInfo = new ContactInfo(
-                    x.emailAddress,
-                    x.houseAddress,
-                    x.phoneNumber,
-                    x.phoneNumber2,
-                    x.phoneNumber3
-                );
-
-                var membershipInfo = new MembershipInfo(
-                    x.membershipDate,
-                    x.membershipStatusID,
-                    x.positionID,
-                    x.permissionID
-                );
-
-                var demographicInfo = new DemographicInfo(
-                    x.countryID,
-                    x.nationalityID,
-                    x.professionID,
-                    x.employmentStatusID,
-                    x.maritalStatusID,
-                    x.LGAOfCountryOrigin
-                );
-
-                var emergencyContact = new EmergencyContact(
-                    x.nextOfKin,
-                    x.relationshipToKinID
-                );
-
-                var lifeStatus = new LifeStatus(
-                    x.deadDate
-                );
-
-                return Member.Rehydrate(
-                    x.memberID,
-                    authentication,
-                    personalInfo,
-                    contactInfo,
-                    membershipInfo,
-                    demographicInfo,
-                    emergencyContact,
-                    lifeStatus
-                );
-
-            }).ToList();
+            return data.Select(x => new MemberFullDetailsDTO
+            {
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                Birthday = x.birthday,
+                ImagePath = x.imagePath,
+                HouseAddress = x.houseAddress,
+                Email = x.emailAddress,
+                MembershipDate = x.membershipDate,
+                Country = x.countryName,
+                Nationality = x.nationality1,
+                Profession = x.profession1,
+                Position = x.positionName,
+                Gender = x.genderName,
+                EmploymentStatus = x.employmentStatus,
+                MaritalStatus = x.maritalStatus,
+                Permission = x.permission1,
+                PhoneNumber = x.phoneNumber,
+                PhoneNumber2 = x.phoneNumber2,
+                PhoneNumber3 = x.phoneNumber3,
+                MembershipStatus = x.membershipStatus,
+                DeadDate = x.deadDate,
+                NextOfKin = x.NextOfKinName,
+                RelationshipToNextOfKin = x.nextOfKin,
+                LGA = x.LGAOfCountryOrigin,
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
         }
 
 
         public List<BirthdayMembersDTO> GetBirthdayMembers(int month)
         {
-            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false && x.birthday.Month == month)
-                          join g in _db.GENDER on m.genderID equals g.genderID
-                          join pos in _db.POSITION on m.positionID equals pos.positionID
-                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Current") on m.membershipStatusID equals ms.membershipStatusID
-                          select new BirthdayMembersDTO
-                          {
-                              MemberId = m.memberID,
-                              FirstName = m.name,
-                              LastName = m.surname,
-                              Birthday = (m.birthday.Day.ToString("00") + "." + m.birthday.Month.ToString("00")).ToString(),
-                              ImagePath = m.imagePath,
-                              Position = pos.positionName,
-                              Gender = g.genderName,
-                          });
+            var data = (from m in _repository.GetAllBirthdayMembers(month)                       
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        select new
+                        {
+                            m.memberID,
+                            m.name,
+                            m.surname,
+                            m.birthday,
+                            m.imagePath,
+                            p.positionName,
+                            g.genderName,
+                        })
+                        .ToList();
 
-            return member.ToList();
+            return data.Select(x => new BirthdayMembersDTO
+            {
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                Birthday =  x.birthday.ToString("dd.MM.YYYY"),
+                ImagePath = x.imagePath,
+                Position = x.positionName,
+                Gender = x.genderName,
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
         }
 
         public List<MembersBasicDetailDTO> GetInactiveMembers()
         {
-            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
-                          join g in _db.GENDER on m.genderID equals g.genderID
-                          join p in _db.POSITION on m.positionID equals p.positionID
-                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
-                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Inactive") on m.membershipStatusID equals ms.membershipStatusID
-                          select new MembersBasicDetailDTO
-                          {
-                              MemberId = m.memberID,
-                              FirstName = m.name,
-                              LastName = m.surname,
-                              Nationality = n.nationality1,
-                              Position = p.positionName,
-                              Gender = g.genderName,
-                              ImagePath = m.imagePath,
-                          });
+            string status = "Inactive";
 
-            return member.ToList();
+            var data = (from m in _repository.GetAll()
+                        join n in _nationalityRepository.GetAll() on m.nationalityID equals n.nationalityID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join ms in _membershipStatusRepository.GetByStatus(status) on m.membershipStatusID equals ms.membershipStatusID
+                        select new
+                        {
+                            m.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            n.nationality1,
+                            p.positionName,
+                            g.genderName,
+                        })
+                        .ToList();
+
+            return data.Select(x => new MembersBasicDetailDTO
+            {
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                Nationality = x.nationality1,
+                Position = x.positionName,
+                Gender = x.genderName,
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
         }
 
         public List<MembersBasicDetailDTO> GetFormerMembers()
         {
-            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
-                          join g in _db.GENDER on m.genderID equals g.genderID
-                          join p in _db.POSITION on m.positionID equals p.positionID
-                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
-                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Former") on m.membershipStatusID equals ms.membershipStatusID
-                          select new MembersBasicDetailDTO
-                          {
-                              MemberId = m.memberID,
-                              FirstName = m.name,
-                              LastName = m.surname,
-                              Position = p.positionName,
-                              Nationality = n.nationality1,
-                              Gender = g.genderName,
-                              ImagePath = m.imagePath,
-                          });
+            string status = "Former";
 
-            return member.ToList();
+            var data = (from m in _repository.GetAll()
+                        join n in _nationalityRepository.GetAll() on m.nationalityID equals n.nationalityID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join ms in _membershipStatusRepository.GetByStatus(status) on m.membershipStatusID equals ms.membershipStatusID
+                        select new
+                        {
+                            m.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            n.nationality1,
+                            p.positionName,
+                            g.genderName,
+                        })
+                        .ToList();
+
+            return data.Select(x => new MembersBasicDetailDTO
+            {
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                Nationality = x.nationality1,
+                Position = x.positionName,
+                Gender = x.genderName,
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
         }
 
         public List<DeadMemberShortDetailDTO> GetDeceasedMembers()
         {
-            var member = (from m in _db.MEMBER.Where(x => x.isDeleted == false)
-                          join g in _db.GENDER on m.genderID equals g.genderID
-                          join p in _db.POSITION on m.positionID equals p.positionID
-                          join n in _db.NATIONALITY on m.nationalityID equals n.nationalityID
-                          join ms in _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == "Deceased") on m.membershipStatusID equals ms.membershipStatusID
-                          select new DeadMemberShortDetailDTO
-                          {
-                              MemberId = m.memberID,
-                              FirstName = m.name,
-                              LastName = m.surname,
-                              Birthdate = m.birthday.ToString("dd.MM.yyyy"),
-                              Position = p.positionName,
-                              Gender = g.genderName,
-                              DeadDate = m.deadDate.ToString("dd.MM.yyyy"),
-                              Age = (m.deadDate.Year - m.birthday.Year - (m.deadDate < m.birthday.AddYears(m.deadDate.Year - m.birthday.Year) ? 1 : 0)).ToString()
-                          });
+            string status = "Deceased";
 
-            return member.ToList();
+            var data = (from m in _repository.GetAll()
+                        join n in _nationalityRepository.GetAll() on m.nationalityID equals n.nationalityID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join ms in _membershipStatusRepository.GetByStatus(status)
+                            on m.membershipStatusID equals ms.membershipStatusID
+                        select new
+                        {
+                            m.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            m.birthday,
+                            m.deadDate,
+                            p.positionName,
+                            g.genderName,
+                        })
+                        .ToList();
+
+            return data.Select(x =>
+            {
+                double age = 0;
+
+                if (x.deadDate != null)
+                {
+                    var difference = x.deadDate - x.birthday;
+                    age = Math.Floor(difference.TotalDays / 365.25);
+                }
+
+                return new DeadMemberShortDetailDTO
+                {
+                    MemberId = x.memberID,
+                    FirstName = x.name,
+                    LastName = x.surname,
+                    ImagePath = x.imagePath,
+                    Birthdate = x.birthday.ToString("dd.MM.yyyy"),
+                    DeadDate = x.deadDate?.ToString("dd.MM.yyyy"),
+                    Position = x.positionName,
+                    Gender = x.genderName,
+                    Age = age
+                };
+            })
+            .OrderBy(x => x.FirstName)
+            .ThenBy(x => x.LastName)
+            .ToList();
         }
-
-
-        public List<MembersBasicDetailDTO> GetAllDeletedMembers()
-            => _repository.GetAllDeletedMembers();
 
         public bool GetBack(int id)
             => _repository.GetBack(id);
-
-
-        public List<MemberFullDetailsDTO> GetFullMemberDetails()
-            => _repository.GetFullMemberDetails();
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
 
         public int Get3MonthsAbsentesCount()
-            => _repository.Get3MonthsAbsentesCount();
+        {
+            var last3Meetings = _generalMeetingRepository.GetAll()
+                .OrderByDescending(x => x.year)
+                .ThenByDescending(x => x.monthID)
+                .Take(3)
+                .Select(x => x.generalAttendanceID)
+                .ToList();
+
+            var absentStatusId = _attendanceStatusRepository.GetAll()
+                .Where(x => x.attendanceStatus == "Absent")
+                .Select(x => x.attendanceStatusID)
+                .FirstOrDefault();
+
+            var result = _generalMeetingAttendanceRepository.GetAll()
+                .Where(a => last3Meetings.Contains(a.generalAttendanceID)
+                            && a.attendanceStatusID == absentStatusId)
+                .GroupBy(a => a.memberID)
+                .Where(g => g.Count() == 3)
+                .Count();
+
+            return result;
+        }
 
         public bool Update(Member data)
         {

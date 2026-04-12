@@ -3,7 +3,6 @@ using APC.DAL;
 using APC.Domain.Entities;
 using System;
 using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace APC.Infrastructure.Repositories
 {
@@ -37,6 +36,11 @@ namespace APC.Infrastructure.Repositories
         public IQueryable<MEMBER> GetAll()
         {
             return _db.MEMBER.Where(x => !x.isDeleted);
+        }
+
+        public IQueryable<MEMBER> GetAllBirthdayMembers(int month)
+        {
+            return _db.MEMBER.Where(x => !x.isDeleted && x.birthday.Month == month);
         }
         
         public IQueryable<MEMBER> GetAllDeletedMembers()

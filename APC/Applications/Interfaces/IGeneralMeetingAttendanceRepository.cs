@@ -6,6 +6,7 @@ namespace APC.Applications.Interfaces
 {
     public interface IGeneralMeetingAttendanceRepository
     {
+        IQueryable<PERSONAL_ATTENDANCE> GetAll();
         IQueryable<PERSONAL_ATTENDANCE> GetAllByGeneralMeetingId(int id);
         IQueryable<PERSONAL_ATTENDANCE> GetAllDeletedPersonalAttendance();
         IQueryable<PERSONAL_ATTENDANCE> GetById(int id);

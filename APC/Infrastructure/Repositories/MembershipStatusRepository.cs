@@ -17,18 +17,14 @@ namespace APC.Infrastructure.Repositories
             _db = db;
         }
 
-        public List<MembershipStatus> GetAll()
+        public IQueryable<MEMBERSHIP_STATUS> GetAll()
         {
-            var data = _db.MEMBERSHIP_STATUS
-                .OrderBy(x => x.membershipStatusID)
-                .ToList();
+            return _db.MEMBERSHIP_STATUS;
+        }
 
-            return data
-                .Select(x => MembershipStatus.Rehydrate(
-                    x.membershipStatusID,
-                    x.membershipStatus
-                ))
-                .ToList();
+        public IQueryable<MEMBERSHIP_STATUS> GetByStatus(string status)
+        {
+            return _db.MEMBERSHIP_STATUS.Where(x => x.membershipStatus == status);
         }
 
         public MembershipStatus GetById(int id)
