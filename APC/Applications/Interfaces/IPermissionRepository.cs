@@ -9,6 +9,9 @@ namespace APC.Applications.Interfaces
     {
         IQueryable<PERMISSION> GetAll();
         IQueryable<PERMISSION> GetAllDeletedPermissions();
+
+        IQueryable<PERMISSION> GetByStatus(string status);
+        IQueryable<PERMISSION> GetAllStatusExcept(string status);
         Permission GetById(int id);
         bool Insert(Permission permission);
         bool Update(Permission permission);

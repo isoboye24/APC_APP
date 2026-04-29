@@ -848,6 +848,7 @@ namespace APC.DAL.DAO
                 throw ex;
             }
         }
+
         public int SelectCountDeadMale()
         {
             try

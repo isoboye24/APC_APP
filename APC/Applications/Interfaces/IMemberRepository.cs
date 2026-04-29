@@ -16,10 +16,13 @@ namespace APC.Applications.Interfaces
         bool Insert(Member data);
         bool Update(Member data);
         bool Delete(int id);
+        
         bool GetBack(int id);
         bool PermanentDelete(int id);
         bool Exists(string firstName, string lastName);
         MEMBER GetByUsername(string username);
         int Count();
+
+        bool DeleteMemberPermission(int id);
     }
 }

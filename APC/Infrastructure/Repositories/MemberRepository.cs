@@ -28,6 +28,14 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
+        public bool DeleteMemberPermission(int id)
+        {
+            var entity = _db.MEMBER.First(x => x.memberID == id);
+            entity.permissionID = 2;
+            _db.SaveChanges();
+            return true;
+        }
+
         public bool Exists(string firstName, string lastName)
         {
             return _db.MEMBER.Any(x => !x.isDeleted && x.name == firstName && x.surname == lastName);

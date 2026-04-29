@@ -26,5 +26,10 @@ namespace APC.Infrastructure.Repositories
         {
             return _db.ATTENDANCE_STATUS.Where(x => !x.isDeleted && x.attendanceStatusID == id);
         }
+
+        public IQueryable<ATTENDANCE_STATUS> GetByStatus(string status)
+        {
+            return _db.ATTENDANCE_STATUS.Where(x => !x.isDeleted && x.attendanceStatus == status);
+        }
     }
 }

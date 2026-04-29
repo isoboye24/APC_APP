@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace APC.Applications.Entities
 {
     public interface IMembershipStatusService
     {
-        List<MembershipStatus> GetAll();
+        List<MembershipStatusDTO> GetAll();
 
         MembershipStatus GetById(int id);
     }

@@ -10,5 +10,6 @@ namespace APC.Applications.Interfaces
     {
         IQueryable<ATTENDANCE_STATUS> GetAll();
         IQueryable<ATTENDANCE_STATUS> GetById(int id);
+        IQueryable<ATTENDANCE_STATUS> GetByStatus(string status);
     }
 }

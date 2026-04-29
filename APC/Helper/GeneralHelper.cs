@@ -10,7 +10,15 @@ namespace APC.Helper
 {
     public class GeneralHelper
     {
-        
+
+        public static string Capitalize(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return value;
+
+            return char.ToUpper(value[0]) + value.Substring(1).ToLower();
+        }
+
         public static bool isNumber(KeyPressEventArgs e, TextBox txt)
         {
             // Allow control keys (Backspace, Delete, etc.)

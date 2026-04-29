@@ -1,7 +1,8 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
-using APC.HelperServices;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,17 +14,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using static APC.HelperServices.CommittmentHelperService;
-using static APC.HelperServices.MemberHelperService;
+using static APC.Helper.CommittmentHelper;
+using static APC.Helper.MemberHelper;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
 {
     public partial class FormMembersBoard : Form
     {
-        public FormMembersBoard()
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IMemberService _memberService;
+        public FormMembersBoard(ICurrentUserService currentUserService)
         {
             InitializeComponent();
+            _currentUserService = currentUserService;
         }
 
         MemberBLL registeredMembersBLL = new MemberBLL();
@@ -56,7 +60,7 @@ namespace APC.AllForms
 
         private void FormMembersBoard_Load(object sender, EventArgs e)
         {
-            if (AuthenticationDTO.AccessLevel != 4)
+            if (_currentUserService.AccessLevel != 4)
             {
                 btnDeleteRegisteredMembers.Hide();
             }
@@ -112,15 +116,15 @@ namespace APC.AllForms
         private void ResizeControls()
         {
             #region
-            GeneralHelper.ApplyRegularFont11(label4, label7, label8, label19, label20, label21, label28, label29, label30,
+            GeneralHelper.ApplyRegularFont(11, label4, label7, label8, label19, label20, label21, label28, label29, label30,
                 label31, labelTotalContacts,
                 labelNoOfDivisorRegisteredMembers, labelNoOfFemaleRegisteredMembers, labelNoOfMenRegisteredMembers,
                 labelNoOfDivisorFormerMembers, labelNoOfFemaleFormerMembers, labelNoOfMenFormerMembers,
                 labelNoOfDivisorDeadMembers, labelNoOfFemaleDeadMembers, labelNoOfMenDeadMembers);
 
-            GeneralHelper.ApplyBoldFont11(label24, label25, label26);
+            GeneralHelper.ApplyItalicFont(11, label24, label25, label26);
 
-            GeneralHelper.ApplyBoldFont14(label1, label2, label3, label5, label6, label9, label10, label11, label12,
+            GeneralHelper.ApplyItalicFont(14, label1, label2, label3, label5, label6, label9, label10, label11, label12,
                 label13, label14, label15, label16, label17, label18, label22, label23, label27, label32,
                 label33, label34, label35, label36, label38, label41, label42, btnAddRegisteredMembers,
                 btnUpdateRegisteredMembers, btnViewRegisteredMembers, btnDeleteRegisteredMembers,
@@ -129,7 +133,7 @@ namespace APC.AllForms
                 btnSearchFormerMembers, btnClearFormerMembers, btnUpdateDeadMembers, btnViewDeadMembers,
                 btnSearchDeadMembers, btnClearDeadMembers);
 
-            GeneralHelper.ApplyRegularFont16(txtNameRegisteredMembers, txtSurnameRegisteredMembers,
+            GeneralHelper.ApplyRegularFont(16, txtNameRegisteredMembers, txtSurnameRegisteredMembers,
                 cmbGenderRegisteredMembers, cmbNationalityRegisteredMembers, cmbPositionRegisteredMembers,
                 cmbProfessionRegisteredMembers, txtNameBirthday, txtSurnameBirthday, cmbGenderBirthday,
                 cmbNationalityBirthday, cmbProfessionBirthday, cmbPositionBirthday, cmbMonthBirthday,

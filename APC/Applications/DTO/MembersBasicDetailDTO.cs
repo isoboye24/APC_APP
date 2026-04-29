@@ -11,5 +11,6 @@ namespace APC.Applications.DTO
         public string Position { get; set; }
         public string Gender { get; set; }
         public string ImagePath { get; set; }
+        public string Permission { get; set; }
     }
 }
