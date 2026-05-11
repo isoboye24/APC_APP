@@ -14,6 +14,7 @@ namespace APC.Applications.Interfaces
         AuthenticationDTO Authenticate(string username, string password);
 
         List<MemberFullDetailsDTO> GetAll();
+        List<MemberFullDetailsDTO> GetAllCurrentMembers();
         List<MemberFullDetailsDTO> SelectSpecificMember(int id);
         List<MemberFullDetailsDTO> GetAllDeletedMembers();
         List<BirthdayMembersDTO> GetBirthdayMembers(int month);
@@ -27,6 +28,7 @@ namespace APC.Applications.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
+        int GetAllCurrentMembersCount();
 
         int Get3MonthsAbsentesCount();
         int GetUniqueProfessionCount();

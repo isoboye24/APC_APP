@@ -1,17 +1,8 @@
 ﻿using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL;
-using APC.DAL.DTO;
-using OfficeOpenXml.Drawing.Chart;
+using APC.Domain.Entities;
+using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -19,14 +10,21 @@ namespace APC.AllForms
     public partial class FormGeneralMeeting : Form
     {
         private readonly IGeneralMeetingService _generalMeetingService;
+        private readonly IMemberService _memberService;
+        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
 
         private Applications.DTO.GeneralMeetingDTO _generalMeetingDTO;
         private bool _isUpdate = false;
-        public FormGeneralMeeting(IGeneralMeetingService generalMeetingService)
+
+        public FormGeneralMeeting(IGeneralMeetingService generalMeetingService, IMemberService memberService,
+            IGeneralMeetingAttendanceService generalMeetingAttendanceService)
         {
             InitializeComponent();
             _generalMeetingService = generalMeetingService;
+            _memberService = memberService;
+            _generalMeetingAttendanceService = generalMeetingAttendanceService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -53,78 +51,68 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
-        GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
-        public GeneralAttendanceDetailDTO detail = new GeneralAttendanceDetailDTO();
-        public bool isUpdate = false;
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int day = dateTimePickerGenAttDate.Value.Day;
-            int month = dateTimePickerGenAttDate.Value.Month;
-            int year = dateTimePickerGenAttDate.Value.Year;
-            bool newMeeting = bll.CheckMeeting(day, month, year);
-            if (newMeeting)
+            try
             {
-                MessageBox.Show("There is a meeting with the same date");
-            }
-            else if (!isUpdate)
-            {
-                GeneralAttendanceDetailDTO generalAttendance = new GeneralAttendanceDetailDTO();
-                generalAttendance.Day = dateTimePickerGenAttDate.Value.Day;
-                generalAttendance.MonthID = dateTimePickerGenAttDate.Value.Month;
-                generalAttendance.Year = dateTimePickerGenAttDate.Value.Year.ToString();
-                generalAttendance.Summary = txtSummary.Text.Trim();
-                generalAttendance.TotalMembersPresent = 0;
-                generalAttendance.TotalMembersAbsent = 0;
-                generalAttendance.TotalDuesPaid = 0;
-                generalAttendance.TotalDuesExpected = 0;
-                generalAttendance.TotalDuesBalance = generalAttendance.TotalDuesExpected - generalAttendance.TotalDuesPaid;
-                generalAttendance.AttendanceDate = dateTimePickerGenAttDate.Value;
-                
-                if (bll.Insert(generalAttendance))
+                DateTime meetingDate = dateTimePickerGenAttDate.Value;
+                string summary = txtSummary.Text.Trim();
+
+                if (_generalMeetingDTO.GeneralMeetingId == 0)
                 {
-                    MessageBox.Show("Meeting was created");
-                    dateTimePickerGenAttDate.Value = DateTime.Today;
-                    txtSummary.Clear();
-                }
-            }
-            else if (isUpdate)
-            {
-                if (dateTimePickerGenAttDate.Value == detail.AttendanceDate && detail.Summary == txtSummary.Text.Trim())
-                {
-                    MessageBox.Show("There is no change");
+                    int totalMembersPresent = 0;
+                    int totalMembersAbsent = 0;
+                    decimal totalDuesPaid = 0;
+                    int currentMembers = _memberService.GetAllCurrentMembersCount();
+                    decimal totalDuesExpected = currentMembers * 10;
+                    decimal totalBalance = totalDuesExpected - totalDuesPaid;
+
+                    var generalMeeing = new GeneralMeeting(totalMembersPresent, totalMembersAbsent, totalDuesPaid, totalDuesExpected, totalBalance, 
+                        summary, meetingDate);
+
+                    _generalMeetingService.Create(generalMeeing);
+                    MessageBox.Show("Meeting created successfully!");
                 }
                 else
                 {
-                    detail.Day = dateTimePickerGenAttDate.Value.Day;
-                    detail.MonthID = dateTimePickerGenAttDate.Value.Month;
-                    detail.Year = dateTimePickerGenAttDate.Value.Year.ToString();
-                    detail.Summary = txtSummary.Text.Trim();
-                    detail.AttendanceDate = dateTimePickerGenAttDate.Value;
-                    if (bll.Update(detail))
-                    {
-                        MessageBox.Show("Attendance was updated");
-                        this.Close();
-                    }
+                    int totalMembersPresent = _generalMeetingAttendanceService.GetMembersPresentCount(_generalMeetingDTO.GeneralMeetingId);
+                    int totalMembersAbsent = _generalMeetingAttendanceService.GetMembersPresentCount(_generalMeetingDTO.GeneralMeetingId);
+                    decimal totalDuesPaid = _generalMeetingAttendanceService.GetTotalDuesPaid(_generalMeetingDTO.GeneralMeetingId);
+                    int currentMembers = _memberService.GetAllCurrentMembersCount();
+
+                    decimal totalDuesExpected = currentMembers * 10;
+                    decimal totalBalance = totalDuesExpected - totalDuesPaid;
+
+                    var generalMeeing = new GeneralMeeting(totalMembersPresent, totalMembersAbsent, totalDuesPaid, totalDuesExpected, totalBalance,
+                        summary, meetingDate);
+
+
+                    _generalMeetingService.Update(generalMeeing);
+                    MessageBox.Show("General meeting updated successfully!");
+                    this.Close();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, label1, label2, labelTitle, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(14, dateTimePickerGenAttDate, txtSummary);
         }
 
         private void FormGeneralAttendance_Load(object sender, EventArgs e)
         {
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            resizeControls();
 
-            dateTimePickerGenAttDate.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSummary.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            if (isUpdate)
+            if (_isUpdate)
             {
-                labelTitle.Text = "Edit meeting on " + detail.Day + "." + detail.MonthID +"."+ detail.Year;
-                dateTimePickerGenAttDate.Value = detail.AttendanceDate;
-                txtSummary.Text = detail.Summary;
+                labelTitle.Text = "Edit meeting on " + _generalMeetingDTO.Day + "." +_generalMeetingDTO.MonthId + "." +_generalMeetingDTO.Year;
+                dateTimePickerGenAttDate.Value = _generalMeetingDTO.GeneralMeetingDate;
+                txtSummary.Text = _generalMeetingDTO.Summary;
             }
             else
             {

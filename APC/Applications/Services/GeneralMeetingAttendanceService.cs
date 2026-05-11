@@ -14,17 +14,56 @@ namespace APC.Applications.Services
         private readonly IMemberRepository _memberRepository;
         private readonly IAttendanceStatusRepository _statusRepository;
         private readonly IGenderRepository _genderRepository;
+        private readonly IAttendanceStatusRepository _attendanceStatusRepository;
         public GeneralMeetingAttendanceService(IGeneralMeetingAttendanceRepository repository, IMemberRepository memberRepository, 
-            IAttendanceStatusRepository statusRepository, IGenderRepository genderRepository)
+            IAttendanceStatusRepository statusRepository, IGenderRepository genderRepository, IAttendanceStatusRepository attendanceStatusRepository)
         {
             _repository = repository;
             _memberRepository = memberRepository;
             _statusRepository = statusRepository;
             _genderRepository = genderRepository;
+            _attendanceStatusRepository = attendanceStatusRepository;
         }
 
         public int Count()
             => _repository.Count();
+
+        public int GetMembersPresentCount(int generalMeetingId)
+        {
+            string status = "Present";
+
+            int data = (from a in _repository.GetAll().Where(x => x.generalAttendanceID == generalMeetingId)
+                        join m in _memberRepository.GetAll() on a.memberID equals m.memberID
+                        join ats in _attendanceStatusRepository.GetByStatus(status) on a.attendanceStatusID equals ats.attendanceStatusID
+                        select new
+                        {
+                            m.memberID,
+                        })
+                        .Count();
+
+            return data;
+        }
+        
+        public int GetMembersAbsentCount(int generalMeetingId)
+        {
+            string status = "Absent";
+
+            int data = (from a in _repository.GetAll().Where(x => x.generalAttendanceID == generalMeetingId)
+                        join m in _memberRepository.GetAll() on a.memberID equals m.memberID
+                        join ats in _attendanceStatusRepository.GetByStatus(status) on a.attendanceStatusID equals ats.attendanceStatusID
+                        select new
+                        {
+                            m.memberID,
+                        })
+                        .Count();
+
+            return data;
+        }
+        
+        public decimal GetTotalDuesPaid(int generalMeetingId)
+        {
+            return _repository.GetAll().Where(x => x.generalAttendanceID == generalMeetingId).Sum(x =>x.monthlyDues ?? 0);
+        }
 
         public bool Create(Domain.Entities.PersonalAttendance data)
         {

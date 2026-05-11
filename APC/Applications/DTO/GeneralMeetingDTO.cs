@@ -20,6 +20,7 @@ namespace APC.Applications.DTO
         public string Summary { get; set; }
         public DateTime GeneralMeetingDate { get; set; }
         public string MonthName { get; set; }
+        public int Day { get; set; }
         public int MonthId { get; set; }
         public int Year { get; set; }
     }

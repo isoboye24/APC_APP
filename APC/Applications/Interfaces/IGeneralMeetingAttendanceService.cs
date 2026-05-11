@@ -18,5 +18,8 @@ namespace APC.Applications.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
+        int GetMembersPresentCount(int generalMeetingId);
+        int GetMembersAbsentCount(int generalMeetingId);
+        decimal GetTotalDuesPaid(int generalMeetingId);
     }
 }

@@ -167,7 +167,7 @@ namespace APC.AllForms
             labelTotalComments.Text = "Rows: " + dataGridViewComments.RowCount.ToString();
             labelTotalConstitutions.Text = "Rows: " + dataGridViewConstitution.RowCount.ToString();
             labelTotalFineMembers.Text = "Rows: " + dataGridViewFinedMembers.RowCount.ToString();
-            labelTotalPaidFines.Text = "Total Paid: " + bll.TotalPaidFines();
+            labelTotalPaidFines.Text = "Total Paid: " + _finedMemberService.GetTotalPaidFines();
             labelTotalRowsContributions.Text = "Rows: " + dataGridViewSpecialContributions.RowCount.ToString();
             labelOverallTotalContributions.Text = "Total : ";
         }
@@ -347,7 +347,7 @@ namespace APC.AllForms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var form = new FormGeneralMeeting(_generalMeetingService);
+            var form = new FormGeneralMeeting(_generalMeetingService, _memberService, _generalMeetingAttendanceService);
             form.ShowDialog();
             ClearFilters();
         }
@@ -385,7 +385,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormGeneralMeeting(_generalMeetingService);
+            var form = new FormGeneralMeeting(_generalMeetingService, _memberService, _generalMeetingAttendanceService);
             form.loadForEdit(selected, true);
             form.ShowDialog();
 

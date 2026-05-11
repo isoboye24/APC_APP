@@ -89,6 +89,79 @@ namespace APC.Applications.Services
 
         public List<MemberFullDetailsDTO> GetAll()
         {
+            var data = (from m in _repository.GetAll()
+                        join c in _countryRepository.GetAll() on m.countryID equals c.countryID
+                        join n in _nationalityRepository.GetAll() on m.nationalityID equals n.nationalityID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
+                        join pro in _professionRepository.GetAll() on m.professionID equals pro.professionID
+                        join per in _permissionRepository.GetAll() on m.permissionID equals per.permissionID
+                        join mar in _maritalStatusRepository.GetAll() on m.maritalStatusID equals mar.maritalStatusID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join mb in _membershipStatusRepository.GetAll() on m.membershipStatusID equals mb.membershipStatusID
+                        join e in _employmentStatusRepository.GetAll() on m.employmentStatusID equals e.employmentStatusID
+                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.NextOfKinId
+                        select new
+                        {
+                            m.memberID,
+                            m.name,
+                            m.surname,
+                            m.birthday,
+                            m.imagePath,
+                            m.houseAddress,
+                            m.emailAddress,
+                            m.membershipDate,
+                            c.countryName,
+                            n.nationality1,
+                            pro.profession1,
+                            p.positionName,
+                            g.genderName,
+                            e.employmentStatus,
+                            mar.maritalStatus,
+                            per.permission1,
+                            m.phoneNumber,
+                            m.phoneNumber2,
+                            m.phoneNumber3,
+                            mb.membershipStatus,
+                            m.deadDate,
+                            m.nextOfKin,
+                            nk.NextOfKinName,
+                            m.LGAOfCountryOrigin,
+                        })
+                        .ToList();
+
+            return data.Select(x => new MemberFullDetailsDTO
+            {
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                Birthday = x.birthday,
+                ImagePath = x.imagePath,
+                HouseAddress = x.houseAddress,
+                Email = x.emailAddress,
+                MembershipDate = x.membershipDate,
+                Country = x.countryName,
+                Nationality = x.nationality1,
+                Profession = x.profession1,
+                Position = x.positionName,
+                Gender = x.genderName,
+                EmploymentStatus = x.employmentStatus,
+                MaritalStatus = x.maritalStatus,
+                Permission = x.permission1,
+                PhoneNumber = x.phoneNumber,
+                PhoneNumber2 = x.phoneNumber2,
+                PhoneNumber3 = x.phoneNumber3,
+                MembershipStatus = x.membershipStatus,
+                DeadDate = x.deadDate,
+                NextOfKin = x.NextOfKinName,
+                RelationshipToNextOfKin = x.nextOfKin,
+                LGA = x.LGAOfCountryOrigin,
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
+        }
+
+        public List<MemberFullDetailsDTO> GetAllCurrentMembers()
+        {
             string status = "Current";
 
             var data = (from m in _repository.GetAll()
@@ -161,7 +234,24 @@ namespace APC.Applications.Services
             .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
             .ToList();
         }
-        
+
+
+        public int GetAllCurrentMembersCount()
+        {
+            string status = "Current";
+
+            int data = (from m in _repository.GetAll()
+                        join mb in _membershipStatusRepository.GetByStatus(status) on m.membershipStatusID equals mb.membershipStatusID
+                        select new
+                        {
+                            m.memberID,
+                        })
+                        .Count();
+
+            return data;
+        }
+
+
         public List<MemberFullDetailsDTO> SelectSpecificMember(int id)
         {
             string status = "Current";

@@ -64,6 +64,7 @@ namespace APC.Applications.Services
                 TotalDuesBalance = ((decimal)x.totalDuesExpected - (decimal)x.totalDuesPaid).ToString(),
                 FinesRaised = _finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid).ToString(),
                 Summary = x.summary,
+                Day = x.attendanceDate.Day,
                 MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
                 MonthId = x.attendanceDate.Month,
                 Year = x.attendanceDate.Year,
@@ -100,6 +101,7 @@ namespace APC.Applications.Services
                 TotalDuesBalance = ((decimal)x.totalDuesExpected - (decimal)x.totalDuesPaid).ToString(),
                 FinesRaised = _finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid).ToString(),
                 Summary = x.summary,
+                Day = x.attendanceDate.Day,
                 MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
                 MonthId = x.attendanceDate.Month,
                 Year = x.attendanceDate.Year,
@@ -136,6 +138,7 @@ namespace APC.Applications.Services
                 TotalDuesBalance = ((decimal)x.totalDuesExpected - (decimal)x.totalDuesPaid).ToString(),
                 FinesRaised = _finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid).ToString(),
                 Summary = x.summary,
+                Day = x.attendanceDate.Day,
                 MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
                 MonthId = x.attendanceDate.Month,
                 Year = x.attendanceDate.Year,
@@ -187,8 +190,8 @@ namespace APC.Applications.Services
                 .OrderByDescending(x => x)
                 .Select(x => new YearDTO
                 {
-                    Value = x,
-                    Text = x.ToString()
+                    YearInValue = x,
+                    YearInText = x.ToString()
                 })
                 .ToList();
         }
