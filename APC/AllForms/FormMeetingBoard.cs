@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -21,17 +22,22 @@ namespace APC.AllForms
         private readonly ISpecialContributionService _specialContributionService;
         private readonly ISpecialContributorService _specialContributorService;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IGeneralMeetingService _generalMeetingService;
+        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
 
         private List<Applications.DTO.CommentDTO> _commentDTO;
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
         private List<Applications.DTO.FinedMemberDTO> _finedMemberDTO;
         private List<Applications.DTO.SpecialContributionDTO> _specialContributionDTO;
         private List<Applications.DTO.SpecialContributorDTO> _specialContributorsDTO;
+        private List<Applications.DTO.GeneralMeetingDTO> _generalMeetingDTOs;
+
+        private int year = DateTime.Now.Year;
 
         public FormMeetingBoard(ICommentService commentService, IGenderService genderService, IMemberService memberService, 
             IMonthService monthService, IConstitutionService constitutionService, IFinedMemberService finedMemberService, 
             ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService, 
-            ICurrentUserService currentUserService)
+            ICurrentUserService currentUserService, IGeneralMeetingService generalMeetingService, IGeneralMeetingAttendanceService generalMeetingAttendanceService)
         {
             InitializeComponent();
             _commentService = commentService;
@@ -43,11 +49,9 @@ namespace APC.AllForms
             _specialContributionService = specialContributionService;
             _specialContributorService = specialContributorService;
             _currentUserService = currentUserService;
+            _generalMeetingService = generalMeetingService;
+            _generalMeetingAttendanceService = generalMeetingAttendanceService;
         }
-
-        GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
-        GeneralAttendanceDTO dto = new GeneralAttendanceDTO();
-        GeneralAttendanceDetailDTO detail = new GeneralAttendanceDetailDTO();
 
         private void resizeControls()
         {
@@ -95,18 +99,33 @@ namespace APC.AllForms
             SpecialContributionHelper.ConfigureSpecialContributionGrid(dataGridViewSpecialContributions, SpecialContributionHelper.SpecialContributionGridType.Basic);
         }
 
+        private void loadGeneralMeeting(int year)
+        {
+            dataGridViewGeneralMeeting.DataSource = _generalMeetingService.GetAllByYear(year);
+            _generalMeetingDTOs = _generalMeetingService.GetAll();
+            GeneralMeetingHelper.ConfigureGeneralMeetingGrid(dataGridViewGeneralMeeting, GeneralMeetingHelper.GeneralMeetingGridType.Basic);
+        }
+
+        private void loadGeneralMeetingAttendance(int year)
+        {
+            dataGridViewGeneralMeeting.DataSource = _generalMeetingService.GetAllByYear(year);
+            _generalMeetingDTOs = _generalMeetingService.GetAll();
+            GeneralMeetingHelper.ConfigureGeneralMeetingGrid(dataGridViewGeneralMeeting, GeneralMeetingHelper.GeneralMeetingGridType.Basic);
+        }
+
         private void FormMeetingBoard_Load(object sender, EventArgs e)
         {
             resizeControls();
             
             loadConstitutions();
 
-            dto = bll.Select(DateTime.Now.Year);
+            loadGeneralMeeting(year);
+
             cmbMonth.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
 
-            cmbYearMeeting.DataSource = dto.Years;
-            cmbYearMeeting.SelectedIndex = -1;
+            cmbYearMeeting.DataSource = _generalMeetingService.GetMeetingYears();
+            GeneralHelper.ComboBoxProps(cmbYearMeeting, "YearInText", "YearInValue");
 
             loadComments();
             cmbGenderComments.DataSource = _genderService.GetAll();
@@ -129,11 +148,6 @@ namespace APC.AllForms
             cmbMonthContribution.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthContribution, "MonthName", "MonthID");
 
-            #region
-            LoadDataGridView.loadGeneralAttendances(dataGridView1, dto);
-            
-            #endregion
-
             if (_currentUserService.AccessLevel != 4)
             {
                 btnDelete.Hide();
@@ -149,7 +163,7 @@ namespace APC.AllForms
         }
         private void RefreshCounts()
         {
-            labelTotalMeetings.Text = "Rows: " + dataGridView1.RowCount.ToString();
+            labelTotalMeetings.Text = "Rows: " + dataGridViewGeneralMeeting.RowCount.ToString();
             labelTotalComments.Text = "Rows: " + dataGridViewComments.RowCount.ToString();
             labelTotalConstitutions.Text = "Rows: " + dataGridViewConstitution.RowCount.ToString();
             labelTotalFineMembers.Text = "Rows: " + dataGridViewFinedMembers.RowCount.ToString();
@@ -272,7 +286,7 @@ namespace APC.AllForms
             #endregion
 
             #region
-            dataGridView1.Tag = "resizable";
+            dataGridViewGeneralMeeting.Tag = "resizable";
             dataGridViewComments.Tag = "resizable";
             dataGridViewConstitution.Tag = "resizable";
             dataGridViewFinedMembers.Tag = "resizable";
@@ -293,9 +307,7 @@ namespace APC.AllForms
             rbMoreAttend.Checked = false;
             cmbMonth.SelectedIndex = -1;
             cmbYearMeeting.SelectedIndex = -1;
-            bll = new GeneralAttendanceBLL();
-            dto = bll.Select(DateTime.Now.Year);
-            dataGridView1.DataSource = dto.GeneralAttendance;
+            loadGeneralMeeting(year);
 
             txtNameComments.Clear();
             txtComment.Clear();
@@ -330,49 +342,54 @@ namespace APC.AllForms
         }
 
         // -------------------------------------------------------------------------
-        // -------------------- GENERAL ATTENDANCE ----------------------
+        // -------------------- GENERAL MEETING ----------------------
         // -------------------------------------------------------------------------
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var form = new FormGeneralMeeting(_dailyService);
+            var form = new FormGeneralMeeting(_generalMeetingService);
             form.ShowDialog();
             ClearFilters();
         }
 
+        private Applications.DTO.GeneralMeetingDTO GetGenralMeeting()
+        {
+            if (dataGridViewGeneralMeeting.CurrentRow == null)
+                return null;
+
+            return dataGridViewGeneralMeeting.CurrentRow.DataBoundItem as Applications.DTO.GeneralMeetingDTO;
+        }
+
         private void btnView_Click(object sender, EventArgs e)
         {
-            if (detail.GeneralAttendanceID == 0)
+            var selected = GetGenralMeeting();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an attendance from the table");
+                MessageBox.Show("Please select a general meeting from the table");
+                return;
             }
-            else
-            {
-                FormViewGeneralAttendance open = new FormViewGeneralAttendance();
-                open.detail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormViewGeneralAttendance(selected, _generalMeetingAttendanceService, _memberService);
+            form.ShowDialog();
+
+            ClearFilters();
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (detail.GeneralAttendanceID == 0)
+            var selected = GetGenralMeeting();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an attendance from the table");
+                MessageBox.Show("Please select a comment from the table");
+                return;
             }
-            else
-            {
-                FormGeneralMeeting open = new FormGeneralMeeting();
-                open.isUpdate = true;
-                open.detail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormGeneralMeeting(_generalMeetingService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void txtYear_KeyPress(object sender, KeyPressEventArgs e)
@@ -392,29 +409,40 @@ namespace APC.AllForms
         
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (cmbYearMeeting.SelectedIndex == -1)
+            var filtered = _generalMeetingDTOs.AsQueryable();
+
+            if (cmbYearMeeting.SelectedIndex == -1 )
             {
-                MessageBox.Show("Please select year");
+                MessageBox.Show("Please select a year");
+                return;
             }
             else
             {
-                bll = new GeneralAttendanceBLL();
-                dto = bll.Select(Convert.ToInt32(cmbYearMeeting.SelectedValue));
-                List<GeneralAttendanceDetailDTO> list = dto.GeneralAttendance;
+                if (cmbYearMeeting.SelectedIndex != -1)
+                {
+                    int searchedYear = Convert.ToInt32(cmbYearMeeting.SelectedValue);
+                    filtered = filtered.Where(x => x.Year == searchedYear);
+                }
+
+                if (cmbMonthComments.SelectedIndex != -1)
+                {
+                    int searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
+                    filtered = filtered.Where(x => x.MonthId == searchedMonth);
+                }
 
                 if (txtMonthlyDues.Text.Trim() != "")
                 {
                     if (rbEqualMonDues.Checked)
                     {
-                        list = list.Where(x => x.TotalDuesPaid == Convert.ToInt32(txtMonthlyDues.Text)).ToList();
+                        filtered = filtered.Where(x => x.TotalDuesPaid == Convert.ToDecimal(txtMonthlyDues.Text));
                     }
                     else if (rbLessMonDues.Checked)
                     {
-                        list = list.Where(x => x.TotalDuesPaid < Convert.ToInt32(txtMonthlyDues.Text)).ToList();
+                        filtered = filtered.Where(x => x.TotalDuesPaid < Convert.ToDecimal(txtMonthlyDues.Text));
                     }
                     else if (rbMoreMonDues.Checked)
                     {
-                        list = list.Where(x => x.TotalDuesPaid > Convert.ToInt32(txtMonthlyDues.Text)).ToList();
+                        filtered = filtered.Where(x => x.TotalDuesPaid > Convert.ToDecimal(txtMonthlyDues.Text));
                     }
                     else
                     {
@@ -425,29 +453,25 @@ namespace APC.AllForms
                 {
                     if (rbEqualAttend.Checked)
                     {
-                        list = list.Where(x => x.TotalMembersPresent == Convert.ToInt32(txtNoOfAttend.Text)).ToList();
+                        filtered = filtered.Where(x => x.TotalMembersPresent == Convert.ToInt32(txtNoOfAttend.Text));
                     }
                     else if (rbLessAttend.Checked)
                     {
-                        list = list.Where(x => x.TotalMembersPresent < Convert.ToInt32(txtNoOfAttend.Text)).ToList();
+                        filtered = filtered.Where(x => x.TotalMembersPresent < Convert.ToInt32(txtNoOfAttend.Text));
                     }
                     else if (rbMoreAttend.Checked)
                     {
-                        list = list.Where(x => x.TotalMembersPresent > Convert.ToInt32(txtNoOfAttend.Text)).ToList();
+                        filtered = filtered.Where(x => x.TotalMembersPresent > Convert.ToInt32(txtNoOfAttend.Text));
                     }
                     else
                     {
                         MessageBox.Show("Please select a criterion from the total number of attendance group");
                     }
                 }
-                if (cmbMonth.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.MonthID == Convert.ToInt32((cmbMonth.SelectedValue)) && Convert.ToInt32(x.Year) == Convert.ToInt32((cmbYearMeeting.SelectedValue))).ToList();
-                }
-                dataGridView1.DataSource = list;
-
-                RefreshCounts();
             }
+
+            dataGridViewComments.DataSource = filtered.ToList();
+            RefreshCounts();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -457,34 +481,32 @@ namespace APC.AllForms
         
         private void txtYear_TextChanged(object sender, EventArgs e)
         {
-            List<GeneralAttendanceDetailDTO> list = dto.GeneralAttendance;
-            list = list.Where(x => x.Year.Contains(txtYear.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
+            //List<GeneralAttendanceDetailDTO> list = dto.GeneralAttendance;
+            //list = list.Where(x => x.Year.Contains(txtYear.Text.Trim())).ToList();
+            //dataGridViewGeneralMeeting.DataSource = list;
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            detail = GeneralHelper.MapFromGrid<GeneralAttendanceDetailDTO>(dataGridView1, e.RowIndex);
+            //if (e.RowIndex < 0) return;
+            //detail = GeneralHelper.MapFromGrid<GeneralAttendanceDetailDTO>(dataGridViewGeneralMeeting, e.RowIndex);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (detail.GeneralAttendanceID == 0)
+            var selected = GetGenralMeeting();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an attendance from the table");
+                MessageBox.Show("Please select a meeting.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (bll.Delete(detail))
-                    {
-                        MessageBox.Show("Attendance was deleted");
-                        ClearFilters();
-                    }
-                }
+                _generalMeetingService.Delete(selected.GeneralMeetingId);
+                ClearFilters();
             }
         }
 
@@ -539,7 +561,7 @@ namespace APC.AllForms
             var selected = GetSelectedComment();
             if (selected == null)
             {
-                MessageBox.Show("Please select a country from the table");
+                MessageBox.Show("Please select a comment from the table");
                 return;
             }
 

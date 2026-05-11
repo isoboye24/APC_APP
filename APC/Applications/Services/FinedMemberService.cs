@@ -1,9 +1,11 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.DAL;
 using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace APC.Applications.Services
 {
@@ -36,9 +38,9 @@ namespace APC.Applications.Services
         public List<FinedMemberDTO> GetAll()
         {
             var data = (from f in _repository.GetAll()
-                        join m in _memberRepository.GetAll() on f.memberID equals m.MemberId
-                        join g in _genderRepository.GetAll() on m.PersonalInfo.GenderId equals g.genderID
-                        join p in _positionRepository.GetAll() on m.MembershipInfo.PositionId equals p.positionID
+                        join m in _memberRepository.GetAll() on f.memberID equals m.memberID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
                         join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
                         select new FinedMemberDTO
                         {
@@ -53,14 +55,14 @@ namespace APC.Applications.Services
                             AmountExpected = (c.fine + " €").ToString(),
                             Balance = (c.fine - f.amountPaid).ToString(),
                             MemberId = f.memberID,
-                            FirstName = m.PersonalInfo.FirstName,
-                            LastName = m.PersonalInfo.LastName,
-                            ImagePath = m.PersonalInfo.ImagePath,
-                            GenderId = m.PersonalInfo.GenderId,
+                            FirstName = m.name,
+                            LastName = m.surname,
+                            ImagePath = m.imagePath,
+                            GenderId = m.genderID,
                             GenderName = g.genderName,
-                            PositionId = m.MembershipInfo.PositionId,
+                            PositionId = m.positionID,
                             PositionName = p.positionName,
-                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine)  ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
+                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine) ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
                             FineDate = f.fineDate,
                             FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
                         }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
@@ -71,9 +73,9 @@ namespace APC.Applications.Services
         public List<FinedMemberDTO> GetAllDeletedFinedMembers()
         {
             var data = (from f in _repository.GetAllDeletedFinedMembers()
-                        join m in _memberRepository.GetAll() on f.memberID equals m.MemberId
-                        join g in _genderRepository.GetAll() on m.PersonalInfo.GenderId equals g.genderID
-                        join p in _positionRepository.GetAll() on m.MembershipInfo.PositionId equals p.positionID
+                        join m in _memberRepository.GetAll() on f.memberID equals m.memberID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
                         join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
                         select new FinedMemberDTO
                         {
@@ -88,12 +90,12 @@ namespace APC.Applications.Services
                             AmountExpected = (c.fine + " €").ToString(),
                             Balance = (c.fine - f.amountPaid).ToString(),
                             MemberId = f.memberID,
-                            FirstName = m.PersonalInfo.FirstName,
-                            LastName = m.PersonalInfo.LastName,
-                            ImagePath = m.PersonalInfo.ImagePath,
-                            GenderId = m.PersonalInfo.GenderId,
+                            FirstName = m.name,
+                            LastName = m.surname,
+                            ImagePath = m.imagePath,
+                            GenderId = m.genderID,
                             GenderName = g.genderName,
-                            PositionId = m.MembershipInfo.PositionId,
+                            PositionId = m.positionID,
                             PositionName = p.positionName,
                             Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine)  ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
                             FineDate = f.fineDate,
@@ -122,6 +124,37 @@ namespace APC.Applications.Services
             data.UpdateFineDate(data.FineDate);
 
             return _repository.Update(data);
+        }
+
+
+        public decimal GetTotalPaidFines()
+        {
+            return _repository.GetAll().Sum(x => x.amountPaid ?? 0);
+        }
+        
+        public decimal GetTotalFinesExpected()
+        {
+            var totalExpectedAmount = (from fm in _repository.GetAll()
+                                       join c in _constitutionRepository.GetAll()
+                                           on fm.constitutionID equals c.constitutionID
+                                       select c.fine).Sum();
+
+            return totalExpectedAmount;
+        }
+       
+        public decimal GetTotalFinesPaidByMember(int memberId)
+        {
+            return _repository.GetAll().Where(x =>x.memberID == memberId).Sum(x => x.amountPaid ?? 0);
+        }
+
+        public decimal GetTotalFinesExpectedByMember(int memberId)
+        {
+            var totalExpectedAmount = (from fm in _repository.GetAll().Where(x => x.memberID == memberId)
+                                       join c in _constitutionRepository.GetAll()
+                                           on fm.constitutionID equals c.constitutionID
+                                       select c.fine).Sum();
+
+            return totalExpectedAmount;
         }
     }
 }

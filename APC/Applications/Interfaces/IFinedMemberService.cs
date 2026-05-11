@@ -14,5 +14,11 @@ namespace APC.Applications.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
+
+        decimal GetTotalPaidFines();
+        decimal GetTotalFinesExpected();
+
+        decimal GetTotalFinesPaidByMember(int memberId);
+        decimal GetTotalFinesExpectedByMember(int memberId);
     }
 }

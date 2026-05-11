@@ -1,4 +1,5 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL;
 using APC.DAL.DTO;
 using OfficeOpenXml.Drawing.Chart;
@@ -17,9 +18,14 @@ namespace APC.AllForms
 {
     public partial class FormGeneralMeeting : Form
     {
-        public FormGeneralMeeting()
+        private readonly IGeneralMeetingService _generalMeetingService;
+
+        private Applications.DTO.GeneralMeetingDTO _generalMeetingDTO;
+        private bool _isUpdate = false;
+        public FormGeneralMeeting(IGeneralMeetingService generalMeetingService)
         {
             InitializeComponent();
+            _generalMeetingService = generalMeetingService;
         }
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -40,6 +46,13 @@ namespace APC.AllForms
         {
             this.Close();
         }
+
+        public void loadForEdit(Applications.DTO.GeneralMeetingDTO generalMeetingDTO, bool isUpdate)
+        {
+            _generalMeetingDTO = generalMeetingDTO;
+            _isUpdate = isUpdate;
+        }
+
         GeneralAttendanceBLL bll = new GeneralAttendanceBLL();
         public GeneralAttendanceDetailDTO detail = new GeneralAttendanceDetailDTO();
         public bool isUpdate = false;

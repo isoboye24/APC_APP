@@ -343,6 +343,7 @@
     <Compile Include="Applications\DTO\SpecialContributionDTO.cs" />
     <Compile Include="Applications\DTO\SpecialContributorDTO.cs" />
     <Compile Include="Applications\DTO\MonthDTO.cs" />
+    <Compile Include="Applications\DTO\YearDTO.cs" />
     <Compile Include="Applications\Services\AttendanceStatusService.cs" />
     <Compile Include="Applications\Services\CommentService.cs" />
     <Compile Include="Applications\Services\ConstitutionService.cs" />

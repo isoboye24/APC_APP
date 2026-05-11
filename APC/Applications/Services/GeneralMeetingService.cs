@@ -71,6 +71,42 @@ namespace APC.Applications.Services
             .OrderByDescending(x => x.Year).ThenByDescending(y => y.MonthId).ToList();
         }
 
+        public List<GeneralMeetingDTO> GetAllByYear(int year)
+        {
+            var data = (from g in _repository.GetAll().Where(g => g.year == year)
+                        join m in _monthRepository.GetAll() on g.monthID equals m.monthID
+                        select new
+                        {
+                            g.generalAttendanceID,
+                            g.totalMembersPresent,
+                            g.totalMembersAbsent,
+                            g.totalDuesPaid,
+                            g.totalDuesExpected,
+                            g.totalDuesBalance,
+                            g.attendanceDate,
+                            g.summary
+                        })
+                        .ToList();
+
+            return data.Select(x => new GeneralMeetingDTO
+            {
+                GeneralMeetingId = x.generalAttendanceID,
+                TotalMembersPresent = (int)x.totalMembersPresent,
+                TotalMembersAbsent = (int)x.totalMembersAbsent,
+                TotalDuesPaid = (decimal)x.totalDuesPaid,
+                FormattedTotalDuesPaid = ((decimal)x.totalDuesPaid).ToString(),
+                TotalDuesExpected = (decimal)x.totalDuesExpected,
+                FormattedTotalDuesExpected = ((decimal)x.totalDuesExpected).ToString(),
+                TotalDuesBalance = ((decimal)x.totalDuesExpected - (decimal)x.totalDuesPaid).ToString(),
+                FinesRaised = _finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid).ToString(),
+                Summary = x.summary,
+                MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
+                MonthId = x.attendanceDate.Month,
+                Year = x.attendanceDate.Year,
+            })
+            .OrderByDescending(x => x.Year).ThenByDescending(y => y.MonthId).ToList();
+        }
+
         public List<GeneralMeetingDTO> GetAllDeleted()
         {
             var data = (from g in _repository.GetAllDeletedGeneralMeetings()
@@ -140,6 +176,21 @@ namespace APC.Applications.Services
             data.UpdateGeneralMeetingDate(data.GeneralMeetingDate);
 
             return _repository.Update(data);
+        }
+
+        public List<YearDTO> GetMeetingYears()
+        {
+            return _repository.GetAll()
+                .Where(x => !x.isDeleted)
+                .Select(x => x.attendanceDate.Year)
+                .Distinct()
+                .OrderByDescending(x => x)
+                .Select(x => new YearDTO
+                {
+                    Value = x,
+                    Text = x.ToString()
+                })
+                .ToList();
         }
     }
 }
