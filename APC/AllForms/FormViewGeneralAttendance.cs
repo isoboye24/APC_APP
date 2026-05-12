@@ -2,6 +2,7 @@
 using APC.Applications.Interfaces;
 using APC.Applications.Services;
 using APC.BLL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
 using APC.Helper;
 using OfficeOpenXml.Drawing.Chart;
@@ -14,7 +15,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
@@ -26,6 +29,8 @@ namespace APC.AllForms
         private readonly IMemberService _memberService;
 
         private readonly GeneralMeetingDTO _generalMeetingDTO;
+
+        private List<Applications.DTO.GeneralMeetingAttendanceDTO> _generalMeetingAttendanceDTOs;
 
         public FormViewGeneralAttendance(GeneralMeetingDTO generalMeetingDTO, IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService)
         {
@@ -63,7 +68,7 @@ namespace APC.AllForms
             rbMore.Checked = false;
             rbEqual.Checked = false;
             cmbAttendanceStatus.SelectedIndex = -1;
-            loadAttendances();
+            loadGeneralMeetingAttendances();
 
             ShowRecordData();
         }
@@ -84,7 +89,7 @@ namespace APC.AllForms
                 labelTotalMembersPresent);
         }
 
-        private void loadAttendances()
+        private void loadGeneralMeetingAttendances()
         {
             dataGridView1.DataSource = _generalMeetingAttendanceService.GetAllByGeneralMeetingId(_generalMeetingDTO.GeneralMeetingId);
             PersonalAttendanceHelper.ConfigurePersonalAttendanceGrid(dataGridView1, PersonalAttendanceHelper.PersonalAttendanceGridType.Basic);
@@ -97,12 +102,13 @@ namespace APC.AllForms
             cmbAttendanceStatus.DataSource = _attendanceStatusService.GetAll();
             GeneralHelper.ComboBoxProps(cmbAttendanceStatus, "AttendanceStatusName", "AttendanceStatusId");
 
-            loadAttendances();
+            loadGeneralMeetingAttendances();
 
-            labelTitle.Text = "Meeting on " + _generalMeetingDTO.Day + "." + _generalMeetingDTO.MonthID + "." + _generalMeetingDTO.Year;
+            labelTitle.Text = "Meeting on " + _generalMeetingDTO.Day + "." + _generalMeetingDTO.MonthId + "." + _generalMeetingDTO.Year;
             txtSummary.Text = _generalMeetingDTO.Summary;
             ShowRecordData();
         }
+
         private void ShowRecordData()
         {
             labelTotalMembersPresent.Text = _generalMeetingDTO.TotalMembersPresent.ToString();
@@ -139,12 +145,12 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private Applications.DTO.GeneralMeetingAttendanceDTO GetSelectedMeetingAttendance()
+        private GeneralMeetingAttendanceDTO GetSelectedMeetingAttendance()
         {
             if (dataGridView1.CurrentRow == null)
                 return null;
 
-            return dataGridView1.CurrentRow.DataBoundItem as Applications.DTO.GeneralMeetingAttendanceDTO;
+            return dataGridView1.CurrentRow.DataBoundItem as GeneralMeetingAttendanceDTO;
         }
 
 
@@ -167,52 +173,57 @@ namespace APC.AllForms
 
         private void txtSurname_TextChanged(object sender, EventArgs e)
         {
-            List<PersonalAttendanceDetailDTO> list = dto.PersonalAttendances;
-            list = list.Where(x => x.Surname.Contains(txtSurname.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
+            string searchedText = txtSurname.Text.Trim().ToLower();
+            var filtered = _generalMeetingAttendanceDTOs.Where(x => x.LastName.IndexOf(searchedText, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridView1.DataSource = filtered;
         }
 
         private void txtName_TextChanged(object sender, EventArgs e)
         {
-            List<PersonalAttendanceDetailDTO> list = dto.PersonalAttendances;
-            list = list.Where(x => x.Name.Contains(txtName.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
+            string searchedText = txtName.Text.Trim().ToLower();
+            var filtered = _generalMeetingAttendanceDTOs.Where(x => x.FirstName.IndexOf(searchedText, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridView1.DataSource = filtered;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            List<PersonalAttendanceDetailDTO> list = dto.PersonalAttendances;
+            var filtered = _generalMeetingAttendanceDTOs.AsQueryable();
+
             if (cmbAttendanceStatus.SelectedIndex != -1)
             {
-                list = list.Where(x => x.AttendanceStatusID == Convert.ToInt32(cmbAttendanceStatus.SelectedValue)).ToList();
+                string searchedStatus = cmbAttendanceStatus.SelectedValue.ToString();
+
+                filtered = filtered.Where(x => x.AttendanceStatus == searchedStatus);
             }
             if (txtMonthlyDues.Text.Trim() != "")
             {
                 if (rbEqual.Checked)
                 {
-                    list = list.Where(x => x.MonthlyDue == Convert.ToDecimal(txtMonthlyDues.Text)).ToList();
+                    filtered = filtered.Where(x => x.DuesPaid == Convert.ToDecimal(txtMonthlyDues.Text));
                 }
-                if (rbLess.Checked)
+                else if (rbLess.Checked)
                 {
-                    list = list.Where(x => x.MonthlyDue < Convert.ToDecimal(txtMonthlyDues.Text)).ToList();
+                    filtered = filtered.Where(x => x.DuesPaid < Convert.ToDecimal(txtMonthlyDues.Text));
                 }
-                if (rbMore.Checked)
+                else if (rbMore.Checked)
                 {
-                    list = list.Where(x => x.MonthlyDue > Convert.ToDecimal(txtMonthlyDues.Text)).ToList();
+                    filtered = filtered.Where(x => x.DuesPaid > Convert.ToDecimal(txtMonthlyDues.Text));
+                }
+                else
+                {
+                    MessageBox.Show("Please select a criterion from the monthly dues group");
                 }
             }
-            dataGridView1.DataSource = list;
+            dataGridView1.DataSource = filtered.ToList();
         }
 
         private void btnViewSummary_Click(object sender, EventArgs e)
         {
-            FormViewMeetingsSummary open = new FormViewMeetingsSummary();            
-            open.detail = detail;
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            FillDataGrid();
-            ShowRecordData();
+            var form = new FormViewMeetingsSummary(_generalMeetingDTO);
+            form.ShowDialog();
+
+            ClearFilters();
+            ShowRecordData();            
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)

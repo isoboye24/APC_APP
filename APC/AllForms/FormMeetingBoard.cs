@@ -479,12 +479,6 @@ namespace APC.AllForms
             ClearFilters();
         }
         
-        private void txtYear_TextChanged(object sender, EventArgs e)
-        {
-            //List<GeneralAttendanceDetailDTO> list = dto.GeneralAttendance;
-            //list = list.Where(x => x.Year.Contains(txtYear.Text.Trim())).ToList();
-            //dataGridViewGeneralMeeting.DataSource = list;
-        }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
