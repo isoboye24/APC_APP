@@ -1,24 +1,12 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.Applications.Services;
-using APC.BLL;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
 using APC.Helper;
-using OfficeOpenXml.Drawing.Chart;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
 {
@@ -80,13 +68,12 @@ namespace APC.AllForms
 
         private void resizeControls()
         {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label7, label9, label10, label11, btnAdd,
+            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label7, label9, btnAdd,
                 labelTitle, btnClose, rbEqual, rbLess, rbMore, btnClear, btnSearch, btnUpdate, btnViewSummary);
 
             GeneralHelper.ApplyRegularFont(14, txtName, txtSurname, txtMonthlyDues, txtSummary, cmbAttendanceStatus);
 
-            GeneralHelper.ApplyBoldFont(24, labelTotalBalanceNew, labelTotalDuesExpected, labelTotalDuesPaid, labelTotalMembersAbsent,
-                labelTotalMembersPresent);
+            GeneralHelper.ApplyBoldFont(24, labelTotalDuesPaid, labelTotalMembersAbsent, labelTotalMembersPresent);
         }
 
         private void loadGeneralMeetingAttendances()
@@ -115,26 +102,10 @@ namespace APC.AllForms
             labelTotalMembersAbsent.Text = _generalMeetingDTO.TotalMembersAbsent.ToString();
 
             labelTotalDuesPaid.Text = _generalMeetingDTO.FormattedTotalDuesPaid;
-            labelTotalDuesExpected.Text = _generalMeetingDTO.FormattedTotalDuesExpected;
             labelTotalMembersAbsent.Text = _generalMeetingDTO.TotalMembersAbsent.ToString();
 
             decimal balance =_generalMeetingDTO.TotalDuesExpected - _generalMeetingDTO.TotalDuesPaid;
 
-            if (balance > 0)
-            {
-                labelBalanceStatus.Text = "Remaining";
-                labelTotalBalanceNew.Text = balance.ToString();
-            }
-            else if (balance < 0)
-            {
-                labelBalanceStatus.Text = "Extra";
-                labelTotalBalanceNew.Text = ((-1) * balance).ToString();
-            }
-            else
-            {
-                labelBalanceStatus.Text = "Exact";
-                labelTotalBalanceNew.Text = balance.ToString();
-            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
