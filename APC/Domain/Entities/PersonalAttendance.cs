@@ -1,4 +1,5 @@
-﻿using APC.DAL;
+﻿using APC.Applications.DTO;
+using APC.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,18 @@ namespace APC.Domain.Entities
         public decimal? ExpectedDues { get; private set; }
         public decimal? Balance { get; private set; }
         public int GeneralMeetingId { get; private set; }
+        public int Day { get; private set; }
+        public int MonthId { get; private set; }
+        public int Year { get; private set; }
         
 
         public PersonalAttendance(int attendanceStatusId, int memberId, decimal? monthlyDues,decimal? expectedDues, decimal? balance, 
-            int generalMeetingId)
+            int generalMeetingId, DateTime date)
         {
             SetAttendanceStatus(attendanceStatusId);
             SetMember(memberId);
             SetMonthlyDues(monthlyDues);
+            SetPersonalAttendanceDate(date);
         }
 
         public static PersonalAttendance Rehydrate(
@@ -33,10 +38,11 @@ namespace APC.Domain.Entities
                 decimal? monthlyDues,
                 decimal? expectedDues, 
                 decimal? balance, 
-                int generalMeetingId
+                int generalMeetingId,
+                DateTime date
             )
         {
-            var personalAttendance = new PersonalAttendance( attendanceStatusId, memberId, monthlyDues, expectedDues,balance, generalMeetingId);
+            var personalAttendance = new PersonalAttendance( attendanceStatusId, memberId, monthlyDues, expectedDues,balance, generalMeetingId, date);
 
             personalAttendance.PersonalAttendanceId = id;
             personalAttendance.GeneralMeetingId = generalMeetingId;
@@ -44,6 +50,21 @@ namespace APC.Domain.Entities
             personalAttendance.Balance = balance;
 
             return personalAttendance;
+        }
+
+        public void UpdatePersonalAttendanceDate(DateTime newDate)
+        {
+            SetPersonalAttendanceDate(newDate);
+        }
+
+        private void SetPersonalAttendanceDate(DateTime date)
+        {
+            if (date.Year < 2000 || date.Year > DateTime.Now.Year + 1)
+                throw new ArgumentException("Invalid year");
+
+            Day = date.Day;
+            MonthId = date.Month;
+            Year = date.Year;
         }
 
         private void SetAttendanceStatus(int statusId)

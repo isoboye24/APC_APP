@@ -1,7 +1,10 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Applications.Services;
 using APC.BLL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
+using APC.Domain.Entities;
 using APC.Helper;
 using System;
 using System.Collections.Generic;
@@ -10,6 +13,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using AttendanceStatusDTO = APC.Applications.DTO.AttendanceStatusDTO;
 
 namespace APC
 {
@@ -20,14 +24,20 @@ namespace APC
         private readonly IAttendanceStatusService _attendanceStatusService;
 
         private GeneralMeetingAttendanceDTO _generalMeetingAttendanceDTO;
+        private GeneralMeetingDTO _generalMeetingDTO;
+        private List<MemberFullDetailsDTO> _memberDTO;
         private bool _isUpdate = false;
+        private int _memberId = 0;
+        private int _attendanceStatusId = 0;
 
-        public FormGeneralMeetingAttendance(IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService, IAttendanceStatusService attendanceStatusService)
+        public FormGeneralMeetingAttendance(IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService, 
+            IAttendanceStatusService attendanceStatusService, GeneralMeetingDTO generalMeetingDTO)
         {
             InitializeComponent();
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _memberService = memberService;
             _attendanceStatusService = attendanceStatusService;
+            _generalMeetingDTO = generalMeetingDTO;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -65,6 +75,7 @@ namespace APC
         private void loadMembers()
         {
             dataGridViewMembers.DataSource = _memberService.GetAll();
+            _memberDTO = _memberService.GetAll();
             MemberHelper.ConfigureMemberGrid(dataGridViewMembers, MemberHelper.MemberGridType.Basic);
         }
 
@@ -74,6 +85,8 @@ namespace APC
 
             if (_isUpdate)
             {
+                labelTitle.Text = "Edit member at meeting on " + _generalMeetingDTO.Day + "." + _generalMeetingDTO.MonthId + "." + _generalMeetingDTO.Year;
+
                 txtSurname.Text = _generalMeetingAttendanceDTO.LastName;
                 txtName.Text = _generalMeetingAttendanceDTO.FirstName;
                 txtGender.Text = _generalMeetingAttendanceDTO.Gender;
@@ -83,6 +96,10 @@ namespace APC
                 picProfilePic.ImageLocation = imagePath;
 
                 tableLayoutPanelMemberList.Hide();
+            }
+            else
+            {
+                labelTitle.Text = "Add member to meeting on " + _generalMeetingDTO.Day + "." + _generalMeetingDTO.MonthId + "." + _generalMeetingDTO.Year;
             }
         }
 
@@ -98,28 +115,47 @@ namespace APC
 
         private void txtSearchSurname_TextChanged(object sender, EventArgs e)
         {
-            List<MemberDetailDTO> list = dto.Members;
-            list = list.Where(x => x.Surname.Contains(txtSearchSurname.Text)).ToList();
-            dataGridViewMembers.DataSource = list;
+            string searchedText = txtSurname.Text.Trim().ToLower();
+            var filtered = _memberDTO.Where(x => x.LastName.IndexOf(searchedText, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewMembers.DataSource = filtered;
+        }
+
+        private MemberFullDetailsDTO GetMember()
+        {
+            if (dataGridViewMembers.CurrentRow == null)
+                return null;
+
+            return dataGridViewMembers.CurrentRow.DataBoundItem as MemberFullDetailsDTO;
+        }
+
+        private AttendanceStatusDTO GetAttendanceStatus()
+        {
+            if (dataGridViewAttendanceStatuses.CurrentRow == null)
+                return null;
+
+            return dataGridViewAttendanceStatuses.CurrentRow.DataBoundItem as AttendanceStatusDTO;
         }
 
         private void dataGridViewMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            memberDetail = new MemberDetailDTO();
-            memberDetail.MemberID = Convert.ToInt32(dataGridViewMembers.Rows[e.RowIndex].Cells[0].Value);
-            txtSurname.Text = dataGridViewMembers.Rows[e.RowIndex].Cells[3].Value.ToString();
-            txtName.Text = dataGridViewMembers.Rows[e.RowIndex].Cells[4].Value.ToString();
-            memberDetail.ImagePath = dataGridViewMembers.Rows[e.RowIndex].Cells[6].Value.ToString();
-            string imagePath = Application.StartupPath + "\\images\\" + memberDetail.ImagePath;
+            var selected = GetMember();
+            if (selected == null) return;
+
+            _memberId = selected.MemberId;
+            txtSurname.Text = selected.LastName;
+            txtName.Text = selected.FirstName;
+
+            string imagePath = Application.StartupPath + "\\images\\" + selected.ImagePath;
             picProfilePic.ImageLocation = imagePath;
-            txtGender.Text = dataGridViewMembers.Rows[e.RowIndex].Cells[19].Value.ToString();
+            txtGender.Text = selected.Gender;
         }
 
         private void dataGridViewAttendanceStatuses_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            attStatusDetail = new AttendanceStatusDetailDTO();
-            attStatusDetail.AttendanceStatusID = Convert.ToInt32(dataGridViewAttendanceStatuses.Rows[e.RowIndex].Cells[0].Value);
-            txtAttendanceStatus.Text = dataGridViewAttendanceStatuses.Rows[e.RowIndex].Cells[1].Value.ToString();
+            var selected = GetAttendanceStatus();
+
+            _attendanceStatusId = selected.AttendanceStatusId;
+            txtAttendanceStatus.Text = selected.AttendanceStatusName;
         }
         
         private void txtSearchSurname_KeyPress(object sender, KeyPressEventArgs e)
@@ -128,17 +164,59 @@ namespace APC
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (memberDetail.MemberID == 0)
+
+            try
+            {
+
+                decimal expectedMonthlyDues = 10;
+                decimal monthlyDues = Convert.ToDecimal(txtMonthlyDues.Text);
+                decimal totalBalance = expectedMonthlyDues - monthlyDues;
+
+                if (_generalMeetingDTO.GeneralMeetingId == 0)
+                {
+                    var personalAttendance = new PersonalAttendance(_attendanceStatusId, _memberId, monthlyDues, expectedMonthlyDues,
+                        totalBalance, _generalMeetingDTO.GeneralMeetingId);
+
+                    _generalMeetingAttendanceService.Create(personalAttendance);
+                    MessageBox.Show("Member added successfully!");
+                }
+                else
+                {
+                    int totalMembersPresent = _generalMeetingAttendanceService.GetMembersPresentCount(_generalMeetingDTO.GeneralMeetingId);
+                    int totalMembersAbsent = _generalMeetingAttendanceService.GetMembersPresentCount(_generalMeetingDTO.GeneralMeetingId);
+                    decimal totalDuesPaid = _generalMeetingAttendanceService.GetTotalDuesPaid(_generalMeetingDTO.GeneralMeetingId);
+                    int currentMembers = _memberService.GetAllCurrentMembersCount();
+
+                    decimal totalDuesExpected = currentMembers * 10;
+                    decimal totalBalance = totalDuesExpected - totalDuesPaid;
+
+                    var generalMeeing = new GeneralMeeting(totalMembersPresent, totalMembersAbsent, totalDuesPaid, totalDuesExpected, totalBalance,
+                        summary, meetingDate);
+
+
+                    _generalMeetingService.Update(generalMeeing);
+                    MessageBox.Show("General meeting updated successfully!");
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+            if (_memberId == 0)
             {
                 MessageBox.Show("Please choose a member from the table");
             }
-            if (attStatusDetail.AttendanceStatusID == 0)
+            if (_attendanceStatusId == 0)
             {
                 MessageBox.Show("Please choose an attendance status from the table");
             }            
             else
             {
-                if (!isUpdate)
+                if (!_isUpdate)
                 {
                     bool isUnique = bll.IsUnique(memberDetail.MemberID, generalAttendanceDetail.GeneralAttendanceID);
                     if (!isUnique)

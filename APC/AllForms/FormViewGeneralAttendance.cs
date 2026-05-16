@@ -110,7 +110,7 @@ namespace APC.AllForms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService);
+            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService, _generalMeetingDTO);
             form.ShowDialog();
 
             ClearFilters();
@@ -134,7 +134,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService);
+            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService, _generalMeetingDTO);
             form.loadForEdit(selected, true);
             form.ShowDialog();
 
