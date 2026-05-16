@@ -164,10 +164,8 @@ namespace APC
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             try
             {
-
                 decimal expectedMonthlyDues = 10;
                 decimal monthlyDues = Convert.ToDecimal(txtMonthlyDues.Text);
                 decimal totalBalance = expectedMonthlyDues - monthlyDues;
@@ -175,110 +173,24 @@ namespace APC
                 if (_generalMeetingDTO.GeneralMeetingId == 0)
                 {
                     var personalAttendance = new PersonalAttendance(_attendanceStatusId, _memberId, monthlyDues, expectedMonthlyDues,
-                        totalBalance, _generalMeetingDTO.GeneralMeetingId);
+                        totalBalance, _generalMeetingDTO.GeneralMeetingId, _generalMeetingDTO.GeneralMeetingDate);
 
                     _generalMeetingAttendanceService.Create(personalAttendance);
                     MessageBox.Show("Member added successfully!");
                 }
                 else
                 {
-                    int totalMembersPresent = _generalMeetingAttendanceService.GetMembersPresentCount(_generalMeetingDTO.GeneralMeetingId);
-                    int totalMembersAbsent = _generalMeetingAttendanceService.GetMembersPresentCount(_generalMeetingDTO.GeneralMeetingId);
-                    decimal totalDuesPaid = _generalMeetingAttendanceService.GetTotalDuesPaid(_generalMeetingDTO.GeneralMeetingId);
-                    int currentMembers = _memberService.GetAllCurrentMembersCount();
+                    var personalAttendance = new PersonalAttendance(_attendanceStatusId, _memberId, monthlyDues, expectedMonthlyDues,
+                        totalBalance, _generalMeetingDTO.GeneralMeetingId, _generalMeetingDTO.GeneralMeetingDate);
 
-                    decimal totalDuesExpected = currentMembers * 10;
-                    decimal totalBalance = totalDuesExpected - totalDuesPaid;
-
-                    var generalMeeing = new GeneralMeeting(totalMembersPresent, totalMembersAbsent, totalDuesPaid, totalDuesExpected, totalBalance,
-                        summary, meetingDate);
-
-
-                    _generalMeetingService.Update(generalMeeing);
-                    MessageBox.Show("General meeting updated successfully!");
+                    _generalMeetingAttendanceService.Update(personalAttendance);
+                    MessageBox.Show("Member updated successfully!");
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-
-
-
-            if (_memberId == 0)
-            {
-                MessageBox.Show("Please choose a member from the table");
-            }
-            if (_attendanceStatusId == 0)
-            {
-                MessageBox.Show("Please choose an attendance status from the table");
-            }            
-            else
-            {
-                if (!_isUpdate)
-                {
-                    bool isUnique = bll.IsUnique(memberDetail.MemberID, generalAttendanceDetail.GeneralAttendanceID);
-                    if (!isUnique)
-                    {
-                        MessageBox.Show("This member has been added");
-                    }
-                    else
-                    {
-                        PersonalAttendanceDetailDTO attendance = new PersonalAttendanceDetailDTO();
-                        attendance.AttendanceStatusID = attStatusDetail.AttendanceStatusID;
-                        attendance.MemberID = memberDetail.MemberID;
-                        attendance.ExpectedDue = 10;
-                        if (txtMonthlyDues.Text.Trim() == "")
-                        {
-                            attendance.MonthlyDue = 0;
-                        }
-                        else
-                        {
-                            attendance.MonthlyDue = Convert.ToDecimal(txtMonthlyDues.Text);
-                        }
-                        attendance.Balance = attendance.ExpectedDue - attendance.MonthlyDue;
-                        attendance.Day = generalAttendanceDetail.Day;
-                        attendance.MonthID = generalAttendanceDetail.MonthID;
-                        attendance.Year = generalAttendanceDetail.Year;
-                        attendance.GeneralAttendanceID = generalAttendanceDetail.GeneralAttendanceID;
-                        if (bll.Insert(attendance))
-                        {
-                            MessageBox.Show("Attendance was added");
-                            txtMonthlyDues.Clear();
-                        }               
-                    }
-                }
-                else if (isUpdate)
-                {
-                    if (personalDetail.AttendanceStatusName == txtAttendanceStatus.Text && personalDetail.MonthlyDue == Convert.ToDecimal(txtMonthlyDues.Text))
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        personalDetail.AttendanceStatusID = attStatusDetail.AttendanceStatusID;
-                        personalDetail.ExpectedDue = 10;
-                        if (txtMonthlyDues.Text.Trim() == "")
-                        {
-                            personalDetail.MonthlyDue = 0;
-                        }
-                        else
-                        {
-                            personalDetail.MonthlyDue = Convert.ToDecimal(txtMonthlyDues.Text);
-                        }
-                        personalDetail.Balance = personalDetail.ExpectedDue - personalDetail.MonthlyDue;
-                        personalDetail.Day = personalDetail.Day;
-                        personalDetail.MonthID = personalDetail.MonthID;
-                        personalDetail.Year = personalDetail.Year;
-                        personalDetail.GeneralAttendanceID = personalDetail.GeneralAttendanceID;
-                        if (bll.Update(personalDetail))
-                        {
-                            MessageBox.Show("The member was updated");
-                            this.Close();
-                        }
-                    }
-                }
             }
         }
 
