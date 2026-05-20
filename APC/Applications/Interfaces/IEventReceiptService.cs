@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace APC.Applications.Interfaces
 {
     public interface IEventReceiptService
     {
-        List<EventReceipt> GetAll();
+        List<EventReceiptDTO> GetAll(int eventId);
+        List<EventReceiptDTO> GetAllDeletedEventReceipts();
         bool Create(EventReceipt data);
         bool Update(EventReceipt data);
         bool Delete(int id);
