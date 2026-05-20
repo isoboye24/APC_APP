@@ -39,6 +39,7 @@ namespace APC.Applications.Services
                     Summary = x.summary,
                     CoverImagePath = x.coverImagePath,
                     EventsDate = x.eventDate,
+                    FormattedEventsDate = x.eventDate.ToString("dd.MM.yyyy"),
                 })
                 .OrderByDescending(x => x.EventsDate.Year)
                 .ThenByDescending(x => x.EventsDate.Month)

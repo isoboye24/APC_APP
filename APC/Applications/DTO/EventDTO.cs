@@ -13,5 +13,6 @@ namespace APC.Applications.DTO
         public string Summary { get; set; }
         public string CoverImagePath { get; set; }
         public DateTime EventsDate { get; set; }
+        public String FormattedEventsDate { get; set; }
     }
 }

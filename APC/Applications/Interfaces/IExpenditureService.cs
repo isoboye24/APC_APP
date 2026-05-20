@@ -1,15 +1,12 @@
-﻿using APC.Domain.Entities;
-using System;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Interfaces
 {
     public interface IExpenditureService
     {
-        List<Expenditure> GetAll();
+        List<ExpenditureDTO> GetAll();
         bool Create(Expenditure data);
         bool Update(Expenditure data);
         bool Delete(int id);

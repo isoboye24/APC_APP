@@ -1,7 +1,9 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace APC.Applications.Services
 {
@@ -27,8 +29,23 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<Expenditure> GetAll()
-            => _repository.GetAll();
+        public List<ExpenditureDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .Select(x => new ExpenditureDTO
+                {
+                    ExpenditureId = x.expenditureID,
+                    AmountSpent = x.amountSpent,
+                    Summary = x.summary,
+                    ExpenditureDate = x.expenditureDate,
+                    FormattedExpenditureDate = x.expenditureDate.ToString("dd.MM.yyyy"),
+                })
+                .OrderByDescending(x => x.ExpenditureDate.Year)
+                .ThenByDescending(x => x.ExpenditureDate.Month)
+                .ThenByDescending(x => x.ExpenditureDate.Day)
+                .ThenBy(x => x.Summary)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);
