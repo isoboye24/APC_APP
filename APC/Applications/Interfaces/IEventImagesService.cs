@@ -6,7 +6,7 @@ namespace APC.Applications.Interfaces
 {
     public interface IEventImagesService
     {
-        List<EventImageDTO> GetAll();
+        List<EventImageDTO> GetAll(int eventId);
         List<EventImageDTO> GetAllDeletedEventImages();
         bool Create(EventImages data);
         bool Update(EventImages data);
