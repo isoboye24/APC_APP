@@ -35,7 +35,7 @@ namespace APC.Applications.Services
         public List<SpecialContributionDTO> GetAll()
         {
             var data = (from sc in _repository.GetAll()
-                        join m in _memberRepository.GetAll() on sc.supervisorID equals m.MemberId
+                        join m in _memberRepository.GetAll() on sc.supervisorID equals m.memberID
                         let totalContributedAmount = _specialContributorRepository.GetAmountContributedByContributionId(sc.specialContributionID)
                         select new SpecialContributionDTO
                         {
@@ -44,9 +44,9 @@ namespace APC.Applications.Services
                             Summary = sc.summary,
                             AmountToContribute = sc.amountToContribute,
                             SupervisorId = sc.supervisorID,
-                            FirstName = m.PersonalInfo.FirstName,
-                            LastName = m.PersonalInfo.LastName,
-                            ImagePath = m.PersonalInfo.ImagePath,
+                            FirstName = m.name,
+                            LastName = m.surname,
+                            ImagePath = m.imagePath,
                             ContributionStartDate = sc.contributionStartDate,
                             FormattedContributionStartDate = sc.contributionStartDate.ToString("dd.MM.yyyy"),
                             ContributionEndDate = sc.contributionEndDate,
@@ -70,7 +70,7 @@ namespace APC.Applications.Services
         {
 
             var data = (from sc in _repository.GetAllDeletedSpecialContributions()
-                        join m in _memberRepository.GetAll() on sc.supervisorID equals m.MemberId
+                        join m in _memberRepository.GetAll() on sc.supervisorID equals m.memberID
                         let totalContributedAmount = _specialContributorRepository.GetAmountContributedByContributionId(sc.specialContributionID)
                         select new SpecialContributionDTO
                         {
@@ -78,20 +78,17 @@ namespace APC.Applications.Services
                             Title = sc.title,
                             Summary = sc.summary,
                             AmountToContribute = sc.amountToContribute,
-                            FormattedAmountToContribute = ("€ " + sc.amountToContribute).ToString(),
                             SupervisorId = sc.supervisorID,
-                            FirstName = m.PersonalInfo.FirstName,
-                            LastName = m.PersonalInfo.LastName,
-                            ImagePath = m.PersonalInfo.ImagePath,
+                            FirstName = m.name,
+                            LastName = m.surname,
+                            ImagePath = m.imagePath,
                             ContributionStartDate = sc.contributionStartDate,
                             FormattedContributionStartDate = sc.contributionStartDate.ToString("dd.MM.yyyy"),
                             ContributionEndDate = sc.contributionEndDate,
                             FormattedContributionEndDate = sc.contributionEndDate.ToString("dd.MM.yyyy"),
                             AmountExpected = sc.amountExpected,
-                            FormattedAmountExpected = ("€ " + sc.amountExpected).ToString(),
                             Status = totalContributedAmount <= 0 ? "Not Paid" : (totalContributedAmount > 0 && totalContributedAmount < sc.amountExpected) ? "Not Completed" : totalContributedAmount == sc.amountExpected ? "Completed" : ((totalContributedAmount - sc.amountExpected) + " € Extra").ToString(),
                             TotalContributedAmount = totalContributedAmount,
-                            FormattedTotalContributedAmount = ("€ " + totalContributedAmount).ToString(),
 
                         }).ToList();
 
