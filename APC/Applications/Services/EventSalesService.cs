@@ -1,17 +1,22 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Domain.Entities;
+using APC.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace APC.Applications.Services
 {
     public class EventSalesService : IEventSalesService
     {
         private readonly IEventSalesRepository _repository;
+        private readonly EventsRepository _eventRepository;
 
-        public EventSalesService(IEventSalesRepository repository)
+        public EventSalesService(IEventSalesRepository repository, EventsRepository eventRepository)
         {
             _repository = repository;
+            _eventRepository = eventRepository;
         }
 
         public int Count()
@@ -28,8 +33,22 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<EventSales> GetAll()
-            => _repository.GetAll();
+        public List<EventSalesDTO> GetAll(int eventId)
+        {
+            var data = (from es in _repository.GetAll(eventId)
+                        join e in _eventRepository.GetAll() on es.eventID equals e.eventID
+                        select new EventSalesDTO
+                        {
+                            EventSalesId = es.eventSalesID,
+                            EventId = es.eventID,
+                            AmountSold = es.amountSold,
+                            SalesDate = e.eventDate,
+                            Summary = es.summary,
+
+                        }).OrderByDescending(x => x.SalesDate.Year).ThenByDescending(x => x.SalesDate.Month).ThenByDescending(x => x.SalesDate.Day).ThenByDescending(x => x.AmountSold).ToList();
+
+            return data;
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

@@ -9,6 +9,7 @@ namespace APC.Applications.Interfaces
     public interface IEventExpenditureService
     {
         List<EventExpenditureDTO> GetAll(int eventId);
+        List<EventExpenditureDTO> GetAllDeletedEventExpenditures();
         bool Create(EventExpenditure data);
         bool Update(EventExpenditure data);
         bool Delete(int id);

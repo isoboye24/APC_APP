@@ -1,15 +1,12 @@
-﻿using APC.Domain.Entities;
-using System;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Interfaces
 {
     public interface IEventSalesService
     {
-        List<EventSales> GetAll();
+        List<EventSalesDTO> GetAll(int eventId);
         bool Create(EventSales data);
         bool Update(EventSales data);
         bool Delete(int id);

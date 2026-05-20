@@ -38,6 +38,23 @@ namespace APC.Applications.Services
                         select new EventExpenditureDTO
                         {
                             EventExpenditureId = ex.eventExpenditureID,
+                            EventId = ex.eventID,
+                            SpentAmount = ex.amountSpent,
+                            ExpenditureDate = e.eventDate,
+                            Summary = ex.summary,
+                            
+                        }).OrderByDescending(x => x.ExpenditureDate.Year).ThenByDescending(x => x.ExpenditureDate.Month).ThenByDescending(x => x.ExpenditureDate.Day).ThenByDescending(x => x.SpentAmount).ToList();
+
+            return data;
+        }
+        
+        public List<EventExpenditureDTO> GetAllDeletedEventExpenditures()
+        {
+            var data = (from ex in _repository.GetAllDeletedEventExpenditures()
+                        join e in _eventRepository.GetAll() on ex.eventID equals e.eventID                        
+                        select new EventExpenditureDTO
+                        {
+                            EventExpenditureId = ex.eventExpenditureID,
                             EventId = e.eventID,
                             SpentAmount = ex.amountSpent,
                             ExpenditureDate = e.eventDate,
