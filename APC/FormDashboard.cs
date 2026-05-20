@@ -280,15 +280,31 @@ namespace APC
             //labelGraphTitleAnnualReport.Text = $"{year} Report";
         }
 
+        private void loadAnnualExpenditures()
+        {
+            var data = _graphicalRepresentationService.GetAllAnnualExpenditures();
+
+            chartExpenditures.Series.Clear();
+
+            chartExpenditures.DataSource = data;
+
+            chartExpenditures.Series.Add("TotalAmountSpent");
+            chartExpenditures.Series["TotalAmountSpent"].ChartType = SeriesChartType.Column;
+            chartExpenditures.Series["TotalAmountSpent"].XValueMember = "Year";
+            chartExpenditures.Series["TotalAmountSpent"].YValueMembers = "TotalAmountSpent";
+            chartExpenditures.Series["TotalAmountSpent"].IsValueShownAsLabel = true;
+
+            chartExpenditures.DataBind();
+
+            chartExpenditures.Titles.Clear();
+            //labelGraphTitleAnnualReport.Text = $"{year} Report";
+        }
+
         private void RefreshAllCards()
         {
             loadAnnualRaisedDues();
 
-            //string yearlyExpenditures = "SELECT EXPENDITURE.year, SUM(EXPENDITURE.amountSpent)\r\n" +
-            //    "FROM EXPENDITURE\r\n" +
-            //    "WHERE EXPENDITURE.isDeleted = 0\r\n" +
-            //    "GROUP BY EXPENDITURE.year\r\n" +
-            //    "ORDER BY EXPENDITURE.year ASC";
+            loadAnnualExpenditures();
 
             labelNoOfRegMem.Text = _memberService.GetAllCurrentMembersCount().ToString();
             labelLastMeetingAttendance.Text = _generalMeetingAttendanceService.GetLastMeetingPresentMembersCount().ToString();
@@ -311,9 +327,7 @@ namespace APC
             labelTotalPaidFines.Text = "€ " + _finedMemberService.GetTotalPaidFines();
 
             labelAmountRaisedYearly.Text = "Dues Raised in each year";
-            labelExpendituresYearly.Text = "Expenditures in each year";
-            //GeneralHelper.CreateChart(chartAmountRaisedYearly, yearlyDues, SeriesChartType.Column, "Dues", "");
-            //GeneralHelper.CreateChart(chartExpenditures, yearlyExpenditures, SeriesChartType.Column, "Expenses", "");
+            labelExpendituresYearly.Text = "Expenditures in each year";            
         }
 
         private void iconClose_MouseEnter(object sender, EventArgs e)

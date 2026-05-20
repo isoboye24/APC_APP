@@ -1,10 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Services
 {
