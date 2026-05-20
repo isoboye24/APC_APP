@@ -1,7 +1,10 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Domain.Entities;
+using APC.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace APC.Applications.Services
 {
     public class FinancialReportService : IFinancialReportService
@@ -26,8 +29,20 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<FinancialReport> GetAll()
-            => _repository.GetAll();
+        public List<FinancialReportDTO> GetAll()
+        {
+            return _repository.GetAll()
+                 .Select(x => new FinancialReportDTO
+                 {
+                     FinancialReportId = x.financialReportID,
+                     TotalAmountRaised = x.totalAmountRaised,
+                     TotalAmountSpent = x.totalAmountSpent,
+                     Year = x.year,
+                     Summary = x.summary,
+                 })
+                 .OrderBy(x => x.Year)
+                 .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

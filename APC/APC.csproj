@@ -327,9 +327,11 @@
     <Compile Include="Applications\DTO\DocumentDTO.cs" />
     <Compile Include="Applications\DTO\EmploymentStatusDTO.cs" />
     <Compile Include="Applications\DTO\EventImageDTO.cs" />
+    <Compile Include="Applications\DTO\FinancialReportDTO.cs" />
     <Compile Include="Applications\DTO\FinedMemberDTO.cs" />
     <Compile Include="Applications\DTO\GenderDTO.cs" />
     <Compile Include="Applications\DTO\GeneralMeetingDTO.cs" />
+    <Compile Include="Applications\DTO\GraphDTO.cs" />
     <Compile Include="Applications\DTO\MaritalStatusDTO.cs" />
     <Compile Include="Applications\DTO\MembersBasicDetailDTO.cs" />
     <Compile Include="Applications\DTO\MemberFullDetailsDTO.cs" />
@@ -344,6 +346,7 @@
     <Compile Include="Applications\DTO\SpecialContributorDTO.cs" />
     <Compile Include="Applications\DTO\MonthDTO.cs" />
     <Compile Include="Applications\DTO\YearDTO.cs" />
+    <Compile Include="Applications\Interfaces\IGraphicalRepresentationService.cs" />
     <Compile Include="Applications\Services\AttendanceStatusService.cs" />
     <Compile Include="Applications\Services\CommentService.cs" />
     <Compile Include="Applications\Services\ConstitutionService.cs" />
@@ -361,6 +364,7 @@
     <Compile Include="Applications\Services\FinedMemberService.cs" />
     <Compile Include="Applications\Services\GenderService.cs" />
     <Compile Include="Applications\Services\GeneralMeetingService.cs" />
+    <Compile Include="Applications\Services\GraphicalRepresentation.cs" />
     <Compile Include="Applications\Services\MaritalStatusService.cs" />
     <Compile Include="Applications\Services\MemberCommittmentService.cs" />
     <Compile Include="Applications\Services\MemberService.cs" />

@@ -260,34 +260,25 @@ namespace APC
 
         private void RefreshAllCards()
         {
-            string yearlyDues = "SELECT PERSONAL_ATTENDANCE.year, SUM(PERSONAL_ATTENDANCE.monthlyDues)\r\n" +
-            "FROM PERSONAL_ATTENDANCE\r\n" +
-            "WHERE PERSONAL_ATTENDANCE.isDeleted = 0\r\n" +
-            "GROUP BY PERSONAL_ATTENDANCE.year\r\n" +
-            "ORDER BY PERSONAL_ATTENDANCE.year ASC";
-            string yearlyExpenditures = "SELECT EXPENDITURE.year, SUM(EXPENDITURE.amountSpent)\r\n" +
-                "FROM EXPENDITURE\r\n" +
-                "WHERE EXPENDITURE.isDeleted = 0\r\n" +
-                "GROUP BY EXPENDITURE.year\r\n" +
-                "ORDER BY EXPENDITURE.year ASC";
+            //string yearlyDues = "SELECT PERSONAL_ATTENDANCE.year, SUM(PERSONAL_ATTENDANCE.monthlyDues)\r\n" +
+            //"FROM PERSONAL_ATTENDANCE\r\n" +
+            //"WHERE PERSONAL_ATTENDANCE.isDeleted = 0\r\n" +
+            //"GROUP BY PERSONAL_ATTENDANCE.year\r\n" +
+            //"ORDER BY PERSONAL_ATTENDANCE.year ASC";
+
+            //string yearlyExpenditures = "SELECT EXPENDITURE.year, SUM(EXPENDITURE.amountSpent)\r\n" +
+            //    "FROM EXPENDITURE\r\n" +
+            //    "WHERE EXPENDITURE.isDeleted = 0\r\n" +
+            //    "GROUP BY EXPENDITURE.year\r\n" +
+            //    "ORDER BY EXPENDITURE.year ASC";
 
             labelNoOfRegMem.Text = _memberService.GetAllCurrentMembersCount().ToString();
             labelLastMeetingAttendance.Text = _generalMeetingAttendanceService.GetLastMeetingPresentMembersCount().ToString();
-            //labelTotalComments.Text = commentBLL.SelectAllCommentsCount().ToString();
-            //labelMonthlyComments.Text = commentBLL.SelectMonthlyCommentsCount().ToString();
-            //labelNoOfChildren.Text = childBLL.SelectAllChildren().ToString();
             //labelLastEventDate.Text = eventBLL.SelectRecentEvent();
 
             string monthToday = DateTime.Now.ToString("MMMM");
             string yearToday = DateTime.Now.Year.ToString();
-            //if (Convert.ToInt32(labelMonthlyComments.Text) > 1)
-            //{
-            //    labelCommentMonthName.Text = "Comments in " + monthToday + " " + yearToday;
-            //}
-            //else
-            //{
-            //    labelCommentMonthName.Text = "Comment in " + monthToday + " " + yearToday;
-            //}
+
             int todayMonth = DateTime.Now.Month;
             int todayYear = DateTime.Today.Year;
             labelDuesMonthName.Text = "Dues in "+ monthToday + " "+ yearToday;
@@ -303,8 +294,8 @@ namespace APC
 
             labelAmountRaisedYearly.Text = "Dues Raised in each year";
             labelExpendituresYearly.Text = "Expenditures in each year";
-            GeneralHelper.CreateChart(chartAmountRaisedYearly, yearlyDues, SeriesChartType.Column, "Dues", "");
-            GeneralHelper.CreateChart(chartExpenditures, yearlyExpenditures, SeriesChartType.Column, "Expenses", "");
+            //GeneralHelper.CreateChart(chartAmountRaisedYearly, yearlyDues, SeriesChartType.Column, "Dues", "");
+            //GeneralHelper.CreateChart(chartExpenditures, yearlyExpenditures, SeriesChartType.Column, "Expenses", "");
         }
 
         private void iconClose_MouseEnter(object sender, EventArgs e)

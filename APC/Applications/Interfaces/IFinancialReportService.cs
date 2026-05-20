@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace APC.Applications.Interfaces
 {
     public interface IFinancialReportService
     {
-        List<FinancialReport> GetAll();
+        List<FinancialReportDTO> GetAll();
         bool Create(FinancialReport data);
         bool Update(FinancialReport data);
         bool Delete(int id);
