@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace APC.Applications.Interfaces
 {
     public interface IEventsService
     {
-        List<TheEvents> GetAll();
+        List<EventDTO> GetAll();
         bool Create(TheEvents data);
         bool Update(TheEvents data);
         bool Delete(int id);

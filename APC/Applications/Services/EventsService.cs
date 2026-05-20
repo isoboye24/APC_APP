@@ -2,6 +2,8 @@
 using APC.Applications.Interfaces;
 using System;
 using System.Collections.Generic;
+using APC.Applications.DTO;
+using System.Linq;
 
 namespace APC.Applications.Services
 {
@@ -27,8 +29,23 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<TheEvents> GetAll()
-            => _repository.GetAll();
+        public List<EventDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .Select(x => new EventDTO
+                {
+                    EventsId = x.eventID,
+                    Title = x.title,
+                    Summary = x.summary,
+                    CoverImagePath = x.coverImagePath,
+                    EventsDate = x.eventDate,
+                })
+                .OrderByDescending(x => x.EventsDate.Year)
+                .ThenByDescending(x => x.EventsDate.Month)
+                .ThenByDescending(x => x.EventsDate.Day)
+                .ThenBy(x => x.Title)
+                .ToList();
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);
