@@ -37,17 +37,16 @@ namespace APC.Applications.Services
         {
             var data = (from c in _repository.GetAll()
                           join m in _memberRepo.GetAll() on c.memberID equals m.MemberId
-                          join g in _genderRepo.GetAll() on m.PersonalInfo.GenderId equals g.GenderId
+                          join g in _genderRepo.GetAll() on m.Gender equals g.GenderName
                           select new CommentDTO
                           {
                               CommentId = c.commentID,
                               MemberId = c.memberID,
                               Content = c.comment1,
-                              FirstName = m.PersonalInfo.FirstName,
-                              LastName = m.PersonalInfo.LastName,
-                              GenderId = m.PersonalInfo.GenderId,
+                              FirstName = m.FirstName,
+                              LastName = m.LastName,
                               Gender = g.GenderName,
-                              ImagePath = m.PersonalInfo.ImagePath,
+                              ImagePath = m.ImagePath,
                               Date = new DateTime(c.year, c.monthID, c.day),
                               FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
                           }).OrderByDescending(x => x.Date.Year).ThenByDescending(x => x.Date.Month).ThenByDescending(x => x.Date.Day).ThenBy(x => x.FirstName).ToList();
@@ -60,17 +59,16 @@ namespace APC.Applications.Services
         {
             var data = (from c in _repository.GetAllDeletedComments()
                         join m in _memberRepo.GetAll() on c.memberID equals m.MemberId
-                        join g in _genderRepo.GetAll() on m.PersonalInfo.GenderId equals g.GenderId
+                        join g in _genderRepo.GetAll() on m.Gender equals g.GenderName
                         select new CommentDTO
                         {
                             CommentId = c.commentID,
                             MemberId = c.memberID,
                             Content = c.comment1,
-                            FirstName = m.PersonalInfo.FirstName,
-                            LastName = m.PersonalInfo.LastName,
-                            GenderId = m.PersonalInfo.GenderId,
+                            FirstName = m.FirstName,
+                            LastName = m.LastName,
                             Gender = g.GenderName,
-                            ImagePath = m.PersonalInfo.ImagePath,
+                            ImagePath = m.ImagePath,
                             Date = new DateTime(c.year, c.monthID, c.day),
                             FormattedDate = new DateTime(c.year, c.monthID, c.day).ToString("dd.MM.yyyy"),
                         }).ToList();

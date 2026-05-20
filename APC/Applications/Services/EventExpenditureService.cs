@@ -1,6 +1,8 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Domain.Entities;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace APC.Applications.Services
@@ -8,6 +10,7 @@ namespace APC.Applications.Services
     public class EventExpenditureService : IEventExpenditureService
     {
         private readonly IEventExpenditureRepository _repository;
+        private readonly IEventsRepository _eventRepository;
 
         public EventExpenditureService(IEventExpenditureRepository repository)
         {
@@ -28,8 +31,22 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<EventExpenditure> GetAll()
-            => _repository.GetAll();
+        public List<EventExpenditureDTO> GetAll(int eventId)
+        {
+            var data = (from ex in _repository.GetAll(eventId)
+                        join e in _eventRepository.GetAll() on ex.eventID equals e.eventID                        
+                        select new EventExpenditureDTO
+                        {
+                            EventExpenditureId = ex.eventExpenditureID,
+                            EventId = e.eventID,
+                            SpentAmount = ex.amountSpent,
+                            ExpenditureDate = e.eventDate,
+                            Summary = ex.summary,
+                            
+                        }).OrderByDescending(x => x.ExpenditureDate.Year).ThenByDescending(x => x.ExpenditureDate.Month).ThenByDescending(x => x.ExpenditureDate.Day).ThenByDescending(x => x.SpentAmount).ToList();
+
+            return data;
+        }
 
         public bool GetBack(int id)
             => _repository.GetBack(id);

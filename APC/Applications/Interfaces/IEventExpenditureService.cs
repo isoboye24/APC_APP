@@ -1,4 +1,5 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ namespace APC.Applications.Interfaces
 {
     public interface IEventExpenditureService
     {
-        List<EventExpenditure> GetAll();
+        List<EventExpenditureDTO> GetAll(int eventId);
         bool Create(EventExpenditure data);
         bool Update(EventExpenditure data);
         bool Delete(int id);
