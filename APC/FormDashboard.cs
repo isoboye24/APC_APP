@@ -42,12 +42,13 @@ namespace APC
 
         private readonly ISpecialContributorService _specialContributorService;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IGraphicalRepresentationService _graphicalRepresentationService;
 
         public FormDashboard(IServiceProvider serviceProvider, IFinedMemberService finedMemberService, IMemberService memberService,
             IGeneralMeetingAttendanceService generalMeetingAttendanceService, IGeneralMeetingService generalMeetingService,
             ICommentService commentService, IGenderService genderService, IMonthService monthService, IConstitutionService constitutionService, 
             ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService,
-            ICurrentUserService currentUserService
+            ICurrentUserService currentUserService, IGraphicalRepresentationService graphicalRepresentationService
             )
         {
             InitializeComponent();
@@ -71,6 +72,7 @@ namespace APC
             _specialContributionService = specialContributionService;
             _specialContributorService = specialContributorService;
             _currentUserService = currentUserService;
+            _graphicalRepresentationService = graphicalRepresentationService;
 
         }
         private struct RBGColors
@@ -258,13 +260,29 @@ namespace APC
             //btnMembers.Tag = "resizable";
         }
 
+        private void loadAnnualRaisedDues()
+        {
+            var data = _graphicalRepresentationService.GetAllAnnualRaisedDues();
+
+            chartAmountRaisedYearly.Series.Clear();
+
+            chartAmountRaisedYearly.DataSource = data;
+
+            chartAmountRaisedYearly.Series.Add("TotalAmountRaised");
+            chartAmountRaisedYearly.Series["TotalAmountRaised"].ChartType = SeriesChartType.Column;
+            chartAmountRaisedYearly.Series["TotalAmountRaised"].XValueMember = "Year";
+            chartAmountRaisedYearly.Series["TotalAmountRaised"].YValueMembers = "TotalAmountRaised";
+            chartAmountRaisedYearly.Series["TotalAmountRaised"].IsValueShownAsLabel = true;
+
+            chartAmountRaisedYearly.DataBind();
+
+            chartAmountRaisedYearly.Titles.Clear();
+            //labelGraphTitleAnnualReport.Text = $"{year} Report";
+        }
+
         private void RefreshAllCards()
         {
-            //string yearlyDues = "SELECT PERSONAL_ATTENDANCE.year, SUM(PERSONAL_ATTENDANCE.monthlyDues)\r\n" +
-            //"FROM PERSONAL_ATTENDANCE\r\n" +
-            //"WHERE PERSONAL_ATTENDANCE.isDeleted = 0\r\n" +
-            //"GROUP BY PERSONAL_ATTENDANCE.year\r\n" +
-            //"ORDER BY PERSONAL_ATTENDANCE.year ASC";
+            loadAnnualRaisedDues();
 
             //string yearlyExpenditures = "SELECT EXPENDITURE.year, SUM(EXPENDITURE.amountSpent)\r\n" +
             //    "FROM EXPENDITURE\r\n" +

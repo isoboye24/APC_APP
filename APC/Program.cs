@@ -88,11 +88,13 @@ namespace APC
             services.AddScoped<IFinedMemberService, FinedMemberService>();
             services.AddScoped<IGeneralMeetingService, GeneralMeetingService>();
             services.AddScoped<IMemberService, MemberService>();
+
             services.AddScoped<IGeneralMeetingAttendanceService, GeneralMeetingAttendanceService>();
             services.AddScoped<ISpecialContributionService, SpecialContributionService>();
             services.AddScoped<ISpecialContributorService, SpecialContributorService>();
             services.AddScoped<IMemberCommittmentService, MemberCommittmentService>();
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
+            services.AddSingleton<IGraphicalRepresentationService, GraphicalRepresentationService>();
 
             // Forms
             services.AddTransient<FormLogin>();

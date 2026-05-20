@@ -364,7 +364,7 @@
     <Compile Include="Applications\Services\FinedMemberService.cs" />
     <Compile Include="Applications\Services\GenderService.cs" />
     <Compile Include="Applications\Services\GeneralMeetingService.cs" />
-    <Compile Include="Applications\Services\GraphicalRepresentation.cs" />
+    <Compile Include="Applications\Services\GraphicalRepresentationService.cs" />
     <Compile Include="Applications\Services\MaritalStatusService.cs" />
     <Compile Include="Applications\Services\MemberCommittmentService.cs" />
     <Compile Include="Applications\Services\MemberService.cs" />
