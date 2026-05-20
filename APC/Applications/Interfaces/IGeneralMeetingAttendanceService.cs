@@ -21,5 +21,6 @@ namespace APC.Applications.Interfaces
         int GetMembersPresentCount(int generalMeetingId);
         int GetMembersAbsentCount(int generalMeetingId);
         decimal GetTotalDuesPaid(int generalMeetingId);
+        int GetLastMeetingPresentMembersCount();
     }
 }

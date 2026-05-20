@@ -11,18 +11,21 @@ namespace APC.Applications.Services
     public class GeneralMeetingAttendanceService : IGeneralMeetingAttendanceService
     {
         private readonly IGeneralMeetingAttendanceRepository _repository;
+        private readonly IGeneralMeetingRepository _generalMeetingRepository;
         private readonly IMemberRepository _memberRepository;
         private readonly IAttendanceStatusRepository _statusRepository;
         private readonly IGenderRepository _genderRepository;
         private readonly IAttendanceStatusRepository _attendanceStatusRepository;
         public GeneralMeetingAttendanceService(IGeneralMeetingAttendanceRepository repository, IMemberRepository memberRepository, 
-            IAttendanceStatusRepository statusRepository, IGenderRepository genderRepository, IAttendanceStatusRepository attendanceStatusRepository)
+            IAttendanceStatusRepository statusRepository, IGenderRepository genderRepository, IAttendanceStatusRepository attendanceStatusRepository,
+            IGeneralMeetingRepository generalMeetingRepository)
         {
             _repository = repository;
             _memberRepository = memberRepository;
             _statusRepository = statusRepository;
             _genderRepository = genderRepository;
             _attendanceStatusRepository = attendanceStatusRepository;
+            _generalMeetingRepository = generalMeetingRepository;
         }
 
         public int Count()
@@ -65,7 +68,7 @@ namespace APC.Applications.Services
             return _repository.GetAll().Where(x => x.generalAttendanceID == generalMeetingId).Sum(x =>x.monthlyDues ?? 0);
         }
 
-        public bool Create(Domain.Entities.PersonalAttendance data)
+        public bool Create(PersonalAttendance data)
         {
             if (_repository.Exists(data.MemberId, data.GeneralMeetingId))
                 throw new Exception("Member already exists");
@@ -139,7 +142,7 @@ namespace APC.Applications.Services
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
 
-        public bool Update(Domain.Entities.PersonalAttendance data)
+        public bool Update(PersonalAttendance data)
         {
             var member = _repository.GetById(data.GeneralMeetingId);
 
@@ -153,6 +156,28 @@ namespace APC.Applications.Services
             data.UpdateAttendanceStatus(data.AttendanceStatusId);
 
             return _repository.Update(data);
+        }
+
+        public int GetLastMeetingPresentMembersCount()
+        {
+            var lastMeeting = _generalMeetingRepository.GetAll()
+                .Where(x => !x.isDeleted)
+                .OrderByDescending(x => x.year)
+                .ThenByDescending(x => x.monthID)
+                .FirstOrDefault();
+
+            if (lastMeeting == null)
+                return 0;
+
+            const int presentStatusId = 2;
+
+            return _repository.GetAll()
+                .Count(x =>
+                    !x.isDeleted &&
+                    x.year == lastMeeting.year &&
+                    x.monthID == lastMeeting.monthID &&
+                    x.day == lastMeeting.day &&
+                    x.attendanceStatusID == presentStatusId);
         }
     }
 }

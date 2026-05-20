@@ -318,7 +318,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 3, 0);
@@ -339,7 +339,7 @@
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.groupBox1, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(829, 4);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(828, 4);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
@@ -567,7 +567,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(803, 583);
+            this.tabControl1.Size = new System.Drawing.Size(802, 583);
             this.tabControl1.TabIndex = 1;
             // 
             // personalInfoPage
@@ -578,7 +578,7 @@
             this.personalInfoPage.Margin = new System.Windows.Forms.Padding(4);
             this.personalInfoPage.Name = "personalInfoPage";
             this.personalInfoPage.Padding = new System.Windows.Forms.Padding(4);
-            this.personalInfoPage.Size = new System.Drawing.Size(795, 539);
+            this.personalInfoPage.Size = new System.Drawing.Size(794, 539);
             this.personalInfoPage.TabIndex = 0;
             this.personalInfoPage.Text = "Personal Info   ";
             // 
@@ -595,7 +595,7 @@
             this.tableLayoutPanel20.Name = "tableLayoutPanel20";
             this.tableLayoutPanel20.RowCount = 1;
             this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel20.Size = new System.Drawing.Size(787, 531);
+            this.tableLayoutPanel20.Size = new System.Drawing.Size(786, 531);
             this.tableLayoutPanel20.TabIndex = 0;
             // 
             // tableLayoutPanel9
@@ -877,7 +877,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.100001F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(386, 523);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(385, 523);
             this.tableLayoutPanel6.TabIndex = 1;
             // 
             // label11
@@ -900,7 +900,7 @@
             this.txtMaritalStatus.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaritalStatus.Name = "txtMaritalStatus";
             this.txtMaritalStatus.ReadOnly = true;
-            this.txtMaritalStatus.Size = new System.Drawing.Size(205, 34);
+            this.txtMaritalStatus.Size = new System.Drawing.Size(204, 34);
             this.txtMaritalStatus.TabIndex = 0;
             // 
             // txtNationality
@@ -912,7 +912,7 @@
             this.txtNationality.Margin = new System.Windows.Forms.Padding(4);
             this.txtNationality.Name = "txtNationality";
             this.txtNationality.ReadOnly = true;
-            this.txtNationality.Size = new System.Drawing.Size(205, 34);
+            this.txtNationality.Size = new System.Drawing.Size(204, 34);
             this.txtNationality.TabIndex = 0;
             // 
             // label15
@@ -946,7 +946,7 @@
             this.txtNextOfKin.Margin = new System.Windows.Forms.Padding(4);
             this.txtNextOfKin.Name = "txtNextOfKin";
             this.txtNextOfKin.ReadOnly = true;
-            this.txtNextOfKin.Size = new System.Drawing.Size(205, 34);
+            this.txtNextOfKin.Size = new System.Drawing.Size(204, 34);
             this.txtNextOfKin.TabIndex = 0;
             // 
             // label16
@@ -969,7 +969,7 @@
             this.txtNextOfKinRelationship.Margin = new System.Windows.Forms.Padding(4);
             this.txtNextOfKinRelationship.Name = "txtNextOfKinRelationship";
             this.txtNextOfKinRelationship.ReadOnly = true;
-            this.txtNextOfKinRelationship.Size = new System.Drawing.Size(205, 34);
+            this.txtNextOfKinRelationship.Size = new System.Drawing.Size(204, 34);
             this.txtNextOfKinRelationship.TabIndex = 0;
             // 
             // label19
@@ -992,7 +992,7 @@
             this.txtPhone1.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone1.Name = "txtPhone1";
             this.txtPhone1.ReadOnly = true;
-            this.txtPhone1.Size = new System.Drawing.Size(205, 34);
+            this.txtPhone1.Size = new System.Drawing.Size(204, 34);
             this.txtPhone1.TabIndex = 0;
             // 
             // labelPhone2
@@ -1015,7 +1015,7 @@
             this.txtPhone2.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone2.Name = "txtPhone2";
             this.txtPhone2.ReadOnly = true;
-            this.txtPhone2.Size = new System.Drawing.Size(205, 34);
+            this.txtPhone2.Size = new System.Drawing.Size(204, 34);
             this.txtPhone2.TabIndex = 0;
             // 
             // labelPhone3
@@ -1038,7 +1038,7 @@
             this.txtPhone3.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone3.Name = "txtPhone3";
             this.txtPhone3.ReadOnly = true;
-            this.txtPhone3.Size = new System.Drawing.Size(205, 34);
+            this.txtPhone3.Size = new System.Drawing.Size(204, 34);
             this.txtPhone3.TabIndex = 0;
             // 
             // commitmentPage

@@ -16,6 +16,7 @@ namespace APC.Applications.Interfaces
         List<MemberFullDetailsDTO> GetAll();
         List<MemberFullDetailsDTO> GetAllCurrentMembers();
         List<MemberFullDetailsDTO> SelectSpecificMember(int id);
+        MemberFullDetailsDTO GetMemberById(int id);
         List<MemberFullDetailsDTO> GetAllDeletedMembers();
         List<BirthdayMembersDTO> GetBirthdayMembers(int month);
         List<MembersBasicDetailDTO> GetInactiveMembers();

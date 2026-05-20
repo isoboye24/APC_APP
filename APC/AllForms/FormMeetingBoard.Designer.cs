@@ -673,7 +673,6 @@
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(18, 34);
             this.txtYear.TabIndex = 1;
-            this.txtYear.TextChanged += new System.EventHandler(this.txtYear_TextChanged);
             this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYear_KeyPress);
             // 
             // specialContributionsPage

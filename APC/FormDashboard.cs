@@ -1,6 +1,9 @@
 ﻿using APC.AllForms;
+using APC.Applications.DTO;
+using APC.Applications.Interfaces;
 using APC.BLL;
 using APC.DAL.DTO;
+using APC.Helper;
 using APC.Utility;
 using FontAwesome.Sharp;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,9 +25,30 @@ namespace APC
         private float globalFontSize = 14.0f;
         private float resizeFactor = 16.0f;
 
-        private readonly IServiceProvider _serviceProvider;
+        private int minWidthPercentage = 70;
+        private int minHeightPercentage = 70;        
 
-        public FormDashboard(IServiceProvider serviceProvider)
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IMemberService _memberService;
+        private readonly IGeneralMeetingService _generalMeetingService;
+        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
+        private readonly IFinedMemberService _finedMemberService;
+
+        private readonly ICommentService _commentService;
+        private readonly IGenderService _genderService;
+        private readonly IMonthService _monthService;
+        private readonly IConstitutionService _constitutionService;
+        private readonly ISpecialContributionService _specialContributionService;
+
+        private readonly ISpecialContributorService _specialContributorService;
+        private readonly ICurrentUserService _currentUserService;
+
+        public FormDashboard(IServiceProvider serviceProvider, IFinedMemberService finedMemberService, IMemberService memberService,
+            IGeneralMeetingAttendanceService generalMeetingAttendanceService, IGeneralMeetingService generalMeetingService,
+            ICommentService commentService, IGenderService genderService, IMonthService monthService, IConstitutionService constitutionService, 
+            ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService,
+            ICurrentUserService currentUserService
+            )
         {
             InitializeComponent();
             leftBorderBtn = new Panel();
@@ -36,6 +60,18 @@ namespace APC
             this.DoubleBuffered = true;
 
             _serviceProvider = serviceProvider;
+            _finedMemberService = finedMemberService;
+            _memberService = memberService;
+            _generalMeetingAttendanceService = generalMeetingAttendanceService;
+            _generalMeetingService = generalMeetingService;
+            _commentService = commentService;
+            _genderService = genderService;
+            _monthService = monthService;
+            _constitutionService = constitutionService;
+            _specialContributionService = specialContributionService;
+            _specialContributorService = specialContributorService;
+            _currentUserService = currentUserService;
+
         }
         private struct RBGColors
         {
@@ -127,46 +163,39 @@ namespace APC
         {
 
         }
-        MemberBLL memberBLL = new MemberBLL();
-        CommentBLL commentBLL = new CommentBLL();
-        GeneralAttendanceBLL generalAttendanceBLL = new GeneralAttendanceBLL();
-        PersonalAttendanceBLL personalAttendanceBLL = new PersonalAttendanceBLL();
+
+        //MemberBLL memberBLL = new MemberBLL();
+        //CommentBLL commentBLL = new CommentBLL();
+        //GeneralAttendanceBLL generalAttendanceBLL = new GeneralAttendanceBLL();
+        //PersonalAttendanceBLL personalAttendanceBLL = new PersonalAttendanceBLL();
         EventsBLL eventBLL = new EventsBLL();
         FinancialReportBLL finBLL = new FinancialReportBLL();
         FormProperties initialDetail = new FormProperties();
         GraphBLL graphBLL = new GraphBLL();
         ExpenditureBLL expenditureBLL = new ExpenditureBLL();
-        FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
+        //FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
         public bool isAdmin = false;
         public bool isEditor = false;
 
         private float buttonSize = 14f;
         private float panelSize;
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(16, labelDuesMonthName, labelTotalDuesYear, labelAmountRaisedYearly, labelExpendituresYearly);
+            GeneralHelper.ApplyBoldFont(24, labelNoOfRegMem, labelMonthlyDues, labelYearlyDues, labelExpendituresInYear, labelTotalExpenditures,
+                labelLastMeetingAttendance, labelTotalPaidFines, labelTotalFineExpected
+                );
+        }
+
         private void FormDashboard_Load(object sender, EventArgs e)
         {
-            #region
-            labelDuesMonthName.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelTotalDuesYear.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            
-            labelAmountRaisedYearly.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelExpendituresYearly.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-
-            labelNoOfRegMem.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelMonthlyDues.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelYearlyDues.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelExpendituresInYear.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelTotalExpenditures.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelLastMeetingAttendance.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelTotalPaidFines.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            labelTotalFineExpected.Font = new Font("Segoe UI", 24, FontStyle.Bold);
-            #endregion
+            resizeControls();
 
             labelAmountRaisedYearly.Tag = "resizable";
-
-            int minWidthPercentage = 70;
-            int minHeightPercentage = 70;
             int minWidth = Screen.PrimaryScreen.Bounds.Width * minWidthPercentage / 100;
             int minHeight = Screen.PrimaryScreen.Bounds.Height * minHeightPercentage / 100;
+
             this.MinimumSize = new Size(minWidth, minHeight);
 
             if (!isAdmin && !isEditor)
@@ -242,8 +271,8 @@ namespace APC
                 "GROUP BY EXPENDITURE.year\r\n" +
                 "ORDER BY EXPENDITURE.year ASC";
 
-            labelNoOfRegMem.Text = memberBLL.SelectAllMembersCount().ToString();
-            labelLastMeetingAttendance.Text = personalAttendanceBLL.SelectLastMeetingAttendance().ToString();
+            labelNoOfRegMem.Text = _memberService.GetAllCurrentMembersCount().ToString();
+            labelLastMeetingAttendance.Text = _generalMeetingAttendanceService.GetLastMeetingPresentMembersCount().ToString();
             //labelTotalComments.Text = commentBLL.SelectAllCommentsCount().ToString();
             //labelMonthlyComments.Text = commentBLL.SelectMonthlyCommentsCount().ToString();
             //labelNoOfChildren.Text = childBLL.SelectAllChildren().ToString();
@@ -269,8 +298,8 @@ namespace APC
             labelYearlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountYearly(todayYear);
             labelExpendituresInYear.Text = "€ " + expenditureBLL.SelectTotalExpendituresYearly(todayYear);
             labelTotalExpenditures.Text = "€ " + finBLL.SelectTotalSpentAmount();
-            labelTotalFineExpected.Text = "€ " + finedMemberBLL.SelectTotalFinedExpected();
-            labelTotalPaidFines.Text = "€ " + finedMemberBLL.SelectTotalPaidFines();
+            labelTotalFineExpected.Text = "€ " + _finedMemberService.GetTotalFinesExpected();
+            labelTotalPaidFines.Text = "€ " + _finedMemberService.GetTotalPaidFines();
 
             labelAmountRaisedYearly.Text = "Dues Raised in each year";
             labelExpendituresYearly.Text = "Expenditures in each year";
@@ -383,28 +412,39 @@ namespace APC
         }
 
         private void btnMembers_Click_1(object sender, EventArgs e)
-        {            
-            int memberCount = memberBLL.SelectAllMembersCount();
-            if (memberCount > 0)
+        {
+            int memberCount = _memberService.Count();
+
+            if (memberCount <= 0)
+                return;
+
+            if (!isAdmin && !isEditor)
             {
-                if (!isAdmin && !isEditor)
+                MemberFullDetailsDTO detail = _memberService.GetMemberById(_currentUserService.MemberId);
+
+                if (detail == null)
                 {
-                    MemberDTO dto = memberBLL.Select();
-                    MemberDetailDTO detail = dto.Members.First(x => x.MemberID == AuthenticationDTO.MemberID);
-                    FormViewMember open = new FormViewMember();
-                    open.detail = detail;
-                    open.isView = true;
-                    this.Hide();
-                    open.ShowDialog();
-                    this.Visible = true;
-                }
-                else
-                {
-                    buttonWasClicked = true;
-                    ActivateButton(sender, RBGColors.color2);
-                    OpenChildForm(new FormMembersBoard());
+                    MessageBox.Show("Member not found.");
+                    return;
                 }
 
+                var form = _serviceProvider.GetRequiredService<FormViewMember>();
+
+                form.MemberDetail(detail);
+                form.isView = true;
+
+                Hide();
+                form.ShowDialog();
+                Show();
+            }
+            else
+            {
+                buttonWasClicked = true;
+                ActivateButton(sender, RBGColors.color2);
+
+                var form = _serviceProvider.GetRequiredService<FormMembersBoard>();
+
+                OpenChildForm(form);
             }
         }
 
@@ -412,13 +452,16 @@ namespace APC
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormReportsBoard());
+
+            var form = _serviceProvider.GetRequiredService<FormReportsBoard>();
+            OpenChildForm(form);
         }
 
         private void btnManage_Click_1(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
+
             var form = _serviceProvider.GetRequiredService<FormSettings>();
             OpenChildForm(form);
         }
@@ -440,9 +483,9 @@ namespace APC
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            FormLogin open = new FormLogin();
+            var form = _serviceProvider.GetRequiredService<FormLogin>();
             this.Hide();
-            open.ShowDialog();
+            form.ShowDialog();
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)
@@ -459,21 +502,27 @@ namespace APC
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormMeetingBoard());
+
+            var form = _serviceProvider.GetRequiredService<FormMeetingBoard>();
+            OpenChildForm(form);
         }
 
         private void btnEvents_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormEventsList());
+
+            var form = _serviceProvider.GetRequiredService<FormEventsList>();
+            OpenChildForm(form);
         }
 
         private void btnDocuments_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormDocumentList());
+
+            var form = _serviceProvider.GetRequiredService<FormDocumentList>();
+            OpenChildForm(form);
         }
 
         private void panelMeetingAttend_Click(object sender, EventArgs e)

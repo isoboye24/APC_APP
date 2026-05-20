@@ -1,13 +1,10 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.DAL.DTO;
 using APC.Domain.Entities;
 using APC.Helper;
-using APC.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 
 namespace APC.Applications.Services
 {
@@ -326,7 +323,12 @@ namespace APC.Applications.Services
             .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
             .ToList();
         }
-        
+
+        public MemberFullDetailsDTO GetMemberById(int id)
+        {
+            return SelectSpecificMember(id).FirstOrDefault();
+        }
+
         public List<MemberFullDetailsDTO> GetAllDeletedMembers()
         {
             var data = (from m in _repository.GetAllDeletedMembers()

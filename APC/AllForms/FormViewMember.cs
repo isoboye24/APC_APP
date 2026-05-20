@@ -1,17 +1,11 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
 using APC.BLL;
+using APC.DAL.DTO;
+using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using APC.DAL;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace APC.AllForms
 {
@@ -35,6 +29,7 @@ namespace APC.AllForms
         public bool isView = false;
         public bool isFormer = false;
         public bool isCommittment = false;
+
         public MemberDetailDTO detail { get; set; }
         public int memberID;
         MemberBLL bll = new MemberBLL();
@@ -51,78 +46,33 @@ namespace APC.AllForms
         FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
         int finesCount = 0;
 
+        private Applications.DTO.MemberFullDetailsDTO _memberFullDetailsDTO;
+
+        public void MemberDetail(MemberFullDetailsDTO memberFullDetailsDTO)
+        {
+            _memberFullDetailsDTO = memberFullDetailsDTO;
+        }
+
+        private void resizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelMemberNameTitle, label1, label2, label3, label4, label5, label6, label7, label8, label9,
+                label10, label11, label12, label13, label14, label15, label16, label17, label18, label19, label20, label21, label22,
+                label23, label25, label26, label27, labelPhone2, labelPhone3, labelBirthday, labelMemSince, labelAmountContributed,
+                labelAmountExpected, labelCommentText, labelFinesText, labelNoOfAbsent, labelNoOfComments, labelNoOfFines, labelNoOfPresent,
+                labelPersonalBalance, btnClose, btnNoComments, btnViewAbsentAttendance, btnViewAmountContributed, btnViewAmountExpected,
+                btnViewFines, btnViewPersonalBalance, btnViewPresentAttendance
+                );
+
+
+            GeneralHelper.ApplyRegularFont(14, txtAddress, txtEmail, txtLGA, txtName, txtPhone1, txtCountry, txtEmpStatus, txtGender,
+                txtPhone2, txtPhone3, txtSurname, txtMaritalStatus, txtNationality, txtNextOfKin, txtNextOfKinRelationship, txtPermission,
+                txtPosition, txtProfession
+                );
+        }
+
         private void FormViewMember_Load(object sender, EventArgs e)
         {
-            #region
-            labelMemberNameTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label7.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label8.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label10.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label11.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label12.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label13.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label14.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label15.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label16.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label17.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label18.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label19.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label20.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label21.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label22.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label23.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label25.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label26.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label27.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelPhone2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelPhone3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelBirthday.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelMemSince.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelAmountContributed.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelAmountExpected.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelCommentText.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelFinesText.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfAbsent.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfFines.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfPresent.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelPersonalBalance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            txtAddress.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtEmail.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtLGA.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPhone1.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPhone2.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPhone3.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSurname.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtCountry.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtEmpStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtGender.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtMaritalStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtNationality.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtNextOfKin.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtNextOfKinRelationship.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPermission.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPosition.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtProfession.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnNoComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewAbsentAttendance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewAmountContributed.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewAmountExpected.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewFines.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewPersonalBalance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewPresentAttendance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
+            resizeControls();
 
             if (isCommittment)
             {
@@ -137,40 +87,40 @@ namespace APC.AllForms
                 }
                 else
                 {
-                    labelMemberNameTitle.Text = detail.Surname + " " + detail.Name;
-                    string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+                    labelMemberNameTitle.Text = _memberFullDetailsDTO.LastName + " " + _memberFullDetailsDTO.FirstName;
+                    string imagePath = Application.StartupPath + "\\images\\" + _memberFullDetailsDTO.ImagePath;
                     picProfilePic.ImageLocation = imagePath;
 
-                    txtName.Text = detail.Name;
-                    txtSurname.Text = detail.Surname;
-                    txtAddress.Text = detail.HouseAddress;
-                    txtPosition.Text = detail.PositionName;
-                    labelBirthday.Text = detail.Birthday.ToShortDateString();
-                    labelMemSince.Text = detail.MembershipDate.ToShortDateString();
-                    txtEmail.Text = detail.EmailAddress;
-                    txtPhone1.Text = detail.PhoneNumber;
-                    txtLGA.Text = detail.LGA;
-                    if (detail.PhoneNumber2 != "")
+                    txtName.Text = _memberFullDetailsDTO.FirstName;
+                    txtSurname.Text = _memberFullDetailsDTO.LastName;
+                    txtAddress.Text = _memberFullDetailsDTO.HouseAddress;
+                    txtPosition.Text = _memberFullDetailsDTO.Position;
+                    labelBirthday.Text = _memberFullDetailsDTO.Birthday.ToShortDateString();
+                    labelMemSince.Text = _memberFullDetailsDTO.MembershipDate.ToString();
+                    txtEmail.Text = _memberFullDetailsDTO.Email;
+                    txtPhone1.Text = _memberFullDetailsDTO.PhoneNumber;
+                    txtLGA.Text = _memberFullDetailsDTO.LGA;
+                    if (_memberFullDetailsDTO.PhoneNumber2 != "")
                     {
                         txtPhone2.Visible = true;
                         labelPhone2.Visible = true;
                     }
-                    if (detail.PhoneNumber3 != "")
+                    if (_memberFullDetailsDTO.PhoneNumber3 != "")
                     {
                         txtPhone3.Visible = true;
                         labelPhone3.Visible = true;
                     }
-                    txtPhone2.Text = detail.PhoneNumber2;
-                    txtPhone3.Text = detail.PhoneNumber3;
-                    txtCountry.Text = detail.CountryName;
-                    txtProfession.Text = detail.ProfessionName;
-                    txtEmpStatus.Text = detail.EmploymentStatusName;
-                    txtGender.Text = detail.GenderName;
-                    txtNationality.Text = detail.NationalityName;
-                    txtMaritalStatus.Text = detail.MaritalStatusName;
-                    txtPermission.Text = detail.PermissionName;
-                    txtNextOfKin.Text = detail.NameOfNextOfKin;
-                    txtNextOfKinRelationship.Text = detail.RelationshipToKin;
+                    txtPhone2.Text = _memberFullDetailsDTO.PhoneNumber2;
+                    txtPhone3.Text = _memberFullDetailsDTO.PhoneNumber3;
+                    txtCountry.Text = _memberFullDetailsDTO.Country;
+                    txtProfession.Text = _memberFullDetailsDTO.Profession;
+                    txtEmpStatus.Text = _memberFullDetailsDTO.EmploymentStatus;
+                    txtGender.Text = _memberFullDetailsDTO.Gender;
+                    txtNationality.Text = _memberFullDetailsDTO.Nationality;
+                    txtMaritalStatus.Text = _memberFullDetailsDTO.MaritalStatus;
+                    txtPermission.Text = _memberFullDetailsDTO.Permission;
+                    txtNextOfKin.Text = _memberFullDetailsDTO.NextOfKin;
+                    txtNextOfKinRelationship.Text = _memberFullDetailsDTO.RelationshipToNextOfKin;
                 }
 
 
@@ -180,8 +130,8 @@ namespace APC.AllForms
             labelNoOfComments.Hide();
             btnNoComments.Hide();            
 
-            dto = commentBLL.SelectMembersCommentList(detail.MemberID);
-            commentCount = dto.Comments.Count(x => x.MemberID == detail.MemberID);
+            dto = commentBLL.SelectMembersCommentList(_memberFullDetailsDTO.MemberId);
+            commentCount = dto.Comments.Count(x => x.MemberID == _memberFullDetailsDTO.MemberId);
             labelNoOfComments.Text = commentCount.ToString();
             if (commentCount == 1)
             {
@@ -199,7 +149,7 @@ namespace APC.AllForms
             }
 
             
-            finesCount = finedMemberBLL.SelectAllFinesCount(detail.MemberID);
+            finesCount = finedMemberBLL.SelectAllFinesCount(_memberFullDetailsDTO.MemberId);
             btnViewFines.Hide();
             labelNoOfFines.Text = finesCount.ToString();
             if (finesCount > 0)
@@ -215,7 +165,7 @@ namespace APC.AllForms
                 btnViewFines.Visible = true;
             }
 
-            attendancePresentCount = bll.GetNoOfMembersPresentAttendance(detail.MemberID);
+            attendancePresentCount = bll.GetNoOfMembersPresentAttendance(_memberFullDetailsDTO.MemberId);
             labelNoOfPresent.Text = attendancePresentCount.ToString();
             btnViewPresentAttendance.Hide();
             if (attendancePresentCount > 0)
@@ -224,7 +174,7 @@ namespace APC.AllForms
                 btnViewPresentAttendance.Text = "View Attendance";
             }
 
-            attendanceAbsentCount = bll.GetNoOfMembersAbsentAttendance(detail.MemberID);
+            attendanceAbsentCount = bll.GetNoOfMembersAbsentAttendance(_memberFullDetailsDTO.MemberId);
             labelNoOfAbsent.Text = attendanceAbsentCount.ToString();
             btnViewAbsentAttendance.Hide();
             if (attendanceAbsentCount > 0)
@@ -232,7 +182,7 @@ namespace APC.AllForms
                 btnViewAbsentAttendance.Visible = true;
                 btnViewAbsentAttendance.Text = "View Attendance";
             }
-            amountContributed = bll.GetAmountContributed(detail.MemberID);
+            amountContributed = bll.GetAmountContributed(_memberFullDetailsDTO.MemberId);
             labelAmountContributed.Text = "€" + amountContributed;
             btnViewAmountContributed.Hide();
             if (amountContributed > 0)
@@ -240,7 +190,7 @@ namespace APC.AllForms
                 btnViewAmountContributed.Visible = true;
                 btnViewAmountContributed.Text = "View Amount";
             }
-            amountExpected = bll.GetAmountExpected(detail.MemberID);
+            amountExpected = bll.GetAmountExpected(_memberFullDetailsDTO.MemberId);
             //labelAmountExpected.Text = "€" + amountExpected;
             labelAmountExpected.Text = "€ 120";
             btnViewAmountExpected.Hide();
@@ -264,20 +214,20 @@ namespace APC.AllForms
             labelPhone3.Hide();
             if (isView)
             {
-                labelMemberNameTitle.Text = detail.Surname + " " + detail.Name;
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+                labelMemberNameTitle.Text = _memberFullDetailsDTO.LastName + " " + _memberFullDetailsDTO.FirstName;
+                string imagePath = Application.StartupPath + "\\images\\" + _memberFullDetailsDTO.ImagePath;
                 picProfilePic.ImageLocation = imagePath;
 
-                txtName.Text = detail.Name;
-                txtSurname.Text = detail.Surname;
-                txtAddress.Text = detail.HouseAddress;
-                txtPosition.Text = detail.PositionName;
-                labelBirthday.Text = detail.Birthday.ToShortDateString();
-                labelMemSince.Text = detail.MembershipDate.ToShortDateString();
-                txtEmail.Text = detail.EmailAddress;
-                txtPhone1.Text = detail.PhoneNumber;
-                txtLGA.Text = detail.LGA;
-                if (detail.PhoneNumber2 != "")
+                txtName.Text = _memberFullDetailsDTO.FirstName;
+                txtSurname.Text = _memberFullDetailsDTO.LastName;
+                txtAddress.Text = _memberFullDetailsDTO.HouseAddress;
+                txtPosition.Text = _memberFullDetailsDTO.Position;
+                labelBirthday.Text = _memberFullDetailsDTO.Birthday.ToShortDateString();
+                labelMemSince.Text = _memberFullDetailsDTO.MembershipDate.ToString();
+                txtEmail.Text = _memberFullDetailsDTO.Email;
+                txtPhone1.Text = _memberFullDetailsDTO.PhoneNumber;
+                txtLGA.Text = _memberFullDetailsDTO.LGA;
+                if (_memberFullDetailsDTO.PhoneNumber2 != "")
                 {
                     txtPhone2.Visible = true;
                     labelPhone2.Visible = true;
@@ -287,22 +237,21 @@ namespace APC.AllForms
                     txtPhone3.Visible = true;
                     labelPhone3.Visible = true;
                 }
-                txtPhone2.Text = detail.PhoneNumber2;
-                txtPhone3.Text = detail.PhoneNumber3;
-                txtCountry.Text = detail.CountryName;
-                txtProfession.Text = detail.ProfessionName;
-                txtEmpStatus.Text = detail.EmploymentStatusName;
-                txtGender.Text = detail.GenderName;
-                txtNationality.Text = detail.NationalityName;
-                txtMaritalStatus.Text = detail.MaritalStatusName;
-                txtPermission.Text = detail.PermissionName;
-                txtNextOfKin.Text = detail.NameOfNextOfKin;
-                txtNextOfKinRelationship.Text = detail.RelationshipToKin;
+                txtPhone2.Text = _memberFullDetailsDTO.PhoneNumber2;
+                txtPhone3.Text = _memberFullDetailsDTO.PhoneNumber3;
+                txtCountry.Text = _memberFullDetailsDTO.Country;
+                txtProfession.Text = _memberFullDetailsDTO.Profession;
+                txtEmpStatus.Text = _memberFullDetailsDTO.EmploymentStatus;
+                txtGender.Text = _memberFullDetailsDTO.Gender;
+                txtNationality.Text = _memberFullDetailsDTO.Nationality;
+                txtMaritalStatus.Text = _memberFullDetailsDTO.MaritalStatus;
+                txtPermission.Text = _memberFullDetailsDTO.Permission;
+                txtNextOfKin.Text = _memberFullDetailsDTO.NextOfKin;
+                txtNextOfKinRelationship.Text = _memberFullDetailsDTO.RelationshipToNextOfKin;
             }
-           
-
-
         }
+
+        
 
         private void btnClose_Click(object sender, EventArgs e)
         {
