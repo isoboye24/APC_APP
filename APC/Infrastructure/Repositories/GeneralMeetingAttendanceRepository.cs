@@ -43,6 +43,11 @@ namespace APC.Infrastructure.Repositories
             return _db.PERSONAL_ATTENDANCE.Where(x => !x.isDeleted);
         }
         
+        public IQueryable<PERSONAL_ATTENDANCE> GetMemberPersonalAttendanceByYear(int memberId, int year)
+        {
+            return _db.PERSONAL_ATTENDANCE.Where(x => !x.isDeleted && x.memberID == memberId && x.year == year);
+        }
+        
         public IQueryable<PERSONAL_ATTENDANCE> GetAllDeletedPersonalAttendance()
         {
             return _db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted);

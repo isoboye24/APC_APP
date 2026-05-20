@@ -11,14 +11,16 @@ namespace APC.Applications.Services
     public class MemberCommittmentService : IMemberCommittmentService
     {
         private readonly IMemberRepository _memberRepository;
-        private readonly IGeneralMeetingAttendanceRepository _meetingAttendanceRepository;
+        private readonly IGeneralMeetingAttendanceRepository _generalMeetingAttendanceRepository;
         private readonly IFinedMemberRepository _finedMemberRepository;
-        public MemberCommittmentService(IMemberRepository memberRepository, IGeneralMeetingAttendanceRepository meetingAttendanceRepository,
-            IFinedMemberRepository finedMemberRepository)
+        private readonly IConstitutionRepository _constitutionRepository;
+        public MemberCommittmentService(IMemberRepository memberRepository, IGeneralMeetingAttendanceRepository generalMeetingAttendanceRepository,
+            IFinedMemberRepository finedMemberRepository, IConstitutionRepository constitutionRepository)
         {
             _memberRepository = memberRepository;
-            _meetingAttendanceRepository = meetingAttendanceRepository;
+            _generalMeetingAttendanceRepository = generalMeetingAttendanceRepository;
             _finedMemberRepository = finedMemberRepository;
+            _constitutionRepository = constitutionRepository;
         }
 
         public List<MemberCommittmentDTO> GetMembersCommittment(int year)
@@ -40,11 +42,7 @@ namespace APC.Applications.Services
 
             foreach (var member in members)
             {
-                var attendance = _db.PERSONAL_ATTENDANCE
-                    .Where(x => !x.isDeleted
-                        && x.memberID == member.memberID
-                        && x.year == year)
-                    .ToList();
+                var attendance = _generalMeetingAttendanceRepository.GetMemberPersonalAttendanceByYear(member.memberID, year);
 
                 decimal contributed = attendance.Sum(x => (decimal?)x.monthlyDues ?? 0);
 
@@ -62,8 +60,8 @@ namespace APC.Applications.Services
                     balance = (contributed - expected) + " € Extra";
 
                 var fines = (
-                    from f in _db.FINED_MEMBER
-                    join c in _db.CONSTITUTION on f.constitutionID equals c.constitutionID
+                    from f in _finedMemberRepository.GetAll()
+                    join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
                     where !f.isdeleted
                         && !c.isDeleted
                         && f.memberID == member.memberID
@@ -73,7 +71,7 @@ namespace APC.Applications.Services
 
                 decimal totalFines = fines.Sum();
 
-                decimal paidFines = _db.FINED_MEMBER
+                decimal paidFines = _finedMemberRepository.GetAll()
                     .Where(x => !x.isdeleted
                         && x.memberID == member.memberID
                         && x.year == year)
@@ -94,7 +92,7 @@ namespace APC.Applications.Services
                 // Rank calculation
                 //---------------------------------------
 
-                var duesRatioSum = _db.PERSONAL_ATTENDANCE
+                var duesRatioSum = _generalMeetingAttendanceRepository.GetAll()
                     .Where(x => !x.isDeleted
                         && x.memberID == member.memberID
                         && x.year == year
@@ -106,7 +104,7 @@ namespace APC.Applications.Services
                         ? 50 + (((duesRatioSum - 120) / 120) * 0.5m)
                         : (duesRatioSum / 120) * 50;
 
-                int attendanceRatioCount = _db.PERSONAL_ATTENDANCE
+                int attendanceRatioCount = _generalMeetingAttendanceRepository.GetAll()
                     .Count(x => !x.isDeleted
                         && x.memberID == member.memberID
                         && x.year == year
@@ -116,7 +114,7 @@ namespace APC.Applications.Services
                 decimal attendanceRatio =
                     ((decimal)attendanceRatioCount / (endMonth + 1)) * 40;
 
-                var behaviorRecords = _db.FINED_MEMBER
+                var behaviorRecords = _finedMemberRepository.GetAll()
                     .Where(x => !x.isdeleted
                         && x.memberID == member.memberID
                         && x.year == year

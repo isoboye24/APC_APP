@@ -8,6 +8,7 @@ namespace APC.Applications.Interfaces
     {
         IQueryable<PERSONAL_ATTENDANCE> GetAll();
         IQueryable<PERSONAL_ATTENDANCE> GetAllByGeneralMeetingId(int id);
+        IQueryable<PERSONAL_ATTENDANCE> GetMemberPersonalAttendanceByYear(int memberId, int year);
         IQueryable<PERSONAL_ATTENDANCE> GetAllDeletedPersonalAttendance();
         IQueryable<PERSONAL_ATTENDANCE> GetById(int id);
         bool Insert(PersonalAttendance data);

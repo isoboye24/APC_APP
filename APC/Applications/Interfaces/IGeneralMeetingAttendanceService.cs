@@ -11,6 +11,7 @@ namespace APC.Applications.Interfaces
     public interface IGeneralMeetingAttendanceService
     {
         List<GeneralMeetingAttendanceDTO> GetAllByGeneralMeetingId(int id);
+        List<GeneralMeetingAttendanceDTO> GetMemberPersonalAttendanceByYear(int memberId, int year);
         List<GeneralMeetingAttendanceDTO> GetAllDeletedPersonalAttendance();
         bool Create(Domain.Entities.PersonalAttendance data);
         bool Update(Domain.Entities.PersonalAttendance data);
