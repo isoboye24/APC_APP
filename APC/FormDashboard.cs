@@ -306,18 +306,19 @@ namespace APC
             //labelLastEventDate.Text = eventBLL.SelectRecentEvent();
 
             string monthToday = DateTime.Now.ToString("MMMM");
-            string yearToday = DateTime.Now.Year.ToString();
 
             int todayMonth = DateTime.Now.Month;
             int todayYear = DateTime.Today.Year;
-            labelDuesMonthName.Text = "Dues in "+ monthToday + " "+ yearToday;
-            labelExpensesInThisYear.Text = "Total Expenses in " + yearToday;
-            labelTotalDuesYear.Text = "Total Dues + Fines in " + yearToday;
 
-            labelMonthlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountMonthly(todayMonth, todayYear);
-            labelYearlyDues.Text = "€ " + finBLL.SelectTotalRaisedAmountYearly(todayYear);
-            labelExpendituresInYear.Text = "€ " + expenditureBLL.SelectTotalExpendituresYearly(todayYear);
-            labelTotalExpenditures.Text = "€ " + finBLL.SelectTotalSpentAmount();
+            labelDuesMonthName.Text = "Dues in "+ monthToday + " "+ todayYear;
+            labelExpensesInThisYear.Text = "Total Expenses in " + todayYear;
+            labelTotalDuesYear.Text = "Total Dues + Fines in " + todayYear;
+
+            labelMonthlyDues.Text = "€ " + _financialReportService.GetTotalDuesByMonth(todayMonth, todayYear);
+            labelYearlyDues.Text = "€ " + _financialReportService.GetTotalDuesByYear(todayYear);
+
+            labelExpendituresInYear.Text = "€ " + _financialReportService.GetOverallExpendituresByYear(todayYear);
+            labelTotalExpenditures.Text = "€ " + _financialReportService.GetOverallExpenditures();
             labelTotalFineExpected.Text = "€ " + _finedMemberService.GetTotalFinesExpected();
             labelTotalPaidFines.Text = "€ " + _finedMemberService.GetTotalPaidFines();
 

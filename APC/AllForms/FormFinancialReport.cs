@@ -1,4 +1,5 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,13 @@ namespace APC
 {
     public partial class FormFinancialReport : Form
     {
-        public FormFinancialReport()
+        private readonly IFinancialReportService _financialReportService;
+        public FormFinancialReport(IFinancialReportService financialReportService)
         {
             InitializeComponent();
+            _financialReportService = financialReportService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]

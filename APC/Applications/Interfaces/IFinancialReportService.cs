@@ -1,10 +1,6 @@
 ﻿using APC.Applications.DTO;
 using APC.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Interfaces
 {
@@ -19,6 +15,10 @@ namespace APC.Applications.Interfaces
         int Count();
 
         decimal GetOverallTotalDues();
+        decimal GetTotalDuesByMonth(int month, int year);
+        decimal GetTotalDuesByYear(int year);
+
         decimal GetOverallExpenditures();
+        decimal GetOverallExpendituresByYear(int year);
     }
 }

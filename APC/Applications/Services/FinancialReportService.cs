@@ -108,10 +108,35 @@ namespace APC.Applications.Services
             return _repository.GetAll()
                 .Sum(x => (decimal?)x.totalAmountRaised) ?? 0;
         }
+
+        public decimal GetTotalDuesByMonth(int month, int year)
+        {
+            return _generalMeetingAttendanceRepository.GetAll()
+                   .Where(x => x.monthID == month 
+                   && x.year == year 
+                   && x.monthlyDues > 0)
+                   .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+        }
         
+        public decimal GetTotalDuesByYear(int year)
+        {
+            return _generalMeetingAttendanceRepository.GetAll()
+                   .Where(x => x.year == year 
+                   && x.monthlyDues > 0)
+                   .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+        }
+        
+
         public decimal GetOverallExpenditures()
         {
             return _repository.GetAll()
+                .Sum(x => (decimal?)x.totalAmountSpent) ?? 0;
+        }
+        
+        public decimal GetOverallExpendituresByYear(int year)
+        {
+            return _repository.GetAll()
+                .Where(x => x.year == year)
                 .Sum(x => (decimal?)x.totalAmountSpent) ?? 0;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using APC.Applications.Interfaces;
+using APC.Applications.Services;
 using APC.BLL;
 using APC.DAL.DTO;
 using APC.Helper;
@@ -149,6 +150,20 @@ namespace APC.AllForms
 
         private void btnUpdateFinReport_Click(object sender, EventArgs e)
         {
+            var selected = GetSelectedFinancialReport();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a financial report from the table");
+                return;
+            }
+
+            var form = new FormFinancialReport(_commentService, _memberService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
+
+
             if (finReportDetail.FinancialReportID == 0)
             {
                 MessageBox.Show("Please choose a Report from the table");
