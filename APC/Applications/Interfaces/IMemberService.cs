@@ -50,9 +50,6 @@ namespace APC.Applications.Interfaces
 
         int GetPresentMembersCount(int ID);
         int GetAbsentMembersCount(int ID);
-        decimal GetAmountContributed(int ID);
-        decimal GetAmountExpected(int ID);
-
 
         int SelectPermittedMembersCount();
     }

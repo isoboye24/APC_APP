@@ -47,6 +47,55 @@ namespace APC.Applications.Services
                 .ToList();
         }
 
+        public List<YearDTO> GetExpenditureYearsOnly()
+        {
+            return _repository.GetAll()
+                    .Select(x => x.expenditureDate.Year)
+                    .Distinct()
+                    .OrderByDescending(x => x)
+                    .Select(x => new YearDTO
+                    {
+                        YearInValue = x,
+                        YearInText = x.ToString(),
+                    })
+                    .ToList();
+        }
+
+        public List<ExpenditureDTO> GetAnnualExpenditures(int year)
+        {
+            return _repository.GetAll().Where(x => x.year == year)
+                .Select(x => new ExpenditureDTO
+                {
+                    ExpenditureId = x.expenditureID,
+                    AmountSpent = x.amountSpent,
+                    Summary = x.summary,
+                    ExpenditureDate = x.expenditureDate,
+                    FormattedExpenditureDate = x.expenditureDate.ToString("dd.MM.yyyy"),
+                })
+                .OrderByDescending(x => x.ExpenditureDate.Year)
+                .ThenByDescending(x => x.ExpenditureDate.Month)
+                .ThenByDescending(x => x.ExpenditureDate.Day)
+                .ThenBy(x => x.Summary)
+                .ToList();
+        }
+        public List<ExpenditureDTO> GetAllDeletedExpenditures()
+        {
+            return _repository.GetAllDeletedExpenditures()
+                .Select(x => new ExpenditureDTO
+                {
+                    ExpenditureId = x.expenditureID,
+                    AmountSpent = x.amountSpent,
+                    Summary = x.summary,
+                    ExpenditureDate = x.expenditureDate,
+                    FormattedExpenditureDate = x.expenditureDate.ToString("dd.MM.yyyy"),
+                })
+                .OrderByDescending(x => x.ExpenditureDate.Year)
+                .ThenByDescending(x => x.ExpenditureDate.Month)
+                .ThenByDescending(x => x.ExpenditureDate.Day)
+                .ThenBy(x => x.Summary)
+                .ToList();
+        }
+
         public bool GetBack(int id)
             => _repository.GetBack(id);
 

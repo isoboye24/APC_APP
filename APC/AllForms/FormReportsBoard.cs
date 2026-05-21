@@ -1,78 +1,78 @@
-﻿using APC.BLL;
-using APC.DAL.DAO;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
-using APC.HelperServices;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
 {
     public partial class FormReportsBoard : Form
     {
-        public FormReportsBoard()
+        private readonly IFinancialReportService _financialReportService;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IExpenditureService _expenditureService;
+        private readonly IMonthService _monthService;
+
+        private List<Applications.DTO.FinancialReportDTO> _financialReportDTOs;
+        private List<Applications.DTO.ExpenditureDTO> _expenditureDTOs;
+
+        private int currentYear = DateTime.Today.Year;
+
+        public FormReportsBoard(IFinancialReportService financialReportService, ICurrentUserService currentUserService, 
+            IExpenditureService expenditureService, IMonthService monthService)
         {
             InitializeComponent();
+            _financialReportService = financialReportService;
+            _currentUserService = currentUserService;
+            _expenditureService = expenditureService;
+            _monthService = monthService;
         }
-        FinancialReportBLL finReportBLL = new FinancialReportBLL();
-        FinancialReportDTO finReportDTO = new FinancialReportDTO();
-        FinancialReportDetailDTO finReportDetail = new FinancialReportDetailDTO();
+
+        private void controlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, label5, btnAddFinReport, btnUpdateFinReport, btnViewFinReport, btnDeleteFinReport, label1,
+                label4, btnAddExpReport, btnUpdateExpReport, btnViewExpReport, btnDeleteExpReport, btnSearchExpReport, btnClearExpReport
+                );
+
+            GeneralHelper.ApplyBoldFont(16, label5, label2, label3);
+
+            GeneralHelper.ApplyBoldFont(27, labelTotalAmountRaised, labelTotalAmountSpent, labelTotalBalance);
+
+            GeneralHelper.ApplyRegularFont(11, labelTotalFinReport, labelTotalRowsExpReport, labelTotalExpReportYearly, labelTotalExpReport);
+            GeneralHelper.ApplyRegularFont(16, txtYearFinReport, cmbMonthExpReport, cmbYearExpenditure);
+        }
+
+        private void loadFinancialReports()
+        {
+            dataGridViewExpReport.DataSource = _financialReportService.GetAll();
+            _financialReportDTOs = _financialReportService.GetAll();
+            FinancialReportHelper.ConfigureFinancialReportGrid(dataGridViewExpReport, FinancialReportHelper.FinancialReportGridType.Basic);
+        }
+        
+        private void loadExpenditures(int year)
+        {
+            dataGridViewExpReport.DataSource = _expenditureService.GetAnnualExpenditures(year);
+            _expenditureDTOs = _expenditureService.GetAll();
+            ExpenditureHelper.ConfigureExpenditureGrid(dataGridViewExpReport, ExpenditureHelper.ExpenditureGridType.Basic);
+        }
+
         private void FormReportsBoard_Load(object sender, EventArgs e)
         {
-            #region
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 16, FontStyle.Bold);
-            labelTotalFinReport.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            labelTotalAmountRaised.Font = new Font("Segoe UI", 27, FontStyle.Bold);
-            labelTotalAmountSpent.Font = new Font("Segoe UI", 27, FontStyle.Bold);
-            labelTotalBalance.Font = new Font("Segoe UI", 27, FontStyle.Bold);
-            txtYearFinReport.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnAddFinReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateFinReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewFinReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteFinReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            controlsFont();
 
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalRowsExpReport.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            cmbMonthExpReport.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            cmbYearExpenditure.Font = new Font("Segoe UI", 16, FontStyle.Regular);
-            btnAddExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdateExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDeleteExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearchExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClearExpReport.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            loadFinancialReports();
+            loadExpenditures(currentYear);
 
-            labelTotalExpReportYearly.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            labelTotalExpReport.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-
-            #endregion
-
-            #region
-            finReportDTO = finReportBLL.Select();
-            LoadDataGridView.loadFinancialReport(dataGridViewFinReport, finReportDTO);
-
-            expReportDTO = expReportBLL.Select(DateTime.Now.Year);
-            LoadDataGridView.loadExpenditure(dataGridViewExpReport, expReportDTO);
-
-            cmbMonthExpReport.DataSource = expReportDTO.Months;
+            cmbMonthExpReport.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
-            cmbYearExpenditure.DataSource = expReportDTO.Years;
+            cmbYearExpenditure.DataSource = _expenditureService.GetExpenditureYearsOnly();
             cmbYearExpenditure.SelectedIndex = -1;
 
-            #endregion
-
-            if (AuthenticationDTO.AccessLevel != 4)
+            if (_currentUserService.AccessLevel != 4)
             {
                 btnDeleteFinReport.Hide();
                 btnDeleteExpReport.Hide();
@@ -91,32 +91,31 @@ namespace APC.AllForms
 
         private void ClearFilters()
         {
-            txtYearFinReport.Clear();
-            finReportBLL = new FinancialReportBLL();
-            finReportDTO = finReportBLL.Select();
-            dataGridViewFinReport.DataSource = finReportDTO.FinancialReports;
+            txtYearFinReport.Clear();            
+            dataGridViewFinReport.DataSource = _financialReportService.GetAll();
 
             txtSummaryExpReport.Clear();
             cmbMonthExpReport.SelectedIndex = -1;
             cmbYearExpenditure.SelectedIndex = -1;
-            expReportBLL = new ExpenditureBLL();
-            expReportDTO = expReportBLL.Select(DateTime.Now.Year);
-            dataGridViewExpReport.DataSource = expReportDTO.Expenditures;
+
+            dataGridViewExpReport.DataSource = _expenditureService.GetAnnualExpenditures(currentYear);
 
             Counts();
             RowsCount();
         }
 
-        int currentYear = DateTime.Now.Year;
         private void Counts()
-        {            
-            labelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
-            labelTotalAmountRaised.Text = finReportBLL.SelectTotalRaisedAmount().ToString();
-            labelTotalAmountSpent.Text = finReportBLL.SelectTotalSpentAmount().ToString();
-            labelTotalBalance.Text = (finReportBLL.SelectTotalRaisedAmount() - finReportBLL.SelectTotalSpentAmount()).ToString();
+        {
+            decimal overallRaisedAmount = _financialReportService.GetOverallTotalDues();
+            decimal overallSpentAmount = _financialReportService.GetOverallExpenditures();
 
-            labelTotalExpReport.Text = "Overall Total: " + finReportBLL.SelectTotalExpenditure().ToString() + " €";
-            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + finReportBLL.SelectTotalExpenditureYearly(currentYear).ToString() + " €";
+            labelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
+            labelTotalAmountRaised.Text = overallRaisedAmount.ToString();
+            labelTotalAmountSpent.Text = overallSpentAmount.ToString();
+            labelTotalBalance.Text = (overallRaisedAmount - overallSpentAmount).ToString();
+
+            labelTotalExpReport.Text = "Overall Total: " + overallSpentAmount.ToString() + " €";
+            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + _expenditureService.GetAnnualExpenditures(currentYear).ToString() + " €";
         }
 
         private void RowsCount()
@@ -133,10 +132,19 @@ namespace APC.AllForms
             ClearFilters();
         }
 
+        private Applications.DTO.FinancialReportDTO GetSelectedFinancialReport()
+        {
+            if (dataGridViewFinReport.CurrentRow == null)
+                return null;
+
+            return dataGridViewFinReport.CurrentRow.DataBoundItem as Applications.DTO.FinancialReportDTO;
+        }
+
+
         private void dataGridViewFinReport_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            finReportDetail = GeneralHelper.MapFromGrid<FinancialReportDetailDTO>(dataGridViewFinReport, e.RowIndex);
+            //if (e.RowIndex < 0) return;
+            //finReportDetail = GeneralHelper.MapFromGrid<FinancialReportDetailDTO>(dataGridViewFinReport, e.RowIndex);
         }
 
         private void btnUpdateFinReport_Click(object sender, EventArgs e)

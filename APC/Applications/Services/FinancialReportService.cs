@@ -9,9 +9,16 @@ namespace APC.Applications.Services
     public class FinancialReportService : IFinancialReportService
     {
         private readonly IFinancialReportRepository _repository;
-        public FinancialReportService(IFinancialReportRepository repository)
+        private readonly IGeneralMeetingAttendanceRepository _generalMeetingAttendanceRepository;
+        private readonly IMemberRepository _memberRepository;
+        private readonly IGeneralMeetingRepository _generalMeetingRepository;
+        public FinancialReportService(IFinancialReportRepository repository, IGeneralMeetingAttendanceRepository generalMeetingAttendanceRepository, 
+            IGeneralMeetingRepository generalMeetingRepository, IMemberRepository memberRepository)
         {
             _repository = repository;
+            _generalMeetingAttendanceRepository = generalMeetingAttendanceRepository;
+            _generalMeetingRepository = generalMeetingRepository;
+            _memberRepository = memberRepository;
         }
 
         public int Count()
@@ -61,6 +68,51 @@ namespace APC.Applications.Services
             data.UpdateSummary(data.Summary);
 
             return _repository.Update(data);
+        }
+
+        public decimal GetAmountContributedByMember(int ID)
+        {
+            return _generalMeetingAttendanceRepository.GetAll()
+                   .Where(x => x.memberID == ID &&
+                               !x.isDeleted &&
+                               x.attendanceStatusID == 2 &&
+                               x.monthlyDues > 0)
+                   .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+        }
+
+        public decimal GetAmountExpectedByMember(int ID)
+        {
+            var memberInfo = _memberRepository.GetById(ID);
+
+            if (memberInfo == null || memberInfo.membershipDate == null)
+                return 0;
+
+            DateTime membershipDate = memberInfo.membershipDate.Value;
+
+            int meetingCount = (from a in _generalMeetingAttendanceRepository.GetAll()
+                                join g in _generalMeetingRepository.GetAll()
+                                    on a.generalAttendanceID equals g.generalAttendanceID
+                                where a.memberID == ID &&
+                                      !g.isDeleted &&
+                                      g.attendanceDate > membershipDate
+                                select a)
+                                .Count();
+
+            decimal feePerMeeting = 10.0m;
+
+            return meetingCount * feePerMeeting;
+        }
+
+        public decimal GetOverallTotalDues()
+        {
+            return _repository.GetAll()
+                .Sum(x => (decimal?)x.totalAmountRaised) ?? 0;
+        }
+        
+        public decimal GetOverallExpenditures()
+        {
+            return _repository.GetAll()
+                .Sum(x => (decimal?)x.totalAmountSpent) ?? 0;
         }
     }
 }

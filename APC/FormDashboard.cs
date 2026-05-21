@@ -2,7 +2,6 @@
 using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.BLL;
-using APC.DAL.DTO;
 using APC.Helper;
 using APC.Utility;
 using FontAwesome.Sharp;
@@ -43,12 +42,15 @@ namespace APC
         private readonly ISpecialContributorService _specialContributorService;
         private readonly ICurrentUserService _currentUserService;
         private readonly IGraphicalRepresentationService _graphicalRepresentationService;
+        private readonly IFinancialReportService _financialReportService;
+        private readonly IExpenditureService _expenditureService;
 
         public FormDashboard(IServiceProvider serviceProvider, IFinedMemberService finedMemberService, IMemberService memberService,
             IGeneralMeetingAttendanceService generalMeetingAttendanceService, IGeneralMeetingService generalMeetingService,
             ICommentService commentService, IGenderService genderService, IMonthService monthService, IConstitutionService constitutionService, 
             ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService,
-            ICurrentUserService currentUserService, IGraphicalRepresentationService graphicalRepresentationService
+            ICurrentUserService currentUserService, IGraphicalRepresentationService graphicalRepresentationService,
+            IFinancialReportService financialReportService, IExpenditureService expenditureService
             )
         {
             InitializeComponent();
@@ -73,8 +75,10 @@ namespace APC
             _specialContributorService = specialContributorService;
             _currentUserService = currentUserService;
             _graphicalRepresentationService = graphicalRepresentationService;
-
+            _financialReportService = financialReportService;
+            _expenditureService = expenditureService;
         }
+
         private struct RBGColors
         {
             public static Color color1 = Color.FromArgb(172, 126, 241);
@@ -166,16 +170,7 @@ namespace APC
 
         }
 
-        //MemberBLL memberBLL = new MemberBLL();
-        //CommentBLL commentBLL = new CommentBLL();
-        //GeneralAttendanceBLL generalAttendanceBLL = new GeneralAttendanceBLL();
-        //PersonalAttendanceBLL personalAttendanceBLL = new PersonalAttendanceBLL();
-        EventsBLL eventBLL = new EventsBLL();
-        FinancialReportBLL finBLL = new FinancialReportBLL();
         FormProperties initialDetail = new FormProperties();
-        GraphBLL graphBLL = new GraphBLL();
-        ExpenditureBLL expenditureBLL = new ExpenditureBLL();
-        //FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
         public bool isAdmin = false;
         public bool isEditor = false;
 

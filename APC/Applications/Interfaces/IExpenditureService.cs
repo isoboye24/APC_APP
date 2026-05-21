@@ -7,6 +7,9 @@ namespace APC.Applications.Interfaces
     public interface IExpenditureService
     {
         List<ExpenditureDTO> GetAll();
+        List<ExpenditureDTO> GetAllDeletedExpenditures();
+        List<ExpenditureDTO> GetAnnualExpenditures(int year);
+        List<YearDTO> GetExpenditureYearsOnly();
         bool Create(Expenditure data);
         bool Update(Expenditure data);
         bool Delete(int id);

@@ -891,41 +891,6 @@ namespace APC.Applications.Services
                     (m, a) => m)
                 .Count();
         }
-
-        public decimal GetAmountContributed(int ID)
-        {
-            return _generalMeetingAttendanceRepository.GetAll()
-                   .Where(x => x.memberID == ID &&
-                               !x.isDeleted &&
-                               x.attendanceStatusID == 2 &&
-                               x.monthlyDues > 0)
-                   .Sum(x => (decimal?)x.monthlyDues) ?? 0;
-                    
-        }
-
-        public decimal GetAmountExpected(int ID)
-        {
-            var memberInfo = _repository.GetById(ID);
-
-            if (memberInfo == null || memberInfo.membershipDate == null)
-                return 0;
-
-            DateTime membershipDate = memberInfo.membershipDate.Value;
-
-            int meetingCount = (from a in _generalMeetingAttendanceRepository.GetAll()
-                                join g in _generalMeetingRepository.GetAll()
-                                    on a.generalAttendanceID equals g.generalAttendanceID
-                                where a.memberID == ID &&
-                                      !g.isDeleted &&
-                                      g.attendanceDate > membershipDate
-                                select a)
-                                .Count();
-
-            decimal feePerMeeting = 10.0m;
-
-            return meetingCount * feePerMeeting;
-        }
-
     }
 }
 
