@@ -1,4 +1,5 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,17 @@ namespace APC.AllForms
 {
     public partial class FormExpenditure : Form
     {
-        public FormExpenditure()
+        private readonly IExpenditureService _expenditureService;
+
+        private Applications.DTO.ExpenditureDTO _expenditureDTO;
+        private bool _isUpdate = false;
+
+        public FormExpenditure(IExpenditureService expenditureService)
         {
             InitializeComponent();
+            _expenditureService = expenditureService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -39,9 +47,13 @@ namespace APC.AllForms
         {
             this.Close();
         }
-        ExpenditureBLL bll = new ExpenditureBLL();
-        public ExpenditureDetailDTO detail = new ExpenditureDetailDTO();
-        public bool isUpdate = false;
+        
+
+        public void loadForEdit(Applications.DTO.ExpenditureDTO expenditureDTO, bool isUpdate)
+        {
+            _expenditureDTO = expenditureDTO;
+            _isUpdate = isUpdate;
+        }
 
         private void FormExpenditure_Load(object sender, EventArgs e)
         {

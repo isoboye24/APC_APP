@@ -14,10 +14,12 @@ namespace APC.AllForms
 {
     public partial class FormViewExpenditure : Form
     {
+        private Applications.DTO.ExpenditureDTO _expenditureDTO;
         public FormViewExpenditure()
         {
             InitializeComponent();
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -37,7 +39,11 @@ namespace APC.AllForms
         {
             this.Close();
         }
-        public ExpenditureDetailDTO detail = new ExpenditureDetailDTO();
+
+        public void loadForView(Applications.DTO.ExpenditureDTO expenditureDTO)
+        {
+            _expenditureDTO = expenditureDTO;
+        }
         private void FormViewExpenditure_Load(object sender, EventArgs e)
         {
             #region

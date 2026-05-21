@@ -2,14 +2,8 @@
 using APC.BLL;
 using APC.DAL.DTO;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC
@@ -17,11 +11,16 @@ namespace APC
     public partial class FormFinancialReport : Form
     {
         private readonly IFinancialReportService _financialReportService;
+
+        private Applications.DTO.FinancialReportDTO _financialReportDTO;
+        private bool _isUpdate = false;
+
         public FormFinancialReport(IFinancialReportService financialReportService)
         {
             InitializeComponent();
             _financialReportService = financialReportService;
         }
+
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -47,8 +46,14 @@ namespace APC
         {
             this.Close();
         }
-        public FinancialReportDetailDTO detail = new FinancialReportDetailDTO();
-        public bool isUpdate = false;
+        
+
+        public void loadForEdit(Applications.DTO.FinancialReportDTO financialReportDTO, bool isUpdate)
+        {
+            _financialReportDTO = financialReportDTO;
+            _isUpdate = isUpdate;
+        }
+
         private void FormFinancialReport_Load(object sender, EventArgs e)
         {
             labelTitle.Font = new Font("Segoe UI", 16, FontStyle.Bold);
@@ -72,7 +77,6 @@ namespace APC
                 labelTitle.Text = "Add Financial Report";
             }
         }
-        FinancialReportBLL bll = new FinancialReportBLL();
         private void btnSave_Click(object sender, EventArgs e)
         {
             int conpareYear = Convert.ToInt32(txtYear.Text);

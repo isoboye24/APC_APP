@@ -16,6 +16,7 @@ namespace APC.AllForms
 {
     public partial class FormViewFinancialReport : Form
     {
+        private Applications.DTO.FinancialReportDTO _financialReportDTO;
         public FormViewFinancialReport()
         {
             InitializeComponent();
@@ -40,6 +41,12 @@ namespace APC.AllForms
             this.Close();
         }
         public FinancialReportDetailDTO detail = new FinancialReportDetailDTO();
+
+        public void loadForView(Applications.DTO.FinancialReportDTO financialReportDTO)
+        {
+            _financialReportDTO = financialReportDTO;
+        }
+
         private void FormViewFinancialReport_Load(object sender, EventArgs e)
         {
             #region

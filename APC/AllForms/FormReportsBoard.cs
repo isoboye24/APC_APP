@@ -1,7 +1,4 @@
 ﻿using APC.Applications.Interfaces;
-using APC.Applications.Services;
-using APC.BLL;
-using APC.DAL.DTO;
 using APC.Helper;
 using System;
 using System.Collections.Generic;
@@ -126,10 +123,9 @@ namespace APC.AllForms
 
         private void btnAddFinReport_Click(object sender, EventArgs e)
         {
-            FormFinancialReport open = new FormFinancialReport();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormFinancialReport(_financialReportService);
+            form.ShowDialog();
+
             ClearFilters();
         }
 
@@ -141,13 +137,6 @@ namespace APC.AllForms
             return dataGridViewFinReport.CurrentRow.DataBoundItem as Applications.DTO.FinancialReportDTO;
         }
 
-
-        private void dataGridViewFinReport_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (e.RowIndex < 0) return;
-            //finReportDetail = GeneralHelper.MapFromGrid<FinancialReportDetailDTO>(dataGridViewFinReport, e.RowIndex);
-        }
-
         private void btnUpdateFinReport_Click(object sender, EventArgs e)
         {
             var selected = GetSelectedFinancialReport();
@@ -157,119 +146,103 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormFinancialReport(_commentService, _memberService);
+            var form = new FormFinancialReport(_financialReportService);
             form.loadForEdit(selected, true);
             form.ShowDialog();
 
             ClearFilters();
-
-
-            if (finReportDetail.FinancialReportID == 0)
-            {
-                MessageBox.Show("Please choose a Report from the table");
-            }
-            else
-            {
-                FormFinancialReport open = new FormFinancialReport();
-                open.detail = finReportDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
         }
 
         private void btnViewFinReport_Click(object sender, EventArgs e)
         {
-            if (finReportDetail.FinancialReportID == 0)
+            var selected = GetSelectedFinancialReport();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a Report from the table");
+                MessageBox.Show("Please select a financial report from the table");
+                return;
             }
-            else
-            {
-                FormViewFinancialReport open = new FormViewFinancialReport();
-                open.detail = finReportDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormViewFinancialReport();
+            form.loadForView(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void txtYearFinReport_TextChanged(object sender, EventArgs e)
         {
-            List<FinancialReportDetailDTO> list = finReportDTO.FinancialReports;
-            list = list.Where(x => x.Year.Contains(txtYearFinReport.Text.Trim())).ToList();
-            dataGridViewFinReport.DataSource = list;
+            string search = txtYearFinReport.Text.Trim().ToLower();
+            var filtered = _financialReportDTOs.Where(x => x.Year.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewFinReport.DataSource = filtered;            
         }
 
         private void btnDeleteFinReport_Click(object sender, EventArgs e)
         {
-            if (finReportDetail.FinancialReportID == 0)
+            var selected = GetSelectedFinancialReport();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a Report from the table");
+                MessageBox.Show("Please select a financial report.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (finReportBLL.Delete(finReportDetail))
-                    {
-                        MessageBox.Show("Financial report was deleted");
-                        ClearFilters();
-                    }
-                }
+                _financialReportService.Delete(selected.FinancialReportId);
+                ClearFilters();
             }
         }
 
-        ExpenditureBLL expReportBLL = new ExpenditureBLL();
-        ExpenditureDTO expReportDTO = new ExpenditureDTO();
-        ExpenditureDetailDTO expReportDetail = new ExpenditureDetailDTO();
+        // Expenditure Report //////
 
         private void btnAddExpReport_Click(object sender, EventArgs e)
         {
-            FormExpenditure open = new FormExpenditure();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormExpenditure(_expenditureService);
+            form.ShowDialog();
+
             ClearFilters();
         }
 
+        private Applications.DTO.ExpenditureDTO GetSelectedExpenditure()
+        {
+            if (dataGridViewExpReport.CurrentRow == null)
+                return null;
+
+            return dataGridViewExpReport.CurrentRow.DataBoundItem as Applications.DTO.ExpenditureDTO;
+        }
+
+
         private void btnUpdateExpReport_Click(object sender, EventArgs e)
         {
-            if (expReportDetail.ExpenditureID == 0)
+            var selected = GetSelectedExpenditure();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an expenditure from the table");
+                MessageBox.Show("Please select an expenditure from the table");
+                return;
             }
-            else
-            {
-                FormExpenditure open = new FormExpenditure();
-                open.detail = expReportDetail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormExpenditure(_expenditureService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnViewExpReport_Click(object sender, EventArgs e)
         {
-            if (expReportDetail.ExpenditureID == 0)
+            var selected = GetSelectedExpenditure();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an expenditure from the table");
+                MessageBox.Show("Please select an expenditure from the table");
+                return;
             }
-            else
-            {
-                FormViewExpenditure open = new FormViewExpenditure();
-                open.detail = expReportDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormViewExpenditure();
+            form.loadForView(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnClearExpReport_Click(object sender, EventArgs e)
@@ -278,60 +251,53 @@ namespace APC.AllForms
         }
 
         private void btnSearchExpReport_Click(object sender, EventArgs e)
-        {            
-            if (cmbYearExpenditure.SelectedIndex == -1)            
-            {
-                MessageBox.Show("Select year");                
-            }            
-            else
-            {
-                expReportBLL = new ExpenditureBLL();
-                expReportDTO = expReportBLL.Select(Convert.ToInt32(cmbYearExpenditure.SelectedValue));
-                List<ExpenditureDetailDTO> list = expReportDTO.Expenditures;
-
-                if (cmbMonthExpReport.SelectedIndex != -1 && cmbYearExpenditure.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthExpReport.SelectedValue) && Convert.ToInt32(x.Year) == Convert.ToInt32(cmbYearExpenditure.SelectedValue)).ToList();
-                }
-                
-                dataGridViewExpReport.DataSource = list;
-                RowsCount();
-                labelTotalExpReportYearly.Text = "Total in " + cmbYearExpenditure.SelectedValue + ": " + finReportBLL.SelectTotalExpenditureYearly(Convert.ToInt32(cmbYearExpenditure.SelectedValue)).ToString() + " €";
-            }
-           
-        }
-
-        private void dataGridViewExpReport_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            expReportDetail = GeneralHelper.MapFromGrid<ExpenditureDetailDTO>(dataGridViewExpReport, e.RowIndex);
+            var filtered = _expenditureDTOs.AsQueryable();
+
+            if (cmbYearExpenditure.SelectedIndex == -1 && cmbMonthExpReport.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select either a month or year");
+                return;
+            }
+
+            if (cmbYearExpenditure.SelectedIndex != -1)
+            {
+                int searchedYear = Convert.ToInt32(cmbYearExpenditure.SelectedValue);
+                filtered = filtered.Where(x => x.ExpenditureDate.Year == searchedYear);
+            }
+
+            if (cmbMonthExpReport.SelectedIndex != -1)
+            {
+                int searchedMonth = Convert.ToInt32(cmbMonthExpReport.SelectedValue);
+                filtered = filtered.Where(x => x.ExpenditureDate.Month == searchedMonth);
+            }
+
+            dataGridViewExpReport.DataSource = filtered.ToList();
         }
 
         private void btnDeleteExpReport_Click(object sender, EventArgs e)
         {
-            if (expReportDetail.ExpenditureID == 0)
+            var selected = GetSelectedExpenditure();
+            if (selected == null)
             {
-                MessageBox.Show("Please select an expenditure from the table");
+                MessageBox.Show("Please select an expenditure from the table.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (expReportBLL.Delete(expReportDetail))
-                    {
-                        MessageBox.Show("Expenditure was deleted");
-                        ClearFilters();
-                    }
-                }
+                _expenditureService.Delete(selected.ExpenditureId);
+                ClearFilters();
             }
         }
 
         private void txtSummaryExpReport_TextChanged(object sender, EventArgs e)
         {
-            List<ExpenditureDetailDTO> list = expReportDTO.Expenditures;
-            list = list.Where(x => x.Summary.Contains(txtSummaryExpReport.Text)).ToList();
-            dataGridViewExpReport.DataSource = list;
+            string search = txtSummaryExpReport.Text.Trim().ToLower();
+            var filtered = _expenditureDTOs.Where(x => x.Summary.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewExpReport.DataSource = filtered;
 
             Counts();
         }
