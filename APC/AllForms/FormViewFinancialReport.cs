@@ -1,16 +1,7 @@
-﻿using APC.BLL;
-using APC.DAL.DTO;
+﻿using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace APC.AllForms
 {
@@ -40,35 +31,29 @@ namespace APC.AllForms
         {
             this.Close();
         }
-        public FinancialReportDetailDTO detail = new FinancialReportDetailDTO();
 
         public void loadForView(Applications.DTO.FinancialReportDTO financialReportDTO)
         {
             _financialReportDTO = financialReportDTO;
         }
 
+        private void controlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label3, label4, label6, btnClose, labelTotalAmountRaised,
+                labelTotalAmountSpent, labelTotalBalance);
+
+            GeneralHelper.ApplyRegularFont(14, txtSummary);
+        }
+
         private void FormViewFinancialReport_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalAmountRaised.Font = new Font("Segoe UI", 28, FontStyle.Bold);
-            labelTotalAmountSpent.Font = new Font("Segoe UI", 28, FontStyle.Bold);
-            labelTotalBalance.Font = new Font("Segoe UI", 28, FontStyle.Bold);
+            controlsFont();
 
-            txtSummary.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
-
-            labelTitle.Text = "Financial Report in " + detail.Year;
-            txtSummary.Text = detail.Summary;
-            labelTotalAmountRaised.Text = detail.TotalAmountRaised.ToString();
-            labelTotalAmountSpent.Text = detail.TotalAmountSpent.ToString();
-            labelTotalBalance.Text = (detail.TotalAmountRaised - detail.TotalAmountSpent).ToString();
+            labelTitle.Text = "Financial Report in " + _financialReportDTO.Year;
+            txtSummary.Text = _financialReportDTO.Summary;
+            labelTotalAmountRaised.Text = _financialReportDTO.TotalAmountRaised.ToString();
+            labelTotalAmountSpent.Text = _financialReportDTO.TotalAmountSpent.ToString();
+            labelTotalBalance.Text = (_financialReportDTO.TotalAmountRaised - _financialReportDTO.TotalAmountSpent).ToString();
         }        
     }
 }

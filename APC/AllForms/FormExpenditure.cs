@@ -67,6 +67,8 @@ namespace APC.AllForms
 
         private void FormExpenditure_Load(object sender, EventArgs e)
         {
+            controlsFont();
+
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit Expenditure";
