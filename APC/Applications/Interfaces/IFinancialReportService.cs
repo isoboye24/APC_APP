@@ -20,5 +20,7 @@ namespace APC.Applications.Interfaces
 
         decimal GetOverallExpenditures();
         decimal GetOverallExpendituresByYear(int year);
+
+        bool IsFinancialReportExisting(int year);
     }
 }

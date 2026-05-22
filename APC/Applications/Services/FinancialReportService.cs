@@ -139,5 +139,25 @@ namespace APC.Applications.Services
                 .Where(x => x.year == year)
                 .Sum(x => (decimal?)x.totalAmountSpent) ?? 0;
         }
+        
+        public bool IsFinancialReportExisting(int year)
+        {
+            var totalAmountSpent = _repository.GetAll()
+                .Where(x => x.year == year)
+                .Sum(x => (decimal?)x.totalAmountSpent) ?? 0;
+
+            var totalAmountDues = _repository.GetAll()
+                .Where(x => x.year == year)
+                .Sum(x => (decimal?)x.totalAmountRaised) ?? 0;
+
+            if (totalAmountSpent > 0 || totalAmountDues > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
