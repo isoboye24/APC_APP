@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Animation;
 using System.Xml.Linq;
 using static APC.Helper.CommittmentHelper;
 using static APC.Helper.MemberHelper;
@@ -26,9 +27,14 @@ namespace APC.AllForms
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IMemberService _memberService;
+        private readonly IGenderService _genderService;
+        private readonly IPositionService _positionService;
+        private readonly IProfessionService _professionService;
+        private readonly INationalityService _nationalityService;
 
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOsContacts;
+        private List<MemberFullDetailsDTO> _formerMemberFullDetailsDTOs;
 
         public FormMembersBoard(ICurrentUserService currentUserService)
         {
@@ -43,10 +49,6 @@ namespace APC.AllForms
         MemberDetailDTO deadMembersDetail = new MemberDetailDTO();
         MemberBLL deadMembersBLL = new MemberBLL();
         MemberDTO deadMembersDTO = new MemberDTO();
-
-        MemberDetailDTO formerMembersDetail = new MemberDetailDTO();
-        MemberBLL formerMembersBLL = new MemberBLL();
-        MemberDTO formerMembersDTO = new MemberDTO();
 
         MemberDetailDTO inactiveMembersDetail = new MemberDetailDTO();
         MemberBLL inactiveMembersBLL = new MemberBLL();
@@ -70,6 +72,13 @@ namespace APC.AllForms
             ConfigureMemberGrid(dataGridViewContacts, MemberGridType.Contact);
         }
 
+        private void loadFormerMembers()
+        {
+            dataGridViewInactiveMembers.DataSource = _memberService.GetAll();
+            _formerMemberFullDetailsDTOs = _memberService.GetAll();
+            ConfigureMemberGrid(dataGridViewInactiveMembers, MemberGridType.SemiBasic);
+        }
+
         private void FormMembersBoard_Load(object sender, EventArgs e)
         {
             if (_currentUserService.AccessLevel != 4)
@@ -81,10 +90,14 @@ namespace APC.AllForms
 
             #region
             loadRegisteredMembers();
+            FillRegisteredMemberComboBoxes();
+
             loadMembersContacts();
 
+            loadFormerMembers();
+            FillFormerMemberComboBoxes();
+
             birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
-            formerMembersDTO = formerMembersBLL.SelectFormerMembers();
             deadMembersDTO = deadMembersBLL.SelectDeadMembers();
             inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
             committmentDTO = committmentBLL.Select(DateTime.Now.Year);
@@ -92,8 +105,7 @@ namespace APC.AllForms
             LoadDataGridView.loadBirthdayMembers(dataGridViewBirthday, birthdayDTO);
             FillBirthdayMemberComboBoxes();
 
-            LoadDataGridView.loadMembers(dataGridViewFormerMembers, formerMembersDTO);
-            FillFormerMemberComboBoxes();
+            
 
             LoadDataGridView.loadDeadMembers(dataGridViewDeadMembers, deadMembersDTO);
             FillDeadMemberComboBoxes();
@@ -161,13 +173,13 @@ namespace APC.AllForms
 
         private void FillRegisteredMemberComboBoxes()
         {
-            cmbGenderRegisteredMembers.DataSource = registeredMembersDTO.Genders;
+            cmbGenderRegisteredMembers.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderRegisteredMembers, "GenderName", "genderID");
-            cmbProfessionRegisteredMembers.DataSource = registeredMembersDTO.Professions;
+            cmbProfessionRegisteredMembers.DataSource = _professionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbProfessionRegisteredMembers, "Profession", "professionID");
-            cmbPositionRegisteredMembers.DataSource = registeredMembersDTO.Positions;
+            cmbPositionRegisteredMembers.DataSource = _positionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPositionRegisteredMembers, "PositionName", "positionID");
-            cmbNationalityRegisteredMembers.DataSource = registeredMembersDTO.Nationalities;
+            cmbNationalityRegisteredMembers.DataSource = _nationalityService.GetAll();
             GeneralHelper.ComboBoxProps(cmbNationalityRegisteredMembers, "Nationality", "NationalityID");
         }
 
@@ -186,13 +198,13 @@ namespace APC.AllForms
         }
         private void FillFormerMemberComboBoxes()
         {
-            cmbGenderFormerMembers.DataSource = formerMembersDTO.Genders;
+            cmbGenderFormerMembers.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderFormerMembers, "GenderName", "genderID");
-            cmbProfessionFormerMembers.DataSource = formerMembersDTO.Professions;
+            cmbProfessionFormerMembers.DataSource = _professionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbProfessionFormerMembers, "Profession", "professionID");
-            cmbPositionFormerMembers.DataSource = formerMembersDTO.Positions;
+            cmbPositionFormerMembers.DataSource = _positionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPositionFormerMembers, "PositionName", "positionID");
-            cmbNationalityFormerMembers.DataSource = formerMembersDTO.Nationalities;
+            cmbNationalityFormerMembers.DataSource = _nationalityService.GetAll();
             GeneralHelper.ComboBoxProps(cmbNationalityFormerMembers, "Nationality", "NationalityID");
         }
 
@@ -248,9 +260,7 @@ namespace APC.AllForms
 
 
             txtSurnameContacts.Clear();
-            contactsBLL = new MemberBLL();
-            contactsDTO = contactsBLL.Select();
-            dataGridViewContacts.DataSource = contactsDTO.Members;
+            loadMembersContacts();
 
             txtNameFormerMembers.Clear();
             txtSurnameFormerMembers.Clear();
@@ -258,9 +268,7 @@ namespace APC.AllForms
             cmbGenderFormerMembers.SelectedIndex = -1;
             cmbPositionFormerMembers.SelectedIndex = -1;
             cmbProfessionFormerMembers.SelectedIndex = -1;
-            formerMembersBLL = new MemberBLL();
-            formerMembersDTO = formerMembersBLL.SelectFormerMembers();
-            dataGridViewFormerMembers.DataSource = formerMembersDTO.Members;
+            loadFormerMembers();
 
             txtNameDeadMembers.Clear();
             txtSurnameDeadMembers.Clear();
@@ -293,19 +301,19 @@ namespace APC.AllForms
         }
         private void GetCounts()
         {
-            labelNoOfMenRegisteredMembers.Text = registeredMembersBLL.SelectCountMale().ToString();
-            labelNoOfFemaleRegisteredMembers.Text = registeredMembersBLL.SelectCountFemale().ToString();
-            labelNoOfDivisorRegisteredMembers.Text = registeredMembersBLL.SelectCountDivisor().ToString();
+            labelNoOfMenRegisteredMembers.Text = _memberService.GetCurrentMaleCount().ToString();
+            labelNoOfFemaleRegisteredMembers.Text = _memberService.GetCurrentFemaleCount().ToString();
+            labelNoOfDivisorRegisteredMembers.Text = _memberService.GetCurrentDivisorCount().ToString();
 
             labelTotalContacts.Text = "Total: " + dataGridViewContacts.RowCount.ToString();
 
-            labelNoOfMenFormerMembers.Text = formerMembersBLL.SelectCountFormerMale().ToString();
-            labelNoOfFemaleFormerMembers.Text = formerMembersBLL.SelectCountFormerFemale().ToString();
-            labelNoOfDivisorFormerMembers.Text = formerMembersBLL.SelectCountFormerDivisor().ToString();
+            labelNoOfMenFormerMembers.Text = _memberService.GetFormerMaleCount().ToString();
+            labelNoOfFemaleFormerMembers.Text = _memberService.GetFormerFemaleCount().ToString();
+            labelNoOfDivisorFormerMembers.Text = _memberService.GetFormerDivisorCount().ToString();
 
-            labelNoOfMenDeadMembers.Text = deadMembersBLL.SelectCountDeadMale().ToString();
-            labelNoOfFemaleDeadMembers.Text = deadMembersBLL.SelectCountDeadFemale().ToString();
-            labelNoOfDivisorDeadMembers.Text = deadMembersBLL.SelectCountDeadDivisor().ToString();
+            labelNoOfMenDeadMembers.Text = _memberService.GetDeceasedMaleCount().ToString();
+            labelNoOfFemaleDeadMembers.Text = _memberService.GetDeceasedFemaleCount().ToString();
+            labelNoOfDivisorDeadMembers.Text = _memberService.GetDeceasedDivisorCount().ToString();
 
             labelTotalRowsCommittment.Text = "Row" + (dataGridViewCommitments.RowCount > 1 ? "s : " : " : ") + dataGridViewCommitments.RowCount.ToString();
 
@@ -445,6 +453,8 @@ namespace APC.AllForms
             picRegisteredMember.ImageLocation = imagePath;
         }
 
+        // Members Contacts ******************************
+
         private void txtSurnameContacts_TextChanged(object sender, EventArgs e)
         {
             string search = txtSurnameContacts.Text.Trim().ToLower();
@@ -492,76 +502,103 @@ namespace APC.AllForms
             ClearFilters();
         }
 
+        // Former Members ******************************
 
         private void btnClearFormerMembers_Click(object sender, EventArgs e)
         {
             ClearFilters();
         }
 
+        private MemberFullDetailsDTO GetSelectedFormerMember()
+        {
+            if (dataGridViewFormerMembers.CurrentRow == null)
+                return null;
+
+            return dataGridViewFormerMembers.CurrentRow.DataBoundItem as MemberFullDetailsDTO;
+        }
+
         private void btnUpdateFormerMembers_Click(object sender, EventArgs e)
         {
-            if (formerMembersDetail.MemberID == 0)
+            var selected = GetSelectedFormerMember();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table.");
+                MessageBox.Show("Please select a member from the table");
+                return;
             }
-            else
-            {
-                FormMembers open = new FormMembers();
-                open.isUpdate = true;
-                open.isUpdateDeadMember = true;
-                open.detail = formerMembersDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;                
-                ClearFilters();
-            }
+
+            var form = new FormMembers(_memberService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnViewFormerMembers_Click(object sender, EventArgs e)
-        {            
-            ViewMember(formerMembersDetail, true);
-        }
-
-        private void dataGridViewFormerMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            formerMembersDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewFormerMembers, e.RowIndex);
+            var selected = GetSelectedFormerMember();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a member from the table");
+                return;
+            }
+
+            var form = new FormViewMember(_memberService);
+            form.MemberDetail(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void txtNameFormerMembers_TextChanged(object sender, EventArgs e)
         {
-            List<MemberDetailDTO> list = formerMembersDTO.Members;
-            list = list.Where(x => x.Name.Contains(txtNameFormerMembers.Text)).ToList();
-            dataGridViewFormerMembers.DataSource = list;
+            string search = txtNameFormerMembers.Text.Trim().ToLower();
+            var filtered = _formerMemberFullDetailsDTOs.Where(x => x.FirstName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewFormerMembers.DataSource = filtered;
         }
 
         private void txtSurnameFormerMembers_TextChanged(object sender, EventArgs e)
         {
-            List<MemberDetailDTO> list = formerMembersDTO.Members;
-            list = list.Where(x => x.Surname.Contains(txtSurnameFormerMembers.Text)).ToList();
-            dataGridViewFormerMembers.DataSource = list;
+            string search = txtSurnameFormerMembers.Text.Trim().ToLower();
+            var filtered = _formerMemberFullDetailsDTOs.Where(x => x.LastName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewFormerMembers.DataSource = filtered;
         }
 
         private void btnSearchFormerMembers_Click(object sender, EventArgs e)
         {
-            List<MemberDetailDTO> list = formerMembersDTO.Members;
-            if (cmbNationalityFormerMembers.SelectedIndex != -1)
+            var filtered = _formerMemberFullDetailsDTOs.AsQueryable();
+
+            if (cmbPositionFormerMembers.SelectedIndex == -1 && cmbNationalityFormerMembers.SelectedIndex == -1
+                && cmbGenderFormerMembers.SelectedIndex == -1 && cmbProfessionFormerMembers.SelectedIndex == -1)
             {
-                list = list.Where(x => x.NationalityID == Convert.ToInt32(cmbNationalityFormerMembers.SelectedValue)).ToList();
+                MessageBox.Show("Please select either an option from any of the dropdown boxes");
+                return;
             }
-            if (cmbGenderFormerMembers.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.GenderID == Convert.ToInt32(cmbGenderFormerMembers.SelectedValue)).ToList();
-            }
+
             if (cmbPositionFormerMembers.SelectedIndex != -1)
             {
-                list = list.Where(x => x.PositionID == Convert.ToInt32(cmbPositionFormerMembers.SelectedValue)).ToList();
+                string search = cmbPositionFormerMembers.Text;
+                filtered = filtered.Where(x => x.Position.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
             }
+
+            if (cmbNationalityFormerMembers.SelectedIndex != -1)
+            {
+                string search = cmbNationalityFormerMembers.Text;
+                filtered = filtered.Where(x => x.Nationality.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (cmbGenderFormerMembers.SelectedIndex != -1)
+            {
+                string search = cmbGenderFormerMembers.Text;
+                filtered = filtered.Where(x => x.Gender.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
             if (cmbProfessionFormerMembers.SelectedIndex != -1)
             {
-                list = list.Where(x => x.ProfessionID == Convert.ToInt32(cmbProfessionFormerMembers.SelectedValue)).ToList();
+                string search = cmbProfessionFormerMembers.Text;
+                filtered = filtered.Where(x => x.Profession.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
             }
-            dataGridViewFormerMembers.DataSource = list;
+
+            dataGridViewFormerMembers.DataSource = filtered.ToList();
         }
 
         private void btnUpdateDeadMembers_Click(object sender, EventArgs e)
