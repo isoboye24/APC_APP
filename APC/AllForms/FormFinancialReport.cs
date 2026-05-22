@@ -1,11 +1,7 @@
 ﻿using APC.Applications.Interfaces;
-using APC.Applications.Services;
-using APC.BLL;
-using APC.DAL.DTO;
 using APC.Domain.Entities;
 using APC.Helper;
 using System;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
