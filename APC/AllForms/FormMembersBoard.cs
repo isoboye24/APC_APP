@@ -28,6 +28,7 @@ namespace APC.AllForms
         private readonly IMemberService _memberService;
 
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOs;
+        private List<MemberFullDetailsDTO> _memberFullDetailsDTOsContacts;
 
         public FormMembersBoard(ICurrentUserService currentUserService)
         {
@@ -35,15 +36,9 @@ namespace APC.AllForms
             _currentUserService = currentUserService;
         }
 
-        
-
         MembersCommittmentBLL committmentBLL = new MembersCommittmentBLL();
         MembersCommittmentDetailDTO committmentDetail = new MembersCommittmentDetailDTO();
         MembersCommittmentDTO committmentDTO = new MembersCommittmentDTO();
-
-        MemberBLL contactsBLL = new MemberBLL();
-        MemberDTO contactsDTO = new MemberDTO();
-        MemberDetailDTO contactsDetail = new MemberDetailDTO();
 
         MemberDetailDTO deadMembersDetail = new MemberDetailDTO();
         MemberBLL deadMembersBLL = new MemberBLL();
@@ -65,7 +60,14 @@ namespace APC.AllForms
         {
             dataGridViewRegisteredMembers.DataSource = _memberService.GetAll();
             _memberFullDetailsDTOs = _memberService.GetAll();
-            MemberHelper.ConfigureMemberGrid(dataGridViewRegisteredMembers, MemberHelper.MemberGridType.SemiBasic);
+            ConfigureMemberGrid(dataGridViewRegisteredMembers, MemberGridType.SemiBasic);
+        }
+
+        private void loadMembersContacts()
+        {
+            dataGridViewContacts.DataSource = _memberService.GetAll();
+            _memberFullDetailsDTOsContacts = _memberService.GetAll();
+            ConfigureMemberGrid(dataGridViewContacts, MemberGridType.Contact);
         }
 
         private void FormMembersBoard_Load(object sender, EventArgs e)
@@ -79,12 +81,12 @@ namespace APC.AllForms
 
             #region
             loadRegisteredMembers();
+            loadMembersContacts();
 
             birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
             formerMembersDTO = formerMembersBLL.SelectFormerMembers();
             deadMembersDTO = deadMembersBLL.SelectDeadMembers();
             inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
-            contactsDTO = contactsBLL.Select();
             committmentDTO = committmentBLL.Select(DateTime.Now.Year);
 
             LoadDataGridView.loadBirthdayMembers(dataGridViewBirthday, birthdayDTO);
@@ -98,8 +100,6 @@ namespace APC.AllForms
 
             LoadDataGridView.loadMembers(dataGridViewInactiveMembers, inactiveMembersDTO);
             FillInactiveMemberComboBoxes();
-
-            LoadDataGridView.loadMembersContacts(dataGridViewContacts, contactsDTO);
 
             LoadMemberCommittments();
             FillMemberCommittmentComboBoxes();
@@ -375,7 +375,40 @@ namespace APC.AllForms
 
         private void btnSearchRegisteredMembers_Click(object sender, EventArgs e)
         {
+            var filtered = _memberFullDetailsDTOs.AsQueryable();
+
+            if (cmbPositionRegisteredMembers.SelectedIndex == -1 && cmbNationalityRegisteredMembers.SelectedIndex == -1
+                && cmbGenderRegisteredMembers.SelectedIndex == -1 && cmbProfessionRegisteredMembers.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select either an option from any of the dropdown boxes");
+                return;
+            }
+
+            if (cmbPositionRegisteredMembers.SelectedIndex != -1)
+            {
+                string search = cmbPositionRegisteredMembers.Text;
+                filtered = filtered.Where(x => x.Position.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (cmbNationalityRegisteredMembers.SelectedIndex != -1)
+            {
+                string search = cmbNationalityRegisteredMembers.Text;
+                filtered = filtered.Where(x => x.Nationality.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
             
+            if (cmbGenderRegisteredMembers.SelectedIndex != -1)
+            {
+                string search = cmbGenderRegisteredMembers.Text;
+                filtered = filtered.Where(x => x.Gender.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+            
+            if (cmbProfessionRegisteredMembers.SelectedIndex != -1)
+            {
+                string search = cmbProfessionRegisteredMembers.Text;
+                filtered = filtered.Where(x => x.Profession.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            dataGridViewRegisteredMembers.DataSource = filtered.ToList();
         }
 
         private void btnClearRegisteredMembers_Click(object sender, EventArgs e)
@@ -414,21 +447,51 @@ namespace APC.AllForms
 
         private void txtSurnameContacts_TextChanged(object sender, EventArgs e)
         {
-            List<MemberDetailDTO> list = contactsDTO.Members;
-            list = list.Where(x => x.Surname.Contains(txtSurnameContacts.Text)).ToList();
-            dataGridViewContacts.DataSource = list;
+            string search = txtSurnameContacts.Text.Trim().ToLower();
+            var filtered = _memberFullDetailsDTOsContacts.Where(x => x.LastName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewContacts.DataSource = filtered;
+        }
+
+        private MemberFullDetailsDTO GetSelectedMemberContact()
+        {
+            if (dataGridViewContacts.CurrentRow == null)
+                return null;
+
+            return dataGridViewContacts.CurrentRow.DataBoundItem as MemberFullDetailsDTO;
         }
 
         private void btnUpdateContacts_Click(object sender, EventArgs e)
         {
-            updateMember(contactsDetail);
+            var selected = GetSelectedMemberContact();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a member from the table");
+                return;
+            }
+
+            var form = new FormMembers(_memberService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
-        private void dataGridViewContacts_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void btnViewContacts_Click(object sender, EventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            contactsDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewContacts, e.RowIndex);
+            var selected = GetSelectedMemberContact();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a member from the table");
+                return;
+            }
+
+            var form = new FormViewMember(_memberService);
+            form.MemberDetail(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
+
 
         private void btnClearFormerMembers_Click(object sender, EventArgs e)
         {
@@ -845,5 +908,7 @@ namespace APC.AllForms
         {
             ClearFilters();
         }
+
+        
     }
 }
