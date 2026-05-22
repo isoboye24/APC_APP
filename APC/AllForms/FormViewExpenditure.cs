@@ -1,13 +1,6 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -44,24 +37,21 @@ namespace APC.AllForms
         {
             _expenditureDTO = expenditureDTO;
         }
+
+        private void controlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label3, btnClose);
+
+            GeneralHelper.ApplyRegularFont(14, txtSummary, txtAmountSpent, txtDate);
+        }
+
         private void FormViewExpenditure_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            controlsFont();
 
-            txtAmountSpent.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtDate.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSummary.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);            
-            #endregion
-
-            txtAmountSpent.Text = detail.AmountSpent.ToString();
-            txtSummary.Text = detail.Summary;
-            txtDate.Text = detail.Day + "/" + detail.MonthID +"/"+ detail.Year;
+            txtAmountSpent.Text = _expenditureDTO.AmountSpent.ToString();
+            txtSummary.Text = _expenditureDTO.Summary;
+            txtDate.Text = _expenditureDTO.ExpenditureDate.Day + "/" + _expenditureDTO.ExpenditureDate.Month +"/"+ _expenditureDTO.ExpenditureDate.Year;
             labelTitle.Text = $"Expenditure on {txtDate.Text}";
         }        
     }
