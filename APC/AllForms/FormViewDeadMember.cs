@@ -1,4 +1,6 @@
-﻿using APC.BLL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using System;
 using System.Collections.Generic;
@@ -16,10 +18,15 @@ namespace APC.AllForms
 {
     public partial class FormViewDeadMember : Form
     {
-        public FormViewDeadMember()
+        private readonly IMemberService _memberService;
+
+        private MemberFullDetailsDTO _memberFullDetailsDTO;
+        public FormViewDeadMember(IMemberService memberService)
         {
             InitializeComponent();
+            _memberService = memberService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -39,6 +46,12 @@ namespace APC.AllForms
         {
             this.Close();
         }
+
+        public void MemberDetail(MemberFullDetailsDTO memberFullDetailsDTO)
+        {
+            _memberFullDetailsDTO = memberFullDetailsDTO;
+        }
+
         public MemberDetailDTO detail = new MemberDetailDTO();
         public bool isView = false;
         MemberBLL bll = new MemberBLL();

@@ -36,6 +36,7 @@ namespace APC.AllForms
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOsContacts;
         private List<MemberFullDetailsDTO> _formerMemberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _deceasedMemberFullDetailsDTOs;
+        private List<MemberFullDetailsDTO> _inactiveMemberFullDetailsDTOs;
 
         public FormMembersBoard(ICurrentUserService currentUserService)
         {
@@ -46,10 +47,6 @@ namespace APC.AllForms
         MembersCommittmentBLL committmentBLL = new MembersCommittmentBLL();
         MembersCommittmentDetailDTO committmentDetail = new MembersCommittmentDetailDTO();
         MembersCommittmentDTO committmentDTO = new MembersCommittmentDTO();
-
-        MemberDetailDTO inactiveMembersDetail = new MemberDetailDTO();
-        MemberBLL inactiveMembersBLL = new MemberBLL();
-        MemberDTO inactiveMembersDTO = new MemberDTO();
 
         MemberBLL birthdayBLL = new MemberBLL();
         MemberDTO birthdayDTO = new MemberDTO();
@@ -82,6 +79,13 @@ namespace APC.AllForms
             _deceasedMemberFullDetailsDTOs = _memberService.GetAll();
             ConfigureMemberGrid(dataGridViewDeadMembers, MemberGridType.Dead);
         }
+        
+        private void loadInactiveMembers()
+        {
+            dataGridViewInactiveMembers.DataSource = _memberService.GetAll();
+            _inactiveMemberFullDetailsDTOs = _memberService.GetAll();
+            ConfigureMemberGrid(dataGridViewInactiveMembers, MemberGridType.SemiBasic);
+        }
 
         private void FormMembersBoard_Load(object sender, EventArgs e)
         {
@@ -102,7 +106,6 @@ namespace APC.AllForms
             FillFormerMemberComboBoxes();
 
             birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
-            inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
             committmentDTO = committmentBLL.Select(DateTime.Now.Year);
 
             LoadDataGridView.loadBirthdayMembers(dataGridViewBirthday, birthdayDTO);
@@ -111,7 +114,7 @@ namespace APC.AllForms
             loadDeceasedMembers();
             FillDeadMemberComboBoxes();
 
-            LoadDataGridView.loadMembers(dataGridViewInactiveMembers, inactiveMembersDTO);
+            loadInactiveMembers();
             FillInactiveMemberComboBoxes();
 
             LoadMemberCommittments();
@@ -619,7 +622,6 @@ namespace APC.AllForms
             return dataGridViewDeadMembers.CurrentRow.DataBoundItem as MemberFullDetailsDTO;
         }
 
-
         private void btnUpdateDeadMembers_Click(object sender, EventArgs e)
         {
             var selected = GetSelectedDeceasedMember();
@@ -702,13 +704,17 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService);
+            var form = new FormViewDeadMember(_memberService);
             form.MemberDetail(selected);
             form.ShowDialog();
 
             ClearFilters();
         }
-        
+
+        ////////////////////////////////////////////////////////////////////////////
+        /// Members Committments 
+        ////////////////////////////////////////////////////////////////////////////
+
         private void dataGridViewCommitments_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -782,40 +788,109 @@ namespace APC.AllForms
             GetCounts();
         }
 
+        ////////////////////////////////////////////////////////////////////////////
+        /// Inactive Members 
+        ////////////////////////////////////////////////////////////////////////////
 
         private void btnClearInactiveMembers_Click(object sender, EventArgs e)
         {
             ClearFilters();
         }
 
-        private void dataGridViewInactiveMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private MemberFullDetailsDTO GetSelectedInactiveMember()
         {
-            if (e.RowIndex < 0) return;
-            inactiveMembersDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewInactiveMembers, e.RowIndex);
+            if (dataGridViewInactiveMembers.CurrentRow == null)
+                return null;
+
+            return dataGridViewInactiveMembers.CurrentRow.DataBoundItem as MemberFullDetailsDTO;
         }
 
         private void btnViewInactiveMembers_Click(object sender, EventArgs e)
         {
-            ViewMember(inactiveMembersDetail, false);
+            var selected = GetSelectedInactiveMember();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a member from the table");
+                return;
+            }
+
+            var form = new FormViewMember(_memberService);
+            form.MemberDetail(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnUpdateInactiveMembers_Click(object sender, EventArgs e)
         {
-            if (inactiveMembersDetail.MemberID == 0)
+            var selected = GetSelectedInactiveMember();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table.");
+                MessageBox.Show("Please select a member from the table");
+                return;
             }
-            else
-            {
-                FormMembers open = new FormMembers();
-                open.isUpdate = true;
-                open.detail = inactiveMembersDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormMembers(_memberService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
+
+        private void txtNameInactiveMembers_TextChanged(object sender, EventArgs e)
+        {
+            string search = txtNameInactiveMembers.Text.Trim().ToLower();
+            var filtered = _inactiveMemberFullDetailsDTOs.Where(x => x.FirstName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewInactiveMembers.DataSource = filtered;
+        }
+
+        private void txtSurnameInactiveMembers_TextChanged(object sender, EventArgs e)
+        {
+            string search = txtSurnameInactiveMembers.Text.Trim().ToLower();
+            var filtered = _inactiveMemberFullDetailsDTOs.Where(x => x.LastName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewInactiveMembers.DataSource = filtered;
+        }
+
+        private void btnSearchInactiveMembers_Click(object sender, EventArgs e)
+        {
+            var filtered = _inactiveMemberFullDetailsDTOs.AsQueryable();
+
+            if (cmbPositionInactiveMembers.SelectedIndex == -1 && cmbNationalityInactiveMembers.SelectedIndex == -1
+                && cmbGenderInactiveMembers.SelectedIndex == -1 && cmbProfessionInactiveMembers.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select either an option from any of the dropdown boxes");
+                return;
+            }
+
+            if (cmbPositionInactiveMembers.SelectedIndex != -1)
+            {
+                string search = cmbPositionInactiveMembers.Text;
+                filtered = filtered.Where(x => x.Position.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (cmbNationalityInactiveMembers.SelectedIndex != -1)
+            {
+                string search = cmbNationalityInactiveMembers.Text;
+                filtered = filtered.Where(x => x.Nationality.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (cmbGenderInactiveMembers.SelectedIndex != -1)
+            {
+                string search = cmbGenderInactiveMembers.Text;
+                filtered = filtered.Where(x => x.Gender.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (cmbProfessionInactiveMembers.SelectedIndex != -1)
+            {
+                string search = cmbProfessionInactiveMembers.Text;
+                filtered = filtered.Where(x => x.Profession.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            dataGridViewInactiveMembers.DataSource = filtered.ToList();
+        }
+
+
+
 
         private void txtNameBirthday_TextChanged(object sender, EventArgs e)
         {
@@ -938,10 +1013,6 @@ namespace APC.AllForms
             }
         }
 
-        private void btnSearchInactiveMembers_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnSearchCommittment_Click_1(object sender, EventArgs e)
         {

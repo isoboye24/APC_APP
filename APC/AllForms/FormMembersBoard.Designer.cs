@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -135,6 +135,7 @@
             this.btnUpdateContacts = new System.Windows.Forms.Button();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalContacts = new System.Windows.Forms.Label();
+            this.btnViewContacts = new System.Windows.Forms.Button();
             this.inactiveMembersPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel51 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel52 = new System.Windows.Forms.TableLayoutPanel();
@@ -234,7 +235,6 @@
             this.btnSearchDeadMembers = new System.Windows.Forms.Button();
             this.btnClearDeadMembers = new System.Windows.Forms.Button();
             this.dataGridViewDeadMembers = new System.Windows.Forms.DataGridView();
-            this.btnViewContacts = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.activeMembersPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -880,8 +880,8 @@
             this.dataGridViewRegisteredMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewRegisteredMembers.Name = "dataGridViewRegisteredMembers";
             this.dataGridViewRegisteredMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewRegisteredMembers.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewRegisteredMembers.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewRegisteredMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewRegisteredMembers.RowTemplate.Height = 40;
             this.dataGridViewRegisteredMembers.Size = new System.Drawing.Size(1201, 392);
@@ -1176,8 +1176,8 @@
             this.dataGridViewCommitments.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewCommitments.Name = "dataGridViewCommitments";
             this.dataGridViewCommitments.RowHeadersWidth = 51;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewCommitments.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCommitments.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewCommitments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewCommitments.RowTemplate.Height = 40;
             this.dataGridViewCommitments.Size = new System.Drawing.Size(1209, 439);
@@ -1659,8 +1659,8 @@
             this.dataGridViewBirthday.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewBirthday.Name = "dataGridViewBirthday";
             this.dataGridViewBirthday.RowHeadersWidth = 51;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewBirthday.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewBirthday.RowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewBirthday.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewBirthday.RowTemplate.Height = 40;
             this.dataGridViewBirthday.Size = new System.Drawing.Size(1201, 359);
@@ -1708,8 +1708,8 @@
             this.dataGridViewContacts.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewContacts.Name = "dataGridViewContacts";
             this.dataGridViewContacts.RowHeadersWidth = 51;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewContacts.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewContacts.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewContacts.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewContacts.RowTemplate.Height = 40;
             this.dataGridViewContacts.Size = new System.Drawing.Size(1209, 485);
@@ -1823,6 +1823,22 @@
             this.labelTotalContacts.Size = new System.Drawing.Size(50, 23);
             this.labelTotalContacts.TabIndex = 0;
             this.labelTotalContacts.Text = "Total:";
+            // 
+            // btnViewContacts
+            // 
+            this.btnViewContacts.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnViewContacts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnViewContacts.FlatAppearance.BorderSize = 0;
+            this.btnViewContacts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewContacts.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewContacts.Location = new System.Drawing.Point(620, 27);
+            this.btnViewContacts.Margin = new System.Windows.Forms.Padding(4);
+            this.btnViewContacts.Name = "btnViewContacts";
+            this.btnViewContacts.Size = new System.Drawing.Size(149, 39);
+            this.btnViewContacts.TabIndex = 1;
+            this.btnViewContacts.Text = "View";
+            this.btnViewContacts.UseVisualStyleBackColor = false;
+            this.btnViewContacts.Click += new System.EventHandler(this.btnViewContacts_Click);
             // 
             // inactiveMembersPage
             // 
@@ -2119,6 +2135,7 @@
             this.txtNameInactiveMembers.Name = "txtNameInactiveMembers";
             this.txtNameInactiveMembers.Size = new System.Drawing.Size(216, 32);
             this.txtNameInactiveMembers.TabIndex = 2;
+            this.txtNameInactiveMembers.TextChanged += new System.EventHandler(this.txtNameInactiveMembers_TextChanged);
             // 
             // label51
             // 
@@ -2173,6 +2190,7 @@
             this.txtSurnameInactiveMembers.Name = "txtSurnameInactiveMembers";
             this.txtSurnameInactiveMembers.Size = new System.Drawing.Size(216, 32);
             this.txtSurnameInactiveMembers.TabIndex = 2;
+            this.txtSurnameInactiveMembers.TextChanged += new System.EventHandler(this.txtSurnameInactiveMembers_TextChanged);
             // 
             // label52
             // 
@@ -2307,13 +2325,12 @@
             this.dataGridViewInactiveMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewInactiveMembers.Name = "dataGridViewInactiveMembers";
             this.dataGridViewInactiveMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewInactiveMembers.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewInactiveMembers.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewInactiveMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewInactiveMembers.RowTemplate.Height = 40;
             this.dataGridViewInactiveMembers.Size = new System.Drawing.Size(1209, 397);
             this.dataGridViewInactiveMembers.TabIndex = 4;
-            this.dataGridViewInactiveMembers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewInactiveMembers_RowEnter);
             // 
             // formerMembersPage
             // 
@@ -2801,7 +2818,6 @@
             this.dataGridViewFormerMembers.RowTemplate.Height = 40;
             this.dataGridViewFormerMembers.Size = new System.Drawing.Size(1209, 397);
             this.dataGridViewFormerMembers.TabIndex = 4;
-            this.dataGridViewFormerMembers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFormerMembers_RowEnter);
             // 
             // deadMembersPage
             // 
@@ -3295,23 +3311,6 @@
             this.dataGridViewDeadMembers.RowTemplate.Height = 40;
             this.dataGridViewDeadMembers.Size = new System.Drawing.Size(1209, 397);
             this.dataGridViewDeadMembers.TabIndex = 4;
-            this.dataGridViewDeadMembers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDeadMembers_RowEnter);
-            // 
-            // btnViewContacts
-            // 
-            this.btnViewContacts.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnViewContacts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnViewContacts.FlatAppearance.BorderSize = 0;
-            this.btnViewContacts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewContacts.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewContacts.Location = new System.Drawing.Point(620, 27);
-            this.btnViewContacts.Margin = new System.Windows.Forms.Padding(4);
-            this.btnViewContacts.Name = "btnViewContacts";
-            this.btnViewContacts.Size = new System.Drawing.Size(149, 39);
-            this.btnViewContacts.TabIndex = 1;
-            this.btnViewContacts.Text = "View";
-            this.btnViewContacts.UseVisualStyleBackColor = false;
-            this.btnViewContacts.Click += new System.EventHandler(this.btnViewContacts_Click);
             // 
             // FormMembersBoard
             // 
