@@ -1,5 +1,7 @@
 ﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
 using APC.BLL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
 using APC.Helper;
 using System;
@@ -11,10 +13,15 @@ namespace APC.AllForms
 {
     public partial class FormViewMember : Form
     {
-        public FormViewMember()
+        private readonly IMemberService _memberService;
+
+        private MemberFullDetailsDTO _memberFullDetailsDTO;
+        public FormViewMember(IMemberService memberService)
         {
             InitializeComponent();
+            _memberService = memberService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -45,8 +52,6 @@ namespace APC.AllForms
         int commentCount = 0;
         FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
         int finesCount = 0;
-
-        private Applications.DTO.MemberFullDetailsDTO _memberFullDetailsDTO;
 
         public void MemberDetail(MemberFullDetailsDTO memberFullDetailsDTO)
         {

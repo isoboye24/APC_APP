@@ -1,4 +1,6 @@
-﻿using APC.Applications.Interfaces;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.Applications.Services;
 using APC.BLL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
@@ -24,15 +26,16 @@ namespace APC.AllForms
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IMemberService _memberService;
+
+        private List<MemberFullDetailsDTO> _memberFullDetailsDTOs;
+
         public FormMembersBoard(ICurrentUserService currentUserService)
         {
             InitializeComponent();
             _currentUserService = currentUserService;
         }
 
-        MemberBLL registeredMembersBLL = new MemberBLL();
-        MemberDTO registeredMembersDTO = new MemberDTO();
-        MemberDetailDTO registeredMembersDetail = new MemberDetailDTO();
+        
 
         MembersCommittmentBLL committmentBLL = new MembersCommittmentBLL();
         MembersCommittmentDetailDTO committmentDetail = new MembersCommittmentDetailDTO();
@@ -58,6 +61,13 @@ namespace APC.AllForms
         MemberDTO birthdayDTO = new MemberDTO();
         MemberDetailDTO birthdayDetail = new MemberDetailDTO();
 
+        private void loadRegisteredMembers()
+        {
+            dataGridViewRegisteredMembers.DataSource = _memberService.GetAll();
+            _memberFullDetailsDTOs = _memberService.GetAll();
+            MemberHelper.ConfigureMemberGrid(dataGridViewRegisteredMembers, MemberHelper.MemberGridType.SemiBasic);
+        }
+
         private void FormMembersBoard_Load(object sender, EventArgs e)
         {
             if (_currentUserService.AccessLevel != 4)
@@ -68,16 +78,14 @@ namespace APC.AllForms
             ResizeControls();
 
             #region
-            registeredMembersDTO = registeredMembersBLL.Select();
+            loadRegisteredMembers();
+
             birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
             formerMembersDTO = formerMembersBLL.SelectFormerMembers();
             deadMembersDTO = deadMembersBLL.SelectDeadMembers();
             inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
             contactsDTO = contactsBLL.Select();
             committmentDTO = committmentBLL.Select(DateTime.Now.Year);
-
-            LoadDataGridView.loadMembers(dataGridViewRegisteredMembers, registeredMembersDTO);
-            FillRegisteredMemberComboBoxes();
 
             LoadDataGridView.loadBirthdayMembers(dataGridViewBirthday, birthdayDTO);
             FillBirthdayMemberComboBoxes();
@@ -218,15 +226,6 @@ namespace APC.AllForms
             GeneralHelper.ComboBoxProps(cmbStatusCommittment, "PaymentStatusName", "PaymentStatusID");
         }
 
-        private void btnAddRegisteredMembers_Click(object sender, EventArgs e)
-        {
-            FormMembers open = new FormMembers();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            ClearFilters();
-        }
-
         private void ClearFilters()
         {
             txtNameRegisteredMembers.Clear();
@@ -235,9 +234,7 @@ namespace APC.AllForms
             cmbGenderRegisteredMembers.SelectedIndex = -1;
             cmbPositionRegisteredMembers.SelectedIndex = -1;
             cmbProfessionRegisteredMembers.SelectedIndex = -1;
-            registeredMembersBLL = new MemberBLL();
-            registeredMembersDTO = registeredMembersBLL.Select();
-            dataGridViewRegisteredMembers.DataSource = registeredMembersDTO.Members;
+            loadRegisteredMembers();
 
             txtNameBirthday.Clear();
             txtSurnameBirthday.Clear();
@@ -279,7 +276,7 @@ namespace APC.AllForms
             committmentDTO = committmentBLL.Select(DateTime.Now.Year);
             dataGridViewCommitments.DataSource = committmentDTO.Committments;
             txtNameCommittment.Clear();
-            txtSurnameCommittment.Clear();            
+            txtSurnameCommittment.Clear();
             cmbYearCommittment.SelectedIndex = -1;
             cmbStatusCommittment.SelectedIndex = -1;
 
@@ -287,7 +284,7 @@ namespace APC.AllForms
             inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
             dataGridViewInactiveMembers.DataSource = inactiveMembersDTO.Members;
             txtNameInactiveMembers.Clear();
-            txtSurnameInactiveMembers.Clear();            
+            txtSurnameInactiveMembers.Clear();
             cmbGenderInactiveMembers.SelectedIndex = -1;
             cmbPositionInactiveMembers.SelectedIndex = -1;
             cmbProfessionInactiveMembers.SelectedIndex = -1;
@@ -314,46 +311,66 @@ namespace APC.AllForms
 
         }
 
-        private void updateMember(MemberDetailDTO detail)
+        private void btnAddRegisteredMembers_Click(object sender, EventArgs e)
         {
-            if (detail.MemberID == 0)
-            {
-                MessageBox.Show("Please choose a member from the table");
-            }
-            else
-            {
-                FormMembers open = new FormMembers();
-                open.detail = detail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+            var form = new FormMembers(_memberService);
+            form.ShowDialog();
+
+            ClearFilters();
+        }
+
+        private MemberFullDetailsDTO GetSelectedRegisteredMembers()
+        {
+            if (dataGridViewRegisteredMembers.CurrentRow == null)
+                return null;
+
+            return dataGridViewRegisteredMembers.CurrentRow.DataBoundItem as MemberFullDetailsDTO;
         }
 
         private void btnUpdateRegisteredMembers_Click(object sender, EventArgs e)
         {
-            updateMember(registeredMembersDetail);
+            var selected = GetSelectedRegisteredMembers();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a member from the table");
+                return;
+            }
+
+            var form = new FormMembers(_memberService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnViewRegisteredMembers_Click(object sender, EventArgs e)
-        {            
-            ViewMember(registeredMembersDetail, false);
+        {
+            var selected = GetSelectedRegisteredMembers();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a member from the table");
+                return;
+            }
+
+            var form = new FormViewMember(_memberService);
+            form.MemberDetail(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void txtNameRegisteredMembers_TextChanged(object sender, EventArgs e)
         {
-            List<MemberDetailDTO> list = registeredMembersDTO.Members;
-            list = list.Where(x => x.Name.Contains(txtNameRegisteredMembers.Text)).ToList();
-            dataGridViewRegisteredMembers.DataSource = list;
+            string search = txtNameRegisteredMembers.Text.Trim().ToLower();
+            var filtered = _memberFullDetailsDTOs.Where(x => x.FirstName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewRegisteredMembers.DataSource = filtered;
         }
 
         private void txtSurnameRegisteredMembers_TextChanged(object sender, EventArgs e)
         {
-            List<MemberDetailDTO> list = registeredMembersDTO.Members;
-            list = list.Where(x => x.Surname.Contains(txtSurnameRegisteredMembers.Text)).ToList();
-            dataGridViewRegisteredMembers.DataSource = list;
+            string search = txtSurnameRegisteredMembers.Text.Trim().ToLower();
+            var filtered = _memberFullDetailsDTOs.Where(x => x.LastName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewRegisteredMembers.DataSource = filtered;
         }
 
         private void btnSearchRegisteredMembers_Click(object sender, EventArgs e)
@@ -368,30 +385,29 @@ namespace APC.AllForms
 
         private void btnDeleteRegisteredMembers_Click(object sender, EventArgs e)
         {
-            if (registeredMembersDetail.MemberID == 0)
+            var selected = GetSelectedRegisteredMembers();
+            if (selected == null)
             {
-                MessageBox.Show("Please select a member from the table");
+                MessageBox.Show("Please select a member from the table.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (registeredMembersBLL.Delete(registeredMembersDetail))
-                    {
-                        MessageBox.Show("Member was deleted");                        
-                        ClearFilters();
-                    }
-                }
-            }
+                _memberService.Delete(selected.MemberId);
+                ClearFilters();
+            }            
         }
 
         private void dataGridViewRegisteredMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            registeredMembersDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewRegisteredMembers, e.RowIndex);
 
-            // Load image
+            var registeredMembersDetail = new MemberFullDetailsDTO();
+            registeredMembersDetail = GeneralHelper.MapFromGrid<MemberFullDetailsDTO>(dataGridViewRegisteredMembers, e.RowIndex);
+
             string imagePath = Path.Combine(Application.StartupPath, "images", registeredMembersDetail.ImagePath);
             picRegisteredMember.ImageLocation = imagePath;
         }

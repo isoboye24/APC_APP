@@ -9,7 +9,7 @@ namespace APC.Helper
         public enum MemberGridType
         {
             Basic,
-            SemiComplete,
+            SemiBasic,
             Contact,
             Birthday,
             Dead,
@@ -20,7 +20,7 @@ namespace APC.Helper
         {
             switch (type)
             {
-                case MemberGridType.SemiComplete:
+                case MemberGridType.SemiBasic:
                     GeneralHelper.SetVisibleColumns(grid, "FirstName", "LastName", "NationalityName", "PositionName", "GenderName");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {

@@ -1,4 +1,5 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL;
 using APC.DAL.DTO;
 using System;
@@ -18,10 +19,17 @@ namespace APC
 {
     public partial class FormMembers : Form
     {
-        public FormMembers()
+        private readonly IMemberService _memberService;
+
+        private Applications.DTO.MemberFullDetailsDTO _memberFullDetailsDTO;
+
+        private bool _isUpdate = false;
+        public FormMembers(IMemberService memberService)
         {
             InitializeComponent();
+            _memberService = memberService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -47,10 +55,16 @@ namespace APC
             this.Close();
         }
 
+        public void loadForEdit(Applications.DTO.MemberFullDetailsDTO memberFullDetailsDTO, bool isUpdate)
+        {
+            _memberFullDetailsDTO = memberFullDetailsDTO;
+            _isUpdate = isUpdate;
+        }
+
         MemberBLL bll = new MemberBLL();
         MemberDTO dto = new MemberDTO();
         public MemberDetailDTO detail = new MemberDetailDTO();
-        public bool isUpdate = false;
+
         public bool isUpdateDeadMember = false;
         private void FormMembers_Load(object sender, EventArgs e)
         {
