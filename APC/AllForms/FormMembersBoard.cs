@@ -31,12 +31,17 @@ namespace APC.AllForms
         private readonly IPositionService _positionService;
         private readonly IProfessionService _professionService;
         private readonly INationalityService _nationalityService;
+        private readonly IMonthService _monthService;
 
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOsContacts;
         private List<MemberFullDetailsDTO> _formerMemberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _deceasedMemberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _inactiveMemberFullDetailsDTOs;
+        private List<MemberFullDetailsDTO> _membersBirthdayFullDetailsDTOs;
+
+        private int currMonth = DateTime.Today.Month;
+        private int currYear = DateTime.Today.Year;
 
         public FormMembersBoard(ICurrentUserService currentUserService)
         {
@@ -48,14 +53,10 @@ namespace APC.AllForms
         MembersCommittmentDetailDTO committmentDetail = new MembersCommittmentDetailDTO();
         MembersCommittmentDTO committmentDTO = new MembersCommittmentDTO();
 
-        MemberBLL birthdayBLL = new MemberBLL();
-        MemberDTO birthdayDTO = new MemberDTO();
-        MemberDetailDTO birthdayDetail = new MemberDetailDTO();
-
         private void loadRegisteredMembers()
         {
-            dataGridViewRegisteredMembers.DataSource = _memberService.GetAll();
-            _memberFullDetailsDTOs = _memberService.GetAll();
+            dataGridViewRegisteredMembers.DataSource = _memberService.GetAllCurrentMembers();
+            _memberFullDetailsDTOs = _memberService.GetAllCurrentMembers();
             ConfigureMemberGrid(dataGridViewRegisteredMembers, MemberGridType.SemiBasic);
         }
 
@@ -68,22 +69,29 @@ namespace APC.AllForms
 
         private void loadFormerMembers()
         {
-            dataGridViewFormerMembers.DataSource = _memberService.GetAll();
-            _formerMemberFullDetailsDTOs = _memberService.GetAll();
+            dataGridViewFormerMembers.DataSource = _memberService.GetFormerMembers();
+            _formerMemberFullDetailsDTOs = _memberService.GetFormerMembers();
             ConfigureMemberGrid(dataGridViewFormerMembers, MemberGridType.SemiBasic);
         }
         
         private void loadDeceasedMembers()
         {
-            dataGridViewDeadMembers.DataSource = _memberService.GetAll();
-            _deceasedMemberFullDetailsDTOs = _memberService.GetAll();
+            dataGridViewDeadMembers.DataSource = _memberService.GetDeceasedMembers();
+            _deceasedMemberFullDetailsDTOs = _memberService.GetDeceasedMembers();
             ConfigureMemberGrid(dataGridViewDeadMembers, MemberGridType.Dead);
+        }
+        
+        private void loadMembersBirthday(int month)
+        {
+            dataGridViewBirthday.DataSource = _memberService.GetBirthdayMembers(month);
+            _membersBirthdayFullDetailsDTOs = _memberService.GetAllCurrentMembers();
+            ConfigureMemberGrid(dataGridViewBirthday, MemberGridType.Birthday);
         }
         
         private void loadInactiveMembers()
         {
-            dataGridViewInactiveMembers.DataSource = _memberService.GetAll();
-            _inactiveMemberFullDetailsDTOs = _memberService.GetAll();
+            dataGridViewInactiveMembers.DataSource = _memberService.GetInactiveMembers();
+            _inactiveMemberFullDetailsDTOs = _memberService.GetInactiveMembers();
             ConfigureMemberGrid(dataGridViewInactiveMembers, MemberGridType.SemiBasic);
         }
 
@@ -105,10 +113,10 @@ namespace APC.AllForms
             loadFormerMembers();
             FillFormerMemberComboBoxes();
 
-            birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
+            
             committmentDTO = committmentBLL.Select(DateTime.Now.Year);
 
-            LoadDataGridView.loadBirthdayMembers(dataGridViewBirthday, birthdayDTO);
+            loadMembersBirthday(currMonth);
             FillBirthdayMemberComboBoxes();
 
             loadDeceasedMembers();
@@ -189,17 +197,18 @@ namespace APC.AllForms
 
         private void FillBirthdayMemberComboBoxes()
         {
-            cmbGenderBirthday.DataSource = birthdayDTO.Genders;
+            cmbGenderBirthday.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderBirthday, "GenderName", "GenderID");
-            cmbNationalityBirthday.DataSource = birthdayDTO.Nationalities;
+            cmbNationalityBirthday.DataSource = _nationalityService.GetAll();
             GeneralHelper.ComboBoxProps(cmbNationalityBirthday, "Nationality", "NationalityID");
-            cmbMonthBirthday.DataSource = birthdayDTO.Months;
+            cmbMonthBirthday.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthBirthday, "MonthName", "MonthID");
-            cmbPositionBirthday.DataSource = birthdayDTO.Positions;
+            cmbPositionBirthday.DataSource = _positionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPositionBirthday, "PositionName", "PositionID");
-            cmbProfessionBirthday.DataSource = birthdayDTO.Professions;
+            cmbProfessionBirthday.DataSource = _professionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbProfessionBirthday, "Profession", "professionID");
         }
+
         private void FillFormerMemberComboBoxes()
         {
             cmbGenderFormerMembers.DataSource = _genderService.GetAll();
@@ -259,8 +268,7 @@ namespace APC.AllForms
             cmbProfessionBirthday.SelectedIndex = -1;
             cmbPositionBirthday.SelectedIndex = -1;
             cmbMonthBirthday.SelectedIndex = -1;
-            birthdayDTO = birthdayBLL.SelectBirthdayMembers(DateTime.Now.Month);
-            dataGridViewBirthday.DataSource = birthdayDTO.Members;
+            loadMembersBirthday(currMonth);
 
             txtSurnameContacts.Clear();
             loadMembersContacts();
@@ -289,9 +297,7 @@ namespace APC.AllForms
             cmbYearCommittment.SelectedIndex = -1;
             cmbStatusCommittment.SelectedIndex = -1;
 
-            inactiveMembersBLL = new MemberBLL();
-            inactiveMembersDTO = inactiveMembersBLL.SelectInactiveMembers();
-            dataGridViewInactiveMembers.DataSource = inactiveMembersDTO.Members;
+            loadInactiveMembers();
             txtNameInactiveMembers.Clear();
             txtSurnameInactiveMembers.Clear();
             cmbGenderInactiveMembers.SelectedIndex = -1;
@@ -788,6 +794,35 @@ namespace APC.AllForms
             GetCounts();
         }
 
+        private void btnSearchCommittment_Click_1(object sender, EventArgs e)
+        {
+            if (cmbYearCommittment.SelectedIndex != -1)
+            {
+                committmentBLL = new MembersCommittmentBLL();
+                committmentDTO = committmentBLL.Select(Convert.ToInt32(cmbYearCommittment.SelectedValue));
+                dataGridViewCommitments.DataSource = committmentDTO.Committments;
+
+                List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
+                if (cmbStatusCommittment.SelectedIndex != -1)
+                {
+                    string selectedStatus = cmbStatusCommittment.Text;
+
+                    list = list.Where(x => x.PaymentStatus == selectedStatus).ToList();
+                    dataGridViewCommitments.DataSource = list;
+                    GetCounts();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select year");
+            }
+        }
+
+        private void btnClearCommittment_Click_1(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
         ////////////////////////////////////////////////////////////////////////////
         /// Inactive Members 
         ////////////////////////////////////////////////////////////////////////////
@@ -889,90 +924,80 @@ namespace APC.AllForms
             dataGridViewInactiveMembers.DataSource = filtered.ToList();
         }
 
+        ////////////////////////////////////////////////////////////////////////////
+        /// Members Birthday
+        ////////////////////////////////////////////////////////////////////////////
 
+        private MemberFullDetailsDTO GetSelectedBirthdayMember()
+        {
+            if (dataGridViewBirthday.CurrentRow == null)
+                return null;
 
+            return dataGridViewBirthday.CurrentRow.DataBoundItem as MemberFullDetailsDTO;
+        }
 
         private void txtNameBirthday_TextChanged(object sender, EventArgs e)
         {
-
+            string search = txtNameBirthday.Text.Trim().ToLower();
+            var filtered = _membersBirthdayFullDetailsDTOs.Where(x => x.FirstName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewBirthday.DataSource = filtered;
         }
         
         private void txtSurnameBirthday_TextChanged(object sender, EventArgs e)
         {
-
+            string search = txtSurnameBirthday.Text.Trim().ToLower();
+            var filtered = _membersBirthdayFullDetailsDTOs.Where(x => x.LastName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewBirthday.DataSource = filtered;
         }
 
         private void btnSearchBirthday_Click(object sender, EventArgs e)
         {
-            birthdayBLL = new MemberBLL();
-            List<MemberDetailDTO> list = birthdayDTO.Members;
+            var filtered = _membersBirthdayFullDetailsDTOs.AsQueryable();
 
+            if (cmbPositionBirthday.SelectedIndex == -1 && cmbNationalityBirthday.SelectedIndex == -1
+                && cmbGenderBirthday.SelectedIndex == -1 && cmbProfessionBirthday.SelectedIndex == -1
+                && cmbMonthBirthday.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select either an option from any of the dropdown boxes");
+                return;
+            }
+
+            if (cmbPositionBirthday.SelectedIndex != -1)
+            {
+                string search = cmbPositionBirthday.Text;
+                filtered = filtered.Where(x => x.Position.ToString()
+                                    .IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (cmbNationalityBirthday.SelectedIndex != -1)
+            {
+                string search = cmbNationalityBirthday.Text;
+                filtered = filtered.Where(x => x.Nationality.ToString()
+                                    .IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (cmbGenderBirthday.SelectedIndex != -1)
+            {
+                string search = cmbGenderBirthday.Text;
+                filtered = filtered.Where(x => x.Gender.ToString()
+                                    .IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (cmbProfessionBirthday.SelectedIndex != -1)
+            {
+                string search = cmbProfessionBirthday.Text;
+                filtered = filtered.Where(x => x.Profession.ToString()
+                                    .IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+            
             if (cmbMonthBirthday.SelectedIndex != -1)
             {
-                birthdayDTO = birthdayBLL.SelectBirthdayMembers(Convert.ToInt32(cmbMonthBirthday.SelectedValue));
-                
-                if (cmbGenderBirthday.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.GenderName == cmbGenderBirthday.SelectedValue.ToString()).ToList();
-                }
-                else if (cmbPositionBirthday.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.PositionName == cmbPositionBirthday.SelectedValue.ToString()).ToList();
-                }
-                else if (cmbProfessionBirthday.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.ProfessionName == cmbProfessionBirthday.SelectedValue.ToString()).ToList();
-                }
-                else if (cmbNationalityBirthday.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.NationalityName == cmbNationalityBirthday.SelectedValue.ToString()).ToList();
-                }
-                else if (txtNameBirthday.Text.Trim() != "")
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.Name.Contains(txtNameBirthday.Text.Trim())).ToList();
-                }
-                else if (txtSurnameBirthday.Text.Trim() != "")
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue) && x.Surname.Contains(txtSurnameBirthday.Text.Trim())).ToList();
-                }
-                else
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(cmbMonthBirthday.SelectedValue)).ToList();
-                }                    
-            }
-            else
-            {
-                if (cmbGenderBirthday.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.GenderName == cmbGenderBirthday.SelectedValue.ToString()).ToList();
-                }
-                else if (cmbPositionBirthday.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.PositionName == cmbPositionBirthday.SelectedValue.ToString()).ToList();
-                }
-                else if (cmbProfessionBirthday.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.ProfessionName == cmbProfessionBirthday.SelectedValue.ToString()).ToList();
-                }
-                else if (cmbNationalityBirthday.SelectedIndex != -1)
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.NationalityName == cmbNationalityBirthday.SelectedValue.ToString()).ToList();
-                }
-                else if (txtNameBirthday.Text.Trim() != "")
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.Name.Contains(txtNameBirthday.Text.Trim())).ToList();
-                }
-                else if (txtSurnameBirthday.Text.Trim() != "")
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month) && x.Surname.Contains(txtSurnameBirthday.Text.Trim())).ToList();
-                }
-                else
-                {
-                    list = list.Where(x => x.Birthday.Month == Convert.ToInt32(DateTime.Now.Month)).ToList();
-                }
+                string search = cmbMonthBirthday.Text;
+                filtered = filtered.Where(x => x.Birthday.ToString("MMMM")
+                                    .Equals(search, StringComparison.OrdinalIgnoreCase));
             }
 
-            dataGridViewBirthday.DataSource = list;
+            dataGridViewBirthday.DataSource = filtered.ToList();
         }
 
         private void btnClearBirthday_Click(object sender, EventArgs e)
@@ -982,67 +1007,19 @@ namespace APC.AllForms
 
         private void btnViewBirthday_Click(object sender, EventArgs e)
         {
-            ViewMember(birthdayDetail, false);
-        }
-
-        private void dataGridViewBirthday_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            birthdayDetail = GeneralHelper.MapFromGrid<MemberDetailDTO>(dataGridViewBirthday, e.RowIndex);
-        }
-
-        private void ViewMember(MemberDetailDTO detail, bool isFormer)
-        {
-            if (detail.MemberID == 0)
+            var selected = GetSelectedBirthdayMember();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table");
+                MessageBox.Show("Please select a member from the table");
+                return;
             }
-            else
-            {
-                FormViewMember open = new FormViewMember();
-                open.detail = detail;
-                open.isView = true;
-                if (isFormer)
-                {
-                    open.isFormer = true;
-                }                
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
 
+            var form = new FormViewMember(_memberService);
+            form.MemberDetail(selected);
+            form.ShowDialog();
 
-        private void btnSearchCommittment_Click_1(object sender, EventArgs e)
-        {
-            if (cmbYearCommittment.SelectedIndex != -1)
-            {
-                committmentBLL = new MembersCommittmentBLL();
-                committmentDTO = committmentBLL.Select(Convert.ToInt32(cmbYearCommittment.SelectedValue));
-                dataGridViewCommitments.DataSource = committmentDTO.Committments;
-
-                List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
-                if (cmbStatusCommittment.SelectedIndex != -1)
-                {
-                    string selectedStatus = cmbStatusCommittment.Text;
-
-                    list = list.Where(x => x.PaymentStatus == selectedStatus).ToList();
-                    dataGridViewCommitments.DataSource = list;
-                    GetCounts();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select year");
-            }
-        }
-
-        private void btnClearCommittment_Click_1(object sender, EventArgs e)
-        {
             ClearFilters();
         }
 
-        
     }
 }

@@ -18,10 +18,10 @@ namespace APC.Applications.Interfaces
         List<MemberFullDetailsDTO> SelectSpecificMember(int id);
         MemberFullDetailsDTO GetMemberById(int id);
         List<MemberFullDetailsDTO> GetAllDeletedMembers();
-        List<BirthdayMembersDTO> GetBirthdayMembers(int month);
-        List<MembersBasicDetailDTO> GetInactiveMembers();
-        List<MembersBasicDetailDTO> GetFormerMembers();
-        List<DeadMemberShortDetailDTO> GetDeceasedMembers();
+        List<MemberFullDetailsDTO> GetBirthdayMembers(int month);
+        List<MemberFullDetailsDTO> GetInactiveMembers();
+        List<MemberFullDetailsDTO> GetFormerMembers();
+        List<MemberFullDetailsDTO> GetDeceasedMembers();
 
         bool Create(Member data);
         bool Update(Member data);

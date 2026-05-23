@@ -402,7 +402,7 @@ namespace APC.Applications.Services
             .ToList();
         }
 
-        public List<BirthdayMembersDTO> GetBirthdayMembers(int month)
+        public List<MemberFullDetailsDTO> GetBirthdayMembers(int month)
         {
             var data = (from m in _repository.GetAllBirthdayMembers(month)                       
                         join p in _positionRepository.GetAll() on m.positionID equals p.positionID
@@ -433,7 +433,7 @@ namespace APC.Applications.Services
             .ToList();
         }
 
-        public List<MembersBasicDetailDTO> GetInactiveMembers()
+        public List<MemberFullDetailsDTO> GetInactiveMembers()
         {
             string status = "Inactive";
 
@@ -468,7 +468,7 @@ namespace APC.Applications.Services
             .ToList();
         }
 
-        public List<MembersBasicDetailDTO> GetFormerMembers()
+        public List<MemberFullDetailsDTO> GetFormerMembers()
         {
             string status = "Former";
 
@@ -503,7 +503,7 @@ namespace APC.Applications.Services
             .ToList();
         }
 
-        public List<DeadMemberShortDetailDTO> GetDeceasedMembers()
+        public List<MemberFullDetailsDTO> GetDeceasedMembers()
         {
             string status = "Deceased";
 
@@ -554,7 +554,7 @@ namespace APC.Applications.Services
             .ToList();
         }
 
-        public List<MembersBasicDetailDTO> GetAllMembersWithAccess()
+        public List<MemberFullDetailsDTO> GetAllMembersWithAccess()
         {
             string status = "Current";
             string permissionStatus = "Member";
@@ -590,7 +590,7 @@ namespace APC.Applications.Services
             .ToList();
         }
 
-        public List<MembersBasicDetailDTO> Select3MonthsAbsentes()
+        public List<MemberFullDetailsDTO> Select3MonthsAbsentes()
         {
             string attendanceStatus = "Absent";
 
