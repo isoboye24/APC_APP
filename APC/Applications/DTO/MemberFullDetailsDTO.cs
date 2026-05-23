@@ -12,6 +12,7 @@ namespace APC.Applications.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Birthday { get; set; }
+        public string FormattedBirthday { get; set; }
         public string ImagePath { get; set; }
         public string HouseAddress { get; set; }
         public string Email { get; set; }

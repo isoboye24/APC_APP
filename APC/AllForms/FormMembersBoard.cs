@@ -1,25 +1,15 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.Applications.Services;
-using APC.BLL;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
 using APC.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.Animation;
-using System.Xml.Linq;
 using static APC.Helper.CommittmentHelper;
 using static APC.Helper.MemberHelper;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
 {
@@ -30,34 +20,55 @@ namespace APC.AllForms
         private readonly IGenderService _genderService;
         private readonly IPositionService _positionService;
         private readonly IProfessionService _professionService;
+
         private readonly INationalityService _nationalityService;
         private readonly IMonthService _monthService;
+        private readonly IMemberCommittmentService _memberCommittmentService;
+        private readonly IGeneralMeetingService _generalMeetingService;
+        private readonly IPaymentStatusService _paymentStatusService;
 
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOsContacts;
         private List<MemberFullDetailsDTO> _formerMemberFullDetailsDTOs;
-        private List<MemberFullDetailsDTO> _deceasedMemberFullDetailsDTOs;
+        private List<DeadMemberShortDetailDTO> _deceasedMemberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _inactiveMemberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _membersBirthdayFullDetailsDTOs;
+
+        private List<MemberCommittmentDTO> _memberCommittmentDTOs;
 
         private int currMonth = DateTime.Today.Month;
         private int currYear = DateTime.Today.Year;
 
-        public FormMembersBoard(ICurrentUserService currentUserService)
+        public FormMembersBoard(ICurrentUserService currentUserService, IMemberService memberService, IGenderService genderService,
+            IPositionService positionService, IProfessionService professionService, INationalityService nationalityService,
+            IMonthService monthService, IMemberCommittmentService memberCommittmentService, IGeneralMeetingService generalMeetingService, 
+            IPaymentStatusService paymentStatusService)
         {
             InitializeComponent();
             _currentUserService = currentUserService;
+            _memberService = memberService;
+            _genderService = genderService;
+            _positionService = positionService;
+            _professionService = professionService;
+            _nationalityService = nationalityService;
+            _monthService = monthService;
+            _memberCommittmentService = memberCommittmentService;
+            _generalMeetingService = generalMeetingService;
+            _paymentStatusService = paymentStatusService;
         }
-
-        MembersCommittmentBLL committmentBLL = new MembersCommittmentBLL();
-        MembersCommittmentDetailDTO committmentDetail = new MembersCommittmentDetailDTO();
-        MembersCommittmentDTO committmentDTO = new MembersCommittmentDTO();
 
         private void loadRegisteredMembers()
         {
             dataGridViewRegisteredMembers.DataSource = _memberService.GetAllCurrentMembers();
             _memberFullDetailsDTOs = _memberService.GetAllCurrentMembers();
             ConfigureMemberGrid(dataGridViewRegisteredMembers, MemberGridType.SemiBasic);
+        }
+
+        private void loadMembersCommittments(int year)
+        {
+            dataGridViewCommitments.DataSource = _memberCommittmentService.GetMembersCommittment(year);
+            _memberCommittmentDTOs = _memberCommittmentService.GetMembersCommittment(year);
+            ConfigureMemberCommittmentGrid(dataGridViewCommitments, MemberCommittmentGridType.Basic);
         }
 
         private void loadMembersContacts()
@@ -113,9 +124,6 @@ namespace APC.AllForms
             loadFormerMembers();
             FillFormerMemberComboBoxes();
 
-            
-            committmentDTO = committmentBLL.Select(DateTime.Now.Year);
-
             loadMembersBirthday(currMonth);
             FillBirthdayMemberComboBoxes();
 
@@ -125,24 +133,18 @@ namespace APC.AllForms
             loadInactiveMembers();
             FillInactiveMemberComboBoxes();
 
-            LoadMemberCommittments();
+            loadMembersCommittments(currYear);
             FillMemberCommittmentComboBoxes();
             #endregion
 
             // Members' Commitments
             #region
-            cmbYearCommittment.DataSource = committmentDTO.Years;
+            cmbYearCommittment.DataSource = _generalMeetingService.GetMeetingYears();
             cmbYearCommittment.SelectedIndex = -1;
 
             #endregion
 
             GetCounts();
-        }
-
-        private void LoadMemberCommittments()
-        {
-            dataGridViewCommitments.DataSource = committmentDTO.Committments;
-            ConfigureMemberCommittmentGrid(dataGridViewCommitments, MemberCommittmentGridType.Basic);
         }
 
         private void ResizeControls()
@@ -247,7 +249,7 @@ namespace APC.AllForms
 
         private void FillMemberCommittmentComboBoxes()
         {
-            cmbStatusCommittment.DataSource = committmentDTO.PaymentStatuses;
+            cmbStatusCommittment.DataSource = _paymentStatusService.GetAll();
             GeneralHelper.ComboBoxProps(cmbStatusCommittment, "PaymentStatusName", "PaymentStatusID");
         }
 
@@ -289,20 +291,18 @@ namespace APC.AllForms
             cmbProfessionDeadMembers.SelectedIndex = -1;
             loadDeceasedMembers();
 
-            committmentBLL = new MembersCommittmentBLL();
-            committmentDTO = committmentBLL.Select(DateTime.Now.Year);
-            dataGridViewCommitments.DataSource = committmentDTO.Committments;
             txtNameCommittment.Clear();
             txtSurnameCommittment.Clear();
             cmbYearCommittment.SelectedIndex = -1;
             cmbStatusCommittment.SelectedIndex = -1;
+            loadMembersCommittments(currYear);
 
-            loadInactiveMembers();
             txtNameInactiveMembers.Clear();
             txtSurnameInactiveMembers.Clear();
             cmbGenderInactiveMembers.SelectedIndex = -1;
             cmbPositionInactiveMembers.SelectedIndex = -1;
             cmbProfessionInactiveMembers.SelectedIndex = -1;
+            loadInactiveMembers();
 
             GetCounts();
         }
@@ -457,8 +457,8 @@ namespace APC.AllForms
         {
             if (e.RowIndex < 0) return;
 
-            var registeredMembersDetail = new MemberFullDetailsDTO();
-            registeredMembersDetail = GeneralHelper.MapFromGrid<MemberFullDetailsDTO>(dataGridViewRegisteredMembers, e.RowIndex);
+            var registeredMembersDetail = GetSelectedRegisteredMembers();
+            // registeredMembersDetail = GeneralHelper.MapFromGrid<MemberFullDetailsDTO>(dataGridViewRegisteredMembers, e.RowIndex);
 
             string imagePath = Path.Combine(Application.StartupPath, "images", registeredMembersDetail.ImagePath);
             picRegisteredMember.ImageLocation = imagePath;
@@ -721,10 +721,20 @@ namespace APC.AllForms
         /// Members Committments 
         ////////////////////////////////////////////////////////////////////////////
 
+        private MemberCommittmentDTO GetSelectedMemberCommittment()
+        {
+            if (dataGridViewCommitments.CurrentRow == null)
+                return null;
+
+            return dataGridViewCommitments.CurrentRow.DataBoundItem as MemberCommittmentDTO;
+        }
+
         private void dataGridViewCommitments_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            committmentDetail = GeneralHelper.MapFromGrid<MembersCommittmentDetailDTO>(dataGridViewCommitments, e.RowIndex);
+
+            var committmentDetail = GetSelectedMemberCommittment();
+            //committmentDetail = GeneralHelper.MapFromGrid<MemberCommittmentDTO>(dataGridViewCommitments, e.RowIndex);
 
             // Load image
             string imagePath = Path.Combine(Application.StartupPath, "images", committmentDetail.ImagePath);
@@ -750,71 +760,61 @@ namespace APC.AllForms
 
         private void btnViewCommittment_Click(object sender, EventArgs e)
         {
-            if (committmentDetail.MemberID == 0)
+            var selected = GetSelectedMemberCommittment();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a member from the table");
+                MessageBox.Show("Please select a member from the table");
+                return;
             }
-            else
-            {
-                FormViewMember open = new FormViewMember();
-                MemberBLL bll = new MemberBLL();
-                MemberDTO DTO = new MemberDTO();
-                DTO = bll.Select();
-                MemberDetailDTO committmentMember = DTO.Members.FirstOrDefault(x => x.MemberID == committmentDetail.MemberID);
-                
-                if (committmentMember == null)
-                {
-                    MessageBox.Show("No member found!");
-                    return;
-                }
 
-                open.detail = committmentMember;
-                open.memberID = committmentMember.MemberID;
-                open.isCommittment = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+            var form = new FormViewMember(_memberService);
+            form.detailFromMemberCommittment(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void txtNameCommittment_TextChanged(object sender, EventArgs e)
         {
-            List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
-            list = list.Where(x => x.Name.Contains(txtNameCommittment.Text.Trim())).ToList();
-            dataGridViewCommitments.DataSource = list;
+            string search = txtNameCommittment.Text.Trim().ToLower();
+            var filtered = _memberCommittmentDTOs.Where(x => x.FirstName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewCommitments.DataSource = filtered;
+
             GetCounts();
         }
 
         private void txtSurnameCommittment_TextChanged(object sender, EventArgs e)
         {
-            List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
-            list = list.Where(x => x.Surname.Contains(txtSurnameCommittment.Text.Trim())).ToList();
-            dataGridViewCommitments.DataSource = list;
+            string search = txtSurnameCommittment.Text.Trim().ToLower();
+            var filtered = _memberCommittmentDTOs.Where(x => x.LastName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewCommitments.DataSource = filtered;
+
             GetCounts();
         }
 
         private void btnSearchCommittment_Click_1(object sender, EventArgs e)
         {
-            if (cmbYearCommittment.SelectedIndex != -1)
+            if (cmbYearCommittment.SelectedIndex == -1)
             {
-                committmentBLL = new MembersCommittmentBLL();
-                committmentDTO = committmentBLL.Select(Convert.ToInt32(cmbYearCommittment.SelectedValue));
-                dataGridViewCommitments.DataSource = committmentDTO.Committments;
-
-                List<MembersCommittmentDetailDTO> list = committmentDTO.Committments;
-                if (cmbStatusCommittment.SelectedIndex != -1)
-                {
-                    string selectedStatus = cmbStatusCommittment.Text;
-
-                    list = list.Where(x => x.PaymentStatus == selectedStatus).ToList();
-                    dataGridViewCommitments.DataSource = list;
-                    GetCounts();
-                }
+                MessageBox.Show("Please select either a year");
+                return;
             }
-            else
+            else if (cmbYearCommittment.SelectedIndex != -1)
             {
-                MessageBox.Show("Please select year");
+                int search = Convert.ToInt32(cmbYearCommittment.SelectedValue);
+                loadMembersCommittments(search);
+            }
+            else if (cmbYearCommittment.SelectedIndex != -1 && cmbStatusCommittment.SelectedIndex != 1)
+            {
+                int searchYear = Convert.ToInt32(cmbYearCommittment.SelectedValue);
+                string searchStatus = cmbStatusCommittment.Text;
+
+                loadMembersCommittments(searchYear);
+                var filtered = _memberCommittmentDTOs.AsQueryable();
+
+                filtered.Where(x => x.Status.ToString().IndexOf(searchStatus, StringComparison.OrdinalIgnoreCase) >= 0);
+
+                dataGridViewCommitments.DataSource = filtered.ToList();
             }
         }
 

@@ -419,12 +419,13 @@ namespace APC.Applications.Services
                         })
                         .ToList();
 
-            return data.Select(x => new BirthdayMembersDTO
+            return data.Select(x => new MemberFullDetailsDTO
             {
                 MemberId = x.memberID,
                 FirstName = x.name,
                 LastName = x.surname,
-                Birthday =  x.birthday.ToString("dd.MM.YYYY"),
+                Birthday =  x.birthday,
+                FormattedBirthday =  x.birthday.ToString("dd.MM.YYYY"),
                 ImagePath = x.imagePath,
                 Position = x.positionName,
                 Gender = x.genderName,
@@ -454,7 +455,7 @@ namespace APC.Applications.Services
                         })
                         .ToList();
 
-            return data.Select(x => new MembersBasicDetailDTO
+            return data.Select(x => new MemberFullDetailsDTO
             {
                 MemberId = x.memberID,
                 FirstName = x.name,
@@ -489,7 +490,7 @@ namespace APC.Applications.Services
                         })
                         .ToList();
 
-            return data.Select(x => new MembersBasicDetailDTO
+            return data.Select(x => new MemberFullDetailsDTO
             {
                 MemberId = x.memberID,
                 FirstName = x.name,
@@ -503,12 +504,13 @@ namespace APC.Applications.Services
             .ToList();
         }
 
-        public List<MemberFullDetailsDTO> GetDeceasedMembers()
+        public List<DeadMemberShortDetailDTO> GetDeceasedMembers()
         {
             string status = "Deceased";
 
             var data = (from m in _repository.GetAll()
                         join n in _nationalityRepository.GetAll() on m.nationalityID equals n.nationalityID
+                        join pro in _professionRepository.GetAll() on m.professionID equals pro.professionID
                         join p in _positionRepository.GetAll() on m.positionID equals p.positionID
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join ms in _membershipStatusRepository.GetByStatus(status)
@@ -523,6 +525,8 @@ namespace APC.Applications.Services
                             m.deadDate,
                             p.positionName,
                             g.genderName,
+                            pro.profession1,
+                            n.nationality1,
                         })
                         .ToList();
 
@@ -546,7 +550,9 @@ namespace APC.Applications.Services
                     DeadDate = x.deadDate.ToString("dd.MM.yyyy"),
                     Position = x.positionName,
                     Gender = x.genderName,
-                    Age = age.ToString()
+                    Age = age.ToString(),
+                    Profession = x.profession1,
+                    Nationality = x.nationality1,
                 };
             })
             .OrderBy(x => x.FirstName)
@@ -576,7 +582,7 @@ namespace APC.Applications.Services
                         })
                        .ToList();
 
-            return data.Select(x => new MembersBasicDetailDTO
+            return data.Select(x => new MemberFullDetailsDTO
             {
                 MemberId = x.memberID,
                 FirstName = x.name,
@@ -630,7 +636,7 @@ namespace APC.Applications.Services
                         })
                         .ToList();
 
-            return data.Select(x => new MembersBasicDetailDTO
+            return data.Select(x => new MemberFullDetailsDTO
             {
                 MemberId = x.memberID,
                 FirstName = x.name,

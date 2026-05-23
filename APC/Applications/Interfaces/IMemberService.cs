@@ -1,11 +1,6 @@
 ﻿using APC.Applications.DTO;
-using APC.DAL;
 using APC.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Interfaces
 {
@@ -21,7 +16,7 @@ namespace APC.Applications.Interfaces
         List<MemberFullDetailsDTO> GetBirthdayMembers(int month);
         List<MemberFullDetailsDTO> GetInactiveMembers();
         List<MemberFullDetailsDTO> GetFormerMembers();
-        List<MemberFullDetailsDTO> GetDeceasedMembers();
+        List<DeadMemberShortDetailDTO> GetDeceasedMembers();
 
         bool Create(Member data);
         bool Update(Member data);

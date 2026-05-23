@@ -17,5 +17,7 @@ namespace APC.Applications.DTO
         public string ImagePath { get; set; }
         public string DeadDate { get; set; }
         public string Age { get; set; }
+        public string Nationality { get; set; }
+        public string Profession { get; set; }
     }
 }

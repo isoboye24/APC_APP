@@ -16,6 +16,9 @@ namespace APC.AllForms
         private readonly IMemberService _memberService;
 
         private MemberFullDetailsDTO _memberFullDetailsDTO;
+        private MemberCommittmentDTO _memberCommittmentDTO;
+
+        private bool _isCommittment = false;
         public FormViewMember(IMemberService memberService)
         {
             InitializeComponent();
@@ -35,7 +38,7 @@ namespace APC.AllForms
         
         public bool isView = false;
         public bool isFormer = false;
-        public bool isCommittment = false;
+        
 
         public MemberDetailDTO detail { get; set; }
         public int memberID;
@@ -56,6 +59,12 @@ namespace APC.AllForms
         public void MemberDetail(MemberFullDetailsDTO memberFullDetailsDTO)
         {
             _memberFullDetailsDTO = memberFullDetailsDTO;
+        }
+
+        public void detailFromMemberCommittment(MemberCommittmentDTO memberCommittmentDTO, bool isCommittment)
+        {
+            _memberCommittmentDTO = memberCommittmentDTO;
+            _isCommittment = isCommittment;
         }
 
         private void resizeControls()
