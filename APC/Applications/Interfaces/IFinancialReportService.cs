@@ -22,5 +22,10 @@ namespace APC.Applications.Interfaces
         decimal GetOverallExpendituresByYear(int year);
 
         bool IsFinancialReportExisting(int year);
+
+        decimal GetTotalDuesById(int memberId);
+        decimal GetTotalAnnualDuesById(int memberId, int year);
+        decimal GetTotalDuesExpectedById(int memberId);
+        decimal GetTotalAnnualDuesExpectedById(int memberId, int year);
     }
 }

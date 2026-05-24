@@ -352,6 +352,7 @@
     <Compile Include="Applications\DTO\MonthDTO.cs" />
     <Compile Include="Applications\DTO\YearDTO.cs" />
     <Compile Include="Applications\Interfaces\IGraphicalRepresentationService.cs" />
+    <Compile Include="Applications\Interfaces\IPersonalAttendanceService.cs" />
     <Compile Include="Applications\Services\AttendanceStatusService.cs" />
     <Compile Include="Applications\Services\CommentService.cs" />
     <Compile Include="Applications\Services\ConstitutionService.cs" />
@@ -380,6 +381,7 @@
     <Compile Include="Applications\Services\PaymentStatusService.cs" />
     <Compile Include="Applications\Services\PermissionService.cs" />
     <Compile Include="Applications\Services\GeneralMeetingAttendanceService.cs" />
+    <Compile Include="Applications\Services\PersonalAttendanceService.cs" />
     <Compile Include="Applications\Services\PositionService.cs" />
     <Compile Include="Applications\Services\ProfessionService.cs" />
     <Compile Include="Applications\Services\SpecialContributionService.cs" />

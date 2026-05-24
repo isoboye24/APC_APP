@@ -1,8 +1,5 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
 using APC.Helper;
 using System;
 using System.Linq;
@@ -14,11 +11,20 @@ namespace APC.AllForms
     public partial class FormViewMember : Form
     {
         private readonly IMemberService _memberService;
+        private readonly IFinedMemberService _finedMemberService;
+        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
+        private readonly IPersonalAttendanceService _personalAttendanceService;
+        private readonly IFinancialReportService _financialReportService;
 
-        private MemberFullDetailsDTO _memberFullDetailsDTO;
+        private MemberFullDetailsDTO _memberFullDetailsDTOById;
         private MemberCommittmentDTO _memberCommittmentDTO;
 
         private bool _isCommittment = false;
+        private bool isView = false;
+        private bool isFormer = false;
+        private int _memberId = 0;
+        private int currYear = DateTime.Today.Year;
+
         public FormViewMember(IMemberService memberService)
         {
             InitializeComponent();
@@ -35,39 +41,22 @@ namespace APC.AllForms
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-        
-        public bool isView = false;
-        public bool isFormer = false;
-        
 
-        public MemberDetailDTO detail { get; set; }
-        public int memberID;
-        MemberBLL bll = new MemberBLL();
-        MemberDTO DTO = new MemberDTO();
+       
         int attendancePresentCount = 0;
         int attendanceAbsentCount = 0;
         decimal amountContributed = 0;
         decimal amountExpected = 0;
         decimal Balance = 0;
-        CommentBLL commentBLL = new CommentBLL();
-        CommentDetailDTO commentDetail = new CommentDetailDTO();
-        CommentDTO dto = new CommentDTO();
         int commentCount = 0;
-        FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
         int finesCount = 0;
 
-        public void MemberDetail(MemberFullDetailsDTO memberFullDetailsDTO)
+        public void MemberDetail(int memberId)
         {
-            _memberFullDetailsDTO = memberFullDetailsDTO;
+            _memberFullDetailsDTOById = _memberService.GetMemberById(memberId);
         }
 
-        public void detailFromMemberCommittment(MemberCommittmentDTO memberCommittmentDTO, bool isCommittment)
-        {
-            _memberCommittmentDTO = memberCommittmentDTO;
-            _isCommittment = isCommittment;
-        }
-
-        private void resizeControls()
+        private void ResizeControls()
         {
             GeneralHelper.ApplyBoldFont(14, labelMemberNameTitle, label1, label2, label3, label4, label5, label6, label7, label8, label9,
                 label10, label11, label12, label13, label14, label15, label16, label17, label18, label19, label20, label21, label22,
@@ -84,86 +73,58 @@ namespace APC.AllForms
                 );
         }
 
+        private void ViewMemberDetails(int Id)
+        {
+            _memberFullDetailsDTOById = _memberService.GetMemberById(Id);
+
+            labelMemberNameTitle.Text = _memberFullDetailsDTOById.LastName + " " + _memberFullDetailsDTOById.FirstName;
+            string imagePath = Application.StartupPath + "\\images\\" + _memberFullDetailsDTOById.ImagePath;
+            picProfilePic.ImageLocation = imagePath;
+
+            txtName.Text = _memberFullDetailsDTOById.FirstName;
+            txtSurname.Text = _memberFullDetailsDTOById.LastName;
+            txtAddress.Text = _memberFullDetailsDTOById.HouseAddress;
+            txtPosition.Text = _memberFullDetailsDTOById.Position;
+            labelBirthday.Text = _memberFullDetailsDTOById.Birthday.ToShortDateString();
+            labelMemSince.Text = _memberFullDetailsDTOById.MembershipDate.ToString();
+            txtEmail.Text = _memberFullDetailsDTOById.Email;
+            txtPhone1.Text = _memberFullDetailsDTOById.PhoneNumber;
+            txtLGA.Text = _memberFullDetailsDTOById.LGA;
+            if (_memberFullDetailsDTOById.PhoneNumber2 != "")
+            {
+                txtPhone2.Visible = true;
+                labelPhone2.Visible = true;
+            }
+            if (_memberFullDetailsDTOById.PhoneNumber3 != "")
+            {
+                txtPhone3.Visible = true;
+                labelPhone3.Visible = true;
+            }
+            txtPhone2.Text = _memberFullDetailsDTOById.PhoneNumber2;
+            txtPhone3.Text = _memberFullDetailsDTOById.PhoneNumber3;
+            txtCountry.Text = _memberFullDetailsDTOById.Country;
+            txtProfession.Text = _memberFullDetailsDTOById.Profession;
+            txtEmpStatus.Text = _memberFullDetailsDTOById.EmploymentStatus;
+            txtGender.Text = _memberFullDetailsDTOById.Gender;
+            txtNationality.Text = _memberFullDetailsDTOById.Nationality;
+            txtMaritalStatus.Text = _memberFullDetailsDTOById.MaritalStatus;
+            txtPermission.Text = _memberFullDetailsDTOById.Permission;
+            txtNextOfKin.Text = _memberFullDetailsDTOById.NextOfKin;
+            txtNextOfKinRelationship.Text = _memberFullDetailsDTOById.RelationshipToNextOfKin;
+        }
+
         private void FormViewMember_Load(object sender, EventArgs e)
         {
-            resizeControls();
+            ResizeControls();
 
-            if (isCommittment)
-            {
-                DTO = bll.Select();
-
-                detail = DTO.Members.FirstOrDefault(x => x.MemberID == memberID);
-
-                if (detail == null)
-                {
-                    MessageBox.Show("No detail data received!");
-                    return;
-                }
-                else
-                {
-                    labelMemberNameTitle.Text = _memberFullDetailsDTO.LastName + " " + _memberFullDetailsDTO.FirstName;
-                    string imagePath = Application.StartupPath + "\\images\\" + _memberFullDetailsDTO.ImagePath;
-                    picProfilePic.ImageLocation = imagePath;
-
-                    txtName.Text = _memberFullDetailsDTO.FirstName;
-                    txtSurname.Text = _memberFullDetailsDTO.LastName;
-                    txtAddress.Text = _memberFullDetailsDTO.HouseAddress;
-                    txtPosition.Text = _memberFullDetailsDTO.Position;
-                    labelBirthday.Text = _memberFullDetailsDTO.Birthday.ToShortDateString();
-                    labelMemSince.Text = _memberFullDetailsDTO.MembershipDate.ToString();
-                    txtEmail.Text = _memberFullDetailsDTO.Email;
-                    txtPhone1.Text = _memberFullDetailsDTO.PhoneNumber;
-                    txtLGA.Text = _memberFullDetailsDTO.LGA;
-                    if (_memberFullDetailsDTO.PhoneNumber2 != "")
-                    {
-                        txtPhone2.Visible = true;
-                        labelPhone2.Visible = true;
-                    }
-                    if (_memberFullDetailsDTO.PhoneNumber3 != "")
-                    {
-                        txtPhone3.Visible = true;
-                        labelPhone3.Visible = true;
-                    }
-                    txtPhone2.Text = _memberFullDetailsDTO.PhoneNumber2;
-                    txtPhone3.Text = _memberFullDetailsDTO.PhoneNumber3;
-                    txtCountry.Text = _memberFullDetailsDTO.Country;
-                    txtProfession.Text = _memberFullDetailsDTO.Profession;
-                    txtEmpStatus.Text = _memberFullDetailsDTO.EmploymentStatus;
-                    txtGender.Text = _memberFullDetailsDTO.Gender;
-                    txtNationality.Text = _memberFullDetailsDTO.Nationality;
-                    txtMaritalStatus.Text = _memberFullDetailsDTO.MaritalStatus;
-                    txtPermission.Text = _memberFullDetailsDTO.Permission;
-                    txtNextOfKin.Text = _memberFullDetailsDTO.NextOfKin;
-                    txtNextOfKinRelationship.Text = _memberFullDetailsDTO.RelationshipToNextOfKin;
-                }
-
-
-            }
+            ViewMemberDetails(_memberFullDetailsDTOById.MemberId);
 
             labelCommentText.Hide();
             labelNoOfComments.Hide();
             btnNoComments.Hide();            
 
-            dto = commentBLL.SelectMembersCommentList(_memberFullDetailsDTO.MemberId);
-            commentCount = dto.Comments.Count(x => x.MemberID == _memberFullDetailsDTO.MemberId);
-            labelNoOfComments.Text = commentCount.ToString();
-            if (commentCount == 1)
-            {
-                labelCommentText.Visible = true;
-                labelNoOfComments.Visible = true;
-                btnNoComments.Visible = true;
-                btnNoComments.Text = "View Comment";
-            }
-            else if(commentCount > 1)
-            {
-                labelCommentText.Visible = true;
-                labelCommentText.Text = "Comments";
-                labelNoOfComments.Visible = true;
-                btnNoComments.Visible = true;
-            }
-
             
-            finesCount = finedMemberBLL.SelectAllFinesCount(_memberFullDetailsDTO.MemberId);
+            finesCount = _finedMemberService.FinesCountById(_memberFullDetailsDTOById.MemberId);
             btnViewFines.Hide();
             labelNoOfFines.Text = finesCount.ToString();
             if (finesCount > 0)
@@ -179,7 +140,7 @@ namespace APC.AllForms
                 btnViewFines.Visible = true;
             }
 
-            attendancePresentCount = bll.GetNoOfMembersPresentAttendance(_memberFullDetailsDTO.MemberId);
+            attendancePresentCount = _personalAttendanceService.GetTotalMembersPresentCountById(_memberFullDetailsDTOById.MemberId);
             labelNoOfPresent.Text = attendancePresentCount.ToString();
             btnViewPresentAttendance.Hide();
             if (attendancePresentCount > 0)
@@ -188,7 +149,7 @@ namespace APC.AllForms
                 btnViewPresentAttendance.Text = "View Attendance";
             }
 
-            attendanceAbsentCount = bll.GetNoOfMembersAbsentAttendance(_memberFullDetailsDTO.MemberId);
+            attendanceAbsentCount = _personalAttendanceService.GetTotalMembersAbsentCountById(_memberFullDetailsDTOById.MemberId);
             labelNoOfAbsent.Text = attendanceAbsentCount.ToString();
             btnViewAbsentAttendance.Hide();
             if (attendanceAbsentCount > 0)
@@ -196,7 +157,8 @@ namespace APC.AllForms
                 btnViewAbsentAttendance.Visible = true;
                 btnViewAbsentAttendance.Text = "View Attendance";
             }
-            amountContributed = bll.GetAmountContributed(_memberFullDetailsDTO.MemberId);
+
+            amountContributed = _financialReportService.GetTotalDuesById(_memberFullDetailsDTOById.MemberId);
             labelAmountContributed.Text = "€" + amountContributed;
             btnViewAmountContributed.Hide();
             if (amountContributed > 0)
@@ -204,7 +166,7 @@ namespace APC.AllForms
                 btnViewAmountContributed.Visible = true;
                 btnViewAmountContributed.Text = "View Amount";
             }
-            amountExpected = bll.GetAmountExpected(_memberFullDetailsDTO.MemberId);
+            amountExpected = _financialReportService.GetTotalDuesExpectedById(_memberFullDetailsDTOById.MemberId);
             //labelAmountExpected.Text = "€" + amountExpected;
             labelAmountExpected.Text = "€ 120";
             btnViewAmountExpected.Hide();
@@ -226,46 +188,7 @@ namespace APC.AllForms
             txtPhone3.Hide();
             labelPhone2.Hide();
             labelPhone3.Hide();
-            if (isView)
-            {
-                labelMemberNameTitle.Text = _memberFullDetailsDTO.LastName + " " + _memberFullDetailsDTO.FirstName;
-                string imagePath = Application.StartupPath + "\\images\\" + _memberFullDetailsDTO.ImagePath;
-                picProfilePic.ImageLocation = imagePath;
-
-                txtName.Text = _memberFullDetailsDTO.FirstName;
-                txtSurname.Text = _memberFullDetailsDTO.LastName;
-                txtAddress.Text = _memberFullDetailsDTO.HouseAddress;
-                txtPosition.Text = _memberFullDetailsDTO.Position;
-                labelBirthday.Text = _memberFullDetailsDTO.Birthday.ToShortDateString();
-                labelMemSince.Text = _memberFullDetailsDTO.MembershipDate.ToString();
-                txtEmail.Text = _memberFullDetailsDTO.Email;
-                txtPhone1.Text = _memberFullDetailsDTO.PhoneNumber;
-                txtLGA.Text = _memberFullDetailsDTO.LGA;
-                if (_memberFullDetailsDTO.PhoneNumber2 != "")
-                {
-                    txtPhone2.Visible = true;
-                    labelPhone2.Visible = true;
-                }
-                if (detail.PhoneNumber3 != "")
-                {
-                    txtPhone3.Visible = true;
-                    labelPhone3.Visible = true;
-                }
-                txtPhone2.Text = _memberFullDetailsDTO.PhoneNumber2;
-                txtPhone3.Text = _memberFullDetailsDTO.PhoneNumber3;
-                txtCountry.Text = _memberFullDetailsDTO.Country;
-                txtProfession.Text = _memberFullDetailsDTO.Profession;
-                txtEmpStatus.Text = _memberFullDetailsDTO.EmploymentStatus;
-                txtGender.Text = _memberFullDetailsDTO.Gender;
-                txtNationality.Text = _memberFullDetailsDTO.Nationality;
-                txtMaritalStatus.Text = _memberFullDetailsDTO.MaritalStatus;
-                txtPermission.Text = _memberFullDetailsDTO.Permission;
-                txtNextOfKin.Text = _memberFullDetailsDTO.NextOfKin;
-                txtNextOfKinRelationship.Text = _memberFullDetailsDTO.RelationshipToNextOfKin;
-            }
         }
-
-        
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -303,35 +226,17 @@ namespace APC.AllForms
 
         private void btnNoComments_Click(object sender, EventArgs e)
         {
-            if (commentCount > 1)
-            {
-                FormSingleCommentList open = new FormSingleCommentList();
-                open.memberID = detail.MemberID;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-            }
-            else if (commentCount < 2 && commentCount > 0)
-            {
-                commentDetail = dto.Comments.First(x => x.MemberID == detail.MemberID);
-                FormViewComment open = new FormViewComment();
-                open.detail = commentDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-            }
+            
         }
 
         private void btnViewPresentAttendance_Click(object sender, EventArgs e)
-        {
+        {            
             if (attendancePresentCount > 0)
             {
-                FormViewPersonalAttendances open = new FormViewPersonalAttendances();
-                open.detail = detail;
-                open.isPresent = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
+                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                form.GetMemberId(_memberFullDetailsDTOById.MemberId);
+                form.IsPresent(true);
+                form.ShowDialog();
             }
         }
 
@@ -339,12 +244,10 @@ namespace APC.AllForms
         {
             if (attendanceAbsentCount > 0)
             {
-                FormViewPersonalAttendances open = new FormViewPersonalAttendances();
-                open.detail = detail;
-                open.isAbsent = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
+                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                form.GetMemberId(_memberFullDetailsDTOById.MemberId);
+                form.IsAbsent(true);
+                form.ShowDialog();
             }
         }
 
@@ -352,12 +255,10 @@ namespace APC.AllForms
         {
             if (amountContributed > 0)
             {
-                FormViewPersonalAttendances open = new FormViewPersonalAttendances();
-                open.detail = detail;
-                open.isAmountContributed = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
+                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                form.GetMemberId(_memberFullDetailsDTOById.MemberId);
+                form.IsAmountContributed(true);
+                form.ShowDialog();
             }
         }
 
@@ -365,12 +266,10 @@ namespace APC.AllForms
         {
             if (Balance > 0)
             {
-                FormViewPersonalAttendances open = new FormViewPersonalAttendances();
-                open.detail = detail;
-                open.isAmountExpected = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
+                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                form.GetMemberId(_memberFullDetailsDTOById.MemberId);
+                form.IsAmountExpected(true);
+                form.ShowDialog();
             }
         }
 
@@ -378,12 +277,10 @@ namespace APC.AllForms
         {
             if (Balance > 0)
             {
-                FormViewPersonalAttendances open = new FormViewPersonalAttendances();
-                open.detail = detail;
-                open.isPersonalBalance = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
+                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                form.GetMemberId(_memberFullDetailsDTOById.MemberId);
+                form.IsPersonalBalance(true);
+                form.ShowDialog();
             }
         }
 
@@ -391,12 +288,10 @@ namespace APC.AllForms
         {
             if (finesCount > 0)
             {
-                FormViewPersonalAttendances open = new FormViewPersonalAttendances();
-                open.detail = detail;
-                open.isPersonalFines = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
+                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                form.GetMemberId(_memberFullDetailsDTOById.MemberId);
+                form.IsPersonalFines(true);
+                form.ShowDialog();
             }
         }
     }

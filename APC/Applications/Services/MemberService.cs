@@ -326,7 +326,14 @@ namespace APC.Applications.Services
 
         public MemberFullDetailsDTO GetMemberById(int id)
         {
-            return SelectSpecificMember(id).FirstOrDefault();
+            if (id == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return SelectSpecificMember(id).FirstOrDefault();                
+            }
         }
 
         public List<MemberFullDetailsDTO> GetAllDeletedMembers()
@@ -872,31 +879,6 @@ namespace APC.Applications.Services
             .Count();
         }
         
-        public int GetPresentMembersCount(int ID)
-        {
-            string status = "Present";
-
-            return _repository.GetAll()
-                .Where(m => m.membershipStatusID == 1)
-                .Join(_attendanceStatusRepository.GetByStatus(status),
-                    m => m.memberID,
-                    a => a.attendanceStatusID,
-                    (m, a) => m)
-                .Count();
-        }
-
-        public int GetAbsentMembersCount(int ID)
-        {
-            string status = "Absent";
-
-            return _repository.GetAll()
-                .Where(m => m.membershipStatusID == 1)
-                .Join(_attendanceStatusRepository.GetByStatus(status),
-                    m => m.memberID,
-                    a => a.attendanceStatusID,
-                    (m, a) => m)
-                .Count();
-        }
     }
 }
 

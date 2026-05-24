@@ -372,7 +372,7 @@ namespace APC.AllForms
             }
 
             var form = new FormViewMember(_memberService);
-            form.MemberDetail(selected);
+            form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
             ClearFilters();
@@ -509,7 +509,7 @@ namespace APC.AllForms
             }
 
             var form = new FormViewMember(_memberService);
-            form.MemberDetail(selected);
+            form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
             ClearFilters();
@@ -558,7 +558,7 @@ namespace APC.AllForms
             }
 
             var form = new FormViewMember(_memberService);
-            form.MemberDetail(selected);
+            form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
             ClearFilters();
@@ -850,7 +850,7 @@ namespace APC.AllForms
             }
 
             var form = new FormViewMember(_memberService);
-            form.MemberDetail(selected);
+            form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
             ClearFilters();
@@ -1015,7 +1015,7 @@ namespace APC.AllForms
             }
 
             var form = new FormViewMember(_memberService);
-            form.MemberDetail(selected);
+            form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
             ClearFilters();

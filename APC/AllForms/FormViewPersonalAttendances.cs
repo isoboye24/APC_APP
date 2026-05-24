@@ -1,4 +1,5 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
 using System;
@@ -16,9 +17,22 @@ namespace APC.AllForms
 {
     public partial class FormViewPersonalAttendances : Form
     {
-        public FormViewPersonalAttendances()
+        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
+        private readonly IMemberService _memberService;
+
+        private int _memberId = 0;
+        private bool _isPresent = false;
+        private bool _isAbsent = false;
+        private bool _isAmountContributed = false;
+        private bool _isAmountExpected = false;
+        private bool _isPersonalBalance = false;
+        private bool _isPersonalFines = false;
+
+        public FormViewPersonalAttendances(IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService)
         {
             InitializeComponent();
+            _generalMeetingAttendanceService = generalMeetingAttendanceService;
+            _memberService = memberService;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -30,16 +44,9 @@ namespace APC.AllForms
         {
             this.Close();
         }
-        PersonalAttendanceBLL bll = new PersonalAttendanceBLL();
-        PersonalAttendanceDTO dto = new PersonalAttendanceDTO();
-        public MemberDetailDTO detail = new MemberDetailDTO();
+
         MemberBLL memberBLL = new MemberBLL();
-        public bool isPresent = false;
-        public bool isAbsent = false;
-        public bool isAmountContributed = false;
-        public bool isAmountExpected = false;
-        public bool isPersonalBalance = false;
-        public bool isPersonalFines = false;
+
         decimal amountContributed = 0;
         decimal amountExpected = 0;
         decimal Balance = 0;
@@ -47,6 +54,41 @@ namespace APC.AllForms
         decimal paidFinesAmount = 0;
         decimal expectedFineAmount = 0;
         decimal fineBalance = 0;
+
+        public void GetMemberId(int memberId)
+        {
+            _memberId = memberId;
+        }
+        
+        public void IsPresent(bool isPresent)
+        {
+            _isPresent = isPresent;
+        }
+        
+        public void IsAbsent(bool isAbsent)
+        {
+            _isAbsent = isAbsent;
+        }
+        
+        public void IsAmountContributed(bool isAmountContributed)
+        {
+            _isAmountContributed = isAmountContributed;
+        }
+        
+        public void IsAmountExpected(bool isAmountExpected)
+        {
+            _isAmountExpected = isAmountExpected;
+        }
+        
+        public void IsPersonalBalance(bool isPersonalBalance)
+        {
+            _isPersonalBalance = isPersonalBalance;
+        }
+        
+        public void IsPersonalFines(bool isPersonalFines)
+        {
+            _isPersonalFines = isPersonalFines;
+        }
 
         private void FormViewPersonalAttendances_Load(object sender, EventArgs e)
         {

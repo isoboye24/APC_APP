@@ -95,6 +95,7 @@ namespace APC
             services.AddScoped<IMemberCommittmentService, MemberCommittmentService>();
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddSingleton<IGraphicalRepresentationService, GraphicalRepresentationService>();
+            services.AddSingleton<IPersonalAttendanceService, PersonalAttendanceService>();
 
             // Forms
             services.AddTransient<FormLogin>();

@@ -43,9 +43,6 @@ namespace APC.Applications.Interfaces
         int GetDeceasedFemaleCount();
         int GetDeceasedDivisorCount();
 
-        int GetPresentMembersCount(int ID);
-        int GetAbsentMembersCount(int ID);
-
         int SelectPermittedMembersCount();
     }
 }

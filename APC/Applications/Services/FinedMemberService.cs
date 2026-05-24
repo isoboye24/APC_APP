@@ -154,5 +154,9 @@ namespace APC.Applications.Services
 
             return totalExpectedAmount;
         }
+
+        public int FinesCountById(int memberId)
+            => _repository.GetAll().Count(x => x.memberID == memberId);
+
     }
 }

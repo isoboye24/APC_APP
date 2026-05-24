@@ -20,5 +20,6 @@ namespace APC.Applications.Interfaces
 
         decimal GetTotalFinesPaidByMember(int memberId);
         decimal GetTotalFinesExpectedByMember(int memberId);
+        int FinesCountById(int memberId);
     }
 }

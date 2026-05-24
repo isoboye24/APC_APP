@@ -12,6 +12,7 @@ namespace APC.Applications.Services
         private readonly IGeneralMeetingAttendanceRepository _generalMeetingAttendanceRepository;
         private readonly IMemberRepository _memberRepository;
         private readonly IGeneralMeetingRepository _generalMeetingRepository;
+        private readonly IAttendanceStatusRepository _attendanceStatusRepository;
         public FinancialReportService(IFinancialReportRepository repository, IGeneralMeetingAttendanceRepository generalMeetingAttendanceRepository, 
             IGeneralMeetingRepository generalMeetingRepository, IMemberRepository memberRepository)
         {
@@ -158,6 +159,38 @@ namespace APC.Applications.Services
             {
                 return false;
             }
+        }
+
+        public decimal GetTotalDuesById(int memberId)
+        {
+            return _generalMeetingAttendanceRepository
+                    .GetAll()
+                    .Where(x => x.memberID == memberId)
+                    .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+        }
+
+        public decimal GetTotalAnnualDuesById(int memberId, int year)
+        {
+            return _generalMeetingAttendanceRepository
+                    .GetAll()
+                    .Where(x => x.memberID == memberId && x.year == year)
+                    .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+        }
+
+        public decimal GetTotalDuesExpectedById(int memberId)
+        {
+            return _generalMeetingAttendanceRepository
+                    .GetAll()
+                    .Where(x => x.memberID == memberId)
+                    .Sum(x => (decimal?)x.expectedMonthlyDue) ?? 0;
+        }
+
+        public decimal GetTotalAnnualDuesExpectedById(int memberId, int year)
+        {
+            return _generalMeetingAttendanceRepository
+                    .GetAll()
+                    .Where(x => x.memberID == memberId && x.year == year)
+                    .Sum(x => (decimal?)x.expectedMonthlyDue) ?? 0;
         }
     }
 }
