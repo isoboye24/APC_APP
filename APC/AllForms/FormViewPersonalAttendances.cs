@@ -1,7 +1,10 @@
-﻿using APC.Applications.Interfaces;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
 using APC.BLL;
 using APC.DAL.DAO;
 using APC.DAL.DTO;
+using APC.Helper;
+using OfficeOpenXml.Drawing.Slicer.Style;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +15,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static APC.Helper.FinedMemberHelper;
+using static APC.Helper.PersonalAttendanceHelper;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace APC.AllForms
 {
@@ -19,20 +25,47 @@ namespace APC.AllForms
     {
         private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
         private readonly IMemberService _memberService;
+        private readonly IMonthService _monthService;
+        private readonly IGeneralMeetingService _generalMeetingService;
+        private readonly IFinancialReportService _financialReportService;
+        private readonly IFinedMemberService _finedMemberService;
+        private readonly IPersonalAttendanceService _personalAttendanceService;
+
+        private List<PersonalAttendanceDetailsDTO> _personalAttendanceDetailDTOs;
+        private MemberFullDetailsDTO _memberFullDetailsDTO;
+        private List<PersonalAttendanceDetailsDTO> _filteredPresents;
+        private List<PersonalAttendanceDetailsDTO> _filteredAbsents;
+        private List<PersonalAttendanceDetailsDTO> _filteredAnnualContribution;
+        private List<Applications.DTO.FinedMemberDTO> _finedMemberDTOs;
 
         private int _memberId = 0;
         private bool _isPresent = false;
         private bool _isAbsent = false;
         private bool _isAmountContributed = false;
         private bool _isAmountExpected = false;
+
         private bool _isPersonalBalance = false;
         private bool _isPersonalFines = false;
+        private decimal amountContributed = 0;
+        private decimal amountExpected = 0;
+        private decimal Balance = 0;
 
-        public FormViewPersonalAttendances(IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService)
+        private decimal paidFinesAmount = 0;
+        private decimal expectedFineAmount = 0;
+        private decimal fineBalance = 0;
+        private int currYear = DateTime.Today.Year;
+
+        public FormViewPersonalAttendances(IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService,
+            IMonthService monthService, IGeneralMeetingService generalMeetingService, IFinancialReportService financialReportService, 
+            IFinedMemberService finedMemberService)
         {
             InitializeComponent();
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _memberService = memberService;
+            _monthService = monthService;
+            _generalMeetingService = generalMeetingService;
+            _financialReportService = financialReportService;
+            _finedMemberService = finedMemberService;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -45,19 +78,10 @@ namespace APC.AllForms
             this.Close();
         }
 
-        MemberBLL memberBLL = new MemberBLL();
-
-        decimal amountContributed = 0;
-        decimal amountExpected = 0;
-        decimal Balance = 0;
-
-        decimal paidFinesAmount = 0;
-        decimal expectedFineAmount = 0;
-        decimal fineBalance = 0;
-
         public void GetMemberId(int memberId)
         {
             _memberId = memberId;
+            _memberFullDetailsDTO = _memberService.GetMemberById(memberId);
         }
         
         public void IsPresent(bool isPresent)
@@ -90,280 +114,174 @@ namespace APC.AllForms
             _isPersonalFines = isPersonalFines;
         }
 
+        private void controlFonts()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label5, labelTotalAmount, btnClose);
+            GeneralHelper.ApplyRegularFont(14, labelTotalName, txtAmount, cmbMonth, cmbYear);
+            GeneralHelper.ApplyBoldFont(11, rbEqualAmount, rbLessAmount, rbMoreAmount);
+        }
+
+
+
+        private void loadMemberAttendanceDetails()
+        {
+            dataGridView1.DataSource = _personalAttendanceService.GetAnnualGeneralMeetingAttendanceById(_memberId, currYear);
+            _personalAttendanceDetailDTOs = _personalAttendanceService.GetTotalGeneralMeetingAttendanceById(_memberId);
+            ConfigurePersonalAttendanceGrid(dataGridView1, PersonalAttendanceGridType.Details);
+        }
+        
+        private void loadMemberAttendancePresent()
+        {
+            string search = "Present";
+            var filtered = _personalAttendanceDetailDTOs.Where(x => x.AttendanceStatus.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            _filteredPresents = filtered;
+            dataGridView1.DataSource = filtered;
+        }
+        
+        private void loadMemberAttendanceAnnualPresent(int year)
+        {
+            string search = "Present";
+            var filtered = _personalAttendanceDetailDTOs.Where(x => x.Year == year && x.AttendanceStatus.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridView1.DataSource = filtered;
+        }
+
+        private void loadMemberAttendanceAbsent()
+        {
+            string search = "Absent";
+            var filtered = _personalAttendanceDetailDTOs.Where(x => x.AttendanceStatus.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            _filteredAbsents = filtered;
+            dataGridView1.DataSource = filtered;
+        }
+
+        private void loadMemberAttendanceAnnualAbsent(int year)
+        {
+            string search = "Absent";
+            var filtered = _personalAttendanceDetailDTOs.Where(x => x.Year == year && x.AttendanceStatus.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridView1.DataSource = filtered;
+        }
+
+        private void loadMemberContributionDetails()
+        {
+            _filteredAnnualContribution = _personalAttendanceService.GetAnnualGeneralMeetingAttendanceById(_memberId, currYear);
+            var filtered = _filteredAnnualContribution.AsQueryable();
+
+            filtered = filtered.Where(x => x.MonthlyDues > 0);
+            dataGridView1.DataSource = filtered.ToList();
+            ConfigurePersonalAttendanceGrid(dataGridView1, PersonalAttendanceGridType.Details);
+        }
+
+        private void loadMemberFineDetails()
+        {
+            dataGridView1.DataSource = _finedMemberService.GetAnnualFineListsById(_memberId, currYear);
+            _finedMemberDTOs = _finedMemberService.GetAllFineListsById(_memberId);
+            ConfigureFinedMemberGrid(dataGridView1, FinedMemberGridType.PersonalDetails);
+        }
+
         private void FormViewPersonalAttendances_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalAmount.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelTotalName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            controlFonts();
 
-            rbEqualAttend.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-            rbLessAttend.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-            rbMoreAttend.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-
-            txtAmount.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            cmbMonth.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);   
-            
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
-
-            dto = bll.Select(detail.MemberID);
-            cmbMonth.DataSource = dto.Months;
+            cmbMonth.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
-            cmbYear.DataSource = dto.Years;
+            cmbYear.DataSource = _generalMeetingService.GetMeetingYears();
             cmbYear.SelectedIndex = -1;
             tableLayoutPanelChangingAmount.Hide();
             tableLayoutPanelTotal.Hide();
 
-            amountContributed = memberBLL.GetAmountContributed(detail.MemberID);
-            amountExpected = memberBLL.GetAmountExpected(detail.MemberID);
+            amountContributed = _financialReportService.GetTotalAnnualDuesById(_memberId, currYear);
+            amountExpected = _financialReportService.GetTotalAnnualDuesExpectedById(_memberId, currYear);
             Balance = amountExpected - amountContributed;
 
-            paidFinesAmount = memberBLL.GetFinedAmountPaid(detail.MemberID);
-            expectedFineAmount = memberBLL.GetFinedAmountExpected(detail.MemberID);
+            paidFinesAmount = _finedMemberService.GetTotalFinesPaidByMember(_memberId);
+            expectedFineAmount = _finedMemberService.GetTotalFinesExpectedByMember(_memberId);
             fineBalance = expectedFineAmount - paidFinesAmount;
 
-            if (isPresent)
+            labelTitle.Text = _memberFullDetailsDTO.LastName + " " + _memberFullDetailsDTO.FirstName + "'s present attendance record";
+            string imagePath = Application.StartupPath + "\\images\\" + _memberFullDetailsDTO.ImagePath;
+            picProfile.ImageLocation = imagePath;
+
+            if (_isPresent)
             {
-                dataGridView1.DataSource = dto.PresentMember;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].HeaderText = "Month";
-                dataGridView1.Columns[5].HeaderText = "Year";
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].Visible = false;
-                dataGridView1.Columns[11].HeaderText = "Gender";
-                dataGridView1.Columns[12].HeaderText = "Att. Status";
-                dataGridView1.Columns[13].HeaderText = "Monthly Dues";
-                dataGridView1.Columns[14].Visible = false;
-                dataGridView1.Columns[15].Visible = false;
-                dataGridView1.Columns[16].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-                }
-                labelTitle.Text = detail.Surname + " " + detail.Name + "'s present attendance record";
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-                picProfile.ImageLocation = imagePath;
+                loadMemberAttendanceAnnualPresent(currYear);
             }
-            if (isAbsent)
+            if (_isAbsent)
             {
-                dataGridView1.DataSource = dto.AbsentMember;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].HeaderText = "Month";
-                dataGridView1.Columns[5].HeaderText = "Year";
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].Visible = false;
-                dataGridView1.Columns[11].HeaderText = "Gender";
-                dataGridView1.Columns[12].HeaderText = "Att. Status";
-                dataGridView1.Columns[13].HeaderText = "Monthly Dues";
-                dataGridView1.Columns[14].Visible = false;
-                dataGridView1.Columns[15].Visible = false;
-                dataGridView1.Columns[16].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-                }
-                labelTitle.Text = detail.Surname + " " + detail.Name + "'s absent attendance record";
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-                picProfile.ImageLocation = imagePath;
+                loadMemberAttendanceAnnualAbsent(currYear);
             }
-            if (isAmountContributed)
+            if (_isAmountContributed)
             {
-                dataGridView1.DataSource = dto.AmountsContributed;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].HeaderText = "Month";
-                dataGridView1.Columns[5].HeaderText = "Year";
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].Visible = false;
-                dataGridView1.Columns[11].HeaderText = "Gender";
-                dataGridView1.Columns[12].HeaderText = "Att. Status";
-                dataGridView1.Columns[13].HeaderText = "Monthly Dues";
-                dataGridView1.Columns[14].Visible = false;
-                dataGridView1.Columns[15].Visible = false;
-                dataGridView1.Columns[16].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-                }
-                labelTitle.Text = detail.Surname + " " + detail.Name + "'s contributed amount record";
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-                picProfile.ImageLocation = imagePath;
+                loadMemberContributionDetails();
+
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€" + amountContributed;
+                labelTotalAmount.Text = "€" + _financialReportService.GetTotalAnnualDuesById(_memberId, currYear);
                 labelTotalName.Text = "Total Amt. Contributed";
             }
-            if (isAmountExpected)
+            if (_isAmountExpected)
             {
-                dataGridView1.DataSource = dto.AmountExpected;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].HeaderText = "Month";
-                dataGridView1.Columns[5].HeaderText = "Year";
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].Visible = false;
-                dataGridView1.Columns[11].HeaderText = "Gender";
-                dataGridView1.Columns[12].HeaderText = "Att. Status";
-                dataGridView1.Columns[13].HeaderText = "Monthly Dues";
-                dataGridView1.Columns[14].HeaderText = "Expected Dues";
-                dataGridView1.Columns[15].Visible = false;
-                dataGridView1.Columns[16].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-                }
-                labelTitle.Text = detail.Surname + " " + detail.Name + "'s expected amount record";
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-                picProfile.ImageLocation = imagePath;
+                loadMemberAttendanceDetails();
+
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€ 120.00";
+                labelTotalAmount.Text = "€ 120.00"; // To be made dynamic
                 labelTotalName.Text = "Total Amt. Expected per Year";
             }
-            if (isPersonalBalance)
+            if (_isPersonalBalance)
             {
-                dataGridView1.DataSource = dto.AmountsBalance;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].Visible = false;
-                dataGridView1.Columns[4].HeaderText = "Month";
-                dataGridView1.Columns[5].HeaderText = "Year";
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].Visible = false;
-                dataGridView1.Columns[11].HeaderText = "Gender";
-                dataGridView1.Columns[12].HeaderText = "Att. Status";
-                dataGridView1.Columns[13].HeaderText = "Monthly Dues";
-                dataGridView1.Columns[14].Visible = false;
-                dataGridView1.Columns[15].Visible = false;
-                dataGridView1.Columns[16].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-                }
-                labelTitle.Text = detail.Surname + " " + detail.Name + "'s balance amount record";
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-                picProfile.ImageLocation = imagePath;
+                loadMemberAttendanceDetails();
+
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€" + (120 - amountContributed);
+                labelTotalAmount.Text = "€" + (120 - _financialReportService.GetTotalAnnualDuesById(_memberId, currYear)); // 120 is to be made more dynamic
                 labelTotalName.Text = "Remaining Amt.";
             }
-            if (isPersonalFines)
+            if (_isPersonalFines)
             {
-                dataGridView1.DataSource = dto.FinedMember;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Name";
-                dataGridView1.Columns[2].HeaderText = "Surname";
-                dataGridView1.Columns[3].HeaderText = "Violated";
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[5].HeaderText = "Fine";
-                dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[7].HeaderText = "Paid";
-                dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].Visible = false;
-                dataGridView1.Columns[10].HeaderText = "Balance";
-                dataGridView1.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[11].HeaderText = "Status";
-                dataGridView1.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[12].Visible = false;
-                dataGridView1.Columns[13].Visible = false;
-                dataGridView1.Columns[14].Visible = false;
-                dataGridView1.Columns[15].Visible = false;
-                dataGridView1.Columns[16].Visible = false;
-                dataGridView1.Columns[17].Visible = false;
-                dataGridView1.Columns[18].Visible = false;
-                dataGridView1.Columns[19].Visible = false;
-                dataGridView1.Columns[20].HeaderText = "Day";
-                dataGridView1.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[21].Visible = false;
-                dataGridView1.Columns[22].HeaderText = "Month";
-                dataGridView1.Columns[22].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[23].HeaderText = "Year";
-                dataGridView1.Columns[23].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                dataGridView1.Columns[24].Visible = false;
-                dataGridView1.Columns[25].Visible = false;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-                }
-                labelTitle.Text = detail.Surname + " " + detail.Name + "'s fine records";
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-                picProfile.ImageLocation = imagePath;
+                loadMemberFineDetails();
+
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€ " + fineBalance;
+                labelTotalAmount.Text = "€ " + _finedMemberService.GetTotalFinesPaidByMember(_memberId);
                 labelTotalName.Text = "Total Fines";
             }
         }
 
         private void ClearFilters()
         {
-            cmbYear.DataSource = dto.Years;
+            cmbYear.DataSource = _generalMeetingService.GetMeetingYears();
             cmbYear.SelectedIndex = -1;
-            cmbMonth.DataSource = dto.Months;
+            cmbMonth.DataSource = _monthService.GetAll();
             cmbMonth.SelectedIndex = -1;
+
             txtAmount.Clear();
-            rbEqualAttend.Checked = false;
-            rbLessAttend.Checked = false;
-            rbMoreAttend.Checked = false;
-            bll = new PersonalAttendanceBLL();
-            dto = bll.Select(detail.MemberID);
-            if (isPresent)
+            rbEqualAmount.Checked = false;
+            rbLessAmount.Checked = false;
+            rbMoreAmount.Checked = false;
+            loadMemberAttendanceDetails();
+
+
+            if (_isPresent)
             {
-                dataGridView1.DataSource = dto.PresentMember;
+                loadMemberAttendanceAnnualPresent(currYear);
             }
-            else if (isAbsent)
+            else if (_isAbsent)
             {
-                dataGridView1.DataSource = dto.AbsentMember;
+                loadMemberAttendanceAnnualAbsent(currYear);
             }
-            else if (isAmountContributed)
+            else if (_isAmountContributed)
             {
-                dataGridView1.DataSource = dto.AmountsContributed;
+                loadMemberContributionDetails();
             }
-            else if (isAmountExpected)
+            else if (_isAmountExpected)
             {
-                dataGridView1.DataSource = dto.AmountExpected;
+                loadMemberContributionDetails();
             }
-            else if (isPersonalBalance)
+            else if (_isPersonalBalance)
             {
-                dataGridView1.DataSource = dto.AmountsBalance;
+                loadMemberContributionDetails();
             }
-            else if (isPersonalFines)
+            else if (_isPersonalFines)
             {
-                dataGridView1.DataSource = dto.FinedMember;                
+                loadMemberFineDetails();
             }
         }
         private void btnClear_Click(object sender, EventArgs e)
@@ -371,103 +289,139 @@ namespace APC.AllForms
             ClearFilters();
         }
 
+        private void StatusSearch(string status, bool isAmount, bool isFines)
+        {
+            var filtered = _personalAttendanceDetailDTOs.AsQueryable();
+            var filteredFinedMember = _finedMemberDTOs.AsQueryable();
+            string month = cmbMonth.Text;
+            int year = Convert.ToInt32(cmbYear.SelectedValue);
+
+            if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex == -1 && txtAmount.Text.Trim() == "")
+            {
+                MessageBox.Show("Please select a month or year or amount");
+                return;
+            }
+
+            if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
+            {               
+                filtered = filtered.Where(x => x.Month.ToString().IndexOf(month, StringComparison.OrdinalIgnoreCase) >= 0
+                                        && x.AttendanceStatus.ToString().IndexOf(status, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+            else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1)
+            {
+                filtered = filtered.Where(x => x.Year == year && x.AttendanceStatus.ToString().IndexOf(status, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+            else if (isAmount)
+            {
+                decimal searchedAmount = Convert.ToDecimal(txtAmount.Text.Trim());
+
+                if (txtAmount.Text.Trim() != "" && cmbYear.SelectedIndex == -1)
+                {
+                    if (rbEqualAmount.Checked)
+                    {
+                        if (!isFines)
+                        {
+                            filtered = filtered.Where(x => x.MonthlyDues == searchedAmount);
+                        }
+                        else if (isFines)
+                        {
+                            filteredFinedMember = filteredFinedMember.Where(x => x.AmountExpected == searchedAmount);
+                        }
+                    }
+                    else if (rbLessAmount.Checked)
+                    {
+                        if (!isFines)
+                        {
+                            filtered = filtered.Where(x => x.MonthlyDues < searchedAmount);
+                        }
+                        else if (isFines)
+                        {
+                            filteredFinedMember = filteredFinedMember.Where(x => x.AmountExpected < searchedAmount);
+                        }
+                    }
+                    else if (rbMoreAmount.Checked)
+                    {
+                        if (!isFines)
+                        {
+                            filtered = filtered.Where(x => x.MonthlyDues > searchedAmount);
+                        }
+                        else if (isFines)
+                        {
+                            filteredFinedMember = filteredFinedMember.Where(x => x.AmountExpected > searchedAmount);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please choose Less or Equal or more buttons");
+                    }
+                }
+                if (txtAmount.Text.Trim() != "" && cmbYear.SelectedIndex != -1)
+                {
+                    if (rbEqualAmount.Checked)
+                    {
+                        filtered = filtered.Where(x => x.MonthlyDues == searchedAmount && x.Year == year);
+                    }
+                    else if (rbLessAmount.Checked)
+                    {
+                        filtered = filtered.Where(x => x.MonthlyDues < searchedAmount && x.Year == year);
+                    }
+                    else if (rbMoreAmount.Checked)
+                    {
+                        filtered = filtered.Where(x => x.MonthlyDues > searchedAmount && x.Year == year);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please choose Less or Equal or more buttons");
+                    }
+                }
+            }
+            else
+            {
+                filtered = filtered.Where(x => x.Year == year 
+                && x.Month.ToString().IndexOf(month, StringComparison.OrdinalIgnoreCase) >= 0 
+                && x.AttendanceStatus.ToString().IndexOf(status, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (_isPersonalFines)
+            {
+                dataGridView1.DataSource = filteredFinedMember.ToList();
+            }
+            else
+            {
+                dataGridView1.DataSource = filtered.ToList();
+            }        
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            dto = bll.Select(detail.MemberID);
+            if (_isPresent)
+            {
+                string status = "Present";
+                StatusSearch(status, false, false);
+            }
 
-            List<PersonalAttendanceDetailDTO> list = dto.PresentMember;
-            List<FinedMemberDetailDTO> fineMemberlist = dto.FinedMember;
-            if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
+            if (_isAbsent)
             {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue) && x.Year.Contains(cmbYear.SelectedValue.ToString())).ToList();
-                if (isPersonalFines)
-                {
-                    fineMemberlist = fineMemberlist.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue) && x.Year.ToString().Contains(cmbYear.SelectedValue.ToString())).ToList();
-                }
+                string status = "Absent";
+                StatusSearch(status, false, false);
             }
-            if (cmbMonth.SelectedIndex != -1)
+
+            if (_isAmountContributed)
             {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
-                if (isPersonalFines)
-                {
-                    fineMemberlist = fineMemberlist.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
-                }
+                string status = "";
+                StatusSearch(status, true, false);
             }
-            if (cmbYear.SelectedIndex != -1)
+
+            if (_isPersonalBalance)
             {
-                list = list.Where(x => x.Year.Contains(cmbYear.SelectedValue.ToString())).ToList();
-                if (isPersonalFines)
-                {
-                    fineMemberlist = fineMemberlist.Where(x => x.Year.ToString().Contains(cmbYear.SelectedValue.ToString())).ToList();
-                }
+                string status = "";
+                StatusSearch(status, true, false);
             }
-            if (txtAmount.Text.Trim() != "")
+
+            if (_isPersonalFines)
             {
-                if (isAmountContributed)
-                {
-                    if (rbLessAttend.Checked)
-                    {
-                        list = list.Where(x => x.MonthlyDue < Convert.ToDecimal(txtAmount.Text.Trim())).ToList();
-                    }
-                    else if (rbEqualAttend.Checked)
-                    {
-                        list = list.Where(x => x.MonthlyDue == Convert.ToDecimal(txtAmount.Text.Trim())).ToList();
-                    }
-                    else if (rbMoreAttend.Checked)
-                    {
-                        list = list.Where(x => x.MonthlyDue > Convert.ToDecimal(txtAmount.Text.Trim())).ToList();
-                    }
-                    else
-                    {
-                        MessageBox.Show("There is no result for amount contributed search");
-                    }
-                }
-                if (isPersonalBalance)
-                {
-                    if (rbLessAttend.Checked)
-                    {
-                        list = list.Where(x => x.Balance < Convert.ToDecimal(txtAmount.Text.Trim())).ToList();
-                    }
-                    else if (rbEqualAttend.Checked)
-                    {
-                        list = list.Where(x => x.Balance == Convert.ToDecimal(txtAmount.Text.Trim())).ToList();
-                    }
-                    else if (rbMoreAttend.Checked)
-                    {
-                        list = list.Where(x => x.Balance > Convert.ToDecimal(txtAmount.Text.Trim())).ToList();
-                    }
-                    else
-                    {
-                        MessageBox.Show("There is no result for amount contributed search");
-                    }
-                }
-                if (isPersonalFines)
-                {
-                    if (rbLessAttend.Checked)
-                    {
-                        fineMemberlist = fineMemberlist.Where(x => x.Balance < Convert.ToDecimal(txtAmount.Text.Trim())).ToList();
-                    }
-                    else if (rbEqualAttend.Checked)
-                    {
-                        fineMemberlist = fineMemberlist.Where(x => x.Balance == Convert.ToDecimal(txtAmount.Text.Trim())).ToList();
-                    }
-                    else if (rbMoreAttend.Checked)
-                    {
-                        fineMemberlist = fineMemberlist.Where(x => x.Balance > Convert.ToDecimal(txtAmount.Text.Trim())).ToList();
-                    }
-                    else
-                    {
-                        MessageBox.Show("There is no result for amount contributed search");
-                    }
-                }
-            }
-            if (!isPersonalFines)
-            {
-                dataGridView1.DataSource = list;
-            }    
-            else if (isPersonalFines)
-            {
-                dataGridView1.DataSource = fineMemberlist;
+                string status = "";
+                StatusSearch(status, true, true);
             }
         }
 

@@ -50,7 +50,8 @@ namespace APC.Applications.Services
                             ConstitutionId = f.constitutionID,
                             Section = c.section,
                             ShortDescription = c.ShortDescription,
-                            AmountExpected = (c.fine + " €").ToString(),
+                            AmountExpected = c.fine,
+                            FormattedAmountExpected = (c.fine + " €").ToString(),
                             Balance = (c.fine - f.amountPaid).ToString(),
                             MemberId = f.memberID,
                             FirstName = m.name,
@@ -85,7 +86,8 @@ namespace APC.Applications.Services
                             ConstitutionId = f.constitutionID,
                             Section = c.section,
                             ShortDescription = c.ShortDescription,
-                            AmountExpected = (c.fine + " €").ToString(),
+                            AmountExpected = c.fine,
+                            FormattedAmountExpected = (c.fine + " €").ToString(),
                             Balance = (c.fine - f.amountPaid).ToString(),
                             MemberId = f.memberID,
                             FirstName = m.name,
@@ -155,8 +157,82 @@ namespace APC.Applications.Services
             return totalExpectedAmount;
         }
 
-        public int FinesCountById(int memberId)
+        public int AnnualFinesCountById(int memberId, int year)
+            => _repository.GetAll().Count(x => x.memberID == memberId && x.fineDate.Year == year);
+
+        public int TotalFinesCountById(int memberId)
             => _repository.GetAll().Count(x => x.memberID == memberId);
 
+        public List<FinedMemberDTO> GetAllFineListsById(int memberId)
+        {
+            var data = (from f in _repository.GetAll().Where(x => x.memberID == memberId)
+                        join m in _memberRepository.GetAll() on f.memberID equals m.memberID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
+                        join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
+                        select new FinedMemberDTO
+                        {
+
+                            FinedMemberId = f.finedMemberID,
+                            AmountPaid = (decimal)f.amountPaid,
+                            FormattedAmountPaid = (f.amountPaid + " €").ToString(),
+                            Summary = f.summary,
+                            ConstitutionId = f.constitutionID,
+                            Section = c.section,
+                            ShortDescription = c.ShortDescription,
+                            AmountExpected = c.fine,
+                            FormattedAmountExpected = (c.fine + " €").ToString(),
+                            Balance = (c.fine - f.amountPaid).ToString(),
+                            MemberId = f.memberID,
+                            FirstName = m.name,
+                            LastName = m.surname,
+                            ImagePath = m.imagePath,
+                            GenderId = m.genderID,
+                            GenderName = g.genderName,
+                            PositionId = m.positionID,
+                            PositionName = p.positionName,
+                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine) ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
+                            FineDate = f.fineDate,
+                            FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
+                        }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
+
+            return data;
+        }
+
+        public List<FinedMemberDTO> GetAnnualFineListsById(int memberId, int year)
+        {
+            var data = (from f in _repository.GetAll().Where(x => x.memberID == memberId && x.year == year)
+                        join m in _memberRepository.GetAll() on f.memberID equals m.memberID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join p in _positionRepository.GetAll() on m.positionID equals p.positionID
+                        join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
+                        select new FinedMemberDTO
+                        {
+
+                            FinedMemberId = f.finedMemberID,
+                            AmountPaid = (decimal)f.amountPaid,
+                            FormattedAmountPaid = (f.amountPaid + " €").ToString(),
+                            Summary = f.summary,
+                            ConstitutionId = f.constitutionID,
+                            Section = c.section,
+                            ShortDescription = c.ShortDescription,
+                            AmountExpected = c.fine,
+                            FormattedAmountExpected = (c.fine + " €").ToString(),
+                            Balance = (c.fine - f.amountPaid).ToString(),
+                            MemberId = f.memberID,
+                            FirstName = m.name,
+                            LastName = m.surname,
+                            ImagePath = m.imagePath,
+                            GenderId = m.genderID,
+                            GenderName = g.genderName,
+                            PositionId = m.positionID,
+                            PositionName = p.positionName,
+                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine) ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
+                            FineDate = f.fineDate,
+                            FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
+                        }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
+
+            return data;
+        }
     }
 }

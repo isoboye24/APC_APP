@@ -345,6 +345,7 @@
     <Compile Include="Applications\DTO\PaymentStatusDTO.cs" />
     <Compile Include="Applications\DTO\PermissionDTO.cs" />
     <Compile Include="Applications\DTO\GeneralMeetingAttendanceDTO.cs" />
+    <Compile Include="Applications\DTO\PersonalAttendanceDetailsDTO.cs" />
     <Compile Include="Applications\DTO\PositionDTO.cs" />
     <Compile Include="Applications\DTO\ProfessionDTO.cs" />
     <Compile Include="Applications\DTO\SpecialContributionDTO.cs" />

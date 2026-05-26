@@ -8,7 +8,8 @@ namespace APC.Helper
     {
         public enum FinedMemberGridType
         {
-            Basic
+            Basic,
+            PersonalDetails
         }
 
         public static void ConfigureFinedMemberGrid(DataGridView grid, FinedMemberGridType type)
@@ -22,6 +23,17 @@ namespace APC.Helper
                                 {
                                     { "FirstName", "First Name" },
                                     { "LastName", "Last Name" },
+                                    { "ShortDescription", "Violated" },
+                                    { "AmountExpected", "Fine" },
+                                    { "AmountPaid", "Paid" },
+                                    { "FormattedFineDate", "Date" }
+                                });
+                    break;
+
+                case FinedMemberGridType.PersonalDetails:
+                    GeneralHelper.SetVisibleColumns(grid, "ShortDescription", "AmountExpected", "AmountPaid", "Balance", "Status", "FormattedFineDate");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
                                     { "ShortDescription", "Violated" },
                                     { "AmountExpected", "Fine" },
                                     { "AmountPaid", "Paid" },

@@ -2,7 +2,6 @@
 using APC.Applications.Interfaces;
 using APC.Helper;
 using System;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -17,18 +16,24 @@ namespace APC.AllForms
         private readonly IFinancialReportService _financialReportService;
 
         private MemberFullDetailsDTO _memberFullDetailsDTOById;
-        private MemberCommittmentDTO _memberCommittmentDTO;
 
-        private bool _isCommittment = false;
-        private bool isView = false;
-        private bool isFormer = false;
-        private int _memberId = 0;
+        private int attendancePresentCount = 0;
+        private int attendanceAbsentCount = 0;
+        private decimal amountContributed = 0;
+        private decimal amountExpected = 0;
+        private decimal balanceCurrYear = 0;
+        private int finesCount = 0;
         private int currYear = DateTime.Today.Year;
 
-        public FormViewMember(IMemberService memberService)
+        public FormViewMember(IMemberService memberService, IFinedMemberService finedMemberService, IGeneralMeetingAttendanceService generalMeetingAttendanceService,
+            IPersonalAttendanceService personalAttendanceService, IFinancialReportService financialReportService)
         {
             InitializeComponent();
             _memberService = memberService;
+            _finedMemberService = finedMemberService;
+            _generalMeetingAttendanceService = generalMeetingAttendanceService;
+            _personalAttendanceService = personalAttendanceService;
+            _financialReportService = financialReportService;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -42,14 +47,6 @@ namespace APC.AllForms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-       
-        int attendancePresentCount = 0;
-        int attendanceAbsentCount = 0;
-        decimal amountContributed = 0;
-        decimal amountExpected = 0;
-        decimal Balance = 0;
-        int commentCount = 0;
-        int finesCount = 0;
 
         public void MemberDetail(int memberId)
         {
@@ -117,14 +114,10 @@ namespace APC.AllForms
         {
             ResizeControls();
 
-            ViewMemberDetails(_memberFullDetailsDTOById.MemberId);
-
-            labelCommentText.Hide();
-            labelNoOfComments.Hide();
-            btnNoComments.Hide();            
+            ViewMemberDetails(_memberFullDetailsDTOById.MemberId);         
 
             
-            finesCount = _finedMemberService.FinesCountById(_memberFullDetailsDTOById.MemberId);
+            finesCount = _finedMemberService.AnnualFinesCountById(_memberFullDetailsDTOById.MemberId, currYear);
             btnViewFines.Hide();
             labelNoOfFines.Text = finesCount.ToString();
             if (finesCount > 0)
@@ -140,7 +133,7 @@ namespace APC.AllForms
                 btnViewFines.Visible = true;
             }
 
-            attendancePresentCount = _personalAttendanceService.GetTotalMembersPresentCountById(_memberFullDetailsDTOById.MemberId);
+            attendancePresentCount = _personalAttendanceService.GetAnnualMembersPresentCountById(_memberFullDetailsDTOById.MemberId, currYear);
             labelNoOfPresent.Text = attendancePresentCount.ToString();
             btnViewPresentAttendance.Hide();
             if (attendancePresentCount > 0)
@@ -149,7 +142,7 @@ namespace APC.AllForms
                 btnViewPresentAttendance.Text = "View Attendance";
             }
 
-            attendanceAbsentCount = _personalAttendanceService.GetTotalMembersAbsentCountById(_memberFullDetailsDTOById.MemberId);
+            attendanceAbsentCount = _personalAttendanceService.GetAnnualMembersAbsentCountById(_memberFullDetailsDTOById.MemberId, currYear);
             labelNoOfAbsent.Text = attendanceAbsentCount.ToString();
             btnViewAbsentAttendance.Hide();
             if (attendanceAbsentCount > 0)
@@ -158,7 +151,7 @@ namespace APC.AllForms
                 btnViewAbsentAttendance.Text = "View Attendance";
             }
 
-            amountContributed = _financialReportService.GetTotalDuesById(_memberFullDetailsDTOById.MemberId);
+            amountContributed = _financialReportService.GetTotalAnnualDuesById(_memberFullDetailsDTOById.MemberId, currYear);
             labelAmountContributed.Text = "€" + amountContributed;
             btnViewAmountContributed.Hide();
             if (amountContributed > 0)
@@ -166,20 +159,19 @@ namespace APC.AllForms
                 btnViewAmountContributed.Visible = true;
                 btnViewAmountContributed.Text = "View Amount";
             }
-            amountExpected = _financialReportService.GetTotalDuesExpectedById(_memberFullDetailsDTOById.MemberId);
-            //labelAmountExpected.Text = "€" + amountExpected;
-            labelAmountExpected.Text = "€ 120";
+            amountExpected = _financialReportService.GetTotalAnnualDuesExpectedById(_memberFullDetailsDTOById.MemberId, currYear);
+            labelAmountExpected.Text = "€ 120"; // To be dynamically calculated
             btnViewAmountExpected.Hide();
             if (amountExpected > 0)
             {
                 btnViewAmountExpected.Visible = true;
                 btnViewAmountExpected.Text = "View Amount";
             }
-            Balance = 120 - amountContributed;
+            balanceCurrYear = amountExpected - amountContributed;
             btnViewPersonalBalance.Hide();
-            if (Balance > 0)
+            if (balanceCurrYear > 0)
             {
-                labelPersonalBalance.Text = "€" + Balance;
+                labelPersonalBalance.Text = "€" + balanceCurrYear;
                 btnViewPersonalBalance.Visible = true;
                 btnViewPersonalBalance.Text = "View Amount";    
             }
@@ -228,7 +220,7 @@ namespace APC.AllForms
         {
             
         }
-
+        
         private void btnViewPresentAttendance_Click(object sender, EventArgs e)
         {            
             if (attendancePresentCount > 0)

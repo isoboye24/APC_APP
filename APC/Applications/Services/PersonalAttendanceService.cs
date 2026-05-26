@@ -1,10 +1,8 @@
-﻿using APC.Applications.Interfaces;
-using APC.Infrastructure.Repositories;
-using System;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.Helper;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.Services
 {
@@ -16,6 +14,7 @@ namespace APC.Applications.Services
         private readonly IAttendanceStatusRepository _statusRepository;
         private readonly IGenderRepository _genderRepository;
         private readonly IAttendanceStatusRepository _attendanceStatusRepository;
+
         public PersonalAttendanceService(IGeneralMeetingAttendanceRepository repository, IMemberRepository memberRepository,
             IAttendanceStatusRepository statusRepository, IGenderRepository genderRepository, IAttendanceStatusRepository attendanceStatusRepository,
             IGeneralMeetingRepository generalMeetingRepository)
@@ -92,6 +91,63 @@ namespace APC.Applications.Services
             return data;
         }
 
-        
+        public List<PersonalAttendanceDetailsDTO> GetTotalGeneralMeetingAttendanceById(int memberId)
+        {
+                var data = (from p in _repository.GetAll()
+                            join m in _memberRepository.GetAll().Where(x => x.memberID == memberId) on p.memberID equals m.memberID
+                            join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                            join ats in _attendanceStatusRepository.GetAll() on p.attendanceStatusID equals ats.attendanceStatusID
+                            join gen in _generalMeetingRepository.GetAll() on p.generalAttendanceID equals gen.generalAttendanceID
+                            select new
+                            {
+                                p.monthlyDues,
+                                ats.attendanceStatus,
+                                p.year,
+                                p.monthID,
+                            })
+                        .ToList();
+
+            return data.Select(x => new PersonalAttendanceDetailsDTO
+            {
+                MonthId = x.monthID,
+                Month = GeneralHelper.ConventIntToMonth(x.monthID),
+                Year = x.year,
+                AttendanceStatus = x.attendanceStatus,
+                MonthlyDues = x.monthlyDues ?? 0,
+
+            })
+            .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthId)
+            .ToList();
+        }
+
+        public List<PersonalAttendanceDetailsDTO> GetAnnualGeneralMeetingAttendanceById(int memberId, int year)
+        {
+            var data = (from p in _repository.GetAll().Where(x => x.year == year)
+                        join m in _memberRepository.GetAll().Where(x => x.memberID == memberId) on p.memberID equals m.memberID
+                        join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                        join ats in _attendanceStatusRepository.GetAll() on p.attendanceStatusID equals ats.attendanceStatusID
+                        join gen in _generalMeetingRepository.GetAll() on p.generalAttendanceID equals gen.generalAttendanceID
+                        select new
+                        {
+                            p.monthlyDues,
+                            ats.attendanceStatus,
+                            p.year,
+                            p.monthID,
+                        })
+                    .ToList();
+
+            return data.Select(x => new PersonalAttendanceDetailsDTO
+            {
+                MonthId = x.monthID,
+                Month = GeneralHelper.ConventIntToMonth(x.monthID),
+                Year = x.year,
+                AttendanceStatus = x.attendanceStatus,
+                MonthlyDues = x.monthlyDues ?? 0,
+
+            })
+            .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthId)
+            .ToList();
+        }
+
     }
 }

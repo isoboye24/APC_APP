@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Applications.DTO
 {
@@ -15,7 +11,8 @@ namespace APC.Applications.DTO
         public int ConstitutionId { get; set; }
         public string Section { get; set; }
         public string ShortDescription { get; set; }
-        public string AmountExpected { get; set; }
+        public string FormattedAmountExpected { get; set; }
+        public decimal AmountExpected { get; set; }
         public string Balance { get; set; }
         public int MemberId { get; set; }
         public string FirstName { get; set; }

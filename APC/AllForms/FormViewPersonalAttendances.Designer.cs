@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -58,9 +58,9 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.tableLayoutPanelChangingAmount = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.rbLessAttend = new System.Windows.Forms.RadioButton();
-            this.rbMoreAttend = new System.Windows.Forms.RadioButton();
-            this.rbEqualAttend = new System.Windows.Forms.RadioButton();
+            this.rbLessAmount = new System.Windows.Forms.RadioButton();
+            this.rbMoreAmount = new System.Windows.Forms.RadioButton();
+            this.rbEqualAmount = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAmount = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -280,30 +280,30 @@
             // dataGridView1
             // 
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(30, 155);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(1257, 447);
             this.dataGridView1.TabIndex = 5;
@@ -487,9 +487,9 @@
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel8.Controls.Add(this.rbLessAttend, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.rbMoreAttend, 1, 0);
-            this.tableLayoutPanel8.Controls.Add(this.rbEqualAttend, 2, 0);
+            this.tableLayoutPanel8.Controls.Add(this.rbLessAmount, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.rbMoreAmount, 1, 0);
+            this.tableLayoutPanel8.Controls.Add(this.rbEqualAmount, 2, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(218, 4);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(4);
@@ -499,44 +499,44 @@
             this.tableLayoutPanel8.Size = new System.Drawing.Size(283, 37);
             this.tableLayoutPanel8.TabIndex = 4;
             // 
-            // rbLessAttend
+            // rbLessAmount
             // 
-            this.rbLessAttend.AutoSize = true;
-            this.rbLessAttend.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbLessAttend.Location = new System.Drawing.Point(4, 4);
-            this.rbLessAttend.Margin = new System.Windows.Forms.Padding(4);
-            this.rbLessAttend.Name = "rbLessAttend";
-            this.rbLessAttend.Size = new System.Drawing.Size(63, 27);
-            this.rbLessAttend.TabIndex = 0;
-            this.rbLessAttend.TabStop = true;
-            this.rbLessAttend.Text = "Less";
-            this.rbLessAttend.UseVisualStyleBackColor = true;
+            this.rbLessAmount.AutoSize = true;
+            this.rbLessAmount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbLessAmount.Location = new System.Drawing.Point(4, 4);
+            this.rbLessAmount.Margin = new System.Windows.Forms.Padding(4);
+            this.rbLessAmount.Name = "rbLessAmount";
+            this.rbLessAmount.Size = new System.Drawing.Size(63, 27);
+            this.rbLessAmount.TabIndex = 0;
+            this.rbLessAmount.TabStop = true;
+            this.rbLessAmount.Text = "Less";
+            this.rbLessAmount.UseVisualStyleBackColor = true;
             // 
-            // rbMoreAttend
+            // rbMoreAmount
             // 
-            this.rbMoreAttend.AutoSize = true;
-            this.rbMoreAttend.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMoreAttend.Location = new System.Drawing.Point(98, 4);
-            this.rbMoreAttend.Margin = new System.Windows.Forms.Padding(4);
-            this.rbMoreAttend.Name = "rbMoreAttend";
-            this.rbMoreAttend.Size = new System.Drawing.Size(73, 27);
-            this.rbMoreAttend.TabIndex = 0;
-            this.rbMoreAttend.TabStop = true;
-            this.rbMoreAttend.Text = "More";
-            this.rbMoreAttend.UseVisualStyleBackColor = true;
+            this.rbMoreAmount.AutoSize = true;
+            this.rbMoreAmount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbMoreAmount.Location = new System.Drawing.Point(98, 4);
+            this.rbMoreAmount.Margin = new System.Windows.Forms.Padding(4);
+            this.rbMoreAmount.Name = "rbMoreAmount";
+            this.rbMoreAmount.Size = new System.Drawing.Size(73, 27);
+            this.rbMoreAmount.TabIndex = 0;
+            this.rbMoreAmount.TabStop = true;
+            this.rbMoreAmount.Text = "More";
+            this.rbMoreAmount.UseVisualStyleBackColor = true;
             // 
-            // rbEqualAttend
+            // rbEqualAmount
             // 
-            this.rbEqualAttend.AutoSize = true;
-            this.rbEqualAttend.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbEqualAttend.Location = new System.Drawing.Point(192, 4);
-            this.rbEqualAttend.Margin = new System.Windows.Forms.Padding(4);
-            this.rbEqualAttend.Name = "rbEqualAttend";
-            this.rbEqualAttend.Size = new System.Drawing.Size(75, 27);
-            this.rbEqualAttend.TabIndex = 0;
-            this.rbEqualAttend.TabStop = true;
-            this.rbEqualAttend.Text = "Equal";
-            this.rbEqualAttend.UseVisualStyleBackColor = true;
+            this.rbEqualAmount.AutoSize = true;
+            this.rbEqualAmount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbEqualAmount.Location = new System.Drawing.Point(192, 4);
+            this.rbEqualAmount.Margin = new System.Windows.Forms.Padding(4);
+            this.rbEqualAmount.Name = "rbEqualAmount";
+            this.rbEqualAmount.Size = new System.Drawing.Size(75, 27);
+            this.rbEqualAmount.TabIndex = 0;
+            this.rbEqualAmount.TabStop = true;
+            this.rbEqualAmount.Text = "Equal";
+            this.rbEqualAmount.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -652,9 +652,9 @@
         private System.Windows.Forms.PictureBox picProfile;
         private System.Windows.Forms.ComboBox cmbYear;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.RadioButton rbLessAttend;
-        private System.Windows.Forms.RadioButton rbMoreAttend;
-        private System.Windows.Forms.RadioButton rbEqualAttend;
+        private System.Windows.Forms.RadioButton rbLessAmount;
+        private System.Windows.Forms.RadioButton rbMoreAmount;
+        private System.Windows.Forms.RadioButton rbEqualAmount;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelChangingAmount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtAmount;

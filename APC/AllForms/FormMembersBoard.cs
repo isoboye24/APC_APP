@@ -27,6 +27,11 @@ namespace APC.AllForms
         private readonly IGeneralMeetingService _generalMeetingService;
         private readonly IPaymentStatusService _paymentStatusService;
 
+        private readonly IFinedMemberService _finedMemberService;
+        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
+        private readonly IPersonalAttendanceService _personalAttendanceService;
+        private readonly IFinancialReportService _financialReportService;
+
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOsContacts;
         private List<MemberFullDetailsDTO> _formerMemberFullDetailsDTOs;
@@ -42,7 +47,8 @@ namespace APC.AllForms
         public FormMembersBoard(ICurrentUserService currentUserService, IMemberService memberService, IGenderService genderService,
             IPositionService positionService, IProfessionService professionService, INationalityService nationalityService,
             IMonthService monthService, IMemberCommittmentService memberCommittmentService, IGeneralMeetingService generalMeetingService, 
-            IPaymentStatusService paymentStatusService)
+            IPaymentStatusService paymentStatusService, IFinedMemberService finedMemberService, IGeneralMeetingAttendanceService generalMeetingAttendanceService, 
+            IPersonalAttendanceService personalAttendanceService)
         {
             InitializeComponent();
             _currentUserService = currentUserService;
@@ -55,6 +61,9 @@ namespace APC.AllForms
             _memberCommittmentService = memberCommittmentService;
             _generalMeetingService = generalMeetingService;
             _paymentStatusService = paymentStatusService;
+            _finedMemberService = finedMemberService;
+            _generalMeetingAttendanceService = generalMeetingAttendanceService;
+            _personalAttendanceService = personalAttendanceService;
         }
 
         private void loadRegisteredMembers()
@@ -371,7 +380,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
@@ -508,7 +517,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
@@ -557,7 +566,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
@@ -767,8 +776,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService);
-            form.detailFromMemberCommittment(selected, true);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
+            form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
             ClearFilters();
@@ -849,7 +858,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
@@ -1014,7 +1023,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 

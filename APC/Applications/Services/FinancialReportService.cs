@@ -126,7 +126,6 @@ namespace APC.Applications.Services
                    && x.monthlyDues > 0)
                    .Sum(x => (decimal?)x.monthlyDues) ?? 0;
         }
-        
 
         public decimal GetOverallExpenditures()
         {
@@ -179,18 +178,22 @@ namespace APC.Applications.Services
 
         public decimal GetTotalDuesExpectedById(int memberId)
         {
-            return _generalMeetingAttendanceRepository
+            int noOfAttendance = _generalMeetingAttendanceRepository
                     .GetAll()
                     .Where(x => x.memberID == memberId)
-                    .Sum(x => (decimal?)x.expectedMonthlyDue) ?? 0;
+                    .Count();
+
+            return (noOfAttendance * 10);
         }
 
         public decimal GetTotalAnnualDuesExpectedById(int memberId, int year)
         {
-            return _generalMeetingAttendanceRepository
+            int noOfAttendance = _generalMeetingAttendanceRepository
                     .GetAll()
                     .Where(x => x.memberID == memberId && x.year == year)
-                    .Sum(x => (decimal?)x.expectedMonthlyDue) ?? 0;
+                    .Count();
+
+            return (noOfAttendance * 10);
         }
     }
 }

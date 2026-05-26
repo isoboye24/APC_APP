@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace APC.Helper
@@ -11,7 +7,8 @@ namespace APC.Helper
     {
         public enum PersonalAttendanceGridType
         {
-            Basic
+            Basic,
+            Details
         }
 
         public static void ConfigurePersonalAttendanceGrid(DataGridView grid, PersonalAttendanceGridType type)
@@ -26,6 +23,14 @@ namespace APC.Helper
                                     { "FirstName", "First Name" },
                                     { "LastName", "Last Name" },
                                     { "AttendanceStatus", "Status" },
+                                    { "DuesPaid", "Dues Paid" },
+                                });
+                    break;
+                case PersonalAttendanceGridType.Details:
+                    GeneralHelper.SetVisibleColumns(grid, "Month", "Year", "AttendanceStatus", "DuesPaid");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
+                                {
+                                    { "AttendanceStatus", "Att. Status" },
                                     { "DuesPaid", "Dues Paid" },
                                 });
                     break;
