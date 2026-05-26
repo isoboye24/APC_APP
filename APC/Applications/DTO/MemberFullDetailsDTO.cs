@@ -17,20 +17,30 @@ namespace APC.Applications.DTO
         public string HouseAddress { get; set; }
         public string Email { get; set; }
         public DateTime? MembershipDate { get; set; }
+        public int CountryId { get; set; }
         public string Country { get; set; }
+        public int NationalityId { get; set; }
         public string Nationality { get; set; }
+        public int ProfessionId { get; set; }
         public string Profession { get; set; }
+        public int PositionId { get; set; }
         public string Position { get; set; }
+        public int GenderId { get; set; }
         public string Gender { get; set; }
+        public int EmploymentStatusId { get; set; }
         public string EmploymentStatus { get; set; }
+        public int MaritalStatusId { get; set; }
         public string MaritalStatus { get; set; }
+        public int PermissionId { get; set; }
         public string Permission { get; set; }
         public string PhoneNumber { get; set; }
         public string PhoneNumber2 { get; set; }
         public string PhoneNumber3 { get; set; }
+        public int MembershipStatusId { get; set; }
         public string MembershipStatus { get; set; }
         public DateTime DeadDate { get; set; }
         public string NextOfKin { get; set; }
+        public int RelationshipToNextOfKinId { get; set; }
         public string RelationshipToNextOfKin { get; set; }
         public string LGA { get; set; }
     }

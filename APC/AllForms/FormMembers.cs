@@ -1,33 +1,55 @@
-﻿using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL;
-using APC.DAL.DTO;
+﻿using APC.Applications.Entities;
+using APC.Applications.Interfaces;
+using APC.Domain.Entities;
+using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace APC
 {
     public partial class FormMembers : Form
     {
         private readonly IMemberService _memberService;
+        private readonly ICountryService _countryService;
+        private readonly INationalityService _nationalityService;
+        private readonly IProfessionService _professionService;
+        private readonly IPositionService _positionService;
+        private readonly ICurrentUserService _currentUserService;
+
+        private readonly IGenderService _genderService;
+        private readonly IMaritalStatusService _maritalStatusService;
+        private readonly IEmploymentStatusService _employmentStatusService;
+        private readonly INextOfKinService _nextOfKinService;
+        private readonly IPermissionService _permissionService;
+        private readonly IMembershipStatusService _membershipStatusService;
 
         private Applications.DTO.MemberFullDetailsDTO _memberFullDetailsDTO;
 
         private bool _isUpdate = false;
-        public FormMembers(IMemberService memberService)
+        private bool _isUpdateDeadMember = false;
+        private string fileName;
+
+        public FormMembers(IMemberService memberService, ICountryService countryService, INationalityService nationalityService,
+            IProfessionService professionService, IPositionService positionService, ICurrentUserService currentUserService, IGenderService genderService,
+            IMaritalStatusService maritalStatusService, IEmploymentStatusService employmentStatusService, INextOfKinService nextOfKinService,
+            IPermissionService permissionService, IMembershipStatusService membershipStatusService)
         {
             InitializeComponent();
             _memberService = memberService;
+            _countryService = countryService;
+            _nationalityService = nationalityService;
+            _professionService = professionService;
+            _positionService = positionService;
+            _currentUserService = currentUserService;
+
+            _genderService = genderService;
+            _maritalStatusService = maritalStatusService;
+            _employmentStatusService = employmentStatusService;
+            _membershipStatusService = membershipStatusService;
+            _nextOfKinService = nextOfKinService;
+            _permissionService = permissionService;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -61,91 +83,42 @@ namespace APC
             _isUpdate = isUpdate;
         }
 
-        MemberBLL bll = new MemberBLL();
-        MemberDTO dto = new MemberDTO();
-        public MemberDetailDTO detail = new MemberDetailDTO();
+        private void ResizeControls()
+        {
+            GeneralHelper.ApplyItalicFont(14, labelTitle, label1, label2, label3, label5, label6, label9, label10, label11, label12, label4, label7, label8, 
+                label25, label26, label14, label15, label19, label27, labelAccessLevel, labelDeceasedDate, labelMorePhone, labelPhone2, labelPhone3,
+                btnBrowse, btnClose, btnSave);
 
-        public bool isUpdateDeadMember = false;
+            GeneralHelper.ApplyRegularFont(14, cmbCountry, txtAddress, txtEmail, txtImagePath, txtLGA, txtName, txtNameOfNextOfKin, txtPhone1, txtPhone2,
+                txtPhone3, txtSurname, cmbEmpStatus, cmbGender, cmbMaritalStatus, cmbMembershipStatus, cmbNationality, cmbPermission, cmbPosition,
+                cmbProfession, cmbRelationshipToNextOfKin, dateTimePickerBirthday, dateTimePickerDeceasedDate, dateTimePickerMemSince
+                );
+        }
+
         private void FormMembers_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label7.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label8.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label10.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label11.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label12.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label14.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label15.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label19.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label25.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label26.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label27.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelAccessLevel.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelDeceasedDate.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelMorePhone.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelPhone2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelPhone3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            txtAddress.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtEmail.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtImagePath.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtLGA.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtNameOfNextOfKin.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPhone1.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPhone2.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPhone3.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSurname.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            cmbCountry.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbEmpStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbGender.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbMaritalStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbMembershipStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbNationality.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbPermission.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbPosition.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbProfession.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbRelationshipToNextOfKin.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            dateTimePickerBirthday.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            dateTimePickerDeceasedDate.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            dateTimePickerMemSince.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnBrowse.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
+            ResizeControls();
 
             #region
-            dto = bll.Select();
-            cmbCountry.DataSource = dto.Countries;
+            cmbCountry.DataSource = _countryService.GetAll();
             GeneralHelper.ComboBoxProps(cmbCountry, "CountryName", "countryID");
-            cmbGender.DataSource = dto.Genders;
+            cmbGender.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGender, "GenderName", "genderID");
-            cmbProfession.DataSource = dto.Professions;
+            cmbProfession.DataSource = _professionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbProfession, "Profession", "professionID");
-            cmbPosition.DataSource = dto.Positions;
+            cmbPosition.DataSource = _positionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPosition, "PositionName", "positionID");
-            cmbMaritalStatus.DataSource = dto.MaritalStatuses;
+            cmbMaritalStatus.DataSource = _maritalStatusService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMaritalStatus, "MaritalStatus", "MaritalStatusID");
-            cmbEmpStatus.DataSource = dto.EmploymentStatuses;
+            cmbEmpStatus.DataSource = _employmentStatusService.GetAll();
             GeneralHelper.ComboBoxProps(cmbEmpStatus, "EmploymentStatus", "EmploymentStatusID");
-            cmbNationality.DataSource = dto.Nationalities;
+            cmbNationality.DataSource = _nationalityService.GetAll();
             GeneralHelper.ComboBoxProps(cmbNationality, "Nationality", "NationalityID");
-            cmbPermission.DataSource = dto.Permissions;
+            cmbPermission.DataSource = _permissionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
-            cmbMembershipStatus.DataSource = dto.MembershipStatuses;
+            cmbMembershipStatus.DataSource = _membershipStatusService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMembershipStatus, "MembershipStatus", "MembershipStatusID");
-            cmbRelationshipToNextOfKin.DataSource = dto.RelationshipsToNextOfKin;
+            cmbRelationshipToNextOfKin.DataSource = _nextOfKinService.GetAll();
             GeneralHelper.ComboBoxProps(cmbRelationshipToNextOfKin, "Relationship", "RelationshipToKinID");
             #endregion
 
@@ -156,58 +129,58 @@ namespace APC
             txtImagePath.Hide();
             tableLayoutPanelDeceasedDate.Hide();
             labelTitle.Text = "Add Member";
-            if (isUpdateDeadMember)
+            if (_isUpdateDeadMember)
             {
                 tableLayoutPanelDeceasedDate.Visible = true;
-                dateTimePickerDeceasedDate.Value = detail.DeadDate;
+                dateTimePickerDeceasedDate.Value = _memberFullDetailsDTO.DeadDate;
             }
-            if (isUpdate)
+            if (_isUpdate)
             {
                 labelTitle.Text = "Edit Member";
-                txtName.Text = detail.Name;
-                txtSurname.Text = detail.Surname;
-                txtAddress.Text = detail.HouseAddress;
-                cmbPosition.SelectedValue = detail.PositionID;
-                dateTimePickerBirthday.Value = Convert.ToDateTime(detail.Birthday);
-                dateTimePickerMemSince.Value = Convert.ToDateTime(detail.MembershipDate);
-                txtEmail.Text = detail.EmailAddress;
-                txtLGA.Text = detail.LGA;
-                txtImagePath.Text = detail.ImagePath;                
-                txtPhone1.Text = detail.PhoneNumber;
-                if (detail.PhoneNumber2 != "")
+                txtName.Text = _memberFullDetailsDTO.FirstName;
+                txtSurname.Text = _memberFullDetailsDTO.LastName;
+                txtAddress.Text = _memberFullDetailsDTO.HouseAddress;
+                cmbPosition.SelectedValue = _memberFullDetailsDTO.PositionId;
+                dateTimePickerBirthday.Value = Convert.ToDateTime(_memberFullDetailsDTO.Birthday);
+                dateTimePickerMemSince.Value = Convert.ToDateTime(_memberFullDetailsDTO.MembershipDate);
+                txtEmail.Text = _memberFullDetailsDTO.Email;
+                txtLGA.Text = _memberFullDetailsDTO.LGA;
+                txtImagePath.Text = _memberFullDetailsDTO.ImagePath;                
+                txtPhone1.Text = _memberFullDetailsDTO.PhoneNumber;
+                if (_memberFullDetailsDTO.PhoneNumber2 != "")
                 {
                     txtPhone2.Visible = true;
                     labelPhone2.Visible = true;
                 }
-                if (detail.PhoneNumber3 != "")
+                if (_memberFullDetailsDTO.PhoneNumber3 != "")
                 {
                     txtPhone3.Visible = true;
                     labelPhone3.Visible = true;
                 }
-                txtPhone2.Text = detail.PhoneNumber2;
-                txtPhone3.Text = detail.PhoneNumber3;
-                txtNameOfNextOfKin.Text = detail.NameOfNextOfKin;
-                cmbCountry.SelectedValue = detail.CountryID;
-                cmbProfession.SelectedValue = detail.ProfessionID;
-                cmbEmpStatus.SelectedValue = detail.EmploymentStatusID;
-                cmbGender.SelectedValue = detail.GenderID;
-                cmbNationality.SelectedValue = detail.NationalityID;
-                cmbMaritalStatus.SelectedValue = detail.MaritalStatusID;
-                cmbMembershipStatus.SelectedValue = detail.MembershipStatusID;
-                cmbRelationshipToNextOfKin.SelectedValue = detail.RelationshipToKinID;
-                if (AuthenticationDTO.AccessLevel != 4)
+                txtPhone2.Text = _memberFullDetailsDTO.PhoneNumber2;
+                txtPhone3.Text = _memberFullDetailsDTO.PhoneNumber3;
+                txtNameOfNextOfKin.Text = _memberFullDetailsDTO.NextOfKin;
+                cmbCountry.SelectedValue = _memberFullDetailsDTO.CountryId;
+                cmbProfession.SelectedValue = _memberFullDetailsDTO.ProfessionId;
+                cmbEmpStatus.SelectedValue = _memberFullDetailsDTO.EmploymentStatusId;
+                cmbGender.SelectedValue = _memberFullDetailsDTO.GenderId;
+                cmbNationality.SelectedValue = _memberFullDetailsDTO.NationalityId;
+                cmbMaritalStatus.SelectedValue = _memberFullDetailsDTO.MaritalStatusId;
+                cmbMembershipStatus.SelectedValue = _memberFullDetailsDTO.MembershipStatusId;
+                cmbRelationshipToNextOfKin.SelectedValue = _memberFullDetailsDTO.RelationshipToNextOfKinId;
+                if (_currentUserService.AccessLevel != 4)
                 {
                     labelAccessLevel.Hide();
                     cmbPermission.Hide();
-                    detail.PermissionID = detail.PermissionID;
+                    _memberFullDetailsDTO.PermissionId = _memberFullDetailsDTO.PermissionId;
                 }
                 else
                 {
                     labelAccessLevel.Visible = true;
                     cmbPermission.Visible = true;
-                    cmbPermission.SelectedValue = detail.PermissionID;
+                    cmbPermission.SelectedValue = _memberFullDetailsDTO.PermissionId;
                 }
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+                string imagePath = Application.StartupPath + "\\images\\" + _memberFullDetailsDTO.ImagePath;
                 picProfilePic.ImageLocation = imagePath;
             }
         }
@@ -219,327 +192,136 @@ namespace APC
             labelPhone2.Visible = true;
             labelPhone3.Visible = true;
         }
+
+        private void ClearControls()
+        {
+            txtName.Clear();
+            txtSurname.Clear();
+            dateTimePickerBirthday.Value = DateTime.Today;
+            dateTimePickerMemSince.Value = DateTime.Today;
+            txtEmail.Clear();
+
+            txtLGA.Clear();
+            txtAddress.Clear();
+            txtImagePath.Clear();
+            txtPhone1.Clear();
+            txtPhone2.Clear();
+            txtPhone3.Clear();
+
+            txtNameOfNextOfKin.Clear();
+            cmbCountry.SelectedIndex = -1;
+            cmbCountry.DataSource = _countryService.GetAll();
+            cmbNationality.SelectedIndex = -1;
+            cmbNationality.DataSource = _nationalityService.GetAll();
+
+            cmbEmpStatus.SelectedIndex = -1;
+            cmbEmpStatus.DataSource = _employmentStatusService.GetAll();
+            cmbGender.SelectedIndex = -1;
+            cmbGender.DataSource = _genderService.GetAll();
+            cmbMaritalStatus.SelectedIndex = -1;
+            cmbMaritalStatus.DataSource = _maritalStatusService.GetAll();
+            cmbPosition.SelectedIndex = -1;
+            cmbPosition.DataSource = _positionService.GetAll();
+
+            cmbProfession.SelectedIndex = -1;
+            cmbProfession.DataSource = _professionService.GetAll();
+            cmbPermission.SelectedIndex = -1;
+            cmbPermission.DataSource = _permissionService.GetAll();
+            cmbMembershipStatus.SelectedIndex = -1;
+            cmbMembershipStatus.DataSource = _membershipStatusService.GetAll();
+
+            cmbRelationshipToNextOfKin.SelectedIndex = -1;
+            cmbRelationshipToNextOfKin.DataSource = _nextOfKinService.GetAll();
+            picProfilePic.Image = null;
+            txtPhone2.Hide();
+            txtPhone3.Hide();
+            labelPhone2.Hide();
+            labelPhone3.Hide();
+        }
         
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtName.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Please enter name");
-            }
-            if (txtLGA.Text.Trim() == "")
-            {
-                MessageBox.Show("Please enter LGA of country of origin");
-            }
-            if (txtImagePath.Text.Trim() == "")
-            {
-                MessageBox.Show("The imagePath is empty. Choose picture");
-            }
-            else if (txtSurname.Text.Trim() == "")
-            {
-                MessageBox.Show("Please enter surname");
-            }
-            else if (txtPhone1.Text.Trim() == "")
-            {
-                MessageBox.Show("Please enter phone number");
-            }
-            else if (txtEmail.Text.Trim()=="")
-            {
-                MessageBox.Show("Please enter email");
-            }
-            else if (cmbCountry.SelectedIndex ==- 1)
-            {
-                MessageBox.Show("Please select a country");
-            }
-            else if (cmbEmpStatus.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select an employment status");
-            }
-            else if (cmbGender.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a gender");
-            }
-            else if (cmbMaritalStatus.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a marital status");
-            }
-            else if (cmbNationality.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select nationality");
-            }
-            else if (cmbPosition.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a position");
-            }
-            else if (cmbProfession.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a profession");
-            }
-            else if (cmbMembershipStatus.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a membership status");
-            }
-            else if (cmbRelationshipToNextOfKin.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a relationship to next of kin");
-            }
-            else if (AuthenticationDTO.AccessLevel == 4 && cmbPermission.SelectedIndex == -1)
-            {                
-                MessageBox.Show("Please select an access level");
-            }                 
-            else
-            {
-                if (!isUpdate)
-                {                    
-                    MemberDetailDTO member = new MemberDetailDTO();
-                    member.Name = txtName.Text;                    
-                    member.Surname = txtSurname.Text;
-                    member.LGA = txtLGA.Text;
-                    member.Birthday = dateTimePickerBirthday.Value;
-                    int day, month, yearDigit;
-                    string year;
-                    day = dateTimePickerBirthday.Value.Day;
-                    month = dateTimePickerBirthday.Value.Month;
-                    yearDigit = dateTimePickerBirthday.Value.Year % 100;
-                    if (yearDigit == 0)
-                    {
-                        year = "0" + yearDigit;
-                    }
-                    else
-                    {
-                        year = (dateTimePickerBirthday.Value.Year % 100).ToString();
-                    }
-                    string lastUsername = bll.GetLastMemberUsername();
-                    if (lastUsername == null)
-                    {
-                        member.Username = "apc20001";
-                    }
-                    else
-                    {
-                        string getDigits = lastUsername.Substring(3);
-                        int convertDigits = Convert.ToInt32(getDigits) + 1;
-                        member.Username = "apc" + convertDigits;
-                    }                    
-                    if (day < 10 && month < 10)
-                    {
-                        member.Password = "0"+ day + "0" + month + "" + year;
-                    }
-                    else if (day < 10 && month >= 10)
-                    {
-                        member.Password = "0" + day + "" + month + "" + year;
-                    }
-                    else if (day >= 10 && month < 10)
-                    {
-                        member.Password = "" + day + "0" + month + "" + year;
-                    }
-                    else
-                    {
-                        member.Password = "" + day + "" + month + "" + year;
-                    }
-                    member.EmailAddress = txtEmail.Text;
-                    member.HouseAddress = txtAddress.Text;
-                    member.CountryID = Convert.ToInt32(cmbCountry.SelectedValue);
-                    member.ProfessionID = Convert.ToInt32(cmbProfession.SelectedValue);
-                    member.GenderID = Convert.ToInt32(cmbGender.SelectedValue);
-                    member.EmploymentStatusID = Convert.ToInt32(cmbEmpStatus.SelectedValue);
-                    member.NationalityID = Convert.ToInt32(cmbNationality.SelectedValue);
-                    member.MaritalStatusID = Convert.ToInt32(cmbMaritalStatus.SelectedValue);
-                    member.NameOfNextOfKin = txtNameOfNextOfKin.Text;
-                    member.RelationshipToKinID = Convert.ToInt32(cmbRelationshipToNextOfKin.SelectedValue);
-                    if (AuthenticationDTO.AccessLevel != 4)
-                    {
-                        member.PermissionID = 2;
-                    }
-                    else
-                    {
-                        member.PermissionID = Convert.ToInt32(cmbPermission.SelectedValue);
-                    }
-                    member.PermissionID = Convert.ToInt32(cmbPermission.SelectedValue);
-                    member.PositionID = Convert.ToInt32(cmbPosition.SelectedValue);
-                    member.MembershipStatusID = Convert.ToInt32(cmbMembershipStatus.SelectedValue);
-                    member.ImagePath = fileName;
-                    member.PhoneNumber = txtPhone1.Text;
-                    member.PhoneNumber2 = txtPhone2.Text;
-                    member.PhoneNumber3 = txtPhone3.Text;       
-                    member.MembershipDate = dateTimePickerMemSince.Value;
-                    member.DeadDate = DateTime.Today;
-                    if (bll.Insert(member))
-                    {
-                        MessageBox.Show("Member was added");
-                        try
-                        {
-                            File.Copy(txtImagePath.Text, @"images\\" + fileName);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Cannot find the path to this picture");
-                        }
-                        txtName.Clear();
-                        txtSurname.Clear();
-                        dateTimePickerBirthday.Value = DateTime.Today;
-                        dateTimePickerMemSince.Value = DateTime.Today;
-                        txtEmail.Clear();
-                        txtLGA.Clear();
-                        txtAddress.Clear();
-                        txtImagePath.Clear();
-                        txtPhone1.Clear();
-                        txtPhone2.Clear();
-                        txtPhone3.Clear();
-                        txtNameOfNextOfKin.Clear();
-                        cmbCountry.SelectedIndex = -1;
-                        cmbCountry.DataSource = dto.Countries;
-                        cmbNationality.SelectedIndex = -1;
-                        cmbNationality.DataSource = dto.Nationalities;
-                        cmbEmpStatus.SelectedIndex = -1;
-                        cmbEmpStatus.DataSource = dto.EmploymentStatuses;
-                        cmbGender.SelectedIndex = -1;
-                        cmbGender.DataSource = dto.Genders;
-                        cmbMaritalStatus.SelectedIndex = -1;
-                        cmbMaritalStatus.DataSource = dto.MaritalStatuses;
-                        cmbPosition.SelectedIndex = -1;
-                        cmbPosition.DataSource = dto.Positions;
-                        cmbProfession.SelectedIndex = -1;
-                        cmbProfession.DataSource = dto.Professions;
-                        cmbPermission.SelectedIndex = -1;
-                        cmbPermission.DataSource = dto.Permissions;
-                        cmbMembershipStatus.SelectedIndex = -1;
-                        cmbMembershipStatus.DataSource = dto.MembershipStatuses;
-                        cmbRelationshipToNextOfKin.SelectedIndex = -1;
-                        cmbRelationshipToNextOfKin.DataSource = dto.RelationshipsToNextOfKin;
-                        picProfilePic.Image = null;
-                        txtPhone2.Hide();
-                        txtPhone3.Hide();
-                        labelPhone2.Hide();
-                        labelPhone3.Hide();
-                    }
-                }
-                else if(isUpdate)
+                string lastUsername = _memberService.GetLastMemberUsername();
+
+                DateTime birthday = dateTimePickerBirthday.Value;
+                DateTime memberSince = dateTimePickerMemSince.Value;
+                DateTime deadDate = DateTime.Today;
+
+                string firstName = txtName.Text.Trim();
+                string lastName = txtSurname.Text.Trim();
+                string LGA = txtLGA.Text.Trim();
+                string email = txtEmail.Text.Trim();
+                string houseAddress = txtAddress.Text.Trim();
+
+                int countryId = Convert.ToInt32(cmbCountry.SelectedValue);
+                int professionId = Convert.ToInt32(cmbProfession.SelectedValue);
+                int genderId = Convert.ToInt32(cmbGender.SelectedValue);
+                int empStatusId = Convert.ToInt32(cmbEmpStatus.SelectedValue);
+                int nationalityId = Convert.ToInt32(cmbNationality.SelectedValue);
+
+                int maritalStatusId = Convert.ToInt32(cmbMaritalStatus.SelectedValue);
+                int relationshipToNextOfKinId = Convert.ToInt32(cmbRelationshipToNextOfKin.SelectedValue);
+
+                string nameOfNextOfKin = txtNameOfNextOfKin.Text.Trim();
+                int permissionId = 0;
+                if (_currentUserService.AccessLevel != 4)
                 {
-                    if (
-                            !isUpdateDeadMember &&
-                            detail.Name == txtName.Text.Trim() && detail.Surname == txtSurname.Text.Trim() && detail.LGA == txtLGA.Text.Trim()
-                            && detail.EmailAddress == txtEmail.Text.Trim() && detail.PositionID == Convert.ToInt32(cmbPosition.SelectedValue)
-                            && detail.Birthday == dateTimePickerBirthday.Value && detail.MembershipDate == dateTimePickerMemSince.Value
-                            && detail.HouseAddress == txtAddress.Text.Trim() && detail.ImagePath == txtImagePath.Text.Trim()
-                            && detail.PhoneNumber == txtPhone1.Text.Trim() && detail.PhoneNumber2 == txtPhone2.Text.Trim()
-                            && detail.PhoneNumber3 == txtPhone3.Text.Trim() && detail.CountryID == Convert.ToInt32(cmbCountry.SelectedValue)
-                            && detail.ProfessionID == Convert.ToInt32(cmbProfession.SelectedValue) && detail.EmploymentStatusID == Convert.ToInt32(cmbEmpStatus.SelectedValue)
-                            && detail.GenderID == Convert.ToInt32(cmbGender.SelectedValue) && detail.NationalityID == Convert.ToInt32(cmbNationality.SelectedValue)
-                            && detail.MaritalStatusID == Convert.ToInt32(cmbMaritalStatus.SelectedValue) && detail.PermissionID == Convert.ToInt32(cmbPermission.SelectedValue)
-                            && detail.MembershipStatusID == Convert.ToInt32(cmbMembershipStatus.SelectedValue) && detail.RelationshipToKinID == Convert.ToInt32(cmbRelationshipToNextOfKin.SelectedValue)
-                            && detail.NameOfNextOfKin == txtNameOfNextOfKin.Text.Trim()
-                        )
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else if (
-                            isUpdateDeadMember && detail.DeadDate == dateTimePickerDeceasedDate.Value && detail.LGA == txtLGA.Text.Trim()
-                            && detail.Name == txtName.Text.Trim() && detail.Surname == txtSurname.Text.Trim()
-                            && detail.EmailAddress == txtEmail.Text.Trim() && detail.PositionID == Convert.ToInt32(cmbPosition.SelectedValue)
-                            && detail.Birthday == dateTimePickerBirthday.Value && detail.MembershipDate == dateTimePickerMemSince.Value
-                            && detail.HouseAddress == txtAddress.Text.Trim() && detail.ImagePath == txtImagePath.Text.Trim()
-                            && detail.PhoneNumber == txtPhone1.Text.Trim() && detail.PhoneNumber2 == txtPhone2.Text.Trim()
-                            && detail.PhoneNumber3 == txtPhone3.Text.Trim() && detail.CountryID == Convert.ToInt32(cmbCountry.SelectedValue)
-                            && detail.ProfessionID == Convert.ToInt32(cmbProfession.SelectedValue) && detail.EmploymentStatusID == Convert.ToInt32(cmbEmpStatus.SelectedValue)
-                            && detail.GenderID == Convert.ToInt32(cmbGender.SelectedValue) && detail.NationalityID == Convert.ToInt32(cmbNationality.SelectedValue)
-                            && detail.MaritalStatusID == Convert.ToInt32(cmbMaritalStatus.SelectedValue) && detail.PermissionID == Convert.ToInt32(cmbPermission.SelectedValue)
-                            && detail.MembershipStatusID == Convert.ToInt32(cmbMembershipStatus.SelectedValue) && detail.RelationshipToKinID == Convert.ToInt32(cmbRelationshipToNextOfKin.SelectedValue)
-                            && detail.NameOfNextOfKin == txtNameOfNextOfKin.Text.Trim()
-                        )
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        detail.Name = txtName.Text;
-                        detail.Surname = txtSurname.Text;
-                        detail.HouseAddress = txtAddress.Text;
-                        detail.NameOfNextOfKin = txtNameOfNextOfKin.Text;
-                        detail.PositionID = Convert.ToInt32(cmbPosition.SelectedValue);                        
-                        detail.MembershipDate = dateTimePickerMemSince.Value;
-                        detail.Username = detail.Username;
-                        if (detail.Birthday == dateTimePickerBirthday.Value)
-                        {
-                            detail.Password = detail.Password;
-                            detail.Birthday = detail.Birthday;
-                        }
-                        else if (detail.Birthday != dateTimePickerBirthday.Value)
-                        {
-                            int day, month, yearDigit;
-                            string year;
-                            day = dateTimePickerBirthday.Value.Day;
-                            month = dateTimePickerBirthday.Value.Month;
-                            yearDigit = dateTimePickerBirthday.Value.Year % 100;
-                            if (yearDigit == 0 )
-                            {
-                                year = "0" + yearDigit;
-                            }
-                            else
-                            {
-                                year = (dateTimePickerBirthday.Value.Year % 100).ToString();
-                            }
-                            if (day < 10 && month < 10)
-                            {
-                                detail.Password = "0" + day + "0" + month + "" + year;
-                            }
-                            else if (day < 10 && month >= 10)
-                            {
-                                detail.Password = "0" + day + "" + month + "" + year;
-                            }
-                            else if (day >= 10 && month < 10)
-                            {
-                                detail.Password = "" + day + "0" + month + "" + year;
-                            }
-                            else if (day >= 10 && month >= 10)
-                            {
-                                detail.Password = "" + day + "" + month + "" + year;
-                            }
-                            detail.Birthday = dateTimePickerBirthday.Value;
-                        }                        
-                        detail.EmailAddress = txtEmail.Text;
-                        detail.LGA = txtLGA.Text;
-                        if (detail.ImagePath != txtImagePath.Text.Trim())
-                        {
-                            if (File.Exists(@"images\\" + detail.ImagePath))
-                            {
-                                File.Delete(@"images\\" + detail.ImagePath);
-                            }
-                            File.Copy(txtImagePath.Text, @"images\\" + fileName);
-                            detail.ImagePath = fileName;
-                        }
-                        else if (detail.ImagePath == txtImagePath.Text.Trim())
-                        {
-                            detail.ImagePath = txtImagePath.Text;
-                        }
-                        detail.PhoneNumber = txtPhone1.Text;
-                        detail.PhoneNumber2 = txtPhone2.Text;
-                        detail.PhoneNumber3 = txtPhone3.Text;
-                        detail.CountryID = Convert.ToInt32(cmbCountry.SelectedValue);
-                        detail.ProfessionID = Convert.ToInt32(cmbProfession.SelectedValue);
-                        detail.EmploymentStatusID = Convert.ToInt32(cmbEmpStatus.SelectedValue);
-                        detail.GenderID = Convert.ToInt32(cmbGender.SelectedValue);
-                        detail.NationalityID = Convert.ToInt32(cmbNationality.SelectedValue);
-                        detail.MaritalStatusID = Convert.ToInt32(cmbMaritalStatus.SelectedValue);
-                        detail.PermissionID = Convert.ToInt32(cmbPermission.SelectedValue);
-                        detail.MembershipStatusID = Convert.ToInt32(cmbMembershipStatus.SelectedValue);
-                        detail.RelationshipToKinID = Convert.ToInt32(cmbRelationshipToNextOfKin.SelectedValue);
-                        if (isUpdateDeadMember)
-                        {
-                            detail.DeadDate = dateTimePickerDeceasedDate.Value;
-                        }
-                        if (!isUpdateDeadMember)
-                        {
-                            detail.DeadDate = detail.DeadDate;
-                        }                        
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Member was updated");
-                            this.Close();
-                        }
-                    }
+                    permissionId = 2;
                 }
+                else
+                {
+                    permissionId = Convert.ToInt32(cmbPermission.SelectedValue);
+                }
+
+                int positionId = Convert.ToInt32(cmbPosition.SelectedValue);
+                int membershipStatusId = Convert.ToInt32(cmbMembershipStatus.SelectedValue);
+
+                string imagePath = fileName;
+                string phone1 = txtPhone1.Text.Trim();
+                string phone2 = txtPhone2.Text.Trim();
+                string phone3 = txtPhone3.Text.Trim();
+
+                var authentication = new MemberAuthentication(lastUsername, birthday);
+                var personalInfo = new PersonalInfo(firstName, lastName, birthday, imagePath, genderId);
+                var contactInfo = new ContactInfo(email, houseAddress, phone1, phone2, phone3);
+                var membershipInfo = new MembershipInfo(memberSince, membershipStatusId, positionId, permissionId);
+                var demographicInfo = new DemographicInfo(countryId, nationalityId, professionId, empStatusId, maritalStatusId, LGA);
+                var emergencyContact = new EmergencyContact(nameOfNextOfKin, relationshipToNextOfKinId);
+                var lifeStatus = new LifeStatus(deadDate);
+
+                var member = new Member(authentication, personalInfo, contactInfo, membershipInfo, demographicInfo, emergencyContact, lifeStatus);
+
+
+                if (_memberFullDetailsDTO.MemberId == 0)
+                {
+                    _memberService.Create(member);
+
+                    MessageBox.Show("Member was added");
+                    try
+                    {
+                        File.Copy(txtImagePath.Text, @"images\\" + fileName);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Cannot find the path to this picture");
+                    }
+                    ClearControls();
+                }
+                else
+                {
+                    _memberService.Update(member);
+                    MessageBox.Show("Member updated successfully!");
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
-        string fileName;
+        
         OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
         private void btnBrowse_Click(object sender, EventArgs e)
         {

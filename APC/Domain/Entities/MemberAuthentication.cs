@@ -1,4 +1,6 @@
-﻿using System;
+﻿using APC.DAL;
+using System;
+using System.Windows.Forms;
 
 namespace APC.Domain.Entities
 {
@@ -7,16 +9,22 @@ namespace APC.Domain.Entities
         public string Username { get; private set; }
         public string PasswordHash { get; private set; }
 
-        public MemberAuthentication(string username, string passwordHash)
+        public MemberAuthentication(string username, DateTime birthday)
         {
             SetUsername(username);
-            SetPasswordHash(passwordHash);
+            SetPasswordHash(birthday);
         }
 
         private void SetUsername(string username)
-        {
+        {           
             if (string.IsNullOrWhiteSpace(username))
-                throw new ArgumentException("Username is required");
+            {
+                Username = "apc20001";
+            }
+
+            string getDigits = username.Substring(3);
+            int convertDigits = Convert.ToInt32(getDigits) + 1;
+            Username = "apc" + convertDigits;
 
             Username = username.Trim();
         }
@@ -26,17 +34,26 @@ namespace APC.Domain.Entities
             SetUsername(newUsername);
         }
 
-        private void SetPasswordHash(string password)
+        private void SetPasswordHash(DateTime? birthday)
         {
-            if (string.IsNullOrWhiteSpace(password))
-                throw new ArgumentException("Password is required", nameof(password));
+            if (!birthday.HasValue)
+                throw new ArgumentException("Birthday is required", nameof(birthday));
 
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword(password.Trim());
+            DateTime birthDate = birthday.Value;
+
+            int day = birthDate.Day;
+            int month = birthDate.Month;
+
+            string year = (birthDate.Year % 100).ToString("D2");
+
+            string password = $"{day:D2}{month:D2}{year}";
+
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
         }
 
-        public void UpdatePasswordHash(string newPassword)
+        public void UpdatePasswordHash(DateTime newBirthday)
         {
-            SetPasswordHash(newPassword);
+            SetPasswordHash(newBirthday);
         }
     }
 }

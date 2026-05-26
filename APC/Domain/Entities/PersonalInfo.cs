@@ -63,7 +63,7 @@ namespace APC.Domain.Entities
             if (string.IsNullOrWhiteSpace(imagePath))
                 throw new ArgumentException("Image path is required");
 
-            LastName = imagePath.Trim();
+            ImagePath = imagePath.Trim();
         }
 
         public void UpdateImagePath(string newImagePath)

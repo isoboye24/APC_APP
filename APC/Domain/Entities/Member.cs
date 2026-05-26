@@ -46,8 +46,7 @@ namespace APC.Domain.Entities
                 LifeStatus lifeStatus
             )
             {
-                var member = new Member(authentication, personalInfo, contactInfo,
-                                        membershipInfo, demographicInfo, emergencyContact, lifeStatus);
+                var member = new Member(authentication, personalInfo, contactInfo, membershipInfo, demographicInfo, emergencyContact, lifeStatus);
 
                 member.MemberId = memberId;
 

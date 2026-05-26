@@ -44,5 +44,6 @@ namespace APC.Applications.Interfaces
         int GetDeceasedDivisorCount();
 
         int SelectPermittedMembersCount();
+        string GetLastMemberUsername();
     }
 }

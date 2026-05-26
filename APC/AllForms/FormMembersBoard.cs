@@ -380,7 +380,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService, 
+                                            _monthService, _generalMeetingService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
@@ -517,7 +518,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService, 
+                                            _monthService, _generalMeetingService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
@@ -566,7 +568,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService, 
+                                            _monthService, _generalMeetingService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
@@ -719,7 +722,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewDeadMember(_memberService);
+            var form = new FormViewDeadMember(_memberService, _personalAttendanceService, _generalMeetingAttendanceService, _generalMeetingService, 
+                                                _finedMemberService, _monthService, _financialReportService);
             form.MemberDetail(selected);
             form.ShowDialog();
 
@@ -776,7 +780,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService, 
+                                            _monthService, _generalMeetingService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
@@ -858,7 +863,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService,
+                                            _monthService, _generalMeetingService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 
@@ -1023,7 +1029,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService);
+            var form = new FormViewMember(_memberService, _finedMemberService, _generalMeetingAttendanceService, _personalAttendanceService, _financialReportService, 
+                                            _monthService, _generalMeetingService);
             form.MemberDetail(selected.MemberId);
             form.ShowDialog();
 

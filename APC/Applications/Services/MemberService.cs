@@ -123,6 +123,17 @@ namespace APC.Applications.Services
                             m.nextOfKin,
                             nk.NextOfKinName,
                             m.LGAOfCountryOrigin,
+
+                            m.countryID,
+                            m.nationalityID,
+                            m.professionID,
+                            m.positionID,
+                            m.maritalStatusID,
+                            m.employmentStatusID,
+                            m.relationshipToKinID,
+                            m.membershipStatusID,
+                            m.genderID,
+                            m.permissionID,
                         })
                         .ToList();
 
@@ -152,6 +163,17 @@ namespace APC.Applications.Services
                 NextOfKin = x.NextOfKinName,
                 RelationshipToNextOfKin = x.nextOfKin,
                 LGA = x.LGAOfCountryOrigin,
+
+                CountryId = x.countryID,
+                NationalityId = x.nationalityID,
+                ProfessionId = x.professionID,
+                PositionId = x.positionID,
+                EmploymentStatusId = x.employmentStatusID,
+                MaritalStatusId = x.maritalStatusID,
+                PermissionId = x.permissionID,
+                RelationshipToNextOfKinId = x.relationshipToKinID,
+                MembershipStatusId = x.membershipStatusID,
+                GenderId = x.genderID
             })
             .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
             .ToList();
@@ -198,6 +220,17 @@ namespace APC.Applications.Services
                             m.nextOfKin,
                             nk.NextOfKinName,
                             m.LGAOfCountryOrigin,
+
+                            m.countryID,
+                            m.nationalityID,
+                            m.professionID,
+                            m.positionID,
+                            m.maritalStatusID,
+                            m.employmentStatusID,
+                            m.relationshipToKinID,
+                            m.membershipStatusID,
+                            m.genderID,
+                            m.permissionID,
                         })
                         .ToList();
 
@@ -227,6 +260,17 @@ namespace APC.Applications.Services
                 NextOfKin = x.NextOfKinName,
                 RelationshipToNextOfKin = x.nextOfKin,
                 LGA = x.LGAOfCountryOrigin,
+
+                CountryId = x.countryID,
+                NationalityId = x.nationalityID,
+                ProfessionId = x.professionID,
+                PositionId = x.positionID,
+                EmploymentStatusId = x.employmentStatusID,
+                MaritalStatusId = x.maritalStatusID,
+                PermissionId = x.permissionID,
+                RelationshipToNextOfKinId = x.relationshipToKinID,
+                MembershipStatusId = x.membershipStatusID,
+                GenderId = x.genderID
             })
             .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
             .ToList();
@@ -290,6 +334,17 @@ namespace APC.Applications.Services
                             m.nextOfKin,
                             nk.NextOfKinName,
                             m.LGAOfCountryOrigin,
+
+                            m.countryID,
+                            m.nationalityID,
+                            m.professionID,
+                            m.positionID,
+                            m.maritalStatusID,
+                            m.employmentStatusID,
+                            m.relationshipToKinID,
+                            m.membershipStatusID,
+                            m.genderID,
+                            m.permissionID,
                         })
                         .ToList();
 
@@ -319,6 +374,17 @@ namespace APC.Applications.Services
                 NextOfKin = x.NextOfKinName,
                 RelationshipToNextOfKin = x.nextOfKin,
                 LGA = x.LGAOfCountryOrigin,
+
+                CountryId = x.countryID,
+                NationalityId = x.nationalityID,
+                ProfessionId = x.professionID,
+                PositionId = x.positionID,
+                EmploymentStatusId = x.employmentStatusID,
+                MaritalStatusId = x.maritalStatusID,
+                PermissionId = x.permissionID,
+                RelationshipToNextOfKinId = x.relationshipToKinID,
+                MembershipStatusId = x.membershipStatusID,
+                GenderId = x.genderID
             })
             .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
             .ToList();
@@ -375,6 +441,17 @@ namespace APC.Applications.Services
                             m.nextOfKin,
                             nk.NextOfKinName,
                             m.LGAOfCountryOrigin,
+
+                            m.countryID,
+                            m.nationalityID,
+                            m.professionID,
+                            m.positionID,
+                            m.maritalStatusID,
+                            m.employmentStatusID,
+                            m.relationshipToKinID,
+                            m.membershipStatusID,
+                            m.genderID,
+                            m.permissionID,
                         })
                         .ToList();
 
@@ -404,6 +481,17 @@ namespace APC.Applications.Services
                 NextOfKin = x.NextOfKinName,
                 RelationshipToNextOfKin = x.nextOfKin,
                 LGA = x.LGAOfCountryOrigin,
+
+                CountryId = x.countryID,
+                NationalityId = x.nationalityID,
+                ProfessionId = x.professionID,
+                PositionId = x.positionID,
+                EmploymentStatusId = x.employmentStatusID,
+                MaritalStatusId = x.maritalStatusID,
+                PermissionId = x.permissionID,
+                RelationshipToNextOfKinId = x.relationshipToKinID,
+                MembershipStatusId = x.membershipStatusID,
+                GenderId = x.genderID
             })
             .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
             .ToList();
@@ -878,7 +966,29 @@ namespace APC.Applications.Services
               (m, p) => p.permission1)
             .Count();
         }
-        
+
+        public string GetLastMemberUsername()
+        {
+            try
+            {
+                string username;
+                var lastMemberUsername = _repository.GetAll().OrderByDescending(x => x.memberID).FirstOrDefault();
+                if (lastMemberUsername != null)
+                {
+                    username = lastMemberUsername.username;
+                    return username;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
 
