@@ -1,7 +1,9 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Applications.Services;
 using APC.BLL;
 using APC.DAL.DTO;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,12 +21,26 @@ namespace APC.AllForms
     public partial class FormViewDeadMember : Form
     {
         private readonly IMemberService _memberService;
+        private readonly IPersonalAttendanceService _personalAttendanceService;
+        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
+        private readonly IGeneralMeetingService _generalMeetingService;
+        private readonly IFinedMemberService _finedMemberService;
+        private readonly IMonthService _monthService;
+        private readonly IFinancialReportService _financialReportService;
 
         private MemberFullDetailsDTO _memberFullDetailsDTO;
-        public FormViewDeadMember(IMemberService memberService)
+        public FormViewDeadMember(IMemberService memberService, IPersonalAttendanceService personalAttendanceService, 
+            IGeneralMeetingAttendanceService generalMeetingAttendanceService, IGeneralMeetingService generalMeetingService, 
+            IFinedMemberService finedMemberService, IMonthService monthService, IFinancialReportService financialReportService)
         {
             InitializeComponent();
             _memberService = memberService;
+            _personalAttendanceService = personalAttendanceService;
+            _generalMeetingAttendanceService = generalMeetingAttendanceService;
+            _generalMeetingService = generalMeetingService;
+            _finedMemberService = finedMemberService;
+            _monthService = monthService;
+            _financialReportService = financialReportService;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -52,75 +68,28 @@ namespace APC.AllForms
             _memberFullDetailsDTO = memberFullDetailsDTO;
         }
 
-        public MemberDetailDTO detail = new MemberDetailDTO();
         public bool isView = false;
-        MemberBLL bll = new MemberBLL();
         int attendancePresentCount = 0;
         int attendanceAbsentCount = 0;
         int commentCount = 0;
-        CommentBLL commentBLL = new CommentBLL();
-        CommentDTO dto = new CommentDTO();
-        CommentDetailDTO commentDetail = new CommentDetailDTO();
+
+        private void ResizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelMemberNameTitle, label1, label2, label3, label4, label5, label6, label7, label8, label9,
+                label10, label11, label12, label13, label14, label15, btnClose, btnViewAbsentAttendance, btnViewPresentAttendance, labelDeadDate,
+                label25, labelBirthday, labelMemSince, labelNoOfAbsent, labelNoOfPresent, labelAge
+                );
+
+            GeneralHelper.ApplyRegularFont(14, txtName, txtCountry, txtGender, txtSurname, txtMaritalStatus, txtNationality, txtNameOfNextOfKin,
+                txtRelationshipToKin, txtPosition, txtProfession
+                );
+        }
+
         private void FormViewDeadMember_Load(object sender, EventArgs e)
         {
-            #region
-            labelMemberNameTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label5.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label7.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label8.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label9.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label10.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label11.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label12.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label14.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label15.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label25.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelBirthday.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelDeadDate.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelMemSince.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfAbsent.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelNoOfPresent.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            labelAge.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            ResizeControls();
 
-            txtName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtNameOfNextOfKin.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtSurname.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtCountry.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtGender.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtMaritalStatus.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtNationality.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtPosition.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtProfession.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtRelationshipToKin.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewAbsentAttendance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnViewPresentAttendance.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnNoComments.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
-
-            if (Convert.ToInt32(labelNoOfChildren.Text) > 0)
-            {
-                labelChildren.Text = "Child";
-                btnViewChildren.Text = "View Child";
-                btnViewChildren.Visible = true;
-            }
-            if (Convert.ToInt32(labelNoOfChildren.Text) > 1)
-            {
-                labelChildren.Text = "Children";
-                btnViewChildren.Text = "View Children";
-                btnViewChildren.Visible = true;
-            }
-
-            attendancePresentCount = bll.GetNoOfMembersPresentAttendance(detail.MemberID);
+            attendancePresentCount = _personalAttendanceService.GetTotalMembersPresentCountById(_memberFullDetailsDTO.MemberId);
             labelNoOfPresent.Text = attendancePresentCount.ToString();
             btnViewPresentAttendance.Hide();
             if (attendancePresentCount > 0)
@@ -128,7 +97,7 @@ namespace APC.AllForms
                 btnViewPresentAttendance.Visible = true;
             }
 
-            attendanceAbsentCount = bll.GetNoOfMembersAbsentAttendance(detail.MemberID);
+            attendanceAbsentCount = _personalAttendanceService.GetTotalMembersAbsentCountById(_memberFullDetailsDTO.MemberId);
             labelNoOfAbsent.Text = attendanceAbsentCount.ToString();
             btnViewAbsentAttendance.Hide();
             if (attendanceAbsentCount > 0)
@@ -136,48 +105,30 @@ namespace APC.AllForms
                 btnViewAbsentAttendance.Visible = true;
             }
 
-            labelCommentText.Hide();
-            labelNoOfComments.Hide();
-            btnNoComments.Hide();
+            labelMemberNameTitle.Text = _memberFullDetailsDTO.LastName + " " + _memberFullDetailsDTO.FirstName;
+            string imagePath = Application.StartupPath + "\\images\\" + _memberFullDetailsDTO.ImagePath;
+            picProfilePic.ImageLocation = imagePath;
 
-            dto = commentBLL.SelectMembersCommentList(detail.MemberID);
-            commentCount = dto.Comments.Count(x => x.MemberID == detail.MemberID);
-            labelNoOfComments.Text = commentCount.ToString();
-            if (commentCount == 1)
-            {
-                labelCommentText.Visible = true;
-                labelNoOfComments.Visible = true;
-                btnNoComments.Visible = true;
-                btnNoComments.Text = "View Comment";
-            }
-            else if (commentCount > 1)
-            {
-                labelCommentText.Visible = true;
-                labelCommentText.Text = "Comments";
-                labelNoOfComments.Visible = true;
-                btnNoComments.Visible = true;
-            }
-                labelMemberNameTitle.Text = detail.Surname + " " + detail.Name;
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
-                picProfilePic.ImageLocation = imagePath;
+            txtName.Text = _memberFullDetailsDTO.FirstName;
+            txtSurname.Text = _memberFullDetailsDTO.LastName;
+            txtPosition.Text = _memberFullDetailsDTO.Position;
+            labelBirthday.Text = _memberFullDetailsDTO.Birthday.ToShortDateString();
+            DateTime memberSince = Convert.ToDateTime(_memberFullDetailsDTO.MembershipDate);
+            labelMemSince.Text = memberSince.ToString("dd.MM.yyy");
 
-                txtName.Text = detail.Name;
-                txtSurname.Text = detail.Surname;
-                txtPosition.Text = detail.PositionName;
-                labelBirthday.Text = detail.Birthday.ToShortDateString();
-                labelMemSince.Text = detail.MembershipDate.ToShortDateString();
-                txtCountry.Text = detail.CountryName;
-                txtProfession.Text = detail.ProfessionName;
-                txtGender.Text = detail.GenderName;
-                txtNationality.Text = detail.NationalityName;
-                txtMaritalStatus.Text = detail.MaritalStatusName;
-                TimeSpan difference;
-                DateTime died = Convert.ToDateTime(detail.DeadDate);
-                labelDeadDate.Text = died.ToShortDateString();
-                difference = detail.DeadDate - detail.Birthday;
-                labelAge.Text = Math.Floor(difference.TotalDays / 365.25).ToString() + " years";
-                txtNameOfNextOfKin.Text = detail.NameOfNextOfKin;
-                txtRelationshipToKin.Text = detail.RelationshipToKin;
+            txtCountry.Text = _memberFullDetailsDTO.Country;
+            txtProfession.Text = _memberFullDetailsDTO.Profession;
+            txtGender.Text = _memberFullDetailsDTO.Gender;
+            txtNationality.Text = _memberFullDetailsDTO.Nationality;
+            txtMaritalStatus.Text = _memberFullDetailsDTO.MaritalStatus;
+
+            TimeSpan difference;
+            DateTime died = Convert.ToDateTime(_memberFullDetailsDTO.DeadDate);
+            labelDeadDate.Text = died.ToShortDateString();
+            difference = _memberFullDetailsDTO.DeadDate - _memberFullDetailsDTO.Birthday;
+            labelAge.Text = Math.Floor(difference.TotalDays / 365.25).ToString() + " years";
+            txtNameOfNextOfKin.Text = _memberFullDetailsDTO.NextOfKin;
+            txtRelationshipToKin.Text = _memberFullDetailsDTO.RelationshipToNextOfKin;
         }
 
         private void btnViewChildren_Click(object sender, EventArgs e)
@@ -189,12 +140,11 @@ namespace APC.AllForms
         {
             if (attendancePresentCount > 0)
             {
-                FormViewPersonalAttendances open = new FormViewPersonalAttendances();
-                open.detail = detail;
-                open.isPresent = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
+                var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
+                    _finedMemberService);
+                form.GetMemberId(_memberFullDetailsDTO.MemberId);
+                form.IsPresent(true);
+                form.ShowDialog();
             }
         }
 
@@ -202,34 +152,17 @@ namespace APC.AllForms
         {
             if (attendanceAbsentCount > 0)
             {
-                FormViewPersonalAttendances open = new FormViewPersonalAttendances();
-                open.detail = detail;
-                open.isAbsent = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
+                var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
+                    _finedMemberService);
+                form.GetMemberId(_memberFullDetailsDTO.MemberId);
+                form.IsAbsent(true);
+                form.ShowDialog();
             }
         }
 
         private void btnNoComments_Click(object sender, EventArgs e)
         {
-            if (commentCount > 1)
-            {
-                FormSingleCommentList open = new FormSingleCommentList();
-                open.memberID = detail.MemberID;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-            }
-            else if (commentCount < 2 && commentCount > 0)
-            {
-                commentDetail = dto.Comments.First(x => x.MemberID == detail.MemberID);
-                FormViewComment open = new FormViewComment();
-                open.detail = commentDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-            }
+            
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)

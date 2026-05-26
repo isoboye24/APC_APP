@@ -12,8 +12,10 @@ namespace APC.AllForms
         private readonly IMemberService _memberService;
         private readonly IFinedMemberService _finedMemberService;
         private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
+        private readonly IGeneralMeetingService _generalMeetingService;
         private readonly IPersonalAttendanceService _personalAttendanceService;
         private readonly IFinancialReportService _financialReportService;
+        private readonly IMonthService _monthService;
 
         private MemberFullDetailsDTO _memberFullDetailsDTOById;
 
@@ -26,7 +28,8 @@ namespace APC.AllForms
         private int currYear = DateTime.Today.Year;
 
         public FormViewMember(IMemberService memberService, IFinedMemberService finedMemberService, IGeneralMeetingAttendanceService generalMeetingAttendanceService,
-            IPersonalAttendanceService personalAttendanceService, IFinancialReportService financialReportService)
+            IPersonalAttendanceService personalAttendanceService, IFinancialReportService financialReportService, IMonthService monthService,
+            IGeneralMeetingService generalMeetingService)
         {
             InitializeComponent();
             _memberService = memberService;
@@ -34,6 +37,8 @@ namespace APC.AllForms
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _personalAttendanceService = personalAttendanceService;
             _financialReportService = financialReportService;
+            _monthService = monthService;
+            _generalMeetingService = generalMeetingService;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -58,8 +63,8 @@ namespace APC.AllForms
             GeneralHelper.ApplyBoldFont(14, labelMemberNameTitle, label1, label2, label3, label4, label5, label6, label7, label8, label9,
                 label10, label11, label12, label13, label14, label15, label16, label17, label18, label19, label20, label21, label22,
                 label23, label25, label26, label27, labelPhone2, labelPhone3, labelBirthday, labelMemSince, labelAmountContributed,
-                labelAmountExpected, labelCommentText, labelFinesText, labelNoOfAbsent, labelNoOfComments, labelNoOfFines, labelNoOfPresent,
-                labelPersonalBalance, btnClose, btnNoComments, btnViewAbsentAttendance, btnViewAmountContributed, btnViewAmountExpected,
+                labelAmountExpected, labelFinesText, labelNoOfAbsent, labelNoOfFines, labelNoOfPresent,
+                labelPersonalBalance, btnClose, btnViewAbsentAttendance, btnViewAmountContributed, btnViewAmountExpected,
                 btnViewFines, btnViewPersonalBalance, btnViewPresentAttendance
                 );
 
@@ -225,7 +230,8 @@ namespace APC.AllForms
         {            
             if (attendancePresentCount > 0)
             {
-                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService, 
+                    _finedMemberService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsPresent(true);
                 form.ShowDialog();
@@ -236,7 +242,8 @@ namespace APC.AllForms
         {
             if (attendanceAbsentCount > 0)
             {
-                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
+                    _finedMemberService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsAbsent(true);
                 form.ShowDialog();
@@ -247,7 +254,8 @@ namespace APC.AllForms
         {
             if (amountContributed > 0)
             {
-                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
+                    _finedMemberService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsAmountContributed(true);
                 form.ShowDialog();
@@ -256,9 +264,10 @@ namespace APC.AllForms
 
         private void btnViewAmountExpected_Click_1(object sender, EventArgs e)
         {
-            if (Balance > 0)
+            if (balanceCurrYear > 0)
             {
-                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
+                    _finedMemberService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsAmountExpected(true);
                 form.ShowDialog();
@@ -267,9 +276,10 @@ namespace APC.AllForms
 
         private void btnViewPersonalBalance_Click_1(object sender, EventArgs e)
         {
-            if (Balance > 0)
+            if (balanceCurrYear > 0)
             {
-                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
+                    _finedMemberService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsPersonalBalance(true);
                 form.ShowDialog();
@@ -280,7 +290,8 @@ namespace APC.AllForms
         {
             if (finesCount > 0)
             {
-                var form = new FormViewPersonalAttendances(_generalMeetingAttendanceService, _memberService);
+                var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
+                    _finedMemberService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsPersonalFines(true);
                 form.ShowDialog();

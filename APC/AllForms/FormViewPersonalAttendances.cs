@@ -1,29 +1,18 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
 using APC.Helper;
-using OfficeOpenXml.Drawing.Slicer.Style;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using static APC.Helper.FinedMemberHelper;
 using static APC.Helper.PersonalAttendanceHelper;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace APC.AllForms
 {
     public partial class FormViewPersonalAttendances : Form
     {
-        private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
         private readonly IMemberService _memberService;
         private readonly IMonthService _monthService;
         private readonly IGeneralMeetingService _generalMeetingService;
@@ -33,10 +22,8 @@ namespace APC.AllForms
 
         private List<PersonalAttendanceDetailsDTO> _personalAttendanceDetailDTOs;
         private MemberFullDetailsDTO _memberFullDetailsDTO;
-        private List<PersonalAttendanceDetailsDTO> _filteredPresents;
-        private List<PersonalAttendanceDetailsDTO> _filteredAbsents;
         private List<PersonalAttendanceDetailsDTO> _filteredAnnualContribution;
-        private List<Applications.DTO.FinedMemberDTO> _finedMemberDTOs;
+        private List<FinedMemberDTO> _finedMemberDTOs;
 
         private int _memberId = 0;
         private bool _isPresent = false;
@@ -55,12 +42,10 @@ namespace APC.AllForms
         private decimal fineBalance = 0;
         private int currYear = DateTime.Today.Year;
 
-        public FormViewPersonalAttendances(IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService,
-            IMonthService monthService, IGeneralMeetingService generalMeetingService, IFinancialReportService financialReportService, 
-            IFinedMemberService finedMemberService)
+        public FormViewPersonalAttendances(IMemberService memberService, IMonthService monthService, IGeneralMeetingService generalMeetingService, 
+            IFinancialReportService financialReportService, IFinedMemberService finedMemberService)
         {
             InitializeComponent();
-            _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _memberService = memberService;
             _monthService = monthService;
             _generalMeetingService = generalMeetingService;
@@ -121,23 +106,13 @@ namespace APC.AllForms
             GeneralHelper.ApplyBoldFont(11, rbEqualAmount, rbLessAmount, rbMoreAmount);
         }
 
-
-
         private void loadMemberAttendanceDetails()
         {
             dataGridView1.DataSource = _personalAttendanceService.GetAnnualGeneralMeetingAttendanceById(_memberId, currYear);
             _personalAttendanceDetailDTOs = _personalAttendanceService.GetTotalGeneralMeetingAttendanceById(_memberId);
             ConfigurePersonalAttendanceGrid(dataGridView1, PersonalAttendanceGridType.Details);
         }
-        
-        private void loadMemberAttendancePresent()
-        {
-            string search = "Present";
-            var filtered = _personalAttendanceDetailDTOs.Where(x => x.AttendanceStatus.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            _filteredPresents = filtered;
-            dataGridView1.DataSource = filtered;
-        }
-        
+
         private void loadMemberAttendanceAnnualPresent(int year)
         {
             string search = "Present";
@@ -145,13 +120,6 @@ namespace APC.AllForms
             dataGridView1.DataSource = filtered;
         }
 
-        private void loadMemberAttendanceAbsent()
-        {
-            string search = "Absent";
-            var filtered = _personalAttendanceDetailDTOs.Where(x => x.AttendanceStatus.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            _filteredAbsents = filtered;
-            dataGridView1.DataSource = filtered;
-        }
 
         private void loadMemberAttendanceAnnualAbsent(int year)
         {
