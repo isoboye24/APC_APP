@@ -13,5 +13,8 @@ namespace APC.Applications.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
+
+        decimal GetTotalSalesByYear(int year);
+        decimal GetTotalSalesByEvent(int eventId);
     }
 }

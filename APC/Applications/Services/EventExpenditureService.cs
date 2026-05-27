@@ -31,9 +31,9 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<EventExpenditureDTO> GetAll(int eventId)
+        public List<EventExpenditureDTO> GetByEvent(int eventId)
         {
-            var data = (from ex in _repository.GetAll(eventId)
+            var data = (from ex in _repository.GetAll().Where(x => x.eventID == eventId)
                         join e in _eventRepository.GetAll() on ex.eventID equals e.eventID                        
                         select new EventExpenditureDTO
                         {
@@ -82,6 +82,20 @@ namespace APC.Applications.Services
             data.UpdateSummary(data.Summary);
 
             return _repository.Update(data);
+        }
+
+        public decimal GetTotalEventExpendituresByEvent(int eventId)
+        {
+            return _repository.GetAll()
+                            .Where(x => x.eventID == eventId)
+                            .Sum(x => (decimal?)x.amountSpent) ?? 0;
+        }
+
+        public decimal GetTotalEventExpendituresByYear(int year)
+        {
+            return _repository.GetAll()
+                            .Where(x => x.year == year)
+                            .Sum(x => (decimal?)x.amountSpent) ?? 0;
         }
     }
 }

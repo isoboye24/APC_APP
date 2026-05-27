@@ -1,4 +1,5 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,18 @@ namespace APC
 {
     public partial class FormEvent : Form
     {
-        public FormEvent()
+        private readonly IEventsService _eventsService;
+
+        private Applications.DTO.EventDTO _eventDTO;
+
+        private bool _isUpdate = false;
+
+        public FormEvent(IEventsService eventsService)
         {
             InitializeComponent();
+            _eventsService = eventsService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -42,7 +51,14 @@ namespace APC
         }
         EventsBLL bll = new EventsBLL();
         public EventsDetailDTO detail = new EventsDetailDTO();
-        public bool isUpdate = false;
+        
+
+        public void loadForEdit(Applications.DTO.EventDTO eventDTO, bool isUpdate)
+        {
+             _eventDTO = eventDTO;
+            _isUpdate = isUpdate;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (txtTitle.Text.Trim()=="")

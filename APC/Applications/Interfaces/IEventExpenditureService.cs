@@ -16,5 +16,7 @@ namespace APC.Applications.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
+
+        decimal GetTotalEventExpendituresByEvent(int eventId);
     }
 }

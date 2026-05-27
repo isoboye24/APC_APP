@@ -1,4 +1,6 @@
-﻿using APC.BLL;
+﻿using APC.Applications.Interfaces;
+using APC.Applications.DTO;
+using APC.BLL;
 using APC.DAL.DTO;
 using APC.Utility;
 using System;
@@ -17,10 +19,24 @@ namespace APC.AllForms
 {
     public partial class FormEventDetailsBoard : BaseForm
     {
-        public FormEventDetailsBoard()
+        private readonly IEventsService _eventsService;
+        private readonly IEventExpenditureService _eventExpenditureService;
+        private readonly IEventSalesService _eventSalesService;
+        private readonly IEventReceiptService _eventReceiptService;
+        private readonly IEventImagesService _eventImagesService;
+
+        private EventDTO _eventDTO;
+        public FormEventDetailsBoard(IEventsService eventsService, IEventExpenditureService eventExpenditureService, IEventSalesService eventSalesService,
+            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService)
         {
             InitializeComponent();
             this.Load += new System.EventHandler(this.FormEventDetailsBoard_Load);
+
+            _eventsService = eventsService;
+            _eventExpenditureService = eventExpenditureService;
+            _eventSalesService = eventSalesService;
+            _eventReceiptService = eventReceiptService;
+            _eventImagesService = eventImagesService;
         }
 
         /// <summary>
@@ -73,6 +89,11 @@ namespace APC.AllForms
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public void loadForView(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)

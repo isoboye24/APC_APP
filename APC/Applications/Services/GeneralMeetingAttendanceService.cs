@@ -67,7 +67,7 @@ namespace APC.Applications.Services
             return _repository.GetAll().Where(x => x.generalAttendanceID == generalMeetingId).Sum(x =>x.monthlyDues ?? 0);
         }
 
-        public bool Create(PersonalAttendanceService data)
+        public bool Create(PersonalAttendance data)
         {
             if (_repository.Exists(data.MemberId, data.GeneralMeetingId))
                 throw new Exception("Member already exists");
@@ -170,7 +170,7 @@ namespace APC.Applications.Services
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
 
-        public bool Update(PersonalAttendanceService data)
+        public bool Update(PersonalAttendance data)
         {
             var member = _repository.GetById(data.GeneralMeetingId);
 

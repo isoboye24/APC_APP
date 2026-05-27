@@ -781,7 +781,7 @@ namespace APC.Applications.Services
                 throw new InvalidOperationException("Member not found");
 
             data.MemberAuthentication.UpdateUsername(data.MemberAuthentication.Username);
-            data.MemberAuthentication.UpdatePasswordHash(data.MemberAuthentication.PasswordHash);
+            data.MemberAuthentication.UpdatePasswordHash(data.PersonalInfo.Birthday);
 
             data.PersonalInfo.UpdateFirstName(data.PersonalInfo.FirstName);
             data.PersonalInfo.UpdateLastName(data.PersonalInfo.LastName);

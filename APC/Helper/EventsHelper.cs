@@ -20,13 +20,11 @@ namespace APC.Helper
             switch (type)
             {
                 case EventsGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "Year", "EventTitle", "AmountSoldWithCurrency", 
-                        "AmountSpentWithCurrency");
+                    GeneralHelper.SetVisibleColumns(grid, "Counter", "EventTitle");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
+                                    { "Counter", "No." },
                                     { "EventTitle", "Title" },
-                                    { "AmountSoldWithCurrency", "Sold" },
-                                    { "AmountSpentWithCurrency", "Spent" },
                                 });
                     break;
                 case EventsGridType.Images:

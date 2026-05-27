@@ -478,7 +478,6 @@
             this.dataGridViewFinReport.RowTemplate.Height = 40;
             this.dataGridViewFinReport.Size = new System.Drawing.Size(850, 495);
             this.dataGridViewFinReport.TabIndex = 2;
-            this.dataGridViewFinReport.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFinReport_RowEnter);
             // 
             // expenditurePage
             // 
@@ -675,7 +674,6 @@
             this.dataGridViewExpReport.RowTemplate.Height = 40;
             this.dataGridViewExpReport.Size = new System.Drawing.Size(1201, 488);
             this.dataGridViewExpReport.TabIndex = 4;
-            this.dataGridViewExpReport.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewExpReport_RowEnter);
             // 
             // tableLayoutPanel6
             // 

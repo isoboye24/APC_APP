@@ -35,9 +35,9 @@ namespace APC.Infrastructure.Repositories
                                         && x.expenditureDate.Year == date.Year);
         }
 
-        public IQueryable<EVENT_EXPENDITURE> GetAll(int eventId)
+        public IQueryable<EVENT_EXPENDITURE> GetAll()
         {
-            return _db.EVENT_EXPENDITURE.Where(x => !x.isDeleted && x.eventID == eventId);
+            return _db.EVENT_EXPENDITURE.Where(x => !x.isDeleted);
         }
         
         public IQueryable<EVENT_EXPENDITURE> GetAllDeletedEventExpenditures()

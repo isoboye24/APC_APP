@@ -1,78 +1,96 @@
 ﻿using APC.AllForms;
-using APC.BLL;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
+using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static APC.HelperServices.EventsHelperService;
+using static APC.Helper.EventsHelper;
 
 namespace APC
 {
     public partial class FormEventsList : Form
     {
-        public FormEventsList()
+        private readonly IEventsService _eventsService;
+        private readonly IEventExpenditureService _eventExpenditureService;
+        private readonly IEventSalesService _eventSalesService;
+        private readonly IEventReceiptService _eventReceiptService;
+        private readonly IEventImagesService _eventImagesService;
+
+        private List<EventDTO> _eventDTOs;
+
+        private int currYear = DateTime.Today.Year;
+
+        public FormEventsList(IEventsService eventsService, IEventExpenditureService eventExpenditureService, IEventSalesService eventSalesService,
+            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService)
         {
             InitializeComponent();
-        }
+            _eventsService = eventsService;
+            _eventExpenditureService = eventExpenditureService;
+            _eventSalesService = eventSalesService;
+            _eventReceiptService = eventReceiptService;
+            _eventImagesService = eventImagesService;
+        }        
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormEvent open = new FormEvent();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            FillDataGrid();
+            var form = new FormEvent(_eventsService);
+            form.ShowDialog();
+
+            ClearFilters();
+        }
+
+        private EventDTO GetSelectedEvent()
+        {
+            if (dataGridView1.CurrentRow == null)
+                return null;
+
+            return dataGridView1.CurrentRow.DataBoundItem as EventDTO;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (detail.EventID == 0)
+            var selected = GetSelectedEvent();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an event from the table.");
+                MessageBox.Show("Please select an event from the table");
+                return;
             }
-            else
-            {
-                FormEvent open = new FormEvent();
-                open.isUpdate = true;
-                open.detail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                FillDataGrid();
-            }            
+
+            var form = new FormEvent(_eventsService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            if (detail.EventID == 0)
+            var selected = GetSelectedEvent();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an event from the table.");
+                MessageBox.Show("Please select an event from the table");
+                return;
             }
-            else
-            {
-                FormEventDetailsBoard open = new FormEventDetailsBoard();
-                open.isView = true;
-                open.detail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                FillDataGrid();
-            }            
+
+            var form = new FormEventDetailsBoard(_eventsService, _eventExpenditureService, _eventSalesService,
+                    _eventReceiptService, _eventImagesService);
+            form.loadForView(selected);
+            form.ShowDialog();
+
+            ClearFilters();      
         }
-        EventsBLL bll = new EventsBLL();
-        EventsDTO dto = new EventsDTO();
-        private void FormEventsList_Load(object sender, EventArgs e)
+
+        private void controlsFont()
         {
+            GeneralHelper.ApplyBoldFont(14, label5, label2, btnAdd, btnUpdate, btnView);
+
+            GeneralHelper.ApplyRegularFont(14, txtEventYear, txtEventTitle);
+
             label1.Tag = "resizable";
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             label3.Tag = "resizable";
             label4.Tag = "resizable";
             label5.Tag = "resizable";
@@ -80,62 +98,66 @@ namespace APC
             labelOverallBalance.Tag = "resizable";
             labelOverallSold.Tag = "resizable";
             labelOverallSpent.Tag = "resizable";
-            
-
-            txtEventTitle.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtEventYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnAdd.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdate.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnView.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            dto = bll.Select();
-
-            dataGridView1.DataSource = dto.Events;
-            ConfigureEventsGrid(dataGridView1, EventsGridType.Basic);
-
-
-            decimal overallSales = bll.SelectOverallSales();
-            decimal overallExpenditures = bll.SelectOverallExpenditures();
-
         }
-        private void FillDataGrid()
+
+        private void loadEvents()
         {
-            bll = new EventsBLL();
-            dto = bll.Select();
-            dataGridView1.DataSource = dto.Events;
+            dataGridView1.DataSource = _eventsService.GetAnnualEvents(currYear);
+            _eventDTOs = _eventsService.GetAll();
+            ConfigureEventsGrid(dataGridView1, EventsGridType.Basic);
+        }
+
+        private void FormEventsList_Load(object sender, EventArgs e)
+        {
+            controlsFont();
+
+            loadEvents();
+        }
+        private void ClearFilters()
+        {
+            loadEvents();
         }
 
         private void txtEventTitle_TextChanged(object sender, EventArgs e)
         {
-            List<EventsDetailDTO> list = dto.Events;
-            list = list.Where(x => x.EventTitle.Contains(txtEventTitle.Text)).ToList();
-            dataGridView1.DataSource = list;
+            string search = txtEventTitle.Text.Trim().ToLower();
+            var filtered = _eventDTOs.Where(x => x.Title.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridView1.DataSource = filtered;
         }
 
         private void txtEventYear_TextChanged(object sender, EventArgs e)
         {
-            List<EventsDetailDTO> list = dto.Events;
-            list = list.Where(x => x.Year.Contains(txtEventYear.Text)).ToList();
-            dataGridView1.DataSource = list;
+            int year = Convert.ToInt32(txtEventYear.Text.Trim());
+            var filtered = _eventDTOs.Where(x => x.EventsDate.Year == year).ToList();
+            dataGridView1.DataSource = filtered;
         }
 
         private void txtEventYear_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
-        EventsDetailDTO detail = new EventsDetailDTO();
+
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            detail = GeneralHelper.MapFromGrid<EventsDetailDTO>(dataGridView1, e.RowIndex);
+            var selected = GetSelectedEvent();
+            if (selected == null)
+            {
+                return;
+            }
 
-            string imagePath = Path.Combine(Application.StartupPath, "images", detail.CoverImagePath);
+            //detail = GeneralHelper.MapFromGrid<EventsDetailDTO>(dataGridView1, e.RowIndex);
+
+            string imagePath = Path.Combine(Application.StartupPath, "images", selected.CoverImagePath);
             picViewEventCoverImage.ImageLocation = imagePath;
 
-            label3.Text = detail.EventTitle + " " + detail.Year;
-            labelOverallSold.Text = detail.AmountSold.ToString();
-            labelOverallSpent.Text = detail.AmountSpent.ToString();
-            labelOverallBalance.Text = detail.Balance.ToString();
+            label3.Text = selected.Title + " " + selected.EventsDate.Year;
+
+            decimal totalSales = _eventSalesService.GetTotalSalesByEvent(selected.EventsId);
+            decimal totalExpenditures = _eventExpenditureService.GetTotalEventExpendituresByEvent(selected.EventsId);
+
+            labelOverallSold.Text = totalSales.ToString();
+            labelOverallSpent.Text = totalExpenditures.ToString();
+            labelOverallBalance.Text = (totalSales - totalExpenditures).ToString();
         }
     }
 }

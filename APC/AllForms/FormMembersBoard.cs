@@ -1,4 +1,5 @@
 ﻿using APC.Applications.DTO;
+using APC.Applications.Entities;
 using APC.Applications.Interfaces;
 using APC.Helper;
 using System;
@@ -32,6 +33,13 @@ namespace APC.AllForms
         private readonly IPersonalAttendanceService _personalAttendanceService;
         private readonly IFinancialReportService _financialReportService;
 
+        private readonly ICountryService _countryService;
+        private readonly IMaritalStatusService _maritalStatusService;
+        private readonly IEmploymentStatusService _employmentStatusService;
+        private readonly INextOfKinService _nextOfKinService;
+        private readonly IPermissionService _permissionService;
+        private readonly IMembershipStatusService _membershipStatusService;
+
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOs;
         private List<MemberFullDetailsDTO> _memberFullDetailsDTOsContacts;
         private List<MemberFullDetailsDTO> _formerMemberFullDetailsDTOs;
@@ -48,7 +56,9 @@ namespace APC.AllForms
             IPositionService positionService, IProfessionService professionService, INationalityService nationalityService,
             IMonthService monthService, IMemberCommittmentService memberCommittmentService, IGeneralMeetingService generalMeetingService, 
             IPaymentStatusService paymentStatusService, IFinedMemberService finedMemberService, IGeneralMeetingAttendanceService generalMeetingAttendanceService, 
-            IPersonalAttendanceService personalAttendanceService)
+            IPersonalAttendanceService personalAttendanceService, ICountryService countryService, IMaritalStatusService maritalStatusService,
+            IEmploymentStatusService employmentStatusService, INextOfKinService nextOfKinService, IPermissionService permissionService,
+            IMembershipStatusService membershipStatusService)
         {
             InitializeComponent();
             _currentUserService = currentUserService;
@@ -64,6 +74,12 @@ namespace APC.AllForms
             _finedMemberService = finedMemberService;
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _personalAttendanceService = personalAttendanceService;
+            _countryService = countryService;
+            _maritalStatusService = maritalStatusService;
+            _employmentStatusService = employmentStatusService;
+            _nextOfKinService = nextOfKinService;
+            _permissionService = permissionService;
+            _membershipStatusService = membershipStatusService;
         }
 
         private void loadRegisteredMembers()
@@ -341,7 +357,9 @@ namespace APC.AllForms
 
         private void btnAddRegisteredMembers_Click(object sender, EventArgs e)
         {
-            var form = new FormMembers(_memberService);
+            var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService,
+                                        _genderService, _maritalStatusService, _employmentStatusService, _nextOfKinService, _permissionService,
+                                        _membershipStatusService);
             form.ShowDialog();
 
             ClearFilters();
@@ -364,7 +382,9 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormMembers(_memberService);
+            var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService,
+                                        _genderService, _maritalStatusService, _employmentStatusService, _nextOfKinService, _permissionService,
+                                        _membershipStatusService);
             form.loadForEdit(selected, true);
             form.ShowDialog();
 
@@ -502,7 +522,9 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormMembers(_memberService);
+            var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService,
+                                        _genderService, _maritalStatusService, _employmentStatusService, _nextOfKinService, _permissionService,
+                                        _membershipStatusService);
             form.loadForEdit(selected, true);
             form.ShowDialog();
 
@@ -552,7 +574,9 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormMembers(_memberService);
+            var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService, 
+                                        _genderService, _maritalStatusService, _employmentStatusService, _nextOfKinService, _permissionService, 
+                                        _membershipStatusService);
             form.loadForEdit(selected, true);
             form.ShowDialog();
 
@@ -649,7 +673,9 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormMembers(_memberService);
+            var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService,
+                                        _genderService, _maritalStatusService, _employmentStatusService, _nextOfKinService, _permissionService,
+                                        _membershipStatusService);
             form.loadForEdit(selected, true);
             form.ShowDialog();
 
@@ -880,7 +906,9 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormMembers(_memberService);
+            var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService,
+                                        _genderService, _maritalStatusService, _employmentStatusService, _nextOfKinService, _permissionService,
+                                        _membershipStatusService);
             form.loadForEdit(selected, true);
             form.ShowDialog();
 

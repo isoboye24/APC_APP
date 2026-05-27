@@ -7,7 +7,7 @@ namespace APC.Applications.Interfaces
 {
     public interface IEventExpenditureRepository
     {
-        IQueryable<EVENT_EXPENDITURE> GetAll(int eventId);
+        IQueryable<EVENT_EXPENDITURE> GetAll();
         IQueryable<EVENT_EXPENDITURE> GetAllDeletedEventExpenditures();
         IQueryable<EVENT_EXPENDITURE> GetById(int id);
         bool Insert(EventExpenditure data);
