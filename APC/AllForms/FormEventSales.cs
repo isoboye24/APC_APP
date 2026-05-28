@@ -1,19 +1,11 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL.DTO;
+using APC.Domain.Entities;
+using APC.Helper;
 using APC.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
-using System.Globalization;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -26,6 +18,9 @@ namespace APC.AllForms
         private Applications.DTO.EventSalesDTO _eventSalesDTO;
 
         private bool _isUpdate = false;
+        private int buttonSize = 14;
+        private float panelSize;
+        private bool noChanges;
 
         public FormEventSales(IEventSalesService eventSalesService)
         {
@@ -40,14 +35,6 @@ namespace APC.AllForms
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
-
-        public EventSalesDetailDTO detail = new EventSalesDetailDTO();
-        EventSalesBLL bll = new EventSalesBLL();
-
-        private int buttonSize = 14;
-        private float panelSize;
-
-        private bool noChanges;
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -136,15 +123,23 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
+        private void ControlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, btnClose, btnSave);
+            GeneralHelper.ApplyRegularFont(16, txtAmountSold, txtSummary, dateTimePickerEventSalesDate);
+        }
+
         private void FormEventSales_Load(object sender, EventArgs e)
         {
-            if (isUpdate)
-            {
-                labelTitle.Text = "Edit Sales";
+            ControlsFont();
 
-                txtAmountSold.Text = detail.AmountSold.ToString();
-                txtSummary.Text = detail.Summary;
-                dateTimePickerEventSalesDate.Value = detail.SalesDate;
+            if (_isUpdate)
+            {
+                labelTitle.Text = "Edit " + _eventSalesDTO.Summary + " of " + _eventDTO.Title;
+
+                txtAmountSold.Text = _eventSalesDTO.AmountSold.ToString();
+                txtSummary.Text = _eventSalesDTO.Summary;
+                dateTimePickerEventSalesDate.Value = _eventSalesDTO.SalesDate;
             }
             else
             {
@@ -154,58 +149,29 @@ namespace APC.AllForms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtAmountSold.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Add amount");
-            }
-            else if (txtSummary.Text.Trim() == "")
-            {
-                MessageBox.Show("Add summary");
-            }
-            else
-            {
-                if (!isUpdate)
+                decimal amount = Convert.ToDecimal(txtAmountSold.Text.Trim());
+                var summary = txtSummary.Text.Trim();
+                DateTime date = dateTimePickerEventSalesDate.Value;
+
+                var eventSalesData = new EventSales(_eventDTO.EventsId, amount, summary, date);
+
+                if (_eventDTO.EventsId == 0)
                 {
-                    EventSalesDetailDTO sales = new EventSalesDetailDTO();
-                    sales.AmountSold = Convert.ToDecimal(txtAmountSold.Text, CultureInfo.InvariantCulture);
-                    sales.Summary = txtSummary.Text;
-                    sales.EventID = this.eventID;
-                    sales.Day = dateTimePickerEventSalesDate.Value.Day;
-                    sales.MonthID = dateTimePickerEventSalesDate.Value.Month;
-                    sales.Year = dateTimePickerEventSalesDate.Value.Year;
-                    sales.SalesDate = dateTimePickerEventSalesDate.Value;
-                    if (bll.Insert(sales))
-                    {
-                        MessageBox.Show("Event Sales was added");
-                        txtAmountSold.Clear();
-                        txtSummary.Clear();
-                        dateTimePickerEventSalesDate.Value = DateTime.Today;
-                    }
+                    _eventSalesService.Create(eventSalesData);
+                    MessageBox.Show("Event Sale created successfully!");
                 }
-                else if (isUpdate)
+                else
                 {
-                    noChanges = Convert.ToDecimal(txtAmountSold.Text, CultureInfo.InvariantCulture) == detail.AmountSold && txtSummary.Text == detail.Summary
-                        && dateTimePickerEventSalesDate.Value == detail.SalesDate;
-                    if (noChanges)
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        detail.AmountSold = Convert.ToDecimal(txtAmountSold.Text, CultureInfo.InvariantCulture);
-                        detail.EventID = this.eventID;
-                        detail.Summary = txtSummary.Text;
-                        detail.Day = dateTimePickerEventSalesDate.Value.Day;
-                        detail.MonthID = dateTimePickerEventSalesDate.Value.Month;
-                        detail.Year = dateTimePickerEventSalesDate.Value.Year;
-                        detail.SalesDate = dateTimePickerEventSalesDate.Value;
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Event Sales was updated");
-                            this.Close();
-                        }
-                    }
+                    _eventSalesService.Update(eventSalesData);
+                    MessageBox.Show("Event Sale updated successfully!");
+                    this.Close();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
