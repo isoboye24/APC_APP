@@ -599,12 +599,12 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private Applications.DTO.EventImageDTO GetSelectedEventImage()
+        private EventImageDTO GetSelectedEventImage()
         {
             if (dataGridEventImages.CurrentRow == null)
                 return null;
 
-            return dataGridEventSales.CurrentRow.DataBoundItem as Applications.DTO.EventImageDTO;
+            return dataGridEventSales.CurrentRow.DataBoundItem as EventImageDTO;
         }
 
         private void btnUpdateEventImages_Click(object sender, EventArgs e)
@@ -633,7 +633,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewSingleImage(_eventImagesService);
+            var form = new FormViewSingleImage();
             form.loadForView(selected);
             form.loadEventData(_eventDTO);
             form.ShowDialog();

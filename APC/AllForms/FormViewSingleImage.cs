@@ -1,32 +1,23 @@
 ﻿using APC.Applications.DTO;
-using APC.Applications.Interfaces;
-using APC.DAL.DTO;
+using APC.Helper;
 using APC.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
     public partial class FormViewSingleImage : Form
     {
-        private readonly IEventImagesService _eventImagesService;
-
-        private Applications.DTO.EventImageDTO _eventImageDTO;
+        private EventImageDTO _eventImageDTO;
         private EventDTO _eventDTO;
 
-        public FormViewSingleImage(IEventImagesService eventImagesService)
+        private int buttonSize = 14;
+        private float panelSize;
+
+        public FormViewSingleImage()
         {
             InitializeComponent();
-            _eventImagesService = eventImagesService;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -44,10 +35,8 @@ namespace APC.AllForms
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-        private int buttonSize = 14;
-        private float panelSize;
-        public EventsDetailDTO eventDetail = new EventsDetailDTO();
-        public EventImageDetailDTO detail = new EventImageDetailDTO();
+       
+
         private void iconMaximize_Click(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Normal)
@@ -95,7 +84,7 @@ namespace APC.AllForms
             ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
         }
 
-        public void loadForView(Applications.DTO.EventImageDTO eventImageDTO)
+        public void loadForView(EventImageDTO eventImageDTO)
         {
             _eventImageDTO = eventImageDTO;
         }
@@ -105,13 +94,20 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
 
+        private void ControlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, labelCaption, btnClose);
+            GeneralHelper.ApplyRegularFont(16, labelDescription);
+        }
         private void FormViewSingleImage_Load(object sender, EventArgs e)
         {
-            labelTitle.Text = "Event: " + eventDetail.EventTitle;
-            labelDescription.Text = detail.Summary;
-            labelCaption.Text = detail.ImageCaption;
+            ControlsFont();
 
-            string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+            labelTitle.Text = "Event: " + _eventDTO.Title;
+            labelDescription.Text = _eventImageDTO.Summary;
+            labelCaption.Text = _eventImageDTO.ImageCaption;
+
+            string imagePath = Application.StartupPath + "\\images\\" + _eventImageDTO.ImagePath;
             picEventImage.ImageLocation = imagePath;
         }
 

@@ -32,10 +32,10 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelTitle = new System.Windows.Forms.Label();
             this.iconZoomIn = new FontAwesome.Sharp.IconPictureBox();
             this.iconZoomOut = new FontAwesome.Sharp.IconPictureBox();
             this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
+            this.labelTitle = new System.Windows.Forms.Label();
             this.picClose = new System.Windows.Forms.PictureBox();
             this.picMinimize = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -43,9 +43,9 @@
             this.labelCaption = new System.Windows.Forms.Label();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClose = new System.Windows.Forms.Button();
-            this.picEventImage = new System.Windows.Forms.PictureBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.picEventImage = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconZoomIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconZoomOut)).BeginInit();
@@ -55,8 +55,8 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -105,17 +105,6 @@
             this.panel1.Size = new System.Drawing.Size(1381, 63);
             this.panel1.TabIndex = 16;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            // 
-            // labelTitle
-            // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle.Location = new System.Drawing.Point(22, 14);
-            this.labelTitle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(187, 32);
-            this.labelTitle.TabIndex = 5;
-            this.labelTitle.Text = "CAPTION HERE";
             // 
             // iconZoomIn
             // 
@@ -168,6 +157,17 @@
             this.iconMaximize.TabStop = false;
             this.iconMaximize.Click += new System.EventHandler(this.iconMaximize_Click);
             // 
+            // labelTitle
+            // 
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitle.Location = new System.Drawing.Point(22, 14);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(187, 32);
+            this.labelTitle.TabIndex = 5;
+            this.labelTitle.Text = "CAPTION HERE";
+            // 
             // picClose
             // 
             this.picClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -219,8 +219,8 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1F));
             this.tableLayoutPanel4.Controls.Add(this.labelCaption, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel9, 1, 3);
-            this.tableLayoutPanel4.Controls.Add(this.labelDescription, 1, 2);
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel1, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.labelDescription, 1, 2);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(4, 29);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4);
@@ -278,29 +278,16 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // picEventImage
-            // 
-            this.picEventImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picEventImage.Location = new System.Drawing.Point(269, 4);
-            this.picEventImage.Margin = new System.Windows.Forms.Padding(4);
-            this.picEventImage.Name = "picEventImage";
-            this.picEventImage.Size = new System.Drawing.Size(787, 431);
-            this.picEventImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picEventImage.TabIndex = 0;
-            this.picEventImage.TabStop = false;
-            // 
             // labelDescription
             // 
-            this.labelDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelDescription.AutoSize = true;
+            this.labelDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelDescription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDescription.Location = new System.Drawing.Point(17, 522);
             this.labelDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(1323, 28);
+            this.labelDescription.Size = new System.Drawing.Size(1323, 80);
             this.labelDescription.TabIndex = 1;
-            this.labelDescription.Text = ".";
             this.labelDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel1
@@ -318,6 +305,17 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1325, 463);
             this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // picEventImage
+            // 
+            this.picEventImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picEventImage.Location = new System.Drawing.Point(269, 4);
+            this.picEventImage.Margin = new System.Windows.Forms.Padding(4);
+            this.picEventImage.Name = "picEventImage";
+            this.picEventImage.Size = new System.Drawing.Size(787, 431);
+            this.picEventImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEventImage.TabIndex = 0;
+            this.picEventImage.TabStop = false;
             // 
             // FormViewSingleImage
             // 
@@ -345,8 +343,8 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).EndInit();
             this.ResumeLayout(false);
 
         }
