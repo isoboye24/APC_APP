@@ -1,22 +1,11 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL;
-using APC.DAL.DTO;
+using APC.Domain.Entities;
 using APC.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
-using System.Globalization;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
 {
@@ -25,15 +14,18 @@ namespace APC.AllForms
         private readonly IEventExpenditureService _eventExpenditureService;
 
         private EventDTO _eventDTO;
-        private Applications.DTO.EventExpenditureDTO _eventExpenditureDTO;
+        private EventExpenditureDTO _eventExpenditureDTO;
 
         private bool _isUpdate = false;
+        private int buttonSize = 14;
+        private float panelSize;
 
         public FormEventExpenditure(IEventExpenditureService eventExpenditureService)
         {
             InitializeComponent();
             _eventExpenditureService = eventExpenditureService;
         }
+
         /// <summary>
         ///  Drag
         /// </summary>
@@ -42,11 +34,7 @@ namespace APC.AllForms
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        private int buttonSize = 14;
-        private float panelSize;
         
-        public int eventID;
-
         private void picClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -62,17 +50,14 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
 
-        public void loadForEdit(Applications.DTO.EventExpenditureDTO eventExpenditureDTO, bool isUpdate)
+        public void loadForEdit(EventExpenditureDTO eventExpenditureDTO, bool isUpdate)
         {
             _eventExpenditureDTO = eventExpenditureDTO;
             _isUpdate = isUpdate;
         }
 
-        private void FormEventExpenditure_Load(object sender, EventArgs e)
+        private void controlsFont()
         {
-            // Resizeable controls
-            #region
-
             label1.Tag = "resizable";
             label2.Tag = "resizable";
             label3.Tag = "resizable";
@@ -84,15 +69,19 @@ namespace APC.AllForms
 
             btnClose.Tag = "resizable";
             btnSave.Tag = "resizable";
-            #endregion
+        }
 
-            if (isUpdate)
+        private void FormEventExpenditure_Load(object sender, EventArgs e)
+        {
+            controlsFont();
+
+            if (_isUpdate)
             {
-                labelTitle.Text = "Edit Expenditure";
+                labelTitle.Text = "Edit " + _eventExpenditureDTO.Summary + " of " + _eventDTO.Title;
 
-                txtAmountSpent.Text = detail.AmountSpent.ToString();
-                txtSummary.Text = detail.Summary;
-                dateTimePickerEventExpDate.Value = detail.ExpenditureDate;
+                txtAmountSpent.Text = _eventExpenditureDTO.SpentAmount.ToString();
+                txtSummary.Text = _eventExpenditureDTO.Summary;
+                dateTimePickerEventExpDate.Value = _eventExpenditureDTO.ExpenditureDate;
             }
             else
             {
@@ -166,61 +155,32 @@ namespace APC.AllForms
             panelSize -= 1.05f;
             ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
         }
-
-        EventExpenditureBLL bll = new EventExpenditureBLL();        
+     
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtAmountSpent.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Add amount");
-            }
-            else if (txtSummary.Text.Trim() == "")
-            {
-                MessageBox.Show("Add summary");
-            }
-            else
-            {
-                if (!isUpdate)
+                decimal amount = Convert.ToDecimal(txtAmountSpent.Text.Trim());
+                var summary = txtSummary.Text.Trim();
+                DateTime date = dateTimePickerEventExpDate.Value;
+
+                var eventExpenditureData = new EventExpenditure(_eventDTO.EventsId, amount, date, summary);
+
+                if (_eventDTO.EventsId == 0)
                 {
-                    EventExpenditureDetailDTO expenditure = new EventExpenditureDetailDTO();
-                    expenditure.AmountSpent = Convert.ToDecimal(txtAmountSpent.Text, CultureInfo.InvariantCulture);
-                    expenditure.Summary = txtSummary.Text;
-                    expenditure.EventID = this.eventID;
-                    expenditure.Day = dateTimePickerEventExpDate.Value.Day;
-                    expenditure.MonthID = dateTimePickerEventExpDate.Value.Month;
-                    expenditure.Year = dateTimePickerEventExpDate.Value.Year;
-                    expenditure.ExpenditureDate = dateTimePickerEventExpDate.Value;
-                    if (bll.Insert(expenditure))
-                    {
-                        MessageBox.Show("Event Expenditure was added");
-                        txtAmountSpent.Clear();
-                        txtSummary.Clear();
-                        dateTimePickerEventExpDate.Value = DateTime.Today;
-                    }
+                    _eventExpenditureService.Create(eventExpenditureData);
+                    MessageBox.Show("Event Expenditure created successfully!");
                 }
-                else if (isUpdate)
+                else
                 {
-                    if (Convert.ToDecimal(txtAmountSpent.Text, CultureInfo.InvariantCulture) == detail.AmountSpent && txtSummary.Text == detail.Summary
-                        && dateTimePickerEventExpDate.Value == detail.ExpenditureDate)
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        detail.AmountSpent = Convert.ToDecimal(txtAmountSpent.Text, CultureInfo.InvariantCulture);
-                        detail.EventID = this.eventID;
-                        detail.Summary = txtSummary.Text;
-                        detail.Day = dateTimePickerEventExpDate.Value.Day;
-                        detail.MonthID = dateTimePickerEventExpDate.Value.Month;
-                        detail.Year = dateTimePickerEventExpDate.Value.Year;
-                        detail.ExpenditureDate = dateTimePickerEventExpDate.Value;
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Event Expenditure was updated");
-                            this.Close();
-                        }
-                    }
+                    _eventExpenditureService.Update(eventExpenditureData);
+                    MessageBox.Show("Event Expenditure updated successfully!");
+                    this.Close();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
