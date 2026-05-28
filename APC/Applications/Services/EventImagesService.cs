@@ -29,9 +29,26 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<EventImageDTO> GetAll(int eventId)
+        public List<EventImageDTO> GetAll()
         {
-            return _repository.GetAll(eventId)
+            return _repository.GetAll()
+                .OrderBy(x => x.eventID)
+                .Select((x, index) => new EventImageDTO
+                {
+                    Counter = index + 1,
+                    EventImageId = x.eventImageID,
+                    EventId = x.eventID,
+                    Summary = x.summary,
+                    ImagePath = x.imagePath,
+                    ImageCaption = x.imageCaption,
+                })
+                .ToList();
+        }
+        
+        public List<EventImageDTO> GetByEvent(int eventId)
+        {
+            return _repository.GetAll()
+                .Where(x => x.eventID == eventId)
                 .OrderBy(x => x.imageCaption)
                 .Select((x, index) => new EventImageDTO
                 {
@@ -79,6 +96,19 @@ namespace APC.Applications.Services
             data.UpdateImagePath(data.ImagePath);
 
             return _repository.Update(data);
+        }
+
+        public int GetEventImagesByEventCount(int eventId)
+        {
+            return _repository.GetAll()
+                                .Where(x => x.eventID == eventId)
+                                .Count();
+        }
+        
+        public int GetAllEventImagesCount()
+        {
+            return _repository.GetAll()                                
+                                .Count();
         }
     }
 }

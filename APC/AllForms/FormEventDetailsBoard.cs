@@ -31,6 +31,7 @@ namespace APC.AllForms
         private EventDTO _eventDTO;
         private  List<Applications.DTO.EventExpenditureDTO> _eventExpenditureDTOs;
         private  List<Applications.DTO.EventSalesDTO> _eventSalesDTOs;
+        private  List<Applications.DTO.EventImageDTO> _eventImageDTOs;
         public FormEventDetailsBoard(IEventsService eventsService, IEventExpenditureService eventExpenditureService, IEventSalesService eventSalesService,
             IEventReceiptService eventReceiptService, IEventImagesService eventImagesService, ICurrentUserService currentUserService)
         {
@@ -56,11 +57,6 @@ namespace APC.AllForms
         private int buttonSize = 14;
         private int tableHeaderSize = 16;
         private float panelSize;
-
-
-        EventImageDetailDTO eventImageDetail = new EventImageDetailDTO();
-        EventImageBLL eventImageBLL = new EventImageBLL();
-        EventImageDTO eventImageDTO = new EventImageDTO();
 
         EventReceiptsDetailDTO eventReceiptDetail = new EventReceiptsDetailDTO();
         EventReceiptsBLL eventReceiptsBLL = new EventReceiptsBLL();
@@ -242,6 +238,13 @@ namespace APC.AllForms
             _eventSalesDTOs = _eventSalesService.GetByEvent(_eventDTO.EventsId);
             ConfigureEventsGrid(dataGridEventSales, EventsGridType.Sales);
         }
+        
+        private void loadEventImages()
+        {
+            dataGridEventImages.DataSource = _eventImagesService.GetByEvent(_eventDTO.EventsId);
+            _eventImageDTOs = _eventImagesService.GetByEvent(_eventDTO.EventsId);
+            ConfigureEventsGrid(dataGridEventImages, EventsGridType.Images);
+        }
 
         private void FormEventDetailsBoard_Load(object sender, EventArgs e)
         {
@@ -280,27 +283,10 @@ namespace APC.AllForms
 
             // Event Sales
             #region
-            eventSalesDTO = eventSalesBLL.Select(detail.EventID);
-            cmbMonthEventSales.DataSource = eventSalesDTO.Months;
+            cmbMonthEventSales.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthEventSales, "MonthName", "MonthID");
 
-            dataGridEventSales.DataSource = eventSalesDTO.EventSales;
-            dataGridEventSales.Columns[0].Visible = false;
-            dataGridEventSales.Columns[1].Visible = false;
-            dataGridEventSales.Columns[2].HeaderText = "Summary";
-            dataGridEventSales.Columns[3].HeaderText = "Amount Spent (€)";
-            dataGridEventSales.Columns[4].Visible = false;
-            dataGridEventSales.Columns[5].HeaderText = "Day";
-            dataGridEventSales.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridEventSales.Columns[6].Visible = false;
-            dataGridEventSales.Columns[7].HeaderText = "Month";
-            dataGridEventSales.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridEventSales.Columns[8].HeaderText = "Year";
-            dataGridEventSales.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            foreach (DataGridViewColumn column in dataGridEventSales.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", tableHeaderSize, FontStyle.Bold);
-            }
+            loadEventSales();
 
             if (dataGridEventSales.Columns.Count > 2)
             {
@@ -319,24 +305,8 @@ namespace APC.AllForms
 
             #endregion
 
-            // Event Pictures
-            #region
-            eventImageDTO = eventImageBLL.Select(detail.EventID);
 
-            dataGridEventImages.DataSource = eventImageDTO.EventImages;
-            dataGridEventImages.Columns[0].Visible = false;
-            dataGridEventImages.Columns[1].Visible = false;
-            dataGridEventImages.Columns[2].Visible = false;
-            dataGridEventImages.Columns[3].Visible = false;
-            dataGridEventImages.Columns[4].HeaderText = "No.";
-            dataGridEventImages.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridEventImages.Columns[5].HeaderText = "Picture Caption";
-
-            foreach (DataGridViewColumn column in dataGridEventImages.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", tableHeaderSize, FontStyle.Bold);
-            }
-            #endregion
+            loadEventImages();
 
             // Event Receipts
             #region
@@ -371,11 +341,8 @@ namespace APC.AllForms
 
             Counts();
 
-            // Resizeable
-            #region
-            ResizeableControls();
 
-            #endregion
+            ResizeableControls();
         }
 
         // ---------------------------------------------------------------
@@ -447,14 +414,10 @@ namespace APC.AllForms
 
             txtSummaryEventSales.Clear();
             cmbMonthEventSales.SelectedIndex = -1;
-            eventSalesBLL = new EventSalesBLL();
-            eventSalesDTO = eventSalesBLL.Select(detail.EventID);
-            dataGridEventSales.DataSource = eventSalesDTO.EventSales;
+            loadEventSales();
 
             txtEventImageCaption.Clear();
-            eventImageBLL = new EventImageBLL();
-            eventImageDTO = eventImageBLL.Select(detail.EventID);
-            dataGridEventImages.DataSource = eventImageDTO.EventImages;
+            loadEventImages();
 
             txtEventReceiptCaption.Clear();
             cmbMonthEventReceipt.SelectedIndex = -1;
@@ -468,18 +431,18 @@ namespace APC.AllForms
         private void Counts()
         {
             int pluralRowExp = dataGridEventExpenditures.RowCount;
-            labelTotalAmountEventExp.Text = "Total : " + _eventExpenditureService.GetTotalAmountSpentByEvent(detail.EventID) + " €";
+            labelTotalAmountEventExp.Text = "Total : " + _eventExpenditureService.GetTotalAmountSpentByEvent(_eventDTO.EventsId) + " €";
             labelTotalRowsEventExp.Text = "Row" + (pluralRowExp > 1 ? "s " : " ") + pluralRowExp.ToString();
 
             int pluralRowSales = dataGridEventSales.RowCount;
-            labelTotalEventSales.Text = "Total : " + eventSalesBLL.SelectTotalAmountEventSold(detail.EventID) + " €";
+            labelTotalEventSales.Text = "Total : " + _eventSalesService.GetSalesAmountByEvent(_eventDTO.EventsId) + " €";
             labelTotalRowsEventSales.Text = "Row" + (pluralRowSales > 1 ? "s " : " ") + pluralRowSales.ToString();
 
             labelTotalRowsEventImage.Text = "Total : " + dataGridEventImages.RowCount.ToString();
 
             int pluralRowReceipts = dataGridViewEventReceipt.RowCount;
             labelTotalRowsEventReceipt.Text = "Row" + (pluralRowReceipts > 1 ? "s " : " ") + pluralRowReceipts.ToString();
-            labelTotalAmountEventReceipt.Text = "Total : " + eventReceiptsBLL.SelectTotalAmountOnEventReceipt(detail.EventID) + " €";
+            labelTotalAmountEventReceipt.Text = "Total : " + eventReceiptsBLL.SelectTotalAmountOnEventReceipt(_eventDTO.EventsId) + " €";
         }
 
         private void txtSummaryExpReport_TextChanged(object sender, EventArgs e)
@@ -514,19 +477,26 @@ namespace APC.AllForms
 
         private void btnDeleteExpReport_Click(object sender, EventArgs e)
         {
-            var selected = GetSelectedEventExpenditure();
-            if (selected == null)
+            if (_currentUserService.AccessLevel != 4)
             {
-                MessageBox.Show("Please select an expenditure.");
-                return;
+                this.Close();
             }
-
-            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
+            else
             {
-                _eventExpenditureService.Delete(selected.EventExpenditureId);
-                ClearFilters();
+                var selected = GetSelectedEventExpenditure();
+                if (selected == null)
+                {
+                    MessageBox.Show("Please select an expenditure.");
+                    return;
+                }
+
+                var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    _eventExpenditureService.Delete(selected.EventExpenditureId);
+                    ClearFilters();
+                }                
             }
         }
 
@@ -621,19 +591,26 @@ namespace APC.AllForms
 
         private void btnDeleteEventSales_Click(object sender, EventArgs e)
         {
-            var selected = GetSelectedEventSale();
-            if (selected == null)
+            if (_currentUserService.AccessLevel != 4)
             {
-                MessageBox.Show("Please select a sale.");
-                return;
+                this.Close();
             }
-
-            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
+            else
             {
-                _eventSalesService.Delete(selected.EventSalesId);
-                ClearFilters();
+                var selected = GetSelectedEventSale();
+                if (selected == null)
+                {
+                    MessageBox.Show("Please select a sale.");
+                    return;
+                }
+
+                var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    _eventSalesService.Delete(selected.EventSalesId);
+                    ClearFilters();
+                }                
             }
         }
 
@@ -642,104 +619,92 @@ namespace APC.AllForms
         // ---------------------------------------------------------------
         private void btnAddEventImages_Click(object sender, EventArgs e)
         {
-            FormEventSingleImage open = new FormEventSingleImage();
-            open.eventID = detail.EventID;
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormEventSingleImage(_eventImagesService);
+            form.loadEventData(_eventDTO);
+            form.ShowDialog();
+
             ClearFilters();
+        }
+
+        private Applications.DTO.EventImageDTO GetSelectedEventImage()
+        {
+            if (dataGridEventImages.CurrentRow == null)
+                return null;
+
+            return dataGridEventSales.CurrentRow.DataBoundItem as Applications.DTO.EventImageDTO;
         }
 
         private void btnUpdateEventImages_Click(object sender, EventArgs e)
         {
-            if (eventImageDetail.EventImageID == 0)
+            var selected = GetSelectedEventImage();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an image from the table");
+                MessageBox.Show("Please select an image from the table");
+                return;
             }
-            else
-            {
-                FormEventSingleImage open = new FormEventSingleImage();
-                open.detail = eventImageDetail;
-                open.eventDetail = detail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormEventSingleImage(_eventImagesService);
+            form.loadForEdit(selected, true);
+            form.loadEventData(_eventDTO);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnViewEventImages_Click(object sender, EventArgs e)
         {
-            if (eventImageDetail.EventImageID == 0)
+            var selected = GetSelectedEventImage();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an image from the table");
+                MessageBox.Show("Please select an image from the table");
+                return;
             }
-            else
-            {
-                FormViewSingleImage open = new FormViewSingleImage();
-                open.detail = eventImageDetail;
-                open.eventDetail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormViewSingleImage(_eventImagesService);
+            form.loadForView(selected);
+            form.loadEventData(_eventDTO);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnDeleteEventImages_Click(object sender, EventArgs e)
         {
-            if (AuthenticationDTO.AccessLevel != 4)
+            if (_currentUserService.AccessLevel != 4)
             {
                 this.Close();
             }
             else
             {
-                if (eventImageDetail.EventImageID == 0)
+                var selected = GetSelectedEventImage();
+                if (selected == null)
                 {
-                    MessageBox.Show("Please choose an image from the table");
+                    MessageBox.Show("Please select a sale.");
+                    return;
                 }
-                else
+
+                var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
                 {
-                    DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        if (eventImageBLL.Delete(eventImageDetail))
-                        {
-                            MessageBox.Show("The picture was deleted");
-                            ClearFilters();
-                        }
-                    }
+                    _eventImagesService.Delete(selected.EventImageId);
+                    ClearFilters();
                 }
             }
         }
 
         private void txtImageCaption_TextChanged(object sender, EventArgs e)
         {
-            List<EventImageDetailDTO> list = eventImageDTO.EventImages;
-            list = list.Where(x => x.ImageCaption.Contains(txtEventImageCaption.Text)).ToList();
-            dataGridEventImages.DataSource = list;
+            string search = txtEventImageCaption.Text.Trim().ToLower();
+            var filtered = _eventImageDTOs.Where(x => x.ImageCaption.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridEventImages.DataSource = filtered;
         }
 
         private void dataGridEventImages_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= dataGridEventImages.Rows.Count)
-                return;
+            var selected = GetSelectedEventImage();
 
-            var row = dataGridEventImages.Rows[e.RowIndex];
-            if (row == null || row.IsNewRow)
-                return;
-
-            eventImageDetail = new EventImageDetailDTO();
-            eventImageDetail.EventImageID = Convert.ToInt32(row.Cells[0].Value ?? 0);
-            eventImageDetail.EventID = Convert.ToInt32(row.Cells[1].Value ?? 0);
-            eventImageDetail.Summary = row.Cells[2].Value?.ToString() ?? string.Empty;
-            eventImageDetail.ImagePath = row.Cells[3].Value?.ToString() ?? string.Empty;
-            eventImageDetail.Counter = Convert.ToInt32(row.Cells[4].Value ?? 0);
-            eventImageDetail.ImageCaption = row.Cells[5].Value?.ToString() ?? string.Empty;
-
-            // ✅ Only set image if file path is valid
-            string imagePath = System.IO.Path.Combine(Application.StartupPath, "images", eventImageDetail.ImagePath);
+            string imagePath = System.IO.Path.Combine(Application.StartupPath, "images", selected.ImagePath);
             if (System.IO.File.Exists(imagePath))
                 picImage2.ImageLocation = imagePath;
             else

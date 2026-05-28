@@ -1,4 +1,6 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.DAL.DTO;
 using APC.Utility;
 using System;
 using System.Collections.Generic;
@@ -16,10 +18,17 @@ namespace APC.AllForms
 {
     public partial class FormViewSingleImage : Form
     {
-        public FormViewSingleImage()
+        private readonly IEventImagesService _eventImagesService;
+
+        private Applications.DTO.EventImageDTO _eventImageDTO;
+        private EventDTO _eventDTO;
+
+        public FormViewSingleImage(IEventImagesService eventImagesService)
         {
             InitializeComponent();
+            _eventImagesService = eventImagesService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -84,6 +93,16 @@ namespace APC.AllForms
             buttonSize += 1;
             panelSize += 1.05f;
             ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+        }
+
+        public void loadForView(Applications.DTO.EventImageDTO eventImageDTO)
+        {
+            _eventImageDTO = eventImageDTO;
+        }
+
+        public void loadEventData(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
         }
 
         private void FormViewSingleImage_Load(object sender, EventArgs e)

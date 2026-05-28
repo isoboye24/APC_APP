@@ -1,4 +1,6 @@
-﻿using APC.BLL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using APC.Utility;
 using System;
@@ -18,10 +20,18 @@ namespace APC.AllForms
 {
     public partial class FormEventSingleImage : Form
     {
-        public FormEventSingleImage()
+        private readonly IEventImagesService _eventImagesService;
+
+        private EventDTO _eventDTO;
+        private Applications.DTO.EventImageDTO _eventImageDTO;
+
+        private bool _isUpdate = false;
+        public FormEventSingleImage(IEventImagesService eventImagesService)
         {
-            InitializeComponent();                        
+            InitializeComponent();
+            _eventImagesService = eventImagesService;
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -45,7 +55,6 @@ namespace APC.AllForms
         public int eventID;
         EventImageBLL bll = new EventImageBLL();
         public EventImageDetailDTO detail = new EventImageDetailDTO();
-        public bool isUpdate = false;
         public bool isView = false;
 
         private int buttonSize = 14;
@@ -125,6 +134,17 @@ namespace APC.AllForms
                 string unique = Guid.NewGuid().ToString();
                 fileName += unique + OpenFileDialog1.SafeFileName;
             }
+        }
+
+        public void loadEventData(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
+        }
+
+        public void loadForEdit(Applications.DTO.EventImageDTO eventImageDTO, bool isUpdate)
+        {
+            _eventImageDTO = eventImageDTO;
+            _isUpdate = isUpdate;
         }
 
         private void FormEventSingleImage_Load(object sender, EventArgs e)

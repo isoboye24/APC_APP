@@ -33,9 +33,9 @@ namespace APC.Infrastructure.Repositories
             return _db.EVENT_IMAGE.Any(x => !x.isDeleted && x.eventID == eventId && x.imagePath == imagePath);
         }
 
-        public IQueryable<EVENT_IMAGE> GetAll(int eventId)
+        public IQueryable<EVENT_IMAGE> GetAll()
         {
-            return _db.EVENT_IMAGE.Where(x => !x.isDeleted && x.eventID == eventId);
+            return _db.EVENT_IMAGE.Where(x => !x.isDeleted);
         }
         
         public IQueryable<EVENT_IMAGE> GetAllDeletedEventImages()

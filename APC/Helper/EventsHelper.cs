@@ -27,6 +27,7 @@ namespace APC.Helper
                                     { "EventTitle", "Title" },
                                 });
                     break;
+
                 case EventsGridType.Images:
                     GeneralHelper.SetVisibleColumns(grid, "Counter", "ImageCaption");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
@@ -35,6 +36,7 @@ namespace APC.Helper
                                     { "ImageCaption", "Caption" }
                                 });
                     break;
+
                 case EventsGridType.Sales:
                     GeneralHelper.SetVisibleColumns(grid, "Counter", "Summary", "AmountSoldWithCurrency", "FormattedSalesDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
@@ -44,6 +46,7 @@ namespace APC.Helper
                                     { "FormattedSalesDate", "Date" }
                                 });
                     break;
+
                 case EventsGridType.Expenditure:
                     GeneralHelper.SetVisibleColumns(grid, "Counter", "Summary", "AmountSpentWithCurrency", "FormattedExpenditureDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
@@ -53,6 +56,7 @@ namespace APC.Helper
                                     { "FormattedExpenditureDate", "Date" }
                                 });
                     break;
+
                 case EventsGridType.Receipt:
                     GeneralHelper.SetVisibleColumns(grid, "Counter", "ImageCaption", "AmountSpentWithCurrency", "Day",
                         "MonthName", "Year");
@@ -64,6 +68,7 @@ namespace APC.Helper
                                     { "MonthName", "Month" }
                                 });
                     break;
+
                 default:
                     GeneralHelper.SetVisibleColumns(grid, "", "", "");
                     break;
