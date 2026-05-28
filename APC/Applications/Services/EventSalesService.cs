@@ -36,16 +36,47 @@ namespace APC.Applications.Services
         public List<EventSalesDTO> GetByEvent(int eventId)
         {
             var data = (from es in _repository.GetAll().Where(x => x.eventID == eventId)
+                        join e in _eventRepository.GetAll()
+                            on es.eventID equals e.eventID
+                        select new
+                        {
+                            es,
+                            e
+                        })
+                .OrderByDescending(x => x.e.eventDate)
+                .ThenByDescending(x => x.es.amountSold)
+                .Select((x, index) => new EventSalesDTO
+                {
+                    Counter = index + 1,
+                    EventSalesId = x.es.eventSalesID,
+                    EventId = x.es.eventID,
+                    AmountSold = x.es.amountSold,
+                    SalesDate = x.e.eventDate,
+                    Summary = x.es.summary,
+                    FormattedSalesDate = x.e.eventDate.ToString("dd.MM.yyyy"),
+                })
+                .ToList();
+
+            return data;
+
+           }
+
+        public List<EventSalesDTO> GetAll()
+        {
+            var data = (from es in _repository.GetAll()
                         join e in _eventRepository.GetAll() on es.eventID equals e.eventID
                         select new EventSalesDTO
                         {
                             EventSalesId = es.eventSalesID,
                             EventId = es.eventID,
+                            EventTitle = e.title,
                             AmountSold = es.amountSold,
                             SalesDate = e.eventDate,
                             Summary = es.summary,
-
-                        }).OrderByDescending(x => x.SalesDate.Year).ThenByDescending(x => x.SalesDate.Month).ThenByDescending(x => x.SalesDate.Day).ThenByDescending(x => x.AmountSold).ToList();
+                        })
+                        .OrderByDescending(x => x.SalesDate)
+                        .ThenByDescending(x => x.AmountSold)
+                        .ToList();
 
             return data;
         }
@@ -69,14 +100,14 @@ namespace APC.Applications.Services
             return _repository.Update(data);
         }
 
-        public decimal GetTotalSalesByEvent(int eventId)
+        public decimal GetSalesAmountByEvent(int eventId)
         {
             return _repository.GetAll()
                                 .Where(x => x.eventID == eventId)
                                 .Sum(x => (decimal?)x.amountSold) ?? 0;
         }
 
-        public decimal GetTotalSalesByYear(int year)
+        public decimal GetSalesAmountByYear(int year)
         {
             return _repository.GetAll()                                
                                 .Sum(x => (decimal?)x.amountSold) ?? 0;

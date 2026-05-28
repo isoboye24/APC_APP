@@ -30,6 +30,7 @@ namespace APC.AllForms
 
         private EventDTO _eventDTO;
         private  List<Applications.DTO.EventExpenditureDTO> _eventExpenditureDTOs;
+        private  List<Applications.DTO.EventSalesDTO> _eventSalesDTOs;
         public FormEventDetailsBoard(IEventsService eventsService, IEventExpenditureService eventExpenditureService, IEventSalesService eventSalesService,
             IEventReceiptService eventReceiptService, IEventImagesService eventImagesService, ICurrentUserService currentUserService)
         {
@@ -52,15 +53,10 @@ namespace APC.AllForms
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        public EventsDetailDTO detail = new EventsDetailDTO();
-        public bool isView = false;
         private int buttonSize = 14;
         private int tableHeaderSize = 16;
         private float panelSize;
 
-        EventSalesDetailDTO eventSalesDetail = new EventSalesDetailDTO();
-        EventSalesBLL eventSalesBLL = new EventSalesBLL();
-        EventSalesDTO eventSalesDTO = new EventSalesDTO();
 
         EventImageDetailDTO eventImageDetail = new EventImageDetailDTO();
         EventImageBLL eventImageBLL = new EventImageBLL();
@@ -238,6 +234,13 @@ namespace APC.AllForms
             dataGridEventExpenditures.DataSource = _eventExpenditureService.GetByEvent(_eventDTO.EventsId);
             _eventExpenditureDTOs = _eventExpenditureService.GetByEvent(_eventDTO.EventsId);
             ConfigureEventsGrid(dataGridEventExpenditures, EventsGridType.Expenditure);
+        }
+
+        private void loadEventSales()
+        {
+            dataGridEventSales.DataSource = _eventSalesService.GetByEvent(_eventDTO.EventsId);
+            _eventSalesDTOs = _eventSalesService.GetByEvent(_eventDTO.EventsId);
+            ConfigureEventsGrid(dataGridEventSales, EventsGridType.Sales);
         }
 
         private void FormEventDetailsBoard_Load(object sender, EventArgs e)
@@ -537,65 +540,61 @@ namespace APC.AllForms
         } 
         private void btnAddEventSales_Click(object sender, EventArgs e)
         {
-            FormEventSales open = new FormEventSales();
-            open.eventID = detail.EventID;
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormEventSales(_eventSalesService);
+            form.loadEventData(_eventDTO);
+            form.ShowDialog();
+
             ClearFilters();
+        }
+
+        private Applications.DTO.EventSalesDTO GetSelectedEventSale()
+        {
+            if (dataGridEventSales.CurrentRow == null)
+                return null;
+
+            return dataGridEventSales.CurrentRow.DataBoundItem as Applications.DTO.EventSalesDTO;
         }
 
         private void btnUpdateEventSales_Click(object sender, EventArgs e)
         {
-            if (eventSalesDetail.EventSalesID == 0)
+            var selected = GetSelectedEventSale();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an event sales from the table");
+                MessageBox.Show("Please select a sale from the table");
+                return;
             }
-            else
-            {
-                FormEventSales open = new FormEventSales();
-                open.detail = eventSalesDetail;
-                open.eventID = detail.EventID;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
 
-        private void dataGridEventSales_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            eventSalesDetail = new EventSalesDetailDTO();
-            eventSalesDetail.EventSalesID = Convert.ToInt32(dataGridEventSales.Rows[e.RowIndex].Cells[0].Value);
-            eventSalesDetail.EventID = Convert.ToInt32(dataGridEventSales.Rows[e.RowIndex].Cells[1].Value);
-            eventSalesDetail.Summary = dataGridEventSales.Rows[e.RowIndex].Cells[2].Value.ToString();
-            eventSalesDetail.AmountSold = Convert.ToDecimal(dataGridEventSales.Rows[e.RowIndex].Cells[3].Value);
-            eventSalesDetail.SalesDate = Convert.ToDateTime(dataGridEventSales.Rows[e.RowIndex].Cells[4].Value);
-            eventSalesDetail.Day = Convert.ToInt32(dataGridEventSales.Rows[e.RowIndex].Cells[5].Value);
-            eventSalesDetail.MonthID = Convert.ToInt32(dataGridEventSales.Rows[e.RowIndex].Cells[6].Value);
-            eventSalesDetail.MonthName = dataGridEventSales.Rows[e.RowIndex].Cells[7].Value.ToString();
-            eventSalesDetail.Year = Convert.ToInt32(dataGridEventSales.Rows[e.RowIndex].Cells[8].Value);
+            var form = new FormEventSales(_eventSalesService);
+            form.loadForEdit(selected, true);
+            form.loadEventData(_eventDTO);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void txtSummaryEventSales_TextChanged(object sender, EventArgs e)
         {
-            List<EventSalesDetailDTO> list = eventSalesDTO.EventSales;
-            list = list.Where(x => x.Summary.Contains(txtSummaryEventSales.Text)).ToList();
-            dataGridEventSales.DataSource = list;
+            string search = txtSummaryEventSales.Text.Trim().ToLower();
+            var filtered = _eventSalesDTOs.Where(x => x.Summary.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridEventSales.DataSource = filtered;
         }
+
         private void btnSearchEventSales_Click(object sender, EventArgs e)
         {
-            List<EventSalesDetailDTO> list = eventSalesDTO.EventSales;
-            if (cmbMonthEventSales.SelectedIndex != -1)
+            var filtered = _eventSalesDTOs.AsQueryable();
+
+            if (cmbMonthEventSales.SelectedIndex == -1)
             {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthEventSales.SelectedValue)).ToList();
+                MessageBox.Show("Please select a year");
+                return;
             }
             else
             {
-                MessageBox.Show("Unknown search!");
+                int search = Convert.ToInt32(cmbMonthEventSales.SelectedValue);
+                filtered = filtered.Where(x => x.SalesDate.Month == search);
             }
-            dataGridEventSales.DataSource = list;
+
+            dataGridEventSales.DataSource = filtered.ToList();
         }
 
         private void btnClearEventSales_Click(object sender, EventArgs e)
@@ -605,39 +604,36 @@ namespace APC.AllForms
 
         private void btnViewEventSales_Click(object sender, EventArgs e)
         {
-            if (eventSalesDetail.EventSalesID == 0)
+            var selected = GetSelectedEventSale();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an event sales from the table");
+                MessageBox.Show("Please select a sale from the table");
+                return;
             }
-            else
-            {
-                FormViewEventSales open = new FormViewEventSales();
-                open.detail = detail;
-                open.eventSalesDetail = eventSalesDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormViewEventSales(_eventSalesService);
+            form.loadForView(selected);
+            form.loadEventData(_eventDTO);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void btnDeleteEventSales_Click(object sender, EventArgs e)
         {
-            if (eventSalesDetail.EventSalesID == 0)
+            var selected = GetSelectedEventSale();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an event sales from the table");
+                MessageBox.Show("Please select a sale.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (eventSalesBLL.Delete(eventSalesDetail))
-                    {
-                        MessageBox.Show("Event sales was deleted");
-                        ClearFilters();
-                    }
-                }
+                _eventSalesService.Delete(selected.EventSalesId);
+                ClearFilters();
             }
         }
 

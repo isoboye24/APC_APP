@@ -1,4 +1,7 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.DAL;
+using APC.DAL.DTO;
 using APC.Utility;
 using System;
 using System.Collections.Generic;
@@ -17,9 +20,15 @@ namespace APC.AllForms
 {
     public partial class FormViewEventSales : Form
     {
-        public FormViewEventSales()
+        private readonly IEventSalesService _eventSalesService;
+
+        private Applications.DTO.EventSalesDTO _eventSalesDTO;
+        private EventDTO _eventDTO;
+
+        public FormViewEventSales(IEventSalesService eventSalesService)
         {
             InitializeComponent();
+            _eventSalesService = eventSalesService;
         }
         /// <summary>
         ///  Drag
@@ -33,6 +42,16 @@ namespace APC.AllForms
         public EventSalesDetailDTO eventSalesDetail = new EventSalesDetailDTO();
         private int buttonSize = 14;
         private float panelSize;
+
+        public void loadForView(Applications.DTO.EventSalesDTO eventSalesDTO)
+        {
+            _eventSalesDTO = eventSalesDTO;
+        }
+
+        public void loadEventData(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
+        }
 
         private void FormViewEventSales_Load(object sender, EventArgs e)
         {

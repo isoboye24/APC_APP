@@ -6,7 +6,8 @@ namespace APC.Applications.Interfaces
 {
     public interface IEventSalesService
     {
-        List<EventSalesDTO> GetAll(int eventId);
+        List<EventSalesDTO> GetAll();
+        List<EventSalesDTO> GetByEvent(int eventId);
         bool Create(EventSales data);
         bool Update(EventSales data);
         bool Delete(int id);
@@ -14,7 +15,7 @@ namespace APC.Applications.Interfaces
         bool PermanentDelete(int id);
         int Count();
 
-        decimal GetTotalSalesByYear(int year);
-        decimal GetTotalSalesByEvent(int eventId);
+        decimal GetSalesAmountByYear(int year);
+        decimal GetSalesAmountByEvent(int eventId);
     }
 }

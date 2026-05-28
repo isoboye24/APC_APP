@@ -1,4 +1,6 @@
-﻿using APC.BLL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL.DTO;
 using APC.Utility;
 using System;
@@ -18,9 +20,17 @@ namespace APC.AllForms
 {
     public partial class FormEventSales : Form
     {
-        public FormEventSales()
+        private readonly IEventSalesService _eventSalesService;
+
+        private EventDTO _eventDTO;
+        private Applications.DTO.EventSalesDTO _eventSalesDTO;
+
+        private bool _isUpdate = false;
+
+        public FormEventSales(IEventSalesService eventSalesService)
         {
             InitializeComponent();
+            _eventSalesService = eventSalesService;
         }
 
         /// <summary>
@@ -36,9 +46,8 @@ namespace APC.AllForms
 
         private int buttonSize = 14;
         private float panelSize;
-        public bool isUpdate = false;
+
         private bool noChanges;
-        public int eventID;
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -114,6 +123,17 @@ namespace APC.AllForms
             panelSize += 1.05f;
 
             ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+        }
+
+        public void loadEventData(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
+        }
+        
+        public void loadForEdit(Applications.DTO.EventSalesDTO eventSalesDTO, bool isUpdate)
+        {
+            _eventSalesDTO = eventSalesDTO;
+            _isUpdate = isUpdate;
         }
 
         private void FormEventSales_Load(object sender, EventArgs e)
