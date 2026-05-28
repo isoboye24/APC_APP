@@ -1,4 +1,6 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.DAL.DTO;
 using APC.Utility;
 using System;
 using System.Collections.Generic;
@@ -16,9 +18,14 @@ namespace APC.AllForms
 {
     public partial class FormViewEventExpenditure : Form
     {
-        public FormViewEventExpenditure()
+        private readonly IEventExpenditureService _eventExpenditureService;
+
+        private Applications.DTO.EventExpenditureDTO _eventExpenditureDTO;
+        private EventDTO _eventDTO;
+        public FormViewEventExpenditure(IEventExpenditureService eventExpenditureService)
         {
             InitializeComponent();
+            _eventExpenditureService = eventExpenditureService;
         }
         /// <summary>
         ///  Drag
@@ -38,11 +45,18 @@ namespace APC.AllForms
             this.Close();
         }
 
-        public EventExpenditureDetailDTO eventExpDetail = new EventExpenditureDetailDTO();
-        public EventsDetailDTO detail = new EventsDetailDTO();
-
         private int buttonSize = 14;
         private float panelSize;
+
+        public void loadForView(Applications.DTO.EventExpenditureDTO eventExpenditureDTO)
+        {
+            _eventExpenditureDTO = eventExpenditureDTO;
+        }
+
+        public void loadEventData(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
+        }
 
         private void FormViewEventExpenditure_Load(object sender, EventArgs e)
         {

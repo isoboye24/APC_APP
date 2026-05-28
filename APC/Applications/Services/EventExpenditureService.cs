@@ -2,8 +2,8 @@
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace APC.Applications.Services
 {
@@ -34,33 +34,80 @@ namespace APC.Applications.Services
         public List<EventExpenditureDTO> GetByEvent(int eventId)
         {
             var data = (from ex in _repository.GetAll().Where(x => x.eventID == eventId)
-                        join e in _eventRepository.GetAll() on ex.eventID equals e.eventID                        
-                        select new EventExpenditureDTO
+                        join e in _eventRepository.GetAll()
+                            on ex.eventID equals e.eventID
+                        select new
                         {
-                            EventExpenditureId = ex.eventExpenditureID,
-                            EventId = ex.eventID,
-                            SpentAmount = ex.amountSpent,
-                            ExpenditureDate = e.eventDate,
-                            Summary = ex.summary,
-                            
-                        }).OrderByDescending(x => x.ExpenditureDate.Year).ThenByDescending(x => x.ExpenditureDate.Month).ThenByDescending(x => x.ExpenditureDate.Day).ThenByDescending(x => x.SpentAmount).ToList();
+                            ex,
+                            e
+                        })
+                .OrderByDescending(x => x.e.eventDate)
+                .ThenByDescending(x => x.ex.amountSpent)
+                .Select((x, index) => new EventExpenditureDTO
+                {
+                    Counter = index + 1,
+                    EventExpenditureId = x.ex.eventExpenditureID,
+                    EventId = x.ex.eventID,
+                    SpentAmount = x.ex.amountSpent,
+                    ExpenditureDate = x.e.eventDate,
+                    FormattedExpenditureDate = x.e.eventDate.ToString("dd.MM.yyyy"),
+                    Summary = x.ex.summary,
+                })
+                .ToList();
 
             return data;
         }
-        
+
+        public List<EventExpenditureDTO> GetAll()
+        {
+            var data = (from ex in _repository.GetAll()
+                        join e in _eventRepository.GetAll()
+                            on ex.eventID equals e.eventID
+                        select new
+                        {
+                            ex,
+                            e
+                        })
+                .OrderByDescending(x => x.e.eventDate)
+                .ThenByDescending(x => x.ex.amountSpent)
+                .Select((x, index) => new EventExpenditureDTO
+                {
+                    Counter = index + 1,
+                    EventExpenditureId = x.ex.eventExpenditureID,
+                    EventId = x.ex.eventID,
+                    SpentAmount = x.ex.amountSpent,
+                    ExpenditureDate = x.e.eventDate,
+                    FormattedExpenditureDate = x.e.eventDate.ToString("dd.MM.yyyy"),
+                    Summary = x.ex.summary,
+                })
+                .ToList();
+
+            return data;
+        }
+
         public List<EventExpenditureDTO> GetAllDeletedEventExpenditures()
         {
             var data = (from ex in _repository.GetAllDeletedEventExpenditures()
-                        join e in _eventRepository.GetAll() on ex.eventID equals e.eventID                        
-                        select new EventExpenditureDTO
+                        join e in _eventRepository.GetAll()
+                            on ex.eventID equals e.eventID
+                        select new
                         {
-                            EventExpenditureId = ex.eventExpenditureID,
-                            EventId = e.eventID,
-                            SpentAmount = ex.amountSpent,
-                            ExpenditureDate = e.eventDate,
-                            Summary = ex.summary,
-                            
-                        }).OrderByDescending(x => x.ExpenditureDate.Year).ThenByDescending(x => x.ExpenditureDate.Month).ThenByDescending(x => x.ExpenditureDate.Day).ThenByDescending(x => x.SpentAmount).ToList();
+                            ex,
+                            e
+                        })
+               .OrderByDescending(x => x.e.eventDate)
+               .ThenByDescending(x => x.ex.amountSpent)
+               .Select((x, index) => new EventExpenditureDTO
+               {
+                   Counter = index + 1,
+                   EventExpenditureId = x.ex.eventExpenditureID,
+                   EventId = x.ex.eventID,
+                   SpentAmount = x.ex.amountSpent,
+                   ExpenditureDate = x.e.eventDate,
+                   FormattedExpenditureDate = x.e.eventDate.ToString("dd.MM.yyyy"),
+                   Summary = x.ex.summary,
+               })
+               .ToList();
 
             return data;
         }
@@ -84,14 +131,14 @@ namespace APC.Applications.Services
             return _repository.Update(data);
         }
 
-        public decimal GetTotalEventExpendituresByEvent(int eventId)
+        public decimal GetTotalAmountSpentByEvent(int eventId)
         {
             return _repository.GetAll()
                             .Where(x => x.eventID == eventId)
                             .Sum(x => (decimal?)x.amountSpent) ?? 0;
         }
 
-        public decimal GetTotalEventExpendituresByYear(int year)
+        public decimal GetTotalAmountSpentByYear(int year)
         {
             return _repository.GetAll()
                             .Where(x => x.year == year)

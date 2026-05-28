@@ -1,7 +1,6 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
-using APC.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +10,9 @@ namespace APC.Applications.Services
     public class EventsService : IEventsService
     {
         private readonly IEventsRepository _repository;
-        private readonly IEventSalesRepository _eventSalesRepository;
-        private readonly IEventExpenditureRepository _eventExpenditureRepository;
-        public EventsService(IEventsRepository repository, IEventSalesRepository eventSalesRepository, IEventExpenditureRepository eventExpenditureRepository)
+        public EventsService(IEventsRepository repository)
         {
             _repository = repository;
-            _eventSalesRepository = eventSalesRepository;
-            _eventExpenditureRepository = eventExpenditureRepository;
         }
 
         public int Count()
@@ -46,9 +41,7 @@ namespace APC.Applications.Services
                     EventsDate = x.eventDate,
                     FormattedEventsDate = x.eventDate.ToString("dd.MM.yyyy"),
                 })
-                .OrderByDescending(x => x.EventsDate.Year)
-                .ThenByDescending(x => x.EventsDate.Month)
-                .ThenByDescending(x => x.EventsDate.Day)
+                .OrderByDescending(x => x.EventsDate)
                 .ThenBy(x => x.Title)
                 .ToList();
         }
@@ -65,9 +58,7 @@ namespace APC.Applications.Services
                     EventsDate = x.eventDate,
                     FormattedEventsDate = x.eventDate.ToString("dd.MM.yyyy"),
                 })
-                .OrderByDescending(x => x.EventsDate.Year)
-                .ThenByDescending(x => x.EventsDate.Month)
-                .ThenByDescending(x => x.EventsDate.Day)
+                .OrderByDescending(x => x.EventsDate)
                 .ThenBy(x => x.Title)
                 .ToList();
         }

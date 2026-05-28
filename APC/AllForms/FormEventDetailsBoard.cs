@@ -1,7 +1,8 @@
-﻿using APC.Applications.Interfaces;
-using APC.Applications.DTO;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
 using APC.BLL;
 using APC.DAL.DTO;
+using APC.Helper;
 using APC.Utility;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static APC.Helper.EventsHelper;
 
 namespace APC.AllForms
 {
@@ -24,10 +25,13 @@ namespace APC.AllForms
         private readonly IEventSalesService _eventSalesService;
         private readonly IEventReceiptService _eventReceiptService;
         private readonly IEventImagesService _eventImagesService;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IMonthService _monthService;
 
         private EventDTO _eventDTO;
+        private  List<Applications.DTO.EventExpenditureDTO> _eventExpenditureDTOs;
         public FormEventDetailsBoard(IEventsService eventsService, IEventExpenditureService eventExpenditureService, IEventSalesService eventSalesService,
-            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService)
+            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService, ICurrentUserService currentUserService)
         {
             InitializeComponent();
             this.Load += new System.EventHandler(this.FormEventDetailsBoard_Load);
@@ -37,6 +41,7 @@ namespace APC.AllForms
             _eventSalesService = eventSalesService;
             _eventReceiptService = eventReceiptService;
             _eventImagesService = eventImagesService;
+            _currentUserService = currentUserService;
         }
 
         /// <summary>
@@ -52,10 +57,6 @@ namespace APC.AllForms
         private int buttonSize = 14;
         private int tableHeaderSize = 16;
         private float panelSize;
-
-        EventExpenditureDetailDTO eventExpDetail = new EventExpenditureDetailDTO();
-        EventExpenditureDTO eventExpDTO = new EventExpenditureDTO();
-        EventExpenditureBLL eventExpBLL = new EventExpenditureBLL();
 
         EventSalesDetailDTO eventSalesDetail = new EventSalesDetailDTO();
         EventSalesBLL eventSalesBLL = new EventSalesBLL();
@@ -232,39 +233,29 @@ namespace APC.AllForms
             tableLayoutPanel1.Tag = "resizable";
         }
 
+        private void loadEventExpenditure()
+        {
+            dataGridEventExpenditures.DataSource = _eventExpenditureService.GetByEvent(_eventDTO.EventsId);
+            _eventExpenditureDTOs = _eventExpenditureService.GetByEvent(_eventDTO.EventsId);
+            ConfigureEventsGrid(dataGridEventExpenditures, EventsGridType.Expenditure);
+        }
+
         private void FormEventDetailsBoard_Load(object sender, EventArgs e)
         {
-            if (AuthenticationDTO.AccessLevel != 4)
+            if (_currentUserService.AccessLevel != 4)
             {
                 btnDeleteExpReport.Hide();
             }
 
-            labelTitle.Text = detail.EventTitle;
-            labelEventSummary.Text = detail.Summary;
+            labelTitle.Text = _eventDTO.Title;
+            labelEventSummary.Text = _eventDTO.Summary;
 
             // Event Expenditure
             #region
-            eventExpDTO = eventExpBLL.Select(detail.EventID);
-            cmbMonthExpReport.DataSource = eventExpDTO.Months;
+            cmbMonthExpReport.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
 
-            dataGridEventExpenditures.DataSource = eventExpDTO.EventExpenditures;
-            dataGridEventExpenditures.Columns[0].Visible = false;
-            dataGridEventExpenditures.Columns[1].Visible = false;
-            dataGridEventExpenditures.Columns[2].HeaderText = "Summary";
-            dataGridEventExpenditures.Columns[3].HeaderText = "Amount Spent (€)";
-            dataGridEventExpenditures.Columns[4].Visible = false;
-            dataGridEventExpenditures.Columns[5].HeaderText = "Day";
-            dataGridEventExpenditures.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridEventExpenditures.Columns[6].Visible = false;
-            dataGridEventExpenditures.Columns[7].HeaderText = "Month";
-            dataGridEventExpenditures.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridEventExpenditures.Columns[8].HeaderText = "Year";
-            dataGridEventExpenditures.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            foreach (DataGridViewColumn column in dataGridEventExpenditures.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", tableHeaderSize, FontStyle.Bold);
-            }
+            loadEventExpenditure();
 
             // limit the amount of summary characters
             if (dataGridEventExpenditures.Columns.Count > 2)
@@ -392,73 +383,64 @@ namespace APC.AllForms
             this.Close();
         }
 
-        private void btnViewExpReport_Click(object sender, EventArgs e)
-        {
-            if (eventExpDetail.EventExpenditureID == 0)
-            {
-                MessageBox.Show("Please choose an event expenditure from the table");
-            }
-            else
-            {
-                FormViewEventExpenditure open = new FormViewEventExpenditure();
-                open.detail = detail;
-                open.eventExpDetail = eventExpDetail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
-
         private void btnAddExpReport_Click(object sender, EventArgs e)
         {
-            FormEventExpenditure open = new FormEventExpenditure();
-            open.eventID = detail.EventID;
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormEventExpenditure(_eventExpenditureService);
+            form.loadEventData(_eventDTO);
+            form.ShowDialog();
+
             ClearFilters();
-        }
-        private void btnUpdateExpReport_Click(object sender, EventArgs e)
-        {
-            if (eventExpDetail.EventExpenditureID == 0)
-            {
-                MessageBox.Show("Please choose an event expenditure from the table");
-            }
-            else
-            {
-                FormEventExpenditure open = new FormEventExpenditure();
-                open.detail = eventExpDetail;
-                open.eventID = detail.EventID;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
         }
 
-        private void dataGridEventExpenditures_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private Applications.DTO.EventExpenditureDTO GetSelectedEventExpenditure()
         {
-            eventExpDetail = new EventExpenditureDetailDTO();
-            eventExpDetail.EventExpenditureID = Convert.ToInt32(dataGridEventExpenditures.Rows[e.RowIndex].Cells[0].Value);
-            eventExpDetail.EventID = Convert.ToInt32(dataGridEventExpenditures.Rows[e.RowIndex].Cells[1].Value);
-            eventExpDetail.Summary = dataGridEventExpenditures.Rows[e.RowIndex].Cells[2].Value.ToString();
-            eventExpDetail.AmountSpent = Convert.ToDecimal(dataGridEventExpenditures.Rows[e.RowIndex].Cells[3].Value);
-            eventExpDetail.ExpenditureDate = Convert.ToDateTime(dataGridEventExpenditures.Rows[e.RowIndex].Cells[4].Value);
-            eventExpDetail.Day = Convert.ToInt32(dataGridEventExpenditures.Rows[e.RowIndex].Cells[5].Value);
-            eventExpDetail.MonthID = Convert.ToInt32(dataGridEventExpenditures.Rows[e.RowIndex].Cells[6].Value);
-            eventExpDetail.MonthName = dataGridEventExpenditures.Rows[e.RowIndex].Cells[7].Value.ToString();
-            eventExpDetail.Year = Convert.ToInt32(dataGridEventExpenditures.Rows[e.RowIndex].Cells[8].Value);
+            if (dataGridEventExpenditures.CurrentRow == null)
+                return null;
+
+            return dataGridEventExpenditures.CurrentRow.DataBoundItem as Applications.DTO.EventExpenditureDTO;
+        }
+
+        private void btnViewExpReport_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedEventExpenditure();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select an expenditure from the table");
+                return;
+            }
+
+            var form = new FormViewEventExpenditure(_eventExpenditureService);
+            form.loadForView(selected);
+            form.loadEventData(_eventDTO);
+            form.ShowDialog();
+
+            ClearFilters();
+        }
+
+        
+        private void btnUpdateExpReport_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedEventExpenditure();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select an expenditure from the table");
+                return;
+            }
+
+            var form = new FormEventExpenditure(_eventExpenditureService);
+            form.loadForEdit(selected, true);
+            form.loadEventData(_eventDTO);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void ClearFilters()
         {
             txtSummaryExpReport.Clear();
             cmbMonthExpReport.SelectedIndex = -1;
-            eventExpBLL = new EventExpenditureBLL();
-            eventExpDTO = eventExpBLL.Select(detail.EventID);
-            dataGridEventExpenditures.DataSource = eventExpDTO.EventExpenditures;
+            loadEventExpenditure();
 
             txtSummaryEventSales.Clear();
             cmbMonthEventSales.SelectedIndex = -1;
@@ -483,7 +465,7 @@ namespace APC.AllForms
         private void Counts()
         {
             int pluralRowExp = dataGridEventExpenditures.RowCount;
-            labelTotalAmountEventExp.Text = "Total : " + eventExpBLL.SelectTotalAmountEventExp(detail.EventID) + " €";
+            labelTotalAmountEventExp.Text = "Total : " + _eventExpenditureService.GetTotalAmountSpentByEvent(detail.EventID) + " €";
             labelTotalRowsEventExp.Text = "Row" + (pluralRowExp > 1 ? "s " : " ") + pluralRowExp.ToString();
 
             int pluralRowSales = dataGridEventSales.RowCount;
@@ -499,23 +481,27 @@ namespace APC.AllForms
 
         private void txtSummaryExpReport_TextChanged(object sender, EventArgs e)
         {
-            List<EventExpenditureDetailDTO> list = eventExpDTO.EventExpenditures;
-            list = list.Where(x => x.Summary.Contains(txtSummaryExpReport.Text)).ToList();
-            dataGridEventExpenditures.DataSource = list;
+            string search = txtSummaryExpReport.Text.Trim().ToLower();
+            var filtered = _eventExpenditureDTOs.Where(x => x.Summary.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridEventExpenditures.DataSource = filtered;
         }
 
         private void btnSearchExpReport_Click(object sender, EventArgs e)
         {
-            List<EventExpenditureDetailDTO> list = eventExpDTO.EventExpenditures;
-            if (cmbMonthExpReport.SelectedIndex != -1)
+            var filtered = _eventExpenditureDTOs.AsQueryable();
+
+            if (cmbMonthExpReport.SelectedIndex == -1)
             {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonthExpReport.SelectedValue)).ToList();
-            }            
+                MessageBox.Show("Please select a year");
+                return;
+            }
             else
             {
-                MessageBox.Show("Unknown search!");
+                int search = Convert.ToInt32(cmbMonthExpReport.SelectedValue);
+                filtered = filtered.Where(x => x.ExpenditureDate.Month == search);            
             }
-            dataGridEventExpenditures.DataSource = list;
+
+            dataGridEventExpenditures.DataSource = filtered.ToList();
         }
 
         private void btnClearExpReport_Click(object sender, EventArgs e)
@@ -525,21 +511,19 @@ namespace APC.AllForms
 
         private void btnDeleteExpReport_Click(object sender, EventArgs e)
         {
-            if (eventExpDetail.EventExpenditureID == 0)
+            var selected = GetSelectedEventExpenditure();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose an event expenditure from the table");
+                MessageBox.Show("Please select an expenditure.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (eventExpBLL.Delete(eventExpDetail))
-                    {
-                        MessageBox.Show("Event Expenditure was deleted");
-                        ClearFilters();
-                    }
-                }
+                _eventExpenditureService.Delete(selected.EventExpenditureId);
+                ClearFilters();
             }
         }
 

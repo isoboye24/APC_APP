@@ -1,4 +1,7 @@
-﻿using APC.BLL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.BLL;
+using APC.DAL;
 using APC.DAL.DTO;
 using APC.Utility;
 using System;
@@ -19,9 +22,17 @@ namespace APC.AllForms
 {
     public partial class FormEventExpenditure : Form
     {
-        public FormEventExpenditure()
+        private readonly IEventExpenditureService _eventExpenditureService;
+
+        private EventDTO _eventDTO;
+        private Applications.DTO.EventExpenditureDTO _eventExpenditureDTO;
+
+        private bool _isUpdate = false;
+
+        public FormEventExpenditure(IEventExpenditureService eventExpenditureService)
         {
             InitializeComponent();
+            _eventExpenditureService = eventExpenditureService;
         }
         /// <summary>
         ///  Drag
@@ -33,7 +44,7 @@ namespace APC.AllForms
 
         private int buttonSize = 14;
         private float panelSize;
-        public bool isUpdate = false;
+        
         public int eventID;
 
         private void picClose_Click(object sender, EventArgs e)
@@ -46,7 +57,17 @@ namespace APC.AllForms
             this.Close();
         }
 
-        public EventExpenditureDetailDTO detail = new EventExpenditureDetailDTO();
+        public void loadEventData(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
+        }
+
+        public void loadForEdit(Applications.DTO.EventExpenditureDTO eventExpenditureDTO, bool isUpdate)
+        {
+            _eventExpenditureDTO = eventExpenditureDTO;
+            _isUpdate = isUpdate;
+        }
+
         private void FormEventExpenditure_Load(object sender, EventArgs e)
         {
             // Resizeable controls

@@ -45,12 +45,12 @@ namespace APC.Helper
                                 });
                     break;
                 case EventsGridType.Expenditure:
-                    GeneralHelper.SetVisibleColumns(grid, "Summary", "AmountSpentWithCurrency", "Day",
-                        "MonthName", "Year");
+                    GeneralHelper.SetVisibleColumns(grid, "Counter", "Summary", "AmountSpentWithCurrency", "FormattedExpenditureDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
-                                    { "AmountSpentWithCurrency", "Spent" },
-                                    { "MonthName", "Month" }
+                                    { "Counter", "No." },
+                                    { "AmountSpentWithCurrency", "Amount" },
+                                    { "FormattedExpenditureDate", "Date" }
                                 });
                     break;
                 case EventsGridType.Receipt:
