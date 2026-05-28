@@ -1,5 +1,8 @@
-﻿using APC.BLL;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.BLL;
 using APC.DAL;
+using APC.DAL.DAO;
 using APC.DAL.DTO;
 using APC.Utility;
 using Microsoft.Win32;
@@ -23,9 +26,17 @@ namespace APC.AllForms
 {
     public partial class FormEventReceipt : Form
     {
-        public FormEventReceipt()
+        private readonly IEventReceiptService _eventReceiptService;
+
+        private EventDTO _eventDTO;
+        private Applications.DTO.EventReceiptDTO _eventReceiptDTO;
+
+        private bool _isUpdate = false;
+
+        public FormEventReceipt(IEventReceiptService eventReceiptService)
         {
             InitializeComponent();
+            _eventReceiptService = eventReceiptService;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -52,6 +63,17 @@ namespace APC.AllForms
         public EventsDetailDTO detail = new EventsDetailDTO();
         public EventReceiptsDetailDTO detailReceipt = new EventReceiptsDetailDTO();
         EventReceiptsBLL bll = new EventReceiptsBLL();
+
+        public void loadEventData(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
+        }
+
+        public void loadForEdit(Applications.DTO.EventReceiptDTO eventReceiptDTO, bool isUpdate)
+        {
+            _eventReceiptDTO = eventReceiptDTO;
+            _isUpdate = isUpdate;
+        }
 
         private void FormEventReceipt_Load(object sender, EventArgs e)
         {

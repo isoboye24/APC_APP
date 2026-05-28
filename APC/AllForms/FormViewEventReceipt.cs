@@ -1,4 +1,7 @@
-﻿using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.DAL.DAO;
+using APC.DAL.DTO;
 using APC.Utility;
 using System;
 using System.Collections.Generic;
@@ -16,9 +19,15 @@ namespace APC.AllForms
 {
     public partial class FormViewEventReceipt : Form
     {
-        public FormViewEventReceipt()
+        private readonly IEventReceiptService _eventReceiptService;
+
+        private Applications.DTO.EventReceiptDTO _eventReceiptDTO;
+        private EventDTO _eventDTO;
+
+        public FormViewEventReceipt(IEventReceiptService eventReceiptService)
         {
             InitializeComponent();
+            _eventReceiptService = eventReceiptService;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -93,6 +102,16 @@ namespace APC.AllForms
             buttonSize += 1;
             panelSize += 1.05f;
             ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+        }
+
+        public void loadForView(Applications.DTO.EventReceiptDTO eventReceiptDTO)
+        {
+            _eventReceiptDTO = eventReceiptDTO;
+        }
+
+        public void loadEventData(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
         }
 
         private void FormViewEventReceipt_Load(object sender, EventArgs e)

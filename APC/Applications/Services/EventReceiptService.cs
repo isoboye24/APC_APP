@@ -29,9 +29,28 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<EventReceiptDTO> GetAll(int eventId)
+        public List<EventReceiptDTO> GetAll()
         {
-            return _repository.GetAll(eventId)
+            return _repository.GetAll()
+               .OrderBy(x => x.eventID)
+                .Select((x, index) => new EventReceiptDTO
+                {
+                    Counter = index + 1,
+                    EventReceiptId = x.eventReceiptID,
+                    EventId = x.eventID,
+                    Summary = x.summary,
+                    ImagePath = x.imagePath,
+                    Caption = x.caption,
+                    FormattedReceiptDate = x.receiptDate.ToString("dd.MM.yyyy"),
+                    ReceiptDate = x.receiptDate,
+                })
+                .ToList();
+        }
+        
+        public List<EventReceiptDTO> GetByEvent(int eventId)
+        {
+            return _repository.GetAll()
+                .Where(x => x.eventID == eventId)
                .OrderBy(x => x.caption)
                 .Select((x, index) => new EventReceiptDTO
                 {
@@ -41,6 +60,8 @@ namespace APC.Applications.Services
                     Summary = x.summary,
                     ImagePath = x.imagePath,
                     Caption = x.caption,
+                    FormattedReceiptDate = x.receiptDate.ToString("dd.MM.yyyy"),
+                    ReceiptDate = x.receiptDate,
                 })
                 .ToList();
         }
@@ -80,6 +101,19 @@ namespace APC.Applications.Services
             data.UpdateSpentAmount(data.AmountSpent);
 
             return _repository.Update(data);
+        }
+
+        public int GetEventReceiptsCountByEvent(int eventId)
+        {
+            return _repository.GetAll()
+                                .Where(x => x.eventID == eventId)
+                                .Count();
+        }
+
+        public int GetAllEventReceiptsCount()
+        {
+            return _repository.GetAll()
+                                .Count();
         }
     }
 }

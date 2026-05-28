@@ -11,6 +11,7 @@ namespace APC.Applications.DTO
         public string Summary { get; set; }
         public string Caption { get; set; }
         public DateTime ReceiptDate { get; set; }
+        public string FormattedReceiptDate { get; set; }
         public decimal AmountSpent { get; set; }
     }
 }

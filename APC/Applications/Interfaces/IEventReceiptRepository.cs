@@ -6,7 +6,7 @@ namespace APC.Applications.Interfaces
 {
     public interface IEventReceiptRepository
     {
-        IQueryable<EVENT_RECEIPTS> GetAll(int eventId);
+        IQueryable<EVENT_RECEIPTS> GetAll();
         IQueryable<EVENT_RECEIPTS> GetAllDeletedEventReceipts();
         IQueryable<EVENT_RECEIPTS> GetById(int id);
         bool Insert(EventReceipt data);
