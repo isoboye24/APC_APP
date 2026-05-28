@@ -15,12 +15,11 @@ namespace APC.AllForms
         private readonly IEventSalesService _eventSalesService;
 
         private EventDTO _eventDTO;
-        private Applications.DTO.EventSalesDTO _eventSalesDTO;
+        private EventSalesDTO _eventSalesDTO;
 
         private bool _isUpdate = false;
         private int buttonSize = 14;
         private float panelSize;
-        private bool noChanges;
 
         public FormEventSales(IEventSalesService eventSalesService)
         {
@@ -117,7 +116,7 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
         
-        public void loadForEdit(Applications.DTO.EventSalesDTO eventSalesDTO, bool isUpdate)
+        public void loadForEdit(EventSalesDTO eventSalesDTO, bool isUpdate)
         {
             _eventSalesDTO = eventSalesDTO;
             _isUpdate = isUpdate;
@@ -125,7 +124,7 @@ namespace APC.AllForms
 
         private void ControlsFont()
         {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, btnClose, btnSave);
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, btnClose, btnSave);
             GeneralHelper.ApplyRegularFont(16, txtAmountSold, txtSummary, dateTimePickerEventSalesDate);
         }
 
@@ -157,7 +156,7 @@ namespace APC.AllForms
 
                 var eventSalesData = new EventSales(_eventDTO.EventsId, amount, summary, date);
 
-                if (_eventDTO.EventsId == 0)
+                if (_eventSalesDTO.EventSalesId == 0)
                 {
                     _eventSalesService.Create(eventSalesData);
                     MessageBox.Show("Event Sale created successfully!");

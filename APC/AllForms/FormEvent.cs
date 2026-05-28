@@ -2,6 +2,7 @@
 using APC.Domain.Entities;
 using APC.Helper;
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -52,11 +53,42 @@ namespace APC
         {
             try
             {
-                var title = txtTitle.Text.Trim();
+                string sourcePath = txtImagePath.Text.Trim();
+                string title = txtTitle.Text.Trim();
                 var summary = txtSummary.Text.Trim();
                 DateTime date = dateTimePickerEvent.Value;
 
-                var eventData = new TheEvents(title, summary, fileName, date);
+                string finalImagePath = _eventDTO.CoverImagePath;
+
+                // Only copy image if user selected a file
+                if (!string.IsNullOrWhiteSpace(sourcePath) && !string.IsNullOrWhiteSpace(fileName))
+                {
+                    string destinationFolder =
+                        Path.Combine(Application.StartupPath, "images");
+
+                    if (!Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+
+                    string destinationPath =
+                        Path.Combine(destinationFolder, fileName);
+
+                    File.Copy(sourcePath, destinationPath, true);
+
+                    finalImagePath = destinationPath;
+
+                    if (_eventDTO.EventsId > 0)
+                    {
+                        if (File.Exists(_eventDTO.CoverImagePath) &&
+                            _eventDTO.CoverImagePath != destinationPath)
+                        {
+                            File.Delete(_eventDTO.CoverImagePath);
+                        }
+                    }
+                }
+
+                var eventData = new TheEvents(title, summary, finalImagePath, date);
 
                 if (_eventDTO.EventsId == 0)
                 {
@@ -79,14 +111,19 @@ namespace APC
         
         OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
         private void btnBrowse_Click(object sender, EventArgs e)
-        {            
-            OpenFileDialog1.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+        {
+            OpenFileDialog1.Filter =
+        "Image Files (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+
             if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 picEventCoverImage.Load(OpenFileDialog1.FileName);
+
                 txtImagePath.Text = OpenFileDialog1.FileName;
+
                 string unique = Guid.NewGuid().ToString();
-                fileName += unique + OpenFileDialog1.SafeFileName;
+
+                fileName = unique + "_" + OpenFileDialog1.SafeFileName;
             }
         }
 

@@ -1,19 +1,11 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL.DTO;
+using APC.Domain.Entities;
+using APC.Helper;
 using APC.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -26,6 +18,11 @@ namespace APC.AllForms
         private Applications.DTO.EventImageDTO _eventImageDTO;
 
         private bool _isUpdate = false;
+        private string fileName = "";
+        private int buttonSize = 14;
+        private float panelSize;
+        int maxLength = 50;
+
         public FormEventSingleImage(IEventImagesService eventImagesService)
         {
             InitializeComponent();
@@ -51,88 +48,90 @@ namespace APC.AllForms
         {
             this.Close();
         }
-        public EventsDetailDTO eventDetail = new EventsDetailDTO();
-        public int eventID;
-        EventImageBLL bll = new EventImageBLL();
-        public EventImageDetailDTO detail = new EventImageDetailDTO();
-        public bool isView = false;
 
-        private int buttonSize = 14;
-        private float panelSize;
-        int maxLength = 50;
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (eventID == 0)
+            try
             {
-                MessageBox.Show("Please choose event");
-            }
-            else if (txtImagePath.Text.Trim()=="")
-            {
-                MessageBox.Show("Please upload an image");
-            }
-            else if (txtImageCaption.Text.Length > maxLength)
-            {
-                MessageBox.Show("The caption is too long!");
-            }
-            else
-            {
-                if (!isUpdate)
+                var sourcePath = txtImagePath.Text.Trim();
+                var summary = txtImageSummary.Text.Trim();
+                var caption = txtImageCaption.Text.Trim();
+
+                string finalImagePath = _eventImageDTO.ImagePath;
+
+                // Only copy image if user selected a file
+                if (!string.IsNullOrWhiteSpace(sourcePath) && !string.IsNullOrWhiteSpace(fileName))
                 {
-                    EventImageDetailDTO eventImage = new EventImageDetailDTO();
-                    eventImage.EventID = eventID;
-                    eventImage.Summary = txtImageSummary.Text.Trim();
-                    eventImage.ImageCaption = txtImageCaption.Text.Trim();
-                    eventImage.ImagePath = fileName;
-                    if (bll.Insert(eventImage))
+                    string destinationFolder =
+                        Path.Combine(Application.StartupPath, "images");
+
+                    if (!Directory.Exists(destinationFolder))
                     {
-                        MessageBox.Show("Event image was added");
-                        try
-                        {
-                            File.Copy(txtImagePath.Text, @"images\\" + fileName);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Cannot find the path to this picture");
-                        }
-                        txtImageCaption.Clear();
-                        txtImagePath.Clear();
-                        txtImageSummary.Clear();
-                        picEventImage.Image = null;
+                        Directory.CreateDirectory(destinationFolder);
                     }
-                }
-                else if (isUpdate)
-                {
-                    if (detail.ImageCaption == txtImageCaption.Text.Trim() && detail.Summary == txtImageSummary.Text.Trim() 
-                        && detail.ImagePath == txtImagePath.Text)
+
+                    string destinationPath =
+                        Path.Combine(destinationFolder, fileName);
+
+                    File.Copy(sourcePath, destinationPath, true);
+
+                    finalImagePath = destinationPath;
+
+                    if (_eventImageDTO.EventImageId > 0)
                     {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        detail.ImagePath = txtImagePath.Text;
-                        detail.ImageCaption = txtImageCaption.Text;
-                        detail.Summary = txtImageSummary.Text;
-                        detail.EventID = eventID;
-                        if (bll.Update(detail))
+                        if (File.Exists(_eventImageDTO.ImagePath) &&
+                            _eventImageDTO.ImagePath != destinationPath)
                         {
-                            MessageBox.Show("Event image was updated");
-                            this.Close();
+                            File.Delete(_eventImageDTO.ImagePath);
                         }
                     }
                 }
+
+                var eventImageData = new EventImages(
+                    _eventDTO.EventsId,
+                    summary,
+                    finalImagePath,
+                    caption
+                );
+
+                if (_eventImageDTO.EventImageId == 0)
+                {
+                    _eventImagesService.Create(eventImageData);
+
+                    MessageBox.Show("Event Image created successfully!");
+
+                    ClearFields();
+                }
+                else
+                {
+                    _eventImagesService.Update(eventImageData);
+
+                    MessageBox.Show("Event Image updated successfully!");
+
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
-        string fileName;
+        
         OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            OpenFileDialog1.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+            OpenFileDialog1.Filter =
+        "Image Files (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+
             if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 picEventImage.Load(OpenFileDialog1.FileName);
+
                 txtImagePath.Text = OpenFileDialog1.FileName;
+
                 string unique = Guid.NewGuid().ToString();
-                fileName += unique + OpenFileDialog1.SafeFileName;
+
+                fileName = unique + "_" + OpenFileDialog1.SafeFileName;
             }
         }
 
@@ -147,35 +146,38 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
+        private void ControlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, btnClose, btnSave, btnBrowse);
+            GeneralHelper.ApplyRegularFont(16, txtImagePath, txtImageCaption, txtImageSummary);
+        }
+
+        private void ClearFields()
+        {
+            txtImageCaption.Clear();
+            txtImagePath.Clear();
+            txtImageSummary.Clear();
+            picEventImage.Image = null;
+        }
+
         private void FormEventSingleImage_Load(object sender, EventArgs e)
         {
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            txtImagePath.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtImageCaption.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtImageSummary.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnBrowse.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            ControlsFont();
 
             txtImagePath.Hide();
             label3.Hide();
 
-            labelTitle.Text = labelTitle.Text = "Add " + eventDetail.EventTitle + " Picture.";
-            if (isUpdate)
+            labelTitle.Text = labelTitle.Text = "Add " + _eventDTO.Title + " Picture.";
+            if (_isUpdate)
             {
-                txtImagePath.Text = detail.ImagePath;
-                txtImageCaption.Text = detail.ImageCaption;
-                txtImageSummary.Text = detail.Summary;
-                eventID = detail.EventID;
-                string imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
+                txtImagePath.Text = _eventImageDTO.ImagePath;
+                txtImageCaption.Text = _eventImageDTO.ImageCaption;
+                txtImageSummary.Text = _eventImageDTO.Summary;
+
+                string imagePath = Application.StartupPath + "\\images\\" + _eventImageDTO.ImagePath;
                 picEventImage.ImageLocation = imagePath;
 
-                labelTitle.Text = "Edit " + eventDetail.EventTitle + " Picture.";
+                labelTitle.Text = "Edit " + _eventImageDTO.ImageCaption + " of " + _eventDTO.Title;
             }
             
         }
