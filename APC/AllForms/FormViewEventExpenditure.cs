@@ -1,31 +1,23 @@
 ﻿using APC.Applications.DTO;
-using APC.Applications.Interfaces;
-using APC.DAL.DTO;
+using APC.Helper;
 using APC.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
     public partial class FormViewEventExpenditure : Form
     {
-        private readonly IEventExpenditureService _eventExpenditureService;
-
         private Applications.DTO.EventExpenditureDTO _eventExpenditureDTO;
         private EventDTO _eventDTO;
-        public FormViewEventExpenditure(IEventExpenditureService eventExpenditureService)
+        private int buttonSize = 14;
+        private float panelSize;
+
+        public FormViewEventExpenditure()
         {
             InitializeComponent();
-            _eventExpenditureService = eventExpenditureService;
         }
         /// <summary>
         ///  Drag
@@ -45,9 +37,6 @@ namespace APC.AllForms
             this.Close();
         }
 
-        private int buttonSize = 14;
-        private float panelSize;
-
         public void loadForView(Applications.DTO.EventExpenditureDTO eventExpenditureDTO)
         {
             _eventExpenditureDTO = eventExpenditureDTO;
@@ -58,12 +47,20 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
 
+        private void ControlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3);
+            GeneralHelper.ApplyRegularFont(16, labelSummary, labelAmountSpent, labelDate);
+        }
+
         private void FormViewEventExpenditure_Load(object sender, EventArgs e)
         {
-            labelTitle.Text = detail.EventTitle;
-            labelSummary.Text = eventExpDetail.Summary;
-            labelAmountSpent.Text = eventExpDetail.AmountSpent.ToString();
-            labelDate.Text = eventExpDetail.Day + "." + eventExpDetail.MonthID + "." + eventExpDetail.Year;
+            ControlsFont();
+
+            labelTitle.Text = _eventDTO.Title;
+            labelSummary.Text = _eventExpenditureDTO.Summary;
+            labelAmountSpent.Text = _eventExpenditureDTO.SpentAmount.ToString() + " €";
+            labelDate.Text = _eventExpenditureDTO.FormattedExpenditureDate;
         }
 
         private void picMinimize_Click(object sender, EventArgs e)
