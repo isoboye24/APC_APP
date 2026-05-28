@@ -1,35 +1,23 @@
 ﻿using APC.Applications.DTO;
-using APC.Applications.Interfaces;
-using APC.DAL;
-using APC.DAL.DTO;
+using APC.Helper;
 using APC.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
 {
     public partial class FormViewEventSales : Form
     {
-        private readonly IEventSalesService _eventSalesService;
-
         private Applications.DTO.EventSalesDTO _eventSalesDTO;
         private EventDTO _eventDTO;
 
-        public FormViewEventSales(IEventSalesService eventSalesService)
+        public FormViewEventSales()
         {
             InitializeComponent();
-            _eventSalesService = eventSalesService;
         }
+
         /// <summary>
         ///  Drag
         /// </summary>
@@ -38,8 +26,6 @@ namespace APC.AllForms
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        public EventsDetailDTO detail = new EventsDetailDTO();
-        public EventSalesDetailDTO eventSalesDetail = new EventSalesDetailDTO();
         private int buttonSize = 14;
         private float panelSize;
 
@@ -53,12 +39,20 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
 
+        private void ControlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3);
+            GeneralHelper.ApplyRegularFont(16, labelSummary, labelAmountSold, labelDate);
+        }
+
         private void FormViewEventSales_Load(object sender, EventArgs e)
         {
-            labelTitle.Text = detail.EventTitle;
-            labelSummary.Text = eventSalesDetail.Summary;
-            labelAmountSold.Text = eventSalesDetail.AmountSold.ToString();
-            labelDate.Text = eventSalesDetail.Day + "." + eventSalesDetail.MonthID + "." + eventSalesDetail.Year;
+            ControlsFont();
+
+            labelTitle.Text = _eventSalesDTO.EventTitle;
+            labelSummary.Text = _eventSalesDTO.Summary;
+            labelAmountSold.Text = _eventSalesDTO.AmountSold.ToString() + " €";
+            labelDate.Text = _eventSalesDTO.FormattedSalesDate;
         }
 
         private void btnClose_Click(object sender, EventArgs e)

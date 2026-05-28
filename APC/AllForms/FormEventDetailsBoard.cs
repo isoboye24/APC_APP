@@ -355,7 +355,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewEventExpenditure(_eventExpenditureService);
+            var form = new FormViewEventExpenditure();
             form.loadForView(selected);
             form.loadEventData(_eventDTO);
             form.ShowDialog();
@@ -554,7 +554,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewEventSales(_eventSalesService);
+            var form = new FormViewEventSales();
             form.loadForView(selected);
             form.loadEventData(_eventDTO);
             form.ShowDialog();
