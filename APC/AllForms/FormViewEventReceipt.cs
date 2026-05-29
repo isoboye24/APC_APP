@@ -1,45 +1,30 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
+using APC.Helper;
 using APC.Utility;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
     public partial class FormViewEventReceipt : Form
     {
-        private readonly IEventReceiptService _eventReceiptService;
-
-        private Applications.DTO.EventReceiptDTO _eventReceiptDTO;
+        private EventReceiptDTO _eventReceiptDTO;
         private EventDTO _eventDTO;
 
-        public FormViewEventReceipt(IEventReceiptService eventReceiptService)
+        private int buttonSize = 14;
+        private float panelSize;
+
+        public FormViewEventReceipt()
         {
             InitializeComponent();
-            _eventReceiptService = eventReceiptService;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
-
-        private int buttonSize = 14;
-        private float panelSize;
-
-        public EventReceiptsDetailDTO detailReceipt = new EventReceiptsDetailDTO();
-        public EventsDetailDTO detail = new EventsDetailDTO();
 
         private void picClose_Click(object sender, EventArgs e)
         {
@@ -104,7 +89,7 @@ namespace APC.AllForms
             ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
         }
 
-        public void loadForView(Applications.DTO.EventReceiptDTO eventReceiptDTO)
+        public void loadForView(EventReceiptDTO eventReceiptDTO)
         {
             _eventReceiptDTO = eventReceiptDTO;
         }
@@ -114,14 +99,22 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
 
+        private void ControlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, btnClose);
+            GeneralHelper.ApplyRegularFont(16, labelDate, labelSummary, labelAmount);
+        }
+
         private void FormViewEventReceipt_Load(object sender, EventArgs e)
         {
-            labelTitle.Text = detailReceipt.ImageCaption;
-            labelDate.Text = detailReceipt.Day + "." + detailReceipt.MonthID + "." + detailReceipt.Year;
-            labelSummary.Text = detailReceipt.Summary;
-            labelAmount.Text = detailReceipt.AmountSpent + " €";
+            ControlsFont();
 
-            string imagePath = System.IO.Path.Combine(Application.StartupPath, "images", detailReceipt.ImagePath);
+            labelTitle.Text = _eventReceiptDTO.Caption + " of " + _eventDTO.Title;
+            labelDate.Text = _eventReceiptDTO.FormattedReceiptDate;
+            labelSummary.Text = _eventReceiptDTO.Summary;
+            labelAmount.Text = _eventReceiptDTO.AmountSpent + " €";
+
+            string imagePath = System.IO.Path.Combine(Application.StartupPath, "images", _eventReceiptDTO.ImagePath);
             if (System.IO.File.Exists(imagePath))
                 picEventReceipt.ImageLocation = imagePath;
             else

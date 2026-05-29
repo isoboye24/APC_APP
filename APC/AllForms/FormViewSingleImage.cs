@@ -99,6 +99,7 @@ namespace APC.AllForms
             GeneralHelper.ApplyBoldFont(14, labelTitle, labelCaption, btnClose);
             GeneralHelper.ApplyRegularFont(16, labelDescription);
         }
+
         private void FormViewSingleImage_Load(object sender, EventArgs e)
         {
             ControlsFont();

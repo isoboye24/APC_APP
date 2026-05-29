@@ -23,10 +23,10 @@ namespace APC.AllForms
         private readonly IMonthService _monthService;
 
         private EventDTO _eventDTO;
-        private  List<Applications.DTO.EventExpenditureDTO> _eventExpenditureDTOs;
-        private  List<Applications.DTO.EventSalesDTO> _eventSalesDTOs;
-        private  List<Applications.DTO.EventImageDTO> _eventImageDTOs;
-        private  List<Applications.DTO.EventReceiptDTO> _eventReceiptDTOs;
+        private  List<EventExpenditureDTO> _eventExpenditureDTOs;
+        private  List<EventSalesDTO> _eventSalesDTOs;
+        private  List<EventImageDTO> _eventImageDTOs;
+        private  List<EventReceiptDTO> _eventReceiptDTOs;
         public FormEventDetailsBoard(IEventsService eventsService, IEventExpenditureService eventExpenditureService, IEventSalesService eventSalesService,
             IEventReceiptService eventReceiptService, IEventImagesService eventImagesService, ICurrentUserService currentUserService)
         {
@@ -338,12 +338,12 @@ namespace APC.AllForms
 
         }
 
-        private Applications.DTO.EventExpenditureDTO GetSelectedEventExpenditure()
+        private EventExpenditureDTO GetSelectedEventExpenditure()
         {
             if (dataGridEventExpenditures.CurrentRow == null)
                 return null;
 
-            return dataGridEventExpenditures.CurrentRow.DataBoundItem as Applications.DTO.EventExpenditureDTO;
+            return dataGridEventExpenditures.CurrentRow.DataBoundItem as EventExpenditureDTO;
         }
 
         private void btnViewExpReport_Click(object sender, EventArgs e)
@@ -490,12 +490,12 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private Applications.DTO.EventSalesDTO GetSelectedEventSale()
+        private EventSalesDTO GetSelectedEventSale()
         {
             if (dataGridEventSales.CurrentRow == null)
                 return null;
 
-            return dataGridEventSales.CurrentRow.DataBoundItem as Applications.DTO.EventSalesDTO;
+            return dataGridEventSales.CurrentRow.DataBoundItem as EventSalesDTO;
         }
 
         private void btnUpdateEventSales_Click(object sender, EventArgs e)
@@ -702,12 +702,12 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private Applications.DTO.EventReceiptDTO GetSelectedEventReceipt()
+        private EventReceiptDTO GetSelectedEventReceipt()
         {
             if (dataGridViewEventReceipt.CurrentRow == null)
                 return null;
 
-            return dataGridViewEventReceipt.CurrentRow.DataBoundItem as Applications.DTO.EventReceiptDTO;
+            return dataGridViewEventReceipt.CurrentRow.DataBoundItem as EventReceiptDTO;
         }
 
         private void btnCloseEventReceipt_Click(object sender, EventArgs e)
@@ -784,7 +784,7 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewEventReceipt(_eventReceiptService);
+            var form = new FormViewEventReceipt();
             form.loadForView(selected);
             form.loadEventData(_eventDTO);
             form.ShowDialog();
