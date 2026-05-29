@@ -1,26 +1,12 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
+using APC.Domain.Entities;
+using APC.Helper;
 using APC.Utility;
-using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Microsoft.IO.RecyclableMemoryStreamManager;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.AllForms
 {
@@ -29,9 +15,12 @@ namespace APC.AllForms
         private readonly IEventReceiptService _eventReceiptService;
 
         private EventDTO _eventDTO;
-        private Applications.DTO.EventReceiptDTO _eventReceiptDTO;
+        private EventReceiptDTO _eventReceiptDTO;
 
         private bool _isUpdate = false;
+        private int buttonSize = 14;
+        private float panelSize;
+        private string fileName;
 
         public FormEventReceipt(IEventReceiptService eventReceiptService)
         {
@@ -56,46 +45,47 @@ namespace APC.AllForms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private int buttonSize = 14;
-        private float panelSize;
-        public bool isUpdate = false;
-
-        public EventsDetailDTO detail = new EventsDetailDTO();
-        public EventReceiptsDetailDTO detailReceipt = new EventReceiptsDetailDTO();
-        EventReceiptsBLL bll = new EventReceiptsBLL();
-
         public void loadEventData(EventDTO eventDTO)
         {
             _eventDTO = eventDTO;
         }
 
-        public void loadForEdit(Applications.DTO.EventReceiptDTO eventReceiptDTO, bool isUpdate)
+        public void loadForEdit(EventReceiptDTO eventReceiptDTO, bool isUpdate)
         {
             _eventReceiptDTO = eventReceiptDTO;
             _isUpdate = isUpdate;
         }
 
+        private void controlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, label5, label6, btnBrowse, btnClose, btnSave);
+
+            GeneralHelper.ApplyRegularFont(16, txtImageCaption, txtDescription, txtImagePath, dateTimePickerEventReceiptDate, txtReceiptAmount);
+        }
+
         private void FormEventReceipt_Load(object sender, EventArgs e)
         {
-            string caption;
-            labelTitle.Text = labelTitle.Text = "Add " + detail.EventTitle + " (" + detail.Year + ") Receipt.";
+            controlsFont();
 
-            if (isUpdate)
+            string caption;
+            labelTitle.Text = "Add " + _eventDTO.Title + " Receipt.";
+
+            if (_isUpdate)
             {
-                caption = detailReceipt.ImageCaption;
+                caption = _eventReceiptDTO.Caption;
                 if (caption.Length > 60)
                 {
                     caption = caption.Substring(0, 60) + "...";
                 }                    
-                labelTitle.Text = "Edit " + detailReceipt.ImageCaption;
+                labelTitle.Text = "Edit " + _eventReceiptDTO.Caption + " of " + _eventDTO.Title;
 
-                txtImagePath.Text = detailReceipt.ImagePath;
-                txtImageCaption.Text = detailReceipt.ImageCaption;
-                txtDescription.Text = detailReceipt.Summary;
-                dateTimePickerEventReceiptDate.Value = detailReceipt.ReceiptDate;
-                txtReceiptAmount.Text = detailReceipt.AmountSpent.ToString();
+                txtImagePath.Text = _eventReceiptDTO.ImagePath;
+                txtImageCaption.Text = _eventReceiptDTO.Caption;
+                txtDescription.Text = _eventReceiptDTO.Summary;
+                dateTimePickerEventReceiptDate.Value = _eventReceiptDTO.ReceiptDate;
+                txtReceiptAmount.Text = _eventReceiptDTO.AmountSpent.ToString();
 
-                string imagePath = Application.StartupPath + "\\images\\" + detailReceipt.ImagePath;
+                string imagePath = Application.StartupPath + "\\images\\" + _eventReceiptDTO.ImagePath;
                 picEventReceipt.ImageLocation = imagePath;
             }
         }
@@ -157,132 +147,81 @@ namespace APC.AllForms
             this.Close();
         }
 
-        string fileName;
         System.Windows.Forms.OpenFileDialog OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            OpenFileDialog1.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+            OpenFileDialog1.Filter =
+        "Image Files (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+
             if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 picEventReceipt.Load(OpenFileDialog1.FileName);
+
                 txtImagePath.Text = OpenFileDialog1.FileName;
 
-                // Generate a new unique filename
                 string unique = Guid.NewGuid().ToString();
+
                 fileName = unique + "_" + OpenFileDialog1.SafeFileName;
             }
         }
 
-        int maxLength = 50;
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (detail.EventID == 0)
+            try
             {
-                MessageBox.Show("Please choose event");
-            }
-            else if (txtImagePath.Text.Trim() == "")
-            {
-                MessageBox.Show("Please upload an image");
-            }
-            else if (txtImageCaption.Text.Length > maxLength)
-            {
-                MessageBox.Show("The caption is too long!");
-            }
-            else if (txtImageCaption.Text.Trim() == "")
-            {
-                MessageBox.Show("Please enter image caption");
-            }
-            else if (txtReceiptAmount.Text.Trim() == "")
-            {
-                MessageBox.Show("Please enter amount on the receipt");
-            }
-            else
-            {
-                string imagesDir;
+                string sourcePath = txtImagePath.Text.Trim();
+                string caption = txtImageCaption.Text.Trim();
+                string description = txtDescription.Text.Trim();
+                decimal amount = Convert.ToDecimal(txtReceiptAmount.Text.Trim());
+                DateTime date = dateTimePickerEventReceiptDate.Value;
 
-                // If in Debug or writable folder, use app directory
-                if (Directory.Exists(Application.StartupPath) &&
-                   GeneralHelper.IsDirectoryWritable(Application.StartupPath))
+                string finalImagePath = _eventDTO.CoverImagePath;
+
+                // Only copy image if user selected a file
+                if (!string.IsNullOrWhiteSpace(sourcePath) && !string.IsNullOrWhiteSpace(fileName))
                 {
-                    imagesDir = Path.Combine(Application.StartupPath, "images");
+                    string destinationFolder =
+                        Path.Combine(Application.StartupPath, "images");
+
+                    if (!Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+
+                    string destinationPath =
+                        Path.Combine(destinationFolder, fileName);
+
+                    File.Copy(sourcePath, destinationPath, true);
+
+                    finalImagePath = destinationPath;
+
+                    if (_eventReceiptDTO.EventReceiptId > 0)
+                    {
+                        if (File.Exists(_eventReceiptDTO.ImagePath) &&
+                            _eventReceiptDTO.ImagePath != destinationPath)
+                        {
+                            File.Delete(_eventReceiptDTO.ImagePath);
+                        }
+                    }
+                }
+
+                var eventReceiptData = new EventReceipt(_eventDTO.EventsId, finalImagePath, description, caption, date, amount);
+
+                if (_eventDTO.EventsId == 0)
+                {
+                    _eventReceiptService.Create(eventReceiptData);
+                    MessageBox.Show("Event receipt created successfully!");
                 }
                 else
                 {
-                    // Otherwise, use AppData folder
-                    imagesDir = Path.Combine(
-                        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                        "APC",
-                        "images"
-                    );
+                    _eventReceiptService.Update(eventReceiptData);
+                    MessageBox.Show("Event receipt updated successfully!");
+                    this.Close();
                 }
-
-                // Ensure folder exists
-                Directory.CreateDirectory(imagesDir);
-
-                if (!isUpdate)
-                {
-                    EventReceiptsDetailDTO eventReceipt = new EventReceiptsDetailDTO();
-                    eventReceipt.EventID = detail.EventID;
-                    eventReceipt.Summary = txtDescription.Text.Trim();
-                    eventReceipt.ImageCaption = txtImageCaption.Text.Trim();
-                    eventReceipt.AmountSpent = Convert.ToDecimal(txtReceiptAmount.Text.Trim());
-                    eventReceipt.ImagePath = fileName;
-                    eventReceipt.ReceiptDate = dateTimePickerEventReceiptDate.Value;
-                    eventReceipt.Day = dateTimePickerEventReceiptDate.Value.Day;
-                    eventReceipt.MonthID = dateTimePickerEventReceiptDate.Value.Month;
-                    eventReceipt.Year = dateTimePickerEventReceiptDate.Value.Year;
-                    if (bll.Insert(eventReceipt))
-                    {
-                        string destination = Path.Combine(imagesDir, fileName);
-                        File.Copy(txtImagePath.Text, destination, true);
-
-                        MessageBox.Show("Event image was added");
-
-                        txtImageCaption.Clear();
-                        txtImagePath.Clear();
-                        txtDescription.Clear();
-                        picEventReceipt.Image = null;
-                    }
-                }
-                else if (isUpdate)
-                {
-                    bool imageUnchanged = Path.GetFileName(txtImagePath.Text.Trim()) == detailReceipt.ImagePath;
-                    if (detailReceipt.ImageCaption == txtImageCaption.Text.Trim() && detailReceipt.Summary == txtDescription.Text.Trim()
-                        && imageUnchanged && detailReceipt.AmountSpent == Convert.ToDecimal(txtReceiptAmount.Text.Trim()))
-                    {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        string newFileName = fileName;
-                        if (!imageUnchanged)
-                        {
-                            string oldImagePath = Path.Combine(imagesDir, detailReceipt.ImagePath);
-                            if (File.Exists(oldImagePath))
-                                File.Delete(oldImagePath);
-
-                            string newImagePath = Path.Combine(imagesDir, newFileName);
-                            File.Copy(txtImagePath.Text, newImagePath, true);
-
-                            detailReceipt.ImagePath = newFileName;
-                        }
-
-                        detailReceipt.ImagePath = txtImagePath.Text;
-                        detailReceipt.ImageCaption = txtImageCaption.Text;
-                        detailReceipt.Summary = txtDescription.Text;
-                        detailReceipt.EventID = detail.EventID;
-                        detailReceipt.AmountSpent = Convert.ToDecimal(txtReceiptAmount.Text.Trim());
-                        detailReceipt.ReceiptDate = dateTimePickerEventReceiptDate.Value;
-                        detailReceipt.Day = dateTimePickerEventReceiptDate.Value.Day;
-                        detailReceipt.MonthID = dateTimePickerEventReceiptDate.Value.Month;
-                        detailReceipt.Year = dateTimePickerEventReceiptDate.Value.Year;
-                        if (bll.Update(detailReceipt))
-                        {
-                            MessageBox.Show("Event Receipt was updated");
-                            this.Close();
-                        }
-                    }
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
