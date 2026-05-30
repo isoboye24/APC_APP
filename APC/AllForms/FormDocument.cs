@@ -1,19 +1,9 @@
-﻿using APC.Applications.DTO;
-using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL;
-using APC.DAL.DTO;
-using Microsoft.Win32;
+﻿using APC.Applications.Interfaces;
+using APC.Domain.Entities;
+using APC.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -25,6 +15,8 @@ namespace APC.AllForms
         private Applications.DTO.DocumentDTO _documentDTO;
 
         private bool _isUpdate = false;
+        private string fileName;
+        private string fileExtension;
 
         public FormDocument(IDocumentService documentService)
         {
@@ -54,126 +46,108 @@ namespace APC.AllForms
         {
             this.Close();
         }
-        public DocumentDetailDTO detail = new DocumentDetailDTO();
-        
-        System.Windows.Forms.OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-        string fileName;
-        string fileExtension;
 
-        public void loadForEdit(Applications.DTO.DocumentDTO documentDTO , bool isUpdate)
+        public void loadForEdit(Applications.DTO.DocumentDTO documentDTO, bool isUpdate)
         {
             _documentDTO = documentDTO;
             _isUpdate = isUpdate;
         }
 
+
+        System.Windows.Forms.OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Word Documents|*.docx|Excel Spreadsheets|*.xlsx|Text Files|*.txt|All Files|*.*";
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 txtDocumentPath.Text = openFileDialog1.FileName;
-                fileExtension = Path.GetExtension(txtDocumentPath.Text);
-                string unique = Guid.NewGuid().ToString();
-                fileName += unique + openFileDialog1.SafeFileName;
+                fileExtension = Path.GetExtension(openFileDialog1.FileName);
+
+                fileName = $"{Guid.NewGuid()}_{openFileDialog1.SafeFileName}";
+
                 picFileImage.Visible = true;
             }
         }
-        DocumentBLL bll = new DocumentBLL();
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtDocumentName.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Enter document name");
-            }
-            else if (txtDocumentPath.Text.Trim() == "")
-            {
-                MessageBox.Show("Select document from this device");
-            }
-            else if (fileExtension == "")
-            {
-                MessageBox.Show("Get the file extension");
-            }
-            else
-            {
-                if (!isUpdate)
+                string sourcePath = txtDocumentPath.Text.Trim();
+                string documentName = txtDocumentName.Text.Trim();
+                string documentType = GeneralHelper.GetDocumentType(fileExtension);
+                DateTime date = DateTime.Today;
+
+                string finalDocPath = _documentDTO.DocumentPath;
+
+                // Only copy image if user selected a file
+                if (!string.IsNullOrWhiteSpace(sourcePath) && !string.IsNullOrWhiteSpace(fileName))
                 {
-                    DocumentDetailDTO document = new DocumentDetailDTO();
-                    document.DocumentName = txtDocumentName.Text;
-                    document.DocumentPath = fileName;
-                    document.DocumentType = GeneralHelper.GetDocumentType(fileExtension);
-                    document.Day = DateTime.Today.Day;
-                    document.MonthID = DateTime.Today.Month;
-                    document.Year = DateTime.Today.Year.ToString();
-                    if (bll.Insert(document))
+                    string destinationFolder =
+                        Path.Combine(Application.StartupPath, "images");
+
+                    if (!Directory.Exists(destinationFolder))
                     {
-                        try
-                        {
-                            File.Copy(txtDocumentPath.Text, @"documents\\" + fileName);
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Cannot find the path to this document");
-                        }
-                        MessageBox.Show("Document was saved");
-                        txtDocumentName.Clear();
-                        txtDocumentPath.Clear();
-                        picFileImage.Hide();
+                        Directory.CreateDirectory(destinationFolder);
                     }
-                }
-                else if (isUpdate)
-                {
-                    if (txtDocumentPath.Text.Trim() == detail.DocumentPath && txtDocumentName.Text.Trim()==detail.DocumentName)
+
+                    string destinationPath =
+                        Path.Combine(destinationFolder, fileName);
+
+                    File.Copy(sourcePath, destinationPath, true);
+
+                    finalDocPath = destinationPath;
+
+                    if (_documentDTO.DocumentId > 0)
                     {
-                        MessageBox.Show("There is no change");
-                    }
-                    else
-                    {
-                        if (detail.DocumentPath != txtDocumentPath.Text.Trim())
+                        if (File.Exists(_documentDTO.DocumentPath) &&
+                            _documentDTO.DocumentPath != destinationPath)
                         {
-                            if (File.Exists(@"documents\\" + detail.DocumentPath))
-                            {
-                                File.Delete(@"documents\\" + detail.DocumentPath);
-                            }
-                            File.Copy(txtDocumentPath.Text, @"documents\\" + fileName);
-                            detail.DocumentPath = fileName;
-                            fileExtension = Path.GetExtension(detail.DocumentPath);
-                            detail.DocumentType = GeneralHelper.GetDocumentType(fileExtension);
-                        }
-                        else if (txtDocumentPath.Text == detail.DocumentPath)
-                        {
-                            detail.DocumentPath = txtDocumentPath.Text;
-                            detail.DocumentType = detail.DocumentType;
-                        }
-                        detail.DocumentName = txtDocumentName.Text;                        
-                        detail.Day = DateTime.Today.Day;
-                        detail.MonthID = DateTime.Today.Month;
-                        detail.Year = DateTime.Today.Year.ToString();
-                        if (bll.Update(detail))
-                        {
-                            MessageBox.Show("Document was updated");
-                            this.Close();
+                            File.Delete(_documentDTO.DocumentPath);
                         }
                     }
                 }
+
+                var documentData = new Document(documentName, finalDocPath, documentType, date);
+
+                if (_documentDTO.DocumentId == 0)
+                {
+                    _documentService.Create(documentData);
+                    MessageBox.Show("Document created successfully!");
+                }
+                else
+                {
+                    _documentService.Update(documentData);
+                    MessageBox.Show("Document updated successfully!");
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
+
+        private void ControlsFont()
+        {
+            GeneralHelper.ApplyBoldFont(14, label1, label2, btnClose, btnSave, btnBrowse);
+            GeneralHelper.ApplyRegularFont(14, txtDocumentPath);
+            GeneralHelper.ApplyRegularFont(16, txtDocumentName);
+        }
+
         private void FormDocument_Load(object sender, EventArgs e)
         {
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            txtDocumentName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtDocumentPath.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            ControlsFont();
 
             picFileImage.Hide();
-            if (isUpdate)
+            if (_isUpdate)
             {
-                labelTitle.Text = "Edit Document";
+                labelTitle.Text = "Edit " + _documentDTO.DocumentName;
                 picFileImage.Visible = true;
-                txtDocumentName.Text = detail.DocumentName;
-                txtDocumentPath.Text = detail.DocumentPath;
+                txtDocumentName.Text = _documentDTO.DocumentName;
+                txtDocumentPath.Text = _documentDTO.DocumentPath;
             }
             else
             {

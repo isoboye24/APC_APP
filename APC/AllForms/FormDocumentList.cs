@@ -17,7 +17,7 @@ namespace APC.AllForms
         private readonly IMonthService _monthService;
         private readonly ICurrentUserService _currentUserService;
 
-        private List<Applications.DTO.DocumentDTO> _documentDTOs;
+        private List<DocumentDTO> _documentDTOs;
 
         private DateTime currDate = DateTime.Today;
 

@@ -17,10 +17,11 @@ namespace APC.Domain.Entities
         public int MonthId { get; private set; }
         public int Year { get; private set; }
 
-        public Document(string documentName, string documentPath, string documentType, int day, int monthId, int year)
+        public Document(string documentName, string documentPath, string documentType, DateTime date)
         {
             SetDocumentName(documentName);
             SetDocumentPath(documentPath);
+            SetDate(date);
         }
 
         public static Document Rehydrate(
@@ -28,12 +29,10 @@ namespace APC.Domain.Entities
             string documentName, 
             string documentPath, 
             string documentType, 
-            int day, 
-            int monthId, 
-            int year
+            DateTime date
             )
         {
-            var document = new Document(documentName, documentPath, documentType, day, monthId, year);
+            var document = new Document(documentName, documentPath, documentType, date);
             document.DocumentId = id;
             return document;
         }
@@ -62,6 +61,16 @@ namespace APC.Domain.Entities
         public void UpdateDocumentPath(string newDocumentPath)
         {
             SetDocumentPath(newDocumentPath);
+        }
+
+        private void SetDate(DateTime date)
+        {
+            if (date.Year < 2000 || date.Year > DateTime.Now.Year + 1)
+                throw new ArgumentException("Invalid year");
+
+            Day = date.Day;
+            MonthId = date.Month;
+            Year = date.Year;
         }
     }
 }
