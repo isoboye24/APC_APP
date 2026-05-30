@@ -1,27 +1,37 @@
-﻿using System;
-using System.IO;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.BLL;
+using APC.DAL;
+using APC.DAL.DTO;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Win32;
-using APC.DAL.DTO;
-using APC.BLL;
-using APC.DAL;
-using System.Runtime.InteropServices;
 
 namespace APC.AllForms
 {
     public partial class FormDocument : Form
     {
-        public FormDocument()
+        private readonly IDocumentService _documentService;
+
+        private Applications.DTO.DocumentDTO _documentDTO;
+
+        private bool _isUpdate = false;
+
+        public FormDocument(IDocumentService documentService)
         {
             InitializeComponent();
+            _documentService = documentService;
         }
+
         /// <summary>
         ///  Drag
         /// </summary>
@@ -45,10 +55,17 @@ namespace APC.AllForms
             this.Close();
         }
         public DocumentDetailDTO detail = new DocumentDetailDTO();
-        public bool isUpdate = false;
+        
         System.Windows.Forms.OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
         string fileName;
         string fileExtension;
+
+        public void loadForEdit(Applications.DTO.DocumentDTO documentDTO , bool isUpdate)
+        {
+            _documentDTO = documentDTO;
+            _isUpdate = isUpdate;
+        }
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Word Documents|*.docx|Excel Spreadsheets|*.xlsx|Text Files|*.txt|All Files|*.*";

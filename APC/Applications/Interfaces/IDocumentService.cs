@@ -8,6 +8,7 @@ namespace APC.Applications.Interfaces
     public interface IDocumentService
     {
         List<DocumentDTO> GetAll();
+        List<DocumentDTO> GetDocumentByYear(int year);
         List<DocumentDTO> GetAllDeletedDocuments();
         bool Create(Document data);
         bool Update(Document data);
@@ -15,5 +16,7 @@ namespace APC.Applications.Interfaces
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
+
+        List<YearDTO> GetOnlyYears();
     }
 }

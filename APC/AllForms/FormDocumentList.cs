@@ -1,142 +1,164 @@
-﻿using APC.BLL;
-using APC.DAL.DTO;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
+using static APC.Helper.DocumentHelper;
 
 namespace APC.AllForms
 {
     public partial class FormDocumentList : Form
     {
-        public FormDocumentList()
+        private readonly IDocumentService _documentService;
+        private readonly IMonthService _monthService;
+        private readonly ICurrentUserService _currentUserService;
+
+        private List<Applications.DTO.DocumentDTO> _documentDTOs;
+
+        private DateTime currDate = DateTime.Today;
+
+        public FormDocumentList(IDocumentService documentService, IMonthService monthService, ICurrentUserService currentUserService)
         {
             InitializeComponent();
+            _documentService = documentService;
+            _monthService = monthService;
+            _currentUserService = currentUserService;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void ControlsFont()
         {
-            FormDocument open = new FormDocument();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, btnAddDocument, btnDeleteDocument, btnUpdateDocument, btnViewDocument,
+                btnSearchDocument, btnClearDocument);
+            GeneralHelper.ApplyRegularFont(14, txtDocNameDocument, txtDocTypeDocument, cmbYearDocument, cmbMonthDocument);
+        }
+
+        private void loadDocuments()
+        {
+            dataGridView1.DataSource = _documentService.GetDocumentByYear(currDate.Year);
+            _documentDTOs = _documentService.GetAll();
+            ConfigureDocumentGrid(dataGridView1, DocumentGridType.Basic);
+        }
+
+        private void FormDocumentList_Load(object sender, EventArgs e)
+        {
+            ControlsFont();
+
+            cmbMonthDocument.DataSource = _monthService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbMonthDocument, "MonthName", "MonthID");
+            
+            cmbYearDocument.DataSource = _documentService.GetOnlyYears();
+            GeneralHelper.ComboBoxProps(cmbYearDocument, "YearInText", "YearInValue");
+
+            loadDocuments();
+
+            Count();
+
+            if (_currentUserService.AccessLevel != 4)
+            {
+                btnDeleteDocument.Hide();
+            }
+
+        }
+        private void Count()
+        {
+            labelDocCount.Text = dataGridView1.RowCount.ToString();
+        }
+        
+        private void ClearFilters()
+        {
+            txtDocNameDocument.Clear();
+            txtDocTypeDocument.Clear();
+            cmbMonthDocument.SelectedIndex = -1;
+            cmbYearDocument.SelectedIndex = -1;
+            loadDocuments();
+            Count();
+        }
+
+        private void btnAddDocument_Click(object sender, EventArgs e)
+        {
+            var form = new FormDocument(_documentService);
+            form.ShowDialog();
+
             ClearFilters();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private DocumentDTO GetSelectedDocument()
         {
-            if (detail.DocumentID==0)
-            {
-                MessageBox.Show("Please select a document from the table");                
-            }
-            else
-            {
-                FormDocument open = new FormDocument();
-                open.detail = detail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }            
+            if (dataGridView1.CurrentRow == null)
+                return null;
+
+            return dataGridView1.CurrentRow.DataBoundItem as DocumentDTO;
         }
 
-        private void btnView_Click(object sender, EventArgs e)
+        private void btnUpdateDocument_Click(object sender, EventArgs e)
         {
-            if (detail.DocumentID == 0)
+            var selected = GetSelectedDocument();
+            if (selected == null)
             {
                 MessageBox.Show("Please select a document from the table");
+                return;
+            }
+
+            var form = new FormDocument(_documentService);
+            form.loadForEdit(selected, true);
+            form.ShowDialog();
+
+            ClearFilters();
+        }
+
+        private void btnViewDocument_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedDocument();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a document from the table");
+                return;
+            }
+            else if (selected.DocumentType == "Word Document")
+            {
+                DialogResult result = MessageBox.Show("Open document \"" + selected.DocumentName + " ?\"", "Warning!", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    var form = new FormViewDocument();
+                    form.loadForView(selected);
+                    form.ShowDialog();
+                }
             }
             else
             {
-                if (detail.DocumentType != "Word Document")
+                // Place the file in the Download folder to be opened
+            }
+
+            ClearFilters();
+        }
+
+        private void btnDeleteDocument_Click(object sender, EventArgs e)
+        {
+            if (_currentUserService.AccessLevel != 4)
+            {
+                this.Close();
+            }
+            else
+            {
+                var selected = GetSelectedDocument();
+                if (selected == null)
                 {
-                    ReadFiles.CopyDocument(detail.DocumentPath, detail.DocumentName);
+                    MessageBox.Show("Please select a document.");
+                    return;
+                }
+
+                var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    _documentService.Delete(selected.DocumentId);
                     ClearFilters();
                 }
-                else if (detail.DocumentType == "Word Document")
-                {
-                    DialogResult result = MessageBox.Show("Open document \"" + detail.DocumentName + " ?\"", "Warning!", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        FormViewDocument open = new FormViewDocument();
-                        open.detail = detail;
-                        this.Hide();
-                        open.ShowDialog();
-                        this.Visible = true;
-                        ClearFilters();
-                    }
-                }                
-            }           
-        }
-        DocumentBLL bll = new DocumentBLL();
-        DocumentDTO dto = new DocumentDTO();
-        private void FormDocumentList_Load(object sender, EventArgs e)
-        {
-            label2.Tag = "resizable";
-            label1.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label6.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-
-            txtDocName.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtDocType.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            cmbMonth.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-
-            btnAdd.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnDelete.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnUpdate.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnView.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSearch.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClear.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-            dto = bll.Select();
-            cmbMonth.DataSource = dto.Months;
-            GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
-
-            dataGridView1.DataSource = dto.Documents;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].HeaderText = "Document Name";
-            dataGridView1.Columns[2].HeaderText = "Document Type";
-            dataGridView1.Columns[3].Visible = false;
-            dataGridView1.Columns[4].Visible = false;
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].Visible = false;
-            dataGridView1.Columns[7].HeaderText = "Date";
-            dataGridView1.Columns[8].Visible = false;
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
-
-            labelDocCount.Text = bll.SelectDocCount().ToString();
-            if (AuthenticationDTO.AccessLevel != 4)
-            {
-                btnDelete.Hide();
-            }
-        }
-        private void FillDataGrid()
-        {
-            bll = new DocumentBLL();
-            dto = bll.Select();
-            dataGridView1.DataSource = dto.Documents;
-            labelDocCount.Text = bll.SelectDocCount().ToString();
-        }
-        private void ClearFilters()
-        {
-            txtDocName.Clear();
-            txtDocType.Clear();
-            txtYear.Clear();
-            cmbMonth.SelectedIndex = -1;
-            FillDataGrid();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -144,52 +166,38 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private void txtDocName_TextChanged(object sender, EventArgs e)
+        private void btnSearchDocument_Click(object sender, EventArgs e)
         {
-            List<DocumentDetailDTO> list = dto.Documents;
-            list = list.Where(x => x.DocumentName.Contains(txtDocName.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
-        }
+            var filtered = _documentDTOs.AsQueryable();
 
-        private void txtYear_TextChanged(object sender, EventArgs e)
-        {
-            List<DocumentDetailDTO> list = dto.Documents;
-            list = list.Where(x => x.Year.Contains(txtYear.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
-        }
-
-        private void txtDocType_TextChanged(object sender, EventArgs e)
-        {
-            List<DocumentDetailDTO> list = dto.Documents;
-            list = list.Where(x => x.DocumentType.Contains(txtDocType.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            List<DocumentDetailDTO> list = dto.Documents;
-            if (cmbMonth.SelectedIndex != -1)
+            if (cmbMonthDocument.SelectedIndex == -1 && cmbYearDocument.SelectedIndex == -1)
             {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
-            }           
-            dataGridView1.DataSource = list;
-        }
-        DocumentDetailDTO detail = new DocumentDetailDTO();
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            detail = new DocumentDetailDTO();
-            detail.DocumentID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-            detail.DocumentName = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            detail.DocumentType = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();            
-            detail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-            detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-            detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            detail.Year = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-            detail.Date = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-            detail.DocumentPath = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
+                MessageBox.Show("Please select a month or year");
+                return;
+            }
+            else
+            {
+                int searchedMonth = Convert.ToInt32(cmbMonthDocument.SelectedValue);
+                int searchedYear = Convert.ToInt32(cmbMonthDocument.SelectedValue);
+
+                if (cmbMonthDocument.SelectedIndex == -1 && cmbYearDocument.SelectedIndex != -1)
+                {
+                    filtered = filtered.Where(x => x.Date.Year == searchedYear);
+                }
+                else if (cmbMonthDocument.SelectedIndex != -1 && cmbYearDocument.SelectedIndex == -1)
+                {
+                    filtered = filtered.Where(x => x.Date.Month == searchedMonth);
+                }
+                else
+                {
+                    filtered = filtered.Where(x => x.Date.Month == searchedMonth && x.Date.Year == searchedYear);
+                }
+            }
+
+            dataGridView1.DataSource = filtered.ToList();
         }
 
-        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dataGridView1_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == 2 && e.Value != null)
             {
@@ -215,24 +223,18 @@ namespace APC.AllForms
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void txtDocNameDocument_TextChanged(object sender, EventArgs e)
         {
-            if (detail.DocumentID == 0)
-            {
-                MessageBox.Show("Please choose a document from the table");
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show("Are you sure?","Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (bll.Delete(detail))
-                    {
-                        MessageBox.Show("Document was deleted");
-                        ClearFilters();
-                    }
-                }
-            }
+            string search = txtDocNameDocument.Text.Trim().ToLower();
+            var filtered = _documentDTOs.Where(x => x.DocumentName.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridView1.DataSource = filtered;
+        }
+
+        private void txtDocTypeDocument_TextChanged(object sender, EventArgs e)
+        {
+            string search = txtDocTypeDocument.Text.Trim().ToLower();
+            var filtered = _documentDTOs.Where(x => x.DocumentType.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridView1.DataSource = filtered;
         }
     }
 }

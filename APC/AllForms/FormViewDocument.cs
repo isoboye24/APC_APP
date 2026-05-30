@@ -15,6 +15,7 @@ namespace APC.AllForms
 {
     public partial class FormViewDocument : Form
     {
+        private Applications.DTO.DocumentDTO _documentDTO;
         public FormViewDocument()
         {
             InitializeComponent();
@@ -33,7 +34,11 @@ namespace APC.AllForms
         {
             this.Close();
         }
-        public DocumentDetailDTO detail = new DocumentDetailDTO();
+        public void loadForView(Applications.DTO.DocumentDTO documentDTO)
+        {
+            _documentDTO = documentDTO;
+        }
+
         private void FormViewDocument_Load(object sender, EventArgs e)
         {
             labelWordsCount.Font = new Font("Segoe UI", 11, FontStyle.Regular);

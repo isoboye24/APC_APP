@@ -40,10 +40,24 @@ namespace APC.Applications.Services
                     Date = new DateTime(x.year, x.monthID, x.day),
                     FormattedDate = new DateTime(x.year, x.monthID, x.day).ToString("dd.MM.yyyy"),
                 })
-                .OrderByDescending(x => x.Date.Year)
-                .ThenByDescending(x => x.Date.Month)
-                .ThenByDescending(x => x.Date.Day)
-                .ThenBy(x => x.DocumentName)
+                .OrderByDescending(x => x.Date)
+                .ToList();
+        }
+
+        public List<DocumentDTO> GetDocumentByYear(int year)
+        {
+            return _repository.GetAll()
+                .Where(x => x.year == year)
+                .Select(x => new DocumentDTO
+                {
+                    DocumentId = x.documentID,
+                    DocumentName = x.documentName,
+                    DocumentPath = x.documentPath,
+                    DocumentType = x.documentType,
+                    Date = new DateTime(x.year, x.monthID, x.day),
+                    FormattedDate = new DateTime(x.year, x.monthID, x.day).ToString("dd.MM.yyyy"),
+                })
+                .OrderByDescending(x => x.Date)                
                 .ToList();
         }
         
@@ -59,10 +73,7 @@ namespace APC.Applications.Services
                     Date = new DateTime(x.year, x.monthID, x.day),
                     FormattedDate = new DateTime(x.year, x.monthID, x.day).ToString("dd.MM.yyyy"),
                 })
-                .OrderByDescending(x => x.Date.Year)
-                .ThenByDescending(x => x.Date.Month)
-                .ThenByDescending(x => x.Date.Day)
-                .ThenBy(x => x.DocumentName)
+                .OrderByDescending(x => x.Date)
                 .ToList();
         }
 
@@ -82,6 +93,20 @@ namespace APC.Applications.Services
             data.UpdateDocumentPath(data.DocumentPath);
 
             return _repository.Update(data);
+        }
+
+        public List<YearDTO> GetOnlyYears()
+        {
+            return _repository.GetAll()
+                .Select(x => x.year)
+                .Distinct()
+                .OrderByDescending(x => x)
+                .Select(x => new YearDTO
+                {
+                    YearInValue = x,
+                    YearInText = x.ToString()
+                })
+                .ToList();
         }
     }
 }
