@@ -1,12 +1,10 @@
 ﻿using APC.Applications.Interfaces;
-using APC.BLL;
-using APC.DAL.DTO;
 using APC.Helper;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -14,7 +12,6 @@ namespace APC.AllForms
     public partial class FormMeetingBoard : Form
     {
         private readonly IMemberService _memberService;
-        private readonly ICommentService _commentService;
         private readonly IGenderService _genderService;
         private readonly IMonthService _monthService;
         private readonly IConstitutionService _constitutionService;
@@ -24,8 +21,8 @@ namespace APC.AllForms
         private readonly ICurrentUserService _currentUserService;
         private readonly IGeneralMeetingService _generalMeetingService;
         private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
+        private readonly IServiceProvider _serviceProvider;
 
-        private List<Applications.DTO.CommentDTO> _commentDTO;
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
         private List<Applications.DTO.FinedMemberDTO> _finedMemberDTO;
         private List<Applications.DTO.SpecialContributionDTO> _specialContributionDTO;
@@ -34,13 +31,13 @@ namespace APC.AllForms
 
         private int year = DateTime.Now.Year;
 
-        public FormMeetingBoard(ICommentService commentService, IGenderService genderService, IMemberService memberService, 
+        public FormMeetingBoard(IGenderService genderService, IMemberService memberService, 
             IMonthService monthService, IConstitutionService constitutionService, IFinedMemberService finedMemberService, 
             ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService, 
-            ICurrentUserService currentUserService, IGeneralMeetingService generalMeetingService, IGeneralMeetingAttendanceService generalMeetingAttendanceService)
+            ICurrentUserService currentUserService, IGeneralMeetingService generalMeetingService, 
+            IGeneralMeetingAttendanceService generalMeetingAttendanceService, IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _commentService = commentService;
             _genderService = genderService;
             _memberService = memberService;
             _monthService = monthService;
@@ -51,32 +48,24 @@ namespace APC.AllForms
             _currentUserService = currentUserService;
             _generalMeetingService = generalMeetingService;
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
+            _serviceProvider = serviceProvider;
         }
 
         private void resizeControls()
         {
             GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, rbEqualAttend, rbEqualMonDues, rbLessAttend, rbLessMonDues,
-                rbMoreAttend, rbMoreMonDues, btnUpdate, btnView, btnAdd, btnAbsentees, btnDelete, btnSearch, btnClear, label5, label6,
-                label7, label8, label9, label10, btnAddComments, btnDeleteComments, btnUpdateComments, btnViewComments, btnSearchComments,
-                btnClearComments, label18, label19, label21, btnAddConstitution, btnDeleteConstitution, btnUpdateConstitution,
+                rbMoreAttend, rbMoreMonDues, btnUpdate, btnView, btnAdd, btnAbsentees, btnDelete, btnSearch, btnClear, label18, label19, label21, btnAddConstitution, btnDeleteConstitution, btnUpdateConstitution,
                 btnViewConstitution, btnClearConstitution, label12, label20, label22, label23, label24, label25, label26, btnSearchFinedMember,
                 btnClearFinedMember);
 
-            GeneralHelper.ApplyRegularFont(11, labelTotalMeetings, labelTotalPaidFines, labelTotalComments, labelTotalConstitutions);
+            GeneralHelper.ApplyRegularFont(11, labelTotalMeetings, labelTotalPaidFines, labelTotalConstitutions);
 
             GeneralHelper.ApplyRegularFont(14, labelTotalFineMembers);
 
-            GeneralHelper.ApplyRegularFont(16, txtMonthlyDues, txtNoOfAttend, txtYear, cmbMonth, cmbYearComments, txtNameComments,
-                txtComment, txtSurnameComments, cmbGenderComments, cmbMonthComments, txtNameFinedMember, txtSurnameFinedMember,
+            GeneralHelper.ApplyRegularFont(16, txtMonthlyDues, txtNoOfAttend, txtYear, cmbMonth, txtNameFinedMember, txtSurnameFinedMember,
                 txtConstitutionSection, cmbGenderFinedMember, cmbMonthFinedMember, cmbFineStatus, cmbYearMeeting);
         }
 
-        private void loadComments()
-        {
-            dataGridViewComments.DataSource = _commentService.GetAll();
-            _commentDTO = _commentService.GetAll();
-            CommentHelper.ConfigureCommentGrid(dataGridViewComments, CommentHelper.CommentGridType.Basic);
-        }
 
         private void loadConstitutions()
         {
@@ -127,12 +116,6 @@ namespace APC.AllForms
             cmbYearMeeting.DataSource = _generalMeetingService.GetMeetingYears();
             GeneralHelper.ComboBoxProps(cmbYearMeeting, "YearInText", "YearInValue");
 
-            loadComments();
-            cmbGenderComments.DataSource = _genderService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbGenderComments, "GenderName", "GenderId");
-            cmbMonthComments.DataSource = _monthService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbMonthComments, "MonthName", "MonthId");
-
             loadFinedMembers();
             cmbMonthFinedMember.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthFinedMember, "MonthName", "MonthID");
@@ -151,7 +134,6 @@ namespace APC.AllForms
             if (_currentUserService.AccessLevel != 4)
             {
                 btnDelete.Hide();
-                btnDeleteComments.Hide();
                 btnAddConstitution.Hide();
                 btnUpdateConstitution.Hide();
                 btnDeleteConstitution.Hide();
@@ -164,7 +146,6 @@ namespace APC.AllForms
         private void RefreshCounts()
         {
             labelTotalMeetings.Text = "Rows: " + dataGridViewGeneralMeeting.RowCount.ToString();
-            labelTotalComments.Text = "Rows: " + dataGridViewComments.RowCount.ToString();
             labelTotalConstitutions.Text = "Rows: " + dataGridViewConstitution.RowCount.ToString();
             labelTotalFineMembers.Text = "Rows: " + dataGridViewFinedMembers.RowCount.ToString();
             labelTotalPaidFines.Text = "Total Paid: " + _finedMemberService.GetTotalPaidFines();
@@ -181,7 +162,6 @@ namespace APC.AllForms
             label21.Tag = "resizable";
             label23.Tag = "resizable";
             label24.Tag = "resizable";
-            label10.Tag = "resizable";
             label12.Tag = "resizable";
             label13.Tag = "resizable";
             label15.Tag = "resizable";
@@ -196,13 +176,7 @@ namespace APC.AllForms
             label26.Tag = "resizable";
             label3.Tag = "resizable";
             label4.Tag = "resizable";
-            label5.Tag = "resizable";
-            label6.Tag = "resizable";
-            label7.Tag = "resizable";
-            label8.Tag = "resizable";
-            label9.Tag = "resizable";
             labelOverallTotalContributions.Tag = "resizable";
-            labelTotalComments.Tag = "resizable";
             labelTotalConstitutions.Tag = "resizable";
             labelTotalFineMembers.Tag = "resizable";
             labelTotalMeetings.Tag = "resizable";
@@ -213,31 +187,25 @@ namespace APC.AllForms
             #region
             btnAbsentees.Tag = "resizable";
             btnAdd.Tag = "resizable";
-            btnAddComments.Tag = "resizable";
             btnAddConstitution.Tag = "resizable";
             btnAddContribution.Tag = "resizable";
             btnAddFinedMember.Tag = "resizable";
             btnClear.Tag = "resizable";
-            btnClearComments.Tag = "resizable";
             btnClearConstitution.Tag = "resizable";
             btnClearContribution.Tag = "resizable";
             btnClearFinedMember.Tag = "resizable";
             btnDelete.Tag = "resizable";
-            btnDeleteComments.Tag = "resizable";
             btnDeleteConstitution.Tag = "resizable";
             btnDeleteContribution.Tag = "resizable";
             btnDeleteFinedMember.Tag = "resizable";
             btnSearch.Tag = "resizable";
-            btnSearchComments.Tag = "resizable";
             btnSearchContribution.Tag = "resizable";
             btnSearchFinedMember.Tag = "resizable";
             btnUpdate.Tag = "resizable";
-            btnUpdateComments.Tag = "resizable";
             btnUpdateConstitution.Tag = "resizable";
             btnUpdateContribution.Tag = "resizable";
             btnUpdateFinedMember.Tag = "resizable";
             btnView.Tag = "resizable";
-            btnViewComments.Tag = "resizable";
             btnViewConstitution.Tag = "resizable";
             btnViewContribution.Tag = "resizable";
             btnViewFinedMember.Tag = "resizable";
@@ -246,16 +214,13 @@ namespace APC.AllForms
 
             #region
             txtAmountSContributions.Tag = "resizable";
-            txtComment.Tag = "resizable";
             txtConstitution.Tag = "resizable";
             txtConstitutionSection.Tag = "resizable";
             txtFine.Tag = "resizable";
             txtMonthlyDues.Tag = "resizable";
-            txtNameComments.Tag = "resizable";
             txtNameFinedMember.Tag = "resizable";
             txtNoOfAttend.Tag = "resizable";
             txtSection.Tag = "resizable";
-            txtSurnameComments.Tag = "resizable";
             txtSurnameFinedMember.Tag = "resizable";
             txtYear.Tag = "resizable";
             cmbYearContribution.Tag = "resizable";
@@ -264,13 +229,10 @@ namespace APC.AllForms
 
             #region
             cmbFineStatus.Tag = "resizable";
-            cmbGenderComments.Tag = "resizable";
             cmbGenderFinedMember.Tag = "resizable";
             cmbMonth.Tag = "resizable";
-            cmbMonthComments.Tag = "resizable";
             cmbMonthContribution.Tag = "resizable";
             cmbMonthFinedMember.Tag = "resizable";
-            cmbYearComments.Tag = "resizable";
             #endregion
 
             #region
@@ -287,7 +249,6 @@ namespace APC.AllForms
 
             #region
             dataGridViewGeneralMeeting.Tag = "resizable";
-            dataGridViewComments.Tag = "resizable";
             dataGridViewConstitution.Tag = "resizable";
             dataGridViewFinedMembers.Tag = "resizable";
             dataGridViewSpecialContributions.Tag = "resizable";
@@ -308,13 +269,6 @@ namespace APC.AllForms
             cmbMonth.SelectedIndex = -1;
             cmbYearMeeting.SelectedIndex = -1;
             loadGeneralMeeting(year);
-
-            txtNameComments.Clear();
-            txtComment.Clear();
-            txtSurnameComments.Clear();
-            cmbGenderComments.SelectedIndex = -1;
-            cmbMonthComments.SelectedIndex = -1;
-            loadComments();
 
             txtConstitution.Clear();
             txtSection.Clear();
@@ -424,7 +378,7 @@ namespace APC.AllForms
                     filtered = filtered.Where(x => x.Year == searchedYear);
                 }
 
-                if (cmbMonthComments.SelectedIndex != -1)
+                if (cmbMonth.SelectedIndex != -1)
                 {
                     int searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
                     filtered = filtered.Where(x => x.MonthId == searchedMonth);
@@ -470,7 +424,7 @@ namespace APC.AllForms
                 }
             }
 
-            dataGridViewComments.DataSource = filtered.ToList();
+            dataGridViewGeneralMeeting.DataSource = filtered.ToList();
             RefreshCounts();
         }
 
@@ -509,137 +463,10 @@ namespace APC.AllForms
         // -------------------------------------------------------------------------
         private void btnAbsentees_Click(object sender, EventArgs e)
         {
-            FormNotifications open = new FormNotifications();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-        }
-
-        // -------------------------------------------------------------------------
-        // -------------------- COMMENTS ----------------------
-        // -------------------------------------------------------------------------
-        private void btnAddComments_Click(object sender, EventArgs e)
-        {
-            var form = new FormComments(_commentService, _memberService);
+            var form = new FormNotifications(_serviceProvider, _memberService);
             form.ShowDialog();
-
             ClearFilters();
         }
-
-        private Applications.DTO.CommentDTO GetSelectedComment()
-        {
-            if (dataGridViewComments.CurrentRow == null)
-                return null;
-
-            return dataGridViewComments.CurrentRow.DataBoundItem as Applications.DTO.CommentDTO;
-        }
-
-        private void btnUpdateComments_Click(object sender, EventArgs e)
-        {
-            var selected = GetSelectedComment();
-            if (selected == null)
-            {
-                MessageBox.Show("Please select a comment from the table");
-                return;
-            }
-
-            var form = new FormComments(_commentService, _memberService);
-            form.loadForEdit(selected, true);
-            form.ShowDialog();
-
-            ClearFilters();
-        }
-
-        private void btnViewComments_Click(object sender, EventArgs e)
-        {
-            var selected = GetSelectedComment();
-            if (selected == null)
-            {
-                MessageBox.Show("Please select a comment from the table");
-                return;
-            }
-
-            var form = new FormViewComment(selected);
-            form.ShowDialog();
-
-            ClearFilters();
-        }
-
-        private void txtSurnameComments_TextChanged(object sender, EventArgs e)
-        {
-            string search = txtSurnameComments.Text.Trim().ToLower();
-            var filtered = _commentDTO.Where(x => x.LastName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            dataGridViewComments.DataSource = filtered;
-        }
-
-        private void txtNameComments_TextChanged(object sender, EventArgs e)
-        {
-            string search = txtNameComments.Text.Trim().ToLower();
-            var filtered = _commentDTO.Where(x => x.FirstName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            dataGridViewComments.DataSource = filtered;
-        }
-
-        private void txtComment_TextChanged(object sender, EventArgs e)
-        {
-            string search = txtComment.Text.Trim().ToLower();
-            var filtered = _commentDTO.Where(x => x.Content.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            dataGridViewComments.DataSource = filtered;
-        }
-
-        private void btnSearchComments_Click(object sender, EventArgs e)
-        {
-            var filtered = _commentDTO.AsQueryable();
-
-            if (cmbGenderComments.SelectedIndex != -1)
-            {
-                int searchedGender = Convert.ToInt32(cmbGenderComments.SelectedValue);
-                filtered = filtered.Where(x => x.GenderId == searchedGender);
-            }
-
-            if (cmbYearComments.SelectedIndex == -1 && cmbMonthComments.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a year or month");
-                return;
-            }
-
-            if (cmbYearComments.SelectedIndex != -1)
-            {
-                int searchedYear = Convert.ToInt32(cmbYearComments.SelectedValue);
-                filtered = filtered.Where(x => x.Date.Year == searchedYear);
-            }
-
-            if (cmbMonthComments.SelectedIndex != -1)
-            {
-                int searchedMonth = Convert.ToInt32(cmbMonthComments.SelectedValue);
-                filtered = filtered.Where(x => x.Date.Month == searchedMonth);
-            }
-
-            dataGridViewComments.DataSource = filtered.ToList();
-        }
-
-        private void btnClearComments_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
-        }
-
-        private void btnDeleteComments_Click(object sender, EventArgs e)
-        {
-            var selected = GetSelectedComment();
-            if (selected == null)
-            {
-                MessageBox.Show("Please select a constitution.");
-                return;
-            }
-
-            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
-            {
-                _commentService.Delete(selected.CommentId);
-                ClearFilters();
-            }
-        }
-
 
         // -------------------------------------------------------------------------
         // -------------------- FINED MEMBERS ----------------------

@@ -1,11 +1,6 @@
-﻿using APC.DAL;
-using APC.Domain.Entities;
-using APC.Applications.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using APC.Applications.Interfaces;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using APC.Infrastructure.Data;
 
 namespace APC.Infrastructure.Repositories
 {

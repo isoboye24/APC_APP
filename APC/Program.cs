@@ -1,6 +1,5 @@
 ﻿using APC.AllForms;
 using APC.Applications.Services;
-using APC.DAL;
 using APC.Applications.Interfaces;
 using APC.Infrastructure.Repositories;
 using APC.Utility;
@@ -9,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using APC.Applications.Entities;
+using APC.Infrastructure.Data;
 
 namespace APC
 {
@@ -43,7 +43,6 @@ namespace APC
             services.AddScoped<IPaymentStatusRepository, PaymentStatusRepository>();
             services.AddScoped<INextOfKinRepository, NextOfKinRepository>();
 
-            services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IConstitutionRepository, ConstitutionRepository>();
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IEventExpenditureRepository, EventExpenditureRepository>();
@@ -74,7 +73,6 @@ namespace APC
             services.AddScoped<IMembershipStatusService, MembershipStatusService>();
             services.AddScoped<INextOfKinService, NextOfKinService>();
 
-            services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IConstitutionService, ConstitutionService>();
             services.AddScoped<IDocumentService, DocumentService>();
             services.AddScoped<IEventExpenditureService, EventExpenditureService>();
@@ -108,8 +106,6 @@ namespace APC
             services.AddTransient<FormPaymentStatus>();
             services.AddTransient<FormSettings>();
 
-            services.AddTransient<FormComments>();
-            services.AddTransient<FormSingleCommentList>();
             services.AddTransient<FormViewComment>();
             services.AddTransient<FormConstitution>();
             services.AddTransient<FormViewConstitution>();
@@ -150,6 +146,8 @@ namespace APC
             services.AddTransient<FormViewMember>();
             services.AddTransient<FormViewDeadMember>();
             services.AddTransient<FormMembersBoard>();
+            services.AddTransient<FormNotifications>();
+            services.AddTransient<FormDashboard>();
 
 
             var initializedForms = new HashSet<Form>();

@@ -161,7 +161,7 @@ namespace APC.AllForms
 
                 if (!isChangeConstitution)
                 {
-                    labelFine.Text = _finedMemberDTO.AmountExpected;
+                    labelFine.Text = _finedMemberDTO.FormattedAmountExpected;
                     labelConstitutionSection.Text = _finedMemberDTO.Section;
                     _constitutionId = selectConstitution.ConstitutionId;
                 }

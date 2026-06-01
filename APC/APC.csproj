@@ -59,10 +59,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3D7447F81D49CD2674AE6B0C2796239971C0ECA6</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>8564ACF7622AF1E733ACC7C967CED7F4BEE80C38</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>APC_3_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>APC_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -233,12 +233,6 @@
     <Compile Include="AllForms\FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormSingleCommentList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormSingleCommentList.Designer.cs">
-      <DependentUpon>FormSingleCommentList.cs</DependentUpon>
-    </Compile>
     <Compile Include="AllForms\FormSpecialContribution.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,7 +349,6 @@
     <Compile Include="Applications\Interfaces\IGraphicalRepresentationService.cs" />
     <Compile Include="Applications\Interfaces\IPersonalAttendanceService.cs" />
     <Compile Include="Applications\Services\AttendanceStatusService.cs" />
-    <Compile Include="Applications\Services\CommentService.cs" />
     <Compile Include="Applications\Services\ConstitutionService.cs" />
     <Compile Include="Applications\Services\CountryService.cs" />
     <Compile Include="Applications\Services\CurrentUserService.cs" />
@@ -387,75 +380,43 @@
     <Compile Include="Applications\Services\ProfessionService.cs" />
     <Compile Include="Applications\Services\SpecialContributionService.cs" />
     <Compile Include="Applications\Services\SpecialContributorService.cs" />
-    <Compile Include="BLL\ConstitutionBLL.cs" />
-    <Compile Include="BLL\DocumentBLL.cs" />
-    <Compile Include="BLL\EventExpenditureBLL.cs" />
-    <Compile Include="BLL\EventReceiptsBLL.cs" />
-    <Compile Include="BLL\EventSalesBLL.cs" />
-    <Compile Include="BLL\FinedMemberBLL.cs" />
-    <Compile Include="BLL\GeneralAttendanceBLL.cs" />
-    <Compile Include="BLL\GraphBLL.cs" />
-    <Compile Include="BLL\MembersCommittmentBLL.cs" />
-    <Compile Include="BLL\MembershipStatusBLL.cs" />
-    <Compile Include="BLL\PaymentStatusBLL.cs" />
-    <Compile Include="BLL\RelationshipsToKinBLL.cs" />
-    <Compile Include="BLL\SpecialContributionsBLL.cs" />
-    <Compile Include="BLL\SpecialContributorsBLL.cs" />
     <Compile Include="CircularPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DAL\ATTENDANCE_STATUS.cs">
+    <Compile Include="Infrastructure\Data\APCContext.cs" />
+    <Compile Include="Infrastructure\Data\ATTENDANCE_STATUS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\CHILD.cs">
+    <Compile Include="Infrastructure\Data\CHILD.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\COMMENT.cs">
+    <Compile Include="Infrastructure\Data\COMMENT.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\CONSTITUTION.cs">
+    <Compile Include="Infrastructure\Data\CONSTITUTION.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\COUNTRY.cs">
+    <Compile Include="Infrastructure\Data\COUNTRY.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DAO\ConstitutionDAO.cs" />
-    <Compile Include="DAL\DAO\DocumentDAO.cs" />
-    <Compile Include="DAL\DAO\EventReceiptsDAO.cs" />
-    <Compile Include="DAL\DAO\EventSalesDAO.cs" />
-    <Compile Include="DAL\DAO\FinedMemberDAO.cs" />
-    <Compile Include="DAL\DAO\GraphDAO.cs" />
-    <Compile Include="DAL\DAO\MembersCommittmentDAO.cs" />
-    <Compile Include="DAL\DAO\MembershipStatusDAO.cs" />
-    <Compile Include="DAL\DAO\PaymentStatusDAO.cs" />
-    <Compile Include="DAL\DAO\RelationshipToNextOfKinDAO.cs" />
-    <Compile Include="DAL\DAO\SpecialContributionsDAO.cs" />
-    <Compile Include="DAL\DAO\SpecialContributorsDAO.cs" />
-    <Compile Include="DAL\DataModel.Context.cs">
+    <Compile Include="Infrastructure\Data\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DataModel.cs">
+    <Compile Include="Infrastructure\Data\DataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DataModel.Designer.cs">
+    <Compile Include="Infrastructure\Data\DataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DOCUMENT.cs">
+    <Compile Include="Infrastructure\Data\DOCUMENT.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DTO\AbsenteesDetailDTO.cs" />
-    <Compile Include="DAL\DTO\AbsenteesDTO.cs" />
-    <Compile Include="DAL\DTO\ConstitutionDetailDTO.cs" />
-    <Compile Include="DAL\DTO\ConstitutionDTO.cs" />
-    <Compile Include="DAL\DTO\ConstitutionSectionDetailDTO.cs" />
-    <Compile Include="DAL\DTO\ConstitutionSectionDTO.cs" />
-    <Compile Include="DAL\DTO\DocumentDetailDTO.cs" />
     <Compile Include="AllForms\FormDocumentList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -467,12 +428,6 @@
     </Compile>
     <Compile Include="AllForms\FormGeneralMeetingAttendance.Designer.cs">
       <DependentUpon>FormGeneralMeetingAttendance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AllForms\FormComments.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormComments.Designer.cs">
-      <DependentUpon>FormComments.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\FormCountry.cs">
       <SubType>Form</SubType>
@@ -552,189 +507,82 @@
     <Compile Include="AllForms\FormViewMember.Designer.cs">
       <DependentUpon>FormViewMember.cs</DependentUpon>
     </Compile>
-    <Compile Include="BLL\EventImageBLL.cs" />
-    <Compile Include="BLL\EventsBLL.cs" />
-    <Compile Include="BLL\FinancialReportBLL.cs" />
-    <Compile Include="BLL\PersonalAttendanceBLL.cs" />
-    <Compile Include="BLL\AttendanceStatusBLL.cs" />
-    <Compile Include="BLL\CommentBLL.cs" />
-    <Compile Include="BLL\CountryBLL.cs" />
-    <Compile Include="BLL\DualNationalityBLL.cs" />
-    <Compile Include="BLL\EmploymentStatusBLL.cs" />
-    <Compile Include="BLL\ExpenditureBLL.cs" />
-    <Compile Include="BLL\GenderBLL.cs" />
-    <Compile Include="BLL\IBLL.cs" />
-    <Compile Include="BLL\MaritalStatusBLL.cs" />
-    <Compile Include="BLL\MemberBLL.cs" />
-    <Compile Include="BLL\MonthBLL.cs" />
-    <Compile Include="BLL\NationalityBLL.cs" />
-    <Compile Include="BLL\PermissionBLL.cs" />
-    <Compile Include="BLL\PositionBLL.cs" />
-    <Compile Include="BLL\ProfessionBLL.cs" />
-    <Compile Include="DAL\DAO\APCContexts.cs" />
-    <Compile Include="DAL\DAO\EventImageDAO.cs" />
-    <Compile Include="DAL\DAO\EventsDAO.cs" />
-    <Compile Include="DAL\DAO\FinancialReportDAO.cs" />
-    <Compile Include="DAL\DAO\GeneralAttendanceDAO.cs" />
-    <Compile Include="DAL\DAO\PersonalAttendanceDAO.cs" />
-    <Compile Include="DAL\DAO\AttendanceStatusDAO.cs" />
-    <Compile Include="DAL\DAO\CommentDAO.cs" />
-    <Compile Include="DAL\DAO\CountryDAO.cs" />
-    <Compile Include="DAL\DAO\DualNationalityDAO.cs" />
-    <Compile Include="DAL\DAO\EmploymentStatusDAO.cs" />
-    <Compile Include="DAL\DAO\ExpenditureDAO.cs" />
-    <Compile Include="DAL\DAO\GenderDAO.cs" />
-    <Compile Include="DAL\DAO\IDAO.cs" />
-    <Compile Include="DAL\DAO\MaritalStatusDAO.cs" />
-    <Compile Include="DAL\DAO\MemberDAO.cs" />
-    <Compile Include="DAL\DAO\MonthDAO.cs" />
-    <Compile Include="DAL\DAO\NationalityDAO.cs" />
-    <Compile Include="DAL\DAO\PermissionDAO.cs" />
-    <Compile Include="DAL\DAO\PositionDAO.cs" />
-    <Compile Include="DAL\DAO\ProfessionDAO.cs" />
-    <Compile Include="DAL\DTO\DocumentDTO.cs" />
-    <Compile Include="DAL\DTO\EventExpenditureDetailDTO.cs" />
-    <Compile Include="DAL\DTO\EventExpenditureDTO.cs" />
-    <Compile Include="DAL\DTO\EventImageDetailDTO.cs" />
-    <Compile Include="DAL\DTO\EventImageDTO.cs" />
-    <Compile Include="DAL\DTO\EventReceiptsDetailDTO.cs" />
-    <Compile Include="DAL\DTO\EventReceiptsDTO.cs" />
-    <Compile Include="DAL\DTO\EventSalesDetailDTO.cs" />
-    <Compile Include="DAL\DTO\EventsDetailDTO.cs" />
-    <Compile Include="DAL\DTO\EventsDTO.cs" />
-    <Compile Include="DAL\DTO\EventSalesDTO.cs" />
-    <Compile Include="DAL\DTO\FinancialReportDetailDTO.cs" />
-    <Compile Include="DAL\DTO\FinancialReportDTO.cs" />
-    <Compile Include="DAL\DTO\FinedMemberDetailDTO.cs" />
-    <Compile Include="DAL\DTO\FinedMemberDTO.cs" />
-    <Compile Include="DAL\DTO\GraphAmountDetailDTO.cs" />
-    <Compile Include="DAL\DTO\GraphDTO.cs" />
-    <Compile Include="DAL\DTO\MembersCommittmentDetailDTO.cs" />
-    <Compile Include="DAL\DTO\MembersCommittmentDTO.cs" />
-    <Compile Include="DAL\DTO\MembershipStatusDetailDTO.cs" />
-    <Compile Include="DAL\DTO\MembershipStatusDTO.cs" />
-    <Compile Include="DAL\DTO\PaymentStatusDetailDTO.cs" />
-    <Compile Include="DAL\DTO\PaymentStatusDTO.cs" />
-    <Compile Include="DAL\DTO\PersonalAttendanceDetailDTO.cs" />
-    <Compile Include="DAL\DTO\PersonalAttendanceDTO.cs" />
-    <Compile Include="DAL\DTO\GeneralAttendanceDetailDTO.cs" />
-    <Compile Include="DAL\DTO\GeneralAttendanceDTO.cs" />
-    <Compile Include="DAL\DTO\AttendanceStatusDetailDTO.cs" />
-    <Compile Include="DAL\DTO\AttendanceStatusDTO.cs" />
-    <Compile Include="DAL\DTO\CommentDetailDTO.cs" />
-    <Compile Include="DAL\DTO\CommentDTO.cs" />
-    <Compile Include="DAL\DTO\DualNationalityDetailDTO.cs" />
-    <Compile Include="DAL\DTO\DualNationalityDTO.cs" />
-    <Compile Include="DAL\DTO\EmploymentStatusDetailDTO.cs" />
-    <Compile Include="DAL\DTO\EmploymentStatusDTO.cs" />
-    <Compile Include="DAL\DTO\ExpenditureDetailDTO.cs" />
-    <Compile Include="DAL\DTO\ExpenditureDTO.cs" />
-    <Compile Include="DAL\DTO\FatherDTO.cs" />
-    <Compile Include="DAL\DTO\FathersDetailDTO.cs" />
-    <Compile Include="DAL\DTO\GenderDetailDTO.cs" />
-    <Compile Include="DAL\DTO\GenderDTO.cs" />
-    <Compile Include="DAL\DTO\MaritalStatusDetailDTO.cs" />
-    <Compile Include="DAL\DTO\MaritalStatusDTO.cs" />
-    <Compile Include="DAL\DTO\MemberDetailDTO.cs" />
-    <Compile Include="DAL\DTO\MemberDTO.cs" />
-    <Compile Include="DAL\DTO\MonthAndYearListDetailDTO.cs" />
-    <Compile Include="DAL\DTO\MonthAndYearListDTO.cs" />
-    <Compile Include="DAL\DTO\MonthDetailDTO.cs" />
-    <Compile Include="DAL\DTO\MonthDTO.cs" />
-    <Compile Include="DAL\DTO\MotherDTO.cs" />
-    <Compile Include="DAL\DTO\MothersDetailDTO.cs" />
-    <Compile Include="DAL\DTO\NationalityDetailDTO.cs" />
-    <Compile Include="DAL\DTO\NationalityDTO.cs" />
-    <Compile Include="DAL\DTO\PermissionDetailDTO.cs" />
-    <Compile Include="DAL\DTO\PermissionDTO.cs" />
-    <Compile Include="DAL\DTO\PositionDetailDTO.cs" />
-    <Compile Include="DAL\DTO\PositionDTO.cs" />
-    <Compile Include="DAL\DTO\ProfessionDetailDTO.cs" />
-    <Compile Include="DAL\DTO\ProfessionDTO.cs" />
-    <Compile Include="DAL\DTO\RelationshipToNextOfKinDetailDTO.cs" />
-    <Compile Include="DAL\DTO\RelationshipToNextOfKinDTO.cs" />
-    <Compile Include="DAL\DAO\EventExpenditureDAO.cs" />
-    <Compile Include="DAL\DTO\SpecialContributionDetailDTO.cs" />
-    <Compile Include="DAL\DTO\SpecialContributionDTO.cs" />
-    <Compile Include="DAL\DTO\SpecialContributorDetailDTO.cs" />
-    <Compile Include="DAL\DTO\SpecialContributorDTO.cs" />
-    <Compile Include="DAL\DUAL_NATIONALITY.cs">
+    <Compile Include="Infrastructure\Data\DUAL_NATIONALITY.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EMPLOYMENT_STATUS.cs">
+    <Compile Include="Infrastructure\Data\EMPLOYMENT_STATUS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EVENTS.cs">
+    <Compile Include="Infrastructure\Data\EVENTS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EVENT_EXPENDITURE.cs">
+    <Compile Include="Infrastructure\Data\EVENT_EXPENDITURE.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EVENT_IMAGE.cs">
+    <Compile Include="Infrastructure\Data\EVENT_IMAGE.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EVENT_RECEIPTS.cs">
+    <Compile Include="Infrastructure\Data\EVENT_RECEIPTS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EVENT_SALES.cs">
+    <Compile Include="Infrastructure\Data\EVENT_SALES.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EXPENDITURE.cs">
+    <Compile Include="Infrastructure\Data\EXPENDITURE.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\FINANCIAL_REPORT.cs">
+    <Compile Include="Infrastructure\Data\FINANCIAL_REPORT.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\FINED_MEMBER.cs">
+    <Compile Include="Infrastructure\Data\FINED_MEMBER.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\GENDER.cs">
+    <Compile Include="Infrastructure\Data\GENDER.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\GENERAL_ATTENDANCE.cs">
+    <Compile Include="Infrastructure\Data\GENERAL_ATTENDANCE.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\MARITAL_STATUS.cs">
+    <Compile Include="Infrastructure\Data\MARITAL_STATUS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\MEMBER.cs">
+    <Compile Include="Infrastructure\Data\MEMBER.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\MEMBERSHIP_STATUS.cs">
+    <Compile Include="Infrastructure\Data\MEMBERSHIP_STATUS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\MONTH.cs">
+    <Compile Include="Infrastructure\Data\MONTH.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\NATIONALITY.cs">
+    <Compile Include="Infrastructure\Data\NATIONALITY.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\NEXT_OF_KIN_RELATIONSHIP.cs">
+    <Compile Include="Infrastructure\Data\NEXT_OF_KIN_RELATIONSHIP.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\PAYMENT_STATUS.cs">
+    <Compile Include="Infrastructure\Data\PAYMENT_STATUS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\PERMISSION.cs">
+    <Compile Include="Infrastructure\Data\PERMISSION.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\PERSONAL_ATTENDANCE.cs">
+    <Compile Include="Infrastructure\Data\PERSONAL_ATTENDANCE.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\POSITION.cs">
+    <Compile Include="Infrastructure\Data\POSITION.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\PROFESSION.cs">
+    <Compile Include="Infrastructure\Data\PROFESSION.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\SPECIAL_CONTRIBUTIONS.cs">
+    <Compile Include="Infrastructure\Data\SPECIAL_CONTRIBUTIONS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\SPECIAL_CONTRIBUTORS.cs">
+    <Compile Include="Infrastructure\Data\SPECIAL_CONTRIBUTORS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\Entities\AttendanceStatus.cs" />
-    <Compile Include="Domain\Entities\Comment.cs" />
     <Compile Include="Domain\Entities\Constitution.cs" />
     <Compile Include="Domain\Entities\ContactInfo.cs" />
     <Compile Include="Domain\Entities\Country.cs" />
@@ -792,8 +640,6 @@
     <Compile Include="Domain\Entities\Profession.cs" />
     <Compile Include="Applications\Interfaces\IAttendanceStatusRepository.cs" />
     <Compile Include="Applications\Interfaces\IAttendanceStatusService.cs" />
-    <Compile Include="Applications\Interfaces\ICommentRepository.cs" />
-    <Compile Include="Applications\Interfaces\ICommentService.cs" />
     <Compile Include="Applications\Interfaces\IConstitutionRepository.cs" />
     <Compile Include="Applications\Interfaces\IConstitutionService.cs" />
     <Compile Include="Applications\Interfaces\ICountryRepository.cs" />
@@ -831,7 +677,6 @@
     <Compile Include="Applications\Interfaces\ISpecialContributorRepository.cs" />
     <Compile Include="Applications\Interfaces\ISpecialContributorService.cs" />
     <Compile Include="FormProperties.cs" />
-    <Compile Include="Helper\CommentHelper.cs" />
     <Compile Include="Helper\CommittmentHelper.cs" />
     <Compile Include="Helper\ConstitutionHelper.cs" />
     <Compile Include="Helper\DocumentHelper.cs" />
@@ -847,7 +692,6 @@
     <Compile Include="Helper\SpecialContributionHelper.cs" />
     <Compile Include="Helper\SpecialContributorHelper.cs" />
     <Compile Include="Infrastructure\Repositories\AttendanceStatusRepository.cs" />
-    <Compile Include="Infrastructure\Repositories\CommentRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ConstitutionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\CountryRepository.cs" />
     <Compile Include="Infrastructure\Repositories\DocumentRepository.cs" />
@@ -878,7 +722,6 @@
     <Compile Include="Infrastructure\Repositories\SpecialContributorRepository.cs" />
     <Compile Include="Applications\DTO\AuthenticationDTO.cs" />
     <Compile Include="ReadFiles.cs" />
-    <Compile Include="FillComboBox.cs" />
     <Compile Include="FormDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -985,9 +828,6 @@
     <EmbeddedResource Include="AllForms\FormGeneralMeetingAttendance.resx">
       <DependentUpon>FormGeneralMeetingAttendance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormComments.resx">
-      <DependentUpon>FormComments.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormCountry.resx">
       <DependentUpon>FormCountry.cs</DependentUpon>
     </EmbeddedResource>
@@ -1026,9 +866,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormSingleCommentList.resx">
-      <DependentUpon>FormSingleCommentList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormSpecialContribution.resx">
       <DependentUpon>FormSpecialContribution.cs</DependentUpon>
@@ -1109,16 +946,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Utility\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="AllForms\packages.config" />
-    <None Include="APC_1_TemporaryKey.pfx" />
-    <None Include="APC_2_TemporaryKey.pfx" />
-    <None Include="APC_3_TemporaryKey.pfx" />
-    <None Include="APC_TemporaryKey.pfx" />
-    <EntityDeploy Include="DAL\DataModel.edmx">
+    <EntityDeploy Include="Infrastructure\Data\DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DAL\DataModel.edmx.diagram">
+    <None Include="APC_TemporaryKey.pfx" />
+    <None Include="Infrastructure\Data\DataModel.edmx.diagram">
       <DependentUpon>DataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -1217,12 +1054,12 @@
     <None Include="Resources\docIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DAL\DataModel.Context.tt">
+    <Content Include="Infrastructure\Data\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DAL\DataModel.tt">
+    <Content Include="Infrastructure\Data\DataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.cs</LastGenOutput>
@@ -1237,7 +1074,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 und x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -1248,7 +1085,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AllForms\ViewModels\" />
-    <Folder Include="Infrastructure\Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

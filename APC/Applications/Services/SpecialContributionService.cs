@@ -12,10 +12,12 @@ namespace APC.Applications.Services
         private readonly ISpecialContributionRepository _repository;
         private readonly IMemberRepository _memberRepository;
         private readonly ISpecialContributorRepository _specialContributorRepository;
-        public SpecialContributionService(ISpecialContributionRepository repository, IMemberRepository memberRepository)
+        public SpecialContributionService(ISpecialContributionRepository repository, IMemberRepository memberRepository,
+            ISpecialContributorRepository specialContributorRepository)
         {
             _repository = repository;
             _memberRepository = memberRepository;
+            _specialContributorRepository = specialContributorRepository;
         }
 
         public int Count()
@@ -35,70 +37,131 @@ namespace APC.Applications.Services
         public List<SpecialContributionDTO> GetAll()
         {
             var data = (from sc in _repository.GetAll()
-                        join m in _memberRepository.GetAll() on sc.supervisorID equals m.memberID
-                        let totalContributedAmount = _specialContributorRepository.GetAmountContributedByContributionId(sc.specialContributionID)
-                        select new SpecialContributionDTO
+                        join m in _memberRepository.GetAll()
+                            on sc.supervisorID equals m.memberID
+                        select new
                         {
-                            SpecialContributionId = sc.specialContributionID,
-                            Title = sc.title,
-                            Summary = sc.summary,
-                            AmountToContribute = sc.amountToContribute,
-                            SupervisorId = sc.supervisorID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            ContributionStartDate = sc.contributionStartDate,
-                            FormattedContributionStartDate = sc.contributionStartDate.ToString("dd.MM.yyyy"),
-                            ContributionEndDate = sc.contributionEndDate,
-                            FormattedContributionEndDate = sc.contributionEndDate.ToString("dd.MM.yyyy"),
-                            AmountExpected = sc.amountExpected,
-                            Status = totalContributedAmount <= 0 ? "Not Paid" : (totalContributedAmount > 0 && totalContributedAmount < sc.amountExpected) ? "Not Completed" : totalContributedAmount == sc.amountExpected ? "Completed" : ((totalContributedAmount - sc.amountExpected) + " € Extra").ToString(),
-                            TotalContributedAmount = totalContributedAmount,
+                            sc.specialContributionID,
+                            sc.title,
+                            sc.summary,
+                            sc.amountToContribute,
+                            sc.supervisorID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            sc.contributionStartDate,
+                            sc.contributionEndDate,
+                            sc.amountExpected,
+                        })
+                        .ToList();
 
-                        }).ToList();
-
-            data = data.Select((x, index) =>
+            return data.Select(x =>
             {
-                x.Counter = index + 1;
-                return x;
-            }).OrderByDescending(x => x.ContributionStartDate.Year).ThenByDescending(x => x.ContributionStartDate.Month).ThenByDescending(x => x.ContributionStartDate.Day).ThenBy(x => x.Title).ToList();
+                decimal totalContributedAmount =
+                    _specialContributorRepository.GetAmountContributedByContributionId(
+                        x.specialContributionID);
 
-            return data;
+                return new SpecialContributionDTO
+                {
+                    SpecialContributionId = x.specialContributionID,
+                    Title = x.title,
+                    Summary = x.summary,
+                    AmountToContribute = x.amountToContribute,
+                    SupervisorId = x.supervisorID,
+                    FirstName = x.name,
+                    LastName = x.surname,
+                    ImagePath = x.imagePath,
+
+                    ContributionStartDate = x.contributionStartDate,
+                    FormattedContributionStartDate =
+                        x.contributionStartDate.ToString("dd.MM.yyyy"),
+
+                    ContributionEndDate = x.contributionEndDate,
+                    FormattedContributionEndDate =
+                        x.contributionEndDate.ToString("dd.MM.yyyy"),
+
+                    AmountExpected = x.amountExpected,
+
+                    Status =
+                        totalContributedAmount <= 0
+                            ? "Not Paid"
+                            : totalContributedAmount < x.amountExpected
+                                ? "Not Completed"
+                                : totalContributedAmount == x.amountExpected
+                                    ? "Completed"
+                                    : $"{totalContributedAmount - x.amountExpected} € Extra",
+
+                    TotalContributedAmount = totalContributedAmount
+                };
+            })
+            .OrderByDescending(x => x.ContributionStartDate)
+            .ThenBy(x => x.LastName)
+            .ToList();
         }
-        
+
         public List<SpecialContributionDTO> GetAllDeletedSpecialContributions()
         {
-
             var data = (from sc in _repository.GetAllDeletedSpecialContributions()
-                        join m in _memberRepository.GetAll() on sc.supervisorID equals m.memberID
-                        let totalContributedAmount = _specialContributorRepository.GetAmountContributedByContributionId(sc.specialContributionID)
-                        select new SpecialContributionDTO
+                        join m in _memberRepository.GetAll()
+                            on sc.supervisorID equals m.memberID
+                        select new
                         {
-                            SpecialContributionId = sc.specialContributionID,
-                            Title = sc.title,
-                            Summary = sc.summary,
-                            AmountToContribute = sc.amountToContribute,
-                            SupervisorId = sc.supervisorID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            ContributionStartDate = sc.contributionStartDate,
-                            FormattedContributionStartDate = sc.contributionStartDate.ToString("dd.MM.yyyy"),
-                            ContributionEndDate = sc.contributionEndDate,
-                            FormattedContributionEndDate = sc.contributionEndDate.ToString("dd.MM.yyyy"),
-                            AmountExpected = sc.amountExpected,
-                            Status = totalContributedAmount <= 0 ? "Not Paid" : (totalContributedAmount > 0 && totalContributedAmount < sc.amountExpected) ? "Not Completed" : totalContributedAmount == sc.amountExpected ? "Completed" : ((totalContributedAmount - sc.amountExpected) + " € Extra").ToString(),
-                            TotalContributedAmount = totalContributedAmount,
+                            sc.specialContributionID,
+                            sc.title,
+                            sc.summary,
+                            sc.amountToContribute,
+                            sc.supervisorID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            sc.contributionStartDate,
+                            sc.contributionEndDate,
+                            sc.amountExpected,
+                        })
+                        .ToList();
 
-                        }).ToList();
-
-            data = data.Select((x, index) =>
+            return data.Select(x =>
             {
-                x.Counter = index + 1;
-                return x;
-            }).OrderByDescending(x => x.ContributionStartDate.Year).ThenByDescending(x => x.ContributionStartDate.Month).ThenByDescending(x => x.ContributionStartDate.Day).ThenBy(x => x.Title).ToList();
+                decimal totalContributedAmount =
+                    _specialContributorRepository.GetAmountContributedByContributionId(
+                        x.specialContributionID);
 
-            return data;
+                return new SpecialContributionDTO
+                {
+                    SpecialContributionId = x.specialContributionID,
+                    Title = x.title,
+                    Summary = x.summary,
+                    AmountToContribute = x.amountToContribute,
+                    SupervisorId = x.supervisorID,
+                    FirstName = x.name,
+                    LastName = x.surname,
+                    ImagePath = x.imagePath,
+
+                    ContributionStartDate = x.contributionStartDate,
+                    FormattedContributionStartDate =
+                        x.contributionStartDate.ToString("dd.MM.yyyy"),
+
+                    ContributionEndDate = x.contributionEndDate,
+                    FormattedContributionEndDate =
+                        x.contributionEndDate.ToString("dd.MM.yyyy"),
+
+                    AmountExpected = x.amountExpected,
+
+                    Status =
+                        totalContributedAmount <= 0
+                            ? "Not Paid"
+                            : totalContributedAmount < x.amountExpected
+                                ? "Not Completed"
+                                : totalContributedAmount == x.amountExpected
+                                    ? "Completed"
+                                    : $"{totalContributedAmount - x.amountExpected} € Extra",
+
+                    TotalContributedAmount = totalContributedAmount
+                };
+            })
+            .OrderByDescending(x => x.ContributionStartDate)
+            .ThenBy(x => x.LastName)
+            .ToList();
         }
 
         public bool GetBack(int id)

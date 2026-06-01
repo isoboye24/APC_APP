@@ -1,22 +1,13 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.Applications.Services;
-using APC.BLL;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
 using APC.Domain.Entities;
 using APC.Helper;
 using APC.Utility;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -29,8 +20,8 @@ namespace APC.AllForms
         private Applications.DTO.SpecialContributorDTO _specialContributorDTO;
         private List<MembersBasicDetailDTO> _memberDTO;
 
-        public int _memberId = 0;
-        public bool _isUpdate = false;
+        private int _memberId = 0;
+        private bool _isUpdate = false;
         private int buttonSize = 14;
         private float panelSize;
 

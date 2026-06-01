@@ -1,5 +1,5 @@
-﻿using APC.DAL;
-using APC.Domain.Entities;
+﻿using APC.Domain.Entities;
+using APC.Infrastructure.Data;
 using System;
 using System.Linq;
 

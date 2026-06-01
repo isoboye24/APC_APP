@@ -1,7 +1,4 @@
-﻿using APC.DAL;
-using APC.Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using APC.Infrastructure.Data;
 using System.Linq;
 
 namespace APC.Applications.Interfaces

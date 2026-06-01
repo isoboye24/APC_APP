@@ -1,7 +1,6 @@
 ﻿using APC.AllForms;
 using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.BLL;
 using APC.Helper;
 using APC.Utility;
 using FontAwesome.Sharp;
@@ -16,24 +15,13 @@ using System.Windows.Forms.DataVisualization.Charting;
 namespace APC
 {
     public partial class FormDashboard : BaseForm
-    {
-        private IconButton currentBtn;
-        private Panel leftBorderBtn;
-        private Form currentChildForm;
-
-        private float globalFontSize = 14.0f;
-        private float resizeFactor = 16.0f;
-
-        private int minWidthPercentage = 70;
-        private int minHeightPercentage = 70;        
-
+    {            
         private readonly IServiceProvider _serviceProvider;
         private readonly IMemberService _memberService;
         private readonly IGeneralMeetingService _generalMeetingService;
         private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
         private readonly IFinedMemberService _finedMemberService;
 
-        private readonly ICommentService _commentService;
         private readonly IGenderService _genderService;
         private readonly IMonthService _monthService;
         private readonly IConstitutionService _constitutionService;
@@ -45,9 +33,25 @@ namespace APC
         private readonly IFinancialReportService _financialReportService;
         private readonly IExpenditureService _expenditureService;
 
+        FormProperties initialDetail = new FormProperties();
+        private bool _isAdmin = false;
+        private bool _isEditor = false;
+
+        private float buttonSize = 14f;
+        private float panelSize;
+        private IconButton currentBtn;
+        private Panel leftBorderBtn;
+        private Form currentChildForm;
+
+        private float globalFontSize = 14.0f;
+        private float resizeFactor = 16.0f;
+
+        private int minWidthPercentage = 70;
+        private int minHeightPercentage = 70;
+
         public FormDashboard(IServiceProvider serviceProvider, IFinedMemberService finedMemberService, IMemberService memberService,
             IGeneralMeetingAttendanceService generalMeetingAttendanceService, IGeneralMeetingService generalMeetingService,
-            ICommentService commentService, IGenderService genderService, IMonthService monthService, IConstitutionService constitutionService, 
+            IGenderService genderService, IMonthService monthService, IConstitutionService constitutionService, 
             ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService,
             ICurrentUserService currentUserService, IGraphicalRepresentationService graphicalRepresentationService,
             IFinancialReportService financialReportService, IExpenditureService expenditureService
@@ -67,7 +71,6 @@ namespace APC
             _memberService = memberService;
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _generalMeetingService = generalMeetingService;
-            _commentService = commentService;
             _genderService = genderService;
             _monthService = monthService;
             _constitutionService = constitutionService;
@@ -170,19 +173,18 @@ namespace APC
 
         }
 
-        FormProperties initialDetail = new FormProperties();
-        public bool isAdmin = false;
-        public bool isEditor = false;
-
-        private float buttonSize = 14f;
-        private float panelSize;
-
         private void resizeControls()
         {
             GeneralHelper.ApplyBoldFont(16, labelDuesMonthName, labelTotalDuesYear, labelAmountRaisedYearly, labelExpendituresYearly);
             GeneralHelper.ApplyBoldFont(24, labelNoOfRegMem, labelMonthlyDues, labelYearlyDues, labelExpendituresInYear, labelTotalExpenditures,
                 labelLastMeetingAttendance, labelTotalPaidFines, labelTotalFineExpected
                 );
+        }
+
+        public void AccessControl(bool isAdmin, bool isEditor)
+        {
+            _isAdmin = isAdmin;
+            _isEditor = isEditor;
         }
 
         private void FormDashboard_Load(object sender, EventArgs e)
@@ -195,7 +197,7 @@ namespace APC
 
             this.MinimumSize = new Size(minWidth, minHeight);
 
-            if (!isAdmin && !isEditor)
+            if (!_isAdmin && !_isEditor)
             {
                 tableLayoutPanelCards.Hide();
                 btnAttendance.Hide();
@@ -266,7 +268,7 @@ namespace APC
             chartAmountRaisedYearly.Series.Add("TotalAmountRaised");
             chartAmountRaisedYearly.Series["TotalAmountRaised"].ChartType = SeriesChartType.Column;
             chartAmountRaisedYearly.Series["TotalAmountRaised"].XValueMember = "Year";
-            chartAmountRaisedYearly.Series["TotalAmountRaised"].YValueMembers = "TotalAmountRaised";
+            chartAmountRaisedYearly.Series["TotalAmountRaised"].YValueMembers = "Amount";
             chartAmountRaisedYearly.Series["TotalAmountRaised"].IsValueShownAsLabel = true;
 
             chartAmountRaisedYearly.DataBind();
@@ -286,7 +288,7 @@ namespace APC
             chartExpenditures.Series.Add("TotalAmountSpent");
             chartExpenditures.Series["TotalAmountSpent"].ChartType = SeriesChartType.Column;
             chartExpenditures.Series["TotalAmountSpent"].XValueMember = "Year";
-            chartExpenditures.Series["TotalAmountSpent"].YValueMembers = "TotalAmountSpent";
+            chartExpenditures.Series["TotalAmountSpent"].YValueMembers = "Amount";
             chartExpenditures.Series["TotalAmountSpent"].IsValueShownAsLabel = true;
 
             chartExpenditures.DataBind();
@@ -437,7 +439,7 @@ namespace APC
             if (memberCount <= 0)
                 return;
 
-            if (!isAdmin && !isEditor)
+            if (!_isAdmin && !_isEditor)
             {
                 MemberFullDetailsDTO detail = _memberService.GetMemberById(_currentUserService.MemberId);
 
@@ -449,8 +451,7 @@ namespace APC
 
                 var form = _serviceProvider.GetRequiredService<FormViewMember>();
 
-                form.MemberDetail(detail);
-                form.isView = true;
+                form.ViewMemberDetails(detail.MemberId);
 
                 Hide();
                 form.ShowDialog();

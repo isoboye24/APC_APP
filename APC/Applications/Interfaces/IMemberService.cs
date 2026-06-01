@@ -17,6 +17,7 @@ namespace APC.Applications.Interfaces
         List<MemberFullDetailsDTO> GetInactiveMembers();
         List<MemberFullDetailsDTO> GetFormerMembers();
         List<DeadMemberShortDetailDTO> GetDeceasedMembers();
+        List<MemberFullDetailsDTO> Get3MonthsAbsentes();
 
         bool Create(Member data);
         bool Update(Member data);

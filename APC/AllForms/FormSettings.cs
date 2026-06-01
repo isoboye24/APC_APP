@@ -1,6 +1,4 @@
 ﻿using APC.Applications.DTO;
-using APC.BLL;
-using APC.DAL.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
 using System;
@@ -27,7 +25,6 @@ namespace APC.AllForms
         private readonly IPaymentStatusService _paymentStatusService;
 
         private readonly IMemberService _memberService;
-        private readonly ICommentService _commentService;
         private readonly IDocumentService _documentService;
         private readonly IEventImagesRepository _eventImagesService;
 
@@ -45,7 +42,7 @@ namespace APC.AllForms
         public FormSettings(ICountryService countryService, ICurrentUserService currentUserService, IEmploymentStatusService employmentStatusService,
             IMaritalStatusService maritalStatusService, INationalityService nationalityService, IPermissionService permissionService, 
             IPositionService positionService, IProfessionService professionService, IPaymentStatusService paymentStatusService, 
-            IMemberService memberService, ICommentService commentService, IDocumentService documentService, IEventImagesRepository eventImagesService)
+            IMemberService memberService, IDocumentService documentService, IEventImagesRepository eventImagesService)
         {
             InitializeComponent();
             _countryService = countryService;
@@ -58,36 +55,35 @@ namespace APC.AllForms
             _professionService = professionService;
             _paymentStatusService = paymentStatusService;
             _memberService = memberService;
-            _commentService = commentService;
             _documentService = documentService;
             _eventImagesService = eventImagesService;
         }   
         
-        EventsBLL eventBLL = new EventsBLL();
+        //EventsBLL eventBLL = new EventsBLL();
 
-        MemberDetailDTO permissionDetail = new MemberDetailDTO();
-        MemberBLL permissionMemberBLL = new MemberBLL();
+        //MemberDetailDTO permissionDetail = new MemberDetailDTO();
+        //MemberBLL permissionMemberBLL = new MemberBLL();
 
-        EventsDTO eventsDTO = new EventsDTO();
-        EventsBLL eventsBLL = new EventsBLL();
+        //EventsDTO eventsDTO = new EventsDTO();
+        //EventsBLL eventsBLL = new EventsBLL();
 
-        EventSalesDTO eventSalesDTO = new EventSalesDTO();
-        EventSalesBLL eventSalesBLL = new EventSalesBLL();
+        //EventSalesDTO eventSalesDTO = new EventSalesDTO();
+        //EventSalesBLL eventSalesBLL = new EventSalesBLL();
 
-        EventExpenditureDTO eventExpenditureDTO = new EventExpenditureDTO();
-        EventExpenditureBLL eventExpenditureBLL = new EventExpenditureBLL();
+        //EventExpenditureDTO eventExpenditureDTO = new EventExpenditureDTO();
+        //EventExpenditureBLL eventExpenditureBLL = new EventExpenditureBLL();
 
-        EventReceiptsDTO eventReceiptsDTO = new EventReceiptsDTO();
-        EventReceiptsBLL eventReceiptsBLL = new EventReceiptsBLL();
+        //EventReceiptsDTO eventReceiptsDTO = new EventReceiptsDTO();
+        //EventReceiptsBLL eventReceiptsBLL = new EventReceiptsBLL();
 
-        GeneralAttendanceDTO generalAttendanceDTO = new GeneralAttendanceDTO();
-        GeneralAttendanceBLL generalAttendanceBLL = new GeneralAttendanceBLL();
+        //GeneralAttendanceDTO generalAttendanceDTO = new GeneralAttendanceDTO();
+        //GeneralAttendanceBLL generalAttendanceBLL = new GeneralAttendanceBLL();
 
-        ExpenditureDTO expenditureDTO = new ExpenditureDTO();
-        ExpenditureBLL expenditureBLL = new ExpenditureBLL();
+        //ExpenditureDTO expenditureDTO = new ExpenditureDTO();
+        //ExpenditureBLL expenditureBLL = new ExpenditureBLL();
 
-        FinancialReportDTO financialReportDTO = new FinancialReportDTO();
-        FinancialReportBLL financialReportBLL = new FinancialReportBLL();
+        //FinancialReportDTO financialReportDTO = new FinancialReportDTO();
+        //FinancialReportBLL financialReportBLL = new FinancialReportBLL();
 
         //ConstitutionDTO constitutionDTO = new ConstitutionDTO();
         //ConstitutionBLL constitutionBLL = new ConstitutionBLL();
@@ -226,6 +222,7 @@ namespace APC.AllForms
             //        txtProfession
             //        );
         }
+
         private void FormSettings_Load(object sender, EventArgs e)
         {
             // Controls sizes
@@ -747,122 +744,122 @@ namespace APC.AllForms
         }
 
 
-        MemberDetailDTO deletedDataDetail = new MemberDetailDTO();
-        CountryBLL countryDeletedDataBLL = new CountryBLL();
-        CountryDTO countryDeletedDataDetail = new CountryDTO();
-        NationalityBLL nationalityDeletedDataBLL = new NationalityBLL();
-        NationalityDetailDTO nationalityDeletedDataDetail = new NationalityDetailDTO();
-        ProfessionBLL professionDeletedDataBLL = new ProfessionBLL();
-        ProfessionDetailDTO professionDeletedDataDetail = new ProfessionDetailDTO();
-        PositionBLL positionDeletedDataBLL = new PositionBLL();
-        PositionDetailDTO positionDeletedDataDetail = new PositionDetailDTO();
-        EmploymentStatusBLL empStatusDeletedDataBLL = new EmploymentStatusBLL();
-        EmploymentStatusDetailDTO empStatusDeletedDataDetail = new EmploymentStatusDetailDTO();
-        MaritalStatusBLL marStatusDeletedDataBLL = new MaritalStatusBLL();
-        MaritalStatusDetailDTO marStatusDeletedDataDetail = new MaritalStatusDetailDTO();
-        CommentBLL commentDeletedDataBLL = new CommentBLL();
-        CommentDetailDTO commentDeletedDataDetail = new CommentDetailDTO();
-        DocumentBLL documentDeletedDataBLL = new DocumentBLL();
-        DocumentDetailDTO documentDeletedDataDetail = new DocumentDetailDTO();
-        EventImageBLL eventImageDeletedDataBLL = new EventImageBLL();
-        EventImageDetailDTO eventImageDeletedDataDetail = new EventImageDetailDTO();
-        EventsBLL eventDeletedDataBLL = new EventsBLL();
-        EventsDetailDTO eventDeletedDataDetail = new EventsDetailDTO();
-        GeneralAttendanceBLL genAttendDeletedDataBLL = new GeneralAttendanceBLL();
-        GeneralAttendanceDetailDTO genAttendDeletedDataDetail = new GeneralAttendanceDetailDTO();
-        ExpenditureBLL expendutureDeletedDataBLL = new ExpenditureBLL();
-        ExpenditureDetailDTO expenditureDeletedDataDetail = new ExpenditureDetailDTO();
-        FinancialReportBLL financialRepDeletedDataBLL = new FinancialReportBLL();
-        FinancialReportDetailDTO financialRepDeletedDataDetail = new FinancialReportDetailDTO();
-        ConstitutionBLL constitutionDeletedDataBLL = new ConstitutionBLL();
-        ConstitutionDetailDTO constitutionDeletedDataDetail = new ConstitutionDetailDTO();
-        FinedMemberBLL fineddeletedDataBLL = new FinedMemberBLL();
-        FinedMemberDetailDTO fineddeletedDataDetail = new FinedMemberDetailDTO();
+        //MemberDetailDTO deletedDataDetail = new MemberDetailDTO();
+        //CountryBLL countryDeletedDataBLL = new CountryBLL();
+        //CountryDTO countryDeletedDataDetail = new CountryDTO();
+        //NationalityBLL nationalityDeletedDataBLL = new NationalityBLL();
+        //NationalityDetailDTO nationalityDeletedDataDetail = new NationalityDetailDTO();
+        //ProfessionBLL professionDeletedDataBLL = new ProfessionBLL();
+        //ProfessionDetailDTO professionDeletedDataDetail = new ProfessionDetailDTO();
+        //PositionBLL positionDeletedDataBLL = new PositionBLL();
+        //PositionDetailDTO positionDeletedDataDetail = new PositionDetailDTO();
+        //EmploymentStatusBLL empStatusDeletedDataBLL = new EmploymentStatusBLL();
+        //EmploymentStatusDetailDTO empStatusDeletedDataDetail = new EmploymentStatusDetailDTO();
+        //MaritalStatusBLL marStatusDeletedDataBLL = new MaritalStatusBLL();
+        //MaritalStatusDetailDTO marStatusDeletedDataDetail = new MaritalStatusDetailDTO();
+        //CommentBLL commentDeletedDataBLL = new CommentBLL();
+        //CommentDetailDTO commentDeletedDataDetail = new CommentDetailDTO();
+        //DocumentBLL documentDeletedDataBLL = new DocumentBLL();
+        //DocumentDetailDTO documentDeletedDataDetail = new DocumentDetailDTO();
+        //EventImageBLL eventImageDeletedDataBLL = new EventImageBLL();
+        //EventImageDetailDTO eventImageDeletedDataDetail = new EventImageDetailDTO();
+        //EventsBLL eventDeletedDataBLL = new EventsBLL();
+        //EventsDetailDTO eventDeletedDataDetail = new EventsDetailDTO();
+        //GeneralAttendanceBLL genAttendDeletedDataBLL = new GeneralAttendanceBLL();
+        //GeneralAttendanceDetailDTO genAttendDeletedDataDetail = new GeneralAttendanceDetailDTO();
+        //ExpenditureBLL expendutureDeletedDataBLL = new ExpenditureBLL();
+        //ExpenditureDetailDTO expenditureDeletedDataDetail = new ExpenditureDetailDTO();
+        //FinancialReportBLL financialRepDeletedDataBLL = new FinancialReportBLL();
+        //FinancialReportDetailDTO financialRepDeletedDataDetail = new FinancialReportDetailDTO();
+        //ConstitutionBLL constitutionDeletedDataBLL = new ConstitutionBLL();
+        //ConstitutionDetailDTO constitutionDeletedDataDetail = new ConstitutionDetailDTO();
+        //FinedMemberBLL fineddeletedDataBLL = new FinedMemberBLL();
+        //FinedMemberDetailDTO fineddeletedDataDetail = new FinedMemberDetailDTO();
 
         private void cmbDeletedData_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbDeletedData.SelectedIndex == 0)
-            {
-                loadDeletedMembers();
-            }
-            else if (cmbDeletedData.SelectedIndex == 1)
-            {
-                loadDeletedCountries();
-            }
-            else if (cmbDeletedData.SelectedIndex == 2)
-            {
-                loadDeletedNationalities();                
-            }
-            else if (cmbDeletedData.SelectedIndex == 3)
-            {
-                loadDeletedProfessions();
-            }
-            else if (cmbDeletedData.SelectedIndex == 4)
-            {
-                loadDeletedPositions();
-            }
-            else if (cmbDeletedData.SelectedIndex == 5)
-            {
-                loadDeletedEmploymentStatuses();                
-            }
-            else if (cmbDeletedData.SelectedIndex == 6)
-            {
-                loadDeletedMaritalStatuses();
-            }
-            else if (cmbDeletedData.SelectedIndex == 8)
-            {
-                loadDeletedComments();
-            }
-            else if (cmbDeletedData.SelectedIndex == 9)
-            {
-                loadDeletedDocuments();                
-            }
-            else if (cmbDeletedData.SelectedIndex == 10)
-            {
-                loadDeletedEventImages();
-            }
-            else if (cmbDeletedData.SelectedIndex == 11)
-            {
-                eventsDTO = eventsBLL.Select(true);
-                LoadDataGridView.loadEvents(dataGridView1, eventsDTO);
-            }
-            else if (cmbDeletedData.SelectedIndex == 12)
-            {
-                generalAttendanceDTO = generalAttendanceBLL.Select(true);
-                LoadDataGridView.loadGeneralAttendances(dataGridView1, generalAttendanceDTO);
-            }
-            else if (cmbDeletedData.SelectedIndex == 13)
-            {
-                expenditureDTO = expenditureBLL.Select(true);
-                LoadDataGridView.loadExpenditure(dataGridView1, expenditureDTO);
-            }
-            else if (cmbDeletedData.SelectedIndex == 14)
-            {
-                financialReportDTO = financialReportBLL.Select(true);
-                LoadDataGridView.loadFinancialReport(dataGridView1, financialReportDTO);
-            }
-            else if (cmbDeletedData.SelectedIndex == 15)
-            {
-                //constitutionDTO = constitutionBLL.Select(true);
-                //LoadDataGridView.loadConstitution(dataGridView1, constitutionDTO);
-            }
-            else if (cmbDeletedData.SelectedIndex == 16)
-            {
-                //finedMemberDTO = finedMemberBLL.Select(true);
-                //LoadDataGridView.loadFinedMembers(dataGridView1, finedMemberDTO);
-            }
-            else if (cmbDeletedData.SelectedIndex == 17)
-            {
-                loadDeletedPaymentStatuses();
-            }
-            else if (cmbDeletedData.SelectedIndex == 18)
-            {
-                loadDeletedPermissions();
-            }
-            else
-            {
-                MessageBox.Show("Unknown data");
-            }
+            //if (cmbDeletedData.SelectedIndex == 0)
+            //{
+            //    loadDeletedMembers();
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 1)
+            //{
+            //    loadDeletedCountries();
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 2)
+            //{
+            //    loadDeletedNationalities();                
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 3)
+            //{
+            //    loadDeletedProfessions();
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 4)
+            //{
+            //    loadDeletedPositions();
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 5)
+            //{
+            //    loadDeletedEmploymentStatuses();                
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 6)
+            //{
+            //    loadDeletedMaritalStatuses();
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 8)
+            //{
+            //    loadDeletedComments();
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 9)
+            //{
+            //    loadDeletedDocuments();                
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 10)
+            //{
+            //    loadDeletedEventImages();
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 11)
+            //{
+            //    eventsDTO = eventsBLL.Select(true);
+            //    LoadDataGridView.loadEvents(dataGridView1, eventsDTO);
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 12)
+            //{
+            //    generalAttendanceDTO = generalAttendanceBLL.Select(true);
+            //    LoadDataGridView.loadGeneralAttendances(dataGridView1, generalAttendanceDTO);
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 13)
+            //{
+            //    expenditureDTO = expenditureBLL.Select(true);
+            //    LoadDataGridView.loadExpenditure(dataGridView1, expenditureDTO);
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 14)
+            //{
+            //    financialReportDTO = financialReportBLL.Select(true);
+            //    LoadDataGridView.loadFinancialReport(dataGridView1, financialReportDTO);
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 15)
+            //{
+            //    //constitutionDTO = constitutionBLL.Select(true);
+            //    //LoadDataGridView.loadConstitution(dataGridView1, constitutionDTO);
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 16)
+            //{
+            //    //finedMemberDTO = finedMemberBLL.Select(true);
+            //    //LoadDataGridView.loadFinedMembers(dataGridView1, finedMemberDTO);
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 17)
+            //{
+            //    loadDeletedPaymentStatuses();
+            //}
+            //else if (cmbDeletedData.SelectedIndex == 18)
+            //{
+            //    loadDeletedPermissions();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Unknown data");
+            //}
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)

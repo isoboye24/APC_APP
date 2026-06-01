@@ -1,9 +1,11 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace APC.Applications.Services
 {
@@ -14,9 +16,14 @@ namespace APC.Applications.Services
         private readonly IGenderRepository _genderRepository;
         private readonly IPositionRepository _positionRepository;
         private readonly IConstitutionRepository _constitutionRepository;
-        public FinedMemberService(IFinedMemberRepository repository)
+        public FinedMemberService(IFinedMemberRepository repository, IMemberRepository memberRepository, IGenderRepository genderRepository,
+            IPositionRepository positionRepository, IConstitutionRepository constitutionRepository)
         {
             _repository = repository;
+            _memberRepository = memberRepository;
+            _genderRepository = genderRepository;
+            _positionRepository = positionRepository;
+            _constitutionRepository = constitutionRepository;
         }
 
         public int Count()
@@ -40,33 +47,53 @@ namespace APC.Applications.Services
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join p in _positionRepository.GetAll() on m.positionID equals p.positionID
                         join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
-                        select new FinedMemberDTO
+                        select new
                         {
-
-                            FinedMemberId = f.finedMemberID,
-                            AmountPaid = (decimal)f.amountPaid,
-                            FormattedAmountPaid = (f.amountPaid + " €").ToString(),
+                            f.finedMemberID,
+                            f.amountPaid,
                             Summary = f.summary,
                             ConstitutionId = f.constitutionID,
                             Section = c.section,
-                            ShortDescription = c.ShortDescription,
-                            AmountExpected = c.fine,
-                            FormattedAmountExpected = (c.fine + " €").ToString(),
-                            Balance = (c.fine - f.amountPaid).ToString(),
-                            MemberId = f.memberID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            GenderId = m.genderID,
-                            GenderName = g.genderName,
-                            PositionId = m.positionID,
-                            PositionName = p.positionName,
-                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine) ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
-                            FineDate = f.fineDate,
-                            FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
-                        }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
+                            c.ShortDescription,
+                            c.fine,
+                            f.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            m.genderID,
+                            g.genderName,
+                            m.positionID,
+                            p.positionName,
+                            f.fineDate,
+                        })
+                        .ToList();
 
-            return data;
+            return data.Select(x => new FinedMemberDTO
+            {
+                FinedMemberId = x.finedMemberID,
+                AmountPaid = (decimal)x.amountPaid,
+                FormattedAmountPaid = (x.amountPaid + " €").ToString(),
+                Summary = x.Summary,
+                ConstitutionId = x.ConstitutionId,
+                Section = x.Section,
+                ShortDescription = x.ShortDescription,
+                AmountExpected = x.fine,
+                FormattedAmountExpected = (x.fine + " €").ToString(),
+                Balance = (x.fine - x.amountPaid).ToString(),
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                GenderId = x.genderID,
+                GenderName = x.genderName,
+                PositionId = x.positionID,
+                PositionName = x.positionName,
+                Status = x.amountPaid <= 0 ? "Not Paid" : (x.amountPaid > 0 && x.amountPaid < x.fine) ? "Not Completed" : x.amountPaid == x.fine ? "Completed" : ((x.amountPaid - x.fine) + " € Extra").ToString(),
+                FineDate = x.fineDate,
+                FormattedFineDate = x.fineDate.ToString("dd.MM.yyyy"),
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
         }
 
         public List<FinedMemberDTO> GetAllDeletedFinedMembers()
@@ -76,33 +103,53 @@ namespace APC.Applications.Services
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join p in _positionRepository.GetAll() on m.positionID equals p.positionID
                         join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
-                        select new FinedMemberDTO
+                        select new
                         {
-
-                            FinedMemberId = f.finedMemberID,
-                            AmountPaid = (decimal)f.amountPaid,
-                            FormattedAmountPaid = (f.amountPaid + " €").ToString(),
+                            f.finedMemberID,
+                            f.amountPaid,
                             Summary = f.summary,
                             ConstitutionId = f.constitutionID,
                             Section = c.section,
-                            ShortDescription = c.ShortDescription,
-                            AmountExpected = c.fine,
-                            FormattedAmountExpected = (c.fine + " €").ToString(),
-                            Balance = (c.fine - f.amountPaid).ToString(),
-                            MemberId = f.memberID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            GenderId = m.genderID,
-                            GenderName = g.genderName,
-                            PositionId = m.positionID,
-                            PositionName = p.positionName,
-                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine)  ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
-                            FineDate = f.fineDate,
-                            FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
-                        }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
+                            c.ShortDescription,
+                            c.fine,
+                            f.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            m.genderID,
+                            g.genderName,
+                            m.positionID,
+                            p.positionName,
+                            f.fineDate,
+                        })
+                        .ToList();
 
-            return data;
+            return data.Select(x => new FinedMemberDTO
+            {
+                FinedMemberId = x.finedMemberID,
+                AmountPaid = (decimal)x.amountPaid,
+                FormattedAmountPaid = (x.amountPaid + " €").ToString(),
+                Summary = x.Summary,
+                ConstitutionId = x.ConstitutionId,
+                Section = x.Section,
+                ShortDescription = x.ShortDescription,
+                AmountExpected = x.fine,
+                FormattedAmountExpected = (x.fine + " €").ToString(),
+                Balance = (x.fine - x.amountPaid).ToString(),
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                GenderId = x.genderID,
+                GenderName = x.genderName,
+                PositionId = x.positionID,
+                PositionName = x.positionName,
+                Status = x.amountPaid <= 0 ? "Not Paid" : (x.amountPaid > 0 && x.amountPaid < x.fine) ? "Not Completed" : x.amountPaid == x.fine ? "Completed" : ((x.amountPaid - x.fine) + " € Extra").ToString(),
+                FineDate = x.fineDate,
+                FormattedFineDate = x.fineDate.ToString("dd.MM.yyyy"),
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
         }
 
         public bool GetBack(int id)
@@ -170,33 +217,53 @@ namespace APC.Applications.Services
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join p in _positionRepository.GetAll() on m.positionID equals p.positionID
                         join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
-                        select new FinedMemberDTO
+                        select new
                         {
-
-                            FinedMemberId = f.finedMemberID,
-                            AmountPaid = (decimal)f.amountPaid,
-                            FormattedAmountPaid = (f.amountPaid + " €").ToString(),
+                            f.finedMemberID,
+                            f.amountPaid,
                             Summary = f.summary,
                             ConstitutionId = f.constitutionID,
                             Section = c.section,
-                            ShortDescription = c.ShortDescription,
-                            AmountExpected = c.fine,
-                            FormattedAmountExpected = (c.fine + " €").ToString(),
-                            Balance = (c.fine - f.amountPaid).ToString(),
-                            MemberId = f.memberID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            GenderId = m.genderID,
-                            GenderName = g.genderName,
-                            PositionId = m.positionID,
-                            PositionName = p.positionName,
-                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine) ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
-                            FineDate = f.fineDate,
-                            FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
-                        }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
+                            c.ShortDescription,
+                            c.fine,
+                            f.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            m.genderID,
+                            g.genderName,
+                            m.positionID,
+                            p.positionName,
+                            f.fineDate,
+                        })
+                        .ToList();
 
-            return data;
+            return data.Select(x => new FinedMemberDTO
+            {
+                FinedMemberId = x.finedMemberID,
+                AmountPaid = (decimal)x.amountPaid,
+                FormattedAmountPaid = (x.amountPaid + " €").ToString(),
+                Summary = x.Summary,
+                ConstitutionId = x.ConstitutionId,
+                Section = x.Section,
+                ShortDescription = x.ShortDescription,
+                AmountExpected = x.fine,
+                FormattedAmountExpected = (x.fine + " €").ToString(),
+                Balance = (x.fine - x.amountPaid).ToString(),
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                GenderId = x.genderID,
+                GenderName = x.genderName,
+                PositionId = x.positionID,
+                PositionName = x.positionName,
+                Status = x.amountPaid <= 0 ? "Not Paid" : (x.amountPaid > 0 && x.amountPaid < x.fine) ? "Not Completed" : x.amountPaid == x.fine ? "Completed" : ((x.amountPaid - x.fine) + " € Extra").ToString(),
+                FineDate = x.fineDate,
+                FormattedFineDate = x.fineDate.ToString("dd.MM.yyyy"),
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
         }
 
         public List<FinedMemberDTO> GetAnnualFineListsById(int memberId, int year)
@@ -206,33 +273,53 @@ namespace APC.Applications.Services
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join p in _positionRepository.GetAll() on m.positionID equals p.positionID
                         join c in _constitutionRepository.GetAll() on f.constitutionID equals c.constitutionID
-                        select new FinedMemberDTO
+                        select new
                         {
-
-                            FinedMemberId = f.finedMemberID,
-                            AmountPaid = (decimal)f.amountPaid,
-                            FormattedAmountPaid = (f.amountPaid + " €").ToString(),
+                            f.finedMemberID,
+                            f.amountPaid,
                             Summary = f.summary,
                             ConstitutionId = f.constitutionID,
                             Section = c.section,
-                            ShortDescription = c.ShortDescription,
-                            AmountExpected = c.fine,
-                            FormattedAmountExpected = (c.fine + " €").ToString(),
-                            Balance = (c.fine - f.amountPaid).ToString(),
-                            MemberId = f.memberID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            GenderId = m.genderID,
-                            GenderName = g.genderName,
-                            PositionId = m.positionID,
-                            PositionName = p.positionName,
-                            Status = f.amountPaid <= 0 ? "Not Paid" : (f.amountPaid > 0 && f.amountPaid < c.fine) ? "Not Completed" : f.amountPaid == c.fine ? "Completed" : ((f.amountPaid - c.fine) + " € Extra").ToString(),
-                            FineDate = f.fineDate,
-                            FormattedFineDate = f.fineDate.ToString("dd.MM.yyyy"),
-                        }).OrderByDescending(x => x.FineDate.Year).ThenByDescending(x => x.FineDate.Month).ThenByDescending(x => x.FineDate.Day).ThenBy(x => x.FirstName).ToList();
+                            c.ShortDescription,
+                            c.fine,
+                            f.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            m.genderID,
+                            g.genderName,
+                            m.positionID,
+                            p.positionName,
+                            f.fineDate,
+                        })
+                        .ToList();
 
-            return data;
+            return data.Select(x => new FinedMemberDTO
+            {
+                FinedMemberId = x.finedMemberID,
+                AmountPaid = (decimal)x.amountPaid,
+                FormattedAmountPaid = (x.amountPaid + " €").ToString(),
+                Summary = x.Summary,
+                ConstitutionId = x.ConstitutionId,
+                Section = x.Section,
+                ShortDescription = x.ShortDescription,
+                AmountExpected = x.fine,
+                FormattedAmountExpected = (x.fine + " €").ToString(),
+                Balance = (x.fine - x.amountPaid).ToString(),
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                GenderId = x.genderID,
+                GenderName = x.genderName,
+                PositionId = x.positionID,
+                PositionName = x.positionName,
+                Status = x.amountPaid <= 0 ? "Not Paid" : (x.amountPaid > 0 && x.amountPaid < x.fine) ? "Not Completed" : x.amountPaid == x.fine ? "Completed" : ((x.amountPaid - x.fine) + " € Extra").ToString(),
+                FineDate = x.fineDate,
+                FormattedFineDate = x.fineDate.ToString("dd.MM.yyyy"),
+            })
+            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .ToList();
         }
     }
 }

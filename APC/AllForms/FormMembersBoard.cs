@@ -58,7 +58,7 @@ namespace APC.AllForms
             IPaymentStatusService paymentStatusService, IFinedMemberService finedMemberService, IGeneralMeetingAttendanceService generalMeetingAttendanceService, 
             IPersonalAttendanceService personalAttendanceService, ICountryService countryService, IMaritalStatusService maritalStatusService,
             IEmploymentStatusService employmentStatusService, INextOfKinService nextOfKinService, IPermissionService permissionService,
-            IMembershipStatusService membershipStatusService)
+            IMembershipStatusService membershipStatusService, IFinancialReportService financialReportService)
         {
             InitializeComponent();
             _currentUserService = currentUserService;
@@ -66,14 +66,18 @@ namespace APC.AllForms
             _genderService = genderService;
             _positionService = positionService;
             _professionService = professionService;
+
             _nationalityService = nationalityService;
             _monthService = monthService;
             _memberCommittmentService = memberCommittmentService;
             _generalMeetingService = generalMeetingService;
             _paymentStatusService = paymentStatusService;
+
             _finedMemberService = finedMemberService;
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _personalAttendanceService = personalAttendanceService;
+            _financialReportService = financialReportService;
+
             _countryService = countryService;
             _maritalStatusService = maritalStatusService;
             _employmentStatusService = employmentStatusService;

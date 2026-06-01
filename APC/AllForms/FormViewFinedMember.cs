@@ -48,7 +48,7 @@ namespace APC.AllForms
             labelName.Text = _finedMemberDTO.FirstName;
             labelSurname.Text = _finedMemberDTO.LastName;
             labelPosition.Text = _finedMemberDTO.PositionName;
-            labelExpectedAmount.Text = _finedMemberDTO.AmountExpected;
+            labelExpectedAmount.Text = _finedMemberDTO.FormattedAmountExpected;
             labelPaidAmount.Text = _finedMemberDTO.FormattedAmountPaid;
             labelBalance.Text = _finedMemberDTO.Balance;            
             labelPaymentStatus.Text = "Payment " + _finedMemberDTO.Status;

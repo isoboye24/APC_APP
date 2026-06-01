@@ -68,14 +68,13 @@ namespace APC.AllForms
                 btnViewFines, btnViewPersonalBalance, btnViewPresentAttendance
                 );
 
-
             GeneralHelper.ApplyRegularFont(14, txtAddress, txtEmail, txtLGA, txtName, txtPhone1, txtCountry, txtEmpStatus, txtGender,
                 txtPhone2, txtPhone3, txtSurname, txtMaritalStatus, txtNationality, txtNextOfKin, txtNextOfKinRelationship, txtPermission,
                 txtPosition, txtProfession
                 );
         }
 
-        private void ViewMemberDetails(int Id)
+        public void ViewMemberDetails(int Id)
         {
             _memberFullDetailsDTOById = _memberService.GetMemberById(Id);
 
@@ -219,11 +218,6 @@ namespace APC.AllForms
             {
                 WindowState = FormWindowState.Normal;
             }
-        }
-
-        private void btnNoComments_Click(object sender, EventArgs e)
-        {
-            
         }
         
         private void btnViewPresentAttendance_Click(object sender, EventArgs e)

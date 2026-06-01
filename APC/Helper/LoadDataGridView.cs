@@ -1,7 +1,7 @@
-﻿using APC.DAL.DTO;
-using System;
+﻿using APC.Applications.DTO;
+using APC.Domain.Entities;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using static APC.Helper.CommentHelper;
 using static APC.Helper.ConstitutionHelper;
 using static APC.Helper.DocumentHelper;
 using static APC.Helper.EventsHelper;
@@ -12,158 +12,159 @@ using static APC.Helper.GeneralMeetingHelper;
 using static APC.Helper.MemberHelper;
 using static APC.Helper.SingleColumnHelper;
 using static APC.Helper.SpecialContributionHelper;
+using static APC.Helper.SpecialContributorHelper;
 
 namespace APC.Helper
 {
     public class LoadDataGridView
     {
-        public static void loadPaymentStatuses(DataGridView grid, PaymentStatusDTO dto)
+        public static void loadPaymentStatuses(DataGridView grid, List<PaymentStatusDTO> paymentStatuses)
         {
-            grid.DataSource = dto.PaymentStatuses;
+            grid.DataSource = paymentStatuses;
             ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "PaymentStatusName", "Payment Status");
         }
 
-        public static void loadPositions(DataGridView grid, PositionDTO dto)
+        public static void loadPositions(DataGridView grid, List<PositionDTO> positions)
         {
-            grid.DataSource = dto.Positions;
+            grid.DataSource = positions;
             ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "PositionName", "Positions");
         }
-        public static void loadEmploymentStatuses(DataGridView grid, EmploymentStatusDTO dto)
+        public static void loadEmploymentStatuses(DataGridView grid, List<EmploymentStatusDTO> employmentStatuses)
         {
-            grid.DataSource = dto.EmploymentStatuses;
+            grid.DataSource = employmentStatuses;
             ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "EmploymentStatus", "Employment Statuses");
         }
-        public static void loadMaritalStatuses(DataGridView grid, MaritalStatusDTO dto)
+        public static void loadMaritalStatuses(DataGridView grid, List<MaritalStatusDTO> maritalStatuses)
         {
-            grid.DataSource = dto.MaritalStatuses;
+            grid.DataSource = maritalStatuses;
             ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "MaritalStatus", "Marital Statuses");
         }
-        public static void loadCountries(DataGridView grid, CountryDTO dto)
+        public static void loadCountries(DataGridView grid, List<CountryDTO> countries)
         {
-            grid.DataSource = dto.Countries;
+            grid.DataSource = countries;
             ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "CountryName", "Countries");
         }
-        public static void loadNationalities(DataGridView grid, NationalityDTO dto)
+        public static void loadNationalities(DataGridView grid, List<NationalityDTO> nationalities)
         {
-            grid.DataSource = dto.Nationalities;
+            grid.DataSource = nationalities;
             ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "Nationality", "Nationalities");
         }
 
-        public static void loadProfessions(DataGridView grid, ProfessionDTO dto)
+        public static void loadProfessions(DataGridView grid, List<ProfessionDTO> professions)
         {
-            grid.DataSource = dto.Professions;
+            grid.DataSource = professions;
             ConfigureSingleColumnGrid(grid, SingleColumnGridType.Basic, "Profession", "Professions");
         }        
 
-        public static void loadPermissions(DataGridView grid, MemberDTO dto)
+        public static void loadPermissions(DataGridView grid, List<MemberFullDetailsDTO> memberFullDetails)
         {
-            grid.DataSource = dto.Members;
+            grid.DataSource = memberFullDetails;
             ConfigureMemberGrid(grid, MemberGridType.Permission);
         }
-        public static void loadMembers(DataGridView grid, MemberDTO dto)
+        public static void loadMembers(DataGridView grid, List<MemberFullDetailsDTO> memberFullDetails)
         {
-            grid.DataSource = dto.Members;
-            ConfigureMemberGrid(grid, MemberGridType.SemiComplete);
+            grid.DataSource = memberFullDetails;
+            ConfigureMemberGrid(grid, MemberGridType.SemiBasic);
         }
 
-        public static void loadBirthdayMembers(DataGridView grid, MemberDTO dto)
+        public static void loadBirthdayMembers(DataGridView grid, List<MemberFullDetailsDTO> memberFullDetails)
         {
-            grid.DataSource = dto.Members;
+            grid.DataSource = memberFullDetails;
             ConfigureMemberGrid(grid, MemberGridType.Birthday);
         }
 
-        public static void loadDeadMembers(DataGridView grid, MemberDTO dto)
+        public static void loadDeadMembers(DataGridView grid, List<MemberFullDetailsDTO> memberFullDetails)
         {
-            grid.DataSource = dto.Members;
+            grid.DataSource = memberFullDetails;
             ConfigureMemberGrid(grid, MemberGridType.Dead);
         }
 
-        public static void loadMembersContacts(DataGridView grid, MemberDTO dto)
+        public static void loadMembersContacts(DataGridView grid, List<MemberFullDetailsDTO> memberFullDetails)
         {
-            grid.DataSource = dto.Members;
+            grid.DataSource = memberFullDetails;
             ConfigureMemberGrid(grid, MemberGridType.Contact);
         }
 
-        public static void loadMembersShrinked(DataGridView grid, MemberDTO dto)
+        public static void loadMembersShrinked(DataGridView grid, List<MemberFullDetailsDTO> memberFullDetails)
         {
-            grid.DataSource = dto.Members;
+            grid.DataSource = memberFullDetails;
             ConfigureMemberGrid(grid, MemberGridType.Basic);
         }
 
-        public static void loadComments(DataGridView grid, CommentDTO dto)
+        public static void loadDocuments(DataGridView grid, List<DocumentDTO> documents)
         {
-            grid.DataSource = dto.Comments;
-            ConfigureCommentGrid(grid, CommentGridType.Basic);
-        }
-
-        public static void loadDocuments(DataGridView grid, DocumentDTO dto)
-        {
-            grid.DataSource = dto.Documents;
+            grid.DataSource = documents;
             ConfigureDocumentGrid(grid, DocumentGridType.Basic);
         }
-        public static void loadEventImages(DataGridView grid, EventImageDTO dto)
+        public static void loadEventImages(DataGridView grid, List<EventImages> eventImages)
         {
-            grid.DataSource = dto.EventImages;
+            grid.DataSource = eventImages;
             ConfigureEventsGrid(grid, EventsGridType.Images);
         }
 
-        public static void loadEvents(DataGridView grid, EventsDTO dto)
+        public static void loadEvents(DataGridView grid, List<EventDTO> events)
         {
-            grid.DataSource = dto.Events;
+            grid.DataSource = events;
             ConfigureEventsGrid(grid, EventsGridType.Basic);
         }
 
-        public static void loadEventSales(DataGridView grid, EventSalesDTO dto)
+        public static void loadEventSales(DataGridView grid, List<EventSalesDTO> eventSales)
         {
-            grid.DataSource = dto.EventSales;
+            grid.DataSource = eventSales;
             ConfigureEventsGrid(grid, EventsGridType.Sales);
         }
 
-        public static void loadEventExpenditure(DataGridView grid, EventExpenditureDTO dto)
+        public static void loadEventExpenditure(DataGridView grid, List<EventExpenditureDTO> eventExpenditures)
         {
-            grid.DataSource = dto.EventExpenditures;
+            grid.DataSource = eventExpenditures;
             ConfigureEventsGrid(grid, EventsGridType.Expenditure);
         }
 
-        public static void loadEventReceipt(DataGridView grid, EventReceiptsDTO dto)
+        public static void loadEventReceipt(DataGridView grid, List<EventReceiptDTO> eventReceipts)
         {
-            grid.DataSource = dto.EventReceipts;
+            grid.DataSource = eventReceipts;
             ConfigureEventsGrid(grid, EventsGridType.Receipt);
         }
 
-        public static void loadGeneralAttendances(DataGridView grid, GeneralAttendanceDTO dto)
+        public static void loadGeneralAttendances(DataGridView grid, List<GeneralMeetingDTO> generalMeetings)
         {
-            grid.DataSource = dto.GeneralAttendance;
-            ConfigureGeneralAttendanceGrid(grid, GeneralAttendanceGridType.Basic);
+            grid.DataSource = generalMeetings;
+            ConfigureGeneralMeetingGrid(grid, GeneralMeetingGridType.Basic);
         }
-        public static void loadExpenditure(DataGridView grid, ExpenditureDTO dto)
+        public static void loadExpenditure(DataGridView grid, List<ExpenditureDTO> expenditures)
         {
-            grid.DataSource = dto.Expenditures;
+            grid.DataSource = expenditures;
             ConfigureExpenditureGrid(grid, ExpenditureGridType.Basic);
         }
 
-        public static void loadFinancialReport(DataGridView grid, FinancialReportDTO dto)
+        public static void loadFinancialReport(DataGridView grid, List<FinancialReportDTO> financialReports)
         {
-            grid.DataSource = dto.FinancialReports;
+            grid.DataSource = financialReports;
             ConfigureFinancialReportGrid(grid, FinancialReportGridType.Basic);
         }
        
-        public static void loadConstitution(DataGridView grid, ConstitutionDTO dto)
+        public static void loadConstitution(DataGridView grid, List<ConstitutionDTO> constitutions)
         {
-            grid.DataSource = dto.Constitutions;
+            grid.DataSource = constitutions;
             ConfigureConstitutionGrid(grid, ConstitutionGridType.Basic);
         }
 
-        public static void loadFinedMembers(DataGridView grid, FinedMemberDTO dto)
+        public static void loadFinedMembers(DataGridView grid, List<FinedMemberDTO> finedMembers)
         {
-            grid.DataSource = dto.FineMembers;
+            grid.DataSource = finedMembers;
             ConfigureFinedMemberGrid(grid, FinedMemberGridType.Basic);
         }
         
-        public static void loadSpecialContributions(DataGridView grid, SpecialContributionDTO dto)
+        public static void loadSpecialContributions(DataGridView grid, List<SpecialContributionDTO> specialContributions)
         {
-            grid.DataSource = dto.SpecialContributions;
+            grid.DataSource = specialContributions;
             ConfigureSpecialContributionGrid(grid, SpecialContributionGridType.Basic);
+        }
+        
+        public static void loadSpecialContributors(DataGridView grid, List<SpecialContributorDTO> specialContributors)
+        {
+            grid.DataSource = specialContributors;
+            ConfigureSpecialContributorGrid(grid, SpecialContributorGridType.Basic);
         }
 
     }

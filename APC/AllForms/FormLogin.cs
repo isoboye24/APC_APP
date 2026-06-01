@@ -1,6 +1,4 @@
-﻿using APC.BLL;
-using APC.DAL;
-using APC.Applications.Interfaces;
+﻿using APC.Applications.Interfaces;
 using APC.Helper;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -66,9 +64,7 @@ namespace APC.AllForms
                         if (absenteesCount > 0)
                         {
                             var form = _serviceProvider.GetRequiredService<FormNotifications>();
-                            form.isAdmin = true;
-                            form.isLogin = true;
-                            form.numbers = absenteesCount;
+                            form.AccessControl(true, true, false);
                             this.Hide();
                             form.ShowDialog();
                         }
@@ -76,7 +72,7 @@ namespace APC.AllForms
                         {
                             var form = _serviceProvider.GetRequiredService<FormDashboard>();
                             this.Hide();
-                            form.isAdmin = true;
+                            form.AccessControl(true, false);
                             form.ShowDialog();
                         }
                     }
@@ -85,8 +81,7 @@ namespace APC.AllForms
                         if (absenteesCount > 0)
                         {
                             var form = _serviceProvider.GetRequiredService<FormNotifications>();
-                            form.isEditor = true;
-                            form.isLogin = true;
+                            form.AccessControl(true, false, true);
                             this.Hide();
                             form.ShowDialog();
                         }
@@ -94,7 +89,7 @@ namespace APC.AllForms
                         {
                             var form = _serviceProvider.GetRequiredService<FormDashboard>();
                             this.Hide();
-                            form.isEditor = true;
+                            form.AccessControl(false, true);
                             form.ShowDialog();
                         }
                     }

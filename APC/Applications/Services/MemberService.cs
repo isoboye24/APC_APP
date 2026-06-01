@@ -691,7 +691,7 @@ namespace APC.Applications.Services
             .ToList();
         }
 
-        public List<MemberFullDetailsDTO> Select3MonthsAbsentes()
+        public List<MemberFullDetailsDTO> Get3MonthsAbsentes()
         {
             string attendanceStatus = "Absent";
 

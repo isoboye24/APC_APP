@@ -19,13 +19,14 @@ namespace APC
         private readonly IEventSalesService _eventSalesService;
         private readonly IEventReceiptService _eventReceiptService;
         private readonly IEventImagesService _eventImagesService;
+        private readonly ICurrentUserService _currentUserService;
 
         private List<EventDTO> _eventDTOs;
 
         private int currYear = DateTime.Today.Year;
 
         public FormEventsList(IEventsService eventsService, IEventExpenditureService eventExpenditureService, IEventSalesService eventSalesService,
-            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService)
+            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService, ICurrentUserService currentUserService)
         {
             InitializeComponent();
             _eventsService = eventsService;
@@ -33,6 +34,7 @@ namespace APC
             _eventSalesService = eventSalesService;
             _eventReceiptService = eventReceiptService;
             _eventImagesService = eventImagesService;
+            _currentUserService = currentUserService;
         }        
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -77,7 +79,7 @@ namespace APC
             }
 
             var form = new FormEventDetailsBoard(_eventsService, _eventExpenditureService, _eventSalesService,
-                    _eventReceiptService, _eventImagesService);
+                    _eventReceiptService, _eventImagesService, _currentUserService);
             form.loadForView(selected);
             form.ShowDialog();
 
@@ -152,8 +154,8 @@ namespace APC
 
             label3.Text = selected.Title + " " + selected.EventsDate.Year;
 
-            decimal totalSales = _eventSalesService.GetTotalSalesByEvent(selected.EventsId);
-            decimal totalExpenditures = _eventExpenditureService.GetTotalEventExpendituresByEvent(selected.EventsId);
+            decimal totalSales = _eventSalesService.GetSalesAmountByEvent(selected.EventsId);
+            decimal totalExpenditures = _eventExpenditureService.GetTotalAmountSpentByEvent(selected.EventsId);
 
             labelOverallSold.Text = totalSales.ToString();
             labelOverallSpent.Text = totalExpenditures.ToString();

@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.meetingsPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -87,31 +86,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.cmbYearContribution = new System.Windows.Forms.ComboBox();
             this.dataGridViewSpecialContributions = new System.Windows.Forms.DataGridView();
-            this.commentPage = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnClearComments = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnSearchComments = new System.Windows.Forms.Button();
-            this.txtComment = new System.Windows.Forms.TextBox();
-            this.cmbGenderComments = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtNameComments = new System.Windows.Forms.TextBox();
-            this.txtSurnameComments = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cmbMonthComments = new System.Windows.Forms.ComboBox();
-            this.cmbYearComments = new System.Windows.Forms.ComboBox();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAddComments = new System.Windows.Forms.Button();
-            this.btnUpdateComments = new System.Windows.Forms.Button();
-            this.btnDeleteComments = new System.Windows.Forms.Button();
-            this.btnViewComments = new System.Windows.Forms.Button();
-            this.labelTotalComments = new System.Windows.Forms.Label();
-            this.panelDataGridView = new System.Windows.Forms.Panel();
-            this.dataGridViewComments = new System.Windows.Forms.DataGridView();
             this.finedMemberPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
@@ -179,12 +153,6 @@
             this.tableLayoutPanel24.SuspendLayout();
             this.tableLayoutPanel25.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSpecialContributions)).BeginInit();
-            this.commentPage.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
-            this.panelDataGridView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComments)).BeginInit();
             this.finedMemberPage.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
@@ -210,7 +178,6 @@
             // 
             this.tabControl1.Controls.Add(this.meetingsPage);
             this.tabControl1.Controls.Add(this.specialContributionsPage);
-            this.tabControl1.Controls.Add(this.commentPage);
             this.tabControl1.Controls.Add(this.finedMemberPage);
             this.tabControl1.Controls.Add(this.constitutionPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1031,376 +998,6 @@
             this.dataGridViewSpecialContributions.Size = new System.Drawing.Size(1209, 459);
             this.dataGridViewSpecialContributions.TabIndex = 6;
             // 
-            // commentPage
-            // 
-            this.commentPage.Controls.Add(this.tableLayoutPanel6);
-            this.commentPage.Location = new System.Drawing.Point(4, 46);
-            this.commentPage.Margin = new System.Windows.Forms.Padding(4);
-            this.commentPage.Name = "commentPage";
-            this.commentPage.Padding = new System.Windows.Forms.Padding(4);
-            this.commentPage.Size = new System.Drawing.Size(1268, 688);
-            this.commentPage.TabIndex = 1;
-            this.commentPage.Text = "Comments   ";
-            this.commentPage.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel7, 1, 1);
-            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel8, 1, 3);
-            this.tableLayoutPanel6.Controls.Add(this.panelDataGridView, 1, 2);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 4;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(1260, 680);
-            this.tableLayoutPanel6.TabIndex = 5;
-            // 
-            // tableLayoutPanel7
-            // 
-            this.tableLayoutPanel7.ColumnCount = 7;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tableLayoutPanel7.Controls.Add(this.btnClearComments, 6, 2);
-            this.tableLayoutPanel7.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label6, 0, 2);
-            this.tableLayoutPanel7.Controls.Add(this.label7, 2, 2);
-            this.tableLayoutPanel7.Controls.Add(this.btnSearchComments, 6, 0);
-            this.tableLayoutPanel7.Controls.Add(this.txtComment, 1, 2);
-            this.tableLayoutPanel7.Controls.Add(this.cmbGenderComments, 3, 2);
-            this.tableLayoutPanel7.Controls.Add(this.label8, 2, 0);
-            this.tableLayoutPanel7.Controls.Add(this.txtNameComments, 3, 0);
-            this.tableLayoutPanel7.Controls.Add(this.txtSurnameComments, 1, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label9, 4, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label10, 4, 2);
-            this.tableLayoutPanel7.Controls.Add(this.cmbMonthComments, 5, 0);
-            this.tableLayoutPanel7.Controls.Add(this.cmbYearComments, 5, 2);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(29, 10);
-            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 3;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1201, 93);
-            this.tableLayoutPanel7.TabIndex = 4;
-            // 
-            // btnClearComments
-            // 
-            this.btnClearComments.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnClearComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearComments.FlatAppearance.BorderSize = 0;
-            this.btnClearComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearComments.Location = new System.Drawing.Point(1060, 50);
-            this.btnClearComments.Margin = new System.Windows.Forms.Padding(4);
-            this.btnClearComments.Name = "btnClearComments";
-            this.btnClearComments.Size = new System.Drawing.Size(137, 39);
-            this.btnClearComments.TabIndex = 0;
-            this.btnClearComments.Text = "Clear";
-            this.btnClearComments.UseVisualStyleBackColor = false;
-            this.btnClearComments.Click += new System.EventHandler(this.btnClearComments_Click);
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(69, 12);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(95, 28);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Surname";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(61, 58);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 28);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Comment";
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(432, 58);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(80, 28);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Gender";
-            // 
-            // btnSearchComments
-            // 
-            this.btnSearchComments.BackColor = System.Drawing.Color.Plum;
-            this.btnSearchComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearchComments.FlatAppearance.BorderSize = 0;
-            this.btnSearchComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchComments.Location = new System.Drawing.Point(1060, 4);
-            this.btnSearchComments.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSearchComments.Name = "btnSearchComments";
-            this.btnSearchComments.Size = new System.Drawing.Size(137, 37);
-            this.btnSearchComments.TabIndex = 0;
-            this.btnSearchComments.Text = "Search";
-            this.btnSearchComments.UseVisualStyleBackColor = false;
-            this.btnSearchComments.Click += new System.EventHandler(this.btnSearchComments_Click);
-            // 
-            // txtComment
-            // 
-            this.txtComment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtComment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComment.Location = new System.Drawing.Point(172, 50);
-            this.txtComment.Margin = new System.Windows.Forms.Padding(4);
-            this.txtComment.Multiline = true;
-            this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(172, 39);
-            this.txtComment.TabIndex = 1;
-            this.txtComment.TextChanged += new System.EventHandler(this.txtComment_TextChanged);
-            // 
-            // cmbGenderComments
-            // 
-            this.cmbGenderComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbGenderComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGenderComments.FormattingEnabled = true;
-            this.cmbGenderComments.Location = new System.Drawing.Point(520, 50);
-            this.cmbGenderComments.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbGenderComments.Name = "cmbGenderComments";
-            this.cmbGenderComments.Size = new System.Drawing.Size(172, 36);
-            this.cmbGenderComments.TabIndex = 4;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(444, 12);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 28);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Name";
-            // 
-            // txtNameComments
-            // 
-            this.txtNameComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtNameComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNameComments.Location = new System.Drawing.Point(520, 4);
-            this.txtNameComments.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNameComments.Name = "txtNameComments";
-            this.txtNameComments.Size = new System.Drawing.Size(172, 34);
-            this.txtNameComments.TabIndex = 1;
-            this.txtNameComments.TextChanged += new System.EventHandler(this.txtNameComments_TextChanged);
-            // 
-            // txtSurnameComments
-            // 
-            this.txtSurnameComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSurnameComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSurnameComments.Location = new System.Drawing.Point(172, 4);
-            this.txtSurnameComments.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSurnameComments.Name = "txtSurnameComments";
-            this.txtSurnameComments.Size = new System.Drawing.Size(172, 34);
-            this.txtSurnameComments.TabIndex = 1;
-            this.txtSurnameComments.TextChanged += new System.EventHandler(this.txtSurnameComments_TextChanged);
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(785, 12);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(75, 28);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Month";
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(808, 58);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 28);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Year";
-            // 
-            // cmbMonthComments
-            // 
-            this.cmbMonthComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbMonthComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbMonthComments.FormattingEnabled = true;
-            this.cmbMonthComments.Location = new System.Drawing.Point(868, 4);
-            this.cmbMonthComments.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbMonthComments.Name = "cmbMonthComments";
-            this.cmbMonthComments.Size = new System.Drawing.Size(184, 36);
-            this.cmbMonthComments.TabIndex = 4;
-            // 
-            // cmbYearComments
-            // 
-            this.cmbYearComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbYearComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbYearComments.FormattingEnabled = true;
-            this.cmbYearComments.Location = new System.Drawing.Point(868, 50);
-            this.cmbYearComments.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbYearComments.Name = "cmbYearComments";
-            this.cmbYearComments.Size = new System.Drawing.Size(184, 36);
-            this.cmbYearComments.TabIndex = 4;
-            // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.ColumnCount = 9;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21F));
-            this.tableLayoutPanel8.Controls.Add(this.btnAddComments, 1, 1);
-            this.tableLayoutPanel8.Controls.Add(this.btnUpdateComments, 3, 1);
-            this.tableLayoutPanel8.Controls.Add(this.btnDeleteComments, 7, 1);
-            this.tableLayoutPanel8.Controls.Add(this.btnViewComments, 5, 1);
-            this.tableLayoutPanel8.Controls.Add(this.labelTotalComments, 8, 1);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(29, 582);
-            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 3;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(1201, 94);
-            this.tableLayoutPanel8.TabIndex = 2;
-            // 
-            // btnAddComments
-            // 
-            this.btnAddComments.BackColor = System.Drawing.Color.Plum;
-            this.btnAddComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddComments.FlatAppearance.BorderSize = 0;
-            this.btnAddComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddComments.Location = new System.Drawing.Point(256, 27);
-            this.btnAddComments.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddComments.Name = "btnAddComments";
-            this.btnAddComments.Size = new System.Drawing.Size(148, 39);
-            this.btnAddComments.TabIndex = 0;
-            this.btnAddComments.Text = "Add";
-            this.btnAddComments.UseVisualStyleBackColor = false;
-            this.btnAddComments.Click += new System.EventHandler(this.btnAddComments_Click);
-            // 
-            // btnUpdateComments
-            // 
-            this.btnUpdateComments.BackColor = System.Drawing.Color.Plum;
-            this.btnUpdateComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnUpdateComments.FlatAppearance.BorderSize = 0;
-            this.btnUpdateComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateComments.Location = new System.Drawing.Point(436, 27);
-            this.btnUpdateComments.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUpdateComments.Name = "btnUpdateComments";
-            this.btnUpdateComments.Size = new System.Drawing.Size(148, 39);
-            this.btnUpdateComments.TabIndex = 1;
-            this.btnUpdateComments.Text = "Edit";
-            this.btnUpdateComments.UseVisualStyleBackColor = false;
-            this.btnUpdateComments.Click += new System.EventHandler(this.btnUpdateComments_Click);
-            // 
-            // btnDeleteComments
-            // 
-            this.btnDeleteComments.BackColor = System.Drawing.Color.Plum;
-            this.btnDeleteComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeleteComments.FlatAppearance.BorderSize = 0;
-            this.btnDeleteComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteComments.Location = new System.Drawing.Point(796, 27);
-            this.btnDeleteComments.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDeleteComments.Name = "btnDeleteComments";
-            this.btnDeleteComments.Size = new System.Drawing.Size(148, 39);
-            this.btnDeleteComments.TabIndex = 2;
-            this.btnDeleteComments.Text = "Delete";
-            this.btnDeleteComments.UseVisualStyleBackColor = false;
-            this.btnDeleteComments.Click += new System.EventHandler(this.btnDeleteComments_Click);
-            // 
-            // btnViewComments
-            // 
-            this.btnViewComments.BackColor = System.Drawing.Color.Plum;
-            this.btnViewComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnViewComments.FlatAppearance.BorderSize = 0;
-            this.btnViewComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewComments.Location = new System.Drawing.Point(616, 27);
-            this.btnViewComments.Margin = new System.Windows.Forms.Padding(4);
-            this.btnViewComments.Name = "btnViewComments";
-            this.btnViewComments.Size = new System.Drawing.Size(148, 39);
-            this.btnViewComments.TabIndex = 3;
-            this.btnViewComments.Text = "View";
-            this.btnViewComments.UseVisualStyleBackColor = false;
-            this.btnViewComments.Click += new System.EventHandler(this.btnViewComments_Click);
-            // 
-            // labelTotalComments
-            // 
-            this.labelTotalComments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalComments.AutoSize = true;
-            this.labelTotalComments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalComments.Location = new System.Drawing.Point(1115, 35);
-            this.labelTotalComments.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
-            this.labelTotalComments.Name = "labelTotalComments";
-            this.labelTotalComments.Size = new System.Drawing.Size(82, 28);
-            this.labelTotalComments.TabIndex = 5;
-            this.labelTotalComments.Text = "Total: 0";
-            // 
-            // panelDataGridView
-            // 
-            this.panelDataGridView.Controls.Add(this.dataGridViewComments);
-            this.panelDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDataGridView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelDataGridView.Location = new System.Drawing.Point(29, 111);
-            this.panelDataGridView.Margin = new System.Windows.Forms.Padding(4);
-            this.panelDataGridView.Name = "panelDataGridView";
-            this.panelDataGridView.Size = new System.Drawing.Size(1201, 463);
-            this.panelDataGridView.TabIndex = 5;
-            // 
-            // dataGridViewComments
-            // 
-            this.dataGridViewComments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewComments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewComments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewComments.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewComments.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridViewComments.Name = "dataGridViewComments";
-            this.dataGridViewComments.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewComments.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewComments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewComments.RowTemplate.Height = 40;
-            this.dataGridViewComments.Size = new System.Drawing.Size(1201, 463);
-            this.dataGridViewComments.TabIndex = 0;
-            // 
             // finedMemberPage
             // 
             this.finedMemberPage.Controls.Add(this.tableLayoutPanel9);
@@ -1569,8 +1166,8 @@
             this.dataGridViewFinedMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewFinedMembers.Name = "dataGridViewFinedMembers";
             this.dataGridViewFinedMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewFinedMembers.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewFinedMembers.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewFinedMembers.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewFinedMembers.RowTemplate.Height = 40;
             this.dataGridViewFinedMembers.Size = new System.Drawing.Size(1209, 401);
@@ -2047,8 +1644,8 @@
             this.dataGridViewConstitution.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewConstitution.Name = "dataGridViewConstitution";
             this.dataGridViewConstitution.RowHeadersWidth = 51;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewConstitution.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewConstitution.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewConstitution.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewConstitution.RowTemplate.Height = 40;
             this.dataGridViewConstitution.Size = new System.Drawing.Size(1209, 469);
@@ -2225,14 +1822,6 @@
             this.tableLayoutPanel25.ResumeLayout(false);
             this.tableLayoutPanel25.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSpecialContributions)).EndInit();
-            this.commentPage.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel7.PerformLayout();
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
-            this.panelDataGridView.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComments)).EndInit();
             this.finedMemberPage.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
@@ -2295,31 +1884,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.DataGridView dataGridViewGeneralMeeting;
-        private System.Windows.Forms.TabPage commentPage;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.Button btnClearComments;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnSearchComments;
-        private System.Windows.Forms.TextBox txtComment;
-        private System.Windows.Forms.ComboBox cmbGenderComments;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtNameComments;
-        private System.Windows.Forms.TextBox txtSurnameComments;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox cmbMonthComments;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.Button btnAddComments;
-        private System.Windows.Forms.Button btnUpdateComments;
-        private System.Windows.Forms.Button btnDeleteComments;
-        private System.Windows.Forms.Button btnViewComments;
-        private System.Windows.Forms.Panel panelDataGridView;
-        private System.Windows.Forms.DataGridView dataGridViewComments;
         private System.Windows.Forms.Label labelTotalMeetings;
-        private System.Windows.Forms.Label labelTotalComments;
         private System.Windows.Forms.TabPage finedMemberPage;
         private System.Windows.Forms.TabPage constitutionPage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
@@ -2396,7 +1961,6 @@
         private System.Windows.Forms.Label labelOverallTotalContributions;
         private System.Windows.Forms.ComboBox cmbYearContribution;
         private System.Windows.Forms.ComboBox cmbYearMeeting;
-        private System.Windows.Forms.ComboBox cmbYearComments;
         private System.Windows.Forms.Label label16;
     }
 }

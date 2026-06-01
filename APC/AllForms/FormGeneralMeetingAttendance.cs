@@ -1,15 +1,10 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.Applications.Services;
-using APC.BLL;
-using APC.DAL.DAO;
-using APC.DAL.DTO;
 using APC.Domain.Entities;
 using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;

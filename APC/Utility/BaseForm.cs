@@ -13,5 +13,17 @@ namespace APC.Utility
                 ControlResize.ResizeTaggedControls(this, ZoomManager.CurrentFontSize, 1.1f);
             };
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // BaseForm
+            // 
+            this.ClientSize = new System.Drawing.Size(387, 253);
+            this.Name = "BaseForm";
+            this.ResumeLayout(false);
+
+        }
     }
 }
