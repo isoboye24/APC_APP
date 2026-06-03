@@ -46,13 +46,13 @@
             this.labelDocCount = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbYearDocument = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSearchDocument = new System.Windows.Forms.Button();
             this.btnClearDocument = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbMonthDocument = new System.Windows.Forms.ComboBox();
             this.tabReceiptPage = new System.Windows.Forms.TabPage();
-            this.cmbYearDocument = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabDocumentPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -347,6 +347,17 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1203, 54);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
+            // cmbYearDocument
+            // 
+            this.cmbYearDocument.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbYearDocument.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbYearDocument.FormattingEnabled = true;
+            this.cmbYearDocument.Location = new System.Drawing.Point(111, 4);
+            this.cmbYearDocument.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbYearDocument.Name = "cmbYearDocument";
+            this.cmbYearDocument.Size = new System.Drawing.Size(182, 36);
+            this.cmbYearDocument.TabIndex = 4;
+            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -426,17 +437,6 @@
             this.tabReceiptPage.TabIndex = 1;
             this.tabReceiptPage.Text = "Receipts    ";
             this.tabReceiptPage.UseVisualStyleBackColor = true;
-            // 
-            // cmbYearDocument
-            // 
-            this.cmbYearDocument.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbYearDocument.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbYearDocument.FormattingEnabled = true;
-            this.cmbYearDocument.Location = new System.Drawing.Point(111, 4);
-            this.cmbYearDocument.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbYearDocument.Name = "cmbYearDocument";
-            this.cmbYearDocument.Size = new System.Drawing.Size(182, 36);
-            this.cmbYearDocument.TabIndex = 4;
             // 
             // FormDocumentList
             // 

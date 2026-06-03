@@ -32,6 +32,10 @@ namespace APC.Helper
                                     { "ShortDescription", "Summary" },
                                     { "FineWithCurrency", "Fine" }
                                 });
+
+                    grid.Columns["ShortDescription"].DisplayIndex = 0;
+                    grid.Columns["Section"].DisplayIndex = 1;
+                    grid.Columns["FineWithCurrency"].DisplayIndex = 2;
                     break;
             }
         }

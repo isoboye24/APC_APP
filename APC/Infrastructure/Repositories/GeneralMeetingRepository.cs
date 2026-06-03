@@ -68,6 +68,7 @@ namespace APC.Infrastructure.Repositories
                 totalDuesBalance = data.TotalDuesBalance,
                 summary = data.Summary,
                 attendanceDate = data.GeneralMeetingDate,
+
             });
 
             _db.SaveChanges();

@@ -74,7 +74,7 @@ namespace APC.Applications.Services
 
         public List<GeneralMeetingDTO> GetAllByYear(int year)
         {
-            var data = (from g in _repository.GetAll().Where(g => g.year == year)
+            var data = (from g in _repository.GetAll().Where(g => g.attendanceDate.Year == year)
                         join m in _monthRepository.GetAll() on g.monthID equals m.monthID
                         select new
                         {

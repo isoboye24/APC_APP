@@ -314,7 +314,6 @@
     <Compile Include="Applications\DTO\AbsenteesDTO.cs" />
     <Compile Include="Applications\DTO\AttendanceStatusDTO.cs" />
     <Compile Include="Applications\DTO\BirthdayMembersDTO.cs" />
-    <Compile Include="Applications\DTO\CommentDTO.cs" />
     <Compile Include="Applications\DTO\ConstitutionDTO.cs" />
     <Compile Include="Applications\DTO\CountryDTO.cs" />
     <Compile Include="Applications\DTO\DeadMemberShortDetailDTO.cs" />
@@ -342,6 +341,7 @@
     <Compile Include="Applications\DTO\PersonalAttendanceDetailsDTO.cs" />
     <Compile Include="Applications\DTO\PositionDTO.cs" />
     <Compile Include="Applications\DTO\ProfessionDTO.cs" />
+    <Compile Include="Applications\DTO\RelationshipToNextOfKinDTO.cs" />
     <Compile Include="Applications\DTO\SpecialContributionDTO.cs" />
     <Compile Include="Applications\DTO\SpecialContributorDTO.cs" />
     <Compile Include="Applications\DTO\MonthDTO.cs" />
@@ -371,7 +371,7 @@
     <Compile Include="Applications\Services\MembershipStatusService.cs" />
     <Compile Include="Applications\Services\MonthService.cs" />
     <Compile Include="Applications\Services\NationalityService.cs" />
-    <Compile Include="Applications\Services\NextOfKinService.cs" />
+    <Compile Include="Applications\Services\RelationshipToNextOfKinService.cs" />
     <Compile Include="Applications\Services\PaymentStatusService.cs" />
     <Compile Include="Applications\Services\PermissionService.cs" />
     <Compile Include="Applications\Services\GeneralMeetingAttendanceService.cs" />
@@ -482,12 +482,6 @@
     </Compile>
     <Compile Include="AllForms\FormViewGeneralAttendance.Designer.cs">
       <DependentUpon>FormViewGeneralAttendance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AllForms\FormViewComment.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormViewComment.Designer.cs">
-      <DependentUpon>FormViewComment.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\FormViewDeadMember.cs">
       <SubType>Form</SubType>
@@ -661,7 +655,7 @@
     <Compile Include="Applications\Interfaces\INationalityRepository.cs" />
     <Compile Include="Applications\Interfaces\INationalityService.cs" />
     <Compile Include="Applications\Interfaces\INextOfKinRepository.cs" />
-    <Compile Include="Applications\Interfaces\INextOfKinService.cs" />
+    <Compile Include="Applications\Interfaces\IRelationshipToNextOfKinService.cs" />
     <Compile Include="Applications\Interfaces\IPaymentStatusRepository.cs" />
     <Compile Include="Applications\Interfaces\IPaymentStatusService.cs" />
     <Compile Include="Applications\Interfaces\IPermissionRepository.cs" />
@@ -896,9 +890,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormViewGeneralAttendance.resx">
       <DependentUpon>FormViewGeneralAttendance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormViewComment.resx">
-      <DependentUpon>FormViewComment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormViewDeadMember.resx">
       <DependentUpon>FormViewDeadMember.cs</DependentUpon>

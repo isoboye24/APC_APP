@@ -15,11 +15,13 @@ namespace APC.Applications.Services
         private readonly ICountryRepository _countryRepository;
         private readonly INationalityRepository _nationalityRepository;
         private readonly IPositionRepository _positionRepository;
+
         private readonly IProfessionRepository _professionRepository;
         private readonly IPermissionRepository _permissionRepository;
         private readonly IMaritalStatusRepository _maritalStatusRepository;
         private readonly IEmploymentStatusRepository _employmentStatusRepository;
         private readonly IGenderRepository _genderRepository;
+
         private readonly IMembershipStatusRepository _membershipStatusRepository;
         private readonly INextOfKinRepository _nextOfKinRepository;
         private readonly IGeneralMeetingRepository _generalMeetingRepository;
@@ -38,11 +40,13 @@ namespace APC.Applications.Services
             _countryRepository = countryRepository;
             _nationalityRepository = nationalityRepository;
             _positionRepository = positionRepository;
+
             _professionRepository = professionRepository;
             _permissionRepository = permissionRepository;
             _maritalStatusRepository = maritalStatusRepository;
             _genderRepository = genderRepository;
             _membershipStatusRepository = membershipStatusRepository;
+
             _employmentStatusRepository = employmentStatusRepository;
             _nextOfKinRepository = nextOfKinRepository;
             _generalMeetingRepository = generalMeetingRepository;
@@ -96,7 +100,7 @@ namespace APC.Applications.Services
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join mb in _membershipStatusRepository.GetAll() on m.membershipStatusID equals mb.membershipStatusID
                         join e in _employmentStatusRepository.GetAll() on m.employmentStatusID equals e.employmentStatusID
-                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.NextOfKinId
+                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.RelationshipToKinID
                         select new
                         {
                             m.memberID,
@@ -121,7 +125,7 @@ namespace APC.Applications.Services
                             mb.membershipStatus,
                             m.deadDate,
                             m.nextOfKin,
-                            nk.NextOfKinName,
+                            nk.RelationshipToKin,
                             m.LGAOfCountryOrigin,
 
                             m.countryID,
@@ -160,7 +164,7 @@ namespace APC.Applications.Services
                 PhoneNumber3 = x.phoneNumber3,
                 MembershipStatus = x.membershipStatus,
                 DeadDate = x.deadDate,
-                NextOfKin = x.NextOfKinName,
+                NextOfKin = x.RelationshipToKin,
                 RelationshipToNextOfKin = x.nextOfKin,
                 LGA = x.LGAOfCountryOrigin,
 
@@ -193,7 +197,7 @@ namespace APC.Applications.Services
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join mb in _membershipStatusRepository.GetByStatus(status) on m.membershipStatusID equals mb.membershipStatusID
                         join e in _employmentStatusRepository.GetAll() on m.employmentStatusID equals e.employmentStatusID
-                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.NextOfKinId
+                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.RelationshipToKinID
                         select new
                         {
                             m.memberID,
@@ -201,24 +205,28 @@ namespace APC.Applications.Services
                             m.surname,
                             m.birthday,
                             m.imagePath,
+
                             m.houseAddress,
                             m.emailAddress,
                             m.membershipDate,
                             c.countryName,
+
                             n.nationality1,
                             pro.profession1,
                             p.positionName,
                             g.genderName,
                             e.employmentStatus,
+
                             mar.maritalStatus,
                             per.permission1,
                             m.phoneNumber,
                             m.phoneNumber2,
                             m.phoneNumber3,
+
                             mb.membershipStatus,
                             m.deadDate,
                             m.nextOfKin,
-                            nk.NextOfKinName,
+                            nk.RelationshipToKin,
                             m.LGAOfCountryOrigin,
 
                             m.countryID,
@@ -226,6 +234,7 @@ namespace APC.Applications.Services
                             m.professionID,
                             m.positionID,
                             m.maritalStatusID,
+
                             m.employmentStatusID,
                             m.relationshipToKinID,
                             m.membershipStatusID,
@@ -241,23 +250,27 @@ namespace APC.Applications.Services
                 LastName = x.surname,
                 Birthday = x.birthday,
                 ImagePath = x.imagePath,
+
                 HouseAddress = x.houseAddress,
                 Email = x.emailAddress,
                 MembershipDate = x.membershipDate,
                 Country = x.countryName,
                 Nationality = x.nationality1,
+
                 Profession = x.profession1,
                 Position = x.positionName,
                 Gender = x.genderName,
                 EmploymentStatus = x.employmentStatus,
                 MaritalStatus = x.maritalStatus,
+
                 Permission = x.permission1,
                 PhoneNumber = x.phoneNumber,
                 PhoneNumber2 = x.phoneNumber2,
                 PhoneNumber3 = x.phoneNumber3,
                 MembershipStatus = x.membershipStatus,
+
                 DeadDate = x.deadDate,
-                NextOfKin = x.NextOfKinName,
+                NextOfKin = x.RelationshipToKin,
                 RelationshipToNextOfKin = x.nextOfKin,
                 LGA = x.LGAOfCountryOrigin,
 
@@ -266,6 +279,7 @@ namespace APC.Applications.Services
                 ProfessionId = x.professionID,
                 PositionId = x.positionID,
                 EmploymentStatusId = x.employmentStatusID,
+
                 MaritalStatusId = x.maritalStatusID,
                 PermissionId = x.permissionID,
                 RelationshipToNextOfKinId = x.relationshipToKinID,
@@ -307,7 +321,7 @@ namespace APC.Applications.Services
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join mb in _membershipStatusRepository.GetByStatus(status) on m.membershipStatusID equals mb.membershipStatusID
                         join e in _employmentStatusRepository.GetAll() on m.employmentStatusID equals e.employmentStatusID
-                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.NextOfKinId
+                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.RelationshipToKinID
                         select new
                         {
                             m.memberID,
@@ -332,7 +346,7 @@ namespace APC.Applications.Services
                             mb.membershipStatus,
                             m.deadDate,
                             m.nextOfKin,
-                            nk.NextOfKinName,
+                            nk.RelationshipToKin,
                             m.LGAOfCountryOrigin,
 
                             m.countryID,
@@ -371,7 +385,7 @@ namespace APC.Applications.Services
                 PhoneNumber3 = x.phoneNumber3,
                 MembershipStatus = x.membershipStatus,
                 DeadDate = x.deadDate,
-                NextOfKin = x.NextOfKinName,
+                NextOfKin = x.RelationshipToKin,
                 RelationshipToNextOfKin = x.nextOfKin,
                 LGA = x.LGAOfCountryOrigin,
 
@@ -414,7 +428,7 @@ namespace APC.Applications.Services
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join mb in _membershipStatusRepository.GetAll() on m.membershipStatusID equals mb.membershipStatusID
                         join e in _employmentStatusRepository.GetAll() on m.employmentStatusID equals e.employmentStatusID
-                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.NextOfKinId
+                        join nk in _nextOfKinRepository.GetAll() on m.relationshipToKinID equals nk.RelationshipToKinID
                         select new
                         {
                             m.memberID,
@@ -439,7 +453,7 @@ namespace APC.Applications.Services
                             mb.membershipStatus,
                             m.deadDate,
                             m.nextOfKin,
-                            nk.NextOfKinName,
+                            nk.RelationshipToKin,
                             m.LGAOfCountryOrigin,
 
                             m.countryID,
@@ -478,7 +492,7 @@ namespace APC.Applications.Services
                 PhoneNumber3 = x.phoneNumber3,
                 MembershipStatus = x.membershipStatus,
                 DeadDate = x.deadDate,
-                NextOfKin = x.NextOfKinName,
+                NextOfKin = x.RelationshipToKin,
                 RelationshipToNextOfKin = x.nextOfKin,
                 LGA = x.LGAOfCountryOrigin,
 

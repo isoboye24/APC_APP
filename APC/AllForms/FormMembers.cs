@@ -21,7 +21,7 @@ namespace APC
         private readonly IGenderService _genderService;
         private readonly IMaritalStatusService _maritalStatusService;
         private readonly IEmploymentStatusService _employmentStatusService;
-        private readonly INextOfKinService _nextOfKinService;
+        private readonly IRelationshipToNextOfKinService _relationshipToNextOfKinService;
         private readonly IPermissionService _permissionService;
         private readonly IMembershipStatusService _membershipStatusService;
 
@@ -33,7 +33,7 @@ namespace APC
 
         public FormMembers(IMemberService memberService, ICountryService countryService, INationalityService nationalityService,
             IProfessionService professionService, IPositionService positionService, ICurrentUserService currentUserService, IGenderService genderService,
-            IMaritalStatusService maritalStatusService, IEmploymentStatusService employmentStatusService, INextOfKinService nextOfKinService,
+            IMaritalStatusService maritalStatusService, IEmploymentStatusService employmentStatusService, IRelationshipToNextOfKinService relationshipToNextOfKinService,
             IPermissionService permissionService, IMembershipStatusService membershipStatusService)
         {
             InitializeComponent();
@@ -48,7 +48,7 @@ namespace APC
             _maritalStatusService = maritalStatusService;
             _employmentStatusService = employmentStatusService;
             _membershipStatusService = membershipStatusService;
-            _nextOfKinService = nextOfKinService;
+            _relationshipToNextOfKinService = relationshipToNextOfKinService;
             _permissionService = permissionService;
         }
 
@@ -118,7 +118,7 @@ namespace APC
             GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
             cmbMembershipStatus.DataSource = _membershipStatusService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMembershipStatus, "MembershipStatus", "MembershipStatusID");
-            cmbRelationshipToNextOfKin.DataSource = _nextOfKinService.GetAll();
+            cmbRelationshipToNextOfKin.DataSource = _relationshipToNextOfKinService.GetAll();
             GeneralHelper.ComboBoxProps(cmbRelationshipToNextOfKin, "Relationship", "RelationshipToKinID");
             #endregion
 
@@ -231,7 +231,7 @@ namespace APC
             cmbMembershipStatus.DataSource = _membershipStatusService.GetAll();
 
             cmbRelationshipToNextOfKin.SelectedIndex = -1;
-            cmbRelationshipToNextOfKin.DataSource = _nextOfKinService.GetAll();
+            cmbRelationshipToNextOfKin.DataSource = _relationshipToNextOfKinService.GetAll();
             picProfilePic.Image = null;
             txtPhone2.Hide();
             txtPhone3.Hide();

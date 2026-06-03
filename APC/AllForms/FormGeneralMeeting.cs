@@ -58,7 +58,7 @@ namespace APC.AllForms
                 DateTime meetingDate = dateTimePickerGenAttDate.Value;
                 string summary = txtSummary.Text.Trim();
 
-                if (_generalMeetingDTO.GeneralMeetingId == 0)
+                if (!_isUpdate)
                 {
                     int totalMembersPresent = 0;
                     int totalMembersAbsent = 0;

@@ -265,11 +265,11 @@ namespace APC
 
             chartAmountRaisedYearly.DataSource = data;
 
-            chartAmountRaisedYearly.Series.Add("TotalAmountRaised");
-            chartAmountRaisedYearly.Series["TotalAmountRaised"].ChartType = SeriesChartType.Column;
-            chartAmountRaisedYearly.Series["TotalAmountRaised"].XValueMember = "Year";
-            chartAmountRaisedYearly.Series["TotalAmountRaised"].YValueMembers = "Amount";
-            chartAmountRaisedYearly.Series["TotalAmountRaised"].IsValueShownAsLabel = true;
+            chartAmountRaisedYearly.Series.Add("Amount");
+
+            chartAmountRaisedYearly.Series["Amount"].XValueMember = "Year";
+            chartAmountRaisedYearly.Series["Amount"].YValueMembers = "Amount";
+            chartAmountRaisedYearly.Series["Amount"].IsValueShownAsLabel = true;
 
             chartAmountRaisedYearly.DataBind();
 
@@ -285,11 +285,11 @@ namespace APC
 
             chartExpenditures.DataSource = data;
 
-            chartExpenditures.Series.Add("TotalAmountSpent");
-            chartExpenditures.Series["TotalAmountSpent"].ChartType = SeriesChartType.Column;
-            chartExpenditures.Series["TotalAmountSpent"].XValueMember = "Year";
-            chartExpenditures.Series["TotalAmountSpent"].YValueMembers = "Amount";
-            chartExpenditures.Series["TotalAmountSpent"].IsValueShownAsLabel = true;
+            chartExpenditures.Series.Add("Amount");
+            chartExpenditures.Series["Amount"].ChartType = SeriesChartType.Column;
+            chartExpenditures.Series["Amount"].XValueMember = "Year";
+            chartExpenditures.Series["Amount"].YValueMembers = "Amount";
+            chartExpenditures.Series["Amount"].IsValueShownAsLabel = true;
 
             chartExpenditures.DataBind();
 

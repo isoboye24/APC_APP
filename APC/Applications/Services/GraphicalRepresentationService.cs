@@ -16,25 +16,27 @@ namespace APC.Applications.Services
         public List<GraphDTO> GetAllAnnualExpenditures()
         {
             return _financialRepository.GetAll()
-                 .Select(x => new GraphDTO
-                 {
-                     Amount = x.totalAmountSpent,
-                     Year = x.year,
-                 })
-                 .OrderBy(x => x.Year)
-                 .ToList();
+                .GroupBy(x => x.year)
+                .Select(g => new GraphDTO
+                {
+                    Year = g.Key,
+                    Amount = g.Sum(x => x.totalAmountSpent)
+                })
+                .OrderBy(x => x.Year)
+                .ToList();
         }
 
         public List<GraphDTO> GetAllAnnualRaisedDues()
         {
             return _financialRepository.GetAll()
-                 .Select(x => new GraphDTO
-                 {
-                     Amount = x.totalAmountRaised,
-                     Year = x.year,
-                 })
-                 .OrderBy(x => x.Year)
-                 .ToList();
+                .GroupBy(x => x.year)
+                .Select(g => new GraphDTO
+                {
+                    Year = g.Key,
+                    Amount = g.Sum(x => x.totalAmountRaised)
+                })
+                .OrderBy(x => x.Year)
+                .ToList();
         }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Entities
 {
@@ -21,6 +17,7 @@ namespace APC.Domain.Entities
         {
             SetDocumentName(documentName);
             SetDocumentPath(documentPath);
+            SetDocumentType(documentType);
             SetDate(date);
         }
 
@@ -61,6 +58,19 @@ namespace APC.Domain.Entities
         public void UpdateDocumentPath(string newDocumentPath)
         {
             SetDocumentPath(newDocumentPath);
+        }
+
+        private void SetDocumentType(string documentType)
+        {
+            if (string.IsNullOrWhiteSpace(documentType))
+                throw new ArgumentException("Document type name cannot be empty");
+
+            DocumentType = documentType.Trim();
+        }
+
+        public void UpdateDocumentType(string newDocumentType)
+        {
+            SetDocumentType(newDocumentType);
         }
 
         private void SetDate(DateTime date)

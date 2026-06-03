@@ -28,6 +28,14 @@ namespace APC.Helper
                                     { "AmountPaid", "Paid" },
                                     { "FormattedFineDate", "Date" }
                                 });
+
+                    grid.Columns["FirstName"].DisplayIndex = 0;
+                    grid.Columns["LastName"].DisplayIndex = 1;
+                    grid.Columns["ShortDescription"].DisplayIndex = 2;
+                    grid.Columns["AmountExpected"].DisplayIndex = 3;
+                    grid.Columns["AmountPaid"].DisplayIndex = 4;
+                    grid.Columns["Status"].DisplayIndex = 5;
+                    grid.Columns["FormattedFineDate"].DisplayIndex = 6;
                     break;
 
                 case FinedMemberGridType.PersonalDetails:
@@ -39,6 +47,13 @@ namespace APC.Helper
                                     { "AmountPaid", "Paid" },
                                     { "FormattedFineDate", "Date" }
                                 });
+
+                    grid.Columns["ShortDescription"].DisplayIndex = 0;
+                    grid.Columns["AmountExpected"].DisplayIndex = 1;
+                    grid.Columns["AmountPaid"].DisplayIndex = 2;
+                    grid.Columns["Balance"].DisplayIndex = 3;
+                    grid.Columns["Status"].DisplayIndex = 4;
+                    grid.Columns["FormattedFineDate"].DisplayIndex = 5;
                     break;
             }
         }

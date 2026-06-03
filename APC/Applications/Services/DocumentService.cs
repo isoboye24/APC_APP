@@ -31,6 +31,7 @@ namespace APC.Applications.Services
         public List<DocumentDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                 .Select(x => new DocumentDTO
                 {
                     DocumentId = x.documentID,
@@ -48,6 +49,7 @@ namespace APC.Applications.Services
         {
             return _repository.GetAll()
                 .Where(x => x.year == year)
+                .ToList()
                 .Select(x => new DocumentDTO
                 {
                     DocumentId = x.documentID,
@@ -64,6 +66,7 @@ namespace APC.Applications.Services
         public List<DocumentDTO> GetAllDeletedDocuments()
         {
             return _repository.GetAllDeletedDocuments()
+                .ToList()
                 .Select(x => new DocumentDTO
                 {
                     DocumentId = x.documentID,
@@ -88,9 +91,6 @@ namespace APC.Applications.Services
             var check = _repository.GetById(data.DocumentId);
             if (check == null)
                 throw new Exception("Document not found");
-
-            data.UpdateDocumentName(data.DocumentName);
-            data.UpdateDocumentPath(data.DocumentPath);
 
             return _repository.Update(data);
         }

@@ -1,11 +1,10 @@
-﻿using APC.Domain.Entities;
-using System.Collections.Generic;
+﻿using APC.Infrastructure.Data;
+using System.Linq;
 
 namespace APC.Applications.Interfaces
 {
     public interface INextOfKinRepository
     {
-        List<NextOfKin> GetAll();
-        NextOfKin GetById(int id);
+        IQueryable<NEXT_OF_KIN_RELATIONSHIP> GetAll();
     }
 }

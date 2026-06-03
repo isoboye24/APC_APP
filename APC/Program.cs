@@ -71,7 +71,7 @@ namespace APC
             services.AddScoped<IGenderService, GenderService>();
             services.AddScoped<IAttendanceStatusService, AttendanceStatusService>();
             services.AddScoped<IMembershipStatusService, MembershipStatusService>();
-            services.AddScoped<INextOfKinService, NextOfKinService>();
+            services.AddScoped<IRelationshipToNextOfKinService, RelationshipToNextOfKinService>();
 
             services.AddScoped<IConstitutionService, ConstitutionService>();
             services.AddScoped<IDocumentService, DocumentService>();
@@ -93,6 +93,7 @@ namespace APC
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddSingleton<IGraphicalRepresentationService, GraphicalRepresentationService>();
             services.AddSingleton<IPersonalAttendanceService, PersonalAttendanceService>();
+            services.AddSingleton<IPaymentStatusService, PaymentStatusService>();
 
             // Forms
             services.AddTransient<FormLogin>();
@@ -106,7 +107,6 @@ namespace APC
             services.AddTransient<FormPaymentStatus>();
             services.AddTransient<FormSettings>();
 
-            services.AddTransient<FormViewComment>();
             services.AddTransient<FormConstitution>();
             services.AddTransient<FormViewConstitution>();
             services.AddTransient<FormFinedMember>();
