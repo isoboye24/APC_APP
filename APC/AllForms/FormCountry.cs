@@ -61,7 +61,7 @@ namespace APC
             {
                 var name = txtCountry.Text.Trim();
 
-                if (_countryId == 0)
+                if (!_isUpdate)
                 {
                     var country = new Country(name);
                     _countryService.Create(country);

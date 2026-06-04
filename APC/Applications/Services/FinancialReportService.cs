@@ -12,7 +12,7 @@ namespace APC.Applications.Services
         private readonly IGeneralMeetingAttendanceRepository _generalMeetingAttendanceRepository;
         private readonly IMemberRepository _memberRepository;
         private readonly IGeneralMeetingRepository _generalMeetingRepository;
-        private readonly IAttendanceStatusRepository _attendanceStatusRepository;
+
         public FinancialReportService(IFinancialReportRepository repository, IGeneralMeetingAttendanceRepository generalMeetingAttendanceRepository, 
             IGeneralMeetingRepository generalMeetingRepository, IMemberRepository memberRepository)
         {
@@ -39,6 +39,7 @@ namespace APC.Applications.Services
         public List<FinancialReportDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                  .Select(x => new FinancialReportDTO
                  {
                      FinancialReportId = x.financialReportID,
@@ -63,12 +64,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Financial Report not found");
 
-            data.UpdateTotalAmountRaised(data.TotalAmountRaised);
-            data.UpdateTotalAmountSpent(data.TotalAmountSpent);
-            data.UpdateYear(data.Year);
-            data.UpdateSummary(data.Summary);
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
 
         public decimal GetAmountContributedByMember(int ID)

@@ -48,20 +48,10 @@ namespace APC.Domain.Entities
             TotalMembersPresent = value < 0 ? 0 : value;
         }
 
-        public void UpdateTotalMembersPresent(int newMembersPresent)
-        {
-            SetTotalMembersPresent(newMembersPresent);
-        }
-
         private void SetTotalMembersAbsent(int? membersAbsent)
         {
             var value = membersAbsent ?? 0;
             TotalMembersAbsent = value < 0 ? 0 : value;
-        }
-
-        public void UpdateTotalMembersAbsent(int newMembersAbsent)
-        {
-            SetTotalMembersAbsent(newMembersAbsent);
         }
        
         private void SetTotalDuesPaid(decimal? duesPaid)
@@ -70,20 +60,10 @@ namespace APC.Domain.Entities
             TotalDuesPaid = value < 0 ? 0 : value;
         }
 
-        public void UpdateTotalDuesPaid(decimal newDuesPaid)
-        {
-            SetTotalDuesPaid(newDuesPaid);
-        }
-
         private void SetTotalDuesExpected(decimal? duesExpected)
         {
             var value = duesExpected ?? 0;
             TotalDuesPaid = value < 0 ? 0 : value;
-        }
-
-        public void UpdateTotalDuesExpected(decimal newDuesExpected)
-        {
-            SetTotalDuesExpected(newDuesExpected);
         }
         
         private void SetTotalDuesBalance(decimal? duesBalance)
@@ -92,19 +72,9 @@ namespace APC.Domain.Entities
             TotalDuesPaid = value < 0 ? 0 : value;
         }
 
-        public void UpdateTotalDuesBalance(decimal newDuesBalance)
-        {
-            SetTotalDuesBalance(newDuesBalance);
-        }
-
         private void SetSummary(string summary)
         {
             Summary = string.IsNullOrWhiteSpace(summary) ? null : summary.Trim();
-        }
-
-        public void UpdateSummary(string newSummary)
-        {
-            SetSummary(newSummary);
         }
 
         private void SetGeneralMeetingDate(DateTime date)
@@ -113,11 +83,6 @@ namespace APC.Domain.Entities
                 throw new ArgumentException("Invalid year");
 
             GeneralMeetingDate = date;
-        }
-
-        public void UpdateGeneralMeetingDate(DateTime newDate)
-        {
-            SetGeneralMeetingDate(newDate);
         }
     }
 }

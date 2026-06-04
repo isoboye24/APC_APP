@@ -18,6 +18,7 @@ namespace APC.Applications.Services
         public List<CountryDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                 .Select(x => new CountryDTO
                 {
                     CountryId = x.countryID,
@@ -30,6 +31,7 @@ namespace APC.Applications.Services
         public List<CountryDTO> GetAllDeletedCountries()
         {
             return _repository.GetAllDeletedCountries()
+                .ToList()
                 .Select(x => new CountryDTO
                 {
                     CountryId = x.countryID,
@@ -64,9 +66,10 @@ namespace APC.Applications.Services
             var check = _repository.GetById(country.CountryId);
             if (check == null)
                 throw new Exception("Country not found");
-
-            country.UpdateName(country.CountryName);
-            return _repository.Update(country);
+            else
+            {
+                return _repository.Update(country);                
+            }
         }
     }
 }

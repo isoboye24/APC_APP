@@ -33,6 +33,7 @@ namespace APC.Applications.Services
         {
             return _repository.GetAll()
                 .OrderBy(x => x.eventID)
+                .ToList()
                 .Select((x, index) => new EventImageDTO
                 {
                     Counter = index + 1,
@@ -50,6 +51,7 @@ namespace APC.Applications.Services
             return _repository.GetAll()
                 .Where(x => x.eventID == eventId)
                 .OrderBy(x => x.imageCaption)
+                .ToList()
                 .Select((x, index) => new EventImageDTO
                 {
                     Counter = index + 1,
@@ -66,6 +68,7 @@ namespace APC.Applications.Services
         {
             return _repository.GetAllDeletedEventImages()
                 .OrderBy(x => x.imageCaption)
+                .ToList()
                 .Select((x, index) => new EventImageDTO
                 {
                     Counter = index + 1,
@@ -91,11 +94,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Event image not found");
 
-            data.UpdateImageCaption(data.ImageCaption);
-            data.UpdateSummary(data.Summary);
-            data.UpdateImagePath(data.ImagePath);
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
 
         public int GetEventImagesByEventCount(int eventId)

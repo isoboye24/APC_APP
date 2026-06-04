@@ -42,11 +42,6 @@ namespace APC.Domain.Entities
             DocumentName = documentName.Trim();
         }
 
-        public void UpdateDocumentName(string newDocumentName)
-        {
-            SetDocumentName(newDocumentName);
-        }
-
         private void SetDocumentPath(string documentPath)
         {
             if (string.IsNullOrWhiteSpace(documentPath))
@@ -55,22 +50,12 @@ namespace APC.Domain.Entities
             DocumentPath = documentPath.Trim();
         }
 
-        public void UpdateDocumentPath(string newDocumentPath)
-        {
-            SetDocumentPath(newDocumentPath);
-        }
-
         private void SetDocumentType(string documentType)
         {
             if (string.IsNullOrWhiteSpace(documentType))
                 throw new ArgumentException("Document type name cannot be empty");
 
             DocumentType = documentType.Trim();
-        }
-
-        public void UpdateDocumentType(string newDocumentType)
-        {
-            SetDocumentType(newDocumentType);
         }
 
         private void SetDate(DateTime date)

@@ -1,7 +1,5 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
-using APC.Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +16,7 @@ namespace APC.Applications.Services
         public List<RelationshipToNextOfKinDTO> GetAll()
         {
             return _repository.GetAll()
+                 .ToList()
                 .Select(x => new RelationshipToNextOfKinDTO
                 {
                     RelationshipToNextOfKinId = x.RelationshipToKinID,

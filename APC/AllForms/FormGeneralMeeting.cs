@@ -83,7 +83,7 @@ namespace APC.AllForms
                     decimal totalDuesExpected = currentMembers * 10;
                     decimal totalBalance = totalDuesExpected - totalDuesPaid;
 
-                    var generalMeeing = new GeneralMeeting(totalMembersPresent, totalMembersAbsent, totalDuesPaid, totalDuesExpected, totalBalance,
+                    var generalMeeing = GeneralMeeting.Rehydrate(_generalMeetingDTO.GeneralMeetingId, totalMembersPresent, totalMembersAbsent, totalDuesPaid, totalDuesExpected, totalBalance,
                         summary, meetingDate);
 
 

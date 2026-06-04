@@ -12,9 +12,10 @@ namespace APC.Applications.Services
         private readonly IEventExpenditureRepository _repository;
         private readonly IEventsRepository _eventRepository;
 
-        public EventExpenditureService(IEventExpenditureRepository repository)
+        public EventExpenditureService(IEventExpenditureRepository repository, IEventsRepository eventRepository)
         {
             _repository = repository;
+            _eventRepository = eventRepository;
         }
 
         public int Count()
@@ -43,6 +44,7 @@ namespace APC.Applications.Services
                         })
                 .OrderByDescending(x => x.e.eventDate)
                 .ThenByDescending(x => x.ex.amountSpent)
+                .ToList()
                 .Select((x, index) => new EventExpenditureDTO
                 {
                     Counter = index + 1,
@@ -70,6 +72,7 @@ namespace APC.Applications.Services
                         })
                 .OrderByDescending(x => x.e.eventDate)
                 .ThenByDescending(x => x.ex.amountSpent)
+                .ToList()
                 .Select((x, index) => new EventExpenditureDTO
                 {
                     Counter = index + 1,
@@ -97,6 +100,7 @@ namespace APC.Applications.Services
                         })
                .OrderByDescending(x => x.e.eventDate)
                .ThenByDescending(x => x.ex.amountSpent)
+               .ToList()
                .Select((x, index) => new EventExpenditureDTO
                {
                    Counter = index + 1,
@@ -124,11 +128,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Event Expenditure not found");
 
-            data.UpdateDate(data.ExpenditureDate);
-            data.UpdateSpentAmount(data.SpentAmount);
-            data.UpdateSummary(data.Summary);
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
 
         public decimal GetTotalAmountSpentByEvent(int eventId)

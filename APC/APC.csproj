@@ -318,6 +318,7 @@
     <Compile Include="Applications\DTO\CountryDTO.cs" />
     <Compile Include="Applications\DTO\DeadMemberShortDetailDTO.cs" />
     <Compile Include="Applications\DTO\DocumentDTO.cs" />
+    <Compile Include="Applications\DTO\DocumentTypeDTO.cs" />
     <Compile Include="Applications\DTO\EmploymentStatusDTO.cs" />
     <Compile Include="Applications\DTO\EventDTO.cs" />
     <Compile Include="Applications\DTO\EventExpenditureDTO.cs" />
@@ -383,6 +384,7 @@
     <Compile Include="CircularPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Helper\AttendanceStatusHelper.cs" />
     <Compile Include="Infrastructure\Data\APCContext.cs" />
     <Compile Include="Infrastructure\Data\ATTENDANCE_STATUS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>

@@ -32,6 +32,7 @@ namespace APC.Applications.Services
         public List<ConstitutionDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                 .Select(x => new ConstitutionDTO
                 {
                     ConstitutionId = x.constitutionID,
@@ -48,6 +49,7 @@ namespace APC.Applications.Services
         public List<ConstitutionDTO> GetAllDeletedConstitutions()
         {
             return _repository.GetAllDeletedConstitutions()
+                .ToList()
                 .Select(x => new ConstitutionDTO
                 {
                     ConstitutionId = x.constitutionID,
@@ -64,6 +66,7 @@ namespace APC.Applications.Services
         public ConstitutionDTO GetById(int id)
         {
             return _repository.GetById(id)
+                .ToList()
                 .Select(x => new ConstitutionDTO
                 {
                     ConstitutionId = x.constitutionID,
@@ -80,6 +83,7 @@ namespace APC.Applications.Services
         public ConstitutionDTO GetBySection(string section)
         {
             return _repository.GetBySection(section)
+                .ToList()
                 .Select(x => new ConstitutionDTO
                 {
                     ConstitutionId = x.constitutionID,
@@ -104,14 +108,10 @@ namespace APC.Applications.Services
             var check = _repository.GetById(data.ConstitutionId);
             if (check == null)
                 throw new Exception("Constitution not found");
-
-            data.UpdateConstitutionText(data.ConstitutionText);
-            data.UpdateFine(data.Fine);
-            data.UpdateSection(data.Section);
-            data.UpdateConstitutionText(data.ConstitutionText);
-            
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
     }
 }

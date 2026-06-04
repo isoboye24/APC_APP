@@ -31,6 +31,7 @@ namespace APC.Applications.Services
         public List<PositionDTO> GetAll()
         {
             return _repository.GetAll()
+                 .ToList()
                 .Select(x => new PositionDTO
                 {
                     PositionId = x.positionID,
@@ -42,6 +43,7 @@ namespace APC.Applications.Services
         public List<PositionDTO> GetAllDeletedPositions()
         {
             return _repository.GetAllDeletedPositions()
+                 .ToList()
                 .Select(x => new PositionDTO
                 {
                     PositionId = x.positionID,
@@ -62,8 +64,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Position not found");
 
-            position.UpdateName(position.PositionName);
-            return _repository.Update(position);
+            else
+            {
+                return _repository.Update(position);                
+            }
         }
     }
 }

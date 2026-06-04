@@ -2,13 +2,13 @@
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
+using APC.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AttendanceStatusDTO = APC.Applications.DTO.AttendanceStatusDTO;
 
 namespace APC
 {
@@ -26,13 +26,12 @@ namespace APC
         private int _attendanceStatusId = 0;
 
         public FormGeneralMeetingAttendance(IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService, 
-            IAttendanceStatusService attendanceStatusService, GeneralMeetingDTO generalMeetingDTO)
+            IAttendanceStatusService attendanceStatusService)
         {
             InitializeComponent();
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _memberService = memberService;
             _attendanceStatusService = attendanceStatusService;
-            _generalMeetingDTO = generalMeetingDTO;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -54,9 +53,14 @@ namespace APC
         {
 
         }
-        public void loadForEdit(GeneralMeetingAttendanceDTO dto, bool isUpdate)
+        public void loadGeneralMeetingData(GeneralMeetingDTO generalMeetingDTO)
         {
-            _generalMeetingAttendanceDTO = dto;
+            _generalMeetingDTO = generalMeetingDTO;
+        }
+
+        public void loadForEdit(int memberId, bool isUpdate)
+        {
+            _generalMeetingAttendanceDTO = _generalMeetingAttendanceService.GetPersonalAttendanceById(memberId, _generalMeetingDTO.GeneralMeetingId);
             _isUpdate = isUpdate;
         }
 
@@ -74,13 +78,23 @@ namespace APC
             MemberHelper.ConfigureMemberGrid(dataGridViewMembers, MemberHelper.MemberGridType.Basic);
         }
 
+        private void loadAttendanceStatuses()
+        {
+            dataGridViewAttendanceStatuses.DataSource = _attendanceStatusService.GetAll();
+            AttendanceStatusHelper.ConfigureAttendanceStatusGrid(dataGridViewAttendanceStatuses, AttendanceStatusHelper.AttendanceStatusGridType.Basic);
+        }
+
         private void FormAttendance_Load(object sender, EventArgs e)
         {
-            loadMembers();
+            resizeControls();
+
+            
+
+            loadAttendanceStatuses();
 
             if (_isUpdate)
             {
-                labelTitle.Text = "Edit member at meeting on " + _generalMeetingDTO.Day + "." + _generalMeetingDTO.MonthId + "." + _generalMeetingDTO.Year;
+                labelTitle.Text = "Edit member at meeting on " + _generalMeetingDTO.GeneralMeetingDate.ToString("dd.MM.yyyy");
 
                 txtSurname.Text = _generalMeetingAttendanceDTO.LastName;
                 txtName.Text = _generalMeetingAttendanceDTO.FirstName;
@@ -91,10 +105,13 @@ namespace APC
                 picProfilePic.ImageLocation = imagePath;
 
                 tableLayoutPanelMemberList.Hide();
+                _memberId = _generalMeetingAttendanceDTO.MemberId;
             }
             else
             {
-                labelTitle.Text = "Add member to meeting on " + _generalMeetingDTO.Day + "." + _generalMeetingDTO.MonthId + "." + _generalMeetingDTO.Year;
+                labelTitle.Text = "Add member to meeting on " + _generalMeetingDTO.GeneralMeetingDate.ToString("dd.MM.yyyy");
+
+                loadMembers();
             }
         }
 
@@ -115,26 +132,17 @@ namespace APC
             dataGridViewMembers.DataSource = filtered;
         }
 
-        private MemberFullDetailsDTO GetMember()
-        {
-            if (dataGridViewMembers.CurrentRow == null)
-                return null;
-
-            return dataGridViewMembers.CurrentRow.DataBoundItem as MemberFullDetailsDTO;
-        }
-
-        private AttendanceStatusDTO GetAttendanceStatus()
-        {
-            if (dataGridViewAttendanceStatuses.CurrentRow == null)
-                return null;
-
-            return dataGridViewAttendanceStatuses.CurrentRow.DataBoundItem as AttendanceStatusDTO;
-        }
-
         private void dataGridViewMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            var selected = GetMember();
-            if (selected == null) return;
+            if (e.RowIndex < 0)
+                return;
+
+            var row = dataGridViewMembers.Rows[e.RowIndex];
+
+            var selected = row.DataBoundItem as MemberFullDetailsDTO;
+
+            if (selected == null)
+                return;
 
             _memberId = selected.MemberId;
             txtSurname.Text = selected.LastName;
@@ -147,7 +155,15 @@ namespace APC
 
         private void dataGridViewAttendanceStatuses_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            var selected = GetAttendanceStatus();
+            if (e.RowIndex < 0)
+                return;
+
+            var row = dataGridViewAttendanceStatuses.Rows[e.RowIndex];
+
+            var selected = row.DataBoundItem as AttendanceStatusDTO;
+
+            if (selected == null)
+                return;
 
             _attendanceStatusId = selected.AttendanceStatusId;
             txtAttendanceStatus.Text = selected.AttendanceStatusName;
@@ -162,10 +178,10 @@ namespace APC
             try
             {
                 decimal expectedMonthlyDues = 10;
-                decimal monthlyDues = Convert.ToDecimal(txtMonthlyDues.Text);
-                decimal totalBalance = expectedMonthlyDues - monthlyDues;
+                decimal monthlyDues = decimal.TryParse(txtMonthlyDues.Text.Trim(), out decimal result) ? result: 0;
+                decimal totalBalance = Convert.ToDecimal(expectedMonthlyDues - monthlyDues);
 
-                if (_generalMeetingDTO.GeneralMeetingId == 0)
+                if (!_isUpdate)
                 {
                     var personalAttendance = new PersonalAttendance(_attendanceStatusId, _memberId, monthlyDues, expectedMonthlyDues,
                         totalBalance, _generalMeetingDTO.GeneralMeetingId, _generalMeetingDTO.GeneralMeetingDate);
@@ -175,7 +191,7 @@ namespace APC
                 }
                 else
                 {
-                    var personalAttendance = new PersonalAttendance(_attendanceStatusId, _memberId, monthlyDues, expectedMonthlyDues,
+                    var personalAttendance = PersonalAttendance.Rehydrate(_generalMeetingAttendanceDTO.PersonalAttendanceId, _attendanceStatusId, _memberId, monthlyDues, expectedMonthlyDues,
                         totalBalance, _generalMeetingDTO.GeneralMeetingId, _generalMeetingDTO.GeneralMeetingDate);
 
                     _generalMeetingAttendanceService.Update(personalAttendance);

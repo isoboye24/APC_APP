@@ -16,20 +16,23 @@ namespace APC.Helper
             switch (type)
             {
                 case GeneralMeetingGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "MonthName", "Year", "TotalMembersPresent", "TotalMembersAbsent", "FormattedTotalDuesPaid");
+                    GeneralHelper.SetVisibleColumns(grid, "MonthName", "Year", "TotalMembersPresent", "TotalMembersAbsent", "FormattedTotalDuesPaid", 
+                        "FinesRaised");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "MonthName", "Month" },
                                     { "TotalMembersPresent", "Present" },
                                     { "TotalMembersAbsent", "Absent" },
                                     { "FormattedTotalDuesPaid", "Dues Paid" },
+                                    { "FinesRaised", "Fines Paid" },
                                 });
-                    // Force column order
+                    
                     grid.Columns["MonthName"].DisplayIndex = 0;
                     grid.Columns["Year"].DisplayIndex = 1;
                     grid.Columns["TotalMembersPresent"].DisplayIndex = 2;
                     grid.Columns["TotalMembersAbsent"].DisplayIndex = 3;
                     grid.Columns["FormattedTotalDuesPaid"].DisplayIndex = 4;
+                    grid.Columns["FinesRaised"].DisplayIndex = 5;
                     break;
             }
         }

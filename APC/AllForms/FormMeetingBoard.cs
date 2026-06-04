@@ -22,6 +22,7 @@ namespace APC.AllForms
         private readonly IGeneralMeetingService _generalMeetingService;
         private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IAttendanceStatusService _attendanceStatusService;
 
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
         private List<Applications.DTO.FinedMemberDTO> _finedMemberDTO;
@@ -35,7 +36,7 @@ namespace APC.AllForms
             IMonthService monthService, IConstitutionService constitutionService, IFinedMemberService finedMemberService, 
             ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService, 
             ICurrentUserService currentUserService, IGeneralMeetingService generalMeetingService, 
-            IGeneralMeetingAttendanceService generalMeetingAttendanceService, IServiceProvider serviceProvider)
+            IGeneralMeetingAttendanceService generalMeetingAttendanceService, IServiceProvider serviceProvider, IAttendanceStatusService attendanceStatusService)
         {
             InitializeComponent();
             _genderService = genderService;
@@ -49,6 +50,7 @@ namespace APC.AllForms
             _generalMeetingService = generalMeetingService;
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _serviceProvider = serviceProvider;
+            _attendanceStatusService = attendanceStatusService;
         }
 
         private void resizeControls()
@@ -323,7 +325,8 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormViewGeneralAttendance(selected, _generalMeetingAttendanceService, _memberService);
+            var form = new FormViewGeneralAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService);
+            form.loadForView(selected);
             form.ShowDialog();
 
             ClearFilters();

@@ -32,6 +32,7 @@ namespace APC.Applications.Services
         public List<NationalityDTO> GetAll()
         {
             return _repository.GetAll()
+                 .ToList()
                 .Select(x => new NationalityDTO
                 {
                     NationalityId = x.nationalityID,
@@ -42,6 +43,7 @@ namespace APC.Applications.Services
         public List<NationalityDTO> GetAllDeletedNationalities()
         {
             return _repository.GetAllDeletedNationalities()
+                 .ToList()
                 .Select(x => new NationalityDTO
                 {
                     NationalityId = x.nationalityID,
@@ -62,8 +64,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Nationality not found");
 
-            nationality.UpdateName(nationality.NationalityName);
-            return _repository.Update(nationality);
+            else
+            {
+                return _repository.Update(nationality);                
+            }
         }
     }
 }

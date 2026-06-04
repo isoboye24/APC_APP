@@ -31,6 +31,7 @@ namespace APC.Applications.Services
         public List<MaritalStatusDTO> GetAll()
         {
             return _repository.GetAll()
+                 .ToList()
                 .Select(x => new MaritalStatusDTO
                 {
                     MaritalStatusId = x.maritalStatusID,
@@ -42,6 +43,7 @@ namespace APC.Applications.Services
         public List<MaritalStatusDTO> GetAllMaritalStatuses()
         {
             return _repository.GetAllMaritalStatuses()
+                 .ToList()
                 .Select(x => new MaritalStatusDTO
                 {
                     MaritalStatusId = x.maritalStatusID,
@@ -62,8 +64,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Marital status not found");
 
-            maritalStatus.UpdateName(maritalStatus.MaritalStatusName);
-            return _repository.Update(maritalStatus);
+            else
+            {
+                return _repository.Update(maritalStatus);                
+            }
         }
     }
 }

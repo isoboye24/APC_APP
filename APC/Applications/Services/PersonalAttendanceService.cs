@@ -11,7 +11,6 @@ namespace APC.Applications.Services
         private readonly IGeneralMeetingAttendanceRepository _repository;
         private readonly IGeneralMeetingRepository _generalMeetingRepository;
         private readonly IMemberRepository _memberRepository;
-        private readonly IAttendanceStatusRepository _statusRepository;
         private readonly IGenderRepository _genderRepository;
         private readonly IAttendanceStatusRepository _attendanceStatusRepository;
 
@@ -21,7 +20,6 @@ namespace APC.Applications.Services
         {
             _repository = repository;
             _memberRepository = memberRepository;
-            _statusRepository = statusRepository;
             _genderRepository = genderRepository;
             _attendanceStatusRepository = attendanceStatusRepository;
             _generalMeetingRepository = generalMeetingRepository;

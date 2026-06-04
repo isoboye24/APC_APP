@@ -16,6 +16,7 @@ namespace APC.Applications.Services
         public List<MonthDTO> GetAll()
         {
             return _repository.GetAll()
+                 .ToList()
                 .Select(x => new MonthDTO
                 {
                     MonthId = x.monthID,

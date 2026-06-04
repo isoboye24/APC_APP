@@ -32,6 +32,7 @@ namespace APC.Applications.Services
         public List<ProfessionDTO> GetAll()
         {
             return _repository.GetAll()
+                 .ToList()
                 .Select(x => new ProfessionDTO
                 {
                     ProfessionId = x.professionID,
@@ -43,6 +44,7 @@ namespace APC.Applications.Services
         public List<ProfessionDTO> GetAllDeletedProfessions()
         {
             return _repository.GetAllDeletedProfessions()
+                 .ToList()
                 .Select(x => new ProfessionDTO
                 {
                     ProfessionId = x.professionID,
@@ -63,8 +65,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Profession not found");
 
-            profession.UpdateName(profession.ProfessionName);
-            return _repository.Update(profession);
+            else
+            {
+                return _repository.Update(profession);                
+            }
         }
     }
 }

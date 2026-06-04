@@ -31,6 +31,7 @@ namespace APC.Applications.Services
         public List<PaymentStatusDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                 .Select(x => new PaymentStatusDTO
                 {
                     PaymentStatusId = x.paymentStatusID,
@@ -42,6 +43,7 @@ namespace APC.Applications.Services
         public List<PaymentStatusDTO> GetAllDeletedPaymentStatuses()
         {
             return _repository.GetAllDeletedPaymentStatuses()
+                .ToList()
                 .Select(x => new PaymentStatusDTO
                 {
                     PaymentStatusId = x.paymentStatusID,
@@ -62,8 +64,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Payment status not found");
 
-            status.UpdateName(status.PaymentStatusName);
-            return _repository.Update(status);
+            else
+            {
+                return _repository.Update(status);                
+            }
         }
     }
 }

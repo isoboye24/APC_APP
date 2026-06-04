@@ -236,5 +236,10 @@ namespace APC.AllForms
             var filtered = _documentDTOs.Where(x => x.DocumentType.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             dataGridView1.DataSource = filtered;
         }
+
+        private void btnClearDocument_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
     }
 }

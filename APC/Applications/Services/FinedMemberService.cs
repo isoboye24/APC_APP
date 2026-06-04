@@ -164,13 +164,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Fined member not found");
 
-            data.UpdateConstitution(data.ConstitutionId);
-            data.UpdateAmountPaid(data.AmountPaid);
-            data.UpdateMember(data.MemberId);
-            data.UpdateSummary(data.Summary);
-            data.UpdateFineDate(data.FineDate);
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
 
 

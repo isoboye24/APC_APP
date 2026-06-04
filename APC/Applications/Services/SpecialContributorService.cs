@@ -37,75 +37,123 @@ namespace APC.Applications.Services
         public List<SpecialContributorDTO> GetAllByContributionId(int id)
         {
             var data = (from c in _repository.GetAllByContributionId(id)
-                        join m in _memberRepository.GetAll() on c.memberID equals m.memberID
-                        join sc in _specialContributionRepository.GetAll() on c.specialContributionID equals sc.specialContributionID
-                        select new SpecialContributorDTO
+                        join m in _memberRepository.GetAll()
+                            on c.memberID equals m.memberID
+                        join sc in _specialContributionRepository.GetAll()
+                            on c.specialContributionID equals sc.specialContributionID
+                        select new
                         {
-                            SpecialContributorId = c.specialContributorID,
-                            MemberId = c.memberID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            AmountContributed = c.amountContributed,
-                            FormattedAmountContributed = ("€ " + c.amountContributed).ToString(),
-                            FormattedContributedDate = c.contributedDate.ToString("dd.MM.yyyy"),
-                            ContributedDate = c.contributedDate,
-                            AmountExpected = sc.amountExpected,
-                            FormattedAmountExpected = ("€ " + sc.amountExpected).ToString(),
-                            Balance = ("€ " + (sc.amountExpected - c.amountContributed)).ToString(),
+                            c.specialContributorID,
+                            c.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            c.amountContributed,
+                            c.contributedDate,
+                            sc.amountExpected,
+                            sc.summary,
+                            sc.specialContributionID,
+                        })
+                        .ToList();
 
-                            PaymentStatus = c.amountContributed <= 0 ? "Not Paid" : (c.amountContributed > 0 && 
-                            c.amountContributed < sc.amountExpected) ? "Not Completed" : c.amountContributed == sc.amountExpected ? 
-                            "Completed" : ((c.amountContributed - sc.amountExpected) + " € Extra").ToString(),
+            var result = data.Select(x => new SpecialContributorDTO
+            {
+                SpecialContributorId = x.specialContributorID,
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                AmountContributed = x.amountContributed,
+                FormattedAmountContributed = "€ " + x.amountContributed,
+                FormattedContributedDate = x.contributedDate.ToString("dd.MM.yyyy"),
+                ContributedDate = x.contributedDate,
 
-                            Summary = sc.summary,
-                            SpecialContributionId = sc.specialContributionID,
-                        }).ToList();
+                AmountExpected = x.amountExpected,
+                FormattedAmountExpected = "€ " + x.amountExpected,
 
-            data = data.Select((x, index) =>
+                Balance = "€ " + (x.amountExpected - x.amountContributed),
+
+                PaymentStatus =
+                    x.amountContributed <= 0 ? "Not Paid" :
+                    x.amountContributed < x.amountExpected ? "Not Completed" :
+                    x.amountContributed == x.amountExpected ? "Completed" :
+                    (x.amountContributed - x.amountExpected) + " € Extra",
+
+                Summary = x.summary,
+                SpecialContributionId = x.specialContributionID,
+            })
+            .OrderByDescending(x => x.ContributedDate)
+            .ThenBy(x => x.FirstName)
+            .ToList();
+
+            result = result.Select((x, index) =>
             {
                 x.Counter = index + 1;
                 return x;
-            }).OrderByDescending(x => x.ContributedDate.Year).ThenByDescending(x => x.ContributedDate.Month).ThenByDescending(x => x.ContributedDate.Day).ThenBy(x => x.FirstName).ToList();
+            }).ToList();
 
-            return data;
+            return result;
         }
 
         public List<SpecialContributorDTO> GetAllDeletedSpecialContributors()
         {
             var data = (from c in _repository.GetAllDeletedContributors()
-                        join m in _memberRepository.GetAll() on c.memberID equals m.memberID
-                        join sc in _specialContributionRepository.GetAll() on c.specialContributionID equals sc.specialContributionID
-                        select new SpecialContributorDTO
+                        join m in _memberRepository.GetAll()
+                            on c.memberID equals m.memberID
+                        join sc in _specialContributionRepository.GetAll()
+                            on c.specialContributionID equals sc.specialContributionID
+                        select new
                         {
-                            SpecialContributorId = c.specialContributorID,
-                            MemberId = c.memberID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            AmountContributed = c.amountContributed,
-                            FormattedAmountContributed = ("€ " + c.amountContributed).ToString(),
-                            FormattedContributedDate = c.contributedDate.ToString("dd.MM.yyyy"),
-                            ContributedDate = c.contributedDate,
-                            AmountExpected = sc.amountExpected,
-                            FormattedAmountExpected = ("€ " + sc.amountExpected).ToString(),
-                            Balance = ("€ " + (sc.amountExpected - c.amountContributed)).ToString(),
+                            c.specialContributorID,
+                            c.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            c.amountContributed,
+                            c.contributedDate,
+                            sc.amountExpected,
+                            sc.summary,
+                            sc.specialContributionID,
+                        })
+                        .ToList();
 
-                            PaymentStatus = c.amountContributed <= 0 ? "Not Paid" : (c.amountContributed > 0 &&
-                            c.amountContributed < sc.amountExpected) ? "Not Completed" : c.amountContributed == sc.amountExpected ?
-                            "Completed" : ((c.amountContributed - sc.amountExpected) + " € Extra").ToString(),
+            var result = data.Select(x => new SpecialContributorDTO
+            {
+                SpecialContributorId = x.specialContributorID,
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                AmountContributed = x.amountContributed,
+                FormattedAmountContributed = "€ " + x.amountContributed,
+                FormattedContributedDate = x.contributedDate.ToString("dd.MM.yyyy"),
+                ContributedDate = x.contributedDate,
 
-                            Summary = sc.summary,
-                            SpecialContributionId = sc.specialContributionID,
-                        }).ToList();
+                AmountExpected = x.amountExpected,
+                FormattedAmountExpected = "€ " + x.amountExpected,
 
-            data = data.Select((x, index) =>
+                Balance = "€ " + (x.amountExpected - x.amountContributed),
+
+                PaymentStatus =
+                    x.amountContributed <= 0 ? "Not Paid" :
+                    x.amountContributed < x.amountExpected ? "Not Completed" :
+                    x.amountContributed == x.amountExpected ? "Completed" :
+                    (x.amountContributed - x.amountExpected) + " € Extra",
+
+                Summary = x.summary,
+                SpecialContributionId = x.specialContributionID,
+            })
+            .OrderByDescending(x => x.ContributedDate)
+            .ThenBy(x => x.FirstName)
+            .ToList();
+
+            result = result.Select((x, index) =>
             {
                 x.Counter = index + 1;
                 return x;
-            }).OrderByDescending(x => x.ContributedDate.Year).ThenByDescending(x => x.ContributedDate.Month).ThenByDescending(x => x.ContributedDate.Day).ThenBy(x => x.FirstName).ToList();
+            }).ToList();
 
-            return data;
+            return result;
         }
 
         public bool GetBack(int id)
@@ -124,12 +172,10 @@ namespace APC.Applications.Services
             if (contributor == null)
                 throw new InvalidOperationException("Contributor not found");
 
-            data.UpdateMember(data.MemberId);
-            data.UpdateAmountContributed(data.AmountContributed);
-            data.UpdateContributedDate(data.ContributedDate);
-            data.UpdateSummary(data.Summary);
-            
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
     }
 }

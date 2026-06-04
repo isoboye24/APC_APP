@@ -177,15 +177,10 @@ namespace APC.Applications.Services
             if (contribution == null)
                 throw new InvalidOperationException("Contribution not found");
 
-            data.UpdateTitle(data.Title);
-            data.UpdateSummary(data.Summary);
-            data.UpdateAmountToContribute(data.AmountToContribute);
-            data.UpdateSupervisor(data.SupervisorId);
-            data.UpdateContributionStartDate(data.ContributionStartDate);
-            data.UpdateContributionEndDate(data.ContributionEndDate);
-            data.UpdateAmountExpected(data.AmountExpected);
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
     }
 }

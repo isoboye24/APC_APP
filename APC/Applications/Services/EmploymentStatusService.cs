@@ -32,6 +32,7 @@ namespace APC.Applications.Services
         public List<EmploymentStatusDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                 .Select(x => new EmploymentStatusDTO
                 {
                     EmploymentStatusId = x.employmentStatusID,
@@ -43,6 +44,7 @@ namespace APC.Applications.Services
         public List<EmploymentStatusDTO> GetAllEmploymentStatuses()
         {
             return _repository.GetAllEmploymentStatuses()
+                .ToList()
                 .Select(x => new EmploymentStatusDTO
                 {
                     EmploymentStatusId = x.employmentStatusID,
@@ -63,8 +65,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Employment status not found");
 
-            employmentStatus.UpdateName(employmentStatus.EmploymentStatusName);
-            return _repository.Update(employmentStatus);
+            else
+            {
+                return _repository.Update(employmentStatus);                
+            }
         }
     }
 }

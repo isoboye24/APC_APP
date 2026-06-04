@@ -403,6 +403,7 @@
             this.btnClearDocument.TabIndex = 0;
             this.btnClearDocument.Text = "Clear";
             this.btnClearDocument.UseVisualStyleBackColor = false;
+            this.btnClearDocument.Click += new System.EventHandler(this.btnClearDocument_Click);
             // 
             // label4
             // 

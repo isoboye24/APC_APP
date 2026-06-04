@@ -4,7 +4,6 @@ using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace APC.Applications.Services
 {
@@ -19,6 +18,7 @@ namespace APC.Applications.Services
         public List<MembershipStatusDTO> GetAll()
         {
             return _repository.GetAll()
+                 .ToList()
                 .Select(x => new MembershipStatusDTO
                 {
                     MembershipStatusId = x.membershipStatusID,

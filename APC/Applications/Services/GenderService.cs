@@ -16,6 +16,7 @@ namespace APC.Applications.Services
         public List<GenderDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                 .Select(x => new GenderDTO
                 {
                     GenderId = x.genderID,

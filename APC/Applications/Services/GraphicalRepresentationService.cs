@@ -17,6 +17,7 @@ namespace APC.Applications.Services
         {
             return _financialRepository.GetAll()
                 .GroupBy(x => x.year)
+                 .ToList()
                 .Select(g => new GraphDTO
                 {
                     Year = g.Key,
@@ -30,6 +31,7 @@ namespace APC.Applications.Services
         {
             return _financialRepository.GetAll()
                 .GroupBy(x => x.year)
+                 .ToList()
                 .Select(g => new GraphDTO
                 {
                     Year = g.Key,

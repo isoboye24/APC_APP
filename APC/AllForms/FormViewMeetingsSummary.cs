@@ -1,4 +1,5 @@
-﻿using APC.Helper;
+﻿using APC.Applications.DTO;
+using APC.Helper;
 using System;
 using System.Windows.Forms;
 
@@ -6,11 +7,10 @@ namespace APC.AllForms
 {
     public partial class FormViewMeetingsSummary : Form
     {
-        private Applications.DTO.GeneralMeetingDTO _generalMeetingDTO;
-        public FormViewMeetingsSummary(Applications.DTO.GeneralMeetingDTO generalMeetingDTO)
+        private GeneralMeetingDTO _generalMeetingDTO;
+        public FormViewMeetingsSummary()
         {
             InitializeComponent();
-            _generalMeetingDTO = generalMeetingDTO;
         }
         
         private void btnClose_Click(object sender, EventArgs e)
@@ -25,14 +25,28 @@ namespace APC.AllForms
             GeneralHelper.ApplyRegularFont(12, txtSummary);
         }
 
+        public void loadForView(GeneralMeetingDTO generalMeetingDTO)
+        {
+            _generalMeetingDTO = generalMeetingDTO;
+        }
+
         private void FormViewMeetingsSummary_Load(object sender, EventArgs e)
         {
             resizeControls();
 
-            this.Text = "Summary of meeting on " + _generalMeetingDTO.Day + "." + _generalMeetingDTO.MonthId + "." + _generalMeetingDTO.Year;
+            this.Text = "Summary of meeting on " + _generalMeetingDTO.GeneralMeetingDate.ToString("dd.MM.yyy");
             txtSummary.Text = _generalMeetingDTO.Summary;
-            string[] words = _generalMeetingDTO.Summary.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-            labelWordsCount.Text = words.Length.ToString();
+
+            string[] words;
+            if (_generalMeetingDTO.Summary != null)
+            {
+                words = _generalMeetingDTO.Summary.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                labelWordsCount.Text = words.Length.ToString();
+            }
+            else
+            {
+                labelWordsCount.Text = 0.ToString();
+            }
         }
     }
 }

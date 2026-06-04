@@ -1,7 +1,6 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
-using APC.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +10,9 @@ namespace APC.Applications.Services
     public class EventSalesService : IEventSalesService
     {
         private readonly IEventSalesRepository _repository;
-        private readonly EventsRepository _eventRepository;
+        private readonly IEventsRepository _eventRepository;
 
-        public EventSalesService(IEventSalesRepository repository, EventsRepository eventRepository)
+        public EventSalesService(IEventSalesRepository repository, IEventsRepository eventRepository)
         {
             _repository = repository;
             _eventRepository = eventRepository;

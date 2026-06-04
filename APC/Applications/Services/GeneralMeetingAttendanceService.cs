@@ -1,6 +1,8 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Infrastructure.Data;
+using APC.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +14,14 @@ namespace APC.Applications.Services
         private readonly IGeneralMeetingAttendanceRepository _repository;
         private readonly IGeneralMeetingRepository _generalMeetingRepository;
         private readonly IMemberRepository _memberRepository;
-        private readonly IAttendanceStatusRepository _statusRepository;
         private readonly IGenderRepository _genderRepository;
         private readonly IAttendanceStatusRepository _attendanceStatusRepository;
         public GeneralMeetingAttendanceService(IGeneralMeetingAttendanceRepository repository, IMemberRepository memberRepository, 
-            IAttendanceStatusRepository statusRepository, IGenderRepository genderRepository, IAttendanceStatusRepository attendanceStatusRepository,
+            IGenderRepository genderRepository, IAttendanceStatusRepository attendanceStatusRepository,
             IGeneralMeetingRepository generalMeetingRepository)
         {
             _repository = repository;
             _memberRepository = memberRepository;
-            _statusRepository = statusRepository;
             _genderRepository = genderRepository;
             _attendanceStatusRepository = attendanceStatusRepository;
             _generalMeetingRepository = generalMeetingRepository;
@@ -83,56 +83,72 @@ namespace APC.Applications.Services
             var data = (from p in _repository.GetAllByGeneralMeetingId(id)
                         join m in _memberRepository.GetAll() on p.memberID equals m.memberID
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
-                        join a in _statusRepository.GetAll() on p.attendanceStatusID equals a.attendanceStatusID
-                        select new GeneralMeetingAttendanceDTO
+                        join a in _attendanceStatusRepository.GetAll() on p.attendanceStatusID equals a.attendanceStatusID
+                        select new
                         {
-                            PersonalAttendanceId = p.attendanceID,
-                            MemberId = p.memberID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            AttendanceStatusId = p.attendanceStatusID,
-                            AttendanceStatus = a.attendanceStatus,
-                            DuesPaid = (decimal)p.monthlyDues,
-                            Gender = g.genderName,
-                            GeneralMeetingId = p.generalAttendanceID,
-                        }).ToList();
+                            p.attendanceID,
+                            p.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            p.attendanceStatusID,
+                            a.attendanceStatus,
+                            p.monthlyDues,
+                            g.genderName,
+                            p.generalAttendanceID,
+                        })
+                        .ToList();
 
-            data = data.Select((x, index) =>
+            return data.Select(x => new GeneralMeetingAttendanceDTO
             {
-                x.Counter = index + 1;
-                return x;
-            }).OrderByDescending(x => x.DuesPaid).ThenByDescending(x => x.AttendanceStatus).ThenBy(x => x.FirstName).ToList();
-
-            return data;
+                PersonalAttendanceId = x.attendanceID,
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                AttendanceStatusId = x.attendanceStatusID,
+                AttendanceStatus = x.attendanceStatus,
+                DuesPaid = (decimal)x.monthlyDues,
+                Gender = x.genderName,
+                GeneralMeetingId = x.generalAttendanceID,
+            })
+            .OrderByDescending(x => x.DuesPaid).ThenByDescending(x => x.AttendanceStatus).ThenBy(x => x.FirstName).ToList();
         }
         public List<GeneralMeetingAttendanceDTO> GetMemberPersonalAttendanceByYear(int memberId, int year)
         {
             var data = (from p in _repository.GetAll().Where(x => x.memberID == memberId && x.year == year)
                         join m in _memberRepository.GetAll() on p.memberID equals m.memberID
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
-                        join a in _statusRepository.GetAll() on p.attendanceStatusID equals a.attendanceStatusID
-                        select new GeneralMeetingAttendanceDTO
+                        join a in _attendanceStatusRepository.GetAll() on p.attendanceStatusID equals a.attendanceStatusID
+                        select new
                         {
-                            PersonalAttendanceId = p.attendanceID,
-                            MemberId = p.memberID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            AttendanceStatusId = p.attendanceStatusID,
-                            AttendanceStatus = a.attendanceStatus,
-                            DuesPaid = (decimal)p.monthlyDues,
-                            Gender = g.genderName,
-                            GeneralMeetingId = p.generalAttendanceID,
-                        }).ToList();
+                            p.attendanceID,
+                            p.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            p.attendanceStatusID,
+                            a.attendanceStatus,
+                            p.monthlyDues,
+                            g.genderName,
+                            p.generalAttendanceID,
+                        })
+                        .ToList();
 
-            data = data.Select((x, index) =>
+            return data.Select(x => new GeneralMeetingAttendanceDTO
             {
-                x.Counter = index + 1;
-                return x;
-            }).OrderByDescending(x => x.DuesPaid).ThenByDescending(x => x.AttendanceStatus).ThenBy(x => x.FirstName).ToList();
-
-            return data;
+                PersonalAttendanceId = x.attendanceID,
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                AttendanceStatusId = x.attendanceStatusID,
+                AttendanceStatus = x.attendanceStatus,
+                DuesPaid = (decimal)x.monthlyDues,
+                Gender = x.genderName,
+                GeneralMeetingId = x.generalAttendanceID,
+            })
+            .OrderByDescending(x => x.DuesPaid).ThenByDescending(x => x.AttendanceStatus).ThenBy(x => x.FirstName).ToList();
         }
 
         public List<GeneralMeetingAttendanceDTO> GetAllDeletedPersonalAttendance()
@@ -140,28 +156,59 @@ namespace APC.Applications.Services
             var data = (from p in _repository.GetAllDeletedPersonalAttendance()
                         join m in _memberRepository.GetAll() on p.memberID equals m.memberID
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
-                        join a in _statusRepository.GetAll() on p.attendanceStatusID equals a.attendanceStatusID
-                        select new GeneralMeetingAttendanceDTO
+                        join a in _attendanceStatusRepository.GetAll() on p.attendanceStatusID equals a.attendanceStatusID
+                        select new
                         {
-                            PersonalAttendanceId = p.attendanceID,
-                            MemberId = p.memberID,
-                            FirstName = m.name,
-                            LastName = m.surname,
-                            ImagePath = m.imagePath,
-                            AttendanceStatusId = p.attendanceStatusID,
-                            AttendanceStatus = a.attendanceStatus,
-                            DuesPaid = (decimal)p.monthlyDues,
-                            Gender = g.genderName,
-                            GeneralMeetingId = p.generalAttendanceID,
-                        }).ToList();
+                            p.attendanceID,
+                            p.memberID,
+                            m.name,
+                            m.surname,
+                            m.imagePath,
+                            p.attendanceStatusID,
+                            a.attendanceStatus,
+                            p.monthlyDues,
+                            g.genderName,
+                            p.generalAttendanceID,
+                        })
+                        .ToList();
 
-            data = data.Select((x, index) =>
+            return data.Select(x => new GeneralMeetingAttendanceDTO
             {
-                x.Counter = index + 1;
-                return x;
-            }).OrderByDescending(x => x.DuesPaid).ThenByDescending(x => x.AttendanceStatus).ThenBy(x => x.FirstName).ToList();
+                PersonalAttendanceId = x.attendanceID,
+                MemberId = x.memberID,
+                FirstName = x.name,
+                LastName = x.surname,
+                ImagePath = x.imagePath,
+                AttendanceStatusId = x.attendanceStatusID,
+                AttendanceStatus = x.attendanceStatus,
+                DuesPaid = (decimal)x.monthlyDues,
+                Gender = x.genderName,
+                GeneralMeetingId = x.generalAttendanceID,
+            })
+            .OrderByDescending(x => x.DuesPaid).ThenByDescending(x => x.AttendanceStatus).ThenBy(x => x.FirstName).ToList();
+        }
 
-            return data;
+        public GeneralMeetingAttendanceDTO GetPersonalAttendanceById(int memberId, int generalMeetingId)
+        {
+            return (from p in _repository.GetAllByGeneralMeetingId(generalMeetingId)
+                    where p.memberID == memberId
+                    join m in _memberRepository.GetAll() on p.memberID equals m.memberID
+                    join g in _genderRepository.GetAll() on m.genderID equals g.genderID
+                    join a in _attendanceStatusRepository.GetAll() on p.attendanceStatusID equals a.attendanceStatusID
+                    select new GeneralMeetingAttendanceDTO
+                    {
+                        PersonalAttendanceId = p.attendanceID,
+                        MemberId = p.memberID,
+                        FirstName = m.name,
+                        LastName = m.surname,
+                        ImagePath = m.imagePath,
+                        AttendanceStatusId = p.attendanceStatusID,
+                        AttendanceStatus = a.attendanceStatus,
+                        DuesPaid = p.monthlyDues ?? 0,
+                        Gender = g.genderName,
+                        GeneralMeetingId = p.generalAttendanceID,
+                    })
+            .FirstOrDefault();
         }
 
         public bool GetBack(int id)
@@ -177,13 +224,10 @@ namespace APC.Applications.Services
             if (member == null)
                 throw new InvalidOperationException("Member not found");
 
-            if (data.MonthlyDues.HasValue)
-                data.UpdateMonthlyDues(data.MonthlyDues.Value);
-
-            data.UpdateMembers(data.MemberId);
-            data.UpdateAttendanceStatus(data.AttendanceStatusId);
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
 
         public int GetLastMeetingPresentMembersCount()

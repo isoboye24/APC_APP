@@ -794,39 +794,10 @@ namespace APC.Applications.Services
             if (member == null)
                 throw new InvalidOperationException("Member not found");
 
-            data.MemberAuthentication.UpdateUsername(data.MemberAuthentication.Username);
-            data.MemberAuthentication.UpdatePasswordHash(data.PersonalInfo.Birthday);
-
-            data.PersonalInfo.UpdateFirstName(data.PersonalInfo.FirstName);
-            data.PersonalInfo.UpdateLastName(data.PersonalInfo.LastName);
-            data.PersonalInfo.UpdateBirthday(data.PersonalInfo.Birthday);
-            data.PersonalInfo.UpdateImagePath(data.PersonalInfo.ImagePath);
-            data.PersonalInfo.UpdateGender(data.PersonalInfo.GenderId);
-
-            data.ContactInfo.UpdateEmail(data.ContactInfo.Email);
-            data.ContactInfo.UpdateHouseAddress(data.ContactInfo.HouseAddress);
-            data.ContactInfo.UpdatePhoneNumber(data.ContactInfo.PhoneNumber);
-            data.ContactInfo.UpdatePhoneNumber2(data.ContactInfo.PhoneNumber2);
-            data.ContactInfo.UpdatePhoneNumber3(data.ContactInfo.PhoneNumber3);
-
-            data.MembershipInfo.UpdateMembershipDate((DateTime)data.MembershipInfo.MembershipDate);
-            data.MembershipInfo.UpdateMembershipStatus(data.MembershipInfo.MembershipStatusId);
-            data.MembershipInfo.UpdatePosition(data.MembershipInfo.PositionId);
-            data.MembershipInfo.UpdatePermission(data.MembershipInfo.PermissionId);
-
-            data.DemographicInfo.UpdateCountry(data.DemographicInfo.CountryId);
-            data.DemographicInfo.UpdateNationality(data.DemographicInfo.NationalityId);
-            data.DemographicInfo.UpdateProfession(data.DemographicInfo.ProfessionId);
-            data.DemographicInfo.UpdateEmplomentStatus(data.DemographicInfo.EmploymentStatusId);
-            data.DemographicInfo.UpdateMaritalStatus(data.DemographicInfo.MaritalStatusId);
-            data.DemographicInfo.UpdateLGA(data.DemographicInfo.LGA);
-
-            data.EmergencyContact.UpdateNextOfKin(data.EmergencyContact.NextOfKin);
-            data.EmergencyContact.UpdateRelationshipToNextOfKin(data.EmergencyContact.RelationshipToNextOfKinId);
-
-            data.LifeStatus.UpdateDeadDate(data.LifeStatus.DeadDate);
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
 
         public int GetUniqueProfessionCount()

@@ -32,6 +32,7 @@ namespace APC.Applications.Services
         public List<EventDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                 .Select(x => new EventDTO
                 {
                     EventsId = x.eventID,
@@ -49,6 +50,7 @@ namespace APC.Applications.Services
         public List<EventDTO> GetAnnualEvents(int year)
         {
             return _repository.GetAll().Where(x => x.year == year)
+                .ToList()
                 .Select(x => new EventDTO
                 {
                     EventsId = x.eventID,
@@ -75,12 +77,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Event not found");
 
-            data.UpdateSummary(data.Summary);
-            data.UpdateDate(data.EventsDate);
-            data.UpdateTitle(data.Title);
-            data.UpdateImagePath(data.CoverImagePath);
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
     }
 }

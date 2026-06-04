@@ -32,6 +32,7 @@ namespace APC.Applications.Services
         public List<ExpenditureDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                 .Select(x => new ExpenditureDTO
                 {
                     ExpenditureId = x.expenditureID,
@@ -50,6 +51,7 @@ namespace APC.Applications.Services
         public List<YearDTO> GetExpenditureYearsOnly()
         {
             return _repository.GetAll()
+                    .ToList()
                     .Select(x => x.expenditureDate.Year)
                     .Distinct()
                     .OrderByDescending(x => x)
@@ -64,6 +66,7 @@ namespace APC.Applications.Services
         public List<ExpenditureDTO> GetAnnualExpenditures(int year)
         {
             return _repository.GetAll().Where(x => x.year == year)
+                .ToList()
                 .Select(x => new ExpenditureDTO
                 {
                     ExpenditureId = x.expenditureID,
@@ -81,6 +84,7 @@ namespace APC.Applications.Services
         public List<ExpenditureDTO> GetAllDeletedExpenditures()
         {
             return _repository.GetAllDeletedExpenditures()
+                .ToList()
                 .Select(x => new ExpenditureDTO
                 {
                     ExpenditureId = x.expenditureID,
@@ -108,11 +112,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Expenditure not found");
 
-            data.UpdateDate(data.ExpenditureDate);
-            data.UpdateSpentAmount(data.AmountSpent);
-            data.UpdateSummary(data.Summary);
-
-            return _repository.Update(data);
+            else
+            {
+                return _repository.Update(data);                
+            }
         }
     }
 }

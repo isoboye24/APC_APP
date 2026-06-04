@@ -1,4 +1,5 @@
 ﻿using System;
+using static OfficeOpenXml.ExcelErrorValue;
 
 namespace APC.Domain.Entities
 {
@@ -7,31 +8,34 @@ namespace APC.Domain.Entities
         public int PersonalAttendanceId { get; private set; }
         public int AttendanceStatusId { get; private set; }
         public int MemberId { get; private set; }
-        public decimal? MonthlyDues { get; private set; }
-        public decimal? ExpectedDues { get; private set; }
-        public decimal? Balance { get; private set; }
+        public decimal MonthlyDues { get; private set; }
+        public decimal ExpectedDues { get; private set; }
+        public decimal Balance { get; private set; }
         public int GeneralMeetingId { get; private set; }
         public int Day { get; private set; }
         public int MonthId { get; private set; }
         public int Year { get; private set; }
         
 
-        public PersonalAttendance(int attendanceStatusId, int memberId, decimal? monthlyDues,decimal? expectedDues, decimal? balance, 
+        public PersonalAttendance(int attendanceStatusId, int memberId, decimal monthlyDues, decimal expectedDues, decimal balance, 
             int generalMeetingId, DateTime date)
         {
             SetAttendanceStatus(attendanceStatusId);
             SetMember(memberId);
             SetMonthlyDues(monthlyDues);
+            SetExpectedDues(expectedDues);
+            SetBalance(balance);
             SetPersonalAttendanceDate(date);
+            SetGeneralMeetingId(generalMeetingId);
         }
 
         public static PersonalAttendance Rehydrate(
                 int id,
                 int attendanceStatusId, 
                 int memberId, 
-                decimal? monthlyDues,
-                decimal? expectedDues, 
-                decimal? balance, 
+                decimal monthlyDues,
+                decimal expectedDues, 
+                decimal balance, 
                 int generalMeetingId,
                 DateTime date
             )
@@ -44,11 +48,6 @@ namespace APC.Domain.Entities
             personalAttendance.Balance = balance;
 
             return personalAttendance;
-        }
-
-        public void UpdatePersonalAttendanceDate(DateTime newDate)
-        {
-            SetPersonalAttendanceDate(newDate);
         }
 
         private void SetPersonalAttendanceDate(DateTime date)
@@ -68,10 +67,12 @@ namespace APC.Domain.Entities
 
             AttendanceStatusId = statusId;
         }
-
-        public void UpdateAttendanceStatus(int newStatusId)
+        private void SetGeneralMeetingId(int meetingId)
         {
-            SetAttendanceStatus(newStatusId);
+            if (meetingId < 1)
+                throw new ArgumentException("Invalid attendance status");
+
+            GeneralMeetingId = meetingId;
         }
 
         private void SetMember(int memberId)
@@ -82,20 +83,18 @@ namespace APC.Domain.Entities
             MemberId = memberId;
         }
 
-        public void UpdateMembers(int newMemberId)
+        private void SetMonthlyDues(decimal monthlyDues)
         {
-            SetMember(newMemberId);
+            MonthlyDues = monthlyDues > 0 ? monthlyDues : 0;
+        }
+        private void SetExpectedDues(decimal expectedDues)
+        {
+            ExpectedDues = expectedDues > 0 ? expectedDues : 0;
+        }
+        private void SetBalance(decimal balance)
+        {
+            Balance = balance > 0 ? balance : 0;
         }
 
-        private void SetMonthlyDues(decimal? monthlyDues)
-        {
-            var value = monthlyDues ?? 0;
-            MonthlyDues = value < 0 ? 0 : value;
-        }
-
-        public void UpdateMonthlyDues(decimal newMonthlyDues)
-        {
-            SetMonthlyDues(newMonthlyDues);
-        }
     }
 }

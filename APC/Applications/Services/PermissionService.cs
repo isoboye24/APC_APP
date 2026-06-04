@@ -33,6 +33,7 @@ namespace APC.Applications.Services
         public List<PermissionDTO> GetAll()
         {
             return _repository.GetAll()
+                 .ToList()
                 .Select(x => new PermissionDTO
                 {
                     PermissionId = x.permissionID,
@@ -44,6 +45,7 @@ namespace APC.Applications.Services
         public List<PermissionDTO> GetAllDeletedPermissions()
         {
             return _repository.GetAllDeletedPermissions()
+                 .ToList()
                 .Select(x => new PermissionDTO
                 {
                     PermissionId = x.permissionID,
@@ -64,8 +66,10 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Permission not found");
 
-            permission.UpdateName(permission.PermissionName);
-            return _repository.Update(permission);
+            else
+            {
+                return _repository.Update(permission);                
+            }
         }
     }
 }

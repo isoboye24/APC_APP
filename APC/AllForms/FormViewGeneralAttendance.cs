@@ -16,16 +16,17 @@ namespace APC.AllForms
         private readonly IAttendanceStatusService _attendanceStatusService;
         private readonly IMemberService _memberService;
 
-        private readonly GeneralMeetingDTO _generalMeetingDTO;
+        private GeneralMeetingDTO _generalMeetingDTO;
 
-        private List<Applications.DTO.GeneralMeetingAttendanceDTO> _generalMeetingAttendanceDTOs;
+        private List<GeneralMeetingAttendanceDTO> _generalMeetingAttendanceDTOs;
 
-        public FormViewGeneralAttendance(GeneralMeetingDTO generalMeetingDTO, IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService)
+        public FormViewGeneralAttendance(IGeneralMeetingAttendanceService generalMeetingAttendanceService, IMemberService memberService,
+            IAttendanceStatusService attendanceStatusService)
         {
             InitializeComponent();
-            _generalMeetingDTO = generalMeetingDTO;
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _memberService = memberService;
+            _attendanceStatusService = attendanceStatusService;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -66,12 +67,17 @@ namespace APC.AllForms
             ClearFilters();
         }
 
+        public void loadForView(GeneralMeetingDTO generalMeetingDTO)
+        {
+            _generalMeetingDTO = generalMeetingDTO;
+        }
+
         private void resizeControls()
         {
             GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label7, label9, btnAdd,
                 labelTitle, btnClose, rbEqual, rbLess, rbMore, btnClear, btnSearch, btnUpdate, btnViewSummary);
 
-            GeneralHelper.ApplyRegularFont(14, txtName, txtSurname, txtMonthlyDues, txtSummary, cmbAttendanceStatus);
+            GeneralHelper.ApplyRegularFont(14, txtName, txtSurname, txtMonthlyDues, txtSummary, cmbAttendanceStatus, labelTotalMembers);
 
             GeneralHelper.ApplyBoldFont(24, labelTotalDuesPaid, labelTotalMembersAbsent, labelTotalMembersPresent);
         }
@@ -79,6 +85,7 @@ namespace APC.AllForms
         private void loadGeneralMeetingAttendances()
         {
             dataGridView1.DataSource = _generalMeetingAttendanceService.GetAllByGeneralMeetingId(_generalMeetingDTO.GeneralMeetingId);
+            _generalMeetingAttendanceDTOs = _generalMeetingAttendanceService.GetAllByGeneralMeetingId(_generalMeetingDTO.GeneralMeetingId);
             PersonalAttendanceHelper.ConfigurePersonalAttendanceGrid(dataGridView1, PersonalAttendanceHelper.PersonalAttendanceGridType.Basic);
         }
 
@@ -102,18 +109,18 @@ namespace APC.AllForms
             labelTotalMembersAbsent.Text = _generalMeetingDTO.TotalMembersAbsent.ToString();
 
             labelTotalDuesPaid.Text = _generalMeetingDTO.FormattedTotalDuesPaid;
-            labelTotalMembersAbsent.Text = _generalMeetingDTO.TotalMembersAbsent.ToString();
-
-            decimal balance =_generalMeetingDTO.TotalDuesExpected - _generalMeetingDTO.TotalDuesPaid;
+            labelTotalMembers.Text = dataGridView1.RowCount.ToString() + " Member" + (dataGridView1.RowCount > 1 ? "s" : "");
 
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService, _generalMeetingDTO);
+            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService);
+            form.loadGeneralMeetingData(_generalMeetingDTO);
             form.ShowDialog();
 
             ClearFilters();
+            ShowRecordData();
         }
 
         private GeneralMeetingAttendanceDTO GetSelectedMeetingAttendance()
@@ -134,11 +141,13 @@ namespace APC.AllForms
                 return;
             }
 
-            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService, _generalMeetingDTO);
-            form.loadForEdit(selected, true);
+            var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService);
+            form.loadGeneralMeetingData(_generalMeetingDTO);
+            form.loadForEdit(selected.MemberId, true);
             form.ShowDialog();
 
             ClearFilters();
+            ShowRecordData();
 
         }
 
@@ -160,37 +169,48 @@ namespace APC.AllForms
         {
             var filtered = _generalMeetingAttendanceDTOs.AsQueryable();
 
-            if (cmbAttendanceStatus.SelectedIndex != -1)
+            if (cmbAttendanceStatus.SelectedValue != null)
             {
-                string searchedStatus = cmbAttendanceStatus.SelectedValue.ToString();
+                string searchedStatus = cmbAttendanceStatus.Text;
 
                 filtered = filtered.Where(x => x.AttendanceStatus == searchedStatus);
             }
-            if (txtMonthlyDues.Text.Trim() != "")
+
+            if (!string.IsNullOrWhiteSpace(txtMonthlyDues.Text))
             {
+                if (!decimal.TryParse(txtMonthlyDues.Text, out decimal dues))
+                {
+                    MessageBox.Show("Please enter a valid amount.");
+                    return;
+                }
+
                 if (rbEqual.Checked)
                 {
-                    filtered = filtered.Where(x => x.DuesPaid == Convert.ToDecimal(txtMonthlyDues.Text));
+                    filtered = filtered.Where(x => x.DuesPaid == dues);
                 }
                 else if (rbLess.Checked)
                 {
-                    filtered = filtered.Where(x => x.DuesPaid < Convert.ToDecimal(txtMonthlyDues.Text));
+                    filtered = filtered.Where(x => x.DuesPaid < dues);
                 }
                 else if (rbMore.Checked)
                 {
-                    filtered = filtered.Where(x => x.DuesPaid > Convert.ToDecimal(txtMonthlyDues.Text));
+                    filtered = filtered.Where(x => x.DuesPaid > dues);
                 }
                 else
                 {
                     MessageBox.Show("Please select a criterion from the monthly dues group");
+                    return;
                 }
             }
+
             dataGridView1.DataSource = filtered.ToList();
+            ShowRecordData();
         }
 
         private void btnViewSummary_Click(object sender, EventArgs e)
         {
-            var form = new FormViewMeetingsSummary(_generalMeetingDTO);
+            var form = new FormViewMeetingsSummary();
+            form.loadForView(_generalMeetingDTO);
             form.ShowDialog();
 
             ClearFilters();

@@ -15,6 +15,7 @@ namespace APC.Applications.Services
         public List<AttendanceStatusDTO> GetAll()
         {
             return _repository.GetAll()
+                .ToList()
                 .Select(x => new AttendanceStatusDTO
                 {
                     AttendanceStatusId = x.attendanceStatusID,
@@ -27,6 +28,7 @@ namespace APC.Applications.Services
         public List<AttendanceStatusDTO> GetById(int id)
         {
             return _repository.GetById(id)
+                .ToList()
                 .Select(x => new AttendanceStatusDTO
                 {
                     AttendanceStatusId = x.attendanceStatusID,
