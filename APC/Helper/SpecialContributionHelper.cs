@@ -16,12 +16,10 @@ namespace APC.Helper
             switch (type)
             {
                 case SpecialContributionGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "Counter", "FormattedAmountToContribute",
-                        "FormattedAmountExpected", "FormattedTotalContributedAmount", "Status",
-                        "FirstName", "FormattedContributionStartDate", "FormattedContributionEndDate");
+                    GeneralHelper.SetVisibleColumns(grid, "FormattedAmountExpected", "FormattedAmountToContribute", "FormattedTotalContributedAmount", 
+                        "Status", "FirstName", "FormattedContributionStartDate", "FormattedContributionEndDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
-                                    { "Counter", "No." },
                                     { "FormattedAmountExpected", "Amt. Exp." },
                                     { "FormattedTotalContributedAmount", "Amt. Cont." },
                                     { "FormattedAmountToContribute", "Amt. Each" },
@@ -29,6 +27,14 @@ namespace APC.Helper
                                     { "FormattedContributionStartDate", "Start Date" },
                                     { "FormattedContributionEndDate", "End Date" }
                                 });
+
+                    grid.Columns["FormattedAmountExpected"].DisplayIndex = 0;
+                    grid.Columns["FormattedAmountToContribute"].DisplayIndex = 1;
+                    grid.Columns["FormattedTotalContributedAmount"].DisplayIndex = 2;
+                    grid.Columns["Status"].DisplayIndex = 3;
+                    grid.Columns["FirstName"].DisplayIndex = 4;
+                    grid.Columns["FormattedContributionStartDate"].DisplayIndex = 5;
+                    grid.Columns["FormattedContributionEndDate"].DisplayIndex = 6;
                     break;
             }
         }

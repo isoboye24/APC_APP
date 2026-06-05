@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -76,7 +76,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtSection = new System.Windows.Forms.TextBox();
+            this.txtShortDescription = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewConstitutions = new System.Windows.Forms.DataGridView();
@@ -84,7 +84,6 @@
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
@@ -327,8 +326,8 @@
             this.dataGridViewMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewMembers.Name = "dataGridViewMembers";
             this.dataGridViewMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewMembers.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewMembers.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewMembers.RowTemplate.Height = 30;
             this.dataGridViewMembers.Size = new System.Drawing.Size(389, 411);
             this.dataGridViewMembers.TabIndex = 5;
@@ -746,7 +745,7 @@
             this.tableLayoutPanel10.ColumnCount = 2;
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel10.Controls.Add(this.txtSection, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.txtShortDescription, 1, 0);
             this.tableLayoutPanel10.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(4, 4);
@@ -757,16 +756,16 @@
             this.tableLayoutPanel10.Size = new System.Drawing.Size(398, 44);
             this.tableLayoutPanel10.TabIndex = 6;
             // 
-            // txtSection
+            // txtShortDescription
             // 
-            this.txtSection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSection.Location = new System.Drawing.Point(123, 4);
-            this.txtSection.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSection.Name = "txtSection";
-            this.txtSection.Size = new System.Drawing.Size(271, 34);
-            this.txtSection.TabIndex = 7;
-            this.txtSection.TextChanged += new System.EventHandler(this.txtSection_TextChanged);
+            this.txtShortDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtShortDescription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShortDescription.Location = new System.Drawing.Point(123, 4);
+            this.txtShortDescription.Margin = new System.Windows.Forms.Padding(4);
+            this.txtShortDescription.Name = "txtShortDescription";
+            this.txtShortDescription.Size = new System.Drawing.Size(271, 34);
+            this.txtShortDescription.TabIndex = 7;
+            this.txtShortDescription.TextChanged += new System.EventHandler(this.txtSection_TextChanged);
             // 
             // label6
             // 
@@ -805,8 +804,8 @@
             this.dataGridViewConstitutions.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewConstitutions.Name = "dataGridViewConstitutions";
             this.dataGridViewConstitutions.RowHeadersWidth = 51;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewConstitutions.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewConstitutions.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewConstitutions.RowTemplate.Height = 30;
             this.dataGridViewConstitutions.Size = new System.Drawing.Size(390, 411);
             this.dataGridViewConstitutions.TabIndex = 5;
@@ -956,7 +955,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.DataGridView dataGridViewConstitutions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
-        private System.Windows.Forms.TextBox txtSection;
+        private System.Windows.Forms.TextBox txtShortDescription;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
@@ -978,7 +977,6 @@
         private System.Windows.Forms.TextBox txtSummary;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
         private System.Windows.Forms.Button btnChangeMember;
         private System.Windows.Forms.Button btnChangeConstitution;

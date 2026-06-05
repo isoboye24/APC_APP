@@ -34,6 +34,20 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
+        private decimal GetAmountContributedByContributionId(int contributionId)
+        {
+            decimal totalAmount = _specialContributorRepository.GetAll().Where(x => x.specialContributionID == contributionId)
+                                                .Sum(x => x.amountContributed);
+            return totalAmount;
+        }
+        
+        public decimal GetAllContributedAmount()
+        {
+            decimal totalAmount = _specialContributorRepository.GetAll()
+                                                .Sum(x => x.amountContributed);
+            return totalAmount;
+        }
+
         public List<SpecialContributionDTO> GetAll()
         {
             var data = (from sc in _repository.GetAll()
@@ -57,9 +71,7 @@ namespace APC.Applications.Services
 
             return data.Select(x =>
             {
-                decimal totalContributedAmount =
-                    _specialContributorRepository.GetAmountContributedByContributionId(
-                        x.specialContributionID);
+                decimal totalContributedAmount = GetAmountContributedByContributionId(x.specialContributionID);
 
                 return new SpecialContributionDTO
                 {
@@ -67,20 +79,23 @@ namespace APC.Applications.Services
                     Title = x.title,
                     Summary = x.summary,
                     AmountToContribute = x.amountToContribute,
+                    FormattedAmountToContribute = x.amountToContribute.ToString(),
                     SupervisorId = x.supervisorID,
                     FirstName = x.name,
                     LastName = x.surname,
                     ImagePath = x.imagePath,
 
-                    ContributionStartDate = x.contributionStartDate,
-                    FormattedContributionStartDate =
-                        x.contributionStartDate.ToString("dd.MM.yyyy"),
+                    ContributionStartDate = x.contributionStartDate,                    
+                    FormattedContributionStartDate = x.contributionStartDate.ToString("dd.MM.yyyy"),
 
                     ContributionEndDate = x.contributionEndDate,
-                    FormattedContributionEndDate =
-                        x.contributionEndDate.ToString("dd.MM.yyyy"),
+                    FormattedContributionEndDate = x.contributionEndDate.ToString("dd.MM.yyyy"),
 
                     AmountExpected = x.amountExpected,
+                    FormattedAmountExpected = x.amountExpected.ToString(),
+
+                    TotalContributedAmount = totalContributedAmount,
+                    FormattedTotalContributedAmount = totalContributedAmount.ToString(),
 
                     Status =
                         totalContributedAmount <= 0
@@ -91,7 +106,7 @@ namespace APC.Applications.Services
                                     ? "Completed"
                                     : $"{totalContributedAmount - x.amountExpected} € Extra",
 
-                    TotalContributedAmount = totalContributedAmount
+                    
                 };
             })
             .OrderByDescending(x => x.ContributionStartDate)
@@ -122,9 +137,7 @@ namespace APC.Applications.Services
 
             return data.Select(x =>
             {
-                decimal totalContributedAmount =
-                    _specialContributorRepository.GetAmountContributedByContributionId(
-                        x.specialContributionID);
+                decimal totalContributedAmount = GetAmountContributedByContributionId(x.specialContributionID);
 
                 return new SpecialContributionDTO
                 {

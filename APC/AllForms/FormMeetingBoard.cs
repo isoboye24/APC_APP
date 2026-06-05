@@ -150,9 +150,9 @@ namespace APC.AllForms
             labelTotalMeetings.Text = "Rows: " + dataGridViewGeneralMeeting.RowCount.ToString();
             labelTotalConstitutions.Text = "Rows: " + dataGridViewConstitution.RowCount.ToString();
             labelTotalFineMembers.Text = "Rows: " + dataGridViewFinedMembers.RowCount.ToString();
-            labelTotalPaidFines.Text = "Total Paid: " + _finedMemberService.GetTotalPaidFines();
+            labelTotalPaidFines.Text = "Total Paid: " + _finedMemberService.GetTotalPaidFines() + " €";
             labelTotalRowsContributions.Text = "Rows: " + dataGridViewSpecialContributions.RowCount.ToString();
-            labelOverallTotalContributions.Text = "Total : ";
+            labelOverallTotalContributions.Text = "Total : " + _specialContributionService.GetAllContributedAmount().ToString() + " €";
         }
 
         private void ResizeableControls()

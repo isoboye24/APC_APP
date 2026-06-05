@@ -36,7 +36,7 @@ namespace APC.Applications.Services
 
         public List<SpecialContributorDTO> GetAllByContributionId(int id)
         {
-            var data = (from c in _repository.GetAllByContributionId(id)
+            var data = (from c in _repository.GetAll().Where(x => x.specialContributionID == id)
                         join m in _memberRepository.GetAll()
                             on c.memberID equals m.memberID
                         join sc in _specialContributionRepository.GetAll()
@@ -158,9 +158,13 @@ namespace APC.Applications.Services
 
         public bool GetBack(int id)
             => _repository.GetBack(id);
-        
-        public decimal GetAmountContributedByContributionId(int id)
-            => _repository.GetAmountContributedByContributionId(id);
+
+        public decimal GetAmountContributedByContributionId(int contributionId)
+        {
+            decimal totalAmount = _repository.GetAll().Where(x => x.specialContributionID == contributionId)
+                                                .Sum(x => x.amountContributed);
+            return totalAmount;
+        }
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);

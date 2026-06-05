@@ -19,7 +19,7 @@ namespace APC.AllForms
         private readonly IConstitutionService _constitutionService;
 
         private Applications.DTO.FinedMemberDTO _finedMemberDTO;
-        private List<Applications.DTO.MembersBasicDetailDTO> _memberDTO;
+        private List<Applications.DTO.MemberFullDetailsDTO> _memberDTO;
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
 
         private bool _isUpdate = false;
@@ -108,26 +108,28 @@ namespace APC.AllForms
             GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10,
                 labelTitle, btnClose, btnSave);
             GeneralHelper.ApplyRegularFont(14, labelName, labelSurname, labelPosition, labelConstitutionSection, labelFine, txtAmount, txtSummary,
-                txtSearchSurname, txtSection);
+                txtSearchSurname, txtShortDescription);
         }
 
         private void loadMembers()
         {
             dataGridViewMembers.DataSource = _memberService.GetAll();
+            _memberDTO = _memberService.GetAll();
             MemberHelper.ConfigureMemberGrid(dataGridViewMembers, MemberHelper.MemberGridType.Basic);
         }
 
-        private Applications.DTO.MembersBasicDetailDTO GetSelectedMember()
+        private Applications.DTO.MemberFullDetailsDTO GetSelectedMember()
         {
             if (dataGridViewMembers.CurrentRow == null)
                 return null;
 
-            return dataGridViewMembers.CurrentRow.DataBoundItem as Applications.DTO.MembersBasicDetailDTO;
+            return dataGridViewMembers.CurrentRow.DataBoundItem as Applications.DTO.MemberFullDetailsDTO;
         }
 
         private void loadConstitutions()
         {
             dataGridViewConstitutions.DataSource = _constitutionService.GetAll();
+            _constitutionDTO = _constitutionService.GetAll();
             ConstitutionHelper.ConfigureConstitutionGrid(dataGridViewConstitutions, ConstitutionHelper.ConstitutionGridType.Basic);
         }
 
@@ -141,9 +143,7 @@ namespace APC.AllForms
 
        
         private void FormFinedMember_Load(object sender, EventArgs e)
-        {
-            btnChangeMember.Hide();
-            btnChangeConstitution.Hide();
+        {            
             resizeControls();
 
             loadMembers();
@@ -159,11 +159,15 @@ namespace APC.AllForms
                 txtAmount.Text = _finedMemberDTO.AmountPaid.ToString();
                 dateTimePickerFineDate.Value = _finedMemberDTO.FineDate;
 
+                labelTitle.Text = "Edit Fined Member";
+                btnChangeMember.Visible = true;
+                btnChangeConstitution.Visible = true;
+
                 if (!isChangeConstitution)
                 {
                     labelFine.Text = _finedMemberDTO.FormattedAmountExpected;
                     labelConstitutionSection.Text = _finedMemberDTO.Section;
-                    _constitutionId = selectConstitution.ConstitutionId;
+                    _constitutionId = _finedMemberDTO.ConstitutionId;
                 }
 
                 if (!isChangeMember)
@@ -174,61 +178,39 @@ namespace APC.AllForms
                     string imagePath = Application.StartupPath + "\\images\\" + _finedMemberDTO.ImagePath;
                     picProfilePic.ImageLocation = imagePath;
 
-                    _memberId = selectMember.MemberId;
-                }
-
-                labelTitle.Text = "Edit Fined Member";
-                btnChangeMember.Visible = true;
-                btnChangeConstitution.Visible = true;
+                    _memberId = _finedMemberDTO.MemberId;
+                }                
             }
             else
             {
                 labelTitle.Text = "Add Fined Member";
+
+                btnChangeMember.Hide();
+                btnChangeConstitution.Hide();
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                decimal amountPaid = Convert.ToDecimal(txtAmount.Text.Trim());
-                string summary = txtSummary.Text.Trim();
-
-                if (_finedMemberDTO.FinedMemberId == 0)
-                {
-                    var finedMember = new FinedMember(amountPaid, summary, _constitutionId, _memberId, DateTime.Today);
-                    _finedMemberService.Create(finedMember);
-                    MessageBox.Show("Fined member created successfully!");
-                }
-                else
-                {
-                    var finedMember = new FinedMember(amountPaid, summary, _constitutionId, _memberId, _finedMemberDTO.FineDate);
-
-                    _finedMemberService.Update(finedMember);
-                    MessageBox.Show("Fined member updated successfully!");
-                    this.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
+        
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (isChangeMember)
-            {
-                var selectMember = GetSelectedMember();
+            string imagePath;
 
-                string imagePath = Path.Combine(Application.StartupPath, "images", selectMember.ImagePath);
-                picProfilePic.ImageLocation = imagePath;
+            if (e.RowIndex < 0)
+                return;
 
-                labelName.Text = selectMember.FirstName;
-                labelSurname.Text = selectMember.LastName;
-                labelPosition.Text = selectMember.Position;
-                _memberId = selectMember.MemberId;
-            }            
+            var row = dataGridViewMembers.Rows[e.RowIndex];
+
+            var selected = row.DataBoundItem as Applications.DTO.MemberFullDetailsDTO;
+
+            if (selected == null)
+                return;
+
+            _memberId = selected.MemberId;
+            labelSurname.Text = selected.LastName;
+            labelName.Text = selected.FirstName;
+
+            imagePath = Application.StartupPath + "\\images\\" + selected.ImagePath;
+            picProfilePic.ImageLocation = imagePath;        
         }
 
         private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
@@ -238,14 +220,19 @@ namespace APC.AllForms
 
         private void dataGridViewConstitutions_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (isChangeConstitution)
-            {
-                var selectConstitution = GetSelectedConstitution();
+            if (e.RowIndex < 0)
+                return;
 
-                labelFine.Text = selectConstitution.FineWithCurrency;
-                labelConstitutionSection.Text = selectConstitution.Section;
-                _constitutionId = selectConstitution.ConstitutionId;
-            }            
+            var row = dataGridViewConstitutions.Rows[e.RowIndex];
+
+            var selected = row.DataBoundItem as Applications.DTO.ConstitutionDTO;
+
+            if (selected == null)
+                return;
+
+            _constitutionId = selected.ConstitutionId;
+            labelConstitutionSection.Text = selected.Section;
+            labelFine.Text = selected.FineWithCurrency;     
         }
 
         private void txtSearchSurname_TextChanged(object sender, EventArgs e)
@@ -257,8 +244,8 @@ namespace APC.AllForms
 
         private void txtSection_TextChanged(object sender, EventArgs e)
         {
-            string search = txtSection.Text.Trim().ToLower();
-            var filtered = _constitutionDTO.Where(x => x.Section.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            string search = txtShortDescription.Text.Trim().ToLower();
+            var filtered = _constitutionDTO.Where(x => x.ShortDescription.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             dataGridViewConstitutions.DataSource = filtered;
         }
 
@@ -273,5 +260,38 @@ namespace APC.AllForms
                 WindowState = FormWindowState.Normal;
             }
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal amountPaid = decimal.TryParse(txtAmount.Text.Trim(), out decimal result) ? result : 0;
+                string summary = txtSummary.Text.Trim();
+
+                if (!_isUpdate)
+                {
+                    var finedMember = new FinedMember(amountPaid, summary, _constitutionId, _memberId, DateTime.Today);
+                    _finedMemberService.Create(finedMember);
+                    MessageBox.Show("Fined member created successfully!");
+
+                    txtAmount.Clear();
+                    txtSummary.Clear();
+                    dateTimePickerFineDate.Value = DateTime.Today;
+                }
+                else
+                {
+                    var finedMember = FinedMember.Rehydrate(_finedMemberDTO.FinedMemberId, amountPaid, summary, _constitutionId, _memberId, _finedMemberDTO.FineDate);
+
+                    _finedMemberService.Update(finedMember);
+                    MessageBox.Show("Fined member updated successfully!");
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
     }
 }

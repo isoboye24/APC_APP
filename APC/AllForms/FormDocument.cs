@@ -6,7 +6,6 @@ using System.Data.Entity.Validation;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Data.Entity.Validation;
 
 namespace APC.AllForms
 {

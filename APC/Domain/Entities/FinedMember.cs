@@ -44,19 +44,9 @@ namespace APC.Domain.Entities
             AmountPaid = value < 0 ? 0 : value;
         }
 
-        public void UpdateAmountPaid(decimal newAmountPaid)
-        {
-            SetAmountPaid(newAmountPaid);
-        }
-
         private void SetSummary(string summary)
         {
             Summary = string.IsNullOrWhiteSpace(summary) ? null : summary.Trim();
-        }
-
-        public void UpdateSummary(string newSummary)
-        {
-            SetSummary(newSummary);
         }
 
         private void SetConstitution(int id)
@@ -67,11 +57,6 @@ namespace APC.Domain.Entities
             ConstitutionId = id;
         }
 
-        public void UpdateConstitution(int newId)
-        {
-            SetConstitution(newId);
-        }
-
         private void SetMember(int id)
         {
             if (id < 0)
@@ -80,22 +65,12 @@ namespace APC.Domain.Entities
             MemberId = id;
         }
 
-        public void UpdateMember(int newId)
-        {
-            SetMember(newId);
-        }
-
         private void SetFineDate(DateTime date)
         {
             if (date.Year < 2000 || date.Year > DateTime.Now.Year + 1)
                 throw new ArgumentException("Invalid year");
 
             FineDate = date;
-        }
-
-        public void UpdateFineDate(DateTime newDate)
-        {
-            SetFineDate(newDate);
         }
     }
 }

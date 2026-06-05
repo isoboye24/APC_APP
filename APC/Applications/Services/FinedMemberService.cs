@@ -1,11 +1,9 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
-using APC.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace APC.Applications.Services
 {
@@ -92,7 +90,7 @@ namespace APC.Applications.Services
                 FineDate = x.fineDate,
                 FormattedFineDate = x.fineDate.ToString("dd.MM.yyyy"),
             })
-            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .OrderByDescending(x => x.FineDate).ThenBy(x => x.FirstName)
             .ToList();
         }
 
@@ -148,7 +146,7 @@ namespace APC.Applications.Services
                 FineDate = x.fineDate,
                 FormattedFineDate = x.fineDate.ToString("dd.MM.yyyy"),
             })
-            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .OrderByDescending(x => x.FineDate).ThenBy(x => x.FirstName)
             .ToList();
         }
 
@@ -259,7 +257,7 @@ namespace APC.Applications.Services
                 FineDate = x.fineDate,
                 FormattedFineDate = x.fineDate.ToString("dd.MM.yyyy"),
             })
-            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .OrderByDescending(x => x.FineDate).ThenByDescending(x => x.AmountExpected)
             .ToList();
         }
 
@@ -315,7 +313,7 @@ namespace APC.Applications.Services
                 FineDate = x.fineDate,
                 FormattedFineDate = x.fineDate.ToString("dd.MM.yyyy"),
             })
-            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .OrderByDescending(x => x.FineDate).ThenByDescending(x => x.AmountExpected)
             .ToList();
         }
     }
