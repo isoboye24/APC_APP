@@ -871,23 +871,27 @@ namespace APC.AllForms
                 MessageBox.Show("Please select either a year");
                 return;
             }
-            else if (cmbYearCommittment.SelectedIndex != -1)
+            else
             {
-                int search = Convert.ToInt32(cmbYearCommittment.SelectedValue);
-                loadMembersCommittments(search);
+                if (cmbYearCommittment.SelectedIndex != -1)
+                {
+                    int search = Convert.ToInt32(cmbYearCommittment.SelectedValue);
+                    loadMembersCommittments(search);
+
+                    if (cmbStatusCommittment.SelectedIndex != -1)
+                    {
+                        var filtered = _memberCommittmentDTOs.AsQueryable();
+                        string searchStatus = cmbStatusCommittment.Text;
+
+                        filtered = filtered.Where(x =>
+                            x.Status.ToString()
+                                .IndexOf(searchStatus, StringComparison.OrdinalIgnoreCase) >= 0);
+
+                        dataGridViewCommitments.DataSource = filtered.ToList();
+                    }
+                }
             }
-            else if (cmbYearCommittment.SelectedIndex != -1 && cmbStatusCommittment.SelectedIndex != 1)
-            {
-                int searchYear = Convert.ToInt32(cmbYearCommittment.SelectedValue);
-                string searchStatus = cmbStatusCommittment.Text;
-
-                loadMembersCommittments(searchYear);
-                var filtered = _memberCommittmentDTOs.AsQueryable();
-
-                filtered.Where(x => x.Status.ToString().IndexOf(searchStatus, StringComparison.OrdinalIgnoreCase) >= 0);
-
-                dataGridViewCommitments.DataSource = filtered.ToList();
-            }
+            
         }
 
         private void btnClearCommittment_Click_1(object sender, EventArgs e)
