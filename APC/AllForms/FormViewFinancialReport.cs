@@ -39,10 +39,12 @@ namespace APC.AllForms
 
         private void controlsFont()
         {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label3, label4, label6, btnClose, labelTotalAmountRaised,
-                labelTotalAmountSpent, labelTotalBalance);
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, btnClose);
 
-            GeneralHelper.ApplyRegularFont(14, txtSummary);
+            GeneralHelper.ApplyRegularFont(18, txtSummary);
+
+            GeneralHelper.ApplyBoldFont(20,  label3, label4, label6);
+            GeneralHelper.ApplyBoldFont(24, labelTotalAmountRaised, labelTotalAmountSpent, labelTotalBalance);
         }
 
         private void FormViewFinancialReport_Load(object sender, EventArgs e)
