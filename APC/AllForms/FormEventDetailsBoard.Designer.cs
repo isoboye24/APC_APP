@@ -734,7 +734,6 @@
             this.dataGridEventSales.RowTemplate.Height = 40;
             this.dataGridEventSales.Size = new System.Drawing.Size(1365, 403);
             this.dataGridEventSales.TabIndex = 4;
-            //this.dataGridEventSales.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridEventSales_RowEnter);
             // 
             // tableLayoutPanel12
             // 
@@ -1378,7 +1377,6 @@
             this.dataGridEventExpenditures.RowTemplate.Height = 40;
             this.dataGridEventExpenditures.Size = new System.Drawing.Size(1371, 388);
             this.dataGridEventExpenditures.TabIndex = 4;
-            //this.dataGridEventExpenditures.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridEventExpenditures_RowEnter);
             // 
             // label3
             // 

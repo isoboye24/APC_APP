@@ -8,11 +8,14 @@ namespace APC.Applications.Interfaces
     {
         List<EventDTO> GetAll();
         List<EventDTO> GetAnnualEvents(int year);
+        List<YearDTO> GetEventYearsOnly();
+
         bool Create(TheEvents data);
         bool Update(TheEvents data);
         bool Delete(int id);
         bool GetBack(int id);
         bool PermanentDelete(int id);
         int Count();
+
     }
 }

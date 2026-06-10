@@ -73,8 +73,8 @@ namespace APC
 
         private void loadMembers()
         {
-            dataGridViewMembers.DataSource = _memberService.GetAll();
-            _memberDTO = _memberService.GetAll();
+            dataGridViewMembers.DataSource = _memberService.GetAllCurrentMembers();
+            _memberDTO = _memberService.GetAllCurrentMembers();
             MemberHelper.ConfigureMemberGrid(dataGridViewMembers, MemberHelper.MemberGridType.Basic);
         }
 
@@ -87,8 +87,6 @@ namespace APC
         private void FormAttendance_Load(object sender, EventArgs e)
         {
             resizeControls();
-
-            
 
             loadAttendanceStatuses();
 

@@ -1,6 +1,7 @@
 ﻿using APC.AllForms;
 using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Applications.Services;
 using APC.Helper;
 using System;
 using System.Collections.Generic;
@@ -90,7 +91,7 @@ namespace APC
         {
             GeneralHelper.ApplyBoldFont(14, label5, label2, btnAdd, btnUpdate, btnView);
 
-            GeneralHelper.ApplyRegularFont(14, txtEventYear, txtEventTitle);
+            GeneralHelper.ApplyRegularFont(14, cmbEventYear, txtEventTitle);
 
             label1.Tag = "resizable";
             label3.Tag = "resizable";
@@ -111,12 +112,18 @@ namespace APC
 
         private void FormEventsList_Load(object sender, EventArgs e)
         {
+            cmbEventYear.DataSource = _eventsService.GetEventYearsOnly();
+            GeneralHelper.ComboBoxProps(cmbEventYear, "YearInText", "YearInValue");
+
             controlsFont();
 
             loadEvents();
         }
         private void ClearFilters()
         {
+            cmbEventYear.SelectedIndex = -1;
+            txtEventTitle.Clear();
+
             loadEvents();
         }
 
@@ -124,13 +131,6 @@ namespace APC
         {
             string search = txtEventTitle.Text.Trim().ToLower();
             var filtered = _eventDTOs.Where(x => x.Title.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            dataGridView1.DataSource = filtered;
-        }
-
-        private void txtEventYear_TextChanged(object sender, EventArgs e)
-        {
-            int year = Convert.ToInt32(txtEventYear.Text.Trim());
-            var filtered = _eventDTOs.Where(x => x.EventsDate.Year == year).ToList();
             dataGridView1.DataSource = filtered;
         }
 
@@ -160,6 +160,21 @@ namespace APC
             labelOverallSold.Text = totalSales.ToString();
             labelOverallSpent.Text = totalExpenditures.ToString();
             labelOverallBalance.Text = (totalSales - totalExpenditures).ToString();
+        }
+
+        private void btnSearchEvent_Click(object sender, EventArgs e)
+        {
+            if (cmbEventYear.SelectedIndex != -1)
+            {
+                int year = Convert.ToInt32(cmbEventYear.SelectedValue);
+                var filtered = _eventDTOs.Where(x => x.EventsDate.Year == year).ToList();
+                dataGridView1.DataSource = filtered;
+            }
+        }
+
+        private void btnClearEvent_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
         }
     }
 }

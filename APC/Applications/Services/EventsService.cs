@@ -82,5 +82,20 @@ namespace APC.Applications.Services
                 return _repository.Update(data);                
             }
         }
+
+        public List<YearDTO> GetEventYearsOnly()
+        {
+            return _repository.GetAll()
+                    .ToList()
+                    .Select(x => x.year)
+                    .Distinct()
+                    .OrderByDescending(x => x)
+                    .Select(x => new YearDTO
+                    {
+                        YearInValue = x,
+                        YearInText = x.ToString(),
+                    })
+                    .ToList();
+        }
     }
 }

@@ -20,12 +20,15 @@ namespace APC.Helper
             switch (type)
             {
                 case EventsGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "Counter", "EventTitle");
+                    GeneralHelper.SetVisibleColumns(grid, "Title", "FormattedEventsDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
-                                    { "Counter", "No." },
-                                    { "EventTitle", "Title" },
+                                    { "FormattedEventsDate", "Date" },
                                 });
+
+                    grid.Columns["Title"].DisplayIndex = 0;
+                    grid.Columns["FormattedEventsDate"].DisplayIndex = 1;
+                    grid.Columns["FormattedEventsDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     break;
 
                 case EventsGridType.Images:
