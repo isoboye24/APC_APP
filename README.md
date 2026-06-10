@@ -1,6 +1,6 @@
 ﻿## APC Nexus – Enterprise Membership & Financial Management System
 
-### Overview
+## Overview
 
 APC Nexus is a full-featured enterprise desktop application designed to manage membership operations, 
 financial contributions, attendance tracking, fines, events, and reporting for organizations and associations.
@@ -14,6 +14,7 @@ It is built using:
 - Entity Framework
 - SQL Server
 - LINQ
+- Clean Architecture
 
 
 ### 🔐 Authentication
@@ -44,9 +45,51 @@ Manage:
 - Contacts
 - Commitments
 
+### 📈 Financial Reports
+
+Generate:
+
+- Financial summaries
+- Expenditure reports
+- Yearly breakdowns
+- Contribution statistics
 
 
+![Login](Images/image4.PNG)
 
+### 👤 Member Profile
+
+Detailed member information including:
+
+- Personal information
+- Attendance history
+- Contributions
+- Fines
+- Special contributions
+
+![Login](Images/image2.PNG)
+
+### 📅 Meeting Management
+
+Track:
+
+- Monthly attendance
+- Present and absent members
+- Monthly dues
+- Expected contributions
+- Meeting summaries
+
+### 🎉 Event Management
+
+Manage:
+
+- Event sales
+- Expenditures
+- Receipts
+- Event images
+- Event balances
+
+![Login](Images/image3.PNG)
 
 ### Architecture
 
@@ -72,6 +115,88 @@ APC
   
 ````
 
+## Layer Responsibilities
+
+### Presentation Layer
+
+- Windows Forms UI
+- User interaction
+- Input validation
+
+### Application Layer
+- Business rules
+- DTOs
+- Service interfaces
+- Application services
+
+### Domain Layer
+- Core entities
+- Business models
+
+### Infrastructure Layer
+- Entity Framework
+- Database access
+- Repository implementations
+
+## Design Patterns
+- Clean Architecture
+- Repository Pattern
+- Service Layer Pattern
+- DTO Pattern
+- Dependency Injection
+- Soft Delete Pattern
+
+## Core Features
+
+### 🔐 Authentication & Permissions
+- Login system
+- Role-based access control
+- Permission management
+
+### 👥 Membership Management
+
+- Add/Edit/Delete members
+- Birthday tracking
+- Status management
+- Profile images
+
+### 📅 Attendance Management
+
+- Present/Absent tracking
+- Attendance history
+- Three-month absentee detection
+
+### 💰 Financial Management
+
+- Monthly dues
+- Fines
+- Special contributions
+- Balance calculations
+
+### 🎉 Event Management
+- Event sales
+- Expenditures
+- Receipts
+- Image storage
+
+### 📊 Reporting
+- Financial reports
+- Attendance statistics
+- Member analytics
+
+## ⚙ Settings
+
+Manage:
+
+- Countries
+- Positions
+- Professions
+- Employment statuses
+- Membership statuses
+- Permissions
+- Nationalities
+- Marital Statuses
+
 
 ### 🧰 Setup Instructions
 
@@ -86,23 +211,37 @@ APC
 
 git clone https://github.com/isoboye24/APC_APP_.git
 
-#### 3. Configure Database
+#### 3. Restore NuGet Packages
 
-Update connection string in App.config
+Open the solution in Visual Studio and restore all NuGet packages if necessary.
 
-#### 4. Run Project
+#### 4. Configure Database
+
+Update the connection string in:
+
+App.config
+
+to point to your SQL Server instance.
+
+#### 5. Run Project
 
 - Set APC (UI) as startup project
-- Press F5
+- Press F5 to build and run the application.
 
 ### 🏢 Project Type
 
-Enterprise Desktop Application
-Association / Organization Management System
+ERP System for Community Organizations
+
+Designed for:
+
+Community groups
+Non-profit organizations
 
 👨‍💻 Author
 
-Developed as a professional enterprise-grade membership management platform using structured architecture and clean separation of concerns.
+Isoboye Vincent Dan-Obu
+
+Professional membership and financial management system developed using Clean Architecture principles.
 
 📜 License
 
