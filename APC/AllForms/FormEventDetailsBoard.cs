@@ -5,6 +5,7 @@ using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -28,7 +29,7 @@ namespace APC.AllForms
         private  List<EventImageDTO> _eventImageDTOs;
         private  List<EventReceiptDTO> _eventReceiptDTOs;
         public FormEventDetailsBoard(IEventsService eventsService, IEventExpenditureService eventExpenditureService, IEventSalesService eventSalesService,
-            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService, ICurrentUserService currentUserService)
+            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService, ICurrentUserService currentUserService, IMonthService monthService)
         {
             InitializeComponent();
             this.Load += new System.EventHandler(this.FormEventDetailsBoard_Load);
@@ -39,6 +40,7 @@ namespace APC.AllForms
             _eventReceiptService = eventReceiptService;
             _eventImagesService = eventImagesService;
             _currentUserService = currentUserService;
+            _monthService = monthService;
         }
 
         /// <summary>
@@ -604,7 +606,7 @@ namespace APC.AllForms
             if (dataGridEventImages.CurrentRow == null)
                 return null;
 
-            return dataGridEventSales.CurrentRow.DataBoundItem as EventImageDTO;
+            return dataGridEventImages.CurrentRow.DataBoundItem as EventImageDTO;
         }
 
         private void btnUpdateEventImages_Click(object sender, EventArgs e)
@@ -676,12 +678,13 @@ namespace APC.AllForms
         private void dataGridEventImages_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             var selected = GetSelectedEventImage();
+            if (selected == null)
+            {
+                return;
+            }
 
-            string imagePath = System.IO.Path.Combine(Application.StartupPath, "images", selected.ImagePath);
-            if (System.IO.File.Exists(imagePath))
-                picImage2.ImageLocation = imagePath;
-            else
-                picImage2.Image = null;
+            string imagePath = Path.Combine(Application.StartupPath, "images", selected.ImagePath);
+            picEventImage.ImageLocation = imagePath;
         }
 
         private void btnClearEventImage_Click(object sender, EventArgs e)
@@ -735,14 +738,13 @@ namespace APC.AllForms
         private void dataGridViewEventReceipt_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             var selected = GetSelectedEventReceipt();
+            if (selected == null)
+            {
+                return;
+            }
 
-            string imagePath = System.IO.Path.Combine(Application.StartupPath, "images", selected.ImagePath);
-            if (System.IO.File.Exists(imagePath))
-                picEventReceipt.ImageLocation = imagePath;
-            else
-                picEventReceipt.Image = null;
-
-            
+            string imagePath = Path.Combine(Application.StartupPath, "images", selected.ImagePath);
+            picEventReceipt.ImageLocation = imagePath;
         }
 
         private void txtEventReceiptCaption_TextChanged(object sender, EventArgs e)

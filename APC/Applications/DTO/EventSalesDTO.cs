@@ -9,6 +9,7 @@ namespace APC.Applications.DTO
         public int EventId { get; set; }
         public string EventTitle { get; set; }
         public decimal AmountSold { get; set; }
+        public string FormattedAmountSold { get; set; }
         public string Summary { get; set; }
         public DateTime SalesDate { get; set; }
         public string FormattedSalesDate { get; set; }

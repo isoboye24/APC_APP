@@ -21,13 +21,15 @@ namespace APC
         private readonly IEventReceiptService _eventReceiptService;
         private readonly IEventImagesService _eventImagesService;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IMonthService _monthService;
 
         private List<EventDTO> _eventDTOs;
 
         private int currYear = DateTime.Today.Year;
 
         public FormEventsList(IEventsService eventsService, IEventExpenditureService eventExpenditureService, IEventSalesService eventSalesService,
-            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService, ICurrentUserService currentUserService)
+            IEventReceiptService eventReceiptService, IEventImagesService eventImagesService, ICurrentUserService currentUserService, 
+            IMonthService monthService)
         {
             InitializeComponent();
             _eventsService = eventsService;
@@ -36,6 +38,7 @@ namespace APC
             _eventReceiptService = eventReceiptService;
             _eventImagesService = eventImagesService;
             _currentUserService = currentUserService;
+            _monthService = monthService;
         }        
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -80,7 +83,7 @@ namespace APC
             }
 
             var form = new FormEventDetailsBoard(_eventsService, _eventExpenditureService, _eventSalesService,
-                    _eventReceiptService, _eventImagesService, _currentUserService);
+                    _eventReceiptService, _eventImagesService, _currentUserService, _monthService);
             form.loadForView(selected);
             form.ShowDialog();
 
@@ -146,8 +149,6 @@ namespace APC
             {
                 return;
             }
-
-            //detail = GeneralHelper.MapFromGrid<EventsDetailDTO>(dataGridView1, e.RowIndex);
 
             string imagePath = Path.Combine(Application.StartupPath, "images", selected.CoverImagePath);
             picViewEventCoverImage.ImageLocation = imagePath;

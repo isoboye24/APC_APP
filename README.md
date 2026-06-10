@@ -5,8 +5,7 @@
 APC Nexus is a full-featured enterprise desktop application designed to manage membership operations, 
 financial contributions, attendance tracking, fines, events, and reporting for organizations and associations.
 
-The system provides a structured 3-Layer Architecture (UI – BLL – DAL) ensuring maintainability, scalability, 
-and clean separation of concerns.
+The system is built using Clean Architecture, providing clear separation of concerns, maintainability, scalability, and improved testability.
 
 It is built using:
 
@@ -14,34 +13,36 @@ It is built using:
 - Windows Forms (WinForms)
 - Entity Framework
 - SQL Server
+- LINQ
 
 
-The Login page provides secure access to the system for authorized members of the organization. 
+### 🔐 Authentication
 
-The Dashboard provides a real-time overview of the organization’s financial and membership statistics. Acts as the executive control center for 
-decision-making.
-
-Form Meeting & Contributions manages monthly meetings, attendance, and dues tracking. Tracks member participation and financial obligations per meeting.
+Secure login system for authorized users.
 
 ![Login](Images/image1.PNG)
 
-The Members module manages the full lifecycle of all registered members. Centralized member management with financial and attendance integration.
+### 📊 Dashboard
 
-Form Member Profile (Personal Info) detailed view of individual member information. Provides a complete personal overview of each member.
+Real-time overview of:
 
-![Login](Images/image2.PNG)
+- Registered members
+- Attendance statistics
+- Dues raised
+- Expenses
+- Financial summaries
 
-Form Attendance Record shows detailed attendance history for each member. Maintains accurate historical participation records.
+### 👥 Membership Management
 
-Form used to register new members into the system. Provides structured onboarding for new members.
+Manage:
 
-![Login](Images/image3.PNG)
-
-Form Setting Module manages system reference data. Keeps system data dynamic and configurable without modifying code.
-
-Member Committment Overview displays financial and attendance summary for individual members. Provides accountability tracking per member.
-
-![Login](Images/image4.PNG)
+- Active members
+- Former members
+- Inactive members
+- Deceased members
+- Birthdays
+- Contacts
+- Commitments
 
 
 
@@ -49,151 +50,28 @@ Member Committment Overview displays financial and attendance summary for indivi
 
 ### Architecture
 
-The application follows a structured enterprise architecture:
+The application follows the Clean Architecture pattern:
 
 ````
 APC
 │
-├── UI Layer (WinForms)
-│   ├── Forms
-│   ├── Controls
-│   └── User Interaction Logic
+├── AllForms            → Presentation Layer (WinForms)
+│   
+├── Application 
+│   ├── DTO             → Data Transfer Objects
+│   ├── Interfaces      → Contracts
+│   └── Services        → Application Business Logic
 │
-├── BLL (Business Logic Layer)
-│   ├── Validation
-│   ├── Business Rules
-│   └── DTO Handling
-│
-└── DAL (Data Access Layer)
-    ├── Entity Framework Context
-    ├── DAO Classes
-    ├── LINQ Queries
-    └── Database Operations
+└── Domain ()
+|   ├── Entities        → Core Domain Models
+|
+├── Infrastruture 
+│   ├── Data            → DbContext / EDMX
+│   ├── Repositories    → Data Access Implementations
+│ 
+  
 ````
 
-### Design Patterns Used
-
-- DTO Pattern
-- DAO Pattern
-- Layered Architecture
-- Repository-like Data Handling
-- LINQ-based Querying
-- Soft Delete Strategy
-
-### Core Features
-
-#### 🔐 Authentication & Access Control
-
-- Secure login system
-- Role-based permissions
-- Dynamic access level management
-- Member credential auto-generation
-
-#### 👥 Membership Management
-
-- Add / Edit / View / Delete Members
-- Profile image upload & storage
-- Membership status tracking:
-    - Current
-    - Former
-    - Inactive
-    - Deceased
-- Birthday tracking
-- Nationality statistics
-- Gender distribution analytics
-- 3-Month Absentee detection
-
-#### 📅 Meeting Management
-
-- Monthly meeting tracking
-- Attendance monitoring:
-    - Present
-    - Absent
-- Monthly dues tracking
-- Dues paid vs expected
-- Absentee detection logic (last 3 meetings)
-
-#### 💰 Financial Management
-
-- Monthly dues tracking
-- Fine management system
-- Special contributions
-- Event financial tracking
-- Financial reporting:
-    - Total Raised
-    - Total Spent
-    - Balance
-- Yearly breakdown
-- Automatic balance calculations
-
-#### 📊 Reporting & Dashboard
-
-- Real-time financial dashboard
-- Attendance statistics
-- Member distribution
-- Unique nationality count
-- Unique profession count
-- Position analytics
-- Fine summary
-- Event balance tracking
-
-#### 🎉 Event Management4
-
-- Event creation & management
-- Sales tracking
-- Expenditure tracking
-- Balance computation
-- Event summary analytics
-- Picture storage per event
-
-#### ⚙ Settings Module
-
-Manage system reference data:
-
-- Countries
-- Nationalities
-- Positions
-- Professions
-- Marital Status
-- Employment Status
-- Membership Status
-- Permissions
-
-#### 🧠 Smart Business Logic
-
-The system includes advanced logic such as:
-
-- Auto username generation (apcXXXXX)
-- Auto password generation from birthday
-- Automatic fine calculation
-- Meeting-based expected dues calculation
-- 3 consecutive absence detection
-- Soft delete with recovery
-- Permission-based UI visibility
-- Deceased age calculation
-
-#### 🗃 Database Strategy
-
-- Entity Framework (Code First / Database First compatible)
-- Soft delete pattern (isDeleted)
-- Relational integrity via foreign keys
-- LINQ joins for DTO population
-- Structured membership state transitions
-
-#### 📁 Folder Structure
-
-````
-APC
-│
-├── APC (UI)
-├── APC.BLL
-├── APC.DAL
-│   ├── DAO
-│   ├── DTO
-│   └── Context
-├── images
-└── Database
-````
 
 ### 🧰 Setup Instructions
 

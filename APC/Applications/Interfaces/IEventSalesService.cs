@@ -7,6 +7,7 @@ namespace APC.Applications.Interfaces
     public interface IEventSalesService
     {
         List<EventSalesDTO> GetAll();
+        List<EventSalesDTO> GetAllDeletedEventSales();
         List<EventSalesDTO> GetByEvent(int eventId);
         bool Create(EventSales data);
         bool Update(EventSales data);

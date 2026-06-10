@@ -40,11 +40,6 @@ namespace APC.Domain.Entities
             Summary = string.IsNullOrWhiteSpace(summary) ? null : summary.Trim();
         }
 
-        public void UpdateSummary(string newSummary)
-        {
-            SetSummary(newSummary);
-        }
-
         private void SetImagePath(string imagePath)
         {
             if (string.IsNullOrWhiteSpace(imagePath))
@@ -53,19 +48,9 @@ namespace APC.Domain.Entities
             ImagePath = imagePath.Trim();
         }
 
-        public void UpdateImagePath(string newImagePath)
-        {
-            SetImagePath(newImagePath);
-        }
-
         private void SetImageCaption(string caption)
         {
             ImageCaption = string.IsNullOrWhiteSpace(caption) ? null : caption.Trim();
-        }
-
-        public void UpdateImageCaption(string newCaption)
-        {
-            SetImageCaption(newCaption);
         }
 
         private void SetEvent(int eventId)

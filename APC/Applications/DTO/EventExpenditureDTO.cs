@@ -8,6 +8,7 @@ namespace APC.Applications.DTO
         public int Counter { get; set; }
         public int EventId { get; set; }
         public decimal SpentAmount { get; set; }
+        public string FormattedSpentAmount { get; set; }
         public DateTime ExpenditureDate { get; set; }
         public string FormattedExpenditureDate { get; set; }
         public string Summary { get; set; }

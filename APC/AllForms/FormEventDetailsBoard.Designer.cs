@@ -61,7 +61,7 @@
             this.dataGridEventImages = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
-            this.picImage2 = new System.Windows.Forms.PictureBox();
+            this.picEventImage = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.eventSalesPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -152,7 +152,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventImages)).BeginInit();
             this.tableLayoutPanel15.SuspendLayout();
             this.tableLayoutPanel28.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picImage2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).BeginInit();
             this.eventSalesPage.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
@@ -634,7 +634,7 @@
             // 
             this.tableLayoutPanel28.ColumnCount = 1;
             this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel28.Controls.Add(this.picImage2, 0, 0);
+            this.tableLayoutPanel28.Controls.Add(this.picEventImage, 0, 0);
             this.tableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel28.Location = new System.Drawing.Point(59, 3);
             this.tableLayoutPanel28.Name = "tableLayoutPanel28";
@@ -644,16 +644,16 @@
             this.tableLayoutPanel28.Size = new System.Drawing.Size(446, 416);
             this.tableLayoutPanel28.TabIndex = 2;
             // 
-            // picImage2
+            // picEventImage
             // 
-            this.picImage2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picImage2.Location = new System.Drawing.Point(4, 4);
-            this.picImage2.Margin = new System.Windows.Forms.Padding(4);
-            this.picImage2.Name = "picImage2";
-            this.picImage2.Size = new System.Drawing.Size(438, 283);
-            this.picImage2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picImage2.TabIndex = 1;
-            this.picImage2.TabStop = false;
+            this.picEventImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picEventImage.Location = new System.Drawing.Point(4, 4);
+            this.picEventImage.Margin = new System.Windows.Forms.Padding(4);
+            this.picEventImage.Name = "picEventImage";
+            this.picEventImage.Size = new System.Drawing.Size(438, 283);
+            this.picEventImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEventImage.TabIndex = 1;
+            this.picEventImage.TabStop = false;
             // 
             // label1
             // 
@@ -1868,7 +1868,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEventImages)).EndInit();
             this.tableLayoutPanel15.ResumeLayout(false);
             this.tableLayoutPanel28.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picImage2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEventImage)).EndInit();
             this.eventSalesPage.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -2018,7 +2018,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelTotalAmountEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
-        private System.Windows.Forms.PictureBox picImage2;
+        private System.Windows.Forms.PictureBox picEventImage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel28;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel29;
     }

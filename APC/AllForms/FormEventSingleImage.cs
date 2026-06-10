@@ -15,7 +15,7 @@ namespace APC.AllForms
         private readonly IEventImagesService _eventImagesService;
 
         private EventDTO _eventDTO;
-        private Applications.DTO.EventImageDTO _eventImageDTO;
+        private EventImageDTO _eventImageDTO;
 
         private bool _isUpdate = false;
         private string fileName = "";
@@ -63,7 +63,7 @@ namespace APC.AllForms
                 if (!string.IsNullOrWhiteSpace(sourcePath) && !string.IsNullOrWhiteSpace(fileName))
                 {
                     string destinationFolder =
-                        Path.Combine(Application.StartupPath, "images");
+                       Path.Combine(Application.StartupPath, "images");
 
                     if (!Directory.Exists(destinationFolder))
                     {
@@ -87,16 +87,9 @@ namespace APC.AllForms
                     }
                 }
 
-                
-
                 if (!_isUpdate)
                 {
-                    var eventImageData = new EventImages(
-                    _eventDTO.EventsId,
-                    summary,
-                    finalImagePath,
-                    caption
-                );
+                    var eventImageData = new EventImages(_eventDTO.EventsId, summary, finalImagePath, caption);
                     _eventImagesService.Create(eventImageData);
 
                     MessageBox.Show("Event Image created successfully!");
@@ -105,12 +98,7 @@ namespace APC.AllForms
                 }
                 else
                 {
-                    var eventImageData = EventImages.Rehydrate(_eventImageDTO.EventImageId, 
-                    _eventDTO.EventsId,
-                    summary,
-                    finalImagePath,
-                    caption
-                );
+                    var eventImageData = EventImages.Rehydrate(_eventImageDTO.EventImageId, _eventDTO.EventsId, summary, finalImagePath, caption);
                     _eventImagesService.Update(eventImageData);
 
                     MessageBox.Show("Event Image updated successfully!");

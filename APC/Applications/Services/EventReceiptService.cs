@@ -33,6 +33,7 @@ namespace APC.Applications.Services
         {
             return _repository.GetAll()
                .OrderBy(x => x.eventID)
+               .ToList()
                 .Select((x, index) => new EventReceiptDTO
                 {
                     Counter = index + 1,
@@ -43,6 +44,8 @@ namespace APC.Applications.Services
                     Caption = x.caption,
                     FormattedReceiptDate = x.receiptDate.ToString("dd.MM.yyyy"),
                     ReceiptDate = x.receiptDate,
+                    AmountSpent = x.amountSpent,
+                    FormattedAmountSpent = x.amountSpent.ToString() + " €",
                 })
                 .ToList();
         }
@@ -52,6 +55,7 @@ namespace APC.Applications.Services
             return _repository.GetAll()
                 .Where(x => x.eventID == eventId)
                .OrderBy(x => x.caption)
+               .ToList()
                 .Select((x, index) => new EventReceiptDTO
                 {
                     Counter = index + 1,
@@ -62,6 +66,8 @@ namespace APC.Applications.Services
                     Caption = x.caption,
                     FormattedReceiptDate = x.receiptDate.ToString("dd.MM.yyyy"),
                     ReceiptDate = x.receiptDate,
+                    AmountSpent = x.amountSpent,
+                    FormattedAmountSpent = x.amountSpent.ToString() + " €",
                 })
                 .ToList();
         }
@@ -70,6 +76,7 @@ namespace APC.Applications.Services
         {
             return _repository.GetAllDeletedEventReceipts()
                .OrderBy(x => x.caption)
+               .ToList()
                 .Select((x, index) => new EventReceiptDTO
                 {
                     Counter = index + 1,
@@ -78,6 +85,8 @@ namespace APC.Applications.Services
                     Summary = x.summary,
                     ImagePath = x.imagePath,
                     Caption = x.caption,
+                    AmountSpent = x.amountSpent,
+                    FormattedAmountSpent = x.amountSpent.ToString() + " €",
                 })
                 .ToList();
         }

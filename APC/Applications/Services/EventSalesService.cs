@@ -44,12 +44,14 @@ namespace APC.Applications.Services
                         })
                 .OrderByDescending(x => x.e.eventDate)
                 .ThenByDescending(x => x.es.amountSold)
+                .ToList()
                 .Select((x, index) => new EventSalesDTO
                 {
                     Counter = index + 1,
                     EventSalesId = x.es.eventSalesID,
                     EventId = x.es.eventID,
                     AmountSold = x.es.amountSold,
+                    FormattedAmountSold = x.es.amountSold.ToString() + " €",
                     SalesDate = x.e.eventDate,
                     Summary = x.es.summary,
                     FormattedSalesDate = x.e.eventDate.ToString("dd.MM.yyyy"),
@@ -63,19 +65,57 @@ namespace APC.Applications.Services
         public List<EventSalesDTO> GetAll()
         {
             var data = (from es in _repository.GetAll()
-                        join e in _eventRepository.GetAll() on es.eventID equals e.eventID
-                        select new EventSalesDTO
+                        join e in _eventRepository.GetAll()
+                            on es.eventID equals e.eventID
+                        select new
                         {
-                            EventSalesId = es.eventSalesID,
-                            EventId = es.eventID,
-                            EventTitle = e.title,
-                            AmountSold = es.amountSold,
-                            SalesDate = e.eventDate,
-                            Summary = es.summary,
+                            es,
+                            e
                         })
-                        .OrderByDescending(x => x.SalesDate)
-                        .ThenByDescending(x => x.AmountSold)
-                        .ToList();
+                .OrderByDescending(x => x.e.eventDate)
+                .ThenByDescending(x => x.es.amountSold)
+                .ToList()
+                .Select((x, index) => new EventSalesDTO
+                {
+                    Counter = index + 1,
+                    EventSalesId = x.es.eventSalesID,
+                    EventId = x.es.eventID,
+                    AmountSold = x.es.amountSold,
+                    FormattedAmountSold = x.es.amountSold.ToString() + " €",
+                    SalesDate = x.e.eventDate,
+                    Summary = x.es.summary,
+                    FormattedSalesDate = x.e.eventDate.ToString("dd.MM.yyyy"),
+                })
+                .ToList();
+
+            return data;
+        }
+
+        public List<EventSalesDTO> GetAllDeletedEventSales()
+        {
+            var data = (from es in _repository.GetAllDeletedEventSales()
+                        join e in _eventRepository.GetAll()
+                            on es.eventID equals e.eventID
+                        select new
+                        {
+                            es,
+                            e
+                        })
+                .OrderByDescending(x => x.e.eventDate)
+                .ThenByDescending(x => x.es.amountSold)
+                .ToList()
+                .Select((x, index) => new EventSalesDTO
+                {
+                    Counter = index + 1,
+                    EventSalesId = x.es.eventSalesID,
+                    EventId = x.es.eventID,
+                    AmountSold = x.es.amountSold,
+                    FormattedAmountSold = x.es.amountSold.ToString() + " €",
+                    SalesDate = x.e.eventDate,
+                    Summary = x.es.summary,
+                    FormattedSalesDate = x.e.eventDate.ToString("dd.MM.yyyy"),
+                })
+                .ToList();
 
             return data;
         }
