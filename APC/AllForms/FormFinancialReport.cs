@@ -65,7 +65,7 @@ namespace APC
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit Financial Report";
-                txtYear.Text = _financialReportDTO.Year.ToString("dd.MM.yyyy");
+                txtYear.Text = _financialReportDTO.Year.ToString();
                 txtSummary.Text = _financialReportDTO.Summary;
             }
             else
@@ -82,7 +82,7 @@ namespace APC
                 decimal totalAmountRaised = 0;
                 decimal totalAmountSpent = 0;
 
-                if (_financialReportDTO.FinancialReportId == 0)
+                if (!_isUpdate)
                 {
                     var financialReport = new FinancialReport(totalAmountRaised, totalAmountSpent, year, summary);
                     _financialReportService.Create(financialReport);
@@ -90,7 +90,7 @@ namespace APC
                 }
                 else
                 {
-                    var financialReport = new FinancialReport(totalAmountRaised, totalAmountSpent, year, summary);
+                    var financialReport = FinancialReport.Rehydrate(_financialReportDTO.FinancialReportId, totalAmountRaised, totalAmountSpent, year, summary);
 
                     _financialReportService.Update(financialReport);
                     MessageBox.Show("Financial Report updated successfully!");

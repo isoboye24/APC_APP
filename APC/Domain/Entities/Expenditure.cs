@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APC.Domain.Entities
 {
@@ -40,11 +36,6 @@ namespace APC.Domain.Entities
             AmountSpent = amountSpent;
         }
 
-        public void UpdateSpentAmount(decimal newSpentAmount)
-        {
-            SetAmountSpent(newSpentAmount);
-        }
-
         private void SetSummary(string summary)
         {
             if (string.IsNullOrWhiteSpace(summary))
@@ -53,22 +44,12 @@ namespace APC.Domain.Entities
             Summary = summary.Trim();
         }
 
-        public void UpdateSummary(string newSummary)
-        {
-            SetSummary(newSummary);
-        }
-
         private void SetDate(DateTime date)
         {
             if (date.Year < 2000 || date.Year > DateTime.Now.Year + 1)
                 throw new ArgumentException("Invalid year");
 
             ExpenditureDate = date;
-        }
-
-        public void UpdateDate(DateTime newDate)
-        {
-            SetDate(newDate);
         }
     }
 }

@@ -152,17 +152,21 @@ namespace APC.AllForms
             {
                 decimal amount = Convert.ToDecimal(txtAmountSold.Text.Trim());
                 var summary = txtSummary.Text.Trim();
-                DateTime date = dateTimePickerEventSalesDate.Value;
+                DateTime date = dateTimePickerEventSalesDate.Value;                
 
-                var eventSalesData = new EventSales(_eventDTO.EventsId, amount, summary, date);
-
-                if (_eventSalesDTO.EventSalesId == 0)
+                if (!_isUpdate)
                 {
+                    var eventSalesData = new EventSales(_eventDTO.EventsId, amount, summary, date);
                     _eventSalesService.Create(eventSalesData);
                     MessageBox.Show("Event Sale created successfully!");
+
+                    txtAmountSold.Clear();
+                    txtSummary.Clear();
+                    dateTimePickerEventSalesDate.Value = DateTime.Today;
                 }
                 else
                 {
+                    var eventSalesData = EventSales.Rehydrate(_eventSalesDTO.EventSalesId, _eventDTO.EventsId, amount, summary, date);
                     _eventSalesService.Update(eventSalesData);
                     MessageBox.Show("Event Sale updated successfully!");
                     this.Close();

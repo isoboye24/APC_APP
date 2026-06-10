@@ -16,13 +16,17 @@ namespace APC.Helper
             switch (type)
             {
                 case FinancialReportGridType.Basic:
-                    GeneralHelper.SetVisibleColumns(grid, "Year", "TotalAmountRaisedWithCurrency",
-                        "TotalAmountSpentWithCurrency", "Balance");
+                    GeneralHelper.SetVisibleColumns(grid, "Year", "FormattedTotalAmountRaised", "FormattedTotalAmountSpent");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
-                                    { "TotalAmountRaisedWithCurrency", "Sold" },
-                                    { "TotalAmountSpentWithCurrency", "Spent" }
+                                    { "FormattedTotalAmountRaised", "Sold" },
+                                    { "FormattedTotalAmountSpent", "Spent" }
                                 });
+
+                    grid.Columns["Year"].DisplayIndex = 0;
+                    grid.Columns["Year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    grid.Columns["FormattedTotalAmountRaised"].DisplayIndex = 1;
+                    grid.Columns["FormattedTotalAmountSpent"].DisplayIndex = 2;
                     break;
             }
         }

@@ -16,5 +16,7 @@ namespace APC.Applications.Interfaces
 
         List<PersonalAttendanceDetailsDTO> GetTotalGeneralMeetingAttendanceById(int memberId);
         List<PersonalAttendanceDetailsDTO> GetAnnualGeneralMeetingAttendanceById(int memberId, int year);
+
+        List<YearDTO> GetPersonalAttendanceYears(int memberId);
     }
 }

@@ -105,7 +105,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33555F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66445F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 54F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 0);
@@ -225,7 +225,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(803, 618);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(802, 618);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // tableLayoutPanel5
@@ -240,7 +240,7 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(795, 41);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(794, 41);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // label2
@@ -251,7 +251,7 @@
             this.label2.Location = new System.Drawing.Point(4, 8);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(787, 28);
+            this.label2.Size = new System.Drawing.Size(786, 28);
             this.label2.TabIndex = 0;
             this.label2.Text = "Summary:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -264,7 +264,7 @@
             this.txtSummary.Margin = new System.Windows.Forms.Padding(4);
             this.txtSummary.Multiline = true;
             this.txtSummary.Name = "txtSummary";
-            this.txtSummary.Size = new System.Drawing.Size(795, 561);
+            this.txtSummary.Size = new System.Drawing.Size(794, 561);
             this.txtSummary.TabIndex = 1;
             // 
             // tableLayoutPanel11

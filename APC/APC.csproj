@@ -386,39 +386,6 @@
     </Compile>
     <Compile Include="Helper\AttendanceStatusHelper.cs" />
     <Compile Include="Infrastructure\Data\APCContext.cs" />
-    <Compile Include="Infrastructure\Data\ATTENDANCE_STATUS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\CHILD.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\COMMENT.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\CONSTITUTION.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\COUNTRY.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\DataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\DataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\DataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\DOCUMENT.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="AllForms\FormDocumentList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -502,81 +469,6 @@
     </Compile>
     <Compile Include="AllForms\FormViewMember.Designer.cs">
       <DependentUpon>FormViewMember.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\DUAL_NATIONALITY.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\EMPLOYMENT_STATUS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\EVENTS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\EVENT_EXPENDITURE.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\EVENT_IMAGE.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\EVENT_RECEIPTS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\EVENT_SALES.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\EXPENDITURE.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\FINANCIAL_REPORT.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\FINED_MEMBER.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\GENDER.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\GENERAL_ATTENDANCE.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\MARITAL_STATUS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\MEMBER.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\MEMBERSHIP_STATUS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\MONTH.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\NATIONALITY.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\NEXT_OF_KIN_RELATIONSHIP.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\PAYMENT_STATUS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\PERMISSION.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\PERSONAL_ATTENDANCE.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\POSITION.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\PROFESSION.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\SPECIAL_CONTRIBUTIONS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\SPECIAL_CONTRIBUTORS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\Entities\AttendanceStatus.cs" />
     <Compile Include="Domain\Entities\Constitution.cs" />
@@ -687,6 +579,114 @@
     <Compile Include="Helper\SingleColumnHelper.cs" />
     <Compile Include="Helper\SpecialContributionHelper.cs" />
     <Compile Include="Helper\SpecialContributorHelper.cs" />
+    <Compile Include="Infrastructure\Data\ATTENDANCE_STATUS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\CHILD.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\COMMENT.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\CONSTITUTION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\COUNTRY.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\DataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\DataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\DataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\DOCUMENT.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\DUAL_NATIONALITY.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\EMPLOYMENT_STATUS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\EVENTS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\EVENT_EXPENDITURE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\EVENT_IMAGE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\EVENT_RECEIPTS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\EVENT_SALES.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\EXPENDITURE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\FINANCIAL_REPORT.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\FINED_MEMBER.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\GENDER.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\GENERAL_ATTENDANCE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\MARITAL_STATUS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\MEMBER.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\MEMBERSHIP_STATUS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\MONTH.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\NATIONALITY.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\NEXT_OF_KIN_RELATIONSHIP.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\PAYMENT_STATUS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\PERMISSION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\PERSONAL_ATTENDANCE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\POSITION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\PROFESSION.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\SPECIAL_CONTRIBUTIONS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Data\SPECIAL_CONTRIBUTORS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\Repositories\AttendanceStatusRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ConstitutionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\CountryRepository.cs" />
@@ -943,11 +943,11 @@
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="AllForms\packages.config" />
+    <None Include="APC_TemporaryKey.pfx" />
     <EntityDeploy Include="Infrastructure\Data\DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="APC_TemporaryKey.pfx" />
     <None Include="Infrastructure\Data\DataModel.edmx.diagram">
       <DependentUpon>DataModel.edmx</DependentUpon>
     </None>
@@ -1047,6 +1047,10 @@
     <None Include="Resources\docIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\image1.PNG" />
+    <Content Include="images\image2.PNG" />
+    <Content Include="images\image3.PNG" />
+    <Content Include="images\image4.PNG" />
     <Content Include="Infrastructure\Data\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataModel.edmx</DependentUpon>
@@ -1057,10 +1061,6 @@
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
-    <Content Include="images\image1.PNG" />
-    <Content Include="images\image2.PNG" />
-    <Content Include="images\image3.PNG" />
-    <Content Include="images\image4.PNG" />
     <Content Include="logoAPC.ico" />
     <Content Include="Wallpaperfx-3d-Bluefx-Desktop-Documents.256.ico" />
   </ItemGroup>

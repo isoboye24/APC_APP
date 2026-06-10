@@ -205,15 +205,23 @@ namespace APC.AllForms
                     }
                 }
 
-                var eventReceiptData = new EventReceipt(_eventDTO.EventsId, finalImagePath, description, caption, date, amount);
+                
 
-                if (_eventDTO.EventsId == 0)
+                if (_isUpdate)
                 {
+                    var eventReceiptData = new EventReceipt(_eventDTO.EventsId, finalImagePath, description, caption, date, amount);
                     _eventReceiptService.Create(eventReceiptData);
                     MessageBox.Show("Event receipt created successfully!");
+
+                    txtDescription.Clear();
+                    txtImageCaption.Clear();
+                    txtImagePath.Clear();
+                    txtReceiptAmount.Clear();
+                    dateTimePickerEventReceiptDate.Value = DateTime.Today;
                 }
                 else
                 {
+                    var eventReceiptData = EventReceipt.Rehydrate(_eventReceiptDTO.EventReceiptId, _eventDTO.EventsId, finalImagePath, description, caption, date, amount);
                     _eventReceiptService.Update(eventReceiptData);
                     MessageBox.Show("Event receipt updated successfully!");
                     this.Close();

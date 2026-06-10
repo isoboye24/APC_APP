@@ -164,15 +164,21 @@ namespace APC.AllForms
                 var summary = txtSummary.Text.Trim();
                 DateTime date = dateTimePickerEventExpDate.Value;
 
-                var eventExpenditureData = new EventExpenditure(_eventDTO.EventsId, amount, date, summary);
+                
 
-                if (_eventDTO.EventsId == 0)
+                if (!_isUpdate)
                 {
+                    var eventExpenditureData = new EventExpenditure(_eventDTO.EventsId, amount, date, summary);
                     _eventExpenditureService.Create(eventExpenditureData);
                     MessageBox.Show("Event Expenditure created successfully!");
+
+                    txtAmountSpent.Clear();
+                    txtSummary.Clear();
+                    dateTimePickerEventExpDate.Value = DateTime.Today;
                 }
                 else
                 {
+                    var eventExpenditureData = EventExpenditure.Rehydrate(_eventExpenditureDTO.EventExpenditureId, _eventDTO.EventsId, amount, date, summary);
                     _eventExpenditureService.Update(eventExpenditureData);
                     MessageBox.Show("Event Expenditure updated successfully!");
                     this.Close();

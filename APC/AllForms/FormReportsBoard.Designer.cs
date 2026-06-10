@@ -41,7 +41,9 @@
             this.labelTotalFinReport = new System.Windows.Forms.Label();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtYearFinReport = new System.Windows.Forms.TextBox();
+            this.cmbYearFinReport = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panelNoOfChildren = new System.Windows.Forms.TableLayoutPanel();
@@ -137,11 +139,10 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1260, 680);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
@@ -163,14 +164,14 @@
             this.tableLayoutPanel3.Controls.Add(this.btnDeleteFinReport, 7, 1);
             this.tableLayoutPanel3.Controls.Add(this.labelTotalFinReport, 8, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(29, 588);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(29, 580);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1227, 88);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1227, 96);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // btnUpdateFinReport
@@ -181,10 +182,10 @@
             this.btnUpdateFinReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateFinReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateFinReport.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateFinReport.Location = new System.Drawing.Point(444, 26);
+            this.btnUpdateFinReport.Location = new System.Drawing.Point(444, 28);
             this.btnUpdateFinReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateFinReport.Name = "btnUpdateFinReport";
-            this.btnUpdateFinReport.Size = new System.Drawing.Size(151, 36);
+            this.btnUpdateFinReport.Size = new System.Drawing.Size(151, 40);
             this.btnUpdateFinReport.TabIndex = 3;
             this.btnUpdateFinReport.Text = "Edit";
             this.btnUpdateFinReport.UseVisualStyleBackColor = false;
@@ -198,10 +199,10 @@
             this.btnViewFinReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnViewFinReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewFinReport.ForeColor = System.Drawing.Color.White;
-            this.btnViewFinReport.Location = new System.Drawing.Point(627, 26);
+            this.btnViewFinReport.Location = new System.Drawing.Point(627, 28);
             this.btnViewFinReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnViewFinReport.Name = "btnViewFinReport";
-            this.btnViewFinReport.Size = new System.Drawing.Size(151, 36);
+            this.btnViewFinReport.Size = new System.Drawing.Size(151, 40);
             this.btnViewFinReport.TabIndex = 3;
             this.btnViewFinReport.Text = "View";
             this.btnViewFinReport.UseVisualStyleBackColor = false;
@@ -215,10 +216,10 @@
             this.btnAddFinReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddFinReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddFinReport.ForeColor = System.Drawing.Color.White;
-            this.btnAddFinReport.Location = new System.Drawing.Point(261, 26);
+            this.btnAddFinReport.Location = new System.Drawing.Point(261, 28);
             this.btnAddFinReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddFinReport.Name = "btnAddFinReport";
-            this.btnAddFinReport.Size = new System.Drawing.Size(151, 36);
+            this.btnAddFinReport.Size = new System.Drawing.Size(151, 40);
             this.btnAddFinReport.TabIndex = 3;
             this.btnAddFinReport.Text = "Add";
             this.btnAddFinReport.UseVisualStyleBackColor = false;
@@ -232,10 +233,10 @@
             this.btnDeleteFinReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteFinReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteFinReport.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteFinReport.Location = new System.Drawing.Point(810, 26);
+            this.btnDeleteFinReport.Location = new System.Drawing.Point(810, 28);
             this.btnDeleteFinReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteFinReport.Name = "btnDeleteFinReport";
-            this.btnDeleteFinReport.Size = new System.Drawing.Size(151, 36);
+            this.btnDeleteFinReport.Size = new System.Drawing.Size(151, 40);
             this.btnDeleteFinReport.TabIndex = 3;
             this.btnDeleteFinReport.Text = "Delete";
             this.btnDeleteFinReport.UseVisualStyleBackColor = false;
@@ -246,7 +247,7 @@
             this.labelTotalFinReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTotalFinReport.AutoSize = true;
             this.labelTotalFinReport.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalFinReport.Location = new System.Drawing.Point(1173, 43);
+            this.labelTotalFinReport.Location = new System.Drawing.Point(1173, 49);
             this.labelTotalFinReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotalFinReport.Name = "labelTotalFinReport";
             this.labelTotalFinReport.Size = new System.Drawing.Size(50, 23);
@@ -255,20 +256,26 @@
             // 
             // tableLayoutPanel13
             // 
-            this.tableLayoutPanel13.ColumnCount = 4;
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel13.ColumnCount = 8;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.5F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.5F));
             this.tableLayoutPanel13.Controls.Add(this.label5, 1, 0);
-            this.tableLayoutPanel13.Controls.Add(this.txtYearFinReport, 2, 0);
+            this.tableLayoutPanel13.Controls.Add(this.cmbYearFinReport, 2, 0);
+            this.tableLayoutPanel13.Controls.Add(this.button1, 4, 0);
+            this.tableLayoutPanel13.Controls.Add(this.button2, 6, 0);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(29, 16);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(29, 17);
             this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 1;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(1227, 41);
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(1227, 46);
             this.tableLayoutPanel13.TabIndex = 3;
             // 
             // label5
@@ -276,23 +283,57 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(507, 6);
+            this.label5.Location = new System.Drawing.Point(342, 6);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 28);
             this.label5.TabIndex = 1;
             this.label5.Text = "Year";
             // 
-            // txtYearFinReport
+            // cmbYearFinReport
             // 
-            this.txtYearFinReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtYearFinReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYearFinReport.Location = new System.Drawing.Point(567, 4);
-            this.txtYearFinReport.Margin = new System.Windows.Forms.Padding(4);
-            this.txtYearFinReport.Name = "txtYearFinReport";
-            this.txtYearFinReport.Size = new System.Drawing.Size(176, 34);
-            this.txtYearFinReport.TabIndex = 0;
-            this.txtYearFinReport.TextChanged += new System.EventHandler(this.txtYearFinReport_TextChanged);
+            this.cmbYearFinReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbYearFinReport.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbYearFinReport.FormattingEnabled = true;
+            this.cmbYearFinReport.Location = new System.Drawing.Point(402, 4);
+            this.cmbYearFinReport.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbYearFinReport.Name = "cmbYearFinReport";
+            this.cmbYearFinReport.Size = new System.Drawing.Size(176, 36);
+            this.cmbYearFinReport.TabIndex = 7;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DarkOrange;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(610, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(139, 38);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Search";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.IndianRed;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.Location = new System.Drawing.Point(781, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(139, 38);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Clear";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -302,12 +343,12 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.dataGridViewFinReport, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(29, 65);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(29, 71);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1227, 503);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1227, 488);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // tableLayoutPanel4
@@ -328,7 +369,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(361, 495);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(361, 480);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // panelNoOfChildren
@@ -339,13 +380,13 @@
             this.panelNoOfChildren.Controls.Add(this.label6, 0, 0);
             this.panelNoOfChildren.Controls.Add(this.labelTotalAmountSpent, 0, 1);
             this.panelNoOfChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelNoOfChildren.Location = new System.Drawing.Point(11, 176);
+            this.panelNoOfChildren.Location = new System.Drawing.Point(11, 172);
             this.panelNoOfChildren.Margin = new System.Windows.Forms.Padding(4);
             this.panelNoOfChildren.Name = "panelNoOfChildren";
             this.panelNoOfChildren.RowCount = 2;
             this.panelNoOfChildren.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.panelNoOfChildren.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.panelNoOfChildren.Size = new System.Drawing.Size(346, 140);
+            this.panelNoOfChildren.Size = new System.Drawing.Size(346, 136);
             this.panelNoOfChildren.TabIndex = 12;
             // 
             // label6
@@ -354,7 +395,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(4, 16);
+            this.label6.Location = new System.Drawing.Point(4, 15);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(338, 37);
@@ -368,7 +409,7 @@
             this.labelTotalAmountSpent.AutoSize = true;
             this.labelTotalAmountSpent.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalAmountSpent.ForeColor = System.Drawing.Color.White;
-            this.labelTotalAmountSpent.Location = new System.Drawing.Point(288, 78);
+            this.labelTotalAmountSpent.Location = new System.Drawing.Point(288, 74);
             this.labelTotalAmountSpent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotalAmountSpent.Name = "labelTotalAmountSpent";
             this.labelTotalAmountSpent.Size = new System.Drawing.Size(54, 62);
@@ -389,7 +430,7 @@
             this.tableLayoutPanel10.RowCount = 2;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(346, 140);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(346, 136);
             this.tableLayoutPanel10.TabIndex = 13;
             // 
             // labelTotalAmountRaised
@@ -398,7 +439,7 @@
             this.labelTotalAmountRaised.AutoSize = true;
             this.labelTotalAmountRaised.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalAmountRaised.ForeColor = System.Drawing.Color.White;
-            this.labelTotalAmountRaised.Location = new System.Drawing.Point(288, 78);
+            this.labelTotalAmountRaised.Location = new System.Drawing.Point(288, 74);
             this.labelTotalAmountRaised.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotalAmountRaised.Name = "labelTotalAmountRaised";
             this.labelTotalAmountRaised.Size = new System.Drawing.Size(54, 62);
@@ -411,7 +452,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(4, 16);
+            this.label2.Location = new System.Drawing.Point(4, 15);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(338, 37);
@@ -427,13 +468,13 @@
             this.tableLayoutPanel7.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.labelTotalBalance, 0, 1);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(11, 348);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(11, 340);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(346, 143);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(346, 136);
             this.tableLayoutPanel7.TabIndex = 14;
             // 
             // label3
@@ -442,7 +483,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(4, 17);
+            this.label3.Location = new System.Drawing.Point(4, 15);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(338, 37);
@@ -456,7 +497,7 @@
             this.labelTotalBalance.AutoSize = true;
             this.labelTotalBalance.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalBalance.ForeColor = System.Drawing.Color.White;
-            this.labelTotalBalance.Location = new System.Drawing.Point(288, 81);
+            this.labelTotalBalance.Location = new System.Drawing.Point(288, 74);
             this.labelTotalBalance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotalBalance.Name = "labelTotalBalance";
             this.labelTotalBalance.Size = new System.Drawing.Size(54, 62);
@@ -476,8 +517,9 @@
             this.dataGridViewFinReport.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewFinReport.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewFinReport.RowTemplate.Height = 40;
-            this.dataGridViewFinReport.Size = new System.Drawing.Size(850, 495);
+            this.dataGridViewFinReport.Size = new System.Drawing.Size(850, 480);
             this.dataGridViewFinReport.TabIndex = 2;
+            this.dataGridViewFinReport.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFinReport_RowEnter);
             // 
             // expenditurePage
             // 
@@ -897,7 +939,6 @@
         private System.Windows.Forms.Button btnDeleteFinReport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtYearFinReport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel panelNoOfChildren;
@@ -933,5 +974,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         private System.Windows.Forms.Label labelTotalExpReportYearly;
+        private System.Windows.Forms.ComboBox cmbYearFinReport;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

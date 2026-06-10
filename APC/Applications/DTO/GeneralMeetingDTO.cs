@@ -11,6 +11,8 @@ namespace APC.Applications.DTO
         public int GeneralMeetingId { get; set; }
         public int TotalMembersPresent { get; set; }
         public int TotalMembersAbsent { get; set; }
+        public decimal OverallTotal { get; set; }
+        public string FormattedOverallTotal { get; set; }
         public decimal TotalDuesPaid { get; set; }
         public string FormattedTotalDuesPaid { get; set; }
         public decimal TotalDuesExpected { get; set; }

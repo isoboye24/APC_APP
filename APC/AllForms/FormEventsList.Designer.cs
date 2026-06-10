@@ -43,7 +43,6 @@
             this.txtEventYear = new System.Windows.Forms.TextBox();
             this.txtEventTitle = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.picViewEventCoverImage = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,18 +56,19 @@
             this.label6 = new System.Windows.Forms.Label();
             this.labelOverallBalance = new System.Windows.Forms.Label();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.picViewEventCoverImage = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picViewEventCoverImage)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picViewEventCoverImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -256,8 +256,8 @@
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel4.Controls.Add(this.picViewEventCoverImage, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.dataGridView1, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(29, 79);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4);
@@ -266,17 +266,6 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1210, 548);
             this.tableLayoutPanel4.TabIndex = 5;
-            // 
-            // picViewEventCoverImage
-            // 
-            this.picViewEventCoverImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picViewEventCoverImage.Location = new System.Drawing.Point(4, 4);
-            this.picViewEventCoverImage.Margin = new System.Windows.Forms.Padding(4);
-            this.picViewEventCoverImage.Name = "picViewEventCoverImage";
-            this.picViewEventCoverImage.Size = new System.Drawing.Size(718, 540);
-            this.picViewEventCoverImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picViewEventCoverImage.TabIndex = 2;
-            this.picViewEventCoverImage.TabStop = false;
             // 
             // tableLayoutPanel5
             // 
@@ -469,7 +458,7 @@
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel10.Controls.Add(this.dataGridView1, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.picViewEventCoverImage, 1, 0);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -478,6 +467,17 @@
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel10.Size = new System.Drawing.Size(470, 318);
             this.tableLayoutPanel10.TabIndex = 4;
+            // 
+            // picViewEventCoverImage
+            // 
+            this.picViewEventCoverImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picViewEventCoverImage.Location = new System.Drawing.Point(27, 4);
+            this.picViewEventCoverImage.Margin = new System.Windows.Forms.Padding(4);
+            this.picViewEventCoverImage.Name = "picViewEventCoverImage";
+            this.picViewEventCoverImage.Size = new System.Drawing.Size(415, 246);
+            this.picViewEventCoverImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picViewEventCoverImage.TabIndex = 2;
+            this.picViewEventCoverImage.TabStop = false;
             // 
             // dataGridView1
             // 
@@ -500,14 +500,14 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(27, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 4);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowTemplate.Height = 30;
-            this.dataGridView1.Size = new System.Drawing.Size(415, 246);
+            this.dataGridView1.Size = new System.Drawing.Size(718, 540);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
             // 
@@ -528,7 +528,6 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picViewEventCoverImage)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
@@ -539,6 +538,7 @@
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
             this.tableLayoutPanel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picViewEventCoverImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

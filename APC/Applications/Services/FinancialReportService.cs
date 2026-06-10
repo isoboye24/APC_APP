@@ -9,17 +9,28 @@ namespace APC.Applications.Services
     public class FinancialReportService : IFinancialReportService
     {
         private readonly IFinancialReportRepository _repository;
-        private readonly IGeneralMeetingAttendanceRepository _generalMeetingAttendanceRepository;
         private readonly IMemberRepository _memberRepository;
         private readonly IGeneralMeetingRepository _generalMeetingRepository;
 
+        private readonly IGeneralMeetingAttendanceRepository _generalMeetingAttendanceRepository;
+        private readonly IFinedMemberRepository _finedMemberRepository;
+        private readonly IEventSalesRepository _eventSalesRepository;
+
+        private readonly IEventExpenditureRepository _eventExpenditureRepository;
+        private readonly IExpenditureRepository _expenditureRepository;
+
         public FinancialReportService(IFinancialReportRepository repository, IGeneralMeetingAttendanceRepository generalMeetingAttendanceRepository, 
-            IGeneralMeetingRepository generalMeetingRepository, IMemberRepository memberRepository)
+            IGeneralMeetingRepository generalMeetingRepository, IMemberRepository memberRepository, IFinedMemberRepository finedMemberRepository,
+            IEventSalesRepository eventSalesRepository, IEventExpenditureRepository eventExpenditureRepository, IExpenditureRepository expenditureRepository)
         {
             _repository = repository;
             _generalMeetingAttendanceRepository = generalMeetingAttendanceRepository;
             _generalMeetingRepository = generalMeetingRepository;
             _memberRepository = memberRepository;
+            _eventSalesRepository = eventSalesRepository;
+            _finedMemberRepository = finedMemberRepository;
+            _eventExpenditureRepository = eventExpenditureRepository;
+            _expenditureRepository = expenditureRepository;
         }
 
         public int Count()
@@ -36,6 +47,36 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
+        public decimal CalculateTotalAmountRaisedAnnually(int year)
+        {
+            decimal totalDuesRaised = _generalMeetingAttendanceRepository.GetAll()
+                                    .Where(x => x.year == year)
+                                    .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+
+            decimal totalFinesPaid = _finedMemberRepository.GetAll()
+                                    .Where(x => x.year == year)
+                                    .Sum(x => (decimal?)x.amountPaid) ?? 0;
+
+            decimal totalEventSales = _eventSalesRepository.GetAll()
+                                    .Where(x => x.year == year)
+                                    .Sum(x => (decimal?)x.amountSold) ?? 0;
+
+            return totalDuesRaised + totalFinesPaid + totalEventSales;
+        }
+        
+        public decimal CalculateTotalAmountSpentAnnually(int year)
+        {
+            decimal totalExpenditure = _expenditureRepository.GetAll()
+                                    .Where(x => x.year == year)
+                                    .Sum(x => (decimal?)x.amountSpent) ?? 0;
+
+            decimal totalEventExpenditure = _eventExpenditureRepository.GetAll()
+                                    .Where(x => x.year == year)
+                                    .Sum(x => (decimal?)x.amountSpent) ?? 0;
+
+            return totalExpenditure + totalEventExpenditure;
+        }
+
         public List<FinancialReportDTO> GetAll()
         {
             return _repository.GetAll()
@@ -43,12 +84,14 @@ namespace APC.Applications.Services
                  .Select(x => new FinancialReportDTO
                  {
                      FinancialReportId = x.financialReportID,
-                     TotalAmountRaised = x.totalAmountRaised,
-                     TotalAmountSpent = x.totalAmountSpent,
+                     TotalAmountRaised = CalculateTotalAmountRaisedAnnually(x.year),
+                     FormattedTotalAmountRaised = CalculateTotalAmountRaisedAnnually(x.year) + " €",
+                     TotalAmountSpent = CalculateTotalAmountSpentAnnually(x.year),
+                     FormattedTotalAmountSpent = CalculateTotalAmountSpentAnnually(x.year) + " €",
                      Year = x.year,
                      Summary = x.summary,
                  })
-                 .OrderBy(x => x.Year)
+                 .OrderByDescending(x => x.Year)
                  .ToList();
         }
 
@@ -69,6 +112,22 @@ namespace APC.Applications.Services
                 return _repository.Update(data);                
             }
         }
+
+        public List<YearDTO> GetFinancialReportYearsOnly()
+        {
+            return _repository.GetAll()
+                    .ToList()
+                    .Select(x => x.year)
+                    .Distinct()
+                    .OrderByDescending(x => x)
+                    .Select(x => new YearDTO
+                    {
+                        YearInValue = x,
+                        YearInText = x.ToString(),
+                    })
+                    .ToList();
+        }
+
 
         public decimal GetAmountContributedByMember(int ID)
         {

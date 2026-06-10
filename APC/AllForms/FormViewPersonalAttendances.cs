@@ -43,7 +43,7 @@ namespace APC.AllForms
         private int currYear = DateTime.Today.Year;
 
         public FormViewPersonalAttendances(IMemberService memberService, IMonthService monthService, IGeneralMeetingService generalMeetingService, 
-            IFinancialReportService financialReportService, IFinedMemberService finedMemberService)
+            IFinancialReportService financialReportService, IFinedMemberService finedMemberService, IPersonalAttendanceService personalAttendanceService)
         {
             InitializeComponent();
             _memberService = memberService;
@@ -51,6 +51,7 @@ namespace APC.AllForms
             _generalMeetingService = generalMeetingService;
             _financialReportService = financialReportService;
             _finedMemberService = finedMemberService;
+            _personalAttendanceService = personalAttendanceService;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -101,8 +102,8 @@ namespace APC.AllForms
 
         private void controlFonts()
         {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label5, labelTotalAmount, btnClose);
-            GeneralHelper.ApplyRegularFont(14, labelTotalName, txtAmount, cmbMonth, cmbYear);
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label5, labelTotalPaidAmount, btnClose, labelTotalAmount);
+            GeneralHelper.ApplyRegularFont(14, labelPaidFines, txtAmount, cmbMonth, cmbYear, labelTotalFines);
             GeneralHelper.ApplyBoldFont(11, rbEqualAmount, rbLessAmount, rbMoreAmount);
         }
 
@@ -115,6 +116,9 @@ namespace APC.AllForms
 
         private void loadMemberAttendanceAnnualPresent(int year)
         {
+            if (_personalAttendanceDetailDTOs == null)
+                _personalAttendanceDetailDTOs = _personalAttendanceService.GetTotalGeneralMeetingAttendanceById(_memberId);
+
             string search = "Present";
             var filtered = _personalAttendanceDetailDTOs.Where(x => x.Year == year && x.AttendanceStatus.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             dataGridView1.DataSource = filtered;
@@ -123,6 +127,9 @@ namespace APC.AllForms
 
         private void loadMemberAttendanceAnnualAbsent(int year)
         {
+            if (_personalAttendanceDetailDTOs == null)
+                _personalAttendanceDetailDTOs = _personalAttendanceService.GetTotalGeneralMeetingAttendanceById(_memberId);
+
             string search = "Absent";
             var filtered = _personalAttendanceDetailDTOs.Where(x => x.Year == year && x.AttendanceStatus.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             dataGridView1.DataSource = filtered;
@@ -145,14 +152,25 @@ namespace APC.AllForms
             ConfigureFinedMemberGrid(dataGridView1, FinedMemberGridType.PersonalDetails);
         }
 
-        private void FormViewPersonalAttendances_Load(object sender, EventArgs e)
+        private void FillComboboxes(int memberId)
         {
-            controlFonts();
-
             cmbMonth.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
-            cmbYear.DataSource = _generalMeetingService.GetMeetingYears();
-            cmbYear.SelectedIndex = -1;
+
+            cmbYear.DataSource = _personalAttendanceService.GetPersonalAttendanceYears(memberId);
+            GeneralHelper.ComboBoxProps(cmbYear, "YearInText", "YearInValue");
+        }
+
+        private void FormViewPersonalAttendances_Load(object sender, EventArgs e)
+        {
+            _personalAttendanceDetailDTOs = _personalAttendanceService.GetTotalGeneralMeetingAttendanceById(_memberId) ?? new List<PersonalAttendanceDetailsDTO>();
+
+            _finedMemberDTOs = _finedMemberService.GetAllFineListsById(_memberId) ?? new List<FinedMemberDTO>();
+
+
+            controlFonts();
+            FillComboboxes(_memberId);
+
             tableLayoutPanelChangingAmount.Hide();
             tableLayoutPanelTotal.Hide();
 
@@ -170,10 +188,12 @@ namespace APC.AllForms
 
             if (_isPresent)
             {
+                loadMemberAttendanceDetails();
                 loadMemberAttendanceAnnualPresent(currYear);
             }
             if (_isAbsent)
             {
+                loadMemberAttendanceDetails();
                 loadMemberAttendanceAnnualAbsent(currYear);
             }
             if (_isAmountContributed)
@@ -182,16 +202,16 @@ namespace APC.AllForms
 
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€" + _financialReportService.GetTotalAnnualDuesById(_memberId, currYear);
-                labelTotalName.Text = "Total Amt. Contributed";
+                labelTotalPaidAmount.Text = "€" + amountContributed;
+                labelPaidFines.Text = "Total Amt. Contributed";
             }
             if (_isAmountExpected)
             {
                 loadMemberAttendanceDetails();
 
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€ 120.00"; // To be made dynamic
-                labelTotalName.Text = "Total Amt. Expected per Year";
+                labelTotalPaidAmount.Text = "€ 120.00"; // To be made dynamic
+                labelPaidFines.Text = "Total Amt. Expected per Year";
             }
             if (_isPersonalBalance)
             {
@@ -199,8 +219,8 @@ namespace APC.AllForms
 
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€" + (120 - _financialReportService.GetTotalAnnualDuesById(_memberId, currYear)); // 120 is to be made more dynamic
-                labelTotalName.Text = "Remaining Amt.";
+                labelTotalPaidAmount.Text = "€" + (120 - amountContributed); // 120 is to be made more dynamic
+                labelPaidFines.Text = "Remaining Amt.";
             }
             if (_isPersonalFines)
             {
@@ -208,8 +228,11 @@ namespace APC.AllForms
 
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalAmount.Text = "€ " + _finedMemberService.GetTotalFinesPaidByMember(_memberId);
-                labelTotalName.Text = "Total Fines";
+                labelTotalPaidAmount.Text = "€ " + paidFinesAmount;
+                labelPaidFines.Text = "Paid Fines";
+
+                labelTotalAmount.Text = "€ " + expectedFineAmount;
+                labelTotalFines.Text = "Expected";
             }
         }
 
@@ -261,6 +284,7 @@ namespace APC.AllForms
         {
             var filtered = _personalAttendanceDetailDTOs.AsQueryable();
             var filteredFinedMember = _finedMemberDTOs.AsQueryable();
+
             string month = cmbMonth.Text;
             int year = Convert.ToInt32(cmbYear.SelectedValue);
 
@@ -270,14 +294,22 @@ namespace APC.AllForms
                 return;
             }
 
-            if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
+            if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1 && txtAmount.Text.Trim() != "")
             {               
                 filtered = filtered.Where(x => x.Month.ToString().IndexOf(month, StringComparison.OrdinalIgnoreCase) >= 0
                                         && x.AttendanceStatus.ToString().IndexOf(status, StringComparison.OrdinalIgnoreCase) >= 0);
             }
-            else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1)
+            else if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1 && txtAmount.Text.Trim() == "")
+            {
+                filtered = filtered.Where(x => x.Month.ToString().IndexOf(month, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+            else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1 && txtAmount.Text.Trim() != "")
             {
                 filtered = filtered.Where(x => x.Year == year && x.AttendanceStatus.ToString().IndexOf(status, StringComparison.OrdinalIgnoreCase) >= 0);
+            }            
+            else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1 && txtAmount.Text.Trim() == "")
+            {
+                filtered = filtered.Where(x => x.Year == year);
             }
             else if (isAmount)
             {

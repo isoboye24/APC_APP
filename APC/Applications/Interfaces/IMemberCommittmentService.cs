@@ -10,5 +10,7 @@ namespace APC.Applications.Interfaces
     public interface IMemberCommittmentService
     {
         List<MemberCommittmentDTO> GetMembersCommittment(int year);
+
+        List<YearDTO> GetMeetingYears();
     }
 }

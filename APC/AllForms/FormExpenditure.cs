@@ -79,15 +79,19 @@ namespace APC.AllForms
                 decimal amount = Convert.ToDecimal(txtAmountSpent.Text.Trim());
                 DateTime date = dateTimePickerExpDate.Value;
 
-                if (_expenditureDTO.ExpenditureId == 0)
+                if (!_isUpdate)
                 {
                     var expenditure = new Expenditure(amount, summary, date);
                     _expenditureService.Create(expenditure);
                     MessageBox.Show("Expenditure created successfully!");
+
+                    txtAmountSpent.Clear();
+                    txtSummary.Clear();
+                    dateTimePickerExpDate.Value = DateTime.Today;
                 }
                 else
                 {
-                    var expenditure = new Expenditure(amount, summary, date);
+                    var expenditure = Expenditure.Rehydrate(_expenditureDTO.ExpenditureId, amount, summary, date);
 
                     _expenditureService.Update(expenditure);
                     MessageBox.Show("Expenditure updated successfully!");
@@ -102,7 +106,7 @@ namespace APC.AllForms
 
         private void txtAmountSpent_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
+            //e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
         
 

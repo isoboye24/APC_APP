@@ -1,4 +1,5 @@
-﻿using APC.Applications.Interfaces;
+﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
 using APC.Helper;
 using System;
 using System.Collections.Generic;
@@ -41,14 +42,25 @@ namespace APC.AllForms
             GeneralHelper.ApplyBoldFont(27, labelTotalAmountRaised, labelTotalAmountSpent, labelTotalBalance);
 
             GeneralHelper.ApplyRegularFont(11, labelTotalFinReport, labelTotalRowsExpReport, labelTotalExpReportYearly, labelTotalExpReport);
-            GeneralHelper.ApplyRegularFont(16, txtYearFinReport, cmbMonthExpReport, cmbYearExpenditure);
+            GeneralHelper.ApplyRegularFont(16, cmbMonthExpReport, cmbYearExpenditure, cmbYearFinReport);
         }
 
         private void loadFinancialReports()
         {
-            dataGridViewExpReport.DataSource = _financialReportService.GetAll();
+            dataGridViewFinReport.DataSource = _financialReportService.GetAll();
             _financialReportDTOs = _financialReportService.GetAll();
-            FinancialReportHelper.ConfigureFinancialReportGrid(dataGridViewExpReport, FinancialReportHelper.FinancialReportGridType.Basic);
+            FinancialReportHelper.ConfigureFinancialReportGrid(dataGridViewFinReport, FinancialReportHelper.FinancialReportGridType.Basic);
+        }
+
+        private void FillComboboxes()
+        {
+            cmbMonthExpReport.DataSource = _monthService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
+            cmbYearExpenditure.DataSource = _expenditureService.GetExpenditureYearsOnly();
+            GeneralHelper.ComboBoxProps(cmbYearExpenditure, "YearInText", "YearInValue");
+
+            cmbYearFinReport.DataSource = _financialReportService.GetFinancialReportYearsOnly();
+            GeneralHelper.ComboBoxProps(cmbYearFinReport, "YearInText", "YearInValue");
         }
         
         private void loadExpenditures(int year)
@@ -63,12 +75,10 @@ namespace APC.AllForms
             controlsFont();
 
             loadFinancialReports();
+
             loadExpenditures(currentYear);
 
-            cmbMonthExpReport.DataSource = _monthService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbMonthExpReport, "MonthName", "MonthID");
-            cmbYearExpenditure.DataSource = _expenditureService.GetExpenditureYearsOnly();
-            cmbYearExpenditure.SelectedIndex = -1;
+            FillComboboxes();
 
             if (_currentUserService.AccessLevel != 4)
             {
@@ -89,7 +99,7 @@ namespace APC.AllForms
 
         private void ClearFilters()
         {
-            txtYearFinReport.Clear();            
+            cmbYearFinReport.SelectedIndex = -1;
             dataGridViewFinReport.DataSource = _financialReportService.GetAll();
 
             txtSummaryExpReport.Clear();
@@ -108,9 +118,10 @@ namespace APC.AllForms
             decimal overallSpentAmount = _financialReportService.GetOverallExpenditures();
 
             labelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
-            labelTotalAmountRaised.Text = overallRaisedAmount.ToString();
-            labelTotalAmountSpent.Text = overallSpentAmount.ToString();
-            labelTotalBalance.Text = (overallRaisedAmount - overallSpentAmount).ToString();
+
+            //labelTotalAmountRaised.Text = overallRaisedAmount.ToString();
+            //labelTotalAmountSpent.Text = overallSpentAmount.ToString();
+            //labelTotalBalance.Text = (overallRaisedAmount - overallSpentAmount).ToString();
 
             labelTotalExpReport.Text = "Overall Total: " + overallSpentAmount.ToString() + " €";
             labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + _expenditureService.GetAnnualExpenditures(currentYear).ToString() + " €";
@@ -167,13 +178,6 @@ namespace APC.AllForms
             form.ShowDialog();
 
             ClearFilters();
-        }
-
-        private void txtYearFinReport_TextChanged(object sender, EventArgs e)
-        {
-            string search = txtYearFinReport.Text.Trim().ToLower();
-            var filtered = _financialReportDTOs.Where(x => x.Year.ToString().IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            dataGridViewFinReport.DataSource = filtered;            
         }
 
         private void btnDeleteFinReport_Click(object sender, EventArgs e)
@@ -300,6 +304,47 @@ namespace APC.AllForms
             dataGridViewExpReport.DataSource = filtered;
 
             Counts();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var filtered = _financialReportDTOs.AsQueryable();
+
+            if (cmbYearFinReport.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a year");
+                return;
+            }
+
+            if (cmbYearFinReport.SelectedIndex != -1)
+            {
+                int searchedYear = Convert.ToInt32(cmbYearFinReport.SelectedValue);
+                filtered = filtered.Where(x => x.Year == searchedYear);
+            }
+
+            dataGridViewFinReport.DataSource = filtered.ToList();
+        }
+
+        private void dataGridViewFinReport_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            var row = dataGridViewFinReport.Rows[e.RowIndex];
+
+            var selected = row.DataBoundItem as FinancialReportDTO;
+
+            if (selected == null)
+                return;
+
+            labelTotalAmountRaised.Text = selected.FormattedTotalAmountRaised.ToString();
+            labelTotalAmountSpent.Text = selected.FormattedTotalAmountSpent.ToString();
+            labelTotalBalance.Text = (selected.TotalAmountRaised - selected.TotalAmountSpent).ToString() + " €";
         }
     }
 }

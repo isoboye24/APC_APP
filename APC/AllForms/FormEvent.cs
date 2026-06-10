@@ -88,15 +88,20 @@ namespace APC
                     }
                 }
 
-                var eventData = new TheEvents(title, summary, finalImagePath, date);
-
-                if (_eventDTO.EventsId == 0)
+                if (!_isUpdate)
                 {
+                    var eventData = new TheEvents(title, summary, finalImagePath, date);
                     _eventsService.Create(eventData);
                     MessageBox.Show("Event created successfully!");
+
+                    txtImagePath.Clear();
+                    txtSummary.Clear();
+                    txtTitle.Clear();
+                    dateTimePickerEvent.Value = DateTime.Today;
                 }
                 else
                 {
+                    var eventData = TheEvents.Rehydrate(_eventDTO.EventsId, title, summary, finalImagePath, date);
                     _eventsService.Update(eventData);
                     MessageBox.Show("Event updated successfully!");
                     this.Close();

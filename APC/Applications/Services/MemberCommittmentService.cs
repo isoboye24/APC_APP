@@ -149,11 +149,19 @@ namespace APC.Applications.Services
                     ImagePath = member.imagePath,
 
                     ExpectedDues = expected,
+                    FormattedExpectedDues = expected.ToString() + " €",
+
                     ContributedDues = contributed,
+                    FormattedContributedDues = contributed.ToString() + " €",
+
                     BalanceDues = expected - contributed,
+                    FormattedBalanceDues = (expected - contributed).ToString() + " €",
 
                     TotalFines = totalFines,
+                    FormattedTotalFines = totalFines.ToString() + " €",
+
                     PaidFines = paidFines,
+                    FormattedPaidFines = paidFines.ToString() + " €",
 
                     NoOfPresent = present,
                     NoOfAbsent = absent,
@@ -166,6 +174,21 @@ namespace APC.Applications.Services
 
             return result
                 .OrderByDescending(x => x.Rank)
+                .ToList();
+        }
+
+        public List<YearDTO> GetMeetingYears()
+        {
+            return _generalMeetingAttendanceRepository.GetAll()
+                .Where(x => !x.isDeleted)
+                .Select(x => x.year)
+                .Distinct()
+                .OrderByDescending(x => x)
+                .Select(x => new YearDTO
+                {
+                    YearInValue = x,
+                    YearInText = x.ToString()
+                })
                 .ToList();
         }
     }

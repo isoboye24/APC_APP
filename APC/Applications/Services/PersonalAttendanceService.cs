@@ -14,9 +14,8 @@ namespace APC.Applications.Services
         private readonly IGenderRepository _genderRepository;
         private readonly IAttendanceStatusRepository _attendanceStatusRepository;
 
-        public PersonalAttendanceService(IGeneralMeetingAttendanceRepository repository, IMemberRepository memberRepository,
-            IAttendanceStatusRepository statusRepository, IGenderRepository genderRepository, IAttendanceStatusRepository attendanceStatusRepository,
-            IGeneralMeetingRepository generalMeetingRepository)
+        public PersonalAttendanceService(IGeneralMeetingAttendanceRepository repository, IMemberRepository memberRepository, 
+            IGenderRepository genderRepository, IAttendanceStatusRepository attendanceStatusRepository, IGeneralMeetingRepository generalMeetingRepository)
         {
             _repository = repository;
             _memberRepository = memberRepository;
@@ -145,6 +144,21 @@ namespace APC.Applications.Services
             })
             .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthId)
             .ToList();
+        }
+
+        public List<YearDTO> GetPersonalAttendanceYears(int memberId)
+        {
+            return _repository.GetAll()
+                .Where(x => !x.isDeleted && x.memberID == memberId)
+                .Select(x => x.year)
+                .Distinct()
+                .OrderByDescending(x => x)
+                .Select(x => new YearDTO
+                {
+                    YearInValue = x,
+                    YearInText = x.ToString()
+                })
+                .ToList();
         }
 
     }

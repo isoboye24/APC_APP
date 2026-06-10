@@ -10,6 +10,7 @@ namespace APC.Applications.DTO
     {
         public int ExpenditureId { get; set; }
         public decimal AmountSpent { get; set; }
+        public string FormattedAmountSpent { get; set; }
         public string Summary { get; set; }
         public DateTime ExpenditureDate { get; set; }
         public string FormattedExpenditureDate { get; set; }

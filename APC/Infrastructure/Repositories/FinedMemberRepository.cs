@@ -28,11 +28,17 @@ namespace APC.Infrastructure.Repositories
             return true;
         }
 
-        public bool Exists(int constitutionId, int memberId, DateTime fineDate)
+        public bool Exists(int constitutionId, int memberId, DateTime newDate)
         {
-            return _db.FINED_MEMBER.Any(x => !x.isdeleted && x.constitutionID == constitutionId && x.memberID == memberId 
-                                        && x.fineDate.Day == fineDate.Day && x.fineDate.Month == fineDate.Month
-                                        && x.fineDate.Year == fineDate.Year);
+            DateTime startDate = newDate.Date;
+            DateTime endDate = startDate.AddDays(1);
+
+            return _db.FINED_MEMBER.Any(x =>
+                !x.isdeleted &&
+                x.constitutionID == constitutionId &&
+                x.memberID == memberId &&
+                x.fineDate >= startDate &&
+                x.fineDate < endDate);
         }
 
         public IQueryable<FINED_MEMBER> GetAllByDate(DateTime date)

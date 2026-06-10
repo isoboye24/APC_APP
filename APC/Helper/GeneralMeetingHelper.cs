@@ -17,7 +17,7 @@ namespace APC.Helper
             {
                 case GeneralMeetingGridType.Basic:
                     GeneralHelper.SetVisibleColumns(grid, "MonthName", "Year", "TotalMembersPresent", "TotalMembersAbsent", "FormattedTotalDuesPaid", 
-                        "FinesRaised");
+                        "FinesRaised", "FormattedOverallTotal");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "MonthName", "Month" },
@@ -25,6 +25,7 @@ namespace APC.Helper
                                     { "TotalMembersAbsent", "Absent" },
                                     { "FormattedTotalDuesPaid", "Dues Paid" },
                                     { "FinesRaised", "Fines Paid" },
+                                    { "FormattedOverallTotal", "Total" },
                                 });
                     
                     grid.Columns["MonthName"].DisplayIndex = 0;
@@ -33,6 +34,7 @@ namespace APC.Helper
                     grid.Columns["TotalMembersAbsent"].DisplayIndex = 3;
                     grid.Columns["FormattedTotalDuesPaid"].DisplayIndex = 4;
                     grid.Columns["FinesRaised"].DisplayIndex = 5;
+                    grid.Columns["FormattedOverallTotal"].DisplayIndex = 6;
                     break;
             }
         }

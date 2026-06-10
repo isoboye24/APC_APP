@@ -176,7 +176,7 @@
           </Key>
           <Property Name="expenditureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="amountSpent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="summary" Type="text" Nullable="false" />
+          <Property Name="summary" Type="varchar(max)" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
           <Property Name="day" Type="int" Nullable="false" />

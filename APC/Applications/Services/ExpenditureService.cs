@@ -37,13 +37,12 @@ namespace APC.Applications.Services
                 {
                     ExpenditureId = x.expenditureID,
                     AmountSpent = x.amountSpent,
+                    FormattedAmountSpent = x.amountSpent + " €",
                     Summary = x.summary,
                     ExpenditureDate = x.expenditureDate,
                     FormattedExpenditureDate = x.expenditureDate.ToString("dd.MM.yyyy"),
                 })
-                .OrderByDescending(x => x.ExpenditureDate.Year)
-                .ThenByDescending(x => x.ExpenditureDate.Month)
-                .ThenByDescending(x => x.ExpenditureDate.Day)
+                .OrderByDescending(x => x.ExpenditureDate)
                 .ThenBy(x => x.Summary)
                 .ToList();
         }
@@ -71,13 +70,12 @@ namespace APC.Applications.Services
                 {
                     ExpenditureId = x.expenditureID,
                     AmountSpent = x.amountSpent,
+                    FormattedAmountSpent = x.amountSpent + " €",
                     Summary = x.summary,
                     ExpenditureDate = x.expenditureDate,
                     FormattedExpenditureDate = x.expenditureDate.ToString("dd.MM.yyyy"),
                 })
-                .OrderByDescending(x => x.ExpenditureDate.Year)
-                .ThenByDescending(x => x.ExpenditureDate.Month)
-                .ThenByDescending(x => x.ExpenditureDate.Day)
+                .OrderByDescending(x => x.ExpenditureDate)
                 .ThenBy(x => x.Summary)
                 .ToList();
         }
@@ -89,13 +87,12 @@ namespace APC.Applications.Services
                 {
                     ExpenditureId = x.expenditureID,
                     AmountSpent = x.amountSpent,
+                    FormattedAmountSpent = x.amountSpent + " €",
                     Summary = x.summary,
                     ExpenditureDate = x.expenditureDate,
                     FormattedExpenditureDate = x.expenditureDate.ToString("dd.MM.yyyy"),
                 })
-                .OrderByDescending(x => x.ExpenditureDate.Year)
-                .ThenByDescending(x => x.ExpenditureDate.Month)
-                .ThenByDescending(x => x.ExpenditureDate.Day)
+                .OrderByDescending(x => x.ExpenditureDate)
                 .ThenBy(x => x.Summary)
                 .ToList();
         }

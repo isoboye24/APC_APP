@@ -219,13 +219,15 @@ namespace APC.AllForms
                 WindowState = FormWindowState.Normal;
             }
         }
+
+
         
         private void btnViewPresentAttendance_Click(object sender, EventArgs e)
         {            
             if (attendancePresentCount > 0)
             {
                 var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService, 
-                    _finedMemberService);
+                    _finedMemberService, _personalAttendanceService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsPresent(true);
                 form.ShowDialog();
@@ -237,7 +239,7 @@ namespace APC.AllForms
             if (attendanceAbsentCount > 0)
             {
                 var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
-                    _finedMemberService);
+                    _finedMemberService, _personalAttendanceService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsAbsent(true);
                 form.ShowDialog();
@@ -249,7 +251,7 @@ namespace APC.AllForms
             if (amountContributed > 0)
             {
                 var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
-                    _finedMemberService);
+                    _finedMemberService, _personalAttendanceService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsAmountContributed(true);
                 form.ShowDialog();
@@ -261,7 +263,7 @@ namespace APC.AllForms
             if (balanceCurrYear > 0)
             {
                 var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
-                    _finedMemberService);
+                    _finedMemberService, _personalAttendanceService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsAmountExpected(true);
                 form.ShowDialog();
@@ -273,7 +275,7 @@ namespace APC.AllForms
             if (balanceCurrYear > 0)
             {
                 var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
-                    _finedMemberService);
+                    _finedMemberService, _personalAttendanceService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsPersonalBalance(true);
                 form.ShowDialog();
@@ -285,7 +287,7 @@ namespace APC.AllForms
             if (finesCount > 0)
             {
                 var form = new FormViewPersonalAttendances(_memberService, _monthService, _generalMeetingService, _financialReportService,
-                    _finedMemberService);
+                    _finedMemberService, _personalAttendanceService);
                 form.GetMemberId(_memberFullDetailsDTOById.MemberId);
                 form.IsPersonalFines(true);
                 form.ShowDialog();

@@ -23,6 +23,7 @@ namespace APC.AllForms
         private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
         private readonly IServiceProvider _serviceProvider;
         private readonly IAttendanceStatusService _attendanceStatusService;
+        private readonly IPaymentStatusService _paymentStatusService;
 
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
         private List<Applications.DTO.FinedMemberDTO> _finedMemberDTO;
@@ -36,7 +37,8 @@ namespace APC.AllForms
             IMonthService monthService, IConstitutionService constitutionService, IFinedMemberService finedMemberService, 
             ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService, 
             ICurrentUserService currentUserService, IGeneralMeetingService generalMeetingService, 
-            IGeneralMeetingAttendanceService generalMeetingAttendanceService, IServiceProvider serviceProvider, IAttendanceStatusService attendanceStatusService)
+            IGeneralMeetingAttendanceService generalMeetingAttendanceService, IServiceProvider serviceProvider, 
+            IAttendanceStatusService attendanceStatusService, IPaymentStatusService paymentStatusService)
         {
             InitializeComponent();
             _genderService = genderService;
@@ -51,6 +53,7 @@ namespace APC.AllForms
             _generalMeetingAttendanceService = generalMeetingAttendanceService;
             _serviceProvider = serviceProvider;
             _attendanceStatusService = attendanceStatusService;
+            _paymentStatusService = paymentStatusService;
         }
 
         private void resizeControls()
@@ -124,9 +127,8 @@ namespace APC.AllForms
             cmbGenderFinedMember.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderFinedMember, "GenderName", "GenderID");
 
-            cmbFineStatus.Items.Add("Completed");
-            cmbFineStatus.Items.Add("NOT Completed");
-            cmbFineStatus.Items.Add("NOT Paid");
+            cmbFineStatus.DataSource = _paymentStatusService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbFineStatus, "PaymentStatusName", "PaymentStatusId");
 
 
             loadSpecialContributions();
@@ -594,7 +596,7 @@ namespace APC.AllForms
 
             if (cmbFineStatus.SelectedIndex != -1)
             {
-                string searchedStatus = cmbFineStatus.SelectedValue?.ToString();
+                string searchedStatus = cmbFineStatus.Text;
                 filtered = filtered.Where(x => x.Status != null && x.Status.IndexOf(searchedStatus, StringComparison.OrdinalIgnoreCase) >= 0);
             }
 

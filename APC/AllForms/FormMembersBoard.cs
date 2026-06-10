@@ -218,68 +218,87 @@ namespace APC.AllForms
         {
             cmbGenderRegisteredMembers.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderRegisteredMembers, "GenderName", "genderID");
+
             cmbProfessionRegisteredMembers.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionRegisteredMembers, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionRegisteredMembers, "ProfessionName", "professionID");
+
             cmbPositionRegisteredMembers.DataSource = _positionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPositionRegisteredMembers, "PositionName", "positionID");
+
             cmbNationalityRegisteredMembers.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityRegisteredMembers, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityRegisteredMembers, "NationalityName", "NationalityID");
         }
 
         private void FillBirthdayMemberComboBoxes()
         {
             cmbGenderBirthday.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderBirthday, "GenderName", "GenderID");
+
             cmbNationalityBirthday.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityBirthday, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityBirthday, "NationalityName", "NationalityID");
+
             cmbMonthBirthday.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthBirthday, "MonthName", "MonthID");
+
             cmbPositionBirthday.DataSource = _positionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPositionBirthday, "PositionName", "PositionID");
+
             cmbProfessionBirthday.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionBirthday, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionBirthday, "ProfessionName", "professionID");
         }
 
         private void FillFormerMemberComboBoxes()
         {
             cmbGenderFormerMembers.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderFormerMembers, "GenderName", "genderID");
+
             cmbProfessionFormerMembers.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionFormerMembers, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionFormerMembers, "ProfessionName", "professionID");
+
             cmbPositionFormerMembers.DataSource = _positionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPositionFormerMembers, "PositionName", "positionID");
+
             cmbNationalityFormerMembers.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityFormerMembers, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityFormerMembers, "NationalityName", "NationalityID");
         }
 
         private void FillDeadMemberComboBoxes()
         {
             cmbGenderDeadMembers.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderDeadMembers, "GenderName", "genderID");
+
             cmbProfessionDeadMembers.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionDeadMembers, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionDeadMembers, "ProfessionName", "professionID");
+
             cmbPositionDeadMembers.DataSource = _positionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPositionDeadMembers, "PositionName", "positionID");
+
             cmbNationalityDeadMembers.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityDeadMembers, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityDeadMembers, "NationalityName", "NationalityID");
         }
 
         private void FillInactiveMemberComboBoxes()
         {
             cmbGenderInactiveMembers.DataSource = _genderService.GetAll();
             GeneralHelper.ComboBoxProps(cmbGenderInactiveMembers, "GenderName", "genderID");
+
             cmbProfessionInactiveMembers.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionInactiveMembers, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionInactiveMembers, "ProfessionName", "professionID");
+
             cmbPositionInactiveMembers.DataSource = _positionService.GetAll();
             GeneralHelper.ComboBoxProps(cmbPositionInactiveMembers, "PositionName", "positionID");
+
             cmbNationalityInactiveMembers.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityInactiveMembers, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityInactiveMembers, "NationalityName", "NationalityID");
         }
 
         private void FillMemberCommittmentComboBoxes()
         {
             cmbStatusCommittment.DataSource = _paymentStatusService.GetAll();
             GeneralHelper.ComboBoxProps(cmbStatusCommittment, "PaymentStatusName", "PaymentStatusID");
+            
+            cmbYearCommittment.DataSource = _memberCommittmentService.GetMeetingYears();
+            GeneralHelper.ComboBoxProps(cmbYearCommittment, "YearInText", "YearInValue");
         }
 
         private void ClearFilters()
@@ -489,12 +508,17 @@ namespace APC.AllForms
 
         private void dataGridViewRegisteredMembers_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            if (e.RowIndex < 0)
+                return;
 
-            var registeredMembersDetail = GetSelectedRegisteredMembers();
-            // registeredMembersDetail = GeneralHelper.MapFromGrid<MemberFullDetailsDTO>(dataGridViewRegisteredMembers, e.RowIndex);
+            var row = dataGridViewRegisteredMembers.Rows[e.RowIndex];
 
-            string imagePath = Path.Combine(Application.StartupPath, "images", registeredMembersDetail.ImagePath);
+            var selected = row.DataBoundItem as MemberFullDetailsDTO;
+
+            if (selected == null)
+                return;
+
+            string imagePath = Path.Combine(Application.StartupPath, "images", selected.ImagePath);
             picRegisteredMember.ImageLocation = imagePath;
         }
 
@@ -774,13 +798,17 @@ namespace APC.AllForms
 
         private void dataGridViewCommitments_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            if (e.RowIndex < 0)
+                return;
 
-            var committmentDetail = GetSelectedMemberCommittment();
-            //committmentDetail = GeneralHelper.MapFromGrid<MemberCommittmentDTO>(dataGridViewCommitments, e.RowIndex);
+            var row = dataGridViewCommitments.Rows[e.RowIndex];
 
-            // Load image
-            string imagePath = Path.Combine(Application.StartupPath, "images", committmentDetail.ImagePath);
+            var selected = row.DataBoundItem as MemberCommittmentDTO;
+
+            if (selected == null)
+                return;
+
+            string imagePath = Path.Combine(Application.StartupPath, "images", selected.ImagePath);
             picCommittment.ImageLocation = imagePath;
         }
 

@@ -226,7 +226,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel6, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel9, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.picProfilePic, 5, 0);
@@ -260,7 +260,7 @@
             this.tableLayoutPanel6.Controls.Add(this.txtNameOfNextOfKin, 1, 10);
             this.tableLayoutPanel6.Controls.Add(this.txtRelationshipToKin, 1, 12);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(423, 4);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(422, 4);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 21;
@@ -289,7 +289,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(397, 583);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(396, 583);
             this.tableLayoutPanel6.TabIndex = 1;
             // 
             // label11
@@ -311,7 +311,7 @@
             this.txtMaritalStatus.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaritalStatus.Name = "txtMaritalStatus";
             this.txtMaritalStatus.ReadOnly = true;
-            this.txtMaritalStatus.Size = new System.Drawing.Size(211, 34);
+            this.txtMaritalStatus.Size = new System.Drawing.Size(210, 34);
             this.txtMaritalStatus.TabIndex = 0;
             // 
             // labelAge
@@ -371,7 +371,7 @@
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 1;
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(211, 38);
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(210, 38);
             this.tableLayoutPanel12.TabIndex = 13;
             // 
             // btnViewPresentAttendance
@@ -382,7 +382,7 @@
             this.btnViewPresentAttendance.Location = new System.Drawing.Point(109, 0);
             this.btnViewPresentAttendance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.btnViewPresentAttendance.Name = "btnViewPresentAttendance";
-            this.btnViewPresentAttendance.Size = new System.Drawing.Size(98, 34);
+            this.btnViewPresentAttendance.Size = new System.Drawing.Size(97, 34);
             this.btnViewPresentAttendance.TabIndex = 4;
             this.btnViewPresentAttendance.Text = "View";
             this.btnViewPresentAttendance.UseVisualStyleBackColor = true;
@@ -412,7 +412,7 @@
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 1;
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(211, 38);
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(210, 38);
             this.tableLayoutPanel14.TabIndex = 14;
             // 
             // btnViewAbsentAttendance
@@ -423,7 +423,7 @@
             this.btnViewAbsentAttendance.Location = new System.Drawing.Point(109, 0);
             this.btnViewAbsentAttendance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.btnViewAbsentAttendance.Name = "btnViewAbsentAttendance";
-            this.btnViewAbsentAttendance.Size = new System.Drawing.Size(98, 34);
+            this.btnViewAbsentAttendance.Size = new System.Drawing.Size(97, 34);
             this.btnViewAbsentAttendance.TabIndex = 4;
             this.btnViewAbsentAttendance.Text = "View";
             this.btnViewAbsentAttendance.UseVisualStyleBackColor = true;
@@ -492,7 +492,7 @@
             this.txtNameOfNextOfKin.Margin = new System.Windows.Forms.Padding(4);
             this.txtNameOfNextOfKin.Name = "txtNameOfNextOfKin";
             this.txtNameOfNextOfKin.ReadOnly = true;
-            this.txtNameOfNextOfKin.Size = new System.Drawing.Size(211, 34);
+            this.txtNameOfNextOfKin.Size = new System.Drawing.Size(210, 34);
             this.txtNameOfNextOfKin.TabIndex = 0;
             // 
             // txtRelationshipToKin
@@ -503,7 +503,7 @@
             this.txtRelationshipToKin.Margin = new System.Windows.Forms.Padding(4);
             this.txtRelationshipToKin.Name = "txtRelationshipToKin";
             this.txtRelationshipToKin.ReadOnly = true;
-            this.txtRelationshipToKin.Size = new System.Drawing.Size(211, 34);
+            this.txtRelationshipToKin.Size = new System.Drawing.Size(210, 34);
             this.txtRelationshipToKin.TabIndex = 0;
             // 
             // tableLayoutPanel9
@@ -518,7 +518,7 @@
             this.tableLayoutPanel9.RowCount = 2;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(397, 583);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(396, 583);
             this.tableLayoutPanel9.TabIndex = 2;
             // 
             // tableLayoutPanel5
@@ -566,7 +566,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.859156F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1.408451F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.859156F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(389, 458);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(388, 458);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // label3
@@ -588,7 +588,7 @@
             this.txtSurname.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.ReadOnly = true;
-            this.txtSurname.Size = new System.Drawing.Size(226, 34);
+            this.txtSurname.Size = new System.Drawing.Size(225, 34);
             this.txtSurname.TabIndex = 6;
             // 
             // txtName
@@ -599,7 +599,7 @@
             this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.ReadOnly = true;
-            this.txtName.Size = new System.Drawing.Size(226, 34);
+            this.txtName.Size = new System.Drawing.Size(225, 34);
             this.txtName.TabIndex = 5;
             // 
             // label2
@@ -632,7 +632,7 @@
             this.txtNationality.Margin = new System.Windows.Forms.Padding(4);
             this.txtNationality.Name = "txtNationality";
             this.txtNationality.ReadOnly = true;
-            this.txtNationality.Size = new System.Drawing.Size(226, 34);
+            this.txtNationality.Size = new System.Drawing.Size(225, 34);
             this.txtNationality.TabIndex = 0;
             // 
             // label15
@@ -698,7 +698,7 @@
             this.txtCountry.Margin = new System.Windows.Forms.Padding(4);
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.ReadOnly = true;
-            this.txtCountry.Size = new System.Drawing.Size(226, 34);
+            this.txtCountry.Size = new System.Drawing.Size(225, 34);
             this.txtCountry.TabIndex = 0;
             // 
             // txtProfession
@@ -709,7 +709,7 @@
             this.txtProfession.Margin = new System.Windows.Forms.Padding(4);
             this.txtProfession.Name = "txtProfession";
             this.txtProfession.ReadOnly = true;
-            this.txtProfession.Size = new System.Drawing.Size(226, 34);
+            this.txtProfession.Size = new System.Drawing.Size(225, 34);
             this.txtProfession.TabIndex = 0;
             // 
             // txtGender
@@ -720,7 +720,7 @@
             this.txtGender.Margin = new System.Windows.Forms.Padding(4);
             this.txtGender.Name = "txtGender";
             this.txtGender.ReadOnly = true;
-            this.txtGender.Size = new System.Drawing.Size(226, 34);
+            this.txtGender.Size = new System.Drawing.Size(225, 34);
             this.txtGender.TabIndex = 0;
             // 
             // labelBirthday
@@ -764,17 +764,17 @@
             this.txtPosition.Margin = new System.Windows.Forms.Padding(4);
             this.txtPosition.Name = "txtPosition";
             this.txtPosition.ReadOnly = true;
-            this.txtPosition.Size = new System.Drawing.Size(226, 34);
+            this.txtPosition.Size = new System.Drawing.Size(225, 34);
             this.txtPosition.TabIndex = 0;
             // 
             // picProfilePic
             // 
             this.picProfilePic.BackColor = System.Drawing.Color.DarkOrange;
             this.picProfilePic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picProfilePic.Location = new System.Drawing.Point(835, 4);
+            this.picProfilePic.Location = new System.Drawing.Point(833, 4);
             this.picProfilePic.Margin = new System.Windows.Forms.Padding(4);
             this.picProfilePic.Name = "picProfilePic";
-            this.picProfilePic.Size = new System.Drawing.Size(397, 583);
+            this.picProfilePic.Size = new System.Drawing.Size(396, 583);
             this.picProfilePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picProfilePic.TabIndex = 3;
             this.picProfilePic.TabStop = false;

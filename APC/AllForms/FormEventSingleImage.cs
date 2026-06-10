@@ -87,15 +87,16 @@ namespace APC.AllForms
                     }
                 }
 
-                var eventImageData = new EventImages(
+                
+
+                if (!_isUpdate)
+                {
+                    var eventImageData = new EventImages(
                     _eventDTO.EventsId,
                     summary,
                     finalImagePath,
                     caption
                 );
-
-                if (_eventImageDTO.EventImageId == 0)
-                {
                     _eventImagesService.Create(eventImageData);
 
                     MessageBox.Show("Event Image created successfully!");
@@ -104,6 +105,12 @@ namespace APC.AllForms
                 }
                 else
                 {
+                    var eventImageData = EventImages.Rehydrate(_eventImageDTO.EventImageId, 
+                    _eventDTO.EventsId,
+                    summary,
+                    finalImagePath,
+                    caption
+                );
                     _eventImagesService.Update(eventImageData);
 
                     MessageBox.Show("Event Image updated successfully!");

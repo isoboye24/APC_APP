@@ -155,6 +155,10 @@ namespace APC.Applications.Services
                 FormattedTotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID).ToString(),
 
                 FinesRaised = (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0).ToString(),
+
+                OverallTotal = GetTotalDuesPaid(x.generalAttendanceID) + (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0),
+                FormattedOverallTotal = (GetTotalDuesPaid(x.generalAttendanceID) + (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0)).ToString() + " €",
+
                 Summary = x.summary,
                 Day = x.attendanceDate.Day,
                 MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
