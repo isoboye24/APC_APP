@@ -16,6 +16,12 @@ It is built using:
 - LINQ
 - Clean Architecture
 
+### ## Production Usage
+
+APC Nexus has been actively used in a real community organization for over one year. The system supports day-to-day operations including membership administration, attendance tracking, financial contributions, event management, and reporting.
+
+Its continued use in a live environment demonstrates the reliability, practicality, and maintainability of the application.
+
 
 ### 🔐 Authentication
 
