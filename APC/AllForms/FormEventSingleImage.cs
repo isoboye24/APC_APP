@@ -49,6 +49,17 @@ namespace APC.AllForms
             this.Close();
         }
 
+        public void loadEventData(EventDTO eventDTO)
+        {
+            _eventDTO = eventDTO;
+        }
+
+        public void loadForEdit(Applications.DTO.EventImageDTO eventImageDTO, bool isUpdate)
+        {
+            _eventImageDTO = eventImageDTO;
+            _isUpdate = isUpdate;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -57,7 +68,12 @@ namespace APC.AllForms
                 var summary = txtImageSummary.Text.Trim();
                 var caption = txtImageCaption.Text.Trim();
 
-                string finalImagePath = _eventImageDTO.ImagePath;
+                string finalImagePath = "";
+
+                if (_isUpdate)
+                {
+                    finalImagePath = _eventImageDTO.ImagePath;
+                }
 
                 // Only copy image if user selected a file
                 if (!string.IsNullOrWhiteSpace(sourcePath) && !string.IsNullOrWhiteSpace(fileName))
@@ -77,7 +93,7 @@ namespace APC.AllForms
 
                     finalImagePath = destinationPath;
 
-                    if (_eventImageDTO.EventImageId > 0)
+                    if (_isUpdate)
                     {
                         if (File.Exists(_eventImageDTO.ImagePath) &&
                             _eventImageDTO.ImagePath != destinationPath)
@@ -108,7 +124,7 @@ namespace APC.AllForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ToString());
             }
         }
         
@@ -128,17 +144,6 @@ namespace APC.AllForms
 
                 fileName = unique + "_" + OpenFileDialog1.SafeFileName;
             }
-        }
-
-        public void loadEventData(EventDTO eventDTO)
-        {
-            _eventDTO = eventDTO;
-        }
-
-        public void loadForEdit(Applications.DTO.EventImageDTO eventImageDTO, bool isUpdate)
-        {
-            _eventImageDTO = eventImageDTO;
-            _isUpdate = isUpdate;
         }
 
         private void ControlsFont()

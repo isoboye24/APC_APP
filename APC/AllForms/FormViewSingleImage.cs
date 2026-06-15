@@ -2,7 +2,9 @@
 using APC.Helper;
 using APC.Utility;
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 
 namespace APC.AllForms
@@ -108,7 +110,7 @@ namespace APC.AllForms
             labelDescription.Text = _eventImageDTO.Summary;
             labelCaption.Text = _eventImageDTO.ImageCaption;
 
-            string imagePath = Application.StartupPath + "\\images\\" + _eventImageDTO.ImagePath;
+            string imagePath = Path.Combine(Application.StartupPath, "images", _eventImageDTO.ImagePath);
             picEventImage.ImageLocation = imagePath;
         }
 
