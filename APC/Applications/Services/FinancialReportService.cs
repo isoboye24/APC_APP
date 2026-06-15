@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,13 @@ namespace APC.Applications.Services
         private readonly IEventSalesRepository _eventSalesRepository;
 
         private readonly IEventExpenditureRepository _eventExpenditureRepository;
+        private readonly IEventsRepository _eventsRepository;
         private readonly IExpenditureRepository _expenditureRepository;
 
         public FinancialReportService(IFinancialReportRepository repository, IGeneralMeetingAttendanceRepository generalMeetingAttendanceRepository, 
             IGeneralMeetingRepository generalMeetingRepository, IMemberRepository memberRepository, IFinedMemberRepository finedMemberRepository,
-            IEventSalesRepository eventSalesRepository, IEventExpenditureRepository eventExpenditureRepository, IExpenditureRepository expenditureRepository)
+            IEventSalesRepository eventSalesRepository, IEventExpenditureRepository eventExpenditureRepository, IEventsRepository eventsRepository, 
+        IExpenditureRepository expenditureRepository)
         {
             _repository = repository;
             _generalMeetingAttendanceRepository = generalMeetingAttendanceRepository;
@@ -30,6 +33,7 @@ namespace APC.Applications.Services
             _eventSalesRepository = eventSalesRepository;
             _finedMemberRepository = finedMemberRepository;
             _eventExpenditureRepository = eventExpenditureRepository;
+            _eventsRepository = eventsRepository;
             _expenditureRepository = expenditureRepository;
         }
 
@@ -49,17 +53,24 @@ namespace APC.Applications.Services
 
         public decimal CalculateTotalAmountRaisedAnnually(int year)
         {
-            decimal totalDuesRaised = _generalMeetingAttendanceRepository.GetAll()
-                                    .Where(x => x.year == year)
-                                    .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+            decimal totalDuesRaised = (
+                                        from attendance in _generalMeetingAttendanceRepository.GetAll()
+                                        join meeting in _generalMeetingRepository.GetAll()
+                                        on attendance.generalAttendanceID equals meeting.generalAttendanceID
+                                        where meeting.attendanceDate.Year == year
+                                        select attendance.monthlyDues
+                                        ).Sum(x => (decimal?)x) ?? 0;
 
             decimal totalFinesPaid = _finedMemberRepository.GetAll()
-                                    .Where(x => x.year == year)
+                                    .Where(x => x.fineDate.Year == year)
                                     .Sum(x => (decimal?)x.amountPaid) ?? 0;
 
-            decimal totalEventSales = _eventSalesRepository.GetAll()
-                                    .Where(x => x.year == year)
-                                    .Sum(x => (decimal?)x.amountSold) ?? 0;
+            decimal totalEventSales = (
+                                        from sales in _eventSalesRepository.GetAll()
+                                        join events in _eventsRepository.GetAll().Where(x => x.eventDate.Year == year)
+                                        on sales.eventID equals events.eventID
+                                        select sales.amountSold
+                                        ).Sum(x => (decimal?)x) ?? 0;
 
             return totalDuesRaised + totalFinesPaid + totalEventSales;
         }
@@ -67,12 +78,15 @@ namespace APC.Applications.Services
         public decimal CalculateTotalAmountSpentAnnually(int year)
         {
             decimal totalExpenditure = _expenditureRepository.GetAll()
-                                    .Where(x => x.year == year)
+                                    .Where(x => x.expenditureDate.Year == year)
                                     .Sum(x => (decimal?)x.amountSpent) ?? 0;
 
-            decimal totalEventExpenditure = _eventExpenditureRepository.GetAll()
-                                    .Where(x => x.year == year)
-                                    .Sum(x => (decimal?)x.amountSpent) ?? 0;
+            decimal totalEventExpenditure = (
+                                        from expenses in _eventExpenditureRepository.GetAll()
+                                        join events in _eventsRepository.GetAll().Where(x => x.eventDate.Year == year)
+                                        on expenses.eventID equals events.eventID
+                                        select expenses.amountSpent
+                                        ).Sum(x => (decimal?)x) ?? 0;
 
             return totalExpenditure + totalEventExpenditure;
         }
@@ -170,19 +184,25 @@ namespace APC.Applications.Services
 
         public decimal GetTotalDuesByMonth(int month, int year)
         {
-            return _generalMeetingAttendanceRepository.GetAll()
-                   .Where(x => x.monthID == month 
-                   && x.year == year 
-                   && x.monthlyDues > 0)
-                   .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+            return (
+                    from attendance in _generalMeetingAttendanceRepository.GetAll()
+                    join meeting in _generalMeetingRepository.GetAll()
+                    on attendance.generalAttendanceID equals meeting.generalAttendanceID
+                    where meeting.attendanceDate.Year == year && meeting.attendanceDate.Month == month
+                    select attendance.monthlyDues
+                    ).Sum(x => (decimal?)x) ?? 0;
         }
         
         public decimal GetTotalDuesByYear(int year)
         {
-            return _generalMeetingAttendanceRepository.GetAll()
-                   .Where(x => x.year == year 
-                   && x.monthlyDues > 0)
-                   .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+            return (
+                    from attendance in _generalMeetingAttendanceRepository.GetAll()
+                    join meeting in _generalMeetingRepository.GetAll()
+                    on attendance.generalAttendanceID equals meeting.generalAttendanceID
+                    where meeting.attendanceDate.Year == year
+                    select attendance.monthlyDues
+                    ).Sum(x => (decimal?)x) ?? 0;
+
         }
 
         public decimal GetOverallExpenditures()
@@ -228,10 +248,13 @@ namespace APC.Applications.Services
 
         public decimal GetTotalAnnualDuesById(int memberId, int year)
         {
-            return _generalMeetingAttendanceRepository
-                    .GetAll()
-                    .Where(x => x.memberID == memberId && x.year == year)
-                    .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+            return (
+                    from attendance in _generalMeetingAttendanceRepository.GetAll()
+                    join meeting in _generalMeetingRepository.GetAll()
+                    on attendance.generalAttendanceID equals meeting.generalAttendanceID
+                    where meeting.attendanceDate.Year == year && attendance.memberID == memberId
+                    select attendance.monthlyDues
+                    ).Sum(x => (decimal?)x) ?? 0;
         }
 
         public decimal GetTotalDuesExpectedById(int memberId)
@@ -246,10 +269,13 @@ namespace APC.Applications.Services
 
         public decimal GetTotalAnnualDuesExpectedById(int memberId, int year)
         {
-            int noOfAttendance = _generalMeetingAttendanceRepository
-                    .GetAll()
-                    .Where(x => x.memberID == memberId && x.year == year)
-                    .Count();
+            int noOfAttendance = (
+                    from attendance in _generalMeetingAttendanceRepository.GetAll()
+                    join meeting in _generalMeetingRepository.GetAll()
+                    on attendance.generalAttendanceID equals meeting.generalAttendanceID
+                    where meeting.attendanceDate.Year == year && attendance.memberID == memberId
+                    select attendance.monthlyDues
+                    ).Count();
 
             return (noOfAttendance * 10);
         }

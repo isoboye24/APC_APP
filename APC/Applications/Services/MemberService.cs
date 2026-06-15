@@ -711,8 +711,7 @@ namespace APC.Applications.Services
 
             var recentGeneralMeetings = _generalMeetingRepository.GetAll()
                 .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.year)
-                .ThenByDescending(x => x.monthID)
+                .OrderByDescending(x => x.attendanceDate)
                 .Take(3)
                 .Select(x => x.generalAttendanceID)
                 .ToList();
@@ -767,8 +766,7 @@ namespace APC.Applications.Services
         public int Get3MonthsAbsentesCount()
         {
             var last3Meetings = _generalMeetingRepository.GetAll()
-                .OrderByDescending(x => x.year)
-                .ThenByDescending(x => x.monthID)
+                .OrderByDescending(x => x.attendanceDate)
                 .Take(3)
                 .Select(x => x.generalAttendanceID)
                 .ToList();

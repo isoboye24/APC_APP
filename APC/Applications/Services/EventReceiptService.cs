@@ -103,12 +103,6 @@ namespace APC.Applications.Services
             if (check == null)
                 throw new Exception("Event receipt not found");
 
-            data.UpdateImageCaption(data.Caption);
-            data.UpdateSummary(data.Summary);
-            data.UpdateImagePath(data.ImagePath);
-            data.UpdateDate(data.ReceiptDate);
-            data.UpdateSpentAmount(data.AmountSpent);
-
             return _repository.Update(data);
         }
 

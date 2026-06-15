@@ -19,9 +19,6 @@ namespace APC.Infrastructure.Data
         public string summary { get; set; }
         public int constitutionID { get; set; }
         public int memberID { get; set; }
-        public int monthID { get; set; }
-        public int day { get; set; }
-        public int year { get; set; }
         public bool isdeleted { get; set; }
         public Nullable<System.DateTime> deletedDate { get; set; }
         public System.DateTime fineDate { get; set; }

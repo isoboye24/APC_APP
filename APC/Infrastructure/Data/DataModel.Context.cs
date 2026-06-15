@@ -26,8 +26,6 @@ namespace APC.Infrastructure.Data
         }
     
         public virtual DbSet<ATTENDANCE_STATUS> ATTENDANCE_STATUS { get; set; }
-        public virtual DbSet<CHILD> CHILD { get; set; }
-        public virtual DbSet<COMMENT> COMMENT { get; set; }
         public virtual DbSet<CONSTITUTION> CONSTITUTION { get; set; }
         public virtual DbSet<COUNTRY> COUNTRY { get; set; }
         public virtual DbSet<DOCUMENT> DOCUMENT { get; set; }

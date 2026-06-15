@@ -49,7 +49,7 @@ namespace APC.Applications.Services
         
         public List<EventDTO> GetAnnualEvents(int year)
         {
-            return _repository.GetAll().Where(x => x.year == year)
+            return _repository.GetAll().Where(x => x.eventDate.Year == year)
                 .ToList()
                 .Select(x => new EventDTO
                 {
@@ -87,7 +87,7 @@ namespace APC.Applications.Services
         {
             return _repository.GetAll()
                     .ToList()
-                    .Select(x => x.year)
+                    .Select(x => x.eventDate.Year)
                     .Distinct()
                     .OrderByDescending(x => x)
                     .Select(x => new YearDTO

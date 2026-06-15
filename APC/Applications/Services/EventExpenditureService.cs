@@ -147,7 +147,7 @@ namespace APC.Applications.Services
         public decimal GetTotalAmountSpentByYear(int year)
         {
             return _repository.GetAll()
-                            .Where(x => x.year == year)
+                            .Where(x => x.expenditureDate.Year == year)
                             .Sum(x => (decimal?)x.amountSpent) ?? 0;
         }
     }

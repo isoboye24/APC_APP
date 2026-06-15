@@ -312,6 +312,7 @@
       <DependentUpon>FormViewSpecialContributor.cs</DependentUpon>
     </Compile>
     <Compile Include="Applications\DTO\AbsenteesDTO.cs" />
+    <Compile Include="Applications\DTO\AttendanceStatisticsDTO.cs" />
     <Compile Include="Applications\DTO\AttendanceStatusDTO.cs" />
     <Compile Include="Applications\DTO\BirthdayMembersDTO.cs" />
     <Compile Include="Applications\DTO\ConstitutionDTO.cs" />
@@ -580,12 +581,6 @@
     <Compile Include="Helper\SpecialContributionHelper.cs" />
     <Compile Include="Helper\SpecialContributorHelper.cs" />
     <Compile Include="Infrastructure\Data\ATTENDANCE_STATUS.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\CHILD.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\COMMENT.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Data\CONSTITUTION.cs">

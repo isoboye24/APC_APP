@@ -42,12 +42,7 @@ namespace APC.Infrastructure.Repositories
         {
             return _db.PERSONAL_ATTENDANCE.Where(x => !x.isDeleted);
         }
-        
-        public IQueryable<PERSONAL_ATTENDANCE> GetMemberPersonalAttendanceByYear(int memberId, int year)
-        {
-            return _db.PERSONAL_ATTENDANCE.Where(x => !x.isDeleted && x.memberID == memberId && x.year == year);
-        }
-        
+
         public IQueryable<PERSONAL_ATTENDANCE> GetAllDeletedPersonalAttendance()
         {
             return _db.PERSONAL_ATTENDANCE.Where(x => x.isDeleted);
@@ -77,10 +72,6 @@ namespace APC.Infrastructure.Repositories
                 expectedMonthlyDue = data.ExpectedDues,
                 balance = data.Balance,
                 generalAttendanceID = data.GeneralMeetingId,
-
-                day = DateTime.Today.Day,
-                monthID = DateTime.Today.Month,
-                year = DateTime.Today.Year,
             });
 
             _db.SaveChanges();

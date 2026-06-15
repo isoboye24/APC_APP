@@ -116,8 +116,9 @@ namespace APC.Applications.Services
         }
         public List<GeneralMeetingAttendanceDTO> GetMemberPersonalAttendanceByYear(int memberId, int year)
         {
-            var data = (from p in _repository.GetAll().Where(x => x.memberID == memberId && x.year == year)
+            var data = (from p in _repository.GetAll().Where(x => x.memberID == memberId)
                         join m in _memberRepository.GetAll() on p.memberID equals m.memberID
+                        join gm in _generalMeetingRepository.GetAll().Where(x => x.attendanceDate.Year == year) on p.generalAttendanceID equals gm.generalAttendanceID
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join a in _attendanceStatusRepository.GetAll() on p.attendanceStatusID equals a.attendanceStatusID
                         select new
@@ -234,8 +235,7 @@ namespace APC.Applications.Services
         {
             var lastMeeting = _generalMeetingRepository.GetAll()
                 .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.year)
-                .ThenByDescending(x => x.monthID)
+                .OrderByDescending(x => x.attendanceDate)
                 .FirstOrDefault();
 
             if (lastMeeting == null)
@@ -244,12 +244,7 @@ namespace APC.Applications.Services
             const int presentStatusId = 2;
 
             return _repository.GetAll()
-                .Count(x =>
-                    !x.isDeleted &&
-                    x.year == lastMeeting.year &&
-                    x.monthID == lastMeeting.monthID &&
-                    x.day == lastMeeting.day &&
-                    x.attendanceStatusID == presentStatusId);
+                .Count(x => x.attendanceStatusID == presentStatusId);
         }
     }
 }

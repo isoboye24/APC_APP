@@ -14,35 +14,6 @@
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
         </EntityType>
-        <EntityType Name="CHILD">
-          <Key>
-            <PropertyRef Name="childID" />
-          </Key>
-          <Property Name="childID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="birthday" Type="date" />
-          <Property Name="imagePath" Type="varchar(max)" />
-          <Property Name="genderID" Type="int" Nullable="false" />
-          <Property Name="nationalityID" Type="int" Nullable="false" />
-          <Property Name="isDeleted" Type="bit" Nullable="false" />
-          <Property Name="deletedDate" Type="date" />
-          <Property Name="motherID" Type="int" />
-          <Property Name="fatherID" Type="int" />
-        </EntityType>
-        <EntityType Name="COMMENT">
-          <Key>
-            <PropertyRef Name="commentID" />
-          </Key>
-          <Property Name="commentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="comment" Type="text" Nullable="false" />
-          <Property Name="memberID" Type="int" Nullable="false" />
-          <Property Name="isDeleted" Type="bit" Nullable="false" />
-          <Property Name="deletedDate" Type="date" />
-          <Property Name="day" Type="int" Nullable="false" />
-          <Property Name="monthID" Type="int" Nullable="false" />
-          <Property Name="year" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="CONSTITUTION">
           <Key>
             <PropertyRef Name="constitutionID" />
@@ -107,9 +78,6 @@
           <Property Name="summary" Type="text" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
-          <Property Name="day" Type="int" Nullable="false" />
-          <Property Name="monthID" Type="int" Nullable="false" />
-          <Property Name="year" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EVENT_IMAGE">
           <Key>
@@ -134,9 +102,6 @@
           <Property Name="caption" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
-          <Property Name="day" Type="int" Nullable="false" />
-          <Property Name="monthID" Type="int" Nullable="false" />
-          <Property Name="year" Type="int" Nullable="false" />
           <Property Name="receiptDate" Type="date" Nullable="false" />
           <Property Name="amountSpent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
@@ -150,9 +115,6 @@
           <Property Name="summary" Type="text" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
-          <Property Name="day" Type="int" Nullable="false" />
-          <Property Name="monthID" Type="int" Nullable="false" />
-          <Property Name="year" Type="int" Nullable="false" />
           <Property Name="salesDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="EVENTS">
@@ -165,9 +127,6 @@
           <Property Name="coverImagePath" Type="varchar(max)" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
-          <Property Name="day" Type="int" Nullable="false" />
-          <Property Name="monthID" Type="int" Nullable="false" />
-          <Property Name="year" Type="int" Nullable="false" />
           <Property Name="eventDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="EXPENDITURE">
@@ -179,9 +138,6 @@
           <Property Name="summary" Type="varchar(max)" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
-          <Property Name="day" Type="int" Nullable="false" />
-          <Property Name="monthID" Type="int" Nullable="false" />
-          <Property Name="year" Type="int" Nullable="false" />
           <Property Name="expenditureDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="FINANCIAL_REPORT">
@@ -205,9 +161,6 @@
           <Property Name="summary" Type="text" />
           <Property Name="constitutionID" Type="int" Nullable="false" />
           <Property Name="memberID" Type="int" Nullable="false" />
-          <Property Name="monthID" Type="int" Nullable="false" />
-          <Property Name="day" Type="int" Nullable="false" />
-          <Property Name="year" Type="int" Nullable="false" />
           <Property Name="isdeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
           <Property Name="fineDate" Type="date" Nullable="false" />
@@ -224,8 +177,6 @@
             <PropertyRef Name="generalAttendanceID" />
           </Key>
           <Property Name="generalAttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="monthID" Type="int" Nullable="false" />
-          <Property Name="year" Type="int" Nullable="false" />
           <Property Name="totalMembersPresent" Type="int" />
           <Property Name="totalMembersAbsent" Type="int" />
           <Property Name="totalDuesPaid" Type="decimal" Precision="18" Scale="2" />
@@ -234,7 +185,6 @@
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
           <Property Name="summary" Type="text" />
-          <Property Name="day" Type="int" Nullable="false" />
           <Property Name="attendanceDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="MARITAL_STATUS">
@@ -335,11 +285,8 @@
           <Property Name="attendanceStatusID" Type="int" Nullable="false" />
           <Property Name="memberID" Type="int" Nullable="false" />
           <Property Name="monthlyDues" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="day" Type="int" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
-          <Property Name="monthID" Type="int" Nullable="false" />
-          <Property Name="year" Type="int" Nullable="false" />
           <Property Name="expectedMonthlyDue" Type="decimal" Precision="18" Scale="2" />
           <Property Name="balance" Type="decimal" Precision="18" Scale="2" />
           <Property Name="generalAttendanceID" Type="int" Nullable="false" />
@@ -392,8 +339,6 @@
         </EntityType>
         <EntityContainer Name="APCModelStoreContainer">
           <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CHILD" EntityType="Self.CHILD" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="COMMENT" EntityType="Self.COMMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONSTITUTION" EntityType="Self.CONSTITUTION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DOCUMENT" EntityType="Self.DOCUMENT" Schema="dbo" store:Type="Tables" />
@@ -436,35 +381,6 @@
           <Property Name="attendanceStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="CHILD">
-          <Key>
-            <PropertyRef Name="childID" />
-          </Key>
-          <Property Name="childID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="birthday" Type="DateTime" Precision="0" />
-          <Property Name="imagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="genderID" Type="Int32" Nullable="false" />
-          <Property Name="nationalityID" Type="Int32" Nullable="false" />
-          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="deletedDate" Type="DateTime" Precision="0" />
-          <Property Name="motherID" Type="Int32" />
-          <Property Name="fatherID" Type="Int32" />
-        </EntityType>
-        <EntityType Name="COMMENT">
-          <Key>
-            <PropertyRef Name="commentID" />
-          </Key>
-          <Property Name="commentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="memberID" Type="Int32" Nullable="false" />
-          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="deletedDate" Type="DateTime" Precision="0" />
-          <Property Name="day" Type="Int32" Nullable="false" />
-          <Property Name="monthID" Type="Int32" Nullable="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="CONSTITUTION">
           <Key>
@@ -530,9 +446,6 @@
           <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
-          <Property Name="day" Type="Int32" Nullable="false" />
-          <Property Name="monthID" Type="Int32" Nullable="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="EVENT_IMAGE">
           <Key>
@@ -557,9 +470,6 @@
           <Property Name="caption" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
-          <Property Name="day" Type="Int32" Nullable="false" />
-          <Property Name="monthID" Type="Int32" Nullable="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="receiptDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="amountSpent" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
@@ -573,9 +483,6 @@
           <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
-          <Property Name="day" Type="Int32" Nullable="false" />
-          <Property Name="monthID" Type="Int32" Nullable="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="salesDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="EVENTS">
@@ -588,9 +495,6 @@
           <Property Name="coverImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
-          <Property Name="day" Type="Int32" Nullable="false" />
-          <Property Name="monthID" Type="Int32" Nullable="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="eventDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="EXPENDITURE">
@@ -602,9 +506,6 @@
           <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
-          <Property Name="day" Type="Int32" Nullable="false" />
-          <Property Name="monthID" Type="Int32" Nullable="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="expenditureDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="FINANCIAL_REPORT">
@@ -628,9 +529,6 @@
           <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="constitutionID" Type="Int32" Nullable="false" />
           <Property Name="memberID" Type="Int32" Nullable="false" />
-          <Property Name="monthID" Type="Int32" Nullable="false" />
-          <Property Name="day" Type="Int32" Nullable="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="isdeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
           <Property Name="fineDate" Type="DateTime" Nullable="false" Precision="0" />
@@ -647,8 +545,6 @@
             <PropertyRef Name="generalAttendanceID" />
           </Key>
           <Property Name="generalAttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="monthID" Type="Int32" Nullable="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="totalMembersPresent" Type="Int32" />
           <Property Name="totalMembersAbsent" Type="Int32" />
           <Property Name="totalDuesPaid" Type="Decimal" Precision="18" Scale="2" />
@@ -657,7 +553,6 @@
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
           <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="day" Type="Int32" Nullable="false" />
           <Property Name="attendanceDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="MARITAL_STATUS">
@@ -758,11 +653,8 @@
           <Property Name="attendanceStatusID" Type="Int32" Nullable="false" />
           <Property Name="memberID" Type="Int32" Nullable="false" />
           <Property Name="monthlyDues" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="day" Type="Int32" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
-          <Property Name="monthID" Type="Int32" Nullable="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="expectedMonthlyDue" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="balance" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="generalAttendanceID" Type="Int32" Nullable="false" />
@@ -815,8 +707,6 @@
         </EntityType>
         <EntityContainer Name="APCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" />
-          <EntitySet Name="CHILD" EntityType="Self.CHILD" />
-          <EntitySet Name="COMMENT" EntityType="Self.COMMENT" />
           <EntitySet Name="CONSTITUTION" EntityType="Self.CONSTITUTION" />
           <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" />
           <EntitySet Name="DOCUMENT" EntityType="Self.DOCUMENT" />
@@ -859,37 +749,6 @@
                 <ScalarProperty Name="attendanceStatus" ColumnName="attendanceStatus" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CHILD">
-            <EntityTypeMapping TypeName="APCModel.CHILD">
-              <MappingFragment StoreEntitySet="CHILD">
-                <ScalarProperty Name="childID" ColumnName="childID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="surname" ColumnName="surname" />
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="imagePath" ColumnName="imagePath" />
-                <ScalarProperty Name="genderID" ColumnName="genderID" />
-                <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
-                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
-                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
-                <ScalarProperty Name="motherID" ColumnName="motherID" />
-                <ScalarProperty Name="fatherID" ColumnName="fatherID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="COMMENT">
-            <EntityTypeMapping TypeName="APCModel.COMMENT">
-              <MappingFragment StoreEntitySet="COMMENT">
-                <ScalarProperty Name="commentID" ColumnName="commentID" />
-                <ScalarProperty Name="comment1" ColumnName="comment" />
-                <ScalarProperty Name="memberID" ColumnName="memberID" />
-                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
-                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="monthID" ColumnName="monthID" />
-                <ScalarProperty Name="year" ColumnName="year" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -961,9 +820,6 @@
                 <ScalarProperty Name="summary" ColumnName="summary" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="monthID" ColumnName="monthID" />
-                <ScalarProperty Name="year" ColumnName="year" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -990,9 +846,6 @@
                 <ScalarProperty Name="caption" ColumnName="caption" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="monthID" ColumnName="monthID" />
-                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="receiptDate" ColumnName="receiptDate" />
                 <ScalarProperty Name="amountSpent" ColumnName="amountSpent" />
               </MappingFragment>
@@ -1007,9 +860,6 @@
                 <ScalarProperty Name="summary" ColumnName="summary" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="monthID" ColumnName="monthID" />
-                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="salesDate" ColumnName="salesDate" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1023,9 +873,6 @@
                 <ScalarProperty Name="coverImagePath" ColumnName="coverImagePath" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="monthID" ColumnName="monthID" />
-                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="eventDate" ColumnName="eventDate" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1038,9 +885,6 @@
                 <ScalarProperty Name="summary" ColumnName="summary" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="monthID" ColumnName="monthID" />
-                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="expenditureDate" ColumnName="expenditureDate" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1066,9 +910,6 @@
                 <ScalarProperty Name="summary" ColumnName="summary" />
                 <ScalarProperty Name="constitutionID" ColumnName="constitutionID" />
                 <ScalarProperty Name="memberID" ColumnName="memberID" />
-                <ScalarProperty Name="monthID" ColumnName="monthID" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
                 <ScalarProperty Name="fineDate" ColumnName="fineDate" />
@@ -1087,8 +928,6 @@
             <EntityTypeMapping TypeName="APCModel.GENERAL_ATTENDANCE">
               <MappingFragment StoreEntitySet="GENERAL_ATTENDANCE">
                 <ScalarProperty Name="generalAttendanceID" ColumnName="generalAttendanceID" />
-                <ScalarProperty Name="monthID" ColumnName="monthID" />
-                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="totalMembersPresent" ColumnName="totalMembersPresent" />
                 <ScalarProperty Name="totalMembersAbsent" ColumnName="totalMembersAbsent" />
                 <ScalarProperty Name="totalDuesPaid" ColumnName="totalDuesPaid" />
@@ -1097,7 +936,6 @@
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
                 <ScalarProperty Name="summary" ColumnName="summary" />
-                <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="attendanceDate" ColumnName="attendanceDate" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1207,11 +1045,8 @@
                 <ScalarProperty Name="attendanceStatusID" ColumnName="attendanceStatusID" />
                 <ScalarProperty Name="memberID" ColumnName="memberID" />
                 <ScalarProperty Name="monthlyDues" ColumnName="monthlyDues" />
-                <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
-                <ScalarProperty Name="monthID" ColumnName="monthID" />
-                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="expectedMonthlyDue" ColumnName="expectedMonthlyDue" />
                 <ScalarProperty Name="balance" ColumnName="balance" />
                 <ScalarProperty Name="generalAttendanceID" ColumnName="generalAttendanceID" />

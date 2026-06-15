@@ -50,11 +50,6 @@ namespace APC.Domain.Entities
             Summary = string.IsNullOrWhiteSpace(summary) ? null : summary.Trim();
         }
 
-        public void UpdateSummary(string newSummary)
-        {
-            SetSummary(newSummary);
-        }
-
         private void SetImagePath(string imagePath)
         {
             if (string.IsNullOrWhiteSpace(imagePath))
@@ -63,22 +58,12 @@ namespace APC.Domain.Entities
             ImagePath = imagePath.Trim();
         }
 
-        public void UpdateImagePath(string newImagePath)
-        {
-            SetImagePath(newImagePath);
-        }
-
         private void SetCaption(string caption)
         {
             if (string.IsNullOrWhiteSpace(caption))
                 throw new ArgumentException("Image caption cannot be empty");
 
             Caption = caption.Trim();
-        }
-
-        public void UpdateImageCaption(string newCaption)
-        {
-            SetCaption(newCaption);
         }
 
         private void SetEvent(int eventId)
@@ -97,22 +82,12 @@ namespace APC.Domain.Entities
             ReceiptDate = date;
         }
 
-        public void UpdateDate(DateTime newDate)
-        {
-            SetDate(newDate);
-        }
-
         private void SetAmountSpent(decimal amountSpent)
         {
             if (amountSpent < 0)
                 throw new ArgumentException("Invalid Amount");
 
             AmountSpent = amountSpent;
-        }
-
-        public void UpdateSpentAmount(decimal newAmountSpent)
-        {
-            SetAmountSpent(newAmountSpent);
         }
     }
 }

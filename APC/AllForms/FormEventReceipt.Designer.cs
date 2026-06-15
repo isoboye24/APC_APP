@@ -575,7 +575,7 @@
             this.txtReceiptAmount.Name = "txtReceiptAmount";
             this.txtReceiptAmount.Size = new System.Drawing.Size(101, 34);
             this.txtReceiptAmount.TabIndex = 1;
-            this.txtReceiptAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReceiptAmount_KeyPress);
+            // this.txtReceiptAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReceiptAmount_KeyPress);
             // 
             // tableLayoutPanel3
             // 

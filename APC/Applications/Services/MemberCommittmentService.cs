@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,35 @@ namespace APC.Applications.Services
     {
         private readonly IMemberRepository _memberRepository;
         private readonly IGeneralMeetingAttendanceRepository _generalMeetingAttendanceRepository;
+        private readonly IGeneralMeetingRepository _generalMeetingRepository;
         private readonly IFinedMemberRepository _finedMemberRepository;
         private readonly IConstitutionRepository _constitutionRepository;
         public MemberCommittmentService(IMemberRepository memberRepository, IGeneralMeetingAttendanceRepository generalMeetingAttendanceRepository,
-            IFinedMemberRepository finedMemberRepository, IConstitutionRepository constitutionRepository)
+            IFinedMemberRepository finedMemberRepository, IConstitutionRepository constitutionRepository, IGeneralMeetingRepository generalMeetingRepository)
         {
             _memberRepository = memberRepository;
             _generalMeetingAttendanceRepository = generalMeetingAttendanceRepository;
             _finedMemberRepository = finedMemberRepository;
             _constitutionRepository = constitutionRepository;
+            _generalMeetingRepository = generalMeetingRepository;
+        }
+
+        private AttendanceStatisticsDTO GetMemberAttendanceStatistics(int memberId,int year)
+        {
+            var records =
+                from attendance in _generalMeetingAttendanceRepository.GetAll()
+                join meeting in _generalMeetingRepository.GetAll()
+                    on attendance.generalAttendanceID equals meeting.generalAttendanceID
+                where meeting.attendanceDate.Year == year
+                      && attendance.memberID == memberId
+                select attendance;
+
+            return new AttendanceStatisticsDTO
+            {
+                TotalContribution = records.Sum(x => (decimal?)x.monthlyDues) ?? 0,
+                PresentCount = records.Count(x => x.attendanceStatusID == 2),
+                AbsentCount = records.Count(x => x.attendanceStatusID == 3)
+            };
         }
 
         public List<MemberCommittmentDTO> GetMembersCommittment(int year)
@@ -40,14 +61,16 @@ namespace APC.Applications.Services
 
             var result = new List<MemberCommittmentDTO>();
 
+
+
             foreach (var member in members)
             {
-                var attendance = _generalMeetingAttendanceRepository.GetMemberPersonalAttendanceByYear(member.memberID, year);
+                var attendance = GetMemberAttendanceStatistics(member.memberID, year);
 
-                decimal contributed = attendance.Sum(x => (decimal?)x.monthlyDues ?? 0);
+                decimal contributed = attendance.TotalContribution;
 
-                int present = attendance.Count(x => x.attendanceStatusID == 2);
-                int absent = attendance.Count(x => x.attendanceStatusID == 3);
+                int present = attendance.PresentCount;
+                int absent = attendance.AbsentCount;
 
                 decimal expected = GeneralHelper.CalculateYearlyDue(member.membershipDate.Value, year);
 
@@ -65,7 +88,7 @@ namespace APC.Applications.Services
                     where !f.isdeleted
                         && !c.isDeleted
                         && f.memberID == member.memberID
-                        && f.year == year
+                        && f.fineDate.Year == year
                     select c.fine
                 ).ToList();
 
@@ -74,7 +97,7 @@ namespace APC.Applications.Services
                 decimal paidFines = _finedMemberRepository.GetAll()
                     .Where(x => !x.isdeleted
                         && x.memberID == member.memberID
-                        && x.year == year)
+                        && x.fineDate.Year == year)
                     .Sum(x => (decimal?)x.amountPaid) ?? 0;
 
                 string paymentStatus;
@@ -92,24 +115,31 @@ namespace APC.Applications.Services
                 // Rank calculation
                 //---------------------------------------
 
-                var duesRatioSum = _generalMeetingAttendanceRepository.GetAll()
-                    .Where(x => !x.isDeleted
-                        && x.memberID == member.memberID
-                        && x.year == year
-                        && x.monthID <= endMonth)
-                    .Sum(x => (decimal?)x.monthlyDues) ?? 0;
+                var duesRatioSum = (
+                    from attend in _generalMeetingAttendanceRepository.GetAll()
+                    join meeting in _generalMeetingRepository.GetAll()
+                    on attend.generalAttendanceID equals meeting.generalAttendanceID
+                    where meeting.attendanceDate.Year == year 
+                    && meeting.attendanceDate.Month <= endMonth
+                    && attend.memberID == member.memberID
+                    select attend.monthlyDues
+                    ).Sum(x => (decimal?)x) ?? 0;
 
                 decimal duesRatio =
                     duesRatioSum > 120
                         ? 50 + (((duesRatioSum - 120) / 120) * 0.5m)
                         : (duesRatioSum / 120) * 50;
 
-                int attendanceRatioCount = _generalMeetingAttendanceRepository.GetAll()
-                    .Count(x => !x.isDeleted
-                        && x.memberID == member.memberID
-                        && x.year == year
-                        && x.monthID <= endMonth + 1
-                        && x.attendanceStatusID == 2);
+                int attendanceRatioCount = (
+                    from attend in _generalMeetingAttendanceRepository.GetAll()
+                    join meeting in _generalMeetingRepository.GetAll()
+                    on attend.generalAttendanceID equals meeting.generalAttendanceID
+                    where meeting.attendanceDate.Year == year
+                    && meeting.attendanceDate.Month <= endMonth + 1
+                    && attend.memberID == member.memberID
+                    && attend.attendanceStatusID == 2
+                    select attend.attendanceStatusID
+                    ).Count();
 
                 decimal attendanceRatio =
                     ((decimal)attendanceRatioCount / (endMonth + 1)) * 40;
@@ -117,8 +147,8 @@ namespace APC.Applications.Services
                 var behaviorRecords = _finedMemberRepository.GetAll()
                     .Where(x => !x.isdeleted
                         && x.memberID == member.memberID
-                        && x.year == year
-                        && x.monthID <= endMonth + 1)
+                        && x.fineDate.Year == year
+                        && x.fineDate.Month <= endMonth + 1)
                     .ToList();
 
                 decimal behaviorPenalty = 0;
@@ -179,17 +209,20 @@ namespace APC.Applications.Services
 
         public List<YearDTO> GetMeetingYears()
         {
-            return _generalMeetingAttendanceRepository.GetAll()
-                .Where(x => !x.isDeleted)
-                .Select(x => x.year)
-                .Distinct()
-                .OrderByDescending(x => x)
-                .Select(x => new YearDTO
-                {
-                    YearInValue = x,
-                    YearInText = x.ToString()
-                })
-                .ToList();
+            return (
+                from attendance in _generalMeetingAttendanceRepository.GetAll()
+                join meeting in _generalMeetingRepository.GetAll()
+                    on attendance.generalAttendanceID equals meeting.generalAttendanceID
+                select meeting.attendanceDate.Year
+            )
+            .Distinct()
+            .OrderByDescending(x => x)
+            .Select(x => new YearDTO
+            {
+                YearInValue = x,
+                YearInText = x.ToString()
+            })
+            .ToList();
         }
     }
 }

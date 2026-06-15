@@ -124,7 +124,7 @@ namespace APC.AllForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
         

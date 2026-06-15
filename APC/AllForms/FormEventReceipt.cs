@@ -175,7 +175,12 @@ namespace APC.AllForms
                 decimal amount = Convert.ToDecimal(txtReceiptAmount.Text.Trim());
                 DateTime date = dateTimePickerEventReceiptDate.Value;
 
-                string finalImagePath = _eventDTO.CoverImagePath;
+                string finalImagePath = "";
+
+                if (_isUpdate)
+                {
+                    finalImagePath = _eventReceiptDTO.ImagePath;
+                }
 
                 // Only copy image if user selected a file
                 if (!string.IsNullOrWhiteSpace(sourcePath) && !string.IsNullOrWhiteSpace(fileName))
@@ -195,7 +200,7 @@ namespace APC.AllForms
 
                     finalImagePath = destinationPath;
 
-                    if (_eventReceiptDTO.EventReceiptId > 0)
+                    if (_isUpdate)
                     {
                         if (File.Exists(_eventReceiptDTO.ImagePath) &&
                             _eventReceiptDTO.ImagePath != destinationPath)
@@ -205,9 +210,7 @@ namespace APC.AllForms
                     }
                 }
 
-                
-
-                if (_isUpdate)
+                if (!_isUpdate)
                 {
                     var eventReceiptData = new EventReceipt(_eventDTO.EventsId, finalImagePath, description, caption, date, amount);
                     _eventReceiptService.Create(eventReceiptData);
@@ -229,13 +232,8 @@ namespace APC.AllForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ToString());
             }
-        }
-
-        private void txtReceiptAmount_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = GeneralHelper.isNumber(e, (TextBox)sender);
         }
     }
 }

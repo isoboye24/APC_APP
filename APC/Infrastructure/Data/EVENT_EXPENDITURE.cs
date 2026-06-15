@@ -21,8 +21,5 @@ namespace APC.Infrastructure.Data
         public string summary { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> deletedDate { get; set; }
-        public int day { get; set; }
-        public int monthID { get; set; }
-        public int year { get; set; }
     }
 }

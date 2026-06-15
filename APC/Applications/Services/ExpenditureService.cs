@@ -64,7 +64,7 @@ namespace APC.Applications.Services
 
         public List<ExpenditureDTO> GetAnnualExpenditures(int year)
         {
-            return _repository.GetAll().Where(x => x.year == year)
+            return _repository.GetAll().Where(x => x.expenditureDate.Year == year)
                 .ToList()
                 .Select(x => new ExpenditureDTO
                 {

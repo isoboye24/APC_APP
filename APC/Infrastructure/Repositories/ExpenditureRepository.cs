@@ -66,9 +66,6 @@ namespace APC.Infrastructure.Repositories
                 amountSpent = data.AmountSpent,
                 summary = data.Summary,
                 expenditureDate = data.ExpenditureDate,
-                day = data.ExpenditureDate.Day,
-                monthID = data.ExpenditureDate.Month,
-                year = data.ExpenditureDate.Year,
             });
 
             _db.SaveChanges();
@@ -94,9 +91,6 @@ namespace APC.Infrastructure.Repositories
             entity.amountSpent = data.AmountSpent;
             entity.summary = data.Summary;
             entity.expenditureDate = data.ExpenditureDate;
-            entity.day = data.ExpenditureDate.Day;
-            entity.monthID = data.ExpenditureDate.Month;
-            entity.year = data.ExpenditureDate.Year;
 
             _db.SaveChanges();
             return true;

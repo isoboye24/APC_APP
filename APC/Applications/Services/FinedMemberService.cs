@@ -263,7 +263,7 @@ namespace APC.Applications.Services
 
         public List<FinedMemberDTO> GetAnnualFineListsById(int memberId, int year)
         {
-            var data = (from f in _repository.GetAll().Where(x => x.memberID == memberId && x.year == year)
+            var data = (from f in _repository.GetAll().Where(x => x.memberID == memberId && x.fineDate.Year == year)
                         join m in _memberRepository.GetAll() on f.memberID equals m.memberID
                         join g in _genderRepository.GetAll() on m.genderID equals g.genderID
                         join p in _positionRepository.GetAll() on m.positionID equals p.positionID

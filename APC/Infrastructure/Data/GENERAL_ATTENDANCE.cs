@@ -15,8 +15,6 @@ namespace APC.Infrastructure.Data
     public partial class GENERAL_ATTENDANCE
     {
         public int generalAttendanceID { get; set; }
-        public int monthID { get; set; }
-        public int year { get; set; }
         public Nullable<int> totalMembersPresent { get; set; }
         public Nullable<int> totalMembersAbsent { get; set; }
         public Nullable<decimal> totalDuesPaid { get; set; }
@@ -25,7 +23,6 @@ namespace APC.Infrastructure.Data
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> deletedDate { get; set; }
         public string summary { get; set; }
-        public int day { get; set; }
         public System.DateTime attendanceDate { get; set; }
     }
 }

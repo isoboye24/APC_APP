@@ -95,7 +95,7 @@ namespace APC.Applications.Services
         public List<GeneralMeetingDTO> GetAll()
         {
             var data = (from g in _repository.GetAll()
-                        join m in _monthRepository.GetAll() on g.monthID equals m.monthID
+                        join m in _monthRepository.GetAll() on g.attendanceDate.Month equals m.monthID
                         select new
                         {
                             g.generalAttendanceID,
@@ -132,7 +132,7 @@ namespace APC.Applications.Services
         public List<GeneralMeetingDTO> GetAllByYear(int year)
         {
             var data = (from g in _repository.GetAll().Where(g => g.attendanceDate.Year == year)
-                        join m in _monthRepository.GetAll() on g.monthID equals m.monthID
+                        join m in _monthRepository.GetAll() on g.attendanceDate.Month equals m.monthID
                         select new
                         {
                             g.generalAttendanceID,
@@ -173,7 +173,7 @@ namespace APC.Applications.Services
         public List<GeneralMeetingDTO> GetAllDeleted()
         {
             var data = (from g in _repository.GetAllDeletedGeneralMeetings()
-                        join m in _monthRepository.GetAll() on g.monthID equals m.monthID
+                        join m in _monthRepository.GetAll() on g.attendanceDate.Month equals m.monthID
                         select new
                         {
                             g.generalAttendanceID,
