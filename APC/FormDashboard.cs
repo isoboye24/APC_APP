@@ -7,10 +7,12 @@ using FontAwesome.Sharp;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Globalization;
 
 namespace APC
 {
@@ -176,7 +178,7 @@ namespace APC
         private void resizeControls()
         {
             GeneralHelper.ApplyBoldFont(16, labelDuesMonthName, labelTotalDuesYear, labelAmountRaisedYearly, labelExpendituresYearly);
-            GeneralHelper.ApplyBoldFont(24, labelNoOfRegMem, labelMonthlyDues, labelYearlyDues, labelExpendituresInYear, labelTotalExpenditures,
+            GeneralHelper.ApplyBoldFont(24, labelNoOfRegMem, labelMonthlyDues, labelYearlyDues, labelExpendituresInYear, labelTotalAnnualRevenue,
                 labelLastMeetingAttendance, labelTotalPaidFines, labelTotalFineExpected
                 );
         }
@@ -227,10 +229,10 @@ namespace APC
 
         private void ResizeableControls()
         {
-            label18.Tag = "resizable";
+            labelPaidFinesInYear.Tag = "resizable";
             //label1.Tag = "resizable";
-            label19.Tag = "resizable";
-            label21.Tag = "resizable";
+            labelTotalExpectedFinesInYear.Tag = "resizable";
+            labelRevenue.Tag = "resizable";
             label23.Tag = "resizable";
             label24.Tag = "resizable";
             labelAmountRaisedYearly.Tag = "resizable";
@@ -243,7 +245,7 @@ namespace APC
             labelNoOfRegMem.Tag = "resizable";
             labelTitleChildForm.Tag = "resizable";
             labelTotalDuesYear.Tag = "resizable";
-            labelTotalExpenditures.Tag = "resizable";
+            labelTotalAnnualRevenue.Tag = "resizable";
             labelTotalFineExpected.Tag = "resizable";
             labelTotalPaidFines.Tag = "resizable";
             labelYearlyDues.Tag = "resizable";
@@ -307,7 +309,7 @@ namespace APC
             labelLastMeetingAttendance.Text = _generalMeetingAttendanceService.GetLastMeetingPresentMembersCount().ToString();
             //labelLastEventDate.Text = eventBLL.SelectRecentEvent();
 
-            string monthToday = DateTime.Now.ToString("MMMM");
+            string monthToday = DateTime.Now.ToString("MMMM", CultureInfo.GetCultureInfo("en-US"));
 
             int todayMonth = DateTime.Now.Month;
             int todayYear = DateTime.Today.Year;
@@ -315,17 +317,21 @@ namespace APC
             labelDuesMonthName.Text = "Dues in "+ monthToday + " "+ todayYear;
             labelExpensesInThisYear.Text = "Total Expenses in " + todayYear;
             labelTotalDuesYear.Text = "Total Dues + Fines in " + todayYear;
+            labelRevenue.Text = "Total Revenue in " + todayYear;
 
             labelMonthlyDues.Text = "€ " + _financialReportService.GetTotalDuesByMonth(todayMonth, todayYear);
             labelYearlyDues.Text = "€ " + _financialReportService.GetTotalDuesByYear(todayYear);
 
             labelExpendituresInYear.Text = "€ " + _financialReportService.GetOverallExpendituresByYear(todayYear);
-            labelTotalExpenditures.Text = "€ " + _financialReportService.GetOverallExpenditures();
-            labelTotalFineExpected.Text = "€ " + _finedMemberService.GetTotalFinesExpected();
-            labelTotalPaidFines.Text = "€ " + _finedMemberService.GetTotalPaidFines();
+            labelTotalAnnualRevenue.Text = "€ " + _financialReportService.GetTotalAnnualRevenue(todayYear);
 
-            labelAmountRaisedYearly.Text = "Dues Raised in each year";
-            labelExpendituresYearly.Text = "Expenditures in each year";            
+            labelTotalExpectedFinesInYear.Text = "Expected Fines in " + todayYear;
+            labelTotalFineExpected.Text = "€ " + _finedMemberService.GetAnnualFinesExpected(todayYear);
+            labelPaidFinesInYear.Text = "Paid Fines in " + todayYear;
+            labelTotalPaidFines.Text = "€ " + _finedMemberService.GetAnnualPaidFines(todayYear);
+
+            labelAmountRaisedYearly.Text = "Total Overall Amount Raised";
+            labelExpendituresYearly.Text = "Total Overall Expenditures";
         }
 
         private void iconClose_MouseEnter(object sender, EventArgs e)

@@ -174,9 +174,24 @@ namespace APC.Applications.Services
             return _repository.GetAll().Sum(x => x.amountPaid ?? 0);
         }
         
+        public decimal GetAnnualPaidFines(int year)
+        {
+            return _repository.GetAll().Where(x => x.fineDate.Year == year).Sum(x => x.amountPaid ?? 0);
+        }
+        
         public decimal GetTotalFinesExpected()
         {
             var totalExpectedAmount = (from fm in _repository.GetAll()
+                                       join c in _constitutionRepository.GetAll()
+                                           on fm.constitutionID equals c.constitutionID
+                                       select c.fine).Sum();
+
+            return totalExpectedAmount;
+        }
+
+        public decimal GetAnnualFinesExpected(int year)
+        {
+            var totalExpectedAmount = (from fm in _repository.GetAll().Where(x => x.fineDate.Year == year)
                                        join c in _constitutionRepository.GetAll()
                                            on fm.constitutionID equals c.constitutionID
                                        select c.fine).Sum();

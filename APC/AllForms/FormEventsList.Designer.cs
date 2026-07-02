@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalEventRows = new System.Windows.Forms.Label();
@@ -42,6 +42,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtEventTitle = new System.Windows.Forms.TextBox();
+            this.cmbEventYear = new System.Windows.Forms.ComboBox();
+            this.btnSearchEvent = new System.Windows.Forms.Button();
+            this.btnClearEvent = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -58,9 +61,6 @@
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.picViewEventCoverImage = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.cmbEventYear = new System.Windows.Forms.ComboBox();
-            this.btnSearchEvent = new System.Windows.Forms.Button();
-            this.btnClearEvent = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -250,6 +250,51 @@
             this.txtEventTitle.Size = new System.Drawing.Size(597, 34);
             this.txtEventTitle.TabIndex = 1;
             this.txtEventTitle.TextChanged += new System.EventHandler(this.txtEventTitle_TextChanged);
+            // 
+            // cmbEventYear
+            // 
+            this.cmbEventYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbEventYear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbEventYear.FormattingEnabled = true;
+            this.cmbEventYear.Location = new System.Drawing.Point(825, 9);
+            this.cmbEventYear.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbEventYear.Name = "cmbEventYear";
+            this.cmbEventYear.Size = new System.Drawing.Size(113, 36);
+            this.cmbEventYear.TabIndex = 3;
+            // 
+            // btnSearchEvent
+            // 
+            this.btnSearchEvent.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnSearchEvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSearchEvent.FlatAppearance.BorderSize = 0;
+            this.btnSearchEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearchEvent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchEvent.ForeColor = System.Drawing.Color.Black;
+            this.btnSearchEvent.Location = new System.Drawing.Point(958, 4);
+            this.btnSearchEvent.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearchEvent.Name = "btnSearchEvent";
+            this.btnSearchEvent.Size = new System.Drawing.Size(113, 46);
+            this.btnSearchEvent.TabIndex = 4;
+            this.btnSearchEvent.Text = "Search";
+            this.btnSearchEvent.UseVisualStyleBackColor = false;
+            this.btnSearchEvent.Click += new System.EventHandler(this.btnSearchEvent_Click);
+            // 
+            // btnClearEvent
+            // 
+            this.btnClearEvent.BackColor = System.Drawing.Color.IndianRed;
+            this.btnClearEvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearEvent.FlatAppearance.BorderSize = 0;
+            this.btnClearEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearEvent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearEvent.ForeColor = System.Drawing.Color.Black;
+            this.btnClearEvent.Location = new System.Drawing.Point(1091, 4);
+            this.btnClearEvent.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClearEvent.Name = "btnClearEvent";
+            this.btnClearEvent.Size = new System.Drawing.Size(115, 46);
+            this.btnClearEvent.TabIndex = 5;
+            this.btnClearEvent.Text = "Clear";
+            this.btnClearEvent.UseVisualStyleBackColor = false;
+            this.btnClearEvent.Click += new System.EventHandler(this.btnClearEvent_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -482,87 +527,43 @@
             // dataGridView1
             // 
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(4, 4);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowHeadersWidth = 51;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(718, 540);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
-            // 
-            // cmbEventYear
-            // 
-            this.cmbEventYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbEventYear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbEventYear.FormattingEnabled = true;
-            this.cmbEventYear.Location = new System.Drawing.Point(825, 9);
-            this.cmbEventYear.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbEventYear.Name = "cmbEventYear";
-            this.cmbEventYear.Size = new System.Drawing.Size(113, 36);
-            this.cmbEventYear.TabIndex = 3;
-            // 
-            // btnSearchEvent
-            // 
-            this.btnSearchEvent.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnSearchEvent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearchEvent.FlatAppearance.BorderSize = 0;
-            this.btnSearchEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchEvent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchEvent.ForeColor = System.Drawing.Color.Black;
-            this.btnSearchEvent.Location = new System.Drawing.Point(958, 4);
-            this.btnSearchEvent.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSearchEvent.Name = "btnSearchEvent";
-            this.btnSearchEvent.Size = new System.Drawing.Size(113, 46);
-            this.btnSearchEvent.TabIndex = 4;
-            this.btnSearchEvent.Text = "Search";
-            this.btnSearchEvent.UseVisualStyleBackColor = false;
-            this.btnSearchEvent.Click += new System.EventHandler(this.btnSearchEvent_Click);
-            // 
-            // btnClearEvent
-            // 
-            this.btnClearEvent.BackColor = System.Drawing.Color.IndianRed;
-            this.btnClearEvent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearEvent.FlatAppearance.BorderSize = 0;
-            this.btnClearEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearEvent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearEvent.ForeColor = System.Drawing.Color.Black;
-            this.btnClearEvent.Location = new System.Drawing.Point(1091, 4);
-            this.btnClearEvent.Margin = new System.Windows.Forms.Padding(4);
-            this.btnClearEvent.Name = "btnClearEvent";
-            this.btnClearEvent.Size = new System.Drawing.Size(115, 46);
-            this.btnClearEvent.TabIndex = 5;
-            this.btnClearEvent.Text = "Clear";
-            this.btnClearEvent.UseVisualStyleBackColor = false;
-            this.btnClearEvent.Click += new System.EventHandler(this.btnClearEvent_Click);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // FormEventsList
             // 

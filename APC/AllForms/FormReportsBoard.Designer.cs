@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.financialReportPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -77,7 +77,6 @@
             this.btnUpdateExpReport = new System.Windows.Forms.Button();
             this.btnAddExpReport = new System.Windows.Forms.Button();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalExpReport = new System.Windows.Forms.Label();
             this.labelTotalExpReportYearly = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.financialReportPage.SuspendLayout();
@@ -513,8 +512,8 @@
             this.dataGridViewFinReport.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewFinReport.Name = "dataGridViewFinReport";
             this.dataGridViewFinReport.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewFinReport.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewFinReport.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewFinReport.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewFinReport.RowTemplate.Height = 40;
             this.dataGridViewFinReport.Size = new System.Drawing.Size(850, 480);
@@ -710,8 +709,8 @@
             this.dataGridViewExpReport.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewExpReport.Name = "dataGridViewExpReport";
             this.dataGridViewExpReport.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewExpReport.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewExpReport.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewExpReport.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewExpReport.RowTemplate.Height = 40;
             this.dataGridViewExpReport.Size = new System.Drawing.Size(1201, 488);
@@ -848,7 +847,6 @@
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.Controls.Add(this.labelTotalExpReport, 1, 0);
             this.tableLayoutPanel12.Controls.Add(this.labelTotalExpReportYearly, 0, 0);
             this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 63);
@@ -857,19 +855,6 @@
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel12.Size = new System.Drawing.Size(1197, 45);
             this.tableLayoutPanel12.TabIndex = 4;
-            // 
-            // labelTotalExpReport
-            // 
-            this.labelTotalExpReport.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelTotalExpReport.AutoSize = true;
-            this.labelTotalExpReport.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalExpReport.Location = new System.Drawing.Point(303, 11);
-            this.labelTotalExpReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalExpReport.Name = "labelTotalExpReport";
-            this.labelTotalExpReport.Size = new System.Drawing.Size(109, 23);
-            this.labelTotalExpReport.TabIndex = 4;
-            this.labelTotalExpReport.Text = "Overall Total:";
-            this.labelTotalExpReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTotalExpReportYearly
             // 
@@ -968,7 +953,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtSummaryExpReport;
-        private System.Windows.Forms.Label labelTotalExpReport;
         private System.Windows.Forms.ComboBox cmbYearExpenditure;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;

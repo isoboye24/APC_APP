@@ -144,6 +144,26 @@ namespace APC
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
+            
+        }
+
+        private void btnSearchEvent_Click(object sender, EventArgs e)
+        {
+            if (cmbEventYear.SelectedIndex != -1)
+            {
+                int year = Convert.ToInt32(cmbEventYear.SelectedValue);
+                var filtered = _eventDTOs.Where(x => x.EventsDate.Year == year).ToList();
+                dataGridView1.DataSource = filtered;
+            }
+        }
+
+        private void btnClearEvent_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
             var selected = GetSelectedEvent();
             if (selected == null)
             {
@@ -161,21 +181,6 @@ namespace APC
             labelOverallSold.Text = totalSales.ToString();
             labelOverallSpent.Text = totalExpenditures.ToString();
             labelOverallBalance.Text = (totalSales - totalExpenditures).ToString();
-        }
-
-        private void btnSearchEvent_Click(object sender, EventArgs e)
-        {
-            if (cmbEventYear.SelectedIndex != -1)
-            {
-                int year = Convert.ToInt32(cmbEventYear.SelectedValue);
-                var filtered = _eventDTOs.Where(x => x.EventsDate.Year == year).ToList();
-                dataGridView1.DataSource = filtered;
-            }
-        }
-
-        private void btnClearEvent_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
         }
     }
 }

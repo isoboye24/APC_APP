@@ -29,5 +29,7 @@ namespace APC.Applications.Interfaces
         decimal GetTotalAnnualDuesExpectedById(int memberId, int year);
 
         List<YearDTO> GetFinancialReportYearsOnly();
+
+        decimal GetTotalAnnualRevenue(int year);
     }
 }

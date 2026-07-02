@@ -19,7 +19,7 @@
             <PropertyRef Name="constitutionID" />
           </Key>
           <Property Name="constitutionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="constitution" Type="text" Nullable="false" />
+          <Property Name="constitution" Type="varchar(max)" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
           <Property Name="fine" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -75,7 +75,7 @@
           <Property Name="eventID" Type="int" Nullable="false" />
           <Property Name="amountSpent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="expenditureDate" Type="date" Nullable="false" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
         </EntityType>
@@ -85,7 +85,7 @@
           </Key>
           <Property Name="eventImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="eventID" Type="int" Nullable="false" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
           <Property Name="imagePath" Type="varchar(max)" Nullable="false" />
@@ -98,7 +98,7 @@
           <Property Name="eventReceiptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="eventID" Type="int" Nullable="false" />
           <Property Name="imagePath" Type="varchar(max)" Nullable="false" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" />
           <Property Name="caption" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
@@ -112,7 +112,7 @@
           <Property Name="eventSalesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="eventID" Type="int" Nullable="false" />
           <Property Name="amountSold" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
           <Property Name="salesDate" Type="date" Nullable="false" />
@@ -123,7 +123,7 @@
           </Key>
           <Property Name="eventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" />
           <Property Name="coverImagePath" Type="varchar(max)" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
@@ -150,7 +150,7 @@
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
           <Property Name="year" Type="int" Nullable="false" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="FINED_MEMBER">
           <Key>
@@ -158,7 +158,7 @@
           </Key>
           <Property Name="finedMemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="amountPaid" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" />
           <Property Name="constitutionID" Type="int" Nullable="false" />
           <Property Name="memberID" Type="int" Nullable="false" />
           <Property Name="isdeleted" Type="bit" Nullable="false" />
@@ -184,7 +184,7 @@
           <Property Name="totalDuesBalance" Type="decimal" Precision="18" Scale="2" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" />
           <Property Name="attendanceDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="MARITAL_STATUS">
@@ -309,13 +309,33 @@
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
         </EntityType>
+        <!--Während der Generierung sind Fehler aufgetreten:
+Warnung 6002: Für Tabelle/Sicht 'APC.dbo.RECEIPT' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
+        <EntityType Name="RECEIPT">
+          <Key>
+            <PropertyRef Name="receiptID" />
+            <PropertyRef Name="imagePath" />
+            <PropertyRef Name="caption" />
+            <PropertyRef Name="isDeleted" />
+            <PropertyRef Name="receiptDate" />
+            <PropertyRef Name="amoundSpet" />
+          </Key>
+          <Property Name="receiptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imagePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="summary" Type="varchar(max)" />
+          <Property Name="caption" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+          <Property Name="receiptDate" Type="date" Nullable="false" />
+          <Property Name="amoundSpet" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="SPECIAL_CONTRIBUTIONS">
           <Key>
             <PropertyRef Name="specialContributionID" />
           </Key>
           <Property Name="specialContributionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" />
           <Property Name="amountToContribute" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="supervisorID" Type="int" Nullable="false" />
           <Property Name="contributionStartDate" Type="date" Nullable="false" />
@@ -334,7 +354,7 @@
           <Property Name="contributedDate" Type="date" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
-          <Property Name="summary" Type="text" />
+          <Property Name="summary" Type="varchar(max)" />
           <Property Name="specialContributionID" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="APCModelStoreContainer">
@@ -367,6 +387,18 @@
           <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SPECIAL_CONTRIBUTIONS" EntityType="Self.SPECIAL_CONTRIBUTIONS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SPECIAL_CONTRIBUTORS" EntityType="Self.SPECIAL_CONTRIBUTORS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECEIPT" EntityType="Self.RECEIPT" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RECEIPT].[receiptID] AS [receiptID], 
+    [RECEIPT].[imagePath] AS [imagePath], 
+    [RECEIPT].[summary] AS [summary], 
+    [RECEIPT].[caption] AS [caption], 
+    [RECEIPT].[isDeleted] AS [isDeleted], 
+    [RECEIPT].[deletedDate] AS [deletedDate], 
+    [RECEIPT].[receiptDate] AS [receiptDate], 
+    [RECEIPT].[amoundSpet] AS [amoundSpet]
+    FROM [dbo].[RECEIPT] AS [RECEIPT]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -443,7 +475,7 @@
           <Property Name="eventID" Type="Int32" Nullable="false" />
           <Property Name="amountSpent" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="expenditureDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
         </EntityType>
@@ -705,6 +737,24 @@
           <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="specialContributionID" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="RECEIPT">
+          <Key>
+            <PropertyRef Name="receiptID" />
+            <PropertyRef Name="imagePath" />
+            <PropertyRef Name="caption" />
+            <PropertyRef Name="isDeleted" />
+            <PropertyRef Name="receiptDate" />
+            <PropertyRef Name="amoundSpet" />
+          </Key>
+          <Property Name="receiptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="caption" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="receiptDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="amoundSpet" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="APCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ATTENDANCE_STATUS" EntityType="Self.ATTENDANCE_STATUS" />
           <EntitySet Name="CONSTITUTION" EntityType="Self.CONSTITUTION" />
@@ -735,6 +785,7 @@
           <EntitySet Name="PROFESSION" EntityType="Self.PROFESSION" />
           <EntitySet Name="SPECIAL_CONTRIBUTIONS" EntityType="Self.SPECIAL_CONTRIBUTIONS" />
           <EntitySet Name="SPECIAL_CONTRIBUTORS" EntityType="Self.SPECIAL_CONTRIBUTORS" />
+          <EntitySet Name="RECEIPT" EntityType="Self.RECEIPT" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1100,6 +1151,20 @@
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
                 <ScalarProperty Name="summary" ColumnName="summary" />
                 <ScalarProperty Name="specialContributionID" ColumnName="specialContributionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECEIPT">
+            <EntityTypeMapping TypeName="APCModel.RECEIPT">
+              <MappingFragment StoreEntitySet="RECEIPT">
+                <ScalarProperty Name="receiptID" ColumnName="receiptID" />
+                <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="caption" ColumnName="caption" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="receiptDate" ColumnName="receiptDate" />
+                <ScalarProperty Name="amoundSpet" ColumnName="amoundSpet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

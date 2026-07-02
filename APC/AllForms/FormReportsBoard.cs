@@ -41,7 +41,7 @@ namespace APC.AllForms
 
             GeneralHelper.ApplyBoldFont(27, labelTotalAmountRaised, labelTotalAmountSpent, labelTotalBalance);
 
-            GeneralHelper.ApplyRegularFont(11, labelTotalFinReport, labelTotalRowsExpReport, labelTotalExpReportYearly, labelTotalExpReport);
+            GeneralHelper.ApplyBoldFont(12, labelTotalFinReport, labelTotalRowsExpReport, labelTotalExpReportYearly);
             GeneralHelper.ApplyRegularFont(16, cmbMonthExpReport, cmbYearExpenditure, cmbYearFinReport);
         }
 
@@ -94,7 +94,6 @@ namespace APC.AllForms
         private void ResizeableControls()
         {
             labelTotalExpReportYearly.Tag = "Sizeable";
-            labelTotalExpReport.Tag = "Sizeable";
         }
 
         private void ClearFilters()
@@ -119,12 +118,7 @@ namespace APC.AllForms
 
             labelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
 
-            //labelTotalAmountRaised.Text = overallRaisedAmount.ToString();
-            //labelTotalAmountSpent.Text = overallSpentAmount.ToString();
-            //labelTotalBalance.Text = (overallRaisedAmount - overallSpentAmount).ToString();
-
-            labelTotalExpReport.Text = "Overall Total: " + overallSpentAmount.ToString() + " €";
-            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + _expenditureService.GetAnnualExpenditures(currentYear).ToString() + " €";
+            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + _expenditureService.GetAnnualExpendituresAmount(currentYear).ToString() + " €";
         }
 
         private void RowsCount()

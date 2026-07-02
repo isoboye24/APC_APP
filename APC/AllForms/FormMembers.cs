@@ -1,4 +1,5 @@
-﻿using APC.Applications.Entities;
+﻿using APC.Applications.DTO;
+using APC.Applications.Entities;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
@@ -278,39 +279,68 @@ namespace APC
                 int positionId = Convert.ToInt32(cmbPosition.SelectedValue);
                 int membershipStatusId = Convert.ToInt32(cmbMembershipStatus.SelectedValue);
 
-                string imagePath = fileName;
+                string sourcePath = txtImagePath.Text.Trim();
                 string phone1 = txtPhone1.Text.Trim();
                 string phone2 = txtPhone2.Text.Trim();
                 string phone3 = txtPhone3.Text.Trim();
 
+                string finalImagePath = "";
+
+                if (_isUpdate)
+                {
+                    finalImagePath = _memberFullDetailsDTO.ImagePath;
+                }
+
+                // Only copy image if user selected a file
+                if (!string.IsNullOrWhiteSpace(sourcePath) && !string.IsNullOrWhiteSpace(fileName))
+                {
+                    string destinationFolder =
+                        Path.Combine(Application.StartupPath, "images");
+
+                    if (!Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+
+                    string destinationPath =
+                        Path.Combine(destinationFolder, fileName);
+
+                    File.Copy(sourcePath, destinationPath, true);
+
+                    finalImagePath = destinationPath;
+
+                    if (_isUpdate)
+                    {
+                        if (File.Exists(_memberFullDetailsDTO.ImagePath) &&
+                            _memberFullDetailsDTO.ImagePath != destinationPath)
+                        {
+                            File.Delete(_memberFullDetailsDTO.ImagePath);
+                        }
+                    }
+                }
+
                 var authentication = new MemberAuthentication(lastUsername, birthday);
-                var personalInfo = new PersonalInfo(firstName, lastName, birthday, imagePath, genderId);
+                var personalInfo = new PersonalInfo(firstName, lastName, birthday, finalImagePath, genderId);
                 var contactInfo = new ContactInfo(email, houseAddress, phone1, phone2, phone3);
                 var membershipInfo = new MembershipInfo(memberSince, membershipStatusId, positionId, permissionId);
                 var demographicInfo = new DemographicInfo(countryId, nationalityId, professionId, empStatusId, maritalStatusId, LGA);
                 var emergencyContact = new EmergencyContact(nameOfNextOfKin, relationshipToNextOfKinId);
                 var lifeStatus = new LifeStatus(deadDate);
 
-                var member = new Member(authentication, personalInfo, contactInfo, membershipInfo, demographicInfo, emergencyContact, lifeStatus);
-
-
-                if (_memberFullDetailsDTO.MemberId == 0)
+                if (!_isUpdate)
                 {
+                    var member = new Member(authentication, personalInfo, contactInfo, membershipInfo, demographicInfo, emergencyContact, lifeStatus);
+
                     _memberService.Create(member);
 
                     MessageBox.Show("Member was added");
-                    try
-                    {
-                        File.Copy(txtImagePath.Text, @"images\\" + fileName);
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Cannot find the path to this picture");
-                    }
+                    
                     ClearControls();
                 }
                 else
                 {
+                    var member = Member.Rehydrate(_memberFullDetailsDTO.MemberId, authentication, personalInfo, contactInfo, membershipInfo, demographicInfo, emergencyContact, lifeStatus);
+
                     _memberService.Update(member);
                     MessageBox.Show("Member updated successfully!");
                     this.Close();
@@ -325,13 +355,19 @@ namespace APC
         OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            OpenFileDialog1.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+            
+            OpenFileDialog1.Filter =
+        "Image Files (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+
             if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 picProfilePic.Load(OpenFileDialog1.FileName);
+
                 txtImagePath.Text = OpenFileDialog1.FileName;
+
                 string unique = Guid.NewGuid().ToString();
-                fileName += unique + OpenFileDialog1.SafeFileName;
+
+                fileName = unique + "_" + OpenFileDialog1.SafeFileName;
             }
         }
 

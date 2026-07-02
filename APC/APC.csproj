@@ -676,6 +676,9 @@
     <Compile Include="Infrastructure\Data\PROFESSION.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Data\RECEIPT.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\Data\SPECIAL_CONTRIBUTIONS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

@@ -1,7 +1,6 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
-using APC.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +88,11 @@ namespace APC.Applications.Services
                                         ).Sum(x => (decimal?)x) ?? 0;
 
             return totalExpenditure + totalEventExpenditure;
+        }
+
+        public decimal GetTotalAnnualRevenue(int year)
+        {
+            return CalculateTotalAmountRaisedAnnually(year) - CalculateTotalAmountSpentAnnually(year);
         }
 
         public List<FinancialReportDTO> GetAll()
@@ -213,9 +217,9 @@ namespace APC.Applications.Services
         
         public decimal GetOverallExpendituresByYear(int year)
         {
-            return _repository.GetAll()
-                .Where(x => x.year == year)
-                .Sum(x => (decimal?)x.totalAmountSpent) ?? 0;
+            return _expenditureRepository.GetAll()
+                                    .Where(x => x.expenditureDate.Year == year)
+                                    .Sum(x => (decimal?)x.amountSpent) ?? 0;
         }
         
         public bool IsFinancialReportExisting(int year)

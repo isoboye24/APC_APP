@@ -58,7 +58,12 @@ namespace APC
                 var summary = txtSummary.Text.Trim();
                 DateTime date = dateTimePickerEvent.Value;
 
-                string finalImagePath = _eventDTO.CoverImagePath;
+                string finalImagePath = "";
+
+                if (_isUpdate)
+                {
+                    finalImagePath = _eventDTO.CoverImagePath;
+                }
 
                 // Only copy image if user selected a file
                 if (!string.IsNullOrWhiteSpace(sourcePath) && !string.IsNullOrWhiteSpace(fileName))
@@ -78,7 +83,7 @@ namespace APC
 
                     finalImagePath = destinationPath;
 
-                    if (_eventDTO.EventsId > 0)
+                    if (_isUpdate)
                     {
                         if (File.Exists(_eventDTO.CoverImagePath) &&
                             _eventDTO.CoverImagePath != destinationPath)

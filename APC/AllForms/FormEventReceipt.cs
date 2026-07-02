@@ -147,7 +147,7 @@ namespace APC.AllForms
             this.Close();
         }
 
-        System.Windows.Forms.OpenFileDialog OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+        OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog1.Filter =

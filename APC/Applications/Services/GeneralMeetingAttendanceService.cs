@@ -1,8 +1,6 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
-using APC.Infrastructure.Data;
-using APC.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -233,18 +231,18 @@ namespace APC.Applications.Services
 
         public int GetLastMeetingPresentMembersCount()
         {
-            var lastMeeting = _generalMeetingRepository.GetAll()
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.attendanceDate)
+            var lastMeeting = _generalMeetingRepository
+                .GetAll().OrderByDescending(x => x.attendanceDate)
                 .FirstOrDefault();
 
-            if (lastMeeting == null)
+            if (lastMeeting == default)
                 return 0;
 
             const int presentStatusId = 2;
 
             return _repository.GetAll()
-                .Count(x => x.attendanceStatusID == presentStatusId);
+                .Count(x => x.generalAttendanceID == lastMeeting.generalAttendanceID &&
+                            x.attendanceStatusID == presentStatusId);
         }
     }
 }

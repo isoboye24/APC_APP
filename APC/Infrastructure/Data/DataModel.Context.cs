@@ -54,5 +54,6 @@ namespace APC.Infrastructure.Data
         public virtual DbSet<PROFESSION> PROFESSION { get; set; }
         public virtual DbSet<SPECIAL_CONTRIBUTIONS> SPECIAL_CONTRIBUTIONS { get; set; }
         public virtual DbSet<SPECIAL_CONTRIBUTORS> SPECIAL_CONTRIBUTORS { get; set; }
+        public virtual DbSet<RECEIPT> RECEIPT { get; set; }
     }
 }

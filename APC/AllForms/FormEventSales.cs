@@ -142,7 +142,7 @@ namespace APC.AllForms
             }
             else
             {
-                labelTitle.Text = "Add Sales";
+                labelTitle.Text = "Add Sales to " + _eventDTO.Title;
             }
         }
 
@@ -174,7 +174,7 @@ namespace APC.AllForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ToString());
             }
         }
     }

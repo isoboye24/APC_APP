@@ -114,5 +114,18 @@ namespace APC.Applications.Services
                 return _repository.Update(data);                
             }
         }
+
+        public decimal GetAnnualExpendituresAmount(int year)
+        {
+            return _repository.GetAll()
+                .Where(x => x.expenditureDate.Year == year)
+                .Sum(x => (decimal?)x.amountSpent) ?? 0;
+        }
+        
+        public decimal GetOverallExpendituresAmount()
+        {
+            return _repository.GetAll()
+                .Sum(x => (decimal?)x.amountSpent) ?? 0;
+        }
     }
 }

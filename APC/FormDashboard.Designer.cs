@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.tableLayoutPanelSidebar = new System.Windows.Forms.TableLayoutPanel();
             this.btnAttendance = new FontAwesome.Sharp.IconButton();
@@ -67,11 +67,11 @@
             this.tableLayoutPanel42 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalFineExpected = new System.Windows.Forms.Label();
             this.tableLayoutPanel43 = new System.Windows.Forms.TableLayoutPanel();
-            this.label19 = new System.Windows.Forms.Label();
+            this.labelTotalExpectedFinesInYear = new System.Windows.Forms.Label();
             this.tableLayoutPanel40 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalPaidFines = new System.Windows.Forms.Label();
             this.tableLayoutPanel41 = new System.Windows.Forms.TableLayoutPanel();
-            this.label18 = new System.Windows.Forms.Label();
+            this.labelPaidFinesInYear = new System.Windows.Forms.Label();
             this.panelRegMembers = new System.Windows.Forms.TableLayoutPanel();
             this.label23 = new System.Windows.Forms.Label();
             this.labelNoOfRegMem = new System.Windows.Forms.Label();
@@ -84,9 +84,9 @@
             this.labelExpensesInThisYear = new System.Windows.Forms.Label();
             this.labelExpendituresInYear = new System.Windows.Forms.Label();
             this.tableLayoutPanel46 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalExpenditures = new System.Windows.Forms.Label();
+            this.labelTotalAnnualRevenue = new System.Windows.Forms.Label();
             this.tableLayoutPanel47 = new System.Windows.Forms.TableLayoutPanel();
-            this.label21 = new System.Windows.Forms.Label();
+            this.labelRevenue = new System.Windows.Forms.Label();
             this.panelMonthlyDues = new System.Windows.Forms.TableLayoutPanel();
             this.labelMonthlyDues = new System.Windows.Forms.Label();
             this.tableLayoutPanel49 = new System.Windows.Forms.TableLayoutPanel();
@@ -668,7 +668,7 @@
             this.tableLayoutPanel43.ColumnCount = 1;
             this.tableLayoutPanel43.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel43.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel43.Controls.Add(this.label19, 0, 0);
+            this.tableLayoutPanel43.Controls.Add(this.labelTotalExpectedFinesInYear, 0, 0);
             this.tableLayoutPanel43.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel43.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel43.Name = "tableLayoutPanel43";
@@ -677,18 +677,18 @@
             this.tableLayoutPanel43.Size = new System.Drawing.Size(240, 75);
             this.tableLayoutPanel43.TabIndex = 8;
             // 
-            // label19
+            // labelTotalExpectedFinesInYear
             // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(231, 75);
-            this.label19.TabIndex = 0;
-            this.label19.Text = "Total Fines Expected";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTotalExpectedFinesInYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.labelTotalExpectedFinesInYear.AutoSize = true;
+            this.labelTotalExpectedFinesInYear.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalExpectedFinesInYear.ForeColor = System.Drawing.Color.White;
+            this.labelTotalExpectedFinesInYear.Location = new System.Drawing.Point(4, 0);
+            this.labelTotalExpectedFinesInYear.Name = "labelTotalExpectedFinesInYear";
+            this.labelTotalExpectedFinesInYear.Size = new System.Drawing.Size(231, 75);
+            this.labelTotalExpectedFinesInYear.TabIndex = 0;
+            this.labelTotalExpectedFinesInYear.Text = "Total Fines Expected";
+            this.labelTotalExpectedFinesInYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel40
             // 
@@ -723,7 +723,7 @@
             this.tableLayoutPanel41.ColumnCount = 1;
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel41.Controls.Add(this.label18, 0, 0);
+            this.tableLayoutPanel41.Controls.Add(this.labelPaidFinesInYear, 0, 0);
             this.tableLayoutPanel41.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel41.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel41.Name = "tableLayoutPanel41";
@@ -732,18 +732,18 @@
             this.tableLayoutPanel41.Size = new System.Drawing.Size(238, 75);
             this.tableLayoutPanel41.TabIndex = 8;
             // 
-            // label18
+            // labelPaidFinesInYear
             // 
-            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(28, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(181, 75);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "Total paid Fines";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPaidFinesInYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.labelPaidFinesInYear.AutoSize = true;
+            this.labelPaidFinesInYear.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPaidFinesInYear.ForeColor = System.Drawing.Color.White;
+            this.labelPaidFinesInYear.Location = new System.Drawing.Point(28, 0);
+            this.labelPaidFinesInYear.Name = "labelPaidFinesInYear";
+            this.labelPaidFinesInYear.Size = new System.Drawing.Size(181, 75);
+            this.labelPaidFinesInYear.TabIndex = 0;
+            this.labelPaidFinesInYear.Text = "Total paid Fines";
+            this.labelPaidFinesInYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelRegMembers
             // 
@@ -908,7 +908,7 @@
             this.tableLayoutPanel46.BackColor = System.Drawing.Color.DarkOrchid;
             this.tableLayoutPanel46.ColumnCount = 1;
             this.tableLayoutPanel46.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel46.Controls.Add(this.labelTotalExpenditures, 0, 1);
+            this.tableLayoutPanel46.Controls.Add(this.labelTotalAnnualRevenue, 0, 1);
             this.tableLayoutPanel46.Controls.Add(this.tableLayoutPanel47, 0, 0);
             this.tableLayoutPanel46.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel46.Location = new System.Drawing.Point(259, 196);
@@ -919,24 +919,24 @@
             this.tableLayoutPanel46.Size = new System.Drawing.Size(246, 135);
             this.tableLayoutPanel46.TabIndex = 9;
             // 
-            // labelTotalExpenditures
+            // labelTotalAnnualRevenue
             // 
-            this.labelTotalExpenditures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalExpenditures.AutoSize = true;
-            this.labelTotalExpenditures.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalExpenditures.ForeColor = System.Drawing.Color.White;
-            this.labelTotalExpenditures.Location = new System.Drawing.Point(189, 81);
-            this.labelTotalExpenditures.Name = "labelTotalExpenditures";
-            this.labelTotalExpenditures.Size = new System.Drawing.Size(54, 54);
-            this.labelTotalExpenditures.TabIndex = 0;
-            this.labelTotalExpenditures.Text = "0";
+            this.labelTotalAnnualRevenue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalAnnualRevenue.AutoSize = true;
+            this.labelTotalAnnualRevenue.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalAnnualRevenue.ForeColor = System.Drawing.Color.White;
+            this.labelTotalAnnualRevenue.Location = new System.Drawing.Point(189, 81);
+            this.labelTotalAnnualRevenue.Name = "labelTotalAnnualRevenue";
+            this.labelTotalAnnualRevenue.Size = new System.Drawing.Size(54, 54);
+            this.labelTotalAnnualRevenue.TabIndex = 0;
+            this.labelTotalAnnualRevenue.Text = "0";
             // 
             // tableLayoutPanel47
             // 
             this.tableLayoutPanel47.ColumnCount = 1;
             this.tableLayoutPanel47.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel47.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel47.Controls.Add(this.label21, 0, 0);
+            this.tableLayoutPanel47.Controls.Add(this.labelRevenue, 0, 0);
             this.tableLayoutPanel47.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel47.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel47.Name = "tableLayoutPanel47";
@@ -945,18 +945,18 @@
             this.tableLayoutPanel47.Size = new System.Drawing.Size(240, 75);
             this.tableLayoutPanel47.TabIndex = 8;
             // 
-            // label21
+            // labelRevenue
             // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(13, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(213, 75);
-            this.label21.TabIndex = 0;
-            this.label21.Text = "Total Expenditures";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelRevenue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.labelRevenue.AutoSize = true;
+            this.labelRevenue.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRevenue.ForeColor = System.Drawing.Color.White;
+            this.labelRevenue.Location = new System.Drawing.Point(25, 0);
+            this.labelRevenue.Name = "labelRevenue";
+            this.labelRevenue.Size = new System.Drawing.Size(189, 75);
+            this.labelRevenue.TabIndex = 0;
+            this.labelRevenue.Text = "Revenue in 2026";
+            this.labelRevenue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelMonthlyDues
             // 
@@ -1086,24 +1086,24 @@
             // chartAmountRaisedYearly
             // 
             this.chartAmountRaisedYearly.BackColor = System.Drawing.Color.RoyalBlue;
-            chartArea7.AxisX.LineColor = System.Drawing.Color.Crimson;
-            chartArea7.AxisX2.LineColor = System.Drawing.Color.Transparent;
-            chartArea7.AxisY.LineColor = System.Drawing.Color.Crimson;
-            chartArea7.BackColor = System.Drawing.Color.BlueViolet;
-            chartArea7.Name = "ChartArea1";
-            this.chartAmountRaisedYearly.ChartAreas.Add(chartArea7);
+            chartArea3.AxisX.LineColor = System.Drawing.Color.Crimson;
+            chartArea3.AxisX2.LineColor = System.Drawing.Color.Transparent;
+            chartArea3.AxisY.LineColor = System.Drawing.Color.Crimson;
+            chartArea3.BackColor = System.Drawing.Color.BlueViolet;
+            chartArea3.Name = "ChartArea1";
+            this.chartAmountRaisedYearly.ChartAreas.Add(chartArea3);
             this.chartAmountRaisedYearly.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            legend7.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            legend7.Name = "Legend1";
-            this.chartAmountRaisedYearly.Legends.Add(legend7);
+            legend3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            legend3.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            legend3.Name = "Legend1";
+            this.chartAmountRaisedYearly.Legends.Add(legend3);
             this.chartAmountRaisedYearly.Location = new System.Drawing.Point(3, 53);
             this.chartAmountRaisedYearly.Name = "chartAmountRaisedYearly";
             this.chartAmountRaisedYearly.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.chartAmountRaisedYearly.Series.Add(series7);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartAmountRaisedYearly.Series.Add(series3);
             this.chartAmountRaisedYearly.Size = new System.Drawing.Size(501, 278);
             this.chartAmountRaisedYearly.TabIndex = 1;
             this.chartAmountRaisedYearly.Text = "chart1";
@@ -1141,24 +1141,24 @@
             // chartExpenditures
             // 
             this.chartExpenditures.BackColor = System.Drawing.Color.RoyalBlue;
-            chartArea8.AxisX.LineColor = System.Drawing.Color.Crimson;
-            chartArea8.AxisX2.LineColor = System.Drawing.Color.Transparent;
-            chartArea8.AxisY.LineColor = System.Drawing.Color.Crimson;
-            chartArea8.BackColor = System.Drawing.Color.Cyan;
-            chartArea8.Name = "ChartArea1";
-            this.chartExpenditures.ChartAreas.Add(chartArea8);
+            chartArea4.AxisX.LineColor = System.Drawing.Color.Crimson;
+            chartArea4.AxisX2.LineColor = System.Drawing.Color.Transparent;
+            chartArea4.AxisY.LineColor = System.Drawing.Color.Crimson;
+            chartArea4.BackColor = System.Drawing.Color.Cyan;
+            chartArea4.Name = "ChartArea1";
+            this.chartExpenditures.ChartAreas.Add(chartArea4);
             this.chartExpenditures.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            legend8.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            legend8.Name = "Legend1";
-            this.chartExpenditures.Legends.Add(legend8);
+            legend4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            legend4.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            legend4.Name = "Legend1";
+            this.chartExpenditures.Legends.Add(legend4);
             this.chartExpenditures.Location = new System.Drawing.Point(3, 53);
             this.chartExpenditures.Name = "chartExpenditures";
             this.chartExpenditures.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series8.ChartArea = "ChartArea1";
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.chartExpenditures.Series.Add(series8);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartExpenditures.Series.Add(series4);
             this.chartExpenditures.Size = new System.Drawing.Size(502, 279);
             this.chartExpenditures.TabIndex = 1;
             this.chartExpenditures.Text = "chart1";
@@ -1274,19 +1274,19 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel40;
         private System.Windows.Forms.Label labelTotalPaidFines;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel41;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label labelPaidFinesInYear;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel42;
         private System.Windows.Forms.Label labelTotalFineExpected;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel43;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label labelTotalExpectedFinesInYear;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel44;
         private System.Windows.Forms.Label labelExpendituresInYear;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel45;
         private System.Windows.Forms.Label labelExpensesInThisYear;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel46;
-        private System.Windows.Forms.Label labelTotalExpenditures;
+        private System.Windows.Forms.Label labelTotalAnnualRevenue;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel47;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label labelRevenue;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel38;
         private System.Windows.Forms.TableLayoutPanel panelYearlyDues;
         private System.Windows.Forms.Label labelTotalDuesYear;
