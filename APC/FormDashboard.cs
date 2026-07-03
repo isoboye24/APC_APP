@@ -8,11 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Globalization;
 
 namespace APC
 {
@@ -45,11 +43,12 @@ namespace APC
         private Panel leftBorderBtn;
         private Form currentChildForm;
 
-        private float globalFontSize = 14.0f;
-        private float resizeFactor = 16.0f;
-
         private int minWidthPercentage = 70;
         private int minHeightPercentage = 70;
+        private bool buttonWasClicked = false;
+
+        private DateTime todaysDate = DateTime.Today;
+        Color hoverColor = Color.MediumBlue;
 
         public FormDashboard(IServiceProvider serviceProvider, IFinedMemberService finedMemberService, IMemberService memberService,
             IGeneralMeetingAttendanceService generalMeetingAttendanceService, IGeneralMeetingService generalMeetingService,
@@ -113,9 +112,6 @@ namespace APC
                 leftBorderBtn.Location = new Point(0, currentBtn.Location.Y);
                 leftBorderBtn.Visible = false;
                 leftBorderBtn.BringToFront();
-                // Icon Current Child Form
-                iconCurrentChildForm.IconChar = currentBtn.IconChar;
-                iconCurrentChildForm.IconColor = color;
             }
         }
         private void DisableButton()
@@ -140,8 +136,6 @@ namespace APC
         {
             DisableButton();
             leftBorderBtn.Visible = false;
-            iconCurrentChildForm.IconChar = IconChar.Home;
-            iconCurrentChildForm.IconColor = Color.MediumPurple;
             labelTitleChildForm.Text = "Dashboard";
             RefreshAllCards();
         }
@@ -177,10 +171,15 @@ namespace APC
 
         private void resizeControls()
         {
-            GeneralHelper.ApplyBoldFont(16, labelDuesMonthName, labelTotalDuesYear, labelAmountRaisedYearly, labelExpendituresYearly);
-            GeneralHelper.ApplyBoldFont(24, labelNoOfRegMem, labelMonthlyDues, labelYearlyDues, labelExpendituresInYear, labelTotalAnnualRevenue,
+            GeneralHelper.ApplyBoldFont(20, labelNoOfRegMem, labelMonthlyDues, labelYearlyDues, labelExpendituresInYear, labelTotalAnnualRevenue,
                 labelLastMeetingAttendance, labelTotalPaidFines, labelTotalFineExpected
                 );
+
+            GeneralHelper.ApplyBoldFont(17, labelDuesMonthName, labelTotalDuesYear, labelAmountRaisedYearly, labelExpendituresYearly, label23, labelMeetingAttLabel, 
+                labelPaidFinesInYear, labelRevenue, labelTotalExpectedFinesInYear, labelExpensesInThisYear);
+
+            GeneralHelper.ApplyBoldFont(14, labelTodaysDate);
+            GeneralHelper.ApplyBoldFont(10, label2);
         }
 
         public void AccessControl(bool isAdmin, bool isEditor)
@@ -193,7 +192,6 @@ namespace APC
         {
             resizeControls();
 
-            labelAmountRaisedYearly.Tag = "resizable";
             int minWidth = Screen.PrimaryScreen.Bounds.Width * minWidthPercentage / 100;
             int minHeight = Screen.PrimaryScreen.Bounds.Height * minHeightPercentage / 100;
 
@@ -201,7 +199,6 @@ namespace APC
 
             if (!_isAdmin && !_isEditor)
             {
-                tableLayoutPanelCards.Hide();
                 btnAttendance.Hide();
                 btnFinancialReport.Hide();
                 btnEvents.Hide();
@@ -220,6 +217,8 @@ namespace APC
             this.ControlBox = false;
             RefreshAllCards();
             ResizeableControls();
+
+            labelTodaysDate.Text = "Today: " + todaysDate.ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("en-US"));
         }       
 
         private void picProfilePic_Paint(object sender, PaintEventArgs e)
@@ -229,34 +228,18 @@ namespace APC
 
         private void ResizeableControls()
         {
-            labelPaidFinesInYear.Tag = "resizable";
             //label1.Tag = "resizable";
-            labelTotalExpectedFinesInYear.Tag = "resizable";
-            labelRevenue.Tag = "resizable";
-            label23.Tag = "resizable";
-            label24.Tag = "resizable";
-            labelAmountRaisedYearly.Tag = "resizable";
-            labelDuesMonthName.Tag = "resizable";
             labelExpendituresInYear.Tag = "resizable";
-            labelExpendituresYearly.Tag = "resizable";
-            labelExpensesInThisYear.Tag = "resizable";
+
             labelLastMeetingAttendance.Tag = "resizable";
             labelMonthlyDues.Tag = "resizable";
             labelNoOfRegMem.Tag = "resizable";
             labelTitleChildForm.Tag = "resizable";
-            labelTotalDuesYear.Tag = "resizable";
+
             labelTotalAnnualRevenue.Tag = "resizable";
             labelTotalFineExpected.Tag = "resizable";
             labelTotalPaidFines.Tag = "resizable";
             labelYearlyDues.Tag = "resizable";
-
-
-            //btnAttendance.Tag = "resizable";
-            //btnDocuments.Tag = "resizable";
-            //btnEvents.Tag = "resizable";
-            //btnFinancialReport.Tag = "resizable";
-            //btnManage.Tag = "resizable";
-            //btnMembers.Tag = "resizable";
         }
 
         private void loadAnnualRaisedDues()
@@ -315,9 +298,9 @@ namespace APC
             int todayYear = DateTime.Today.Year;
 
             labelDuesMonthName.Text = "Dues in "+ monthToday + " "+ todayYear;
-            labelExpensesInThisYear.Text = "Total Expenses in " + todayYear;
-            labelTotalDuesYear.Text = "Total Dues + Fines in " + todayYear;
-            labelRevenue.Text = "Total Revenue in " + todayYear;
+            labelExpensesInThisYear.Text = "Expenses in " + todayYear;
+            labelTotalDuesYear.Text = "Dues + Fines in " + todayYear;
+            labelRevenue.Text = "Revenue in " + todayYear;
 
             labelMonthlyDues.Text = "€ " + _financialReportService.GetTotalDuesByMonth(todayMonth, todayYear);
             labelYearlyDues.Text = "€ " + _financialReportService.GetTotalDuesByYear(todayYear);
@@ -330,23 +313,24 @@ namespace APC
             labelPaidFinesInYear.Text = "Paid Fines in " + todayYear;
             labelTotalPaidFines.Text = "€ " + _finedMemberService.GetAnnualPaidFines(todayYear);
 
-            labelAmountRaisedYearly.Text = "Total Overall Amount Raised";
-            labelExpendituresYearly.Text = "Total Overall Expenditures";
+            labelAmountRaisedYearly.Text = "Overall Amount Raised";
+            labelExpendituresYearly.Text = "Overall Expenditures";
+            labelMeetingAttLabel.Text = "Last Meeting's Attend.";
         }
 
         private void iconClose_MouseEnter(object sender, EventArgs e)
         {
-            iconClose.BackColor = Color.DarkOliveGreen;
+            iconClose.BackColor = hoverColor;
         }
 
         private void iconClose_MouseHover(object sender, EventArgs e)
         {
-            iconClose.BackColor = Color.DarkOliveGreen;
+            iconClose.BackColor = hoverColor;
         }
 
         private void iconClose_MouseLeave(object sender, EventArgs e)
         {
-            iconClose.BackColor = Color.DarkOliveGreen;
+            iconClose.BackColor = hoverColor;
         }
         private void picBoxMin_Click_1(object sender, EventArgs e)
         {
@@ -359,17 +343,17 @@ namespace APC
 
         private void iconMaximize_MouseEnter(object sender, EventArgs e)
         {
-            iconMaximize.BackColor = Color.DarkOliveGreen;
+            iconMaximize.BackColor = hoverColor;
         }
 
         private void iconMaximize_MouseHover(object sender, EventArgs e)
         {
-            iconMaximize.BackColor = Color.DarkOliveGreen;
+            iconMaximize.BackColor = hoverColor;
         }
 
         private void iconMaximize_MouseLeave(object sender, EventArgs e)
         {
-            iconMaximize.BackColor = Color.DarkOliveGreen;
+            iconMaximize.BackColor = hoverColor;
         }
 
         private void iconMaximize_Click_1(object sender, EventArgs e)
@@ -379,7 +363,7 @@ namespace APC
                 WindowState = FormWindowState.Maximized;
                 ZoomManager.ZoomIn(this);
 
-                buttonSize = 18f;
+                buttonSize = 24f;
                 panelSize = 3.05f;
                 ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
@@ -391,7 +375,7 @@ namespace APC
                 this.WindowState = initialDetail.WindowState;
                 ZoomManager.ZoomIn(this);
 
-                buttonSize = 14f;
+                buttonSize = 18f;
                 panelSize = 1.05f;
                 ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
@@ -408,7 +392,7 @@ namespace APC
                 WindowState = FormWindowState.Normal;
                 ZoomManager.ZoomOut(this);
 
-                buttonSize = 14f;
+                buttonSize = 18f;
                 panelSize = 1.05f;
                 ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
@@ -416,19 +400,19 @@ namespace APC
 
         private void iconMinimize_MouseEnter(object sender, EventArgs e)
         {
-            iconMinimize.BackColor = Color.DarkOliveGreen;
+            iconMinimize.BackColor = hoverColor;
         }
 
         private void iconMinimize_MouseHover(object sender, EventArgs e)
         {
-            iconMinimize.BackColor = Color.DarkOliveGreen;
+            iconMinimize.BackColor = hoverColor;
         }
 
         private void iconMinimize_MouseLeave(object sender, EventArgs e)
         {
-            iconMinimize.BackColor = Color.DarkOliveGreen;
+            iconMinimize.BackColor = hoverColor;
         }
-        private bool buttonWasClicked = false;
+
         private void btnDashboard_Click_1(object sender, EventArgs e)
         {
             if (buttonWasClicked)
