@@ -1,6 +1,6 @@
 ﻿using APC.Applications.Interfaces;
+using APC.Applications.Services;
 using APC.Helper;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,6 +24,7 @@ namespace APC.AllForms
         private readonly IServiceProvider _serviceProvider;
         private readonly IAttendanceStatusService _attendanceStatusService;
         private readonly IPaymentStatusService _paymentStatusService;
+        private readonly IFinancialReportService _financialReportService;
 
         private List<Applications.DTO.ConstitutionDTO> _constitutionDTO;
         private List<Applications.DTO.FinedMemberDTO> _finedMemberDTO;
@@ -38,7 +39,7 @@ namespace APC.AllForms
             ISpecialContributionService specialContributionService, ISpecialContributorService specialContributorService, 
             ICurrentUserService currentUserService, IGeneralMeetingService generalMeetingService, 
             IGeneralMeetingAttendanceService generalMeetingAttendanceService, IServiceProvider serviceProvider, 
-            IAttendanceStatusService attendanceStatusService, IPaymentStatusService paymentStatusService)
+            IAttendanceStatusService attendanceStatusService, IPaymentStatusService paymentStatusService, IFinancialReportService financialReportService)
         {
             InitializeComponent();
             _genderService = genderService;
@@ -54,6 +55,7 @@ namespace APC.AllForms
             _serviceProvider = serviceProvider;
             _attendanceStatusService = attendanceStatusService;
             _paymentStatusService = paymentStatusService;
+            _financialReportService = financialReportService;
         }
 
         private void resizeControls()
@@ -105,56 +107,6 @@ namespace APC.AllForms
             dataGridViewGeneralMeeting.DataSource = _generalMeetingService.GetAllByYear(year);
             _generalMeetingDTOs = _generalMeetingService.GetAll();
             GeneralMeetingHelper.ConfigureGeneralMeetingGrid(dataGridViewGeneralMeeting, GeneralMeetingHelper.GeneralMeetingGridType.Basic);
-        }
-
-        private void FormMeetingBoard_Load(object sender, EventArgs e)
-        {
-            resizeControls();
-            
-            loadConstitutions();
-
-            loadGeneralMeeting(year);
-
-            cmbMonth.DataSource = _monthService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
-
-            cmbYearMeeting.DataSource = _generalMeetingService.GetMeetingYears();
-            GeneralHelper.ComboBoxProps(cmbYearMeeting, "YearInText", "YearInValue");
-
-            loadFinedMembers();
-            cmbMonthFinedMember.DataSource = _monthService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbMonthFinedMember, "MonthName", "MonthID");
-            cmbGenderFinedMember.DataSource = _genderService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbGenderFinedMember, "GenderName", "GenderID");
-
-            cmbFineStatus.DataSource = _paymentStatusService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbFineStatus, "PaymentStatusName", "PaymentStatusId");
-
-
-            loadSpecialContributions();
-            cmbMonthContribution.DataSource = _monthService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbMonthContribution, "MonthName", "MonthID");
-
-            if (_currentUserService.AccessLevel != 4)
-            {
-                btnDelete.Hide();
-                btnAddConstitution.Hide();
-                btnUpdateConstitution.Hide();
-                btnDeleteConstitution.Hide();
-                btnDeleteFinedMember.Hide();
-                btnDeleteContribution.Hide();
-            }
-            RefreshCounts();
-            ResizeableControls();
-        }
-        private void RefreshCounts()
-        {
-            labelTotalMeetings.Text = "Rows: " + dataGridViewGeneralMeeting.RowCount.ToString();
-            labelTotalConstitutions.Text = "Rows: " + dataGridViewConstitution.RowCount.ToString();
-            labelTotalFineMembers.Text = "Rows: " + dataGridViewFinedMembers.RowCount.ToString();
-            labelTotalPaidFines.Text = "Total Paid: " + _finedMemberService.GetTotalPaidFines() + " €";
-            labelTotalRowsContributions.Text = "Rows: " + dataGridViewSpecialContributions.RowCount.ToString();
-            labelOverallTotalContributions.Text = "Total : " + _specialContributionService.GetAllContributedAmount().ToString() + " €";
         }
 
         private void ResizeableControls()
@@ -257,6 +209,57 @@ namespace APC.AllForms
             dataGridViewFinedMembers.Tag = "resizable";
             dataGridViewSpecialContributions.Tag = "resizable";
             #endregion
+        }
+
+        private void FormMeetingBoard_Load(object sender, EventArgs e)
+        {
+            resizeControls();
+            
+            loadConstitutions();
+
+            loadGeneralMeeting(year);
+
+            cmbMonth.DataSource = _monthService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+
+            cmbYearMeeting.DataSource = _generalMeetingService.GetMeetingYears();
+            GeneralHelper.ComboBoxProps(cmbYearMeeting, "YearInText", "YearInValue");
+
+            loadFinedMembers();
+            cmbMonthFinedMember.DataSource = _monthService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbMonthFinedMember, "MonthName", "MonthID");
+            cmbGenderFinedMember.DataSource = _genderService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbGenderFinedMember, "GenderName", "GenderID");
+
+            cmbFineStatus.DataSource = _paymentStatusService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbFineStatus, "PaymentStatusName", "PaymentStatusId");
+
+
+            loadSpecialContributions();
+            cmbMonthContribution.DataSource = _monthService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbMonthContribution, "MonthName", "MonthID");
+
+            if (_currentUserService.AccessLevel != 4)
+            {
+                btnDelete.Hide();
+                btnAddConstitution.Hide();
+                btnUpdateConstitution.Hide();
+                btnDeleteConstitution.Hide();
+                btnDeleteFinedMember.Hide();
+                btnDeleteContribution.Hide();
+            }
+            ResizeableControls();
+            RefreshCounts();
+        }
+        private void RefreshCounts()
+        {
+            labelTotalMeetings.Text = "Meeting" + (dataGridViewGeneralMeeting.RowCount > 1 ? "s : " : " : ") + dataGridViewGeneralMeeting.RowCount.ToString();
+            labelTotalConstitutions.Text = "Rows: " + dataGridViewConstitution.RowCount.ToString();
+            labelTotalFineMembers.Text = "Rows: " + dataGridViewFinedMembers.RowCount.ToString();
+            labelTotalAmountByYear.Text = "Total : " + _financialReportService.TotalDuesAndFinesInYear(year);
+            labelTotalPaidFines.Text = "Total Paid: " + _finedMemberService.GetTotalPaidFines();
+            labelTotalRowsContributions.Text = "Rows: " + dataGridViewSpecialContributions.RowCount.ToString();
+            labelOverallTotalContributions.Text = "Total : " + _specialContributionService.GetAllContributedAmount();
         }
 
         private void ClearFilters()
@@ -381,6 +384,7 @@ namespace APC.AllForms
                 {
                     int searchedYear = Convert.ToInt32(cmbYearMeeting.SelectedValue);
                     filtered = filtered.Where(x => x.Year == searchedYear);
+                    labelTotalAmountByYear.Text = "Total : " + _financialReportService.TotalDuesAndFinesInYear(year);
                 }
 
                 if (cmbMonth.SelectedIndex != -1)

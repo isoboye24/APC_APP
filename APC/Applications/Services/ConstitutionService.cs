@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace APC.Applications.Services
                     ConstitutionId = x.constitutionID,
                     ConstitutionText = x.constitution1,
                     Fine = x.fine,
-                    FineWithCurrency = (x.fine + " €").ToString(),
+                    FineWithCurrency = AmountHelper.FormatAmount(x.fine),
                     Section = x.section,
                     ShortDescription = x.ShortDescription,
                 })
@@ -55,7 +56,7 @@ namespace APC.Applications.Services
                     ConstitutionId = x.constitutionID,
                     ConstitutionText = x.constitution1,
                     Fine = x.fine,
-                    FineWithCurrency = (x.fine + " €").ToString(),
+                    FineWithCurrency = AmountHelper.FormatAmount(x.fine),
                     Section = x.section,
                     ShortDescription = x.ShortDescription,
                 })
@@ -72,7 +73,7 @@ namespace APC.Applications.Services
                     ConstitutionId = x.constitutionID,
                     ConstitutionText = x.constitution1,
                     Fine = x.fine,
-                    FineWithCurrency = (x.fine + " €").ToString(),
+                    FineWithCurrency = AmountHelper.FormatAmount(x.fine),
                     Section = x.section,
                     ShortDescription = x.ShortDescription,
                 })
@@ -89,7 +90,7 @@ namespace APC.Applications.Services
                     ConstitutionId = x.constitutionID,
                     ConstitutionText = x.constitution1,
                     Fine = x.fine,
-                    FineWithCurrency = (x.fine + " €").ToString(),
+                    FineWithCurrency = AmountHelper.FormatAmount(x.fine),
                     Section = x.section,
                     ShortDescription = x.ShortDescription,
                 })

@@ -46,6 +46,159 @@ namespace APC.Applications.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
+
+        public List<GeneralMeetingDTO> GetAll()
+        {
+            var data = (from g in _repository.GetAll()
+                        join m in _monthRepository.GetAll() on g.attendanceDate.Month equals m.monthID
+                        select new
+                        {
+                            g.generalAttendanceID,
+                            g.totalMembersPresent,
+                            g.totalMembersAbsent,
+                            g.totalDuesPaid,
+                            g.totalDuesExpected,
+                            g.totalDuesBalance,
+                            g.attendanceDate,
+                            g.summary                            
+                        })
+                        .ToList();
+
+            return data.Select(x => new GeneralMeetingDTO
+            {
+                GeneralMeetingId = x.generalAttendanceID,
+                TotalMembersPresent = GetTotalMembersPresentCountById(x.generalAttendanceID),
+                TotalMembersAbsent = GetTotalMembersAbsentCountById(x.generalAttendanceID),
+                TotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID),
+                FormattedTotalDuesPaid = AmountHelper.FormatAmount(GetTotalDuesPaid(x.generalAttendanceID)),
+
+                OverallTotal = GetTotalDuesPaid(x.generalAttendanceID) + (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0),
+                FormattedOverallTotal = AmountHelper.FormatAmount(GetTotalDuesPaid(x.generalAttendanceID) + (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0)),
+
+                FinesRaised = AmountHelper.FormatAmount(_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0),
+                Summary = x.summary,
+                Day = x.attendanceDate.Day,
+                MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
+                MonthId = x.attendanceDate.Month,
+                Year = x.attendanceDate.Year,
+                GeneralMeetingDate = x.attendanceDate,
+            })
+            .OrderByDescending(x => x.GeneralMeetingDate)
+            .ToList();
+        }
+
+        public List<GeneralMeetingDTO> GetAllByYear(int year)
+        {
+            var data = (from g in _repository.GetAll().Where(g => g.attendanceDate.Year == year)
+                        join m in _monthRepository.GetAll() on g.attendanceDate.Month equals m.monthID
+                        select new
+                        {
+                            g.generalAttendanceID,
+                            g.totalMembersPresent,
+                            g.totalMembersAbsent,
+                            g.totalDuesPaid,
+                            g.totalDuesExpected,
+                            g.totalDuesBalance,
+                            g.attendanceDate,
+                            g.summary
+                        })
+                        .ToList();
+
+            return data.Select(x => new GeneralMeetingDTO
+            {
+                GeneralMeetingId = x.generalAttendanceID,
+                TotalMembersPresent = GetTotalMembersPresentCountById(x.generalAttendanceID),
+                TotalMembersAbsent = GetTotalMembersAbsentCountById(x.generalAttendanceID),
+                TotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID),
+                FormattedTotalDuesPaid = AmountHelper.FormatAmount(GetTotalDuesPaid(x.generalAttendanceID)),
+
+                FinesRaised = AmountHelper.FormatAmount(_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0),
+
+                OverallTotal = GetTotalDuesPaid(x.generalAttendanceID) + (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0),
+                FormattedOverallTotal = AmountHelper.FormatAmount(GetTotalDuesPaid(x.generalAttendanceID) + (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0)),
+
+                Summary = x.summary,
+                Day = x.attendanceDate.Day,
+                MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
+                MonthId = x.attendanceDate.Month,
+                Year = x.attendanceDate.Year,
+                GeneralMeetingDate = x.attendanceDate,
+            })
+            .OrderByDescending(x => x.GeneralMeetingDate)            
+            .ToList();
+        }
+
+        public List<GeneralMeetingDTO> GetAllDeleted()
+        {
+            var data = (from g in _repository.GetAllDeletedGeneralMeetings()
+                        join m in _monthRepository.GetAll() on g.attendanceDate.Month equals m.monthID
+                        select new
+                        {
+                            g.generalAttendanceID,
+                            g.totalMembersPresent,
+                            g.totalMembersAbsent,
+                            g.totalDuesPaid,
+                            g.totalDuesExpected,
+                            g.totalDuesBalance,
+                            g.attendanceDate,
+                            g.summary
+                        })
+                        .ToList();
+
+            return data.Select(x => new GeneralMeetingDTO
+            {
+                GeneralMeetingId = x.generalAttendanceID,
+                TotalMembersPresent = GetTotalMembersPresentCountById(x.generalAttendanceID),
+                TotalMembersAbsent = GetTotalMembersAbsentCountById(x.generalAttendanceID),
+                TotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID),
+                FormattedTotalDuesPaid = AmountHelper.FormatAmount(GetTotalDuesPaid(x.generalAttendanceID)),
+
+                FinesRaised = AmountHelper.FormatAmount(_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0),
+                Summary = x.summary,
+                Day = x.attendanceDate.Day,
+                MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
+                MonthId = x.attendanceDate.Month,
+                Year = x.attendanceDate.Year,
+                GeneralMeetingDate = x.attendanceDate,
+            })
+            .OrderByDescending(x => x.GeneralMeetingDate)
+            .ToList();
+        }
+
+        public bool GetBack(int id)
+            => _repository.GetBack(id);
+
+        public bool PermanentDelete(int id)
+            => _repository.PermanentDelete(id);
+
+        public bool Update(GeneralMeeting data)
+        {
+            var meeting = _repository.GetById(data.GeneralMeetingId);
+            if (meeting == null)
+                throw new InvalidOperationException("Meeting not found");
+
+            else
+            {
+                return _repository.Update(data);               
+            }
+        }
+
+        public List<YearDTO> GetMeetingYears()
+        {
+            return _repository.GetAll()
+                .Where(x => !x.isDeleted)
+                .Select(x => x.attendanceDate.Year)
+                .Distinct()
+                .OrderByDescending(x => x)
+                .Select(x => new YearDTO
+                {
+                    YearInValue = x,
+                    YearInText = x.ToString()
+                })
+                .ToList();
+        }
+
+
         private int GetTotalMembersAbsentCountById(int generalMeetingId)
         {
             string status = "Absent";
@@ -92,152 +245,6 @@ namespace APC.Applications.Services
             }
         }
 
-        public List<GeneralMeetingDTO> GetAll()
-        {
-            var data = (from g in _repository.GetAll()
-                        join m in _monthRepository.GetAll() on g.attendanceDate.Month equals m.monthID
-                        select new
-                        {
-                            g.generalAttendanceID,
-                            g.totalMembersPresent,
-                            g.totalMembersAbsent,
-                            g.totalDuesPaid,
-                            g.totalDuesExpected,
-                            g.totalDuesBalance,
-                            g.attendanceDate,
-                            g.summary                            
-                        })
-                        .ToList();
-
-            return data.Select(x => new GeneralMeetingDTO
-            {
-                GeneralMeetingId = x.generalAttendanceID,
-                TotalMembersPresent = GetTotalMembersPresentCountById(x.generalAttendanceID),
-                TotalMembersAbsent = GetTotalMembersAbsentCountById(x.generalAttendanceID),
-                TotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID),
-                FormattedTotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID).ToString(),
-
-                FinesRaised = (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0).ToString(),
-                Summary = x.summary,
-                Day = x.attendanceDate.Day,
-                MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
-                MonthId = x.attendanceDate.Month,
-                Year = x.attendanceDate.Year,
-                GeneralMeetingDate = x.attendanceDate,
-            })
-            .OrderByDescending(x => x.GeneralMeetingDate)
-            .ToList();
-        }
-
-        public List<GeneralMeetingDTO> GetAllByYear(int year)
-        {
-            var data = (from g in _repository.GetAll().Where(g => g.attendanceDate.Year == year)
-                        join m in _monthRepository.GetAll() on g.attendanceDate.Month equals m.monthID
-                        select new
-                        {
-                            g.generalAttendanceID,
-                            g.totalMembersPresent,
-                            g.totalMembersAbsent,
-                            g.totalDuesPaid,
-                            g.totalDuesExpected,
-                            g.totalDuesBalance,
-                            g.attendanceDate,
-                            g.summary
-                        })
-                        .ToList();
-
-            return data.Select(x => new GeneralMeetingDTO
-            {
-                GeneralMeetingId = x.generalAttendanceID,
-                TotalMembersPresent = GetTotalMembersPresentCountById(x.generalAttendanceID),
-                TotalMembersAbsent = GetTotalMembersAbsentCountById(x.generalAttendanceID),
-                TotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID),
-                FormattedTotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID).ToString(),
-
-                FinesRaised = (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0).ToString(),
-
-                OverallTotal = GetTotalDuesPaid(x.generalAttendanceID) + (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0),
-                FormattedOverallTotal = (GetTotalDuesPaid(x.generalAttendanceID) + (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0)).ToString() + " €",
-
-                Summary = x.summary,
-                Day = x.attendanceDate.Day,
-                MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
-                MonthId = x.attendanceDate.Month,
-                Year = x.attendanceDate.Year,
-                GeneralMeetingDate = x.attendanceDate,
-            })
-            .OrderByDescending(x => x.GeneralMeetingDate)            
-            .ToList();
-        }
-
-        public List<GeneralMeetingDTO> GetAllDeleted()
-        {
-            var data = (from g in _repository.GetAllDeletedGeneralMeetings()
-                        join m in _monthRepository.GetAll() on g.attendanceDate.Month equals m.monthID
-                        select new
-                        {
-                            g.generalAttendanceID,
-                            g.totalMembersPresent,
-                            g.totalMembersAbsent,
-                            g.totalDuesPaid,
-                            g.totalDuesExpected,
-                            g.totalDuesBalance,
-                            g.attendanceDate,
-                            g.summary
-                        })
-                        .ToList();
-
-            return data.Select(x => new GeneralMeetingDTO
-            {
-                GeneralMeetingId = x.generalAttendanceID,
-                TotalMembersPresent = GetTotalMembersPresentCountById(x.generalAttendanceID),
-                TotalMembersAbsent = GetTotalMembersAbsentCountById(x.generalAttendanceID),
-                TotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID),
-                FormattedTotalDuesPaid = GetTotalDuesPaid(x.generalAttendanceID).ToString(),
-
-                FinesRaised = (_finedMemberRepository.GetAllByDate(x.attendanceDate).Sum(y => y.amountPaid) ?? 0).ToString(),
-                Summary = x.summary,
-                Day = x.attendanceDate.Day,
-                MonthName = GeneralHelper.ConventIntToMonth(x.attendanceDate.Month),
-                MonthId = x.attendanceDate.Month,
-                Year = x.attendanceDate.Year,
-                GeneralMeetingDate = x.attendanceDate,
-            })
-            .OrderByDescending(x => x.GeneralMeetingDate)
-            .ToList();
-        }
-
-        public bool GetBack(int id)
-            => _repository.GetBack(id);
-
-        public bool PermanentDelete(int id)
-            => _repository.PermanentDelete(id);
-
-        public bool Update(GeneralMeeting data)
-        {
-            var meeting = _repository.GetById(data.GeneralMeetingId);
-            if (meeting == null)
-                throw new InvalidOperationException("Meeting not found");
-
-            else
-            {
-                return _repository.Update(data);               
-            }
-        }
-
-        public List<YearDTO> GetMeetingYears()
-        {
-            return _repository.GetAll()
-                .Where(x => !x.isDeleted)
-                .Select(x => x.attendanceDate.Year)
-                .Distinct()
-                .OrderByDescending(x => x)
-                .Select(x => new YearDTO
-                {
-                    YearInValue = x,
-                    YearInText = x.ToString()
-                })
-                .ToList();
-        }
+        
     }
 }

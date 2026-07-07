@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +82,7 @@ namespace APC.Applications.Services
                     EventSalesId = x.es.eventSalesID,
                     EventId = x.es.eventID,
                     AmountSold = x.es.amountSold,
-                    FormattedAmountSold = x.es.amountSold.ToString() + " €",
+                    FormattedAmountSold = AmountHelper.FormatAmount(x.es.amountSold).ToString() + " €",
                     SalesDate = x.e.eventDate,
                     Summary = x.es.summary,
                     FormattedSalesDate = x.e.eventDate.ToString("dd.MM.yyyy"),
@@ -110,7 +111,7 @@ namespace APC.Applications.Services
                     EventSalesId = x.es.eventSalesID,
                     EventId = x.es.eventID,
                     AmountSold = x.es.amountSold,
-                    FormattedAmountSold = x.es.amountSold.ToString() + " €",
+                    FormattedAmountSold = AmountHelper.FormatAmount(x.es.amountSold).ToString() + " €",
                     SalesDate = x.e.eventDate,
                     Summary = x.es.summary,
                     FormattedSalesDate = x.e.eventDate.ToString("dd.MM.yyyy"),

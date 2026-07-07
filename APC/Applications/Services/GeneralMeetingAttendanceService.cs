@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,8 +110,9 @@ namespace APC.Applications.Services
                 DuesPaid = (decimal)x.monthlyDues,
                 Gender = x.genderName,
                 GeneralMeetingId = x.generalAttendanceID,
+                FormattedDuesPaid = AmountHelper.FormatAmount((decimal)x.monthlyDues),
             })
-            .OrderByDescending(x => x.DuesPaid).ThenByDescending(x => x.AttendanceStatus).ThenBy(x => x.FirstName).ToList();
+            .OrderByDescending(x => x.AttendanceStatus).ThenByDescending(x => x.DuesPaid).ThenBy(x => x.FirstName).ToList();
         }
         public List<GeneralMeetingAttendanceDTO> GetMemberPersonalAttendanceByYear(int memberId, int year)
         {
@@ -144,10 +146,11 @@ namespace APC.Applications.Services
                 AttendanceStatusId = x.attendanceStatusID,
                 AttendanceStatus = x.attendanceStatus,
                 DuesPaid = (decimal)x.monthlyDues,
+                FormattedDuesPaid = AmountHelper.FormatAmount((decimal)x.monthlyDues),
                 Gender = x.genderName,
                 GeneralMeetingId = x.generalAttendanceID,
             })
-            .OrderByDescending(x => x.DuesPaid).ThenByDescending(x => x.AttendanceStatus).ThenBy(x => x.FirstName).ToList();
+            .OrderByDescending(x => x.AttendanceStatus).ThenByDescending(x => x.DuesPaid).ThenBy(x => x.FirstName).ToList();
         }
 
         public List<GeneralMeetingAttendanceDTO> GetAllDeletedPersonalAttendance()
@@ -183,8 +186,9 @@ namespace APC.Applications.Services
                 DuesPaid = (decimal)x.monthlyDues,
                 Gender = x.genderName,
                 GeneralMeetingId = x.generalAttendanceID,
+                FormattedDuesPaid = AmountHelper.FormatAmount((decimal)x.monthlyDues),
             })
-            .OrderByDescending(x => x.DuesPaid).ThenByDescending(x => x.AttendanceStatus).ThenBy(x => x.FirstName).ToList();
+            .OrderByDescending(x => x.AttendanceStatus).ThenByDescending(x => x.DuesPaid).ThenBy(x => x.FirstName).ToList();
         }
 
         public GeneralMeetingAttendanceDTO GetPersonalAttendanceById(int memberId, int generalMeetingId)
@@ -206,6 +210,7 @@ namespace APC.Applications.Services
                         DuesPaid = p.monthlyDues ?? 0,
                         Gender = g.genderName,
                         GeneralMeetingId = p.generalAttendanceID,
+                        FormattedDuesPaid = AmountHelper.FormatAmount((decimal)p.monthlyDues)
                     })
             .FirstOrDefault();
         }

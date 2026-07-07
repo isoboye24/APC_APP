@@ -534,7 +534,7 @@ namespace APC.Applications.Services
                 FirstName = x.name,
                 LastName = x.surname,
                 Birthday =  x.birthday,
-                FormattedBirthday =  x.birthday.ToString("dd.MM.YYYY"),
+                FormattedBirthday =  x.birthday.ToString("dd.MM"),
                 ImagePath = x.imagePath,
                 Position = x.positionName,
                 Gender = x.genderName,

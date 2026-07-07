@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,7 +80,7 @@ namespace APC.Applications.Services
                     Title = x.title,
                     Summary = x.summary,
                     AmountToContribute = x.amountToContribute,
-                    FormattedAmountToContribute = x.amountToContribute.ToString(),
+                    FormattedAmountToContribute = AmountHelper.FormatAmount(x.amountToContribute),
                     SupervisorId = x.supervisorID,
                     FirstName = x.name,
                     LastName = x.surname,
@@ -92,10 +93,10 @@ namespace APC.Applications.Services
                     FormattedContributionEndDate = x.contributionEndDate.ToString("dd.MM.yyyy"),
 
                     AmountExpected = x.amountExpected,
-                    FormattedAmountExpected = x.amountExpected.ToString(),
+                    FormattedAmountExpected = AmountHelper.FormatAmount(x.amountExpected),
 
                     TotalContributedAmount = totalContributedAmount,
-                    FormattedTotalContributedAmount = totalContributedAmount.ToString(),
+                    FormattedTotalContributedAmount = AmountHelper.FormatAmount(totalContributedAmount),
 
                     Status =
                         totalContributedAmount <= 0

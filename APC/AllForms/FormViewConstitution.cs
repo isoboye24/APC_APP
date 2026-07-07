@@ -44,7 +44,7 @@ namespace APC.AllForms
             resizeControls();
 
             txtConstitution.Text = _constitutionDTO.ConstitutionText;
-            labelFine.Text = "€ " + _constitutionDTO.FineWithCurrency;
+            labelFine.Text = _constitutionDTO.FineWithCurrency;
             labelSection.Text = _constitutionDTO.Section;
 
             if (_isFinedMemberView)

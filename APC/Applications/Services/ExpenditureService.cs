@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace APC.Applications.Services
                 {
                     ExpenditureId = x.expenditureID,
                     AmountSpent = x.amountSpent,
-                    FormattedAmountSpent = x.amountSpent + " €",
+                    FormattedAmountSpent = "€ " + AmountHelper.FormatAmount(x.amountSpent),
                     Summary = x.summary,
                     ExpenditureDate = x.expenditureDate,
                     FormattedExpenditureDate = x.expenditureDate.ToString("dd.MM.yyyy"),
@@ -70,7 +71,7 @@ namespace APC.Applications.Services
                 {
                     ExpenditureId = x.expenditureID,
                     AmountSpent = x.amountSpent,
-                    FormattedAmountSpent = x.amountSpent + " €",
+                    FormattedAmountSpent = "€ " + AmountHelper.FormatAmount(x.amountSpent),
                     Summary = x.summary,
                     ExpenditureDate = x.expenditureDate,
                     FormattedExpenditureDate = x.expenditureDate.ToString("dd.MM.yyyy"),
@@ -87,7 +88,7 @@ namespace APC.Applications.Services
                 {
                     ExpenditureId = x.expenditureID,
                     AmountSpent = x.amountSpent,
-                    FormattedAmountSpent = x.amountSpent + " €",
+                    FormattedAmountSpent = "€ " + AmountHelper.FormatAmount(x.amountSpent),
                     Summary = x.summary,
                     ExpenditureDate = x.expenditureDate,
                     FormattedExpenditureDate = x.expenditureDate.ToString("dd.MM.yyyy"),

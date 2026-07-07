@@ -178,9 +178,9 @@ namespace APC
             decimal totalSales = _eventSalesService.GetSalesAmountByEvent(selected.EventsId);
             decimal totalExpenditures = _eventExpenditureService.GetTotalAmountSpentByEvent(selected.EventsId);
 
-            labelOverallSold.Text = totalSales.ToString();
-            labelOverallSpent.Text = totalExpenditures.ToString();
-            labelOverallBalance.Text = (totalSales - totalExpenditures).ToString();
+            labelOverallSold.Text = "€ " + AmountHelper.FormatAmount(totalSales).ToString();
+            labelOverallSpent.Text = "€ " + AmountHelper.FormatAmount(totalExpenditures).ToString();
+            labelOverallBalance.Text = "€ " + AmountHelper.FormatAmount(totalSales - totalExpenditures).ToString();
         }
     }
 }

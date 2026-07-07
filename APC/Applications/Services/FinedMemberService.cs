@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,14 +71,14 @@ namespace APC.Applications.Services
             {
                 FinedMemberId = x.finedMemberID,
                 AmountPaid = (decimal)x.amountPaid,
-                FormattedAmountPaid = (x.amountPaid + " €").ToString(),
+                FormattedAmountPaid = AmountHelper.FormatAmount((decimal)x.amountPaid),
                 Summary = x.Summary,
                 ConstitutionId = x.ConstitutionId,
                 Section = x.Section,
                 ShortDescription = x.ShortDescription,
                 AmountExpected = x.fine,
-                FormattedAmountExpected = (x.fine + " €").ToString(),
-                Balance = (x.fine - x.amountPaid).ToString(),
+                FormattedAmountExpected = AmountHelper.FormatAmount(x.fine),
+                Balance = AmountHelper.FormatAmount((x.fine - (decimal)x.amountPaid)),
                 MemberId = x.memberID,
                 FirstName = x.name,
                 LastName = x.surname,
@@ -126,14 +127,14 @@ namespace APC.Applications.Services
             {
                 FinedMemberId = x.finedMemberID,
                 AmountPaid = (decimal)x.amountPaid,
-                FormattedAmountPaid = (x.amountPaid + " €").ToString(),
+                FormattedAmountPaid = AmountHelper.FormatAmount((decimal)x.amountPaid),
                 Summary = x.Summary,
                 ConstitutionId = x.ConstitutionId,
                 Section = x.Section,
                 ShortDescription = x.ShortDescription,
                 AmountExpected = x.fine,
-                FormattedAmountExpected = (x.fine + " €").ToString(),
-                Balance = (x.fine - x.amountPaid).ToString(),
+                FormattedAmountExpected = AmountHelper.FormatAmount(x.fine),
+                Balance = AmountHelper.FormatAmount((x.fine - (decimal)x.amountPaid)),
                 MemberId = x.memberID,
                 FirstName = x.name,
                 LastName = x.surname,
@@ -204,6 +205,21 @@ namespace APC.Applications.Services
             return _repository.GetAll().Where(x =>x.memberID == memberId).Sum(x => x.amountPaid ?? 0);
         }
 
+        public decimal GetAnnualFinesPaidByMember(int memberId, int year)
+        {
+            return _repository.GetAll().Where(x => x.memberID == memberId && x.fineDate.Year == year).Sum(x => x.amountPaid ?? 0);
+        }
+
+        public decimal GetAnnualFinesExpectedByMember(int memberId, int year)
+        {
+            var totalExpectedAmount = (from fm in _repository.GetAll().Where(x => x.memberID == memberId && x.fineDate.Year == year)
+                                       join c in _constitutionRepository.GetAll()
+                                           on fm.constitutionID equals c.constitutionID
+                                       select c.fine).Sum();
+
+            return totalExpectedAmount;
+        }
+
         public decimal GetTotalFinesExpectedByMember(int memberId)
         {
             var totalExpectedAmount = (from fm in _repository.GetAll().Where(x => x.memberID == memberId)
@@ -252,14 +268,14 @@ namespace APC.Applications.Services
             {
                 FinedMemberId = x.finedMemberID,
                 AmountPaid = (decimal)x.amountPaid,
-                FormattedAmountPaid = (x.amountPaid + " €").ToString(),
+                FormattedAmountPaid = AmountHelper.FormatAmount((decimal)x.amountPaid),
                 Summary = x.Summary,
                 ConstitutionId = x.ConstitutionId,
                 Section = x.Section,
                 ShortDescription = x.ShortDescription,
                 AmountExpected = x.fine,
-                FormattedAmountExpected = (x.fine + " €").ToString(),
-                Balance = (x.fine - x.amountPaid).ToString(),
+                FormattedAmountExpected = AmountHelper.FormatAmount(x.fine),
+                Balance = AmountHelper.FormatAmount((x.fine - (decimal)x.amountPaid)),
                 MemberId = x.memberID,
                 FirstName = x.name,
                 LastName = x.surname,
@@ -308,14 +324,14 @@ namespace APC.Applications.Services
             {
                 FinedMemberId = x.finedMemberID,
                 AmountPaid = (decimal)x.amountPaid,
-                FormattedAmountPaid = (x.amountPaid + " €").ToString(),
+                FormattedAmountPaid = AmountHelper.FormatAmount((decimal)x.amountPaid),
                 Summary = x.Summary,
                 ConstitutionId = x.ConstitutionId,
                 Section = x.Section,
                 ShortDescription = x.ShortDescription,
                 AmountExpected = x.fine,
-                FormattedAmountExpected = (x.fine + " €").ToString(),
-                Balance = (x.fine - x.amountPaid).ToString(),
+                FormattedAmountExpected = AmountHelper.FormatAmount(x.fine),
+                Balance = AmountHelper.FormatAmount((x.fine - (decimal)x.amountPaid)),
                 MemberId = x.memberID,
                 FirstName = x.name,
                 LastName = x.surname,

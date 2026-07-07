@@ -1,8 +1,9 @@
-﻿using APC.Domain.Entities;
+﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
+using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
-using APC.Applications.DTO;
 using System.Linq;
 
 namespace APC.Applications.Services
@@ -45,7 +46,7 @@ namespace APC.Applications.Services
                     FormattedReceiptDate = x.receiptDate.ToString("dd.MM.yyyy"),
                     ReceiptDate = x.receiptDate,
                     AmountSpent = x.amountSpent,
-                    FormattedAmountSpent = x.amountSpent.ToString() + " €",
+                    FormattedAmountSpent = AmountHelper.FormatAmount(x.amountSpent).ToString() + " €",
                 })
                 .ToList();
         }
@@ -67,7 +68,7 @@ namespace APC.Applications.Services
                     FormattedReceiptDate = x.receiptDate.ToString("dd.MM.yyyy"),
                     ReceiptDate = x.receiptDate,
                     AmountSpent = x.amountSpent,
-                    FormattedAmountSpent = x.amountSpent.ToString() + " €",
+                    FormattedAmountSpent = AmountHelper.FormatAmount(x.amountSpent).ToString() + " €",
                 })
                 .ToList();
         }

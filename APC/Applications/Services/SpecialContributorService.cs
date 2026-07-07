@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,14 +65,14 @@ namespace APC.Applications.Services
                 LastName = x.surname,
                 ImagePath = x.imagePath,
                 AmountContributed = x.amountContributed,
-                FormattedAmountContributed = "€ " + x.amountContributed,
+                FormattedAmountContributed = AmountHelper.FormatAmount(x.amountContributed),
                 FormattedContributedDate = x.contributedDate.ToString("dd.MM.yyyy"),
                 ContributedDate = x.contributedDate,
 
                 AmountExpected = x.amountExpected,
-                FormattedAmountExpected = "€ " + x.amountExpected,
+                FormattedAmountExpected = AmountHelper.FormatAmount(x.amountExpected),
 
-                Balance = "€ " + (x.amountExpected - x.amountContributed),
+                Balance = AmountHelper.FormatAmount(x.amountExpected - x.amountContributed),
 
                 PaymentStatus =
                     x.amountContributed <= 0 ? "Not Paid" :
@@ -125,14 +126,14 @@ namespace APC.Applications.Services
                 LastName = x.surname,
                 ImagePath = x.imagePath,
                 AmountContributed = x.amountContributed,
-                FormattedAmountContributed = "€ " + x.amountContributed,
+                FormattedAmountContributed = AmountHelper.FormatAmount(x.amountContributed),
                 FormattedContributedDate = x.contributedDate.ToString("dd.MM.yyyy"),
                 ContributedDate = x.contributedDate,
 
                 AmountExpected = x.amountExpected,
-                FormattedAmountExpected = "€ " + x.amountExpected,
+                FormattedAmountExpected = AmountHelper.FormatAmount(x.amountExpected),
 
-                Balance = "€ " + (x.amountExpected - x.amountContributed),
+                Balance = AmountHelper.FormatAmount(x.amountExpected - x.amountContributed),
 
                 PaymentStatus =
                     x.amountContributed <= 0 ? "Not Paid" :

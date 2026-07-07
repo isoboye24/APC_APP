@@ -171,7 +171,7 @@ namespace APC
 
         private void resizeControls()
         {
-            GeneralHelper.ApplyBoldFont(20, labelNoOfRegMem, labelMonthlyDues, labelYearlyDues, labelExpendituresInYear, labelTotalAnnualRevenue,
+            GeneralHelper.ApplyBoldFont(20, labelNoOfRegMem, labelMonthlyDues, labelYearlyDuesAndFines, labelExpendituresInYear, labelTotalAnnualRevenue,
                 labelLastMeetingAttendance, labelTotalPaidFines, labelTotalFineExpected
                 );
 
@@ -239,7 +239,7 @@ namespace APC
             labelTotalAnnualRevenue.Tag = "resizable";
             labelTotalFineExpected.Tag = "resizable";
             labelTotalPaidFines.Tag = "resizable";
-            labelYearlyDues.Tag = "resizable";
+            labelYearlyDuesAndFines.Tag = "resizable";
         }
 
         private void loadAnnualRaisedDues()
@@ -290,7 +290,6 @@ namespace APC
 
             labelNoOfRegMem.Text = _memberService.GetAllCurrentMembersCount().ToString();
             labelLastMeetingAttendance.Text = _generalMeetingAttendanceService.GetLastMeetingPresentMembersCount().ToString();
-            //labelLastEventDate.Text = eventBLL.SelectRecentEvent();
 
             string monthToday = DateTime.Now.ToString("MMMM", CultureInfo.GetCultureInfo("en-US"));
 
@@ -302,16 +301,16 @@ namespace APC
             labelTotalDuesYear.Text = "Dues + Fines in " + todayYear;
             labelRevenue.Text = "Revenue in " + todayYear;
 
-            labelMonthlyDues.Text = "€ " + _financialReportService.GetTotalDuesByMonth(todayMonth, todayYear);
-            labelYearlyDues.Text = "€ " + _financialReportService.GetTotalDuesByYear(todayYear);
+            labelMonthlyDues.Text = AmountHelper.FormatAmount(_financialReportService.GetTotalDuesByMonth(todayMonth, todayYear));
+            labelYearlyDuesAndFines.Text = _financialReportService.TotalDuesAndFinesInYear(todayYear);
 
-            labelExpendituresInYear.Text = "€ " + _financialReportService.GetOverallExpendituresByYear(todayYear);
-            labelTotalAnnualRevenue.Text = "€ " + _financialReportService.GetTotalAnnualRevenue(todayYear);
+            labelExpendituresInYear.Text = AmountHelper.FormatAmount(_financialReportService.GetOverallExpendituresByYear(todayYear));
+            labelTotalAnnualRevenue.Text = AmountHelper.FormatAmount(_financialReportService.GetTotalAnnualRevenue(todayYear));
 
             labelTotalExpectedFinesInYear.Text = "Expected Fines in " + todayYear;
-            labelTotalFineExpected.Text = "€ " + _finedMemberService.GetAnnualFinesExpected(todayYear);
+            labelTotalFineExpected.Text = AmountHelper.FormatAmount(_finedMemberService.GetAnnualFinesExpected(todayYear));
             labelPaidFinesInYear.Text = "Paid Fines in " + todayYear;
-            labelTotalPaidFines.Text = "€ " + _finedMemberService.GetAnnualPaidFines(todayYear);
+            labelTotalPaidFines.Text = AmountHelper.FormatAmount(_finedMemberService.GetAnnualPaidFines(todayYear));
 
             labelAmountRaisedYearly.Text = "Overall Amount Raised";
             labelExpendituresYearly.Text = "Overall Expenditures";

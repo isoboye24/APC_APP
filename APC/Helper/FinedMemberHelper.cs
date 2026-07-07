@@ -18,39 +18,39 @@ namespace APC.Helper
             {
                 case FinedMemberGridType.Basic:
                     GeneralHelper.SetVisibleColumns(grid, "FirstName", "LastName", "ShortDescription",
-                        "AmountExpected", "AmountPaid", "Status", "FormattedFineDate");
+                        "FormattedAmountExpected", "FormattedAmountPaid", "Status", "FormattedFineDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "FirstName", "First Name" },
                                     { "LastName", "Last Name" },
                                     { "ShortDescription", "Violated" },
-                                    { "AmountExpected", "Fine" },
-                                    { "AmountPaid", "Paid" },
+                                    { "FormattedAmountExpected", "Fine" },
+                                    { "FormattedAmountPaid", "Paid" },
                                     { "FormattedFineDate", "Date" }
                                 });
 
                     grid.Columns["FirstName"].DisplayIndex = 0;
                     grid.Columns["LastName"].DisplayIndex = 1;
                     grid.Columns["ShortDescription"].DisplayIndex = 2;
-                    grid.Columns["AmountExpected"].DisplayIndex = 3;
-                    grid.Columns["AmountPaid"].DisplayIndex = 4;
+                    grid.Columns["FormattedAmountExpected"].DisplayIndex = 3;
+                    grid.Columns["FormattedAmountPaid"].DisplayIndex = 4;
                     grid.Columns["Status"].DisplayIndex = 5;
                     grid.Columns["FormattedFineDate"].DisplayIndex = 6;
                     break;
 
                 case FinedMemberGridType.PersonalDetails:
-                    GeneralHelper.SetVisibleColumns(grid, "ShortDescription", "AmountExpected", "AmountPaid", "Balance", "Status", "FormattedFineDate");
+                    GeneralHelper.SetVisibleColumns(grid, "ShortDescription", "FormattedAmountExpected", "FormattedAmountPaid", "Balance", "Status", "FormattedFineDate");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "ShortDescription", "Violated" },
-                                    { "AmountExpected", "Fine" },
-                                    { "AmountPaid", "Paid" },
+                                    { "FormattedAmountExpected", "Fine" },
+                                    { "FormattedAmountPaid", "Paid" },
                                     { "FormattedFineDate", "Date" }
                                 });
 
                     grid.Columns["ShortDescription"].DisplayIndex = 0;
-                    grid.Columns["AmountExpected"].DisplayIndex = 1;
-                    grid.Columns["AmountPaid"].DisplayIndex = 2;
+                    grid.Columns["FormattedAmountExpected"].DisplayIndex = 1;
+                    grid.Columns["FormattedAmountPaid"].DisplayIndex = 2;
                     grid.Columns["Balance"].DisplayIndex = 3;
                     grid.Columns["Status"].DisplayIndex = 4;
                     grid.Columns["FormattedFineDate"].DisplayIndex = 5;

@@ -31,5 +31,6 @@ namespace APC.Applications.Interfaces
         List<YearDTO> GetFinancialReportYearsOnly();
 
         decimal GetTotalAnnualRevenue(int year);
+        string TotalDuesAndFinesInYear(int year);
     }
 }

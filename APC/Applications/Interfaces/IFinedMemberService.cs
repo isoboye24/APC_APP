@@ -21,7 +21,10 @@ namespace APC.Applications.Interfaces
         decimal GetAnnualFinesExpected(int year);
 
         decimal GetTotalFinesPaidByMember(int memberId);
+        decimal GetAnnualFinesPaidByMember(int memberId, int year);
         decimal GetTotalFinesExpectedByMember(int memberId);
+        decimal GetAnnualFinesExpectedByMember(int memberId, int year);
+
         int AnnualFinesCountById(int memberId, int year);
         int TotalFinesCountById(int memberId);
 

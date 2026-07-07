@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
+using APC.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,9 +104,9 @@ namespace APC.Applications.Services
                  {
                      FinancialReportId = x.financialReportID,
                      TotalAmountRaised = CalculateTotalAmountRaisedAnnually(x.year),
-                     FormattedTotalAmountRaised = CalculateTotalAmountRaisedAnnually(x.year) + " €",
+                     FormattedTotalAmountRaised = "€ " + AmountHelper.FormatAmount(CalculateTotalAmountRaisedAnnually(x.year)),
                      TotalAmountSpent = CalculateTotalAmountSpentAnnually(x.year),
-                     FormattedTotalAmountSpent = CalculateTotalAmountSpentAnnually(x.year) + " €",
+                     FormattedTotalAmountSpent = "€ " + AmountHelper.FormatAmount(CalculateTotalAmountSpentAnnually(x.year)),
                      Year = x.year,
                      Summary = x.summary,
                  })
@@ -268,7 +269,7 @@ namespace APC.Applications.Services
                     .Where(x => x.memberID == memberId)
                     .Count();
 
-            return (noOfAttendance * 10);
+            return (decimal)(noOfAttendance * 10);
         }
 
         public decimal GetTotalAnnualDuesExpectedById(int memberId, int year)
@@ -282,6 +283,14 @@ namespace APC.Applications.Services
                     ).Count();
 
             return (noOfAttendance * 10);
+        }
+
+        public string TotalDuesAndFinesInYear(int year)
+        {
+            var totalFines = _finedMemberRepository.GetAll().Where(x => x.fineDate.Year == year).Sum(x => x.amountPaid ?? 0);
+            var totalDues = GetTotalDuesByYear(year);
+
+            return AmountHelper.FormatAmount(totalDues + totalFines);
         }
     }
 }

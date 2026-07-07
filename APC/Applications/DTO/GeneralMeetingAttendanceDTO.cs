@@ -17,6 +17,7 @@ namespace APC.Applications.DTO
         public int AttendanceStatusId { get; set; }
         public string AttendanceStatus { get; set; }
         public decimal DuesPaid { get; set; }
+        public string FormattedDuesPaid { get; set; }
         public string Gender { get; set; }
         public int GeneralMeetingId { get; set; }
     }

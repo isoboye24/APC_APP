@@ -102,9 +102,10 @@ namespace APC.AllForms
 
         private void controlFonts()
         {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label5, labelTotalPaidAmount, btnClose, labelTotalAmount);
-            GeneralHelper.ApplyRegularFont(14, labelPaidFines, txtAmount, cmbMonth, cmbYear, labelTotalFines);
+            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label5, btnClose);
+            GeneralHelper.ApplyRegularFont(14, txtAmount, cmbMonth, cmbYear);
             GeneralHelper.ApplyBoldFont(11, rbEqualAmount, rbLessAmount, rbMoreAmount);
+            GeneralHelper.ApplyBoldFont(12, labelTotalPaidAmount, labelTotalAmountExpected);
         }
 
         private void loadMemberAttendanceDetails()
@@ -178,10 +179,6 @@ namespace APC.AllForms
             amountExpected = _financialReportService.GetTotalAnnualDuesExpectedById(_memberId, currYear);
             Balance = amountExpected - amountContributed;
 
-            paidFinesAmount = _finedMemberService.GetTotalFinesPaidByMember(_memberId);
-            expectedFineAmount = _finedMemberService.GetTotalFinesExpectedByMember(_memberId);
-            fineBalance = expectedFineAmount - paidFinesAmount;
-
             labelTitle.Text = _memberFullDetailsDTO.LastName + " " + _memberFullDetailsDTO.FirstName + "'s present attendance record";
             string imagePath = Application.StartupPath + "\\images\\" + _memberFullDetailsDTO.ImagePath;
             picProfile.ImageLocation = imagePath;
@@ -190,11 +187,17 @@ namespace APC.AllForms
             {
                 loadMemberAttendanceDetails();
                 loadMemberAttendanceAnnualPresent(currYear);
+
+                labelTotalPaidAmount.Text = "Amount Contributed : €" + amountContributed;
+                labelTotalAmountExpected.Visible = false;
             }
             if (_isAbsent)
             {
                 loadMemberAttendanceDetails();
                 loadMemberAttendanceAnnualAbsent(currYear);
+
+                labelTotalPaidAmount.Text = "Amount Contributed : €" + amountContributed;
+                labelTotalAmountExpected.Visible = false;
             }
             if (_isAmountContributed)
             {
@@ -202,16 +205,17 @@ namespace APC.AllForms
 
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalPaidAmount.Text = "€" + amountContributed;
-                labelPaidFines.Text = "Total Amt. Contributed";
+                labelTotalPaidAmount.Text = "Amount Contributed : €" + amountContributed;
+
+                labelTotalAmountExpected.Visible = false;
             }
             if (_isAmountExpected)
             {
                 loadMemberAttendanceDetails();
 
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalPaidAmount.Text = "€ 120.00"; // To be made dynamic
-                labelPaidFines.Text = "Total Amt. Expected per Year";
+                labelTotalPaidAmount.Text = "Amt. Expected Yearly : € 120.00"; // To be made dynamic#
+                labelTotalAmountExpected.Visible = false;
             }
             if (_isPersonalBalance)
             {
@@ -219,20 +223,24 @@ namespace APC.AllForms
 
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalPaidAmount.Text = "€" + (120 - amountContributed); // 120 is to be made more dynamic
-                labelPaidFines.Text = "Remaining Amt.";
+                labelTotalPaidAmount.Text = "Remaining Amt. : €" + (120 - amountContributed); // 120 is to be made more dynamic
+                labelTotalAmountExpected.Visible = false;
             }
             if (_isPersonalFines)
             {
+                paidFinesAmount = _finedMemberService.GetAnnualFinesPaidByMember(_memberId, currYear);
+                expectedFineAmount = _finedMemberService.GetAnnualFinesExpectedByMember(_memberId, currYear);
+                fineBalance = expectedFineAmount - paidFinesAmount;
+
                 loadMemberFineDetails();
 
                 tableLayoutPanelChangingAmount.Visible = true;
                 tableLayoutPanelTotal.Visible = true;
-                labelTotalPaidAmount.Text = "€ " + paidFinesAmount;
-                labelPaidFines.Text = "Paid Fines";
+                labelTotalAmountExpected.Visible = true;
 
-                labelTotalAmount.Text = "€ " + expectedFineAmount;
-                labelTotalFines.Text = "Expected";
+                labelTotalPaidAmount.Text = "Total Paid Fines : " + "€ " + paidFinesAmount;
+
+                labelTotalAmountExpected.Text = "Expected Fines: " + "€ " + expectedFineAmount;
             }
         }
 

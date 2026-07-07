@@ -43,7 +43,6 @@
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClose = new System.Windows.Forms.Button();
             this.tableLayoutPanelTotal = new System.Windows.Forms.TableLayoutPanel();
-            this.labelPaidFines = new System.Windows.Forms.Label();
             this.labelTotalPaidAmount = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -65,8 +64,8 @@
             this.txtAmount = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.picProfile = new System.Windows.Forms.PictureBox();
-            this.labelTotalAmount = new System.Windows.Forms.Label();
-            this.labelTotalFines = new System.Windows.Forms.Label();
+            this.labelTotalAmountExpected = new System.Windows.Forms.Label();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
@@ -83,6 +82,7 @@
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).BeginInit();
+            this.tableLayoutPanel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -210,6 +210,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44F));
             this.tableLayoutPanel6.Controls.Add(this.btnClose, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel9, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanelTotal, 2, 1);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(30, 610);
@@ -240,16 +241,10 @@
             // 
             // tableLayoutPanelTotal
             // 
-            this.tableLayoutPanelTotal.ColumnCount = 5;
-            this.tableLayoutPanelTotal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanelTotal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanelTotal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelTotal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanelTotal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanelTotal.Controls.Add(this.labelPaidFines, 0, 0);
-            this.tableLayoutPanelTotal.Controls.Add(this.labelTotalPaidAmount, 1, 0);
-            this.tableLayoutPanelTotal.Controls.Add(this.labelTotalAmount, 4, 0);
-            this.tableLayoutPanelTotal.Controls.Add(this.labelTotalFines, 3, 0);
+            this.tableLayoutPanelTotal.ColumnCount = 2;
+            this.tableLayoutPanelTotal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanelTotal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanelTotal.Controls.Add(this.labelTotalAmountExpected, 1, 0);
             this.tableLayoutPanelTotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTotal.Location = new System.Drawing.Point(707, 15);
             this.tableLayoutPanelTotal.Margin = new System.Windows.Forms.Padding(4);
@@ -259,28 +254,18 @@
             this.tableLayoutPanelTotal.Size = new System.Drawing.Size(546, 45);
             this.tableLayoutPanelTotal.TabIndex = 4;
             // 
-            // labelPaidFines
-            // 
-            this.labelPaidFines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelPaidFines.AutoSize = true;
-            this.labelPaidFines.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPaidFines.Location = new System.Drawing.Point(41, 6);
-            this.labelPaidFines.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
-            this.labelPaidFines.Name = "labelPaidFines";
-            this.labelPaidFines.Size = new System.Drawing.Size(118, 39);
-            this.labelPaidFines.TabIndex = 6;
-            this.labelPaidFines.Text = "Total Amt. Contributed";
-            // 
             // labelTotalPaidAmount
             // 
+            this.labelTotalPaidAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTotalPaidAmount.AutoSize = true;
             this.labelTotalPaidAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalPaidAmount.Location = new System.Drawing.Point(167, 6);
+            this.labelTotalPaidAmount.Location = new System.Drawing.Point(4, 9);
             this.labelTotalPaidAmount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.labelTotalPaidAmount.Name = "labelTotalPaidAmount";
-            this.labelTotalPaidAmount.Size = new System.Drawing.Size(27, 32);
+            this.labelTotalPaidAmount.Size = new System.Drawing.Size(537, 32);
             this.labelTotalPaidAmount.TabIndex = 6;
             this.labelTotalPaidAmount.Text = "0";
+            this.labelTotalPaidAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dataGridView1
             // 
@@ -418,11 +403,10 @@
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 4;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.55556F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.111111F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel7.Controls.Add(this.btnClear, 3, 0);
             this.tableLayoutPanel7.Controls.Add(this.btnSearch, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanelChangingAmount, 0, 0);
@@ -442,10 +426,10 @@
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(695, 4);
+            this.btnClear.Location = new System.Drawing.Point(721, 4);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(164, 45);
+            this.btnClear.Size = new System.Drawing.Size(138, 45);
             this.btnClear.TabIndex = 5;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
@@ -458,10 +442,10 @@
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(517, 4);
+            this.btnSearch.Location = new System.Drawing.Point(569, 4);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(163, 45);
+            this.btnSearch.Size = new System.Drawing.Size(135, 45);
             this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -482,7 +466,7 @@
             this.tableLayoutPanelChangingAmount.Name = "tableLayoutPanelChangingAmount";
             this.tableLayoutPanelChangingAmount.RowCount = 1;
             this.tableLayoutPanelChangingAmount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelChangingAmount.Size = new System.Drawing.Size(505, 45);
+            this.tableLayoutPanelChangingAmount.Size = new System.Drawing.Size(557, 45);
             this.tableLayoutPanelChangingAmount.TabIndex = 6;
             this.tableLayoutPanelChangingAmount.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanelChangingAmount_Paint);
             // 
@@ -501,7 +485,7 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(283, 37);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(335, 37);
             this.tableLayoutPanel8.TabIndex = 4;
             // 
             // rbLessAmount
@@ -521,7 +505,7 @@
             // 
             this.rbMoreAmount.AutoSize = true;
             this.rbMoreAmount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbMoreAmount.Location = new System.Drawing.Point(98, 4);
+            this.rbMoreAmount.Location = new System.Drawing.Point(115, 4);
             this.rbMoreAmount.Margin = new System.Windows.Forms.Padding(4);
             this.rbMoreAmount.Name = "rbMoreAmount";
             this.rbMoreAmount.Size = new System.Drawing.Size(73, 27);
@@ -534,7 +518,7 @@
             // 
             this.rbEqualAmount.AutoSize = true;
             this.rbEqualAmount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbEqualAmount.Location = new System.Drawing.Point(192, 4);
+            this.rbEqualAmount.Location = new System.Drawing.Point(226, 4);
             this.rbEqualAmount.Margin = new System.Windows.Forms.Padding(4);
             this.rbEqualAmount.Name = "rbEqualAmount";
             this.rbEqualAmount.Size = new System.Drawing.Size(75, 27);
@@ -591,28 +575,34 @@
             this.picProfile.TabIndex = 0;
             this.picProfile.TabStop = false;
             // 
-            // labelTotalAmount
+            // labelTotalAmountExpected
             // 
-            this.labelTotalAmount.AutoSize = true;
-            this.labelTotalAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalAmount.Location = new System.Drawing.Point(465, 6);
-            this.labelTotalAmount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
-            this.labelTotalAmount.Name = "labelTotalAmount";
-            this.labelTotalAmount.Size = new System.Drawing.Size(27, 32);
-            this.labelTotalAmount.TabIndex = 6;
-            this.labelTotalAmount.Text = "0";
+            this.labelTotalAmountExpected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalAmountExpected.AutoSize = true;
+            this.labelTotalAmountExpected.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalAmountExpected.Location = new System.Drawing.Point(113, 9);
+            this.labelTotalAmountExpected.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
+            this.labelTotalAmountExpected.Name = "labelTotalAmountExpected";
+            this.labelTotalAmountExpected.Size = new System.Drawing.Size(429, 32);
+            this.labelTotalAmountExpected.TabIndex = 6;
+            this.labelTotalAmountExpected.Text = "0";
             // 
-            // labelTotalFines
+            // tableLayoutPanel9
             // 
-            this.labelTotalFines.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalFines.AutoSize = true;
-            this.labelTotalFines.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalFines.Location = new System.Drawing.Point(339, 6);
-            this.labelTotalFines.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
-            this.labelTotalFines.Name = "labelTotalFines";
-            this.labelTotalFines.Size = new System.Drawing.Size(118, 39);
-            this.labelTotalFines.TabIndex = 6;
-            this.labelTotalFines.Text = "Total Amt. Contributed";
+            this.tableLayoutPanel9.ColumnCount = 1;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel9.Controls.Add(this.labelTotalPaidAmount, 0, 0);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(4, 15);
+            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 1;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(545, 45);
+            this.tableLayoutPanel9.TabIndex = 4;
             // 
             // FormViewPersonalAttendances
             // 
@@ -651,6 +641,8 @@
             this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picProfile)).EndInit();
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -687,11 +679,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTotal;
-        private System.Windows.Forms.Label labelPaidFines;
         private System.Windows.Forms.Label labelTotalPaidAmount;
         private FontAwesome.Sharp.IconPictureBox iconMaximize;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelTotalAmount;
-        private System.Windows.Forms.Label labelTotalFines;
+        private System.Windows.Forms.Label labelTotalAmountExpected;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
     }
 }

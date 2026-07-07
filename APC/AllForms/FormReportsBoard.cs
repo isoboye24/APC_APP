@@ -16,8 +16,8 @@ namespace APC.AllForms
         private readonly IExpenditureService _expenditureService;
         private readonly IMonthService _monthService;
 
-        private List<Applications.DTO.FinancialReportDTO> _financialReportDTOs;
-        private List<Applications.DTO.ExpenditureDTO> _expenditureDTOs;
+        private List<FinancialReportDTO> _financialReportDTOs;
+        private List<ExpenditureDTO> _expenditureDTOs;
 
         private int currentYear = DateTime.Today.Year;
 
@@ -118,7 +118,7 @@ namespace APC.AllForms
 
             labelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
 
-            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + _expenditureService.GetAnnualExpendituresAmount(currentYear).ToString() + " €";
+            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": € " + AmountHelper.FormatAmount(_expenditureService.GetAnnualExpendituresAmount(currentYear)).ToString() + " €";
         }
 
         private void RowsCount()
@@ -134,12 +134,12 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private Applications.DTO.FinancialReportDTO GetSelectedFinancialReport()
+        private FinancialReportDTO GetSelectedFinancialReport()
         {
             if (dataGridViewFinReport.CurrentRow == null)
                 return null;
 
-            return dataGridViewFinReport.CurrentRow.DataBoundItem as Applications.DTO.FinancialReportDTO;
+            return dataGridViewFinReport.CurrentRow.DataBoundItem as FinancialReportDTO;
         }
 
         private void btnUpdateFinReport_Click(object sender, EventArgs e)
@@ -202,12 +202,12 @@ namespace APC.AllForms
             ClearFilters();
         }
 
-        private Applications.DTO.ExpenditureDTO GetSelectedExpenditure()
+        private ExpenditureDTO GetSelectedExpenditure()
         {
             if (dataGridViewExpReport.CurrentRow == null)
                 return null;
 
-            return dataGridViewExpReport.CurrentRow.DataBoundItem as Applications.DTO.ExpenditureDTO;
+            return dataGridViewExpReport.CurrentRow.DataBoundItem as ExpenditureDTO;
         }
 
 
@@ -336,9 +336,9 @@ namespace APC.AllForms
             if (selected == null)
                 return;
 
-            labelTotalAmountRaised.Text = selected.FormattedTotalAmountRaised.ToString();
-            labelTotalAmountSpent.Text = selected.FormattedTotalAmountSpent.ToString();
-            labelTotalBalance.Text = (selected.TotalAmountRaised - selected.TotalAmountSpent).ToString() + " €";
+            labelTotalAmountRaised.Text = "€ " + AmountHelper.FormatAmount(selected.TotalAmountRaised).ToString();
+            labelTotalAmountSpent.Text = "€ " + AmountHelper.FormatAmount(selected.TotalAmountSpent).ToString();
+            labelTotalBalance.Text = "€ " + AmountHelper.FormatAmount(selected.TotalAmountRaised - selected.TotalAmountSpent).ToString();
         }
     }
 }

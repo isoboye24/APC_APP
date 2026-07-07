@@ -385,6 +385,7 @@
     <Compile Include="CircularPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Helper\AmountHelper.cs" />
     <Compile Include="Helper\AttendanceStatusHelper.cs" />
     <Compile Include="Infrastructure\Data\APCContext.cs" />
     <Compile Include="AllForms\FormDocumentList.cs">
