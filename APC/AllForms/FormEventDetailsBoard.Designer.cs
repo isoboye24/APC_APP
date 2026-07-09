@@ -124,7 +124,6 @@
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalRowsEventReceipt = new System.Windows.Forms.Label();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalAmountEventReceipt = new System.Windows.Forms.Label();
             this.btnCloseEventReceipt = new System.Windows.Forms.Button();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewEventReceipt = new System.Windows.Forms.DataGridView();
@@ -174,7 +173,6 @@
             this.tableLayoutPanel18.SuspendLayout();
             this.tableLayoutPanel16.SuspendLayout();
             this.tableLayoutPanel17.SuspendLayout();
-            this.tableLayoutPanel22.SuspendLayout();
             this.tableLayoutPanel25.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEventReceipt)).BeginInit();
             this.tableLayoutPanel27.SuspendLayout();
@@ -1666,7 +1664,6 @@
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel22.Controls.Add(this.labelTotalAmountEventReceipt, 1, 0);
             this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel22.Location = new System.Drawing.Point(1142, 25);
             this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1675,19 +1672,6 @@
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel22.Size = new System.Drawing.Size(234, 42);
             this.tableLayoutPanel22.TabIndex = 5;
-            // 
-            // labelTotalAmountEventReceipt
-            // 
-            this.labelTotalAmountEventReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalAmountEventReceipt.AutoSize = true;
-            this.labelTotalAmountEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalAmountEventReceipt.Location = new System.Drawing.Point(27, 7);
-            this.labelTotalAmountEventReceipt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalAmountEventReceipt.Name = "labelTotalAmountEventReceipt";
-            this.labelTotalAmountEventReceipt.Size = new System.Drawing.Size(203, 28);
-            this.labelTotalAmountEventReceipt.TabIndex = 4;
-            this.labelTotalAmountEventReceipt.Text = "0";
-            this.labelTotalAmountEventReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCloseEventReceipt
             // 
@@ -1900,8 +1884,6 @@
             this.tableLayoutPanel16.ResumeLayout(false);
             this.tableLayoutPanel17.ResumeLayout(false);
             this.tableLayoutPanel17.PerformLayout();
-            this.tableLayoutPanel22.ResumeLayout(false);
-            this.tableLayoutPanel22.PerformLayout();
             this.tableLayoutPanel25.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEventReceipt)).EndInit();
             this.tableLayoutPanel27.ResumeLayout(false);
@@ -2016,7 +1998,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel27;
         private System.Windows.Forms.PictureBox picEventReceipt;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label labelTotalAmountEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
         private System.Windows.Forms.PictureBox picEventImage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel28;

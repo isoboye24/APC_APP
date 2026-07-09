@@ -53,9 +53,9 @@ namespace APC.AllForms
 
             labelTitle.Text = "Financial Report in " + _financialReportDTO.Year;
             txtSummary.Text = _financialReportDTO.Summary;
-            labelTotalAmountRaised.Text = _financialReportDTO.TotalAmountRaised.ToString();
-            labelTotalAmountSpent.Text = _financialReportDTO.TotalAmountSpent.ToString();
-            labelTotalBalance.Text = (_financialReportDTO.TotalAmountRaised - _financialReportDTO.TotalAmountSpent).ToString();
+            labelTotalAmountRaised.Text = AmountHelper.FormatAmount(_financialReportDTO.TotalAmountRaised);
+            labelTotalAmountSpent.Text =AmountHelper.FormatAmount(_financialReportDTO.TotalAmountSpent);
+            labelTotalBalance.Text = AmountHelper.FormatAmount(_financialReportDTO.TotalAmountRaised - _financialReportDTO.TotalAmountSpent);
         }        
     }
 }

@@ -46,7 +46,7 @@ namespace APC.Applications.Services
                     FormattedReceiptDate = x.receiptDate.ToString("dd.MM.yyyy"),
                     ReceiptDate = x.receiptDate,
                     AmountSpent = x.amountSpent,
-                    FormattedAmountSpent = AmountHelper.FormatAmount(x.amountSpent).ToString() + " €",
+                    FormattedAmountSpent = AmountHelper.FormatAmount(x.amountSpent),
                 })
                 .ToList();
         }
@@ -68,7 +68,7 @@ namespace APC.Applications.Services
                     FormattedReceiptDate = x.receiptDate.ToString("dd.MM.yyyy"),
                     ReceiptDate = x.receiptDate,
                     AmountSpent = x.amountSpent,
-                    FormattedAmountSpent = AmountHelper.FormatAmount(x.amountSpent).ToString() + " €",
+                    FormattedAmountSpent = AmountHelper.FormatAmount(x.amountSpent),
                 })
                 .ToList();
         }
@@ -87,7 +87,7 @@ namespace APC.Applications.Services
                     ImagePath = x.imagePath,
                     Caption = x.caption,
                     AmountSpent = x.amountSpent,
-                    FormattedAmountSpent = x.amountSpent.ToString() + " €",
+                    FormattedAmountSpent = AmountHelper.FormatAmount(x.amountSpent),
                 })
                 .ToList();
         }

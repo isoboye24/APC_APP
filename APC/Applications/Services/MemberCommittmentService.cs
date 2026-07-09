@@ -179,19 +179,19 @@ namespace APC.Applications.Services
                     ImagePath = member.imagePath,
 
                     ExpectedDues = expected,
-                    FormattedExpectedDues = expected.ToString() + " €",
+                    FormattedExpectedDues = AmountHelper.FormatAmount(expected),
 
                     ContributedDues = contributed,
-                    FormattedContributedDues = contributed.ToString() + " €",
+                    FormattedContributedDues = AmountHelper.FormatAmount(contributed),
 
                     BalanceDues = expected - contributed,
-                    FormattedBalanceDues = (expected - contributed).ToString() + " €",
+                    FormattedBalanceDues = AmountHelper.FormatAmount(expected - contributed),
 
                     TotalFines = totalFines,
-                    FormattedTotalFines = totalFines.ToString() + " €",
+                    FormattedTotalFines = AmountHelper.FormatAmount(totalFines),
 
                     PaidFines = paidFines,
-                    FormattedPaidFines = paidFines.ToString() + " €",
+                    FormattedPaidFines = AmountHelper.FormatAmount(paidFines),
 
                     NoOfPresent = present,
                     NoOfAbsent = absent,

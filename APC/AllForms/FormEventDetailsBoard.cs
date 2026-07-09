@@ -161,7 +161,6 @@ namespace APC.AllForms
             label8.Tag = "resizable";
             label9.Tag = "resizable";
             labelTotalAmountEventExp.Tag = "resizable";
-            labelTotalAmountEventReceipt.Tag = "resizable";
             labelTotalEventSales.Tag = "resizable";
             labelTotalRowsEventExp.Tag = "resizable";
             labelTotalRowsEventImage.Tag = "resizable";
@@ -406,18 +405,17 @@ namespace APC.AllForms
         private void Counts()
         {
             int pluralRowExp = dataGridEventExpenditures.RowCount;
-            labelTotalAmountEventExp.Text = "Total : " + _eventExpenditureService.GetTotalAmountSpentByEvent(_eventDTO.EventsId) + " €";
+            labelTotalAmountEventExp.Text = "Total : " + AmountHelper.FormatAmount(_eventExpenditureService.GetTotalAmountSpentByEvent(_eventDTO.EventsId));
             labelTotalRowsEventExp.Text = "Row" + (pluralRowExp > 1 ? "s " : " ") + pluralRowExp.ToString();
 
             int pluralRowSales = dataGridEventSales.RowCount;
-            labelTotalEventSales.Text = "Total : " + _eventSalesService.GetSalesAmountByEvent(_eventDTO.EventsId) + " €";
+            labelTotalEventSales.Text = "Total : " + AmountHelper.FormatAmount(_eventSalesService.GetSalesAmountByEvent(_eventDTO.EventsId));
             labelTotalRowsEventSales.Text = "Row" + (pluralRowSales > 1 ? "s " : " ") + pluralRowSales.ToString();
 
             labelTotalRowsEventImage.Text = "Total : " + dataGridEventImages.RowCount.ToString();
 
             int pluralRowReceipts = dataGridViewEventReceipt.RowCount;
             labelTotalRowsEventReceipt.Text = "Row" + (pluralRowReceipts > 1 ? "s " : " ") + pluralRowReceipts.ToString();
-            labelTotalAmountEventReceipt.Text = "Total : " + _eventReceiptService.GetEventReceiptsCountByEvent(_eventDTO.EventsId) + " €";
         }
 
         private void txtSummaryExpReport_TextChanged(object sender, EventArgs e)

@@ -49,7 +49,7 @@ namespace APC.AllForms
         {
             controlsFont();
 
-            txtAmountSpent.Text = _expenditureDTO.AmountSpent.ToString();
+            txtAmountSpent.Text = _expenditureDTO.FormattedAmountSpent;
             txtSummary.Text = _expenditureDTO.Summary;
             txtDate.Text = _expenditureDTO.ExpenditureDate.Day + "/" + _expenditureDTO.ExpenditureDate.Month +"/"+ _expenditureDTO.ExpenditureDate.Year;
             labelTitle.Text = $"Expenditure on {txtDate.Text}";

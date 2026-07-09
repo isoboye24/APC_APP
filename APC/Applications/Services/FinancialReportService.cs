@@ -104,9 +104,9 @@ namespace APC.Applications.Services
                  {
                      FinancialReportId = x.financialReportID,
                      TotalAmountRaised = CalculateTotalAmountRaisedAnnually(x.year),
-                     FormattedTotalAmountRaised = "€ " + AmountHelper.FormatAmount(CalculateTotalAmountRaisedAnnually(x.year)),
+                     FormattedTotalAmountRaised = AmountHelper.FormatAmount(CalculateTotalAmountRaisedAnnually(x.year)),
                      TotalAmountSpent = CalculateTotalAmountSpentAnnually(x.year),
-                     FormattedTotalAmountSpent = "€ " + AmountHelper.FormatAmount(CalculateTotalAmountSpentAnnually(x.year)),
+                     FormattedTotalAmountSpent = AmountHelper.FormatAmount(CalculateTotalAmountSpentAnnually(x.year)),
                      Year = x.year,
                      Summary = x.summary,
                  })

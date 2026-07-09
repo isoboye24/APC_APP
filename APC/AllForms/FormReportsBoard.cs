@@ -118,7 +118,7 @@ namespace APC.AllForms
 
             labelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
 
-            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": € " + AmountHelper.FormatAmount(_expenditureService.GetAnnualExpendituresAmount(currentYear)).ToString() + " €";
+            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + AmountHelper.FormatAmount(_expenditureService.GetAnnualExpendituresAmount(currentYear));
         }
 
         private void RowsCount()
@@ -336,9 +336,9 @@ namespace APC.AllForms
             if (selected == null)
                 return;
 
-            labelTotalAmountRaised.Text = "€ " + AmountHelper.FormatAmount(selected.TotalAmountRaised).ToString();
-            labelTotalAmountSpent.Text = "€ " + AmountHelper.FormatAmount(selected.TotalAmountSpent).ToString();
-            labelTotalBalance.Text = "€ " + AmountHelper.FormatAmount(selected.TotalAmountRaised - selected.TotalAmountSpent).ToString();
+            labelTotalAmountRaised.Text = AmountHelper.FormatAmount(selected.TotalAmountRaised).ToString();
+            labelTotalAmountSpent.Text = AmountHelper.FormatAmount(selected.TotalAmountSpent).ToString();
+            labelTotalBalance.Text = AmountHelper.FormatAmount(selected.TotalAmountRaised - selected.TotalAmountSpent).ToString();
         }
     }
 }
