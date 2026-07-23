@@ -1,13 +1,14 @@
 ﻿using APC.Applications.DTO;
+using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using APC.Applications.Interfaces;
 
 namespace APC.AllForms
 {
-    public partial class FormViewConstitution : Form
+    public partial class FormViewConstitution : BaseFormDashboard
     {
         private readonly IConstitutionService _constitutionService;
         private ConstitutionDTO _constitutionDTO;
@@ -28,11 +29,6 @@ namespace APC.AllForms
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int IParam);
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, labelFine, labelTitle, btnClose, labelSection);
-        }
-
         public void loadFromFinedMember(string section, bool isFinedMemberView)
         {
             _section = section;
@@ -41,8 +37,6 @@ namespace APC.AllForms
 
         private void FormViewConstitution_Load(object sender, EventArgs e)
         {
-            resizeControls();
-
             txtConstitution.Text = _constitutionDTO.ConstitutionText;
             labelFine.Text = _constitutionDTO.FineWithCurrency;
             labelSection.Text = _constitutionDTO.Section;

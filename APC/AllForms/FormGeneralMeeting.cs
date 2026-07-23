@@ -1,13 +1,14 @@
 ﻿using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormGeneralMeeting : Form
+    public partial class FormGeneralMeeting : BaseFormDashboard
     {
         private readonly IGeneralMeetingService _generalMeetingService;
         private readonly IMemberService _memberService;
@@ -98,16 +99,8 @@ namespace APC.AllForms
             }
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, labelTitle, btnClose, btnSave);
-            GeneralHelper.ApplyRegularFont(14, dateTimePickerGenAttDate, txtSummary);
-        }
-
         private void FormGeneralAttendance_Load(object sender, EventArgs e)
         {
-            resizeControls();
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit meeting on " + _generalMeetingDTO.Day + "." +_generalMeetingDTO.MonthId + "." +_generalMeetingDTO.Year;

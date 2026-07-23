@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewEventReceipt : Form
+    public partial class FormViewEventReceipt : BaseFormDashboard
     {
         private EventReceiptDTO _eventReceiptDTO;
         private EventDTO _eventDTO;
@@ -99,16 +99,8 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
 
-        private void ControlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, btnClose);
-            GeneralHelper.ApplyRegularFont(16, labelDate, labelSummary, labelAmount);
-        }
-
         private void FormViewEventReceipt_Load(object sender, EventArgs e)
         {
-            ControlsFont();
-
             labelTitle.Text = _eventReceiptDTO.Caption + " of " + _eventDTO.Title;
             labelDate.Text = _eventReceiptDTO.FormattedReceiptDate;
             labelSummary.Text = _eventReceiptDTO.Summary;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace APC.Utility
 {
@@ -20,7 +15,7 @@ namespace APC.Utility
 
         public static void ZoomOut(Form form)
         {
-            if (CurrentFontSize > 6f) // prevent too small text
+            if (CurrentFontSize > 6f)
             {
                 CurrentFontSize -= 1f;
                 ControlResize.ResizeTaggedControls(form, CurrentFontSize, 1 / ResizeStep);

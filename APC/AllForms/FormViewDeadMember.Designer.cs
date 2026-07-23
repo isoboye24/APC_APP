@@ -226,7 +226,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel6, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel9, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.picProfilePic, 5, 0);
@@ -260,7 +260,7 @@
             this.tableLayoutPanel6.Controls.Add(this.txtNameOfNextOfKin, 1, 10);
             this.tableLayoutPanel6.Controls.Add(this.txtRelationshipToKin, 1, 12);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(422, 4);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(421, 4);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 21;
@@ -289,7 +289,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(396, 583);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(395, 583);
             this.tableLayoutPanel6.TabIndex = 1;
             // 
             // label11
@@ -307,7 +307,7 @@
             // 
             this.txtMaritalStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtMaritalStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaritalStatus.Location = new System.Drawing.Point(182, 4);
+            this.txtMaritalStatus.Location = new System.Drawing.Point(181, 4);
             this.txtMaritalStatus.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaritalStatus.Name = "txtMaritalStatus";
             this.txtMaritalStatus.ReadOnly = true;
@@ -318,7 +318,7 @@
             // 
             this.labelAge.AutoSize = true;
             this.labelAge.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAge.Location = new System.Drawing.Point(182, 116);
+            this.labelAge.Location = new System.Drawing.Point(181, 116);
             this.labelAge.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.labelAge.Name = "labelAge";
             this.labelAge.Size = new System.Drawing.Size(92, 28);
@@ -351,7 +351,7 @@
             // 
             this.labelMemSince.AutoSize = true;
             this.labelMemSince.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMemSince.Location = new System.Drawing.Point(182, 64);
+            this.labelMemSince.Location = new System.Drawing.Point(181, 64);
             this.labelMemSince.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.labelMemSince.Name = "labelMemSince";
             this.labelMemSince.Size = new System.Drawing.Size(126, 28);
@@ -366,7 +366,7 @@
             this.tableLayoutPanel12.Controls.Add(this.btnViewPresentAttendance, 1, 0);
             this.tableLayoutPanel12.Controls.Add(this.labelNoOfPresent, 0, 0);
             this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(182, 160);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(181, 160);
             this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 1;
@@ -407,7 +407,7 @@
             this.tableLayoutPanel14.Controls.Add(this.btnViewAbsentAttendance, 1, 0);
             this.tableLayoutPanel14.Controls.Add(this.labelNoOfAbsent, 0, 0);
             this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(182, 212);
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(181, 212);
             this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 1;
@@ -488,7 +488,7 @@
             // 
             this.txtNameOfNextOfKin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNameOfNextOfKin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNameOfNextOfKin.Location = new System.Drawing.Point(182, 264);
+            this.txtNameOfNextOfKin.Location = new System.Drawing.Point(181, 264);
             this.txtNameOfNextOfKin.Margin = new System.Windows.Forms.Padding(4);
             this.txtNameOfNextOfKin.Name = "txtNameOfNextOfKin";
             this.txtNameOfNextOfKin.ReadOnly = true;
@@ -499,7 +499,7 @@
             // 
             this.txtRelationshipToKin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtRelationshipToKin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRelationshipToKin.Location = new System.Drawing.Point(182, 316);
+            this.txtRelationshipToKin.Location = new System.Drawing.Point(181, 316);
             this.txtRelationshipToKin.Margin = new System.Windows.Forms.Padding(4);
             this.txtRelationshipToKin.Name = "txtRelationshipToKin";
             this.txtRelationshipToKin.ReadOnly = true;
@@ -518,7 +518,7 @@
             this.tableLayoutPanel9.RowCount = 2;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(396, 583);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(395, 583);
             this.tableLayoutPanel9.TabIndex = 2;
             // 
             // tableLayoutPanel5
@@ -566,7 +566,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.859156F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1.408451F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.859156F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(388, 458);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(387, 458);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // label3
@@ -584,7 +584,7 @@
             // 
             this.txtSurname.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSurname.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSurname.Location = new System.Drawing.Point(159, 4);
+            this.txtSurname.Location = new System.Drawing.Point(158, 4);
             this.txtSurname.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.ReadOnly = true;
@@ -595,7 +595,7 @@
             // 
             this.txtName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(159, 55);
+            this.txtName.Location = new System.Drawing.Point(158, 55);
             this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.ReadOnly = true;
@@ -628,7 +628,7 @@
             // 
             this.txtNationality.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNationality.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNationality.Location = new System.Drawing.Point(159, 412);
+            this.txtNationality.Location = new System.Drawing.Point(158, 412);
             this.txtNationality.Margin = new System.Windows.Forms.Padding(4);
             this.txtNationality.Name = "txtNationality";
             this.txtNationality.ReadOnly = true;
@@ -694,7 +694,7 @@
             // 
             this.txtCountry.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCountry.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCountry.Location = new System.Drawing.Point(159, 208);
+            this.txtCountry.Location = new System.Drawing.Point(158, 208);
             this.txtCountry.Margin = new System.Windows.Forms.Padding(4);
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.ReadOnly = true;
@@ -705,7 +705,7 @@
             // 
             this.txtProfession.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtProfession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProfession.Location = new System.Drawing.Point(159, 259);
+            this.txtProfession.Location = new System.Drawing.Point(158, 259);
             this.txtProfession.Margin = new System.Windows.Forms.Padding(4);
             this.txtProfession.Name = "txtProfession";
             this.txtProfession.ReadOnly = true;
@@ -716,7 +716,7 @@
             // 
             this.txtGender.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtGender.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGender.Location = new System.Drawing.Point(159, 310);
+            this.txtGender.Location = new System.Drawing.Point(158, 310);
             this.txtGender.Margin = new System.Windows.Forms.Padding(4);
             this.txtGender.Name = "txtGender";
             this.txtGender.ReadOnly = true;
@@ -727,7 +727,7 @@
             // 
             this.labelBirthday.AutoSize = true;
             this.labelBirthday.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBirthday.Location = new System.Drawing.Point(159, 114);
+            this.labelBirthday.Location = new System.Drawing.Point(158, 114);
             this.labelBirthday.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.labelBirthday.Name = "labelBirthday";
             this.labelBirthday.Size = new System.Drawing.Size(126, 28);
@@ -749,7 +749,7 @@
             // 
             this.labelDeadDate.AutoSize = true;
             this.labelDeadDate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDeadDate.Location = new System.Drawing.Point(159, 165);
+            this.labelDeadDate.Location = new System.Drawing.Point(158, 165);
             this.labelDeadDate.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.labelDeadDate.Name = "labelDeadDate";
             this.labelDeadDate.Size = new System.Drawing.Size(126, 28);
@@ -760,7 +760,7 @@
             // 
             this.txtPosition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPosition.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPosition.Location = new System.Drawing.Point(159, 361);
+            this.txtPosition.Location = new System.Drawing.Point(158, 361);
             this.txtPosition.Margin = new System.Windows.Forms.Padding(4);
             this.txtPosition.Name = "txtPosition";
             this.txtPosition.ReadOnly = true;
@@ -771,10 +771,10 @@
             // 
             this.picProfilePic.BackColor = System.Drawing.Color.DarkOrange;
             this.picProfilePic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picProfilePic.Location = new System.Drawing.Point(833, 4);
+            this.picProfilePic.Location = new System.Drawing.Point(831, 4);
             this.picProfilePic.Margin = new System.Windows.Forms.Padding(4);
             this.picProfilePic.Name = "picProfilePic";
-            this.picProfilePic.Size = new System.Drawing.Size(396, 583);
+            this.picProfilePic.Size = new System.Drawing.Size(395, 583);
             this.picProfilePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picProfilePic.TabIndex = 3;
             this.picProfilePic.TabStop = false;

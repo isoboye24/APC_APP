@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormReportsBoard : Form
+    public partial class FormReportsBoard : BaseFormDashboard
     {
         private readonly IFinancialReportService _financialReportService;
         private readonly ICurrentUserService _currentUserService;
@@ -29,20 +30,6 @@ namespace APC.AllForms
             _currentUserService = currentUserService;
             _expenditureService = expenditureService;
             _monthService = monthService;
-        }
-
-        private void controlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, label5, btnAddFinReport, btnUpdateFinReport, btnViewFinReport, btnDeleteFinReport, label1,
-                label4, btnAddExpReport, btnUpdateExpReport, btnViewExpReport, btnDeleteExpReport, btnSearchExpReport, btnClearExpReport
-                );
-
-            GeneralHelper.ApplyBoldFont(16, label5, label2, label3);
-
-            GeneralHelper.ApplyBoldFont(27, labelTotalAmountRaised, labelTotalAmountSpent, labelTotalBalance);
-
-            GeneralHelper.ApplyBoldFont(12, labelTotalFinReport, labelTotalRowsExpReport, labelTotalExpReportYearly);
-            GeneralHelper.ApplyRegularFont(16, cmbMonthExpReport, cmbYearExpenditure, cmbYearFinReport);
         }
 
         private void loadFinancialReports()
@@ -72,8 +59,6 @@ namespace APC.AllForms
 
         private void FormReportsBoard_Load(object sender, EventArgs e)
         {
-            controlsFont();
-
             loadFinancialReports();
 
             loadExpenditures(currentYear);
@@ -93,7 +78,7 @@ namespace APC.AllForms
 
         private void ResizeableControls()
         {
-            labelTotalExpReportYearly.Tag = "Sizeable";
+            svLabelTotalExpReportYearly.Tag = "Sizeable";
         }
 
         private void ClearFilters()
@@ -116,14 +101,14 @@ namespace APC.AllForms
             decimal overallRaisedAmount = _financialReportService.GetOverallTotalDues();
             decimal overallSpentAmount = _financialReportService.GetOverallExpenditures();
 
-            labelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
+            svlabelTotalFinReport.Text = "Total: " + dataGridViewFinReport.RowCount.ToString();
 
-            labelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + AmountHelper.FormatAmount(_expenditureService.GetAnnualExpendituresAmount(currentYear));
+            svLabelTotalExpReportYearly.Text = "Total in " + currentYear.ToString() + ": " + AmountHelper.FormatAmount(_expenditureService.GetAnnualExpendituresAmount(currentYear));
         }
 
         private void RowsCount()
         {
-            labelTotalRowsExpReport.Text = "Row: " + dataGridViewExpReport.RowCount.ToString();
+            svLabelTotalRowsExpReport.Text = "Row: " + dataGridViewExpReport.RowCount.ToString();
         }
 
         private void btnAddFinReport_Click(object sender, EventArgs e)
@@ -336,9 +321,9 @@ namespace APC.AllForms
             if (selected == null)
                 return;
 
-            labelTotalAmountRaised.Text = AmountHelper.FormatAmount(selected.TotalAmountRaised).ToString();
-            labelTotalAmountSpent.Text = AmountHelper.FormatAmount(selected.TotalAmountSpent).ToString();
-            labelTotalBalance.Text = AmountHelper.FormatAmount(selected.TotalAmountRaised - selected.TotalAmountSpent).ToString();
+            dvlabelTotalAmountRaised.Text = AmountHelper.FormatAmount(selected.TotalAmountRaised).ToString();
+            dvlabelTotalAmountSpent.Text = AmountHelper.FormatAmount(selected.TotalAmountSpent).ToString();
+            dvlabelTotalBalance.Text = AmountHelper.FormatAmount(selected.TotalAmountRaised - selected.TotalAmountSpent).ToString();
         }
     }
 }

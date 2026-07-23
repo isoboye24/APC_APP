@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormEventReceipt : Form
+    public partial class FormEventReceipt : BaseFormDashboard
     {
         private readonly IEventReceiptService _eventReceiptService;
 
@@ -56,17 +56,8 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
-        private void controlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, label5, label6, btnBrowse, btnClose, btnSave);
-
-            GeneralHelper.ApplyRegularFont(16, txtImageCaption, txtDescription, txtImagePath, dateTimePickerEventReceiptDate, txtReceiptAmount);
-        }
-
         private void FormEventReceipt_Load(object sender, EventArgs e)
         {
-            controlsFont();
-
             string caption;
             labelTitle.Text = "Add " + _eventDTO.Title + " Receipt.";
 

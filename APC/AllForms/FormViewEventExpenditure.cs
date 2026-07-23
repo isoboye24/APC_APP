@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewEventExpenditure : Form
+    public partial class FormViewEventExpenditure : BaseFormDashboard
     {
         private Applications.DTO.EventExpenditureDTO _eventExpenditureDTO;
         private EventDTO _eventDTO;
@@ -47,16 +47,8 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
 
-        private void ControlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3);
-            GeneralHelper.ApplyRegularFont(16, labelSummary, labelAmountSpent, labelDate);
-        }
-
         private void FormViewEventExpenditure_Load(object sender, EventArgs e)
         {
-            ControlsFont();
-
             labelTitle.Text = _eventDTO.Title;
             labelSummary.Text = _eventExpenditureDTO.Summary;
             labelAmountSpent.Text = _eventExpenditureDTO.SpentAmount.ToString() + " €";

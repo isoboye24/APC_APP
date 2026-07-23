@@ -1,11 +1,12 @@
 ﻿using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewFinancialReport : Form
+    public partial class FormViewFinancialReport : BaseFormDashboard
     {
         private Applications.DTO.FinancialReportDTO _financialReportDTO;
         public FormViewFinancialReport()
@@ -37,25 +38,13 @@ namespace APC.AllForms
             _financialReportDTO = financialReportDTO;
         }
 
-        private void controlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, btnClose);
-
-            GeneralHelper.ApplyRegularFont(18, txtSummary);
-
-            GeneralHelper.ApplyBoldFont(20,  label3, label4, label6);
-            GeneralHelper.ApplyBoldFont(24, labelTotalAmountRaised, labelTotalAmountSpent, labelTotalBalance);
-        }
-
         private void FormViewFinancialReport_Load(object sender, EventArgs e)
         {
-            controlsFont();
-
             labelTitle.Text = "Financial Report in " + _financialReportDTO.Year;
             txtSummary.Text = _financialReportDTO.Summary;
-            labelTotalAmountRaised.Text = AmountHelper.FormatAmount(_financialReportDTO.TotalAmountRaised);
-            labelTotalAmountSpent.Text =AmountHelper.FormatAmount(_financialReportDTO.TotalAmountSpent);
-            labelTotalBalance.Text = AmountHelper.FormatAmount(_financialReportDTO.TotalAmountRaised - _financialReportDTO.TotalAmountSpent);
+            dvLabelTotalAmountRaised.Text = AmountHelper.FormatAmount(_financialReportDTO.TotalAmountRaised);
+            dvLabelTotalAmountSpent.Text =AmountHelper.FormatAmount(_financialReportDTO.TotalAmountSpent);
+            dvLabelTotalBalance.Text = AmountHelper.FormatAmount(_financialReportDTO.TotalAmountRaised - _financialReportDTO.TotalAmountSpent);
         }        
     }
 }

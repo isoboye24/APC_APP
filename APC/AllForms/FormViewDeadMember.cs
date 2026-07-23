@@ -1,13 +1,14 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewDeadMember : Form
+    public partial class FormViewDeadMember : BaseFormDashboard
     {
         private readonly IMemberService _memberService;
         private readonly IPersonalAttendanceService _personalAttendanceService;
@@ -61,22 +62,8 @@ namespace APC.AllForms
             _memberFullDetailsDTO = memberFullDetailsDTO;
         }
 
-        private void ResizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelMemberNameTitle, label1, label2, label3, label4, label5, label6, label7, label8, label9,
-                label10, label11, label12, label13, label14, label15, btnClose, btnViewAbsentAttendance, btnViewPresentAttendance, labelDeadDate,
-                label25, labelBirthday, labelMemSince, labelNoOfAbsent, labelNoOfPresent, labelAge
-                );
-
-            GeneralHelper.ApplyRegularFont(14, txtName, txtCountry, txtGender, txtSurname, txtMaritalStatus, txtNationality, txtNameOfNextOfKin,
-                txtRelationshipToKin, txtPosition, txtProfession
-                );
-        }
-
         private void FormViewDeadMember_Load(object sender, EventArgs e)
         {
-            ResizeControls();
-
             attendancePresentCount = _personalAttendanceService.GetTotalMembersPresentCountById(_memberFullDetailsDTO.MemberId);
             labelNoOfPresent.Text = attendancePresentCount.ToString();
             btnViewPresentAttendance.Hide();

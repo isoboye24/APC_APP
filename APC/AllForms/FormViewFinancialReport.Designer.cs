@@ -41,18 +41,18 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.dashboardLabel1 = new System.Windows.Forms.Label();
             this.txtSummary = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalBalance = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.dashboardLabel3 = new System.Windows.Forms.Label();
+            this.dvLabelTotalBalance = new System.Windows.Forms.Label();
             this.panelNoOfChildren = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalAmountSpent = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.dashboardLabel6 = new System.Windows.Forms.Label();
+            this.dvLabelTotalAmountSpent = new System.Windows.Forms.Label();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalAmountRaised = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.dashboardLabel4 = new System.Windows.Forms.Label();
+            this.dvLabelTotalAmountRaised = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
@@ -114,11 +114,11 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.labelTitle.Location = new System.Drawing.Point(5, 16);
             this.labelTitle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(342, 32);
+            this.labelTitle.Size = new System.Drawing.Size(312, 32);
             this.labelTitle.TabIndex = 5;
             this.labelTitle.Text = "FINANCIAL REPORT IN YEAR";
             // 
@@ -190,7 +190,7 @@
             this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnClose.ForeColor = System.Drawing.Color.Black;
             this.btnClose.Location = new System.Drawing.Point(571, 19);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4);
@@ -238,7 +238,7 @@
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel5.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.dashboardLabel1, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(4, 4);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4);
@@ -248,23 +248,23 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(907, 41);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
-            // label1
+            // dashboardLabel1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 6);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(899, 28);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Summary";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dashboardLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dashboardLabel1.AutoSize = true;
+            this.dashboardLabel1.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.dashboardLabel1.Location = new System.Drawing.Point(4, 4);
+            this.dashboardLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dashboardLabel1.Name = "dashboardLabel1";
+            this.dashboardLabel1.Size = new System.Drawing.Size(899, 32);
+            this.dashboardLabel1.TabIndex = 0;
+            this.dashboardLabel1.Text = "Summary";
+            this.dashboardLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSummary
             // 
             this.txtSummary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSummary.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSummary.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.txtSummary.Location = new System.Drawing.Point(4, 53);
             this.txtSummary.Margin = new System.Windows.Forms.Padding(4);
             this.txtSummary.Multiline = true;
@@ -300,8 +300,8 @@
             this.tableLayoutPanel7.BackColor = System.Drawing.Color.Green;
             this.tableLayoutPanel7.ColumnCount = 1;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Controls.Add(this.label3, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.labelTotalBalance, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.dashboardLabel3, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.dvLabelTotalBalance, 0, 1);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(4, 449);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4);
@@ -312,40 +312,40 @@
             this.tableLayoutPanel7.Size = new System.Drawing.Size(480, 165);
             this.tableLayoutPanel7.TabIndex = 11;
             // 
-            // labelTotalBalance
+            // dashboardLabel3
             // 
-            this.labelTotalBalance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalBalance.AutoSize = true;
-            this.labelTotalBalance.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalBalance.ForeColor = System.Drawing.Color.White;
-            this.labelTotalBalance.Location = new System.Drawing.Point(422, 103);
-            this.labelTotalBalance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalBalance.Name = "labelTotalBalance";
-            this.labelTotalBalance.Size = new System.Drawing.Size(54, 62);
-            this.labelTotalBalance.TabIndex = 0;
-            this.labelTotalBalance.Text = "0";
+            this.dashboardLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dashboardLabel3.AutoSize = true;
+            this.dashboardLabel3.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.dashboardLabel3.ForeColor = System.Drawing.Color.White;
+            this.dashboardLabel3.Location = new System.Drawing.Point(4, 25);
+            this.dashboardLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dashboardLabel3.Name = "dashboardLabel3";
+            this.dashboardLabel3.Size = new System.Drawing.Size(472, 32);
+            this.dashboardLabel3.TabIndex = 0;
+            this.dashboardLabel3.Text = "Total Balance";
+            this.dashboardLabel3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label3
+            // dvLabelTotalBalance
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(4, 25);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(472, 32);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Total Balance";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dvLabelTotalBalance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dvLabelTotalBalance.AutoSize = true;
+            this.dvLabelTotalBalance.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.dvLabelTotalBalance.ForeColor = System.Drawing.Color.White;
+            this.dvLabelTotalBalance.Location = new System.Drawing.Point(449, 133);
+            this.dvLabelTotalBalance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dvLabelTotalBalance.Name = "dvLabelTotalBalance";
+            this.dvLabelTotalBalance.Size = new System.Drawing.Size(27, 32);
+            this.dvLabelTotalBalance.TabIndex = 0;
+            this.dvLabelTotalBalance.Text = "0";
             // 
             // panelNoOfChildren
             // 
             this.panelNoOfChildren.BackColor = System.Drawing.Color.Crimson;
             this.panelNoOfChildren.ColumnCount = 1;
             this.panelNoOfChildren.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.panelNoOfChildren.Controls.Add(this.label6, 0, 0);
-            this.panelNoOfChildren.Controls.Add(this.labelTotalAmountSpent, 0, 1);
+            this.panelNoOfChildren.Controls.Add(this.dashboardLabel6, 0, 0);
+            this.panelNoOfChildren.Controls.Add(this.dvLabelTotalAmountSpent, 0, 1);
             this.panelNoOfChildren.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelNoOfChildren.Location = new System.Drawing.Point(4, 251);
             this.panelNoOfChildren.Margin = new System.Windows.Forms.Padding(4);
@@ -356,40 +356,40 @@
             this.panelNoOfChildren.Size = new System.Drawing.Size(480, 162);
             this.panelNoOfChildren.TabIndex = 11;
             // 
-            // labelTotalAmountSpent
+            // dashboardLabel6
             // 
-            this.labelTotalAmountSpent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalAmountSpent.AutoSize = true;
-            this.labelTotalAmountSpent.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalAmountSpent.ForeColor = System.Drawing.Color.White;
-            this.labelTotalAmountSpent.Location = new System.Drawing.Point(422, 100);
-            this.labelTotalAmountSpent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalAmountSpent.Name = "labelTotalAmountSpent";
-            this.labelTotalAmountSpent.Size = new System.Drawing.Size(54, 62);
-            this.labelTotalAmountSpent.TabIndex = 0;
-            this.labelTotalAmountSpent.Text = "0";
+            this.dashboardLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dashboardLabel6.AutoSize = true;
+            this.dashboardLabel6.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.dashboardLabel6.ForeColor = System.Drawing.Color.White;
+            this.dashboardLabel6.Location = new System.Drawing.Point(4, 24);
+            this.dashboardLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dashboardLabel6.Name = "dashboardLabel6";
+            this.dashboardLabel6.Size = new System.Drawing.Size(472, 32);
+            this.dashboardLabel6.TabIndex = 0;
+            this.dashboardLabel6.Text = "Total Amount Spent";
+            this.dashboardLabel6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label6
+            // dvLabelTotalAmountSpent
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(4, 24);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(472, 32);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Total Amount Spent";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dvLabelTotalAmountSpent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dvLabelTotalAmountSpent.AutoSize = true;
+            this.dvLabelTotalAmountSpent.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.dvLabelTotalAmountSpent.ForeColor = System.Drawing.Color.White;
+            this.dvLabelTotalAmountSpent.Location = new System.Drawing.Point(449, 130);
+            this.dvLabelTotalAmountSpent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dvLabelTotalAmountSpent.Name = "dvLabelTotalAmountSpent";
+            this.dvLabelTotalAmountSpent.Size = new System.Drawing.Size(27, 32);
+            this.dvLabelTotalAmountSpent.TabIndex = 0;
+            this.dvLabelTotalAmountSpent.Text = "0";
             // 
             // tableLayoutPanel10
             // 
             this.tableLayoutPanel10.BackColor = System.Drawing.Color.DarkOrange;
             this.tableLayoutPanel10.ColumnCount = 1;
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel10.Controls.Add(this.labelTotalAmountRaised, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.dashboardLabel4, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.dvLabelTotalAmountRaised, 0, 1);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(4, 53);
             this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(4);
@@ -400,32 +400,32 @@
             this.tableLayoutPanel10.Size = new System.Drawing.Size(480, 162);
             this.tableLayoutPanel10.TabIndex = 11;
             // 
-            // labelTotalAmountRaised
+            // dashboardLabel4
             // 
-            this.labelTotalAmountRaised.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalAmountRaised.AutoSize = true;
-            this.labelTotalAmountRaised.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalAmountRaised.ForeColor = System.Drawing.Color.White;
-            this.labelTotalAmountRaised.Location = new System.Drawing.Point(422, 100);
-            this.labelTotalAmountRaised.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalAmountRaised.Name = "labelTotalAmountRaised";
-            this.labelTotalAmountRaised.Size = new System.Drawing.Size(54, 62);
-            this.labelTotalAmountRaised.TabIndex = 0;
-            this.labelTotalAmountRaised.Text = "0";
+            this.dashboardLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dashboardLabel4.AutoSize = true;
+            this.dashboardLabel4.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.dashboardLabel4.ForeColor = System.Drawing.Color.White;
+            this.dashboardLabel4.Location = new System.Drawing.Point(4, 24);
+            this.dashboardLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dashboardLabel4.Name = "dashboardLabel4";
+            this.dashboardLabel4.Size = new System.Drawing.Size(472, 32);
+            this.dashboardLabel4.TabIndex = 0;
+            this.dashboardLabel4.Text = "Total Amount Raised";
+            this.dashboardLabel4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label4
+            // dvLabelTotalAmountRaised
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(4, 24);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(472, 32);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Total Amount Raised";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dvLabelTotalAmountRaised.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dvLabelTotalAmountRaised.AutoSize = true;
+            this.dvLabelTotalAmountRaised.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.dvLabelTotalAmountRaised.ForeColor = System.Drawing.Color.White;
+            this.dvLabelTotalAmountRaised.Location = new System.Drawing.Point(449, 130);
+            this.dvLabelTotalAmountRaised.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dvLabelTotalAmountRaised.Name = "dvLabelTotalAmountRaised";
+            this.dvLabelTotalAmountRaised.Size = new System.Drawing.Size(27, 32);
+            this.dvLabelTotalAmountRaised.TabIndex = 0;
+            this.dvLabelTotalAmountRaised.Text = "0";
             // 
             // FormViewFinancialReport
             // 
@@ -481,17 +481,17 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label dashboardLabel1;
         private System.Windows.Forms.TextBox txtSummary;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.Label labelTotalAmountRaised;
+        private System.Windows.Forms.Label dvLabelTotalAmountRaised;
         private System.Windows.Forms.TableLayoutPanel panelNoOfChildren;
-        private System.Windows.Forms.Label labelTotalAmountSpent;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label dvLabelTotalAmountSpent;
+        private System.Windows.Forms.Label dashboardLabel6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.Label labelTotalBalance;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label dvLabelTotalBalance;
+        private System.Windows.Forms.Label dashboardLabel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label dashboardLabel4;
     }
 }

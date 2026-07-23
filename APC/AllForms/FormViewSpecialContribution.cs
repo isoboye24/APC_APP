@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewSpecialContribution : Form
+    public partial class FormViewSpecialContribution : BaseFormDashboard
     {
         private readonly ISpecialContributorService _specialContributorService;
         private readonly IMemberService _memberService;

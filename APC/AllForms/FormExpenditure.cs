@@ -1,13 +1,14 @@
 ﻿using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormExpenditure : Form
+    public partial class FormExpenditure : BaseFormDashboard
     {
         private readonly IExpenditureService _expenditureService;
 
@@ -47,17 +48,8 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
-        private void controlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, btnClose, btnSave);
-
-            GeneralHelper.ApplyRegularFont(16, txtSummary, txtAmountSpent, dateTimePickerExpDate);
-        }
-
         private void FormExpenditure_Load(object sender, EventArgs e)
         {
-            controlsFont();
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit Expenditure";

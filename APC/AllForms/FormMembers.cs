@@ -3,6 +3,7 @@ using APC.Applications.Entities;
 using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace APC
 {
-    public partial class FormMembers : Form
+    public partial class FormMembers : BaseFormDashboard
     {
         private readonly IMemberService _memberService;
         private readonly ICountryService _countryService;
@@ -84,22 +85,8 @@ namespace APC
             _isUpdate = isUpdate;
         }
 
-        private void ResizeControls()
-        {
-            GeneralHelper.ApplyItalicFont(14, labelTitle, label1, label2, label3, label5, label6, label9, label10, label11, label12, label4, label7, label8, 
-                label25, label26, label14, label15, label19, label27, labelAccessLevel, labelDeceasedDate, labelMorePhone, labelPhone2, labelPhone3,
-                btnBrowse, btnClose, btnSave);
-
-            GeneralHelper.ApplyRegularFont(14, cmbCountry, txtAddress, txtEmail, txtImagePath, txtLGA, txtName, txtNameOfNextOfKin, txtPhone1, txtPhone2,
-                txtPhone3, txtSurname, cmbEmpStatus, cmbGender, cmbMaritalStatus, cmbMembershipStatus, cmbNationality, cmbPermission, cmbPosition,
-                cmbProfession, cmbRelationshipToNextOfKin, dateTimePickerBirthday, dateTimePickerDeceasedDate, dateTimePickerMemSince
-                );
-        }
-
         private void FormMembers_Load(object sender, EventArgs e)
         {
-            ResizeControls();
-
             #region
             cmbCountry.DataSource = _countryService.GetAll();
             GeneralHelper.ComboBoxProps(cmbCountry, "CountryName", "countryID");

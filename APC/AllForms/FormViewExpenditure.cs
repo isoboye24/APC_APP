@@ -1,11 +1,12 @@
 ﻿using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewExpenditure : Form
+    public partial class FormViewExpenditure : BaseFormDashboard
     {
         private Applications.DTO.ExpenditureDTO _expenditureDTO;
         public FormViewExpenditure()
@@ -38,17 +39,8 @@ namespace APC.AllForms
             _expenditureDTO = expenditureDTO;
         }
 
-        private void controlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label3, btnClose);
-
-            GeneralHelper.ApplyRegularFont(14, txtSummary, txtAmountSpent, txtDate);
-        }
-
         private void FormViewExpenditure_Load(object sender, EventArgs e)
         {
-            controlsFont();
-
             txtAmountSpent.Text = _expenditureDTO.FormattedAmountSpent;
             txtSummary.Text = _expenditureDTO.Summary;
             txtDate.Text = _expenditureDTO.ExpenditureDate.Day + "/" + _expenditureDTO.ExpenditureDate.Month +"/"+ _expenditureDTO.ExpenditureDate.Year;

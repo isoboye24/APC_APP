@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormEventExpenditure : Form
+    public partial class FormEventExpenditure : BaseFormDashboard
     {
         private readonly IEventExpenditureService _eventExpenditureService;
 
@@ -56,25 +56,8 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
-        private void controlsFont()
-        {
-            label1.Tag = "resizable";
-            label2.Tag = "resizable";
-            label3.Tag = "resizable";
-
-            txtAmountSpent.Tag = "resizable";
-            txtSummary.Tag = "resizable";
-
-            dateTimePickerEventExpDate.Tag = "resizable";
-
-            btnClose.Tag = "resizable";
-            btnSave.Tag = "resizable";
-        }
-
         private void FormEventExpenditure_Load(object sender, EventArgs e)
         {
-            controlsFont();
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit " + _eventExpenditureDTO.Summary + " of " + _eventDTO.Title;

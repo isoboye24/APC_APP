@@ -14,7 +14,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace APC
 {
-    public partial class FormDashboard : BaseForm
+    public partial class FormDashboard : BaseFormDashboard
     {            
         private readonly IServiceProvider _serviceProvider;
         private readonly IMemberService _memberService;
@@ -136,7 +136,7 @@ namespace APC
         {
             DisableButton();
             leftBorderBtn.Visible = false;
-            labelTitleChildForm.Text = "Dashboard";
+            dashboardTitleChildForm.Text = "Dashboard";
             RefreshAllCards();
         }
 
@@ -161,7 +161,7 @@ namespace APC
             panelDesktop.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-            labelTitleChildForm.Text = childForm.Text;
+            dashboardTitleChildForm.Text = childForm.Text;
         }
 
         private void picBoxMin_Click(object sender, EventArgs e)
@@ -171,15 +171,15 @@ namespace APC
 
         private void resizeControls()
         {
-            GeneralHelper.ApplyBoldFont(20, labelNoOfRegMem, labelMonthlyDues, labelYearlyDuesAndFines, labelExpendituresInYear, labelTotalAnnualRevenue,
-                labelLastMeetingAttendance, labelTotalPaidFines, labelTotalFineExpected
+            GeneralHelper.ApplyBoldFont(20, dvNoOfRegMemLabel, dvMonthlyDuesLabel, dvYearlyDuesAndFinesLabel, dvExpendituresInYearLabel, dvTotalAnnualRevenueLabel,
+                dvLastMeetingAttendanceLabel, dvTotalPaidFinesLabel, dvTotalFineExpectedLabel
                 );
 
-            GeneralHelper.ApplyBoldFont(17, labelDuesMonthName, labelTotalDuesYear, labelAmountRaisedYearly, labelExpendituresYearly, label23, labelMeetingAttLabel, 
-                labelPaidFinesInYear, labelRevenue, labelTotalExpectedFinesInYear, labelExpensesInThisYear);
+            GeneralHelper.ApplyBoldFont(17, dashboardDuesMonthName, dashboardTotalDuesYear, dashboardAmountRaisedYearly, dashboardExpendituresYearly, dashboardRegister, dashboardMeetingAttLabel, 
+                dashboardPaidFinesInYear, dashboardRevenue, dashboardTotalExpectedFinesInYear, dashboardExpensesInThisYear);
 
-            GeneralHelper.ApplyBoldFont(14, labelTodaysDate);
-            GeneralHelper.ApplyBoldFont(10, label2);
+            GeneralHelper.ApplyBoldFont(14, doTodaysDate);
+            GeneralHelper.ApplyBoldFont(10, doDescriptionLabel);
         }
 
         public void AccessControl(bool isAdmin, bool isEditor)
@@ -199,13 +199,13 @@ namespace APC
 
             if (!_isAdmin && !_isEditor)
             {
-                btnAttendance.Hide();
-                btnFinancialReport.Hide();
-                btnEvents.Hide();
-                btnDocuments.Hide();
-                btnManage.Hide();
-                btnMembers.Text = "    Profile";
-                btnMembers.Location = new Point(0, 118);
+                dashboardBtnAttendance.Hide();
+                dashboardBtnFinancialReport.Hide();
+                dashboardBtnEvents.Hide();
+                dashboardBtnDocuments.Hide();
+                dashboardBtnManage.Hide();
+                dashboardBtnMembers.Text = "    Profile";
+                dashboardBtnMembers.Location = new Point(0, 118);
                 
             }
 
@@ -218,7 +218,7 @@ namespace APC
             RefreshAllCards();
             ResizeableControls();
 
-            labelTodaysDate.Text = "Today: " + todaysDate.ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("en-US"));
+            doTodaysDate.Text = "Today: " + todaysDate.ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("en-US"));
         }       
 
         private void picProfilePic_Paint(object sender, PaintEventArgs e)
@@ -229,17 +229,17 @@ namespace APC
         private void ResizeableControls()
         {
             //label1.Tag = "resizable";
-            labelExpendituresInYear.Tag = "resizable";
+            dvExpendituresInYearLabel.Tag = "resizable";
 
-            labelLastMeetingAttendance.Tag = "resizable";
-            labelMonthlyDues.Tag = "resizable";
-            labelNoOfRegMem.Tag = "resizable";
-            labelTitleChildForm.Tag = "resizable";
+            dvLastMeetingAttendanceLabel.Tag = "resizable";
+            dvMonthlyDuesLabel.Tag = "resizable";
+            dvNoOfRegMemLabel.Tag = "resizable";
+            dashboardTitleChildForm.Tag = "resizable";
 
-            labelTotalAnnualRevenue.Tag = "resizable";
-            labelTotalFineExpected.Tag = "resizable";
-            labelTotalPaidFines.Tag = "resizable";
-            labelYearlyDuesAndFines.Tag = "resizable";
+            dvTotalAnnualRevenueLabel.Tag = "resizable";
+            dvTotalFineExpectedLabel.Tag = "resizable";
+            dvTotalPaidFinesLabel.Tag = "resizable";
+            dvYearlyDuesAndFinesLabel.Tag = "resizable";
         }
 
         private void loadAnnualRaisedDues()
@@ -288,33 +288,33 @@ namespace APC
 
             loadAnnualExpenditures();
 
-            labelNoOfRegMem.Text = _memberService.GetAllCurrentMembersCount().ToString();
-            labelLastMeetingAttendance.Text = _generalMeetingAttendanceService.GetLastMeetingPresentMembersCount().ToString();
+            dvNoOfRegMemLabel.Text = _memberService.GetAllCurrentMembersCount().ToString();
+            dvLastMeetingAttendanceLabel.Text = _generalMeetingAttendanceService.GetLastMeetingPresentMembersCount().ToString();
 
             string monthToday = DateTime.Now.ToString("MMMM", CultureInfo.GetCultureInfo("en-US"));
 
             int todayMonth = DateTime.Now.Month;
             int todayYear = DateTime.Today.Year;
 
-            labelDuesMonthName.Text = "Dues in "+ monthToday + " "+ todayYear;
-            labelExpensesInThisYear.Text = "Expenses in " + todayYear;
-            labelTotalDuesYear.Text = "Dues + Fines in " + todayYear;
-            labelRevenue.Text = "Revenue in " + todayYear;
+            dashboardDuesMonthName.Text = "Dues in "+ monthToday + " "+ todayYear;
+            dashboardExpensesInThisYear.Text = "Expenses in " + todayYear;
+            dashboardTotalDuesYear.Text = "Dues + Fines in " + todayYear;
+            dashboardRevenue.Text = "Revenue in " + todayYear;
 
-            labelMonthlyDues.Text = AmountHelper.FormatAmount(_financialReportService.GetTotalDuesByMonth(todayMonth, todayYear));
-            labelYearlyDuesAndFines.Text = _financialReportService.TotalDuesAndFinesInYear(todayYear);
+            dvMonthlyDuesLabel.Text = AmountHelper.FormatAmount(_financialReportService.GetTotalDuesByMonth(todayMonth, todayYear));
+            dvYearlyDuesAndFinesLabel.Text = _financialReportService.TotalDuesAndFinesInYear(todayYear);
 
-            labelExpendituresInYear.Text = AmountHelper.FormatAmount(_financialReportService.GetOverallExpendituresByYear(todayYear));
-            labelTotalAnnualRevenue.Text = AmountHelper.FormatAmount(_financialReportService.GetTotalAnnualRevenue(todayYear));
+            dvExpendituresInYearLabel.Text = AmountHelper.FormatAmount(_financialReportService.GetOverallExpendituresByYear(todayYear));
+            dvTotalAnnualRevenueLabel.Text = AmountHelper.FormatAmount(_financialReportService.GetTotalAnnualRevenue(todayYear));
 
-            labelTotalExpectedFinesInYear.Text = "Expected Fines in " + todayYear;
-            labelTotalFineExpected.Text = AmountHelper.FormatAmount(_finedMemberService.GetAnnualFinesExpected(todayYear));
-            labelPaidFinesInYear.Text = "Paid Fines in " + todayYear;
-            labelTotalPaidFines.Text = AmountHelper.FormatAmount(_finedMemberService.GetAnnualPaidFines(todayYear));
+            dashboardTotalExpectedFinesInYear.Text = "Expected Fines in " + todayYear;
+            dvTotalFineExpectedLabel.Text = AmountHelper.FormatAmount(_finedMemberService.GetAnnualFinesExpected(todayYear));
+            dashboardPaidFinesInYear.Text = "Paid Fines in " + todayYear;
+            dvTotalPaidFinesLabel.Text = AmountHelper.FormatAmount(_finedMemberService.GetAnnualPaidFines(todayYear));
 
-            labelAmountRaisedYearly.Text = "Overall Amount Raised";
-            labelExpendituresYearly.Text = "Overall Expenditures";
-            labelMeetingAttLabel.Text = "Last Meeting's Attend.";
+            dashboardAmountRaisedYearly.Text = "Overall Amount Raised";
+            dashboardExpendituresYearly.Text = "Overall Expenditures";
+            dashboardMeetingAttLabel.Text = "Last Meeting's Attend.";
         }
 
         private void iconClose_MouseEnter(object sender, EventArgs e)
@@ -360,11 +360,11 @@ namespace APC
             if (WindowState == FormWindowState.Normal)
             {
                 WindowState = FormWindowState.Maximized;
-                ZoomManager.ZoomIn(this);
+                //ZoomManager.ZoomIn(this);
 
-                buttonSize = 24f;
-                panelSize = 3.05f;
-                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+                //buttonSize = 24f;
+                //panelSize = 3.05f;
+                //ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
             else
             {
@@ -372,11 +372,11 @@ namespace APC
                 this.Location = initialDetail.Location;
                 this.Size = initialDetail.Size;
                 this.WindowState = initialDetail.WindowState;
-                ZoomManager.ZoomIn(this);
+                //ZoomManager.ZoomIn(this);
 
-                buttonSize = 18f;
-                panelSize = 1.05f;
-                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+                //buttonSize = 18f;
+                //panelSize = 1.05f;
+                //ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
         }
 
@@ -391,9 +391,9 @@ namespace APC
                 WindowState = FormWindowState.Normal;
                 ZoomManager.ZoomOut(this);
 
-                buttonSize = 18f;
-                panelSize = 1.05f;
-                ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
+                //buttonSize = 18f;
+                //panelSize = 1.05f;
+                //ControlResize.ResizeTaggedControls(this, buttonSize, panelSize);
             }
         }
 
@@ -439,6 +439,7 @@ namespace APC
                 }
 
                 var form = _serviceProvider.GetRequiredService<FormViewMember>();
+                form.WindowState = this.WindowState;
 
                 form.ViewMemberDetails(detail.MemberId);
 
@@ -452,6 +453,7 @@ namespace APC
                 ActivateButton(sender, RBGColors.color2);
 
                 var form = _serviceProvider.GetRequiredService<FormMembersBoard>();
+                form.WindowState = this.WindowState;
 
                 OpenChildForm(form);
             }
@@ -463,6 +465,7 @@ namespace APC
             ActivateButton(sender, RBGColors.color2);
 
             var form = _serviceProvider.GetRequiredService<FormReportsBoard>();
+            form.WindowState = this.WindowState;
             OpenChildForm(form);
         }
 
@@ -472,6 +475,7 @@ namespace APC
             ActivateButton(sender, RBGColors.color2);
 
             var form = _serviceProvider.GetRequiredService<FormSettings>();
+            form.WindowState = this.WindowState;
             OpenChildForm(form);
         }
 
@@ -504,7 +508,7 @@ namespace APC
 
         private void panelRegMembers_Click(object sender, EventArgs e)
         {
-            btnMembers.PerformClick();
+            dashboardBtnMembers.PerformClick();
         }
 
         private void btnAttendance_Click(object sender, EventArgs e)
@@ -513,6 +517,7 @@ namespace APC
             ActivateButton(sender, RBGColors.color2);
 
             var form = _serviceProvider.GetRequiredService<FormMeetingBoard>();
+            form.WindowState = this.WindowState;
             OpenChildForm(form);
         }
 
@@ -522,6 +527,7 @@ namespace APC
             ActivateButton(sender, RBGColors.color2);
 
             var form = _serviceProvider.GetRequiredService<FormEventsList>();
+            form.WindowState = this.WindowState;
             OpenChildForm(form);
         }
 
@@ -531,32 +537,33 @@ namespace APC
             ActivateButton(sender, RBGColors.color2);
 
             var form = _serviceProvider.GetRequiredService<FormDocumentList>();
+            form.WindowState = this.WindowState;
             OpenChildForm(form);
         }
 
         private void panelMeetingAttend_Click(object sender, EventArgs e)
         {
-            btnAttendance.PerformClick();
+            dashboardBtnAttendance.PerformClick();
         }
 
         private void panelLastEvent_Click(object sender, EventArgs e)
         {
-            btnEvents.PerformClick();
+            dashboardBtnEvents.PerformClick();
         }
 
         private void panelMonthlyDues_Click(object sender, EventArgs e)
         {
-            btnAttendance.PerformClick();
+            dashboardBtnAttendance.PerformClick();
         }
 
         private void panelYearlyDues_Click(object sender, EventArgs e)
         {
-            btnAttendance.PerformClick();
+            dashboardBtnAttendance.PerformClick();
         }
 
         public void TriggerEventButtonOnClick()
         {
-            btnEvents.PerformClick();
+            dashboardBtnEvents.PerformClick();
         }
 
         private void labelLastEventDate_Click(object sender, EventArgs e)
@@ -566,7 +573,7 @@ namespace APC
 
         private void panelLastEvent_Click_1(object sender, EventArgs e)
         {
-            btnEvents.PerformClick();
+            dashboardBtnEvents.PerformClick();
         }
 
         private void iconZoomIn_Click(object sender, EventArgs e)

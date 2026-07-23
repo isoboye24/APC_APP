@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewEventSales : Form
+    public partial class FormViewEventSales : BaseFormDashboard
     {
         private Applications.DTO.EventSalesDTO _eventSalesDTO;
         private EventDTO _eventDTO;
@@ -39,16 +39,8 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
 
-        private void ControlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3);
-            GeneralHelper.ApplyRegularFont(16, labelSummary, labelAmountSold, labelDate);
-        }
-
         private void FormViewEventSales_Load(object sender, EventArgs e)
         {
-            ControlsFont();
-
             labelTitle.Text = _eventSalesDTO.EventTitle;
             labelSummary.Text = _eventSalesDTO.Summary;
             labelAmountSold.Text = _eventSalesDTO.AmountSold.ToString() + " €";

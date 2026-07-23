@@ -1,6 +1,7 @@
-﻿using APC.Domain.Entities;
-using APC.Applications.Interfaces;
+﻿using APC.Applications.Interfaces;
+using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace APC
 {
-    public partial class FormPosition : Form
+    public partial class FormPosition : BaseFormDashboard
     {
         private readonly IPositionService _positionService;
 
@@ -87,14 +88,6 @@ namespace APC
 
         private void FormPosition_Load(object sender, EventArgs e)
         {
-            #region
-            labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            txtPosition.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnClose.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            #endregion
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit Position";

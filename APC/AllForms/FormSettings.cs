@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +13,7 @@ using static APC.Helper.SingleColumnHelper;
 
 namespace APC.AllForms
 {
-    public partial class FormSettings : Form
+    public partial class FormSettings : BaseFormDashboard
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly ICountryService _countryService;
@@ -202,32 +203,9 @@ namespace APC.AllForms
 
 
 
-        private void resizeControls()
-        {
-            //    GeneralHelper.ApplyBoldFont(14,
-            //        label1, label2, label3, label4, label5, label6, label7, label8,
-            //        label9, label10, label11, label12, label16, label19, btnAddCountry, btnUpdateCountry, btnDeleteCountry,
-            //         btnAddEmpStatus, btnUpdateEmpStatus, btnDeleteEmpStatus, btnAddMarStatus, btnUpdateMarStatus, btnDeleteMarStatus, 
-            //         btnAddNationality, btnAddProfessions, btnUpdateProfessions, btnDeleteProfessions, cmbDeletedData, btnRetrieve
-            //        btnUpdateNationality, btnDeleteNationality, btnDeletePermissions, btnAddPositions, btnUpdatePositions, btnDeletePositions
-            //        );
-
-            //    GeneralHelper.ApplyRegularFont(11,
-            //        labelTotalCountry, labelTotalEmpStatus, labelTotalMarStatus, labelTotalNationality,
-            //        labelTotalPermissions, labelTotalPositions, labelTotalProfessions
-            //        );
-
-            //    GeneralHelper.ApplyRegularFont(14,
-            //        txtCountry, txtMaritalStatus, txtEmpStatus, txtNationality, txtPosition,
-            //        txtProfession
-            //        );
-        }
-
+       
         private void FormSettings_Load(object sender, EventArgs e)
         {
-            // Controls sizes
-            resizeControls();
-
             loadPaymentStatus();
             loadCountries();
             loadEmploymentStatus();

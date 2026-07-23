@@ -1,6 +1,7 @@
 ﻿using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Data.Entity.Validation;
 using System.IO;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormDocument : Form
+    public partial class FormDocument : BaseFormDashboard
     {
         private readonly IDocumentService _documentService;
 
@@ -56,8 +57,6 @@ namespace APC.AllForms
 
         private void FormDocument_Load(object sender, EventArgs e)
         {
-            ControlsFont();
-
             picFileImage.Hide();
             if (_isUpdate)
             {
@@ -149,14 +148,5 @@ namespace APC.AllForms
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void ControlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, btnClose, btnSave, btnBrowse);
-            GeneralHelper.ApplyRegularFont(14, txtDocumentPath);
-            GeneralHelper.ApplyRegularFont(16, txtDocumentName);
-        }
-
-        
     }
 }

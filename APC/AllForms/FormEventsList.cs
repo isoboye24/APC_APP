@@ -3,6 +3,7 @@ using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Applications.Services;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +14,7 @@ using static APC.Helper.EventsHelper;
 
 namespace APC
 {
-    public partial class FormEventsList : Form
+    public partial class FormEventsList : BaseFormDashboard
     {
         private readonly IEventsService _eventsService;
         private readonly IEventExpenditureService _eventExpenditureService;
@@ -92,18 +93,18 @@ namespace APC
 
         private void controlsFont()
         {
-            GeneralHelper.ApplyBoldFont(14, label5, label2, btnAdd, btnUpdate, btnView);
+            GeneralHelper.ApplyBoldFont(14, dashboardLabel5, label2, btnAdd, btnUpdate, btnView);
 
             GeneralHelper.ApplyRegularFont(14, cmbEventYear, txtEventTitle);
 
             label1.Tag = "resizable";
             label3.Tag = "resizable";
-            label4.Tag = "resizable";
-            label5.Tag = "resizable";
-            label6.Tag = "resizable";
-            labelOverallBalance.Tag = "resizable";
-            labelOverallSold.Tag = "resizable";
-            labelOverallSpent.Tag = "resizable";
+            dashboardLabel4.Tag = "resizable";
+            dashboardLabel5.Tag = "resizable";
+            dashboardLabel6.Tag = "resizable";
+            dvLabelOverallBalance.Tag = "resizable";
+            dvLabelOverallSold.Tag = "resizable";
+            dvLabelOverallSpent.Tag = "resizable";
         }
 
         private void loadEvents()
@@ -178,9 +179,9 @@ namespace APC
             decimal totalSales = _eventSalesService.GetSalesAmountByEvent(selected.EventsId);
             decimal totalExpenditures = _eventExpenditureService.GetTotalAmountSpentByEvent(selected.EventsId);
 
-            labelOverallSold.Text = AmountHelper.FormatAmount(totalSales);
-            labelOverallSpent.Text = AmountHelper.FormatAmount(totalExpenditures);
-            labelOverallBalance.Text = AmountHelper.FormatAmount(totalSales - totalExpenditures);
+            dvLabelOverallSold.Text = AmountHelper.FormatAmount(totalSales);
+            dvLabelOverallSpent.Text = AmountHelper.FormatAmount(totalExpenditures);
+            dvLabelOverallBalance.Text = AmountHelper.FormatAmount(totalSales - totalExpenditures);
         }
     }
 }

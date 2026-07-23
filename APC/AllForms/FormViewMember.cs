@@ -1,13 +1,14 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewMember : Form
+    public partial class FormViewMember : BaseFormDashboard
     {
         private readonly IMemberService _memberService;
         private readonly IFinedMemberService _finedMemberService;
@@ -58,22 +59,6 @@ namespace APC.AllForms
             _memberFullDetailsDTOById = _memberService.GetMemberById(memberId);
         }
 
-        private void ResizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelMemberNameTitle, label1, label2, label3, label4, label5, label6, label7, label8, label9,
-                label10, label11, label12, label13, label14, label15, label16, label17, label18, label19, label20, label21, label22,
-                label23, label25, label26, label27, labelPhone2, labelPhone3, labelBirthday, labelMemSince, labelAmountContributed,
-                labelAmountExpected, labelFinesText, labelNoOfAbsent, labelNoOfFines, labelNoOfPresent,
-                labelPersonalBalance, btnClose, btnViewAbsentAttendance, btnViewAmountContributed, btnViewAmountExpected,
-                btnViewFines, btnViewPersonalBalance, btnViewPresentAttendance
-                );
-
-            GeneralHelper.ApplyRegularFont(14, txtAddress, txtEmail, txtLGA, txtName, txtPhone1, txtCountry, txtEmpStatus, txtGender,
-                txtPhone2, txtPhone3, txtSurname, txtMaritalStatus, txtNationality, txtNextOfKin, txtNextOfKinRelationship, txtPermission,
-                txtPosition, txtProfession
-                );
-        }
-
         public void ViewMemberDetails(int Id)
         {
             _memberFullDetailsDTOById = _memberService.GetMemberById(Id);
@@ -116,11 +101,8 @@ namespace APC.AllForms
 
         private void FormViewMember_Load(object sender, EventArgs e)
         {
-            ResizeControls();
-
             ViewMemberDetails(_memberFullDetailsDTOById.MemberId);         
 
-            
             finesCount = _finedMemberService.AnnualFinesCountById(_memberFullDetailsDTOById.MemberId, currYear);
             btnViewFines.Hide();
             labelNoOfFines.Text = finesCount.ToString();

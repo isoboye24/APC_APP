@@ -1,5 +1,6 @@
 ﻿using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Runtime.InteropServices;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormLogin : Form
+    public partial class FormLogin : BaseFormDashboard
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMemberService _memberService;
@@ -103,15 +104,9 @@ namespace APC.AllForms
             }
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, btnClose, btnEnter);
-            GeneralHelper.ApplyRegularFont(14, txtPassword, txtUsername);
-        }
-
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            resizeControls();
+
         }
 
         private void picClose_Click(object sender, EventArgs e)

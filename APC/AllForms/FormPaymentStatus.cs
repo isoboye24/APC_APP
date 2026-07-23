@@ -1,12 +1,13 @@
-﻿using APC.Domain.Entities;
-using APC.Applications.Interfaces;
+﻿using APC.Applications.Interfaces;
+using APC.Domain.Entities;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormPaymentStatus : Form
+    public partial class FormPaymentStatus : BaseFormDashboard
     {
         private readonly IPaymentStatusService _paymentStatusService;
 

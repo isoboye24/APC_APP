@@ -44,12 +44,12 @@
             this.btnDeleteRegisteredMembers = new System.Windows.Forms.Button();
             this.btnViewRegisteredMembers = new System.Windows.Forms.Button();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelNoOfFemaleRegisteredMembers = new System.Windows.Forms.Label();
-            this.labelNoOfMenRegisteredMembers = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.labelNoOfDivisorRegisteredMembers = new System.Windows.Forms.Label();
+            this.statusMaleLabelMember = new System.Windows.Forms.Label();
+            this.svNoOfFemaleRegisteredMembers = new System.Windows.Forms.Label();
+            this.svNoOfMenRegisteredMembers = new System.Windows.Forms.Label();
+            this.statusFemaleLabelMember = new System.Windows.Forms.Label();
+            this.statusDivisorLabelMember = new System.Windows.Forms.Label();
+            this.svNoOfDivisorRegisteredMembers = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
@@ -94,13 +94,13 @@
             this.label38 = new System.Windows.Forms.Label();
             this.dataGridViewCommitments = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel42 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalRowsCommittment = new System.Windows.Forms.Label();
+            this.svTotalRowsCommittment = new System.Windows.Forms.Label();
             this.btnViewCommittment = new System.Windows.Forms.Button();
             this.membersBirthdayPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.btnViewBirthday = new System.Windows.Forms.Button();
-            this.labelTotalRowBirthday = new System.Windows.Forms.Label();
+            this.svTotalRowBirthday = new System.Windows.Forms.Label();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.label12 = new System.Windows.Forms.Label();
@@ -134,7 +134,7 @@
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
             this.btnUpdateContacts = new System.Windows.Forms.Button();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalContacts = new System.Windows.Forms.Label();
+            this.svTotalContacts = new System.Windows.Forms.Label();
             this.btnViewContacts = new System.Windows.Forms.Button();
             this.inactiveMembersPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel51 = new System.Windows.Forms.TableLayoutPanel();
@@ -142,10 +142,10 @@
             this.btnUpdateInactiveMembers = new System.Windows.Forms.Button();
             this.btnViewInactiveMembers = new System.Windows.Forms.Button();
             this.tableLayoutPanel53 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelNoOfFemaleInactiveMembers = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.labelNoOfMenInactiveMembers = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
+            this.svNoOfFemaleInactiveMembers = new System.Windows.Forms.Label();
+            this.statusLabel45 = new System.Windows.Forms.Label();
+            this.svNoOfMenInactiveMembers = new System.Windows.Forms.Label();
+            this.statusLabel39 = new System.Windows.Forms.Label();
             this.tableLayoutPanel54 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel55 = new System.Windows.Forms.TableLayoutPanel();
             this.label48 = new System.Windows.Forms.Label();
@@ -175,12 +175,12 @@
             this.btnUpdateFormerMembers = new System.Windows.Forms.Button();
             this.btnViewFormerMembers = new System.Windows.Forms.Button();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
-            this.label19 = new System.Windows.Forms.Label();
-            this.labelNoOfFemaleFormerMembers = new System.Windows.Forms.Label();
-            this.labelNoOfMenFormerMembers = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.labelNoOfDivisorFormerMembers = new System.Windows.Forms.Label();
+            this.statusLabel19 = new System.Windows.Forms.Label();
+            this.svNoOfFemaleFormerMembers = new System.Windows.Forms.Label();
+            this.svNoOfMenFormerMembers = new System.Windows.Forms.Label();
+            this.statusLabel20 = new System.Windows.Forms.Label();
+            this.statusLabel21 = new System.Windows.Forms.Label();
+            this.svNoOfDivisorFormerMembers = new System.Windows.Forms.Label();
             this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
             this.label22 = new System.Windows.Forms.Label();
@@ -208,12 +208,12 @@
             this.btnUpdateDeadMembers = new System.Windows.Forms.Button();
             this.btnViewDeadMembers = new System.Windows.Forms.Button();
             this.tableLayoutPanel34 = new System.Windows.Forms.TableLayoutPanel();
-            this.label28 = new System.Windows.Forms.Label();
-            this.labelNoOfFemaleDeadMembers = new System.Windows.Forms.Label();
-            this.labelNoOfMenDeadMembers = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.labelNoOfDivisorDeadMembers = new System.Windows.Forms.Label();
+            this.statusLabel28 = new System.Windows.Forms.Label();
+            this.svNoOfFemaleDeadMembers = new System.Windows.Forms.Label();
+            this.svNoOfMenDeadMembers = new System.Windows.Forms.Label();
+            this.statusLabel29 = new System.Windows.Forms.Label();
+            this.statusLabel30 = new System.Windows.Forms.Label();
+            this.svNoOfDivisorDeadMembers = new System.Windows.Forms.Label();
             this.tableLayoutPanel35 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel36 = new System.Windows.Forms.TableLayoutPanel();
             this.label31 = new System.Windows.Forms.Label();
@@ -472,12 +472,12 @@
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Controls.Add(this.label4, 1, 0);
-            this.tableLayoutPanel7.Controls.Add(this.labelNoOfFemaleRegisteredMembers, 4, 0);
-            this.tableLayoutPanel7.Controls.Add(this.labelNoOfMenRegisteredMembers, 2, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label7, 3, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label8, 5, 0);
-            this.tableLayoutPanel7.Controls.Add(this.labelNoOfDivisorRegisteredMembers, 6, 0);
+            this.tableLayoutPanel7.Controls.Add(this.statusMaleLabelMember, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.svNoOfFemaleRegisteredMembers, 4, 0);
+            this.tableLayoutPanel7.Controls.Add(this.svNoOfMenRegisteredMembers, 2, 0);
+            this.tableLayoutPanel7.Controls.Add(this.statusFemaleLabelMember, 3, 0);
+            this.tableLayoutPanel7.Controls.Add(this.statusDivisorLabelMember, 5, 0);
+            this.tableLayoutPanel7.Controls.Add(this.svNoOfDivisorRegisteredMembers, 6, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(952, 73);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4);
@@ -487,74 +487,74 @@
             this.tableLayoutPanel7.Size = new System.Drawing.Size(245, 16);
             this.tableLayoutPanel7.TabIndex = 4;
             // 
-            // label4
+            // statusMaleLabelMember
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(-7, 0);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 16);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "M:";
+            this.statusMaleLabelMember.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusMaleLabelMember.AutoSize = true;
+            this.statusMaleLabelMember.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusMaleLabelMember.Location = new System.Drawing.Point(-7, 0);
+            this.statusMaleLabelMember.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusMaleLabelMember.Name = "statusMaleLabelMember";
+            this.statusMaleLabelMember.Size = new System.Drawing.Size(30, 16);
+            this.statusMaleLabelMember.TabIndex = 0;
+            this.statusMaleLabelMember.Text = "M:";
             // 
-            // labelNoOfFemaleRegisteredMembers
+            // svNoOfFemaleRegisteredMembers
             // 
-            this.labelNoOfFemaleRegisteredMembers.AutoSize = true;
-            this.labelNoOfFemaleRegisteredMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfFemaleRegisteredMembers.Location = new System.Drawing.Point(117, 0);
-            this.labelNoOfFemaleRegisteredMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfFemaleRegisteredMembers.Name = "labelNoOfFemaleRegisteredMembers";
-            this.labelNoOfFemaleRegisteredMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfFemaleRegisteredMembers.TabIndex = 0;
-            this.labelNoOfFemaleRegisteredMembers.Text = "0";
+            this.svNoOfFemaleRegisteredMembers.AutoSize = true;
+            this.svNoOfFemaleRegisteredMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfFemaleRegisteredMembers.Location = new System.Drawing.Point(117, 0);
+            this.svNoOfFemaleRegisteredMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfFemaleRegisteredMembers.Name = "svNoOfFemaleRegisteredMembers";
+            this.svNoOfFemaleRegisteredMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfFemaleRegisteredMembers.TabIndex = 0;
+            this.svNoOfFemaleRegisteredMembers.Text = "0";
             // 
-            // labelNoOfMenRegisteredMembers
+            // svNoOfMenRegisteredMembers
             // 
-            this.labelNoOfMenRegisteredMembers.AutoSize = true;
-            this.labelNoOfMenRegisteredMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfMenRegisteredMembers.Location = new System.Drawing.Point(31, 0);
-            this.labelNoOfMenRegisteredMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfMenRegisteredMembers.Name = "labelNoOfMenRegisteredMembers";
-            this.labelNoOfMenRegisteredMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfMenRegisteredMembers.TabIndex = 0;
-            this.labelNoOfMenRegisteredMembers.Text = "0";
+            this.svNoOfMenRegisteredMembers.AutoSize = true;
+            this.svNoOfMenRegisteredMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfMenRegisteredMembers.Location = new System.Drawing.Point(31, 0);
+            this.svNoOfMenRegisteredMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfMenRegisteredMembers.Name = "svNoOfMenRegisteredMembers";
+            this.svNoOfMenRegisteredMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfMenRegisteredMembers.TabIndex = 0;
+            this.svNoOfMenRegisteredMembers.Text = "0";
             // 
-            // label7
+            // statusFemaleLabelMember
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(86, 0);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(23, 16);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "F:";
+            this.statusFemaleLabelMember.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusFemaleLabelMember.AutoSize = true;
+            this.statusFemaleLabelMember.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusFemaleLabelMember.Location = new System.Drawing.Point(86, 0);
+            this.statusFemaleLabelMember.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusFemaleLabelMember.Name = "statusFemaleLabelMember";
+            this.statusFemaleLabelMember.Size = new System.Drawing.Size(23, 16);
+            this.statusFemaleLabelMember.TabIndex = 0;
+            this.statusFemaleLabelMember.Text = "F:";
             // 
-            // label8
+            // statusDivisorLabelMember
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(176, 0);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(26, 16);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "D:";
+            this.statusDivisorLabelMember.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusDivisorLabelMember.AutoSize = true;
+            this.statusDivisorLabelMember.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusDivisorLabelMember.Location = new System.Drawing.Point(176, 0);
+            this.statusDivisorLabelMember.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusDivisorLabelMember.Name = "statusDivisorLabelMember";
+            this.statusDivisorLabelMember.Size = new System.Drawing.Size(26, 16);
+            this.statusDivisorLabelMember.TabIndex = 0;
+            this.statusDivisorLabelMember.Text = "D:";
             // 
-            // labelNoOfDivisorRegisteredMembers
+            // svNoOfDivisorRegisteredMembers
             // 
-            this.labelNoOfDivisorRegisteredMembers.AutoSize = true;
-            this.labelNoOfDivisorRegisteredMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfDivisorRegisteredMembers.Location = new System.Drawing.Point(210, 0);
-            this.labelNoOfDivisorRegisteredMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfDivisorRegisteredMembers.Name = "labelNoOfDivisorRegisteredMembers";
-            this.labelNoOfDivisorRegisteredMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfDivisorRegisteredMembers.TabIndex = 0;
-            this.labelNoOfDivisorRegisteredMembers.Text = "0";
+            this.svNoOfDivisorRegisteredMembers.AutoSize = true;
+            this.svNoOfDivisorRegisteredMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfDivisorRegisteredMembers.Location = new System.Drawing.Point(210, 0);
+            this.svNoOfDivisorRegisteredMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfDivisorRegisteredMembers.Name = "svNoOfDivisorRegisteredMembers";
+            this.svNoOfDivisorRegisteredMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfDivisorRegisteredMembers.TabIndex = 0;
+            this.svNoOfDivisorRegisteredMembers.Text = "0";
             // 
             // tableLayoutPanel2
             // 
@@ -606,12 +606,13 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(4, 84);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 10, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 27);
+            this.label5.Size = new System.Drawing.Size(214, 27);
             this.label5.TabIndex = 0;
             this.label5.Text = "Profession";
             // 
@@ -639,12 +640,13 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(4, 10);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 10, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 27);
+            this.label3.Size = new System.Drawing.Size(214, 27);
             this.label3.TabIndex = 0;
             this.label3.Text = "Position";
             // 
@@ -672,12 +674,13 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(4, 10);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 10, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 27);
+            this.label1.Size = new System.Drawing.Size(214, 27);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
@@ -694,12 +697,13 @@
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(4, 84);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 10, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(119, 27);
+            this.label9.Size = new System.Drawing.Size(214, 27);
             this.label9.TabIndex = 0;
             this.label9.Text = "Nationality";
             // 
@@ -749,23 +753,25 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(4, 10);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 10, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 27);
+            this.label2.Size = new System.Drawing.Size(214, 27);
             this.label2.TabIndex = 0;
             this.label2.Text = "Surname";
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(4, 84);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 10, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 27);
+            this.label6.Size = new System.Drawing.Size(214, 27);
             this.label6.TabIndex = 0;
             this.label6.Text = "Gender";
             // 
@@ -983,34 +989,34 @@
             this.tableLayoutPanel45.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel45.Name = "tableLayoutPanel45";
             this.tableLayoutPanel45.RowCount = 4;
-            this.tableLayoutPanel45.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel45.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel45.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel45.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel45.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel45.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel45.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel45.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel45.Size = new System.Drawing.Size(224, 156);
             this.tableLayoutPanel45.TabIndex = 0;
             // 
             // label41
             // 
-            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(4, 87);
+            this.label41.Location = new System.Drawing.Point(4, 85);
             this.label41.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(95, 28);
+            this.label41.Size = new System.Drawing.Size(216, 28);
             this.label41.TabIndex = 0;
             this.label41.Text = "Surname";
             // 
             // label42
             // 
-            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(4, 9);
+            this.label42.Location = new System.Drawing.Point(4, 7);
             this.label42.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(68, 28);
+            this.label42.Size = new System.Drawing.Size(216, 28);
             this.label42.TabIndex = 0;
             this.label42.Text = "Name";
             // 
@@ -1018,7 +1024,7 @@
             // 
             this.txtNameCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNameCommittment.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNameCommittment.Location = new System.Drawing.Point(4, 41);
+            this.txtNameCommittment.Location = new System.Drawing.Point(4, 43);
             this.txtNameCommittment.Margin = new System.Windows.Forms.Padding(4);
             this.txtNameCommittment.Name = "txtNameCommittment";
             this.txtNameCommittment.Size = new System.Drawing.Size(216, 32);
@@ -1029,7 +1035,7 @@
             // 
             this.txtSurnameCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSurnameCommittment.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSurnameCommittment.Location = new System.Drawing.Point(4, 119);
+            this.txtSurnameCommittment.Location = new System.Drawing.Point(4, 121);
             this.txtSurnameCommittment.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurnameCommittment.Name = "txtSurnameCommittment";
             this.txtSurnameCommittment.Size = new System.Drawing.Size(216, 32);
@@ -1114,10 +1120,10 @@
             this.tableLayoutPanel47.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel47.Name = "tableLayoutPanel47";
             this.tableLayoutPanel47.RowCount = 4;
-            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel47.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel47.Size = new System.Drawing.Size(224, 156);
             this.tableLayoutPanel47.TabIndex = 6;
             // 
@@ -1126,7 +1132,7 @@
             this.cmbYearCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbYearCommittment.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbYearCommittment.FormattingEnabled = true;
-            this.cmbYearCommittment.Location = new System.Drawing.Point(4, 41);
+            this.cmbYearCommittment.Location = new System.Drawing.Point(4, 43);
             this.cmbYearCommittment.Margin = new System.Windows.Forms.Padding(4);
             this.cmbYearCommittment.Name = "cmbYearCommittment";
             this.cmbYearCommittment.Size = new System.Drawing.Size(216, 33);
@@ -1137,7 +1143,7 @@
             this.cmbStatusCommittment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbStatusCommittment.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStatusCommittment.FormattingEnabled = true;
-            this.cmbStatusCommittment.Location = new System.Drawing.Point(4, 119);
+            this.cmbStatusCommittment.Location = new System.Drawing.Point(4, 121);
             this.cmbStatusCommittment.Margin = new System.Windows.Forms.Padding(4);
             this.cmbStatusCommittment.Name = "cmbStatusCommittment";
             this.cmbStatusCommittment.Size = new System.Drawing.Size(216, 33);
@@ -1145,25 +1151,25 @@
             // 
             // label11
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(4, 87);
+            this.label11.Location = new System.Drawing.Point(4, 85);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(124, 28);
+            this.label11.Size = new System.Drawing.Size(216, 28);
             this.label11.TabIndex = 0;
             this.label11.Text = "Dues Status";
             // 
             // label38
             // 
-            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(4, 9);
+            this.label38.Location = new System.Drawing.Point(4, 7);
             this.label38.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(52, 28);
+            this.label38.Size = new System.Drawing.Size(216, 28);
             this.label38.TabIndex = 0;
             this.label38.Text = "Year";
             // 
@@ -1193,7 +1199,7 @@
             this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24F));
-            this.tableLayoutPanel42.Controls.Add(this.labelTotalRowsCommittment, 0, 0);
+            this.tableLayoutPanel42.Controls.Add(this.svTotalRowsCommittment, 0, 0);
             this.tableLayoutPanel42.Controls.Add(this.btnViewCommittment, 2, 0);
             this.tableLayoutPanel42.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel42.Location = new System.Drawing.Point(28, 635);
@@ -1203,18 +1209,18 @@
             this.tableLayoutPanel42.Size = new System.Drawing.Size(1211, 50);
             this.tableLayoutPanel42.TabIndex = 6;
             // 
-            // labelTotalRowsCommittment
+            // svTotalRowsCommittment
             // 
-            this.labelTotalRowsCommittment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalRowsCommittment.AutoSize = true;
-            this.labelTotalRowsCommittment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRowsCommittment.Location = new System.Drawing.Point(4, 13);
-            this.labelTotalRowsCommittment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
-            this.labelTotalRowsCommittment.Name = "labelTotalRowsCommittment";
-            this.labelTotalRowsCommittment.Size = new System.Drawing.Size(282, 28);
-            this.labelTotalRowsCommittment.TabIndex = 1;
-            this.labelTotalRowsCommittment.Text = "Row : 0";
-            this.labelTotalRowsCommittment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.svTotalRowsCommittment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.svTotalRowsCommittment.AutoSize = true;
+            this.svTotalRowsCommittment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svTotalRowsCommittment.Location = new System.Drawing.Point(4, 13);
+            this.svTotalRowsCommittment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
+            this.svTotalRowsCommittment.Name = "svTotalRowsCommittment";
+            this.svTotalRowsCommittment.Size = new System.Drawing.Size(282, 28);
+            this.svTotalRowsCommittment.TabIndex = 1;
+            this.svTotalRowsCommittment.Text = "Row : 0";
+            this.svTotalRowsCommittment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnViewCommittment
             // 
@@ -1281,7 +1287,7 @@
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel11.Controls.Add(this.btnViewBirthday, 1, 1);
-            this.tableLayoutPanel11.Controls.Add(this.labelTotalRowBirthday, 0, 1);
+            this.tableLayoutPanel11.Controls.Add(this.svTotalRowBirthday, 0, 1);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(29, 567);
             this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(4);
@@ -1310,18 +1316,18 @@
             this.btnViewBirthday.UseVisualStyleBackColor = false;
             this.btnViewBirthday.Click += new System.EventHandler(this.btnViewBirthday_Click);
             // 
-            // labelTotalRowBirthday
+            // svTotalRowBirthday
             // 
-            this.labelTotalRowBirthday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalRowBirthday.AutoSize = true;
-            this.labelTotalRowBirthday.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRowBirthday.Location = new System.Drawing.Point(4, 34);
-            this.labelTotalRowBirthday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
-            this.labelTotalRowBirthday.Name = "labelTotalRowBirthday";
-            this.labelTotalRowBirthday.Size = new System.Drawing.Size(514, 28);
-            this.labelTotalRowBirthday.TabIndex = 4;
-            this.labelTotalRowBirthday.Text = "Row";
-            this.labelTotalRowBirthday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.svTotalRowBirthday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.svTotalRowBirthday.AutoSize = true;
+            this.svTotalRowBirthday.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svTotalRowBirthday.Location = new System.Drawing.Point(4, 34);
+            this.svTotalRowBirthday.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
+            this.svTotalRowBirthday.Name = "svTotalRowBirthday";
+            this.svTotalRowBirthday.Size = new System.Drawing.Size(514, 28);
+            this.svTotalRowBirthday.TabIndex = 4;
+            this.svTotalRowBirthday.Text = "Row";
+            this.svTotalRowBirthday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel13
             // 
@@ -1361,34 +1367,34 @@
             this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 4;
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel14.Size = new System.Drawing.Size(222, 154);
             this.tableLayoutPanel14.TabIndex = 0;
             // 
             // label12
             // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(4, 86);
+            this.label12.Location = new System.Drawing.Point(4, 83);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(95, 28);
+            this.label12.Size = new System.Drawing.Size(214, 28);
             this.label12.TabIndex = 0;
             this.label12.Text = "Surname";
             // 
             // label13
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(4, 9);
+            this.label13.Location = new System.Drawing.Point(4, 7);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(68, 28);
+            this.label13.Size = new System.Drawing.Size(214, 28);
             this.label13.TabIndex = 0;
             this.label13.Text = "Name";
             // 
@@ -1396,7 +1402,7 @@
             // 
             this.txtNameBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNameBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNameBirthday.Location = new System.Drawing.Point(4, 41);
+            this.txtNameBirthday.Location = new System.Drawing.Point(4, 42);
             this.txtNameBirthday.Margin = new System.Windows.Forms.Padding(4);
             this.txtNameBirthday.Name = "txtNameBirthday";
             this.txtNameBirthday.Size = new System.Drawing.Size(214, 32);
@@ -1427,34 +1433,34 @@
             this.tableLayoutPanel15.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
             this.tableLayoutPanel15.RowCount = 4;
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel15.Size = new System.Drawing.Size(222, 154);
             this.tableLayoutPanel15.TabIndex = 0;
             // 
             // label14
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(4, 80);
+            this.label14.Location = new System.Drawing.Point(4, 83);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(119, 26);
+            this.label14.Size = new System.Drawing.Size(214, 28);
             this.label14.TabIndex = 0;
             this.label14.Text = "Nationality";
             // 
             // label15
             // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(4, 4);
+            this.label15.Location = new System.Drawing.Point(4, 7);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(80, 26);
+            this.label15.Size = new System.Drawing.Size(214, 28);
             this.label15.TabIndex = 0;
             this.label15.Text = "Gender";
             // 
@@ -1463,7 +1469,7 @@
             this.cmbGenderBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbGenderBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGenderBirthday.FormattingEnabled = true;
-            this.cmbGenderBirthday.Location = new System.Drawing.Point(4, 34);
+            this.cmbGenderBirthday.Location = new System.Drawing.Point(4, 42);
             this.cmbGenderBirthday.Margin = new System.Windows.Forms.Padding(4);
             this.cmbGenderBirthday.Name = "cmbGenderBirthday";
             this.cmbGenderBirthday.Size = new System.Drawing.Size(214, 33);
@@ -1474,7 +1480,7 @@
             this.cmbNationalityBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbNationalityBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbNationalityBirthday.FormattingEnabled = true;
-            this.cmbNationalityBirthday.Location = new System.Drawing.Point(4, 110);
+            this.cmbNationalityBirthday.Location = new System.Drawing.Point(4, 118);
             this.cmbNationalityBirthday.Margin = new System.Windows.Forms.Padding(4);
             this.cmbNationalityBirthday.Name = "cmbNationalityBirthday";
             this.cmbNationalityBirthday.Size = new System.Drawing.Size(214, 33);
@@ -1493,10 +1499,10 @@
             this.tableLayoutPanel16.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel16.Name = "tableLayoutPanel16";
             this.tableLayoutPanel16.RowCount = 4;
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel16.Size = new System.Drawing.Size(222, 154);
             this.tableLayoutPanel16.TabIndex = 0;
             // 
@@ -1516,7 +1522,7 @@
             this.cmbPositionBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbPositionBirthday.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPositionBirthday.FormattingEnabled = true;
-            this.cmbPositionBirthday.Location = new System.Drawing.Point(4, 41);
+            this.cmbPositionBirthday.Location = new System.Drawing.Point(4, 42);
             this.cmbPositionBirthday.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPositionBirthday.Name = "cmbPositionBirthday";
             this.cmbPositionBirthday.Size = new System.Drawing.Size(214, 33);
@@ -1524,25 +1530,25 @@
             // 
             // label16
             // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(4, 9);
+            this.label16.Location = new System.Drawing.Point(4, 7);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(88, 28);
+            this.label16.Size = new System.Drawing.Size(214, 28);
             this.label16.TabIndex = 0;
             this.label16.Text = "Position";
             // 
             // label17
             // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(4, 86);
+            this.label17.Location = new System.Drawing.Point(4, 83);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(111, 28);
+            this.label17.Size = new System.Drawing.Size(214, 28);
             this.label17.TabIndex = 0;
             this.label17.Text = "Profession";
             // 
@@ -1640,13 +1646,13 @@
             // 
             // label10
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(4, 15);
+            this.label10.Location = new System.Drawing.Point(4, 9);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(75, 28);
+            this.label10.Size = new System.Drawing.Size(224, 28);
             this.label10.TabIndex = 0;
             this.label10.Text = "Month";
             // 
@@ -1717,10 +1723,10 @@
             // tableLayoutPanel20
             // 
             this.tableLayoutPanel20.ColumnCount = 4;
-            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel20.Controls.Add(this.txtSurnameContacts, 2, 1);
             this.tableLayoutPanel20.Controls.Add(this.label18, 1, 1);
             this.tableLayoutPanel20.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1738,10 +1744,10 @@
             // 
             this.txtSurnameContacts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSurnameContacts.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSurnameContacts.Location = new System.Drawing.Point(531, 18);
+            this.txtSurnameContacts.Location = new System.Drawing.Point(547, 18);
             this.txtSurnameContacts.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurnameContacts.Name = "txtSurnameContacts";
-            this.txtSurnameContacts.Size = new System.Drawing.Size(306, 34);
+            this.txtSurnameContacts.Size = new System.Drawing.Size(354, 34);
             this.txtSurnameContacts.TabIndex = 0;
             this.txtSurnameContacts.TextChanged += new System.EventHandler(this.txtSurnameContacts_TextChanged);
             // 
@@ -1750,7 +1756,7 @@
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(424, 23);
+            this.label18.Location = new System.Drawing.Point(440, 23);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 9, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(99, 25);
@@ -1801,7 +1807,7 @@
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel22.Controls.Add(this.labelTotalContacts, 1, 0);
+            this.tableLayoutPanel22.Controls.Add(this.svTotalContacts, 1, 0);
             this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel22.Location = new System.Drawing.Point(777, 27);
             this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(4);
@@ -1811,17 +1817,17 @@
             this.tableLayoutPanel22.Size = new System.Drawing.Size(428, 39);
             this.tableLayoutPanel22.TabIndex = 6;
             // 
-            // labelTotalContacts
+            // svTotalContacts
             // 
-            this.labelTotalContacts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalContacts.AutoSize = true;
-            this.labelTotalContacts.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalContacts.Location = new System.Drawing.Point(374, 0);
-            this.labelTotalContacts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalContacts.Name = "labelTotalContacts";
-            this.labelTotalContacts.Size = new System.Drawing.Size(50, 23);
-            this.labelTotalContacts.TabIndex = 0;
-            this.labelTotalContacts.Text = "Total:";
+            this.svTotalContacts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.svTotalContacts.AutoSize = true;
+            this.svTotalContacts.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svTotalContacts.Location = new System.Drawing.Point(374, 0);
+            this.svTotalContacts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svTotalContacts.Name = "svTotalContacts";
+            this.svTotalContacts.Size = new System.Drawing.Size(50, 23);
+            this.svTotalContacts.TabIndex = 0;
+            this.svTotalContacts.Text = "Total:";
             // 
             // btnViewContacts
             // 
@@ -1941,10 +1947,10 @@
             this.tableLayoutPanel53.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel53.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel53.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel53.Controls.Add(this.labelNoOfFemaleInactiveMembers, 6, 0);
-            this.tableLayoutPanel53.Controls.Add(this.label45, 5, 0);
-            this.tableLayoutPanel53.Controls.Add(this.labelNoOfMenInactiveMembers, 4, 0);
-            this.tableLayoutPanel53.Controls.Add(this.label39, 3, 0);
+            this.tableLayoutPanel53.Controls.Add(this.svNoOfFemaleInactiveMembers, 6, 0);
+            this.tableLayoutPanel53.Controls.Add(this.statusLabel45, 5, 0);
+            this.tableLayoutPanel53.Controls.Add(this.svNoOfMenInactiveMembers, 4, 0);
+            this.tableLayoutPanel53.Controls.Add(this.statusLabel39, 3, 0);
             this.tableLayoutPanel53.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel53.Location = new System.Drawing.Point(957, 74);
             this.tableLayoutPanel53.Margin = new System.Windows.Forms.Padding(4);
@@ -1954,51 +1960,51 @@
             this.tableLayoutPanel53.Size = new System.Drawing.Size(248, 16);
             this.tableLayoutPanel53.TabIndex = 4;
             // 
-            // labelNoOfFemaleInactiveMembers
+            // svNoOfFemaleInactiveMembers
             // 
-            this.labelNoOfFemaleInactiveMembers.AutoSize = true;
-            this.labelNoOfFemaleInactiveMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfFemaleInactiveMembers.Location = new System.Drawing.Point(211, 0);
-            this.labelNoOfFemaleInactiveMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfFemaleInactiveMembers.Name = "labelNoOfFemaleInactiveMembers";
-            this.labelNoOfFemaleInactiveMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfFemaleInactiveMembers.TabIndex = 0;
-            this.labelNoOfFemaleInactiveMembers.Text = "0";
+            this.svNoOfFemaleInactiveMembers.AutoSize = true;
+            this.svNoOfFemaleInactiveMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfFemaleInactiveMembers.Location = new System.Drawing.Point(211, 0);
+            this.svNoOfFemaleInactiveMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfFemaleInactiveMembers.Name = "svNoOfFemaleInactiveMembers";
+            this.svNoOfFemaleInactiveMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfFemaleInactiveMembers.TabIndex = 0;
+            this.svNoOfFemaleInactiveMembers.Text = "0";
             // 
-            // label45
+            // statusLabel45
             // 
-            this.label45.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label45.AutoSize = true;
-            this.label45.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.Location = new System.Drawing.Point(180, 0);
-            this.label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(23, 16);
-            this.label45.TabIndex = 0;
-            this.label45.Text = "F:";
+            this.statusLabel45.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel45.AutoSize = true;
+            this.statusLabel45.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel45.Location = new System.Drawing.Point(180, 0);
+            this.statusLabel45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel45.Name = "statusLabel45";
+            this.statusLabel45.Size = new System.Drawing.Size(23, 16);
+            this.statusLabel45.TabIndex = 0;
+            this.statusLabel45.Text = "F:";
             // 
-            // labelNoOfMenInactiveMembers
+            // svNoOfMenInactiveMembers
             // 
-            this.labelNoOfMenInactiveMembers.AutoSize = true;
-            this.labelNoOfMenInactiveMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfMenInactiveMembers.Location = new System.Drawing.Point(118, 0);
-            this.labelNoOfMenInactiveMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfMenInactiveMembers.Name = "labelNoOfMenInactiveMembers";
-            this.labelNoOfMenInactiveMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfMenInactiveMembers.TabIndex = 0;
-            this.labelNoOfMenInactiveMembers.Text = "0";
+            this.svNoOfMenInactiveMembers.AutoSize = true;
+            this.svNoOfMenInactiveMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfMenInactiveMembers.Location = new System.Drawing.Point(118, 0);
+            this.svNoOfMenInactiveMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfMenInactiveMembers.Name = "svNoOfMenInactiveMembers";
+            this.svNoOfMenInactiveMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfMenInactiveMembers.TabIndex = 0;
+            this.svNoOfMenInactiveMembers.Text = "0";
             // 
-            // label39
+            // statusLabel39
             // 
-            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(85, 0);
-            this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(25, 16);
-            this.label39.TabIndex = 0;
-            this.label39.Text = "M:";
+            this.statusLabel39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel39.AutoSize = true;
+            this.statusLabel39.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel39.Location = new System.Drawing.Point(85, 0);
+            this.statusLabel39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel39.Name = "statusLabel39";
+            this.statusLabel39.Size = new System.Drawing.Size(25, 16);
+            this.statusLabel39.TabIndex = 0;
+            this.statusLabel39.Text = "M:";
             // 
             // tableLayoutPanel54
             // 
@@ -2116,12 +2122,13 @@
             // 
             // label50
             // 
+            this.label50.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label50.AutoSize = true;
             this.label50.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label50.Location = new System.Drawing.Point(4, 10);
             this.label50.Margin = new System.Windows.Forms.Padding(4, 10, 4, 0);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(68, 28);
+            this.label50.Size = new System.Drawing.Size(216, 28);
             this.label50.TabIndex = 0;
             this.label50.Text = "Name";
             // 
@@ -2430,12 +2437,12 @@
             this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel25.Controls.Add(this.label19, 1, 0);
-            this.tableLayoutPanel25.Controls.Add(this.labelNoOfFemaleFormerMembers, 4, 0);
-            this.tableLayoutPanel25.Controls.Add(this.labelNoOfMenFormerMembers, 2, 0);
-            this.tableLayoutPanel25.Controls.Add(this.label20, 3, 0);
-            this.tableLayoutPanel25.Controls.Add(this.label21, 5, 0);
-            this.tableLayoutPanel25.Controls.Add(this.labelNoOfDivisorFormerMembers, 6, 0);
+            this.tableLayoutPanel25.Controls.Add(this.statusLabel19, 1, 0);
+            this.tableLayoutPanel25.Controls.Add(this.svNoOfFemaleFormerMembers, 4, 0);
+            this.tableLayoutPanel25.Controls.Add(this.svNoOfMenFormerMembers, 2, 0);
+            this.tableLayoutPanel25.Controls.Add(this.statusLabel20, 3, 0);
+            this.tableLayoutPanel25.Controls.Add(this.statusLabel21, 5, 0);
+            this.tableLayoutPanel25.Controls.Add(this.svNoOfDivisorFormerMembers, 6, 0);
             this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel25.Location = new System.Drawing.Point(777, 74);
             this.tableLayoutPanel25.Margin = new System.Windows.Forms.Padding(4);
@@ -2445,74 +2452,74 @@
             this.tableLayoutPanel25.Size = new System.Drawing.Size(428, 16);
             this.tableLayoutPanel25.TabIndex = 4;
             // 
-            // label19
+            // statusLabel19
             // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(162, 0);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(30, 16);
-            this.label19.TabIndex = 0;
-            this.label19.Text = "M:";
+            this.statusLabel19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel19.AutoSize = true;
+            this.statusLabel19.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel19.Location = new System.Drawing.Point(162, 0);
+            this.statusLabel19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel19.Name = "statusLabel19";
+            this.statusLabel19.Size = new System.Drawing.Size(30, 16);
+            this.statusLabel19.TabIndex = 0;
+            this.statusLabel19.Text = "M:";
             // 
-            // labelNoOfFemaleFormerMembers
+            // svNoOfFemaleFormerMembers
             // 
-            this.labelNoOfFemaleFormerMembers.AutoSize = true;
-            this.labelNoOfFemaleFormerMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfFemaleFormerMembers.Location = new System.Drawing.Point(286, 0);
-            this.labelNoOfFemaleFormerMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfFemaleFormerMembers.Name = "labelNoOfFemaleFormerMembers";
-            this.labelNoOfFemaleFormerMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfFemaleFormerMembers.TabIndex = 0;
-            this.labelNoOfFemaleFormerMembers.Text = "0";
+            this.svNoOfFemaleFormerMembers.AutoSize = true;
+            this.svNoOfFemaleFormerMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfFemaleFormerMembers.Location = new System.Drawing.Point(286, 0);
+            this.svNoOfFemaleFormerMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfFemaleFormerMembers.Name = "svNoOfFemaleFormerMembers";
+            this.svNoOfFemaleFormerMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfFemaleFormerMembers.TabIndex = 0;
+            this.svNoOfFemaleFormerMembers.Text = "0";
             // 
-            // labelNoOfMenFormerMembers
+            // svNoOfMenFormerMembers
             // 
-            this.labelNoOfMenFormerMembers.AutoSize = true;
-            this.labelNoOfMenFormerMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfMenFormerMembers.Location = new System.Drawing.Point(200, 0);
-            this.labelNoOfMenFormerMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfMenFormerMembers.Name = "labelNoOfMenFormerMembers";
-            this.labelNoOfMenFormerMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfMenFormerMembers.TabIndex = 0;
-            this.labelNoOfMenFormerMembers.Text = "0";
+            this.svNoOfMenFormerMembers.AutoSize = true;
+            this.svNoOfMenFormerMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfMenFormerMembers.Location = new System.Drawing.Point(200, 0);
+            this.svNoOfMenFormerMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfMenFormerMembers.Name = "svNoOfMenFormerMembers";
+            this.svNoOfMenFormerMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfMenFormerMembers.TabIndex = 0;
+            this.svNoOfMenFormerMembers.Text = "0";
             // 
-            // label20
+            // statusLabel20
             // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(255, 0);
-            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(23, 16);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "F:";
+            this.statusLabel20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel20.AutoSize = true;
+            this.statusLabel20.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel20.Location = new System.Drawing.Point(255, 0);
+            this.statusLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel20.Name = "statusLabel20";
+            this.statusLabel20.Size = new System.Drawing.Size(23, 16);
+            this.statusLabel20.TabIndex = 0;
+            this.statusLabel20.Text = "F:";
             // 
-            // label21
+            // statusLabel21
             // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(345, 0);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(26, 16);
-            this.label21.TabIndex = 0;
-            this.label21.Text = "D:";
+            this.statusLabel21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel21.AutoSize = true;
+            this.statusLabel21.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel21.Location = new System.Drawing.Point(345, 0);
+            this.statusLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel21.Name = "statusLabel21";
+            this.statusLabel21.Size = new System.Drawing.Size(26, 16);
+            this.statusLabel21.TabIndex = 0;
+            this.statusLabel21.Text = "D:";
             // 
-            // labelNoOfDivisorFormerMembers
+            // svNoOfDivisorFormerMembers
             // 
-            this.labelNoOfDivisorFormerMembers.AutoSize = true;
-            this.labelNoOfDivisorFormerMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfDivisorFormerMembers.Location = new System.Drawing.Point(379, 0);
-            this.labelNoOfDivisorFormerMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfDivisorFormerMembers.Name = "labelNoOfDivisorFormerMembers";
-            this.labelNoOfDivisorFormerMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfDivisorFormerMembers.TabIndex = 0;
-            this.labelNoOfDivisorFormerMembers.Text = "0";
+            this.svNoOfDivisorFormerMembers.AutoSize = true;
+            this.svNoOfDivisorFormerMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfDivisorFormerMembers.Location = new System.Drawing.Point(379, 0);
+            this.svNoOfDivisorFormerMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfDivisorFormerMembers.Name = "svNoOfDivisorFormerMembers";
+            this.svNoOfDivisorFormerMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfDivisorFormerMembers.TabIndex = 0;
+            this.svNoOfDivisorFormerMembers.Text = "0";
             // 
             // tableLayoutPanel26
             // 
@@ -2917,12 +2924,12 @@
             this.tableLayoutPanel34.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel34.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel34.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel34.Controls.Add(this.label28, 1, 0);
-            this.tableLayoutPanel34.Controls.Add(this.labelNoOfFemaleDeadMembers, 4, 0);
-            this.tableLayoutPanel34.Controls.Add(this.labelNoOfMenDeadMembers, 2, 0);
-            this.tableLayoutPanel34.Controls.Add(this.label29, 3, 0);
-            this.tableLayoutPanel34.Controls.Add(this.label30, 5, 0);
-            this.tableLayoutPanel34.Controls.Add(this.labelNoOfDivisorDeadMembers, 6, 0);
+            this.tableLayoutPanel34.Controls.Add(this.statusLabel28, 1, 0);
+            this.tableLayoutPanel34.Controls.Add(this.svNoOfFemaleDeadMembers, 4, 0);
+            this.tableLayoutPanel34.Controls.Add(this.svNoOfMenDeadMembers, 2, 0);
+            this.tableLayoutPanel34.Controls.Add(this.statusLabel29, 3, 0);
+            this.tableLayoutPanel34.Controls.Add(this.statusLabel30, 5, 0);
+            this.tableLayoutPanel34.Controls.Add(this.svNoOfDivisorDeadMembers, 6, 0);
             this.tableLayoutPanel34.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel34.Location = new System.Drawing.Point(777, 74);
             this.tableLayoutPanel34.Margin = new System.Windows.Forms.Padding(4);
@@ -2932,74 +2939,74 @@
             this.tableLayoutPanel34.Size = new System.Drawing.Size(428, 16);
             this.tableLayoutPanel34.TabIndex = 4;
             // 
-            // label28
+            // statusLabel28
             // 
-            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(84, 0);
-            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(30, 16);
-            this.label28.TabIndex = 0;
-            this.label28.Text = "M:";
+            this.statusLabel28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel28.AutoSize = true;
+            this.statusLabel28.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel28.Location = new System.Drawing.Point(84, 0);
+            this.statusLabel28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel28.Name = "statusLabel28";
+            this.statusLabel28.Size = new System.Drawing.Size(30, 16);
+            this.statusLabel28.TabIndex = 0;
+            this.statusLabel28.Text = "M:";
             // 
-            // labelNoOfFemaleDeadMembers
+            // svNoOfFemaleDeadMembers
             // 
-            this.labelNoOfFemaleDeadMembers.AutoSize = true;
-            this.labelNoOfFemaleDeadMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfFemaleDeadMembers.Location = new System.Drawing.Point(208, 0);
-            this.labelNoOfFemaleDeadMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfFemaleDeadMembers.Name = "labelNoOfFemaleDeadMembers";
-            this.labelNoOfFemaleDeadMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfFemaleDeadMembers.TabIndex = 0;
-            this.labelNoOfFemaleDeadMembers.Text = "0";
+            this.svNoOfFemaleDeadMembers.AutoSize = true;
+            this.svNoOfFemaleDeadMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfFemaleDeadMembers.Location = new System.Drawing.Point(208, 0);
+            this.svNoOfFemaleDeadMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfFemaleDeadMembers.Name = "svNoOfFemaleDeadMembers";
+            this.svNoOfFemaleDeadMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfFemaleDeadMembers.TabIndex = 0;
+            this.svNoOfFemaleDeadMembers.Text = "0";
             // 
-            // labelNoOfMenDeadMembers
+            // svNoOfMenDeadMembers
             // 
-            this.labelNoOfMenDeadMembers.AutoSize = true;
-            this.labelNoOfMenDeadMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfMenDeadMembers.Location = new System.Drawing.Point(122, 0);
-            this.labelNoOfMenDeadMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfMenDeadMembers.Name = "labelNoOfMenDeadMembers";
-            this.labelNoOfMenDeadMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfMenDeadMembers.TabIndex = 0;
-            this.labelNoOfMenDeadMembers.Text = "0";
+            this.svNoOfMenDeadMembers.AutoSize = true;
+            this.svNoOfMenDeadMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfMenDeadMembers.Location = new System.Drawing.Point(122, 0);
+            this.svNoOfMenDeadMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfMenDeadMembers.Name = "svNoOfMenDeadMembers";
+            this.svNoOfMenDeadMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfMenDeadMembers.TabIndex = 0;
+            this.svNoOfMenDeadMembers.Text = "0";
             // 
-            // label29
+            // statusLabel29
             // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(177, 0);
-            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(23, 16);
-            this.label29.TabIndex = 0;
-            this.label29.Text = "F:";
+            this.statusLabel29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel29.AutoSize = true;
+            this.statusLabel29.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel29.Location = new System.Drawing.Point(177, 0);
+            this.statusLabel29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel29.Name = "statusLabel29";
+            this.statusLabel29.Size = new System.Drawing.Size(23, 16);
+            this.statusLabel29.TabIndex = 0;
+            this.statusLabel29.Text = "F:";
             // 
-            // label30
+            // statusLabel30
             // 
-            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(267, 0);
-            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(26, 16);
-            this.label30.TabIndex = 0;
-            this.label30.Text = "D:";
+            this.statusLabel30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel30.AutoSize = true;
+            this.statusLabel30.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel30.Location = new System.Drawing.Point(267, 0);
+            this.statusLabel30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel30.Name = "statusLabel30";
+            this.statusLabel30.Size = new System.Drawing.Size(26, 16);
+            this.statusLabel30.TabIndex = 0;
+            this.statusLabel30.Text = "D:";
             // 
-            // labelNoOfDivisorDeadMembers
+            // svNoOfDivisorDeadMembers
             // 
-            this.labelNoOfDivisorDeadMembers.AutoSize = true;
-            this.labelNoOfDivisorDeadMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfDivisorDeadMembers.Location = new System.Drawing.Point(301, 0);
-            this.labelNoOfDivisorDeadMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelNoOfDivisorDeadMembers.Name = "labelNoOfDivisorDeadMembers";
-            this.labelNoOfDivisorDeadMembers.Size = new System.Drawing.Size(19, 16);
-            this.labelNoOfDivisorDeadMembers.TabIndex = 0;
-            this.labelNoOfDivisorDeadMembers.Text = "0";
+            this.svNoOfDivisorDeadMembers.AutoSize = true;
+            this.svNoOfDivisorDeadMembers.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svNoOfDivisorDeadMembers.Location = new System.Drawing.Point(301, 0);
+            this.svNoOfDivisorDeadMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svNoOfDivisorDeadMembers.Name = "svNoOfDivisorDeadMembers";
+            this.svNoOfDivisorDeadMembers.Size = new System.Drawing.Size(19, 16);
+            this.svNoOfDivisorDeadMembers.TabIndex = 0;
+            this.svNoOfDivisorDeadMembers.Text = "0";
             // 
             // tableLayoutPanel35
             // 
@@ -3443,12 +3450,12 @@
         private System.Windows.Forms.Button btnDeleteRegisteredMembers;
         private System.Windows.Forms.Button btnViewRegisteredMembers;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelNoOfFemaleRegisteredMembers;
-        private System.Windows.Forms.Label labelNoOfMenRegisteredMembers;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label labelNoOfDivisorRegisteredMembers;
+        private System.Windows.Forms.Label statusMaleLabelMember;
+        private System.Windows.Forms.Label svNoOfFemaleRegisteredMembers;
+        private System.Windows.Forms.Label svNoOfMenRegisteredMembers;
+        private System.Windows.Forms.Label statusFemaleLabelMember;
+        private System.Windows.Forms.Label statusDivisorLabelMember;
+        private System.Windows.Forms.Label svNoOfDivisorRegisteredMembers;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label5;
@@ -3500,18 +3507,18 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel21;
         private System.Windows.Forms.Button btnUpdateContacts;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel22;
-        private System.Windows.Forms.Label labelTotalContacts;
+        private System.Windows.Forms.Label svTotalContacts;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel23;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
         private System.Windows.Forms.Button btnUpdateFormerMembers;
         private System.Windows.Forms.Button btnViewFormerMembers;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label labelNoOfFemaleFormerMembers;
-        private System.Windows.Forms.Label labelNoOfMenFormerMembers;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label labelNoOfDivisorFormerMembers;
+        private System.Windows.Forms.Label statusLabel19;
+        private System.Windows.Forms.Label svNoOfFemaleFormerMembers;
+        private System.Windows.Forms.Label svNoOfMenFormerMembers;
+        private System.Windows.Forms.Label statusLabel20;
+        private System.Windows.Forms.Label statusLabel21;
+        private System.Windows.Forms.Label svNoOfDivisorFormerMembers;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel27;
         private System.Windows.Forms.Label label22;
@@ -3538,12 +3545,12 @@
         private System.Windows.Forms.Button btnUpdateDeadMembers;
         private System.Windows.Forms.Button btnViewDeadMembers;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel34;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label labelNoOfFemaleDeadMembers;
-        private System.Windows.Forms.Label labelNoOfMenDeadMembers;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label labelNoOfDivisorDeadMembers;
+        private System.Windows.Forms.Label statusLabel28;
+        private System.Windows.Forms.Label svNoOfFemaleDeadMembers;
+        private System.Windows.Forms.Label svNoOfMenDeadMembers;
+        private System.Windows.Forms.Label statusLabel29;
+        private System.Windows.Forms.Label statusLabel30;
+        private System.Windows.Forms.Label svNoOfDivisorDeadMembers;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel35;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel36;
         private System.Windows.Forms.Label label31;
@@ -3580,7 +3587,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel43;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel50;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel42;
-        private System.Windows.Forms.Label labelTotalRowsCommittment;
+        private System.Windows.Forms.Label svTotalRowsCommittment;
         private System.Windows.Forms.ComboBox cmbStatusCommittment;
         private System.Windows.Forms.Button btnViewCommittment;
         private System.Windows.Forms.TabPage inactiveMembersPage;
@@ -3589,10 +3596,10 @@
         private System.Windows.Forms.Button btnUpdateInactiveMembers;
         private System.Windows.Forms.Button btnViewInactiveMembers;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel53;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label labelNoOfFemaleInactiveMembers;
-        private System.Windows.Forms.Label labelNoOfMenInactiveMembers;
-        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label statusLabel39;
+        private System.Windows.Forms.Label svNoOfFemaleInactiveMembers;
+        private System.Windows.Forms.Label svNoOfMenInactiveMembers;
+        private System.Windows.Forms.Label statusLabel45;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel54;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel55;
         private System.Windows.Forms.Label label48;
@@ -3618,7 +3625,7 @@
         private System.Windows.Forms.DataGridView dataGridViewInactiveMembers;
         private System.Windows.Forms.ComboBox cmbProfessionBirthday;
         private System.Windows.Forms.ComboBox cmbPositionBirthday;
-        private System.Windows.Forms.Label labelTotalRowBirthday;
+        private System.Windows.Forms.Label svTotalRowBirthday;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         private System.Windows.Forms.ComboBox cmbMonthBirthday;
         private System.Windows.Forms.Label label10;

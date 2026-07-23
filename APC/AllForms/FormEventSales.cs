@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormEventSales : Form
+    public partial class FormEventSales : BaseFormDashboard
     {
         private readonly IEventSalesService _eventSalesService;
 
@@ -122,16 +122,8 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
-        private void ControlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, btnClose, btnSave);
-            GeneralHelper.ApplyRegularFont(16, txtAmountSold, txtSummary, dateTimePickerEventSalesDate);
-        }
-
         private void FormEventSales_Load(object sender, EventArgs e)
         {
-            ControlsFont();
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit " + _eventSalesDTO.Summary + " of " + _eventDTO.Title;

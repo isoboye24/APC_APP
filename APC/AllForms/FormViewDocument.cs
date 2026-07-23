@@ -1,11 +1,12 @@
 ﻿using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewDocument : Form
+    public partial class FormViewDocument : BaseFormDashboard
     {
         private Applications.DTO.DocumentDTO _documentDTO;
         public FormViewDocument()
@@ -43,15 +44,6 @@ namespace APC.AllForms
                 labelWordsCount.Text = words.Length.ToString();
                 labelWordsCount.Visible = true;
             }
-
-            ControlsFont();
-        }
-
-        private void ControlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, label1, btnClose);
-            GeneralHelper.ApplyRegularFont(16, txtDocumentContent);
-            GeneralHelper.ApplyRegularFont(11, labelWordsCount);
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormConstitution : Form
+    public partial class FormConstitution : BaseFormDashboard
     {
         private readonly IConstitutionService _constitutionService;
         private Applications.DTO.ConstitutionDTO _constitutionDTO;
@@ -36,16 +37,8 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, labelTitle, btnClose, btnSave);
-            GeneralHelper.ApplyRegularFont(14, txtConstitution, txtAmount, txtSection, txtShortDescription);
-        }
-
         private void FormConstitution_Load(object sender, EventArgs e)
         {
-            resizeControls();
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit " + _constitutionDTO.ShortDescription;
@@ -111,6 +104,11 @@ namespace APC.AllForms
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

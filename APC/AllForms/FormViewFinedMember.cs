@@ -1,13 +1,14 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewFinedMember : Form
+    public partial class FormViewFinedMember : BaseFormDashboard
     {
         private readonly IConstitutionService _constitutionService;
         private readonly FinedMemberDTO _finedMemberDTO;
@@ -34,17 +35,8 @@ namespace APC.AllForms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, label2, label3, label4, label5, labelSectionBtn, label8, label9, label10, label11,
-                labelTitle, btnClose);
-            GeneralHelper.ApplyRegularFont(14, labelName, labelSurname, labelPosition, labelBalance, labelPaidAmount, labelExpectedAmount);
-        }
-
         private void FormViewFinedMember_Load(object sender, EventArgs e)
         {
-            resizeControls();
-
             labelName.Text = _finedMemberDTO.FirstName;
             labelSurname.Text = _finedMemberDTO.LastName;
             labelPosition.Text = _finedMemberDTO.PositionName;

@@ -2,6 +2,7 @@
 using APC.Applications.Entities;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +15,7 @@ using static APC.Helper.MemberHelper;
 
 namespace APC.AllForms
 {
-    public partial class FormMembersBoard : Form
+    public partial class FormMembersBoard : BaseFormDashboard
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IMemberService _memberService;
@@ -142,7 +143,7 @@ namespace APC.AllForms
                 btnDeleteRegisteredMembers.Hide();
             }
 
-            ResizeControls();
+            //ResizeControls();
 
             #region
             loadRegisteredMembers();
@@ -174,44 +175,6 @@ namespace APC.AllForms
             #endregion
 
             GetCounts();
-        }
-
-        private void ResizeControls()
-        {
-            #region
-            GeneralHelper.ApplyRegularFont(11, label4, label7, label8, label19, label20, label21, label28, label29, label30,
-                label31, labelTotalContacts,
-                labelNoOfDivisorRegisteredMembers, labelNoOfFemaleRegisteredMembers, labelNoOfMenRegisteredMembers,
-                labelNoOfDivisorFormerMembers, labelNoOfFemaleFormerMembers, labelNoOfMenFormerMembers,
-                labelNoOfDivisorDeadMembers, labelNoOfFemaleDeadMembers, labelNoOfMenDeadMembers);
-
-            GeneralHelper.ApplyItalicFont(11, label24, label25, label26);
-
-            GeneralHelper.ApplyItalicFont(14, label1, label2, label3, label5, label6, label9, label10, label11, label12,
-                label13, label14, label15, label16, label17, label18, label22, label23, label27, label32,
-                label33, label34, label35, label36, label38, label41, label42, btnAddRegisteredMembers,
-                btnUpdateRegisteredMembers, btnViewRegisteredMembers, btnDeleteRegisteredMembers,
-                btnSearchRegisteredMembers, btnClearRegisteredMembers, btnViewBirthday, btnSearchBirthday,
-                btnClearBirthday, btnUpdateContacts, btnUpdateFormerMembers, btnViewFormerMembers,
-                btnSearchFormerMembers, btnClearFormerMembers, btnUpdateDeadMembers, btnViewDeadMembers,
-                btnSearchDeadMembers, btnClearDeadMembers);
-
-            GeneralHelper.ApplyRegularFont(16, txtNameRegisteredMembers, txtSurnameRegisteredMembers,
-                cmbGenderRegisteredMembers, cmbNationalityRegisteredMembers, cmbPositionRegisteredMembers,
-                cmbProfessionRegisteredMembers, txtNameBirthday, txtSurnameBirthday, cmbGenderBirthday,
-                cmbNationalityBirthday, cmbProfessionBirthday, cmbPositionBirthday, cmbMonthBirthday,
-                txtSurnameContacts, txtNameFormerMembers, txtSurnameFormerMembers, cmbGenderFormerMembers,
-                cmbNationalityFormerMembers, cmbPositionFormerMembers, cmbProfessionFormerMembers,
-                txtNameDeadMembers, txtSurnameDeadMembers, cmbGenderDeadMembers, cmbNationalityDeadMembers,
-                cmbPositionDeadMembers, cmbProfessionDeadMembers, cmbYearCommittment, cmbStatusCommittment, 
-                txtNameCommittment, txtSurnameCommittment
-                );
-
-            txtNameCommittment.Tag = "resizeable";
-            txtSurnameCommittment.Tag = "resizeable";
-            cmbStatusCommittment.Tag = "resizeable";
-            cmbYearCommittment.Tag = "resizeable";
-            #endregion
         }
 
         private void FillRegisteredMemberComboBoxes()
@@ -356,21 +319,21 @@ namespace APC.AllForms
         }
         private void GetCounts()
         {
-            labelNoOfMenRegisteredMembers.Text = _memberService.GetCurrentMaleCount().ToString();
-            labelNoOfFemaleRegisteredMembers.Text = _memberService.GetCurrentFemaleCount().ToString();
-            labelNoOfDivisorRegisteredMembers.Text = _memberService.GetCurrentDivisorCount().ToString();
+            svNoOfMenRegisteredMembers.Text = _memberService.GetCurrentMaleCount().ToString();
+            svNoOfFemaleRegisteredMembers.Text = _memberService.GetCurrentFemaleCount().ToString();
+            svNoOfDivisorRegisteredMembers.Text = _memberService.GetCurrentDivisorCount().ToString();
 
-            labelTotalContacts.Text = "Total: " + dataGridViewContacts.RowCount.ToString();
+            svTotalContacts.Text = "Total: " + dataGridViewContacts.RowCount.ToString();
 
-            labelNoOfMenFormerMembers.Text = _memberService.GetFormerMaleCount().ToString();
-            labelNoOfFemaleFormerMembers.Text = _memberService.GetFormerFemaleCount().ToString();
-            labelNoOfDivisorFormerMembers.Text = _memberService.GetFormerDivisorCount().ToString();
+            svNoOfMenFormerMembers.Text = _memberService.GetFormerMaleCount().ToString();
+            svNoOfFemaleFormerMembers.Text = _memberService.GetFormerFemaleCount().ToString();
+            svNoOfDivisorFormerMembers.Text = _memberService.GetFormerDivisorCount().ToString();
 
-            labelNoOfMenDeadMembers.Text = _memberService.GetDeceasedMaleCount().ToString();
-            labelNoOfFemaleDeadMembers.Text = _memberService.GetDeceasedFemaleCount().ToString();
-            labelNoOfDivisorDeadMembers.Text = _memberService.GetDeceasedDivisorCount().ToString();
+            svNoOfMenDeadMembers.Text = _memberService.GetDeceasedMaleCount().ToString();
+            svNoOfFemaleDeadMembers.Text = _memberService.GetDeceasedFemaleCount().ToString();
+            svNoOfDivisorDeadMembers.Text = _memberService.GetDeceasedDivisorCount().ToString();
 
-            labelTotalRowsCommittment.Text = "Row" + (dataGridViewCommitments.RowCount > 1 ? "s : " : " : ") + dataGridViewCommitments.RowCount.ToString();
+            svTotalRowsCommittment.Text = "Row" + (dataGridViewCommitments.RowCount > 1 ? "s : " : " : ") + dataGridViewCommitments.RowCount.ToString();
 
         }
 

@@ -43,7 +43,7 @@
             this.btnDeleteDocument = new System.Windows.Forms.Button();
             this.btnViewDocument = new System.Windows.Forms.Button();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelDocCount = new System.Windows.Forms.Label();
+            this.svLabelDocCount = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbYearDocument = new System.Windows.Forms.ComboBox();
@@ -280,7 +280,7 @@
             this.tableLayoutPanel9.ColumnCount = 1;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.Controls.Add(this.labelDocCount, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.svLabelDocCount, 0, 0);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(952, 62);
             this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(4);
@@ -290,18 +290,18 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(247, 41);
             this.tableLayoutPanel9.TabIndex = 5;
             // 
-            // labelDocCount
+            // svLabelDocCount
             // 
-            this.labelDocCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelDocCount.AutoSize = true;
-            this.labelDocCount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDocCount.Location = new System.Drawing.Point(224, 9);
-            this.labelDocCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelDocCount.Name = "labelDocCount";
-            this.labelDocCount.Size = new System.Drawing.Size(19, 23);
-            this.labelDocCount.TabIndex = 0;
-            this.labelDocCount.Text = "0";
-            this.labelDocCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.svLabelDocCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.svLabelDocCount.AutoSize = true;
+            this.svLabelDocCount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.svLabelDocCount.Location = new System.Drawing.Point(224, 9);
+            this.svLabelDocCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svLabelDocCount.Name = "svLabelDocCount";
+            this.svLabelDocCount.Size = new System.Drawing.Size(19, 23);
+            this.svLabelDocCount.TabIndex = 0;
+            this.svLabelDocCount.Text = "0";
+            this.svLabelDocCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dataGridView1
             // 
@@ -483,7 +483,7 @@
         private System.Windows.Forms.Button btnDeleteDocument;
         private System.Windows.Forms.Button btnViewDocument;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
-        private System.Windows.Forms.Label labelDocCount;
+        private System.Windows.Forms.Label svLabelDocCount;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label3;

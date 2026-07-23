@@ -1,6 +1,7 @@
 ﻿using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormFinedMember : Form
+    public partial class FormFinedMember : BaseFormDashboard
     {
         private readonly IFinedMemberService _finedMemberService;
         private readonly IMemberService _memberService;
@@ -103,14 +104,6 @@ namespace APC.AllForms
             _isUpdate = isUpdate;
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10,
-                labelTitle, btnClose, btnSave);
-            GeneralHelper.ApplyRegularFont(14, labelName, labelSurname, labelPosition, labelConstitutionSection, labelFine, txtAmount, txtSummary,
-                txtSearchSurname, txtShortDescription);
-        }
-
         private void loadMembers()
         {
             dataGridViewMembers.DataSource = _memberService.GetAll();
@@ -143,9 +136,7 @@ namespace APC.AllForms
 
        
         private void FormFinedMember_Load(object sender, EventArgs e)
-        {            
-            resizeControls();
-
+        {
             loadMembers();
 
             loadConstitutions();

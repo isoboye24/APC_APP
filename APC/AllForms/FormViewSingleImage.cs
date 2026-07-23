@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewSingleImage : Form
+    public partial class FormViewSingleImage : BaseFormDashboard
     {
         private EventImageDTO _eventImageDTO;
         private EventDTO _eventDTO;
@@ -96,16 +96,8 @@ namespace APC.AllForms
             _eventDTO = eventDTO;
         }
 
-        private void ControlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, labelCaption, btnClose);
-            GeneralHelper.ApplyRegularFont(16, labelDescription);
-        }
-
         private void FormViewSingleImage_Load(object sender, EventArgs e)
         {
-            ControlsFont();
-
             labelTitle.Text = "Event: " + _eventDTO.Title;
             labelDescription.Text = _eventImageDTO.Summary;
             labelCaption.Text = _eventImageDTO.ImageCaption;

@@ -1,11 +1,12 @@
 ﻿using APC.Applications.DTO;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewMeetingsSummary : Form
+    public partial class FormViewMeetingsSummary : BaseFormDashboard
     {
         private GeneralMeetingDTO _generalMeetingDTO;
         public FormViewMeetingsSummary()
@@ -18,13 +19,6 @@ namespace APC.AllForms
             this.Close();
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(12, btnClose);
-            GeneralHelper.ApplyRegularFont(10, labelWordsCount, label1);
-            GeneralHelper.ApplyRegularFont(12, txtSummary);
-        }
-
         public void loadForView(GeneralMeetingDTO generalMeetingDTO)
         {
             _generalMeetingDTO = generalMeetingDTO;
@@ -32,8 +26,6 @@ namespace APC.AllForms
 
         private void FormViewMeetingsSummary_Load(object sender, EventArgs e)
         {
-            resizeControls();
-
             this.Text = "Summary of meeting on " + _generalMeetingDTO.GeneralMeetingDate.ToString("dd.MM.yyy");
             txtSummary.Text = _generalMeetingDTO.Summary;
 
@@ -41,11 +33,11 @@ namespace APC.AllForms
             if (_generalMeetingDTO.Summary != null)
             {
                 words = _generalMeetingDTO.Summary.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-                labelWordsCount.Text = words.Length.ToString();
+                svLabelWordsCount.Text = words.Length.ToString();
             }
             else
             {
-                labelWordsCount.Text = 0.ToString();
+                svLabelWordsCount.Text = 0.ToString();
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace APC
 {
-    public partial class FormEvent : Form
+    public partial class FormEvent : BaseFormDashboard
     {
         private readonly IEventsService _eventsService;
 
@@ -137,17 +138,8 @@ namespace APC
             }
         }
 
-        private void controlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, btnBrowse, btnClose, btnSave);
-
-            GeneralHelper.ApplyRegularFont(14, txtSummary, txtTitle, txtImagePath, dateTimePickerEvent);
-        }
-
         private void FormEvent_Load(object sender, EventArgs e)
         {
-          controlsFont();
-
             txtImagePath.Hide();
             label4.Hide();
             if (_isUpdate)

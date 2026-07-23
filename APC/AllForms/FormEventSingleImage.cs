@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormEventSingleImage : Form
+    public partial class FormEventSingleImage : BaseFormDashboard
     {
         private readonly IEventImagesService _eventImagesService;
 
@@ -146,12 +146,6 @@ namespace APC.AllForms
             }
         }
 
-        private void ControlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label3, btnClose, btnSave, btnBrowse);
-            GeneralHelper.ApplyRegularFont(16, txtImagePath, txtImageCaption, txtImageSummary);
-        }
-
         private void ClearFields()
         {
             txtImageCaption.Clear();
@@ -162,8 +156,6 @@ namespace APC.AllForms
 
         private void FormEventSingleImage_Load(object sender, EventArgs e)
         {
-            ControlsFont();
-
             txtImagePath.Hide();
             label3.Hide();
 

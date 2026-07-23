@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormSpecialContribution : Form
+    public partial class FormSpecialContribution : BaseFormDashboard
     {
         private readonly ISpecialContributionService _specialContributionService;
         private readonly IMemberService _memberService;

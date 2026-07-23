@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using static APC.Helper.MemberHelper;
 
 namespace APC.AllForms
 {
-    public partial class FormNotifications : Form
+    public partial class FormNotifications : BaseFormDashboard
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IMemberService _memberService;
@@ -63,15 +64,8 @@ namespace APC.AllForms
             _isEditor = isEditor;
         }
 
-        private void controlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, txtSearchSurname, btnClose);
-        }
-
         private void FormNotifications_Load(object sender, EventArgs e)
         {
-            controlsFont();
-
             loadMembers();
 
             int absenteesCount = _memberService.Get3MonthsAbsentesCount();

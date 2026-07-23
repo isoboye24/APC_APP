@@ -1,13 +1,14 @@
-﻿using APC.Domain.Entities;
-using APC.Applications.Interfaces;
+﻿using APC.Applications.Interfaces;
+using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC
 {
-    public partial class FormProfession : Form
+    public partial class FormProfession : BaseFormDashboard
     {
         private readonly IProfessionService _professionService;
 
@@ -80,12 +81,6 @@ namespace APC
             }
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
-            GeneralHelper.ApplyRegularFont(14, txtProfession);
-        }
-
         private void FormProfession_Load(object sender, EventArgs e)
         {
             if (_isUpdate)
@@ -96,6 +91,11 @@ namespace APC
             {
                 labelTitle.Text = "Add Profession";
             }
-        }        
+        }
+
+        private void picClose_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +12,7 @@ using static APC.Helper.PersonalAttendanceHelper;
 
 namespace APC.AllForms
 {
-    public partial class FormViewPersonalAttendances : Form
+    public partial class FormViewPersonalAttendances : BaseFormDashboard
     {
         private readonly IMemberService _memberService;
         private readonly IMonthService _monthService;
@@ -100,14 +101,6 @@ namespace APC.AllForms
             _isPersonalFines = isPersonalFines;
         }
 
-        private void controlFonts()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, label5, btnClose);
-            GeneralHelper.ApplyRegularFont(14, txtAmount, cmbMonth, cmbYear);
-            GeneralHelper.ApplyBoldFont(11, rbEqualAmount, rbLessAmount, rbMoreAmount);
-            GeneralHelper.ApplyBoldFont(12, labelTotalPaidAmount, labelTotalAmountExpected);
-        }
-
         private void loadMemberAttendanceDetails()
         {
             dataGridView1.DataSource = _personalAttendanceService.GetAnnualGeneralMeetingAttendanceById(_memberId, currYear);
@@ -168,8 +161,6 @@ namespace APC.AllForms
 
             _finedMemberDTOs = _finedMemberService.GetAllFineListsById(_memberId) ?? new List<FinedMemberDTO>();
 
-
-            controlFonts();
             FillComboboxes(_memberId);
 
             tableLayoutPanelChangingAmount.Hide();

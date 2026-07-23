@@ -1,13 +1,14 @@
-﻿using APC.Domain.Entities;
-using APC.Applications.Interfaces;
+﻿using APC.Applications.Interfaces;
+using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC
 {
-    public partial class FormMaritalStatus : Form
+    public partial class FormMaritalStatus : BaseFormDashboard
     {
         private readonly IMaritalStatusService _maritalStatusService;
 
@@ -86,16 +87,8 @@ namespace APC
             this.Close();
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
-            GeneralHelper.ApplyRegularFont(14, txtMaritalStatus);
-        }
-
         private void FormMaritalStatus_Load(object sender, EventArgs e)
         {
-            resizeControls();
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit Marital Status";

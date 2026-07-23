@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +12,7 @@ using static APC.Helper.DocumentHelper;
 
 namespace APC.AllForms
 {
-    public partial class FormDocumentList : Form
+    public partial class FormDocumentList : BaseFormDashboard
     {
         private readonly IDocumentService _documentService;
         private readonly IMonthService _monthService;
@@ -29,13 +30,6 @@ namespace APC.AllForms
             _currentUserService = currentUserService;
         }
 
-        private void ControlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, btnAddDocument, btnDeleteDocument, btnUpdateDocument, btnViewDocument,
-                btnSearchDocument, btnClearDocument);
-            GeneralHelper.ApplyRegularFont(14, txtDocNameDocument, txtDocTypeDocument, cmbYearDocument, cmbMonthDocument);
-        }
-
         private void loadDocuments()
         {
             dataGridView1.DataSource = _documentService.GetDocumentByYear(currDate.Year);
@@ -45,8 +39,6 @@ namespace APC.AllForms
 
         private void FormDocumentList_Load(object sender, EventArgs e)
         {
-            ControlsFont();
-
             cmbMonthDocument.DataSource = _monthService.GetAll();
             GeneralHelper.ComboBoxProps(cmbMonthDocument, "MonthName", "MonthID");
             
@@ -65,7 +57,7 @@ namespace APC.AllForms
         }
         private void Count()
         {
-            labelDocCount.Text = dataGridView1.RowCount.ToString();
+            svLabelDocCount.Text = dataGridView1.RowCount.ToString();
         }
         
         private void ClearFilters()

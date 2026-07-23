@@ -89,16 +89,8 @@ namespace APC.AllForms
             }
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
-            GeneralHelper.ApplyRegularFont(14, txtPermission);
-        }
-
         private void FormPermission_Load(object sender, EventArgs e)
         {
-            resizeControls();
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit Permission";

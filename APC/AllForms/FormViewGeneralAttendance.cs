@@ -1,6 +1,7 @@
 ﻿using APC.Applications.DTO;
 using APC.Applications.Interfaces;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewGeneralAttendance : Form
+    public partial class FormViewGeneralAttendance : BaseFormDashboard
     {
         private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
         private readonly IAttendanceStatusService _attendanceStatusService;
@@ -72,16 +73,6 @@ namespace APC.AllForms
             _generalMeetingDTO = generalMeetingDTO;
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label7, label9, btnAdd,
-                labelTitle, btnClose, rbEqual, rbLess, rbMore, btnClear, btnSearch, btnUpdate, btnViewSummary);
-
-            GeneralHelper.ApplyRegularFont(14, txtName, txtSurname, txtMonthlyDues, txtSummary, cmbAttendanceStatus, labelTotalMembers);
-
-            GeneralHelper.ApplyBoldFont(24, labelTotalDuesPaid, labelTotalMembersAbsent, labelTotalMembersPresent);
-        }
-
         private void loadGeneralMeetingAttendances()
         {
             dataGridView1.DataSource = _generalMeetingAttendanceService.GetAllByGeneralMeetingId(_generalMeetingDTO.GeneralMeetingId);
@@ -91,8 +82,6 @@ namespace APC.AllForms
 
         private void FormViewAttendance_Load(object sender, EventArgs e)
         {
-            resizeControls();
-
             cmbAttendanceStatus.DataSource = _attendanceStatusService.GetAll();
             GeneralHelper.ComboBoxProps(cmbAttendanceStatus, "AttendanceStatusName", "AttendanceStatusId");
 
@@ -105,11 +94,11 @@ namespace APC.AllForms
 
         private void ShowRecordData()
         {
-            labelTotalMembersPresent.Text = _generalMeetingDTO.TotalMembersPresent.ToString();
-            labelTotalMembersAbsent.Text = _generalMeetingDTO.TotalMembersAbsent.ToString();
+            dvLabelTotalMembersPresent.Text = _generalMeetingDTO.TotalMembersPresent.ToString();
+            dvLabelTotalMembersAbsent.Text = _generalMeetingDTO.TotalMembersAbsent.ToString();
 
-            labelTotalDuesPaid.Text = _generalMeetingDTO.FormattedTotalDuesPaid;
-            labelTotalMembers.Text = dataGridView1.RowCount.ToString() + " Member" + (dataGridView1.RowCount > 1 ? "s" : "");
+            dvLabelTotalDuesPaid.Text = _generalMeetingDTO.FormattedTotalDuesPaid;
+            svLabelTotalMembers.Text = dataGridView1.RowCount.ToString() + " Member" + (dataGridView1.RowCount > 1 ? "s" : "");
 
         }
 

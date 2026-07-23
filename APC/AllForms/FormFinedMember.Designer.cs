@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -326,8 +326,8 @@
             this.dataGridViewMembers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewMembers.Name = "dataGridViewMembers";
             this.dataGridViewMembers.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewMembers.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewMembers.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewMembers.RowTemplate.Height = 30;
             this.dataGridViewMembers.Size = new System.Drawing.Size(389, 411);
             this.dataGridViewMembers.TabIndex = 5;
@@ -804,8 +804,8 @@
             this.dataGridViewConstitutions.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewConstitutions.Name = "dataGridViewConstitutions";
             this.dataGridViewConstitutions.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewConstitutions.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewConstitutions.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewConstitutions.RowTemplate.Height = 30;
             this.dataGridViewConstitutions.Size = new System.Drawing.Size(390, 411);
             this.dataGridViewConstitutions.TabIndex = 5;

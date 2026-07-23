@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormViewSpecialContributor : Form
+    public partial class FormViewSpecialContributor : BaseFormDashboard
     {
         private Applications.DTO.SpecialContributorDTO _specialContributorDTO;
         private Applications.DTO.SpecialContributionDTO _specialContributionDTO;

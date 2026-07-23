@@ -1,6 +1,7 @@
 ﻿using APC.Applications.Interfaces;
 using APC.Applications.Services;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace APC.AllForms
 {
-    public partial class FormMeetingBoard : Form
+    public partial class FormMeetingBoard : BaseFormDashboard
     {
         private readonly IMemberService _memberService;
         private readonly IGenderService _genderService;
@@ -57,22 +58,6 @@ namespace APC.AllForms
             _paymentStatusService = paymentStatusService;
             _financialReportService = financialReportService;
         }
-
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, rbEqualAttend, rbEqualMonDues, rbLessAttend, rbLessMonDues,
-                rbMoreAttend, rbMoreMonDues, btnUpdate, btnView, btnAdd, btnAbsentees, btnDelete, btnSearch, btnClear, label18, label19, label21, btnAddConstitution, btnDeleteConstitution, btnUpdateConstitution,
-                btnViewConstitution, btnClearConstitution, label12, label20, label22, label23, label24, label25, label26, btnSearchFinedMember,
-                btnClearFinedMember);
-
-            GeneralHelper.ApplyRegularFont(11, labelTotalMeetings, labelTotalPaidFines, labelTotalConstitutions);
-
-            GeneralHelper.ApplyRegularFont(14, labelTotalFineMembers);
-
-            GeneralHelper.ApplyRegularFont(16, txtMonthlyDues, txtNoOfAttend, txtYear, cmbMonth, txtNameFinedMember, txtSurnameFinedMember,
-                txtConstitutionSection, cmbGenderFinedMember, cmbMonthFinedMember, cmbFineStatus, cmbYearMeeting);
-        }
-
 
         private void loadConstitutions()
         {
@@ -213,8 +198,6 @@ namespace APC.AllForms
 
         private void FormMeetingBoard_Load(object sender, EventArgs e)
         {
-            resizeControls();
-            
             loadConstitutions();
 
             loadGeneralMeeting(year);

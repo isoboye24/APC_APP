@@ -3,6 +3,7 @@ using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
 using APC.Infrastructure.Data;
+using APC.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace APC
 {
-    public partial class FormGeneralMeetingAttendance : Form
+    public partial class FormGeneralMeetingAttendance : BaseFormDashboard
     {
         private readonly IGeneralMeetingAttendanceService _generalMeetingAttendanceService;
         private readonly IMemberService _memberService;
@@ -64,13 +65,6 @@ namespace APC
             _isUpdate = isUpdate;
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, label1, label2, label3, label4, label5, label6, labelTitle, btnClose, btnSave);
-
-            GeneralHelper.ApplyRegularFont(14, txtAttendanceStatus, txtGender, txtMonthlyDues, txtName, txtSearchSurname, txtSurname);
-        }
-
         private void loadMembers()
         {
             dataGridViewMembers.DataSource = _memberService.GetAllCurrentMembers();
@@ -86,8 +80,6 @@ namespace APC
 
         private void FormAttendance_Load(object sender, EventArgs e)
         {
-            resizeControls();
-
             loadAttendanceStatuses();
 
             if (_isUpdate)

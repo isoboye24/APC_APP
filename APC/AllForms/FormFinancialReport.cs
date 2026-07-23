@@ -1,13 +1,14 @@
 ﻿using APC.Applications.Interfaces;
 using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC
 {
-    public partial class FormFinancialReport : Form
+    public partial class FormFinancialReport : BaseFormDashboard
     {
         private readonly IFinancialReportService _financialReportService;
 
@@ -51,17 +52,8 @@ namespace APC
             _isUpdate = isUpdate;
         }
 
-        private void controlsFont()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label1, label2, btnClose, btnSave);
-
-            GeneralHelper.ApplyRegularFont(16, txtSummary, txtYear);
-        }
-
         private void FormFinancialReport_Load(object sender, EventArgs e)
         {
-            controlsFont();
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit Financial Report";

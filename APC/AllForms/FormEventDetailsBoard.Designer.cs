@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconZoomIn = new FontAwesome.Sharp.IconPictureBox();
             this.iconZoomOut = new FontAwesome.Sharp.IconPictureBox();
@@ -73,9 +73,9 @@
             this.btnDeleteEventSales = new System.Windows.Forms.Button();
             this.btnViewEventSales = new System.Windows.Forms.Button();
             this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalRowsEventSales = new System.Windows.Forms.Label();
+            this.svLabelTotalRowsEventSales = new System.Windows.Forms.Label();
             this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalEventSales = new System.Windows.Forms.Label();
+            this.svLabelTotalEventSales = new System.Windows.Forms.Label();
             this.btnCloseEventSales = new System.Windows.Forms.Button();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
@@ -94,9 +94,9 @@
             this.btnDeleteExpReport = new System.Windows.Forms.Button();
             this.btnViewExpReport = new System.Windows.Forms.Button();
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalRowsEventExp = new System.Windows.Forms.Label();
+            this.svLabelTotalRowsEventExp = new System.Windows.Forms.Label();
             this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalAmountEventExp = new System.Windows.Forms.Label();
+            this.svLabelTotalAmountEventExp = new System.Windows.Forms.Label();
             this.btnCloseEventExp = new System.Windows.Forms.Button();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
@@ -122,7 +122,7 @@
             this.btnDeleteEventReceipt = new System.Windows.Forms.Button();
             this.btnViewEventReceipt = new System.Windows.Forms.Button();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalRowsEventReceipt = new System.Windows.Forms.Label();
+            this.svLabelTotalRowsEventReceipt = new System.Windows.Forms.Label();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
             this.btnCloseEventReceipt = new System.Windows.Forms.Button();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
@@ -278,11 +278,11 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.labelTitle.Location = new System.Drawing.Point(1, 0);
             this.labelTitle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(157, 32);
+            this.labelTitle.Size = new System.Drawing.Size(146, 32);
             this.labelTitle.TabIndex = 5;
             this.labelTitle.Text = "EVENT TITLE";
             // 
@@ -403,9 +403,9 @@
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 3;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(1427, 86);
             this.tableLayoutPanel5.TabIndex = 3;
             // 
@@ -415,12 +415,12 @@
             this.btnAddEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddEventImages.FlatAppearance.BorderSize = 0;
             this.btnAddEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddEventImages.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnAddEventImages.ForeColor = System.Drawing.Color.White;
-            this.btnAddEventImages.Location = new System.Drawing.Point(245, 23);
+            this.btnAddEventImages.Location = new System.Drawing.Point(245, 19);
             this.btnAddEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddEventImages.Name = "btnAddEventImages";
-            this.btnAddEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnAddEventImages.Size = new System.Drawing.Size(165, 47);
             this.btnAddEventImages.TabIndex = 0;
             this.btnAddEventImages.Text = "Add";
             this.btnAddEventImages.UseVisualStyleBackColor = false;
@@ -432,12 +432,12 @@
             this.btnUpdateEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnUpdateEventImages.FlatAppearance.BorderSize = 0;
             this.btnUpdateEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateEventImages.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnUpdateEventImages.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateEventImages.Location = new System.Drawing.Point(437, 23);
+            this.btnUpdateEventImages.Location = new System.Drawing.Point(437, 19);
             this.btnUpdateEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnUpdateEventImages.Name = "btnUpdateEventImages";
-            this.btnUpdateEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnUpdateEventImages.Size = new System.Drawing.Size(165, 47);
             this.btnUpdateEventImages.TabIndex = 1;
             this.btnUpdateEventImages.Text = "Edit";
             this.btnUpdateEventImages.UseVisualStyleBackColor = false;
@@ -449,12 +449,12 @@
             this.btnDeleteEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDeleteEventImages.FlatAppearance.BorderSize = 0;
             this.btnDeleteEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteEventImages.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnDeleteEventImages.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteEventImages.Location = new System.Drawing.Point(821, 23);
+            this.btnDeleteEventImages.Location = new System.Drawing.Point(821, 19);
             this.btnDeleteEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDeleteEventImages.Name = "btnDeleteEventImages";
-            this.btnDeleteEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnDeleteEventImages.Size = new System.Drawing.Size(165, 47);
             this.btnDeleteEventImages.TabIndex = 2;
             this.btnDeleteEventImages.Text = "Delete";
             this.btnDeleteEventImages.UseVisualStyleBackColor = false;
@@ -466,12 +466,12 @@
             this.btnViewEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnViewEventImages.FlatAppearance.BorderSize = 0;
             this.btnViewEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewEventImages.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnViewEventImages.ForeColor = System.Drawing.Color.White;
-            this.btnViewEventImages.Location = new System.Drawing.Point(629, 23);
+            this.btnViewEventImages.Location = new System.Drawing.Point(629, 19);
             this.btnViewEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnViewEventImages.Name = "btnViewEventImages";
-            this.btnViewEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnViewEventImages.Size = new System.Drawing.Size(165, 47);
             this.btnViewEventImages.TabIndex = 3;
             this.btnViewEventImages.Text = "View";
             this.btnViewEventImages.UseVisualStyleBackColor = false;
@@ -483,12 +483,12 @@
             this.btnCloseEventImages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCloseEventImages.FlatAppearance.BorderSize = 0;
             this.btnCloseEventImages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseEventImages.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseEventImages.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnCloseEventImages.ForeColor = System.Drawing.Color.Black;
-            this.btnCloseEventImages.Location = new System.Drawing.Point(1013, 23);
+            this.btnCloseEventImages.Location = new System.Drawing.Point(1013, 19);
             this.btnCloseEventImages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCloseEventImages.Name = "btnCloseEventImages";
-            this.btnCloseEventImages.Size = new System.Drawing.Size(165, 39);
+            this.btnCloseEventImages.Size = new System.Drawing.Size(165, 47);
             this.btnCloseEventImages.TabIndex = 2;
             this.btnCloseEventImages.Text = "Close";
             this.btnCloseEventImages.UseVisualStyleBackColor = false;
@@ -502,23 +502,23 @@
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel26.Controls.Add(this.labelTotalRowsEventImage, 0, 0);
             this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 23);
+            this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 19);
             this.tableLayoutPanel26.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel26.Name = "tableLayoutPanel26";
             this.tableLayoutPanel26.RowCount = 1;
             this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel26.Size = new System.Drawing.Size(236, 39);
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(236, 47);
             this.tableLayoutPanel26.TabIndex = 7;
             // 
             // labelTotalRowsEventImage
             // 
             this.labelTotalRowsEventImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTotalRowsEventImage.AutoSize = true;
-            this.labelTotalRowsEventImage.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRowsEventImage.Location = new System.Drawing.Point(4, 5);
+            this.labelTotalRowsEventImage.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.labelTotalRowsEventImage.Location = new System.Drawing.Point(4, 7);
             this.labelTotalRowsEventImage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotalRowsEventImage.Name = "labelTotalRowsEventImage";
-            this.labelTotalRowsEventImage.Size = new System.Drawing.Size(204, 28);
+            this.labelTotalRowsEventImage.Size = new System.Drawing.Size(204, 32);
             this.labelTotalRowsEventImage.TabIndex = 4;
             this.labelTotalRowsEventImage.Text = "0";
             this.labelTotalRowsEventImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -549,20 +549,21 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 22);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label4.Location = new System.Drawing.Point(3, 20);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(208, 28);
+            this.label4.Size = new System.Drawing.Size(208, 32);
             this.label4.TabIndex = 0;
             this.label4.Text = "Picture Caption";
             // 
             // txtEventImageCaption
             // 
             this.txtEventImageCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEventImageCaption.Location = new System.Drawing.Point(217, 15);
+            this.txtEventImageCaption.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.txtEventImageCaption.Location = new System.Drawing.Point(217, 17);
             this.txtEventImageCaption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtEventImageCaption.Name = "txtEventImageCaption";
-            this.txtEventImageCaption.Size = new System.Drawing.Size(921, 43);
+            this.txtEventImageCaption.Size = new System.Drawing.Size(921, 39);
             this.txtEventImageCaption.TabIndex = 1;
             this.txtEventImageCaption.TextChanged += new System.EventHandler(this.txtImageCaption_TextChanged);
             // 
@@ -572,7 +573,7 @@
             this.btnClearEventImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClearEventImage.FlatAppearance.BorderSize = 0;
             this.btnClearEventImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearEventImage.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearEventImage.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnClearEventImage.ForeColor = System.Drawing.Color.Black;
             this.btnClearEventImage.Location = new System.Drawing.Point(1216, 15);
             this.btnClearEventImage.Margin = new System.Windows.Forms.Padding(4);
@@ -657,7 +658,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.label1.Location = new System.Drawing.Point(5, 10);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
@@ -726,8 +727,8 @@
             this.dataGridEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridEventSales.Name = "dataGridEventSales";
             this.dataGridEventSales.RowHeadersWidth = 51;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridEventSales.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridEventSales.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridEventSales.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridEventSales.RowTemplate.Height = 40;
             this.dataGridEventSales.Size = new System.Drawing.Size(1365, 403);
@@ -759,9 +760,9 @@
             this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 3;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel12.Size = new System.Drawing.Size(1365, 93);
             this.tableLayoutPanel12.TabIndex = 5;
             // 
@@ -771,12 +772,12 @@
             this.btnAddEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddEventSales.FlatAppearance.BorderSize = 0;
             this.btnAddEventSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddEventSales.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnAddEventSales.ForeColor = System.Drawing.Color.White;
-            this.btnAddEventSales.Location = new System.Drawing.Point(236, 27);
+            this.btnAddEventSales.Location = new System.Drawing.Point(236, 22);
             this.btnAddEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddEventSales.Name = "btnAddEventSales";
-            this.btnAddEventSales.Size = new System.Drawing.Size(155, 38);
+            this.btnAddEventSales.Size = new System.Drawing.Size(155, 47);
             this.btnAddEventSales.TabIndex = 0;
             this.btnAddEventSales.Text = "Add";
             this.btnAddEventSales.UseVisualStyleBackColor = false;
@@ -788,12 +789,12 @@
             this.btnUpdateEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnUpdateEventSales.FlatAppearance.BorderSize = 0;
             this.btnUpdateEventSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateEventSales.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnUpdateEventSales.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateEventSales.Location = new System.Drawing.Point(419, 27);
+            this.btnUpdateEventSales.Location = new System.Drawing.Point(419, 22);
             this.btnUpdateEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateEventSales.Name = "btnUpdateEventSales";
-            this.btnUpdateEventSales.Size = new System.Drawing.Size(155, 38);
+            this.btnUpdateEventSales.Size = new System.Drawing.Size(155, 47);
             this.btnUpdateEventSales.TabIndex = 1;
             this.btnUpdateEventSales.Text = "Edit";
             this.btnUpdateEventSales.UseVisualStyleBackColor = false;
@@ -805,12 +806,12 @@
             this.btnDeleteEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDeleteEventSales.FlatAppearance.BorderSize = 0;
             this.btnDeleteEventSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteEventSales.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnDeleteEventSales.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteEventSales.Location = new System.Drawing.Point(785, 27);
+            this.btnDeleteEventSales.Location = new System.Drawing.Point(785, 22);
             this.btnDeleteEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteEventSales.Name = "btnDeleteEventSales";
-            this.btnDeleteEventSales.Size = new System.Drawing.Size(155, 38);
+            this.btnDeleteEventSales.Size = new System.Drawing.Size(155, 47);
             this.btnDeleteEventSales.TabIndex = 2;
             this.btnDeleteEventSales.Text = "Delete";
             this.btnDeleteEventSales.UseVisualStyleBackColor = false;
@@ -822,12 +823,12 @@
             this.btnViewEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnViewEventSales.FlatAppearance.BorderSize = 0;
             this.btnViewEventSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewEventSales.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnViewEventSales.ForeColor = System.Drawing.Color.White;
-            this.btnViewEventSales.Location = new System.Drawing.Point(602, 27);
+            this.btnViewEventSales.Location = new System.Drawing.Point(602, 22);
             this.btnViewEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.btnViewEventSales.Name = "btnViewEventSales";
-            this.btnViewEventSales.Size = new System.Drawing.Size(155, 38);
+            this.btnViewEventSales.Size = new System.Drawing.Size(155, 47);
             this.btnViewEventSales.TabIndex = 3;
             this.btnViewEventSales.Text = "View";
             this.btnViewEventSales.UseVisualStyleBackColor = false;
@@ -839,28 +840,28 @@
             this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel23.Controls.Add(this.labelTotalRowsEventSales, 0, 0);
+            this.tableLayoutPanel23.Controls.Add(this.svLabelTotalRowsEventSales, 0, 0);
             this.tableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel23.Location = new System.Drawing.Point(3, 25);
+            this.tableLayoutPanel23.Location = new System.Drawing.Point(3, 20);
             this.tableLayoutPanel23.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel23.Name = "tableLayoutPanel23";
             this.tableLayoutPanel23.RowCount = 1;
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(226, 42);
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(226, 51);
             this.tableLayoutPanel23.TabIndex = 6;
             // 
-            // labelTotalRowsEventSales
+            // svLabelTotalRowsEventSales
             // 
-            this.labelTotalRowsEventSales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalRowsEventSales.AutoSize = true;
-            this.labelTotalRowsEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRowsEventSales.Location = new System.Drawing.Point(4, 7);
-            this.labelTotalRowsEventSales.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalRowsEventSales.Name = "labelTotalRowsEventSales";
-            this.labelTotalRowsEventSales.Size = new System.Drawing.Size(195, 28);
-            this.labelTotalRowsEventSales.TabIndex = 4;
-            this.labelTotalRowsEventSales.Text = "0";
-            this.labelTotalRowsEventSales.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.svLabelTotalRowsEventSales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.svLabelTotalRowsEventSales.AutoSize = true;
+            this.svLabelTotalRowsEventSales.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.svLabelTotalRowsEventSales.Location = new System.Drawing.Point(4, 9);
+            this.svLabelTotalRowsEventSales.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svLabelTotalRowsEventSales.Name = "svLabelTotalRowsEventSales";
+            this.svLabelTotalRowsEventSales.Size = new System.Drawing.Size(195, 32);
+            this.svLabelTotalRowsEventSales.TabIndex = 4;
+            this.svLabelTotalRowsEventSales.Text = "0";
+            this.svLabelTotalRowsEventSales.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel24
             // 
@@ -868,28 +869,28 @@
             this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel24.Controls.Add(this.labelTotalEventSales, 1, 0);
+            this.tableLayoutPanel24.Controls.Add(this.svLabelTotalEventSales, 1, 0);
             this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel24.Location = new System.Drawing.Point(1130, 25);
+            this.tableLayoutPanel24.Location = new System.Drawing.Point(1130, 20);
             this.tableLayoutPanel24.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel24.Name = "tableLayoutPanel24";
             this.tableLayoutPanel24.RowCount = 1;
             this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel24.Size = new System.Drawing.Size(232, 42);
+            this.tableLayoutPanel24.Size = new System.Drawing.Size(232, 51);
             this.tableLayoutPanel24.TabIndex = 5;
             // 
-            // labelTotalEventSales
+            // svLabelTotalEventSales
             // 
-            this.labelTotalEventSales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalEventSales.AutoSize = true;
-            this.labelTotalEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalEventSales.Location = new System.Drawing.Point(27, 7);
-            this.labelTotalEventSales.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalEventSales.Name = "labelTotalEventSales";
-            this.labelTotalEventSales.Size = new System.Drawing.Size(201, 28);
-            this.labelTotalEventSales.TabIndex = 4;
-            this.labelTotalEventSales.Text = "0";
-            this.labelTotalEventSales.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.svLabelTotalEventSales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.svLabelTotalEventSales.AutoSize = true;
+            this.svLabelTotalEventSales.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.svLabelTotalEventSales.Location = new System.Drawing.Point(27, 9);
+            this.svLabelTotalEventSales.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svLabelTotalEventSales.Name = "svLabelTotalEventSales";
+            this.svLabelTotalEventSales.Size = new System.Drawing.Size(201, 32);
+            this.svLabelTotalEventSales.TabIndex = 4;
+            this.svLabelTotalEventSales.Text = "0";
+            this.svLabelTotalEventSales.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCloseEventSales
             // 
@@ -897,12 +898,12 @@
             this.btnCloseEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCloseEventSales.FlatAppearance.BorderSize = 0;
             this.btnCloseEventSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseEventSales.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnCloseEventSales.ForeColor = System.Drawing.Color.Black;
-            this.btnCloseEventSales.Location = new System.Drawing.Point(968, 27);
+            this.btnCloseEventSales.Location = new System.Drawing.Point(968, 22);
             this.btnCloseEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.btnCloseEventSales.Name = "btnCloseEventSales";
-            this.btnCloseEventSales.Size = new System.Drawing.Size(155, 38);
+            this.btnCloseEventSales.Size = new System.Drawing.Size(155, 47);
             this.btnCloseEventSales.TabIndex = 7;
             this.btnCloseEventSales.Text = "Close";
             this.btnCloseEventSales.UseVisualStyleBackColor = false;
@@ -939,22 +940,22 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(656, 6);
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label8.Location = new System.Drawing.Point(645, 6);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 28);
+            this.label8.Size = new System.Drawing.Size(86, 32);
             this.label8.TabIndex = 1;
             this.label8.Text = "Month";
             // 
             // txtSummaryEventSales
             // 
             this.txtSummaryEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSummaryEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSummaryEventSales.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.txtSummaryEventSales.Location = new System.Drawing.Point(167, 4);
             this.txtSummaryEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.txtSummaryEventSales.Name = "txtSummaryEventSales";
-            this.txtSummaryEventSales.Size = new System.Drawing.Size(401, 34);
+            this.txtSummaryEventSales.Size = new System.Drawing.Size(401, 39);
             this.txtSummaryEventSales.TabIndex = 0;
             this.txtSummaryEventSales.TextChanged += new System.EventHandler(this.txtSummaryEventSales_TextChanged);
             // 
@@ -962,11 +963,11 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(57, 6);
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label9.Location = new System.Drawing.Point(44, 6);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 28);
+            this.label9.Size = new System.Drawing.Size(115, 32);
             this.label9.TabIndex = 1;
             this.label9.Text = "Summary";
             // 
@@ -976,7 +977,7 @@
             this.btnSearchEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSearchEventSales.FlatAppearance.BorderSize = 0;
             this.btnSearchEventSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchEventSales.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnSearchEventSales.ForeColor = System.Drawing.Color.Black;
             this.btnSearchEventSales.Location = new System.Drawing.Point(1012, 4);
             this.btnSearchEventSales.Margin = new System.Windows.Forms.Padding(4);
@@ -990,12 +991,12 @@
             // cmbMonthEventSales
             // 
             this.cmbMonthEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbMonthEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbMonthEventSales.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.cmbMonthEventSales.FormattingEnabled = true;
             this.cmbMonthEventSales.Location = new System.Drawing.Point(739, 4);
             this.cmbMonthEventSales.Margin = new System.Windows.Forms.Padding(4);
             this.cmbMonthEventSales.Name = "cmbMonthEventSales";
-            this.cmbMonthEventSales.Size = new System.Drawing.Size(265, 36);
+            this.cmbMonthEventSales.Size = new System.Drawing.Size(265, 39);
             this.cmbMonthEventSales.TabIndex = 2;
             // 
             // btnClearEventSales
@@ -1004,7 +1005,7 @@
             this.btnClearEventSales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClearEventSales.FlatAppearance.BorderSize = 0;
             this.btnClearEventSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearEventSales.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearEventSales.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnClearEventSales.ForeColor = System.Drawing.Color.Black;
             this.btnClearEventSales.Location = new System.Drawing.Point(1175, 4);
             this.btnClearEventSales.Margin = new System.Windows.Forms.Padding(4);
@@ -1019,7 +1020,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.label2.Location = new System.Drawing.Point(5, 10);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
@@ -1104,9 +1105,9 @@
             this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 3;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(1371, 112);
             this.tableLayoutPanel9.TabIndex = 2;
             // 
@@ -1116,12 +1117,12 @@
             this.btnAddExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddExpReport.FlatAppearance.BorderSize = 0;
             this.btnAddExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddExpReport.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnAddExpReport.ForeColor = System.Drawing.Color.White;
-            this.btnAddExpReport.Location = new System.Drawing.Point(237, 32);
+            this.btnAddExpReport.Location = new System.Drawing.Point(237, 26);
             this.btnAddExpReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddExpReport.Name = "btnAddExpReport";
-            this.btnAddExpReport.Size = new System.Drawing.Size(156, 48);
+            this.btnAddExpReport.Size = new System.Drawing.Size(156, 59);
             this.btnAddExpReport.TabIndex = 0;
             this.btnAddExpReport.Text = "Add";
             this.btnAddExpReport.UseVisualStyleBackColor = false;
@@ -1133,12 +1134,12 @@
             this.btnUpdateExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnUpdateExpReport.FlatAppearance.BorderSize = 0;
             this.btnUpdateExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateExpReport.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnUpdateExpReport.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateExpReport.Location = new System.Drawing.Point(421, 32);
+            this.btnUpdateExpReport.Location = new System.Drawing.Point(421, 26);
             this.btnUpdateExpReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateExpReport.Name = "btnUpdateExpReport";
-            this.btnUpdateExpReport.Size = new System.Drawing.Size(156, 48);
+            this.btnUpdateExpReport.Size = new System.Drawing.Size(156, 59);
             this.btnUpdateExpReport.TabIndex = 1;
             this.btnUpdateExpReport.Text = "Edit";
             this.btnUpdateExpReport.UseVisualStyleBackColor = false;
@@ -1150,12 +1151,12 @@
             this.btnDeleteExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDeleteExpReport.FlatAppearance.BorderSize = 0;
             this.btnDeleteExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteExpReport.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnDeleteExpReport.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteExpReport.Location = new System.Drawing.Point(789, 32);
+            this.btnDeleteExpReport.Location = new System.Drawing.Point(789, 26);
             this.btnDeleteExpReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteExpReport.Name = "btnDeleteExpReport";
-            this.btnDeleteExpReport.Size = new System.Drawing.Size(156, 48);
+            this.btnDeleteExpReport.Size = new System.Drawing.Size(156, 59);
             this.btnDeleteExpReport.TabIndex = 2;
             this.btnDeleteExpReport.Text = "Delete";
             this.btnDeleteExpReport.UseVisualStyleBackColor = false;
@@ -1167,12 +1168,12 @@
             this.btnViewExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnViewExpReport.FlatAppearance.BorderSize = 0;
             this.btnViewExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewExpReport.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnViewExpReport.ForeColor = System.Drawing.Color.White;
-            this.btnViewExpReport.Location = new System.Drawing.Point(605, 32);
+            this.btnViewExpReport.Location = new System.Drawing.Point(605, 26);
             this.btnViewExpReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnViewExpReport.Name = "btnViewExpReport";
-            this.btnViewExpReport.Size = new System.Drawing.Size(156, 48);
+            this.btnViewExpReport.Size = new System.Drawing.Size(156, 59);
             this.btnViewExpReport.TabIndex = 3;
             this.btnViewExpReport.Text = "View";
             this.btnViewExpReport.UseVisualStyleBackColor = false;
@@ -1184,28 +1185,28 @@
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel21.Controls.Add(this.labelTotalRowsEventExp, 0, 0);
+            this.tableLayoutPanel21.Controls.Add(this.svLabelTotalRowsEventExp, 0, 0);
             this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel21.Location = new System.Drawing.Point(3, 30);
+            this.tableLayoutPanel21.Location = new System.Drawing.Point(3, 24);
             this.tableLayoutPanel21.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel21.Name = "tableLayoutPanel21";
             this.tableLayoutPanel21.RowCount = 1;
             this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel21.Size = new System.Drawing.Size(227, 52);
+            this.tableLayoutPanel21.Size = new System.Drawing.Size(227, 63);
             this.tableLayoutPanel21.TabIndex = 6;
             // 
-            // labelTotalRowsEventExp
+            // svLabelTotalRowsEventExp
             // 
-            this.labelTotalRowsEventExp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalRowsEventExp.AutoSize = true;
-            this.labelTotalRowsEventExp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRowsEventExp.Location = new System.Drawing.Point(4, 12);
-            this.labelTotalRowsEventExp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalRowsEventExp.Name = "labelTotalRowsEventExp";
-            this.labelTotalRowsEventExp.Size = new System.Drawing.Size(196, 28);
-            this.labelTotalRowsEventExp.TabIndex = 4;
-            this.labelTotalRowsEventExp.Text = "0";
-            this.labelTotalRowsEventExp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.svLabelTotalRowsEventExp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.svLabelTotalRowsEventExp.AutoSize = true;
+            this.svLabelTotalRowsEventExp.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.svLabelTotalRowsEventExp.Location = new System.Drawing.Point(4, 15);
+            this.svLabelTotalRowsEventExp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svLabelTotalRowsEventExp.Name = "svLabelTotalRowsEventExp";
+            this.svLabelTotalRowsEventExp.Size = new System.Drawing.Size(196, 32);
+            this.svLabelTotalRowsEventExp.TabIndex = 4;
+            this.svLabelTotalRowsEventExp.Text = "0";
+            this.svLabelTotalRowsEventExp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel20
             // 
@@ -1213,28 +1214,28 @@
             this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel20.Controls.Add(this.labelTotalAmountEventExp, 1, 0);
+            this.tableLayoutPanel20.Controls.Add(this.svLabelTotalAmountEventExp, 1, 0);
             this.tableLayoutPanel20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel20.Location = new System.Drawing.Point(1136, 30);
+            this.tableLayoutPanel20.Location = new System.Drawing.Point(1136, 24);
             this.tableLayoutPanel20.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel20.Name = "tableLayoutPanel20";
             this.tableLayoutPanel20.RowCount = 1;
             this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel20.Size = new System.Drawing.Size(232, 52);
+            this.tableLayoutPanel20.Size = new System.Drawing.Size(232, 63);
             this.tableLayoutPanel20.TabIndex = 5;
             // 
-            // labelTotalAmountEventExp
+            // svLabelTotalAmountEventExp
             // 
-            this.labelTotalAmountEventExp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalAmountEventExp.AutoSize = true;
-            this.labelTotalAmountEventExp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalAmountEventExp.Location = new System.Drawing.Point(27, 12);
-            this.labelTotalAmountEventExp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalAmountEventExp.Name = "labelTotalAmountEventExp";
-            this.labelTotalAmountEventExp.Size = new System.Drawing.Size(201, 28);
-            this.labelTotalAmountEventExp.TabIndex = 4;
-            this.labelTotalAmountEventExp.Text = "0";
-            this.labelTotalAmountEventExp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.svLabelTotalAmountEventExp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.svLabelTotalAmountEventExp.AutoSize = true;
+            this.svLabelTotalAmountEventExp.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.svLabelTotalAmountEventExp.Location = new System.Drawing.Point(27, 15);
+            this.svLabelTotalAmountEventExp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svLabelTotalAmountEventExp.Name = "svLabelTotalAmountEventExp";
+            this.svLabelTotalAmountEventExp.Size = new System.Drawing.Size(201, 32);
+            this.svLabelTotalAmountEventExp.TabIndex = 4;
+            this.svLabelTotalAmountEventExp.Text = "0";
+            this.svLabelTotalAmountEventExp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCloseEventExp
             // 
@@ -1242,12 +1243,12 @@
             this.btnCloseEventExp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCloseEventExp.FlatAppearance.BorderSize = 0;
             this.btnCloseEventExp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseEventExp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseEventExp.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnCloseEventExp.ForeColor = System.Drawing.Color.Black;
-            this.btnCloseEventExp.Location = new System.Drawing.Point(973, 32);
+            this.btnCloseEventExp.Location = new System.Drawing.Point(973, 26);
             this.btnCloseEventExp.Margin = new System.Windows.Forms.Padding(4);
             this.btnCloseEventExp.Name = "btnCloseEventExp";
-            this.btnCloseEventExp.Size = new System.Drawing.Size(156, 48);
+            this.btnCloseEventExp.Size = new System.Drawing.Size(156, 59);
             this.btnCloseEventExp.TabIndex = 7;
             this.btnCloseEventExp.Text = "Close";
             this.btnCloseEventExp.UseVisualStyleBackColor = false;
@@ -1284,22 +1285,22 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(660, 6);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label5.Location = new System.Drawing.Point(649, 6);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 28);
+            this.label5.Size = new System.Drawing.Size(86, 32);
             this.label5.TabIndex = 1;
             this.label5.Text = "Month";
             // 
             // txtSummaryExpReport
             // 
             this.txtSummaryExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSummaryExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSummaryExpReport.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.txtSummaryExpReport.Location = new System.Drawing.Point(168, 4);
             this.txtSummaryExpReport.Margin = new System.Windows.Forms.Padding(4);
             this.txtSummaryExpReport.Name = "txtSummaryExpReport";
-            this.txtSummaryExpReport.Size = new System.Drawing.Size(403, 34);
+            this.txtSummaryExpReport.Size = new System.Drawing.Size(403, 39);
             this.txtSummaryExpReport.TabIndex = 0;
             this.txtSummaryExpReport.TextChanged += new System.EventHandler(this.txtSummaryExpReport_TextChanged);
             // 
@@ -1307,11 +1308,11 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(58, 6);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label6.Location = new System.Drawing.Point(45, 6);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 28);
+            this.label6.Size = new System.Drawing.Size(115, 32);
             this.label6.TabIndex = 1;
             this.label6.Text = "Summary";
             // 
@@ -1321,7 +1322,7 @@
             this.btnSearchExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSearchExpReport.FlatAppearance.BorderSize = 0;
             this.btnSearchExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchExpReport.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnSearchExpReport.ForeColor = System.Drawing.Color.Black;
             this.btnSearchExpReport.Location = new System.Drawing.Point(1017, 4);
             this.btnSearchExpReport.Margin = new System.Windows.Forms.Padding(4);
@@ -1335,12 +1336,12 @@
             // cmbMonthExpReport
             // 
             this.cmbMonthExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbMonthExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbMonthExpReport.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.cmbMonthExpReport.FormattingEnabled = true;
             this.cmbMonthExpReport.Location = new System.Drawing.Point(743, 4);
             this.cmbMonthExpReport.Margin = new System.Windows.Forms.Padding(4);
             this.cmbMonthExpReport.Name = "cmbMonthExpReport";
-            this.cmbMonthExpReport.Size = new System.Drawing.Size(266, 36);
+            this.cmbMonthExpReport.Size = new System.Drawing.Size(266, 39);
             this.cmbMonthExpReport.TabIndex = 2;
             // 
             // btnClearExpReport
@@ -1349,7 +1350,7 @@
             this.btnClearExpReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClearExpReport.FlatAppearance.BorderSize = 0;
             this.btnClearExpReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearExpReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearExpReport.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnClearExpReport.ForeColor = System.Drawing.Color.Black;
             this.btnClearExpReport.Location = new System.Drawing.Point(1181, 4);
             this.btnClearExpReport.Margin = new System.Windows.Forms.Padding(4);
@@ -1369,8 +1370,8 @@
             this.dataGridEventExpenditures.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridEventExpenditures.Name = "dataGridEventExpenditures";
             this.dataGridEventExpenditures.RowHeadersWidth = 51;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridEventExpenditures.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridEventExpenditures.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridEventExpenditures.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridEventExpenditures.RowTemplate.Height = 40;
             this.dataGridEventExpenditures.Size = new System.Drawing.Size(1371, 388);
@@ -1380,7 +1381,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.label3.Location = new System.Drawing.Point(5, 10);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
@@ -1452,11 +1453,11 @@
             // txtEventReceiptCaption
             // 
             this.txtEventReceiptCaption.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtEventReceiptCaption.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEventReceiptCaption.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.txtEventReceiptCaption.Location = new System.Drawing.Point(169, 4);
             this.txtEventReceiptCaption.Margin = new System.Windows.Forms.Padding(4);
             this.txtEventReceiptCaption.Name = "txtEventReceiptCaption";
-            this.txtEventReceiptCaption.Size = new System.Drawing.Size(364, 34);
+            this.txtEventReceiptCaption.Size = new System.Drawing.Size(364, 39);
             this.txtEventReceiptCaption.TabIndex = 2;
             this.txtEventReceiptCaption.TextChanged += new System.EventHandler(this.txtEventReceiptCaption_TextChanged);
             // 
@@ -1466,7 +1467,7 @@
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnSearch.ForeColor = System.Drawing.Color.Black;
             this.btnSearch.Location = new System.Drawing.Point(1028, 4);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
@@ -1483,7 +1484,7 @@
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnClear.ForeColor = System.Drawing.Color.Black;
             this.btnClear.Location = new System.Drawing.Point(1213, 4);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
@@ -1498,34 +1499,34 @@
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(568, 15);
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label14.Location = new System.Drawing.Point(568, 13);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(157, 28);
+            this.label14.Size = new System.Drawing.Size(157, 32);
             this.label14.TabIndex = 0;
             this.label14.Text = "Month";
             // 
             // cmbMonthEventReceipt
             // 
             this.cmbMonthEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbMonthEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbMonthEventReceipt.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.cmbMonthEventReceipt.FormattingEnabled = true;
             this.cmbMonthEventReceipt.Location = new System.Drawing.Point(733, 4);
             this.cmbMonthEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.cmbMonthEventReceipt.Name = "cmbMonthEventReceipt";
-            this.cmbMonthEventReceipt.Size = new System.Drawing.Size(267, 36);
+            this.cmbMonthEventReceipt.Size = new System.Drawing.Size(267, 39);
             this.cmbMonthEventReceipt.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(4, 15);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label7.Location = new System.Drawing.Point(4, 13);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(157, 28);
+            this.label7.Size = new System.Drawing.Size(157, 32);
             this.label7.TabIndex = 0;
             this.label7.Text = "Caption";
             // 
@@ -1555,9 +1556,9 @@
             this.tableLayoutPanel16.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel16.Name = "tableLayoutPanel16";
             this.tableLayoutPanel16.RowCount = 3;
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel16.Size = new System.Drawing.Size(1379, 92);
             this.tableLayoutPanel16.TabIndex = 6;
             // 
@@ -1567,12 +1568,12 @@
             this.btnAddEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddEventReceipt.FlatAppearance.BorderSize = 0;
             this.btnAddEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddEventReceipt.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnAddEventReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnAddEventReceipt.Location = new System.Drawing.Point(238, 27);
+            this.btnAddEventReceipt.Location = new System.Drawing.Point(238, 22);
             this.btnAddEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddEventReceipt.Name = "btnAddEventReceipt";
-            this.btnAddEventReceipt.Size = new System.Drawing.Size(157, 38);
+            this.btnAddEventReceipt.Size = new System.Drawing.Size(157, 47);
             this.btnAddEventReceipt.TabIndex = 0;
             this.btnAddEventReceipt.Text = "Add";
             this.btnAddEventReceipt.UseVisualStyleBackColor = false;
@@ -1584,12 +1585,12 @@
             this.btnUpdateEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnUpdateEventReceipt.FlatAppearance.BorderSize = 0;
             this.btnUpdateEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateEventReceipt.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnUpdateEventReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateEventReceipt.Location = new System.Drawing.Point(423, 27);
+            this.btnUpdateEventReceipt.Location = new System.Drawing.Point(423, 22);
             this.btnUpdateEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateEventReceipt.Name = "btnUpdateEventReceipt";
-            this.btnUpdateEventReceipt.Size = new System.Drawing.Size(157, 38);
+            this.btnUpdateEventReceipt.Size = new System.Drawing.Size(157, 47);
             this.btnUpdateEventReceipt.TabIndex = 1;
             this.btnUpdateEventReceipt.Text = "Edit";
             this.btnUpdateEventReceipt.UseVisualStyleBackColor = false;
@@ -1601,12 +1602,12 @@
             this.btnDeleteEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDeleteEventReceipt.FlatAppearance.BorderSize = 0;
             this.btnDeleteEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteEventReceipt.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnDeleteEventReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteEventReceipt.Location = new System.Drawing.Point(793, 27);
+            this.btnDeleteEventReceipt.Location = new System.Drawing.Point(793, 22);
             this.btnDeleteEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteEventReceipt.Name = "btnDeleteEventReceipt";
-            this.btnDeleteEventReceipt.Size = new System.Drawing.Size(157, 38);
+            this.btnDeleteEventReceipt.Size = new System.Drawing.Size(157, 47);
             this.btnDeleteEventReceipt.TabIndex = 2;
             this.btnDeleteEventReceipt.Text = "Delete";
             this.btnDeleteEventReceipt.UseVisualStyleBackColor = false;
@@ -1618,12 +1619,12 @@
             this.btnViewEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnViewEventReceipt.FlatAppearance.BorderSize = 0;
             this.btnViewEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewEventReceipt.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnViewEventReceipt.ForeColor = System.Drawing.Color.White;
-            this.btnViewEventReceipt.Location = new System.Drawing.Point(608, 27);
+            this.btnViewEventReceipt.Location = new System.Drawing.Point(608, 22);
             this.btnViewEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnViewEventReceipt.Name = "btnViewEventReceipt";
-            this.btnViewEventReceipt.Size = new System.Drawing.Size(157, 38);
+            this.btnViewEventReceipt.Size = new System.Drawing.Size(157, 47);
             this.btnViewEventReceipt.TabIndex = 3;
             this.btnViewEventReceipt.Text = "View";
             this.btnViewEventReceipt.UseVisualStyleBackColor = false;
@@ -1635,28 +1636,28 @@
             this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel17.Controls.Add(this.labelTotalRowsEventReceipt, 0, 0);
+            this.tableLayoutPanel17.Controls.Add(this.svLabelTotalRowsEventReceipt, 0, 0);
             this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 25);
+            this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 20);
             this.tableLayoutPanel17.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel17.Name = "tableLayoutPanel17";
             this.tableLayoutPanel17.RowCount = 1;
             this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel17.Size = new System.Drawing.Size(228, 42);
+            this.tableLayoutPanel17.Size = new System.Drawing.Size(228, 51);
             this.tableLayoutPanel17.TabIndex = 6;
             // 
-            // labelTotalRowsEventReceipt
+            // svLabelTotalRowsEventReceipt
             // 
-            this.labelTotalRowsEventReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalRowsEventReceipt.AutoSize = true;
-            this.labelTotalRowsEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRowsEventReceipt.Location = new System.Drawing.Point(4, 7);
-            this.labelTotalRowsEventReceipt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTotalRowsEventReceipt.Name = "labelTotalRowsEventReceipt";
-            this.labelTotalRowsEventReceipt.Size = new System.Drawing.Size(197, 28);
-            this.labelTotalRowsEventReceipt.TabIndex = 4;
-            this.labelTotalRowsEventReceipt.Text = "0";
-            this.labelTotalRowsEventReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.svLabelTotalRowsEventReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.svLabelTotalRowsEventReceipt.AutoSize = true;
+            this.svLabelTotalRowsEventReceipt.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.svLabelTotalRowsEventReceipt.Location = new System.Drawing.Point(4, 9);
+            this.svLabelTotalRowsEventReceipt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.svLabelTotalRowsEventReceipt.Name = "svLabelTotalRowsEventReceipt";
+            this.svLabelTotalRowsEventReceipt.Size = new System.Drawing.Size(197, 32);
+            this.svLabelTotalRowsEventReceipt.TabIndex = 4;
+            this.svLabelTotalRowsEventReceipt.Text = "0";
+            this.svLabelTotalRowsEventReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel22
             // 
@@ -1665,12 +1666,12 @@
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel22.Location = new System.Drawing.Point(1142, 25);
+            this.tableLayoutPanel22.Location = new System.Drawing.Point(1142, 20);
             this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel22.Name = "tableLayoutPanel22";
             this.tableLayoutPanel22.RowCount = 1;
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel22.Size = new System.Drawing.Size(234, 42);
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(234, 51);
             this.tableLayoutPanel22.TabIndex = 5;
             // 
             // btnCloseEventReceipt
@@ -1679,12 +1680,12 @@
             this.btnCloseEventReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCloseEventReceipt.FlatAppearance.BorderSize = 0;
             this.btnCloseEventReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseEventReceipt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseEventReceipt.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.btnCloseEventReceipt.ForeColor = System.Drawing.Color.Black;
-            this.btnCloseEventReceipt.Location = new System.Drawing.Point(978, 27);
+            this.btnCloseEventReceipt.Location = new System.Drawing.Point(978, 22);
             this.btnCloseEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.btnCloseEventReceipt.Name = "btnCloseEventReceipt";
-            this.btnCloseEventReceipt.Size = new System.Drawing.Size(157, 38);
+            this.btnCloseEventReceipt.Size = new System.Drawing.Size(157, 47);
             this.btnCloseEventReceipt.TabIndex = 7;
             this.btnCloseEventReceipt.Text = "Close";
             this.btnCloseEventReceipt.UseVisualStyleBackColor = false;
@@ -1714,8 +1715,8 @@
             this.dataGridViewEventReceipt.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEventReceipt.Name = "dataGridViewEventReceipt";
             this.dataGridViewEventReceipt.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewEventReceipt.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewEventReceipt.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewEventReceipt.RowTemplate.Height = 30;
             this.dataGridViewEventReceipt.Size = new System.Drawing.Size(958, 467);
             this.dataGridViewEventReceipt.TabIndex = 5;
@@ -1796,6 +1797,7 @@
             // 
             this.labelEventSummary.AutoSize = true;
             this.labelEventSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelEventSummary.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.labelEventSummary.Location = new System.Drawing.Point(31, 13);
             this.labelEventSummary.Name = "labelEventSummary";
             this.labelEventSummary.Size = new System.Drawing.Size(1381, 633);
@@ -1936,7 +1938,7 @@
         private System.Windows.Forms.Button btnUpdateExpReport;
         private System.Windows.Forms.Button btnDeleteExpReport;
         private System.Windows.Forms.Button btnViewExpReport;
-        private System.Windows.Forms.Label labelTotalAmountEventExp;
+        private System.Windows.Forms.Label svLabelTotalAmountEventExp;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtSummaryExpReport;
@@ -1963,7 +1965,7 @@
         private FontAwesome.Sharp.IconPictureBox iconZoomOut;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel20;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel21;
-        private System.Windows.Forms.Label labelTotalRowsEventExp;
+        private System.Windows.Forms.Label svLabelTotalRowsEventExp;
         private System.Windows.Forms.Button btnCloseEventExp;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
         private System.Windows.Forms.Button btnAddEventReceipt;
@@ -1971,7 +1973,7 @@
         private System.Windows.Forms.Button btnDeleteEventReceipt;
         private System.Windows.Forms.Button btnViewEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
-        private System.Windows.Forms.Label labelTotalRowsEventReceipt;
+        private System.Windows.Forms.Label svLabelTotalRowsEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel22;
         private System.Windows.Forms.Button btnCloseEventReceipt;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
@@ -1980,9 +1982,9 @@
         private System.Windows.Forms.Button btnDeleteEventSales;
         private System.Windows.Forms.Button btnViewEventSales;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel23;
-        private System.Windows.Forms.Label labelTotalRowsEventSales;
+        private System.Windows.Forms.Label svLabelTotalRowsEventSales;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
-        private System.Windows.Forms.Label labelTotalEventSales;
+        private System.Windows.Forms.Label svLabelTotalEventSales;
         private System.Windows.Forms.Button btnCloseEventSales;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
         private System.Windows.Forms.Label label8;

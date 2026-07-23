@@ -1,13 +1,14 @@
-﻿using APC.Domain.Entities;
-using APC.Applications.Interfaces;
+﻿using APC.Applications.Interfaces;
+using APC.Domain.Entities;
 using APC.Helper;
+using APC.Utility;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace APC
 {
-    public partial class FormCountry : Form
+    public partial class FormCountry : BaseFormDashboard
     {
         private readonly ICountryService _countryService;
 
@@ -83,17 +84,8 @@ namespace APC
             }
         }
 
-        private void resizeControls()
-        {
-            GeneralHelper.ApplyBoldFont(14, labelTitle, label2, btnClose, btnSave);
-            GeneralHelper.ApplyRegularFont(14, txtCountry);
-        }
-
         private void FormCountry_Load(object sender, EventArgs e)
         {
-
-            resizeControls();
-
             if (_isUpdate)
             {
                 labelTitle.Text = "Edit Country";
