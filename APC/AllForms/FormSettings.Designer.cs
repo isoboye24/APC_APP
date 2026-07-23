@@ -764,6 +764,7 @@
             this.dataGridViewCountry.RowTemplate.Height = 40;
             this.dataGridViewCountry.Size = new System.Drawing.Size(1201, 427);
             this.dataGridViewCountry.TabIndex = 0;
+            this.dataGridViewCountry.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCountry_CellContentClick);
             // 
             // tableLayoutPanel4
             // 

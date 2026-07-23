@@ -60,37 +60,6 @@ namespace APC.AllForms
             _eventImagesService = eventImagesService;
         }   
         
-        //EventsBLL eventBLL = new EventsBLL();
-
-        //MemberDetailDTO permissionDetail = new MemberDetailDTO();
-        //MemberBLL permissionMemberBLL = new MemberBLL();
-
-        //EventsDTO eventsDTO = new EventsDTO();
-        //EventsBLL eventsBLL = new EventsBLL();
-
-        //EventSalesDTO eventSalesDTO = new EventSalesDTO();
-        //EventSalesBLL eventSalesBLL = new EventSalesBLL();
-
-        //EventExpenditureDTO eventExpenditureDTO = new EventExpenditureDTO();
-        //EventExpenditureBLL eventExpenditureBLL = new EventExpenditureBLL();
-
-        //EventReceiptsDTO eventReceiptsDTO = new EventReceiptsDTO();
-        //EventReceiptsBLL eventReceiptsBLL = new EventReceiptsBLL();
-
-        //GeneralAttendanceDTO generalAttendanceDTO = new GeneralAttendanceDTO();
-        //GeneralAttendanceBLL generalAttendanceBLL = new GeneralAttendanceBLL();
-
-        //ExpenditureDTO expenditureDTO = new ExpenditureDTO();
-        //ExpenditureBLL expenditureBLL = new ExpenditureBLL();
-
-        //FinancialReportDTO financialReportDTO = new FinancialReportDTO();
-        //FinancialReportBLL financialReportBLL = new FinancialReportBLL();
-
-        //ConstitutionDTO constitutionDTO = new ConstitutionDTO();
-        //ConstitutionBLL constitutionBLL = new ConstitutionBLL();
-
-        //FinedMemberDTO finedMemberDTO = new FinedMemberDTO();
-        //FinedMemberBLL finedMemberBLL = new FinedMemberBLL();
 
         private void loadPaymentStatus()
         {
@@ -105,9 +74,10 @@ namespace APC.AllForms
 
         private void loadCountries()
         {
-            //    dataGridViewCountry.DataSource = _countryService.GetAll();
-            //    ConfigureSingleColumnGrid(dataGridViewCountry, SingleColumnGridType.Basic, "CountryName", "Countries");
-            }
+            dataGridViewCountry.DataSource = _countryService.GetAll();
+            _countryDTO = _countryService.GetAll();
+            ConfigureSingleColumnGrid(dataGridViewCountry, SingleColumnGridType.Basic, "CountryName", "Countries");
+        }
         private void loadDeletedCountries()
         {
             //    dataGridView1.DataSource = _countryService.GetAllDeletedCountries();
@@ -286,7 +256,7 @@ namespace APC.AllForms
 
         private void Counts()
         {
-            //labelTotalCountry.Text = "Total: " + dataGridViewCountry.RowCount.ToString();
+            svLabelTotalCountry.Text = "Total: " + dataGridViewCountry.RowCount.ToString();
             //labelTotalEmpStatus.Text = "Total: " + dataGridViewEmpStatus.RowCount.ToString();
             //labelTotalMarStatus.Text = "Total: " + dataGridViewMarStatus.RowCount.ToString();
             //labelTotalNationality.Text = "Total: " + dataGridViewNationality.RowCount.ToString();
@@ -360,58 +330,58 @@ namespace APC.AllForms
         // Country
         private void btnAddCountry_Click(object sender, EventArgs e)
         {
-            //var form = new FormCountry(_countryService);
-            //form.ShowDialog();
-            //ClearFilters();
+            var form = new FormCountry(_countryService);
+            form.ShowDialog();
+            ClearFilters();
         }
 
-        //private CountryDTO GetSelectedCountry()
-        //{
-        //    if (dataGridViewCountry.CurrentRow == null)
-        //        return null;
+        private CountryDTO GetSelectedCountry()
+        {
+            if (dataGridViewCountry.CurrentRow == null)
+                return null;
 
-        //    return dataGridViewCountry.CurrentRow.DataBoundItem as CountryDTO;
-        //}
+            return dataGridViewCountry.CurrentRow.DataBoundItem as CountryDTO;
+        }
 
         private void btnUpdateCountry_Click(object sender, EventArgs e)
         {
-            //var selected = GetSelectedCountry();
-            //if (selected == null)
-            //{
-            //    MessageBox.Show("Please select a country from the table");
-            //    return;
-            //}
+            var selected = GetSelectedCountry();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a country from the table");
+                return;
+            }
 
-            //var form = new FormCountry(_countryService);
-            //form.LoadForEdit(selected.CountryId, selected.CountryName, true);
-            //form.ShowDialog();
+            var form = new FormCountry(_countryService);
+            form.LoadForEdit(selected.CountryId, selected.CountryName, true);
+            form.ShowDialog();
 
-            //ClearFilters();
+            ClearFilters();
         }
 
         private void txtCountry_TextChanged(object sender, EventArgs e)
         {
-            //string search = txtCountry.Text.Trim().ToLower();
-            //var filtered = _countryDTO.Where(x => x.CountryName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            //dataGridViewCountry.DataSource = filtered;
+            string search = txtCountry.Text.Trim().ToLower();
+            var filtered = _countryDTO.Where(x => x.CountryName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            dataGridViewCountry.DataSource = filtered;
         }
 
         private void btnDeleteCountry_Click(object sender, EventArgs e)
         {
-            //var selected = GetSelectedCountry();
-            //if (selected == null)
-            //{
-            //    MessageBox.Show("Please select a country from the table.");
-            //    return;
-            //}
+            var selected = GetSelectedCountry();
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a country from the table.");
+                return;
+            }
 
-            //var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
 
-            //if (result == DialogResult.Yes)
-            //{
-            //    _countryService.Delete(selected.CountryId);
-            //    ClearFilters();
-            //}
+            if (result == DialogResult.Yes)
+            {
+                _countryService.Delete(selected.CountryId);
+                ClearFilters();
+            }
         }
 
         // Employment status
@@ -1223,6 +1193,11 @@ namespace APC.AllForms
             {
                 MessageBox.Show("Unable to open the website: " + ex.Message);
             }
+        }
+
+        private void dataGridViewCountry_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
