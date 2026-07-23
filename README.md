@@ -27,7 +27,7 @@ Its continued use in a live environment demonstrates the reliability, practicali
 
 Secure login system for authorized users.
 
-![Login](Images/image1.PNG)
+![Login](Images/image1.png)
 
 ### 📊 Dashboard
 
