@@ -129,11 +129,11 @@ namespace APC.Infrastructure.Repositories
         {
             var entity = _db.MEMBER.First(x => x.memberID == data.MemberId);
 
-            entity.surname = data.MemberAuthentication.Username;
-            entity.password = data.MemberAuthentication.PasswordHash;
+            entity.username = entity.username;
+            entity.password = entity.password;
 
             entity.name = data.PersonalInfo.FirstName;
-            entity.username = data.PersonalInfo.LastName;
+            entity.surname = data.PersonalInfo.LastName;
             entity.birthday = data.PersonalInfo.Birthday;
             entity.imagePath = data.PersonalInfo.ImagePath;
             entity.genderID = data.PersonalInfo.GenderId;
@@ -159,15 +159,55 @@ namespace APC.Infrastructure.Repositories
             entity.nextOfKin = data.EmergencyContact.NextOfKin;
             entity.relationshipToKinID = data.EmergencyContact.RelationshipToNextOfKinId;
 
-            entity.deadDate = data.LifeStatus.DeadDate;           
+            entity.deadDate = data.LifeStatus.DeadDate;
 
-            _db.SaveChanges();
-            return true;
+            try
+            {
+                _db.SaveChanges();
+                return true;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var errors = ex.EntityValidationErrors
+                    .SelectMany(x => x.ValidationErrors)
+                    .Select(x => $"{x.PropertyName}: {x.ErrorMessage}");
+
+                throw new Exception(
+                    "Entity validation failed:\n\n" +
+                    string.Join("\n", errors),
+                    ex);
+            }
         }
 
         public MEMBER GetByUsername(string username)
         {
             return _db.MEMBER.FirstOrDefault(x => !x.isDeleted && x.username == username);
+        }
+
+        public string GetNextUsername()
+        {
+            var usernames = _db.MEMBER
+                .Where(x => x.username.StartsWith("apc"))
+                .Select(x => x.username)
+                .ToList();
+
+            int highestNumber = 20000;
+
+            foreach (var username in usernames)
+            {
+                if (username.Length <= 3)
+                    continue;
+
+                string digits = username.Substring(3);
+
+                if (int.TryParse(digits, out int number))
+                {
+                    if (number > highestNumber)
+                        highestNumber = number;
+                }
+            }
+
+            return "apc" + (highestNumber + 1);
         }
     }
 }

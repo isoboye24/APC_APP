@@ -124,7 +124,7 @@ namespace APC.AllForms
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             var selected = GetSelectedMeetingAttendance();
-            if (selected == null)
+            if (selected == null) 
             {
                 MessageBox.Show("Please select a member from the table");
                 return;
@@ -132,7 +132,7 @@ namespace APC.AllForms
 
             var form = new FormGeneralMeetingAttendance(_generalMeetingAttendanceService, _memberService, _attendanceStatusService);
             form.loadGeneralMeetingData(_generalMeetingDTO);
-            form.loadForEdit(selected.MemberId, true);
+            form.loadForEdit(selected, true);
             form.ShowDialog();
 
             ClearFilters();

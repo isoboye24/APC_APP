@@ -59,9 +59,9 @@ namespace APC
             _generalMeetingDTO = generalMeetingDTO;
         }
 
-        public void loadForEdit(int memberId, bool isUpdate)
+        public void loadForEdit(GeneralMeetingAttendanceDTO generalMeetingAttendanceDTO, bool isUpdate)
         {
-            _generalMeetingAttendanceDTO = _generalMeetingAttendanceService.GetPersonalAttendanceById(memberId, _generalMeetingDTO.GeneralMeetingId);
+            _generalMeetingAttendanceDTO = generalMeetingAttendanceDTO;
             _isUpdate = isUpdate;
         }
 

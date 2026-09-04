@@ -69,7 +69,10 @@ namespace APC.Domain.Entities
         private void SetPhoneNumber2(string phoneNumber2)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber2))
-                phoneNumber2 = null;
+            {
+                PhoneNumber2 = null;
+                return;
+            }
 
             PhoneNumber2 = phoneNumber2.Trim();
         }
@@ -82,7 +85,10 @@ namespace APC.Domain.Entities
         private void SetPhoneNumber3(string phoneNumber3)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber3))
-                phoneNumber3 = null;
+            {
+                PhoneNumber3 = null;
+                return;
+            }
 
             PhoneNumber3 = phoneNumber3.Trim();
         }

@@ -16,39 +16,38 @@ namespace APC.Domain.Entities
         }
 
         private void SetUsername(string username)
-        {           
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                Username = "apc20001";
-            }
-
-            string getDigits = username.Substring(3);
-            int convertDigits = Convert.ToInt32(getDigits) + 1;
-            Username = "apc" + convertDigits;
-
-            Username = username.Trim();
-        }
-
-        public void UpdateUsername(string newUsername)
         {
-            SetUsername(newUsername);
+            if (string.IsNullOrWhiteSpace(username))
+                throw new ArgumentException("Username is required.", nameof(username));
+
+            username = username.Trim();
+
+            if (!username.StartsWith("apc"))
+                throw new ArgumentException(
+                    "Username must start with 'apc'.",
+                    nameof(username));
+
+            Username = username;
         }
 
         private void SetPasswordHash(DateTime? birthday)
         {
             if (!birthday.HasValue)
-                throw new ArgumentException("Birthday is required", nameof(birthday));
+                throw new ArgumentException(
+                    "Birthday is required.",
+                    nameof(birthday));
 
             DateTime birthDate = birthday.Value;
 
-            int day = birthDate.Day;
-            int month = birthDate.Month;
-
-            string year = (birthDate.Year % 100).ToString("D2");
-
-            string password = $"{day:D2}{month:D2}{year}";
+            string password =
+                $"{birthDate.Day:D2}{birthDate.Month:D2}{birthDate.Year % 100:D2}";
 
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
+        }
+
+        public void UpdateUsername(string newUsername)
+        {
+            SetUsername(newUsername);
         }
 
         public void UpdatePasswordHash(DateTime newBirthday)

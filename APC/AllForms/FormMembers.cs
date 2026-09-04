@@ -79,9 +79,9 @@ namespace APC
             this.Close();
         }
 
-        public void loadForEdit(Applications.DTO.MemberFullDetailsDTO memberFullDetailsDTO, bool isUpdate)
+        public void loadForEdit(int memberId, bool isUpdate)
         {
-            _memberFullDetailsDTO = memberFullDetailsDTO;
+            _memberFullDetailsDTO = _memberService.GetMemberById(memberId);
             _isUpdate = isUpdate;
         }
 
@@ -89,25 +89,25 @@ namespace APC
         {
             #region
             cmbCountry.DataSource = _countryService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbCountry, "CountryName", "countryID");
+            GeneralHelper.ComboBoxProps(cmbCountry, "CountryName", "CountryId");
             cmbGender.DataSource = _genderService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbGender, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGender, "GenderName", "GenderId");
             cmbProfession.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfession, "Profession", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfession, "ProfessionName", "ProfessionId");
             cmbPosition.DataSource = _positionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbPosition, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPosition, "PositionName", "PositionId");
             cmbMaritalStatus.DataSource = _maritalStatusService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbMaritalStatus, "MaritalStatus", "MaritalStatusID");
+            GeneralHelper.ComboBoxProps(cmbMaritalStatus, "MaritalStatusName", "MaritalStatusId");
             cmbEmpStatus.DataSource = _employmentStatusService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbEmpStatus, "EmploymentStatus", "EmploymentStatusID");
+            GeneralHelper.ComboBoxProps(cmbEmpStatus, "EmploymentStatusName", "EmploymentStatusId");
             cmbNationality.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationality, "Nationality", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationality, "NationalityName", "NationalityId");
             cmbPermission.DataSource = _permissionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbPermission, "Permission", "PermissionID");
+            GeneralHelper.ComboBoxProps(cmbPermission, "PermissionName", "PermissionId");
             cmbMembershipStatus.DataSource = _membershipStatusService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbMembershipStatus, "MembershipStatus", "MembershipStatusID");
+            GeneralHelper.ComboBoxProps(cmbMembershipStatus, "MembershipStatusName", "MembershipStatusId");
             cmbRelationshipToNextOfKin.DataSource = _relationshipToNextOfKinService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbRelationshipToNextOfKin, "Relationship", "RelationshipToKinID");
+            GeneralHelper.ComboBoxProps(cmbRelationshipToNextOfKin, "RelationshipToNextOfKin", "RelationshipToNextOfKinId");
             #endregion
 
             txtPhone2.Hide();
@@ -335,7 +335,11 @@ namespace APC
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(
+                    ex.ToString(),
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
         

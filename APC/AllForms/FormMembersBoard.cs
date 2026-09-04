@@ -180,85 +180,85 @@ namespace APC.AllForms
         private void FillRegisteredMemberComboBoxes()
         {
             cmbGenderRegisteredMembers.DataSource = _genderService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbGenderRegisteredMembers, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGenderRegisteredMembers, "GenderName", "genderId");
 
             cmbProfessionRegisteredMembers.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionRegisteredMembers, "ProfessionName", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionRegisteredMembers, "ProfessionName", "professionId");
 
             cmbPositionRegisteredMembers.DataSource = _positionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbPositionRegisteredMembers, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPositionRegisteredMembers, "PositionName", "positionId");
 
             cmbNationalityRegisteredMembers.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityRegisteredMembers, "NationalityName", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityRegisteredMembers, "NationalityName", "NationalityId");
         }
 
         private void FillBirthdayMemberComboBoxes()
         {
             cmbGenderBirthday.DataSource = _genderService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbGenderBirthday, "GenderName", "GenderID");
+            GeneralHelper.ComboBoxProps(cmbGenderBirthday, "GenderName", "GenderId");
 
             cmbNationalityBirthday.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityBirthday, "NationalityName", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityBirthday, "NationalityName", "NationalityId");
 
             cmbMonthBirthday.DataSource = _monthService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbMonthBirthday, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonthBirthday, "MonthName", "MonthId");
 
             cmbPositionBirthday.DataSource = _positionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbPositionBirthday, "PositionName", "PositionID");
+            GeneralHelper.ComboBoxProps(cmbPositionBirthday, "PositionName", "PositionId");
 
             cmbProfessionBirthday.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionBirthday, "ProfessionName", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionBirthday, "ProfessionName", "ProfessionId");
         }
 
         private void FillFormerMemberComboBoxes()
         {
             cmbGenderFormerMembers.DataSource = _genderService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbGenderFormerMembers, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGenderFormerMembers, "GenderName", "genderId");
 
             cmbProfessionFormerMembers.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionFormerMembers, "ProfessionName", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionFormerMembers, "ProfessionName", "professionId");
 
             cmbPositionFormerMembers.DataSource = _positionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbPositionFormerMembers, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPositionFormerMembers, "PositionName", "positionId");
 
             cmbNationalityFormerMembers.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityFormerMembers, "NationalityName", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityFormerMembers, "NationalityName", "NationalityId");
         }
 
         private void FillDeadMemberComboBoxes()
         {
             cmbGenderDeadMembers.DataSource = _genderService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbGenderDeadMembers, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGenderDeadMembers, "GenderName", "genderId");
 
             cmbProfessionDeadMembers.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionDeadMembers, "ProfessionName", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionDeadMembers, "ProfessionName", "professionId");
 
             cmbPositionDeadMembers.DataSource = _positionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbPositionDeadMembers, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPositionDeadMembers, "PositionName", "positionId");
 
             cmbNationalityDeadMembers.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityDeadMembers, "NationalityName", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityDeadMembers, "NationalityName", "NationalityId");
         }
 
         private void FillInactiveMemberComboBoxes()
         {
             cmbGenderInactiveMembers.DataSource = _genderService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbGenderInactiveMembers, "GenderName", "genderID");
+            GeneralHelper.ComboBoxProps(cmbGenderInactiveMembers, "GenderName", "genderId");
 
             cmbProfessionInactiveMembers.DataSource = _professionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbProfessionInactiveMembers, "ProfessionName", "professionID");
+            GeneralHelper.ComboBoxProps(cmbProfessionInactiveMembers, "ProfessionName", "professionId");
 
             cmbPositionInactiveMembers.DataSource = _positionService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbPositionInactiveMembers, "PositionName", "positionID");
+            GeneralHelper.ComboBoxProps(cmbPositionInactiveMembers, "PositionName", "positionId");
 
             cmbNationalityInactiveMembers.DataSource = _nationalityService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbNationalityInactiveMembers, "NationalityName", "NationalityID");
+            GeneralHelper.ComboBoxProps(cmbNationalityInactiveMembers, "NationalityName", "NationalityId");
         }
 
         private void FillMemberCommittmentComboBoxes()
         {
             cmbStatusCommittment.DataSource = _paymentStatusService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbStatusCommittment, "PaymentStatusName", "PaymentStatusID");
+            GeneralHelper.ComboBoxProps(cmbStatusCommittment, "PaymentStatusName", "PaymentStatusId");
             
             cmbYearCommittment.DataSource = _memberCommittmentService.GetMeetingYears();
             GeneralHelper.ComboBoxProps(cmbYearCommittment, "YearInText", "YearInValue");
@@ -371,7 +371,7 @@ namespace APC.AllForms
             var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService,
                                         _genderService, _maritalStatusService, _employmentStatusService, _relationshipToNextOfKinService, _permissionService,
                                         _membershipStatusService);
-            form.loadForEdit(selected, true);
+            form.loadForEdit(selected.MemberId, true);
             form.ShowDialog();
 
             ClearFilters();
@@ -516,7 +516,7 @@ namespace APC.AllForms
             var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService,
                                         _genderService, _maritalStatusService, _employmentStatusService, _relationshipToNextOfKinService, _permissionService,
                                         _membershipStatusService);
-            form.loadForEdit(selected, true);
+            form.loadForEdit(selected.MemberId, true);
             form.ShowDialog();
 
             ClearFilters();
@@ -568,7 +568,7 @@ namespace APC.AllForms
             var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService, 
                                         _genderService, _maritalStatusService, _employmentStatusService, _relationshipToNextOfKinService, _permissionService, 
                                         _membershipStatusService);
-            form.loadForEdit(selected, true);
+            form.loadForEdit(selected.MemberId, true);
             form.ShowDialog();
 
             ClearFilters();
@@ -667,7 +667,7 @@ namespace APC.AllForms
             var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService,
                                         _genderService, _maritalStatusService, _employmentStatusService, _relationshipToNextOfKinService, _permissionService,
                                         _membershipStatusService);
-            form.loadForEdit(selected, true);
+            form.loadForEdit(selected.MemberId, true);
             form.ShowDialog();
 
             ClearFilters();
@@ -908,7 +908,7 @@ namespace APC.AllForms
             var form = new FormMembers(_memberService, _countryService, _nationalityService, _professionService, _positionService, _currentUserService,
                                         _genderService, _maritalStatusService, _employmentStatusService, _relationshipToNextOfKinService, _permissionService,
                                         _membershipStatusService);
-            form.loadForEdit(selected, true);
+            form.loadForEdit(selected.MemberId, true);
             form.ShowDialog();
 
             ClearFilters();
